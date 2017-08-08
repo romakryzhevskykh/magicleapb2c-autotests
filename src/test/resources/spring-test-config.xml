@@ -1,0 +1,44 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+    http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.2.xsd
+	">
+
+    <context:component-scan base-package="com.template"/>
+    <bean id="sarnovaProject" class="com.template.site.TemplateProject">
+        <constructor-arg value="${com.template.url}"/>
+        <constructor-arg value="${com.template.username}"/>
+        <constructor-arg value="${com.template.password}"/>
+    </bean>
+
+    <context:component-scan base-package="com.template"/>
+    <bean id="hybrisProductCockpitProject" class="com.template.hybris.product_cockpit.HybrisProductCockpitProject">
+        <constructor-arg value="${hybris.product.cockpit.url}"/>
+        <constructor-arg value="${hybris.product.cockpit.username}"/>
+        <constructor-arg value="${hybris.product.cockpit.password}"/>
+    </bean>
+
+    <!--<context:component-scan base-package="templatenova.cucumber" />-->
+    <!--<bean id="baseSteps" class="templatenova.cucumber.steps.BaseSteps"/>-->
+    <!--<bean id="testsRunner" class="templatenova.cucumber.steps.CucumberTestsRunner"/>-->
+
+    <!-- ====================================================== -->
+    <!-- import different variables according to active profile -->
+    <!-- ====================================================== -->
+    <beans profile="stage">
+        <context:property-placeholder
+                ignore-resource-not-found="true"
+                location="classpath*:/META-INF/stage.properties"/>
+    </beans>
+
+    <beans profile="production">
+        <context:property-placeholder
+                ignore-resource-not-found="true"
+                location="classpath*:/META-INF/production.properties"/>
+    </beans>
+
+</beans>
