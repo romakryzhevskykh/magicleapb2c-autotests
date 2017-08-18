@@ -12,9 +12,9 @@ with following params and own credentials for prod and stage environment:
       3. hybris.backoffice.password=backofficestageuserpassword
 
     - site stage/prod credentials
-      1. com.sarnova.sarnova.url=http://com.sarnova.sarnova-stage.com
-      2. com.sarnova.sarnova.username=sarnovausername
-      3. com.sarnova.sarnova.password=sarnovapassword
+      1. com.template.template.url=http://com.template.template-stage.com
+      2. com.template.template.username=templateusername
+      3. com.template.template.password=templatepassword
 
     - in project root file src/test/resources/test_xmls/tests.xml find and set environment `<parameter name="environment" value="%s"/>:`
       1. stage or

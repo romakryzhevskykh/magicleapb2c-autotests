@@ -24,17 +24,18 @@ public class HybrisProductCockpitProject {
     }
 
     private void openBrowser() {
-        browser = Browser.createNewInstance();
+        browser = Browser.createNewInstance("chrome");
         isBrowserOpened = true;
     }
 
     public void logIn() {
         if (!isBrowserOpened)
             openBrowser();
-        if (!isLoggedIn)
+        if (!isLoggedIn) {
             loginPage = LoginPage.getInstance(this);
             loginPage.logIn();
             isLoggedIn = true;
             mainPage = MainPage.getInstance(browser);
+        }
     }
 }

@@ -5,7 +5,8 @@
     <listeners>
         <listener class-name="com.template.cucumber.runners.TestNGExucutionListener"/>
     </listeners>
-    <parameter name="environment" value="stage"/>
+    <!--<parameter name="environment" value="stage"/>-->
+    <parameter name="browser" value="chrome"/>
     <suite-files>
         <suite-file path="MainPageTestSuite.xml"/>
     </suite-files>

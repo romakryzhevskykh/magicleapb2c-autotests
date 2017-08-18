@@ -4,6 +4,8 @@ import com.template.helpers.Logging;
 import com.template.helpers.Utils;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -14,10 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
@@ -51,7 +50,13 @@ public class Browser extends HtmlUnitDriver {
         browsers.add(this);
     }
 
-    public static Browser createNewInstance() {
+    public static Browser createNewInstance(String driverName) {
+        if (driverName.equals("firefox")) {
+            return new Browser(new FirefoxDriver());
+        }
+        if (driverName.equals("chrome")) {
+            return new Browser(new ChromeDriver());
+        }
         return new Browser(new FirefoxDriver());
     }
 

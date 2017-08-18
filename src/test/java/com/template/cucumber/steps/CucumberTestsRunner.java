@@ -2,7 +2,7 @@ package com.template.cucumber.steps;
 
 import com.template.helpers.Logging;
 import com.template.helpers.Utils;
-import com.template.site.TemplateProject;
+import com.template.site.TemplateProjectSettings;
 import cucumber.api.CucumberOptions;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -26,7 +26,7 @@ import java.io.File;
 @ContextConfiguration(locations = {"classpath:spring-test-config.xml"})
 public class CucumberTestsRunner extends AbstractTestNGSpringContextTests {
     private TestNGCucumberRunner testNGCucumberRunner;
-    @Autowired public TemplateProject sarnovaProject;
+    @Autowired public TemplateProjectSettings templateProjectSettings;
 
     //logging fields
     protected static Logging log = Logging.getLogging();
@@ -69,7 +69,7 @@ public class CucumberTestsRunner extends AbstractTestNGSpringContextTests {
 
     @Test(dataProvider = "features")
     public void feature(CucumberFeatureWrapper cucumberFeature) {
-        System.out.println(sarnovaProject);
+        System.out.println(templateProjectSettings);
         testNGCucumberRunner.runCucumber(cucumberFeature.getCucumberFeature());
     }
 

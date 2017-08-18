@@ -9,14 +9,14 @@
 	">
 
     <context:component-scan base-package="com.template"/>
-    <bean id="sarnovaProject" class="com.template.site.TemplateProject">
+    <bean id="templateProjectSettings" class="com.template.site.TemplateProjectSettings">
         <constructor-arg value="${com.template.url}"/>
         <constructor-arg value="${com.template.username}"/>
         <constructor-arg value="${com.template.password}"/>
     </bean>
 
     <context:component-scan base-package="com.template"/>
-    <bean id="hybrisProductCockpitProject" class="com.template.hybris.product_cockpit.HybrisProductCockpitProject">
+    <bean id="hybrisProductCockpitSettings" class="com.template.hybris.product_cockpit.HybrisProductCockpitSettings">
         <constructor-arg value="${hybris.product.cockpit.url}"/>
         <constructor-arg value="${hybris.product.cockpit.username}"/>
         <constructor-arg value="${hybris.product.cockpit.password}"/>
