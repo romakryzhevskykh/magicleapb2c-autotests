@@ -19,6 +19,11 @@ with following params and own credentials for prod and stage environment:
     - in project root file src/test/resources/test_xmls/tests.xml find and set environment `<parameter name="environment" value="%s"/>:`
       1. stage or
       2. production
+3. create ".gitignore" file and fill it with:
+    .gitignore
+    .idea/
+    src/test/resources/META-INF
+    target
 
 
 #dependencies:
@@ -40,7 +45,4 @@ with following params and own credentials for prod and stage environment:
 - then you can open report in your browser by link "http://localhost:8080/"
 - by default Spring will run stage profile with stage properties, to run other(f.e. production) profiles, use additional command:
     - -Dspring.profiles.active=production :
-        - _mvn clean test site jetty:run -Dspring.profiles.active=environmentToUse_
-    
-
-
+        - _mvn clean test site jetty:run -Dspring.profiles.active=environmentToUse
