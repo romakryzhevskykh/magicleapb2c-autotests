@@ -3,6 +3,7 @@ package com.template.storefront.pages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.template.storefront.models.TestProject;
+import ru.yandex.qatools.allure.annotations.Step;
 
 import static com.template.storefront.page_elements.StartPageElements.HELLO_SIGN_IN_LINK_XPATH;
 
@@ -11,10 +12,12 @@ public class StartPage extends Page {
 
     @Autowired TestProject testProject;
 
+    @Step("Open Start page using URL.")
     public void open() {
         open(testProject.getStartUrl());
     }
 
+    @Step("Click on Hello, sign in button.")
     public void openLoginPage() {
         $(HELLO_SIGN_IN_LINK_XPATH).click();
     }

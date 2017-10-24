@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.template.storefront.models.TestProject;
 import com.template.storefront.models.UserAddress;
+import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,14 +19,17 @@ public class AddressBookPage extends Page {
 
     @Autowired TestProject testProject;
 
+    @Step("Get text of header section on Shipping address book page.")
     public String getSectionHeader() {
         return $(SECTION_HEADER_XPATH).getText().trim();
     }
 
+    @Step("Get current page URL.")
     public String getPageUrl() {
         return driver.getCurrentUrl();
     }
 
+    @Step("Get all shipping addresses on Shipping address book page.")
     public List<UserAddress> getShippingAddresses() {
         ArrayList<String> addressesText = new ArrayList<>();
         for (WebElement webElement : $$(By.xpath(ADDRESSES_INFO_ITEMS_TEXT_XPATH))) {
@@ -40,6 +44,7 @@ public class AddressBookPage extends Page {
         return userAddresses;
     }
 
+    @Step("Check that Shipping address book page is opened.")
     public boolean isOpened() {
         return driver.getCurrentUrl().equals(testProject.getShippingAddressBookUrl());
     }

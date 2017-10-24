@@ -1,13 +1,10 @@
 package com.template.storefront.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import com.template.storefront.models.TestProject;
 import com.template.storefront.models.User;
-import ru.yandex.qatools.allure.annotations.Attachment;
+import org.openqa.selenium.By;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import static com.template.storefront.page_elements.LoginPageElements.*;
@@ -20,7 +17,6 @@ public class LoginPage extends Page {
     @Step("Fill login field with {0}.")
     public void fillLoginFieldWith(String loginEmail) {
         $(By.id(USERNAME_FIELD_ID)).sendKeys(loginEmail);
-        captureScreenshot();
     }
 
     @Step("Fill password field with {0}.")
@@ -34,11 +30,6 @@ public class LoginPage extends Page {
         homePage.waitForPageLoad();
     }
 
-    @Attachment("Screenshot")
-    private byte[] captureScreenshot() {
-        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-    }
-
     public void loginAs(User user) {
         fillLoginFieldWith(user.getUsername());
         fillPasswordFieldWith(user.getPassword());
@@ -46,6 +37,7 @@ public class LoginPage extends Page {
         user.setLoggedIn(true);
     }
 
+    @Step("Check that Login page is opened.")
     public boolean isOpened() {
         return driver.getCurrentUrl().equals(testProject.getLoginUrl());
     }

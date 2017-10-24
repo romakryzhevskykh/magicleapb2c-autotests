@@ -7,18 +7,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public abstract class Page {
+
+//    public static boolean isDriverSet = false;
 
     @Autowired
     WebDriver driver;
 
     @PostConstruct
     public void setUp() {
-        driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+//        if (!isDriverSet) {
+//            driver.manage().window().maximize();
+//            driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+//            driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+//            isDriverSet = true;
+//        }
     }
 
     protected void open(String url) {
