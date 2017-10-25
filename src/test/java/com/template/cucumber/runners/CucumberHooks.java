@@ -13,7 +13,6 @@ public class CucumberHooks {
 
     @After
     public void onFailure(Scenario scenario) {
-        System.out.println(driver);
         if (scenario.isFailed()) {
             captureScreenshot();
         }

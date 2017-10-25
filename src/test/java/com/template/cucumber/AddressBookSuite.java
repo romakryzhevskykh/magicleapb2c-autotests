@@ -7,21 +7,5 @@ import cucumber.api.CucumberOptions;
         features = "src/test/resources/features/address_book_features/"
 )
 
-//@ContextConfiguration(locations = {"classpath:spring-application-context.xml"})
 public class AddressBookSuite extends CucumberTestsRunner {
-
-//    @Autowired WebDriver driver;
-//
-//    @After
-//    public void onFailure(Scenario scenario) {
-//        System.out.println(driver);
-//        if (scenario.isFailed()) {
-//            captureScreenshot();
-//        }
-//    }
-//
-//    @Attachment("Screenshot")
-//    private byte[] captureScreenshot() {
-//        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-//    }
 }
