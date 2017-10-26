@@ -9,8 +9,9 @@
 	">
 
     <context:component-scan base-package="com.template.storefront.pages"/>
+    <context:component-scan base-package="com.template.helpers"/>
 
-    <bean id="driver" class="org.openqa.selenium.firefox.FirefoxDriver" destroy-method="quit"/>
+    <!--<bean id="webDriverPool" class="com.template.helpers.WebDriverIstansiator"/>&lt;!&ndash;destroy-method="quit"/>&ndash;&gt;-->
 
     <import resource="classpath:spring-credentials-config-context.xml" />
 

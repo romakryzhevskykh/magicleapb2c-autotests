@@ -1,5 +1,6 @@
 package com.template.storefront.pages;
 
+import com.template.helpers.WebDriverIstansiator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,34 +11,31 @@ import java.util.List;
 
 public abstract class Page {
 
-//    public static boolean isDriverSet = false;
+    @Autowired WebDriverIstansiator webDriverPool;
 
-    @Autowired
-    WebDriver driver;
 
     @PostConstruct
     public void setUp() {
-//        if (!isDriverSet) {
-//            driver.manage().window().maximize();
-//            driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
-//            driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-//            isDriverSet = true;
-//        }
+//        webDriverPool
     }
 
     protected void open(String url) {
-        driver.get(url);
+        getDriver().get(url);
     }
 
     protected WebElement $(String xpath, String... args) {
-        return driver.findElement(By.xpath(String.format(xpath, args)));
+        return getDriver().findElement(By.xpath(String.format(xpath, args)));
     }
 
     protected List<WebElement> $$(By by) {
-        return driver.findElements(by);
+        return getDriver().findElements(by);
     }
 
     protected WebElement $(By by) {
-        return driver.findElement(by);
+        return getDriver().findElement(by);
+    }
+
+    protected WebDriver getDriver() {
+        return webDriverPool.getDriver();
     }
 }

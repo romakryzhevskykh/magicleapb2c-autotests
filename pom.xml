@@ -17,8 +17,9 @@
         <cucumber.jvm.deps.version>1.0.5</cucumber.jvm.deps.version>
         <cucumber.testng.version>1.2.5</cucumber.testng.version>
         <cucumber.reporting.version>3.8.0</cucumber.reporting.version>
-        <cucumber.allure.adaptor>1.6.3</cucumber.allure.adaptor>
+        <cucumber.allure.adaptor>1.6.4</cucumber.allure.adaptor>
         <aspectjweaver>1.8.10</aspectjweaver>
+        <testng.allure.adaptor>1.5.4</testng.allure.adaptor>
         <spring.version>4.3.12.RELEASE</spring.version>
 
         <cucumber-spring.version>1.2.5</cucumber-spring.version>
@@ -35,6 +36,11 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-api</artifactId>
             <version>${selenium.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ru.stqa.selenium</groupId>
+            <artifactId>webdriver-factory</artifactId>
+            <version>4.2</version>
         </dependency>
         <!--TestNG framework-->
         <dependency>
@@ -73,8 +79,10 @@
         <!--Allure for Cucumber report dependencies(also you can add TestNG dependency, but it will duplicate report items)-->
         <dependency>
             <groupId>ru.yandex.qatools.allure</groupId>
+            <!--<artifactId>allure-testng-adaptor</artifactId>-->
             <artifactId>allure-cucumber-jvm-adaptor</artifactId>
             <version>${cucumber.allure.adaptor}</version>
+            <!--<version>${testng.allure.adaptor}</version>-->
         </dependency>
         <!--Spring framework for DI, Cucumber and configs-->
         <dependency>
@@ -131,7 +139,7 @@
                     <argLine>
                         -Dspring.profiles.active=${testEnv}
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectjweaver}/aspectjweaver-${aspectjweaver}.jar"
-                        -Dcucumber.options="--plugin ru.yandex.qatools.allure.cucumberjvm.AllureReporter"
+                          -Dcucumber.options="--plugin ru.yandex.qatools.allure.cucumberjvm.AllureReporter"
                         -Dorg.eclipse.jetty.annotations.maxWait=120
                     </argLine>
                 </configuration>

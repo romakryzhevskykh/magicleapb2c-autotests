@@ -1,21 +1,25 @@
 package com.template.storefront.models;
 
+import com.template.helpers.UserCredentials;
+
 public class User {
-    private String username;
-    private String password;
+    private UserCredentials credentials;
     private boolean isLoggedIn = false;
 
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
+    public User(UserCredentials userCredentials) {
+        this.credentials = userCredentials;
     }
 
     public String getUsername() {
-        return username;
+        return credentials.getLogin();
     }
 
     public String getPassword() {
-        return password;
+        return credentials.getPassword();
+    }
+
+    public void setPassword(String password) {
+        this.credentials.setPassword(password);
     }
 
     public boolean isLoggedIn() {

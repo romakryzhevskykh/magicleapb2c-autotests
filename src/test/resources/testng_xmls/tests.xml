@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Suite1" verbose="1">
-    <test name="address book">
+<suite name="Suite1" parallel="tests">
+    <test name="Chrome suite">
+        <parameter name="browserName" value="chrome" />
         <classes>
             <class name="com.template.cucumber.AddressBookSuite"/>
+            <class name="com.template.cucumber.LoginSuite"/>
         </classes>
     </test>
-    <test name="log in funcs">
+    <test name="Firefox suite">
+        <parameter name="browserName" value="firefox" />
         <classes>
+            <class name="com.template.cucumber.AddressBookSuite"/>
             <class name="com.template.cucumber.LoginSuite"/>
         </classes>
     </test>

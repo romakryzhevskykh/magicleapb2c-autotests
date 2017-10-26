@@ -1,20 +1,20 @@
 package com.template.cucumber.definition_steps;
 
+import com.template.helpers.UsersPool;
+import com.template.storefront.pages.HomePage;
+import com.template.storefront.pages.LoginPage;
+import com.template.storefront.pages.StartPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.template.storefront.models.User;
-import com.template.storefront.pages.HomePage;
-import com.template.storefront.pages.LoginPage;
-import com.template.storefront.pages.StartPage;
 
 import static org.testng.Assert.assertTrue;
 
 public class HomePageStepDefs extends AbstractStepDefs {
 
-    @Autowired User testUser;
+    @Autowired UsersPool usersPool;
 
     @Autowired HomePage homePage;
     @Autowired LoginPage loginPage;
@@ -22,12 +22,12 @@ public class HomePageStepDefs extends AbstractStepDefs {
 
     @Given("^Home page opened.$")
     public void openHomePage() {
-        if (!testUser.isLoggedIn()) {
+        if (!usersPool.getUser().isLoggedIn()) {
             if (!loginPage.isOpened()) {
                 startPage.open();
                 startPage.openLoginPage();
             }
-            loginPage.loginAs(testUser);
+            loginPage.loginAs(usersPool.getUser());
         } else if (!homePage.isOpened()) {
             homePage.open();
         }
@@ -57,6 +57,6 @@ public class HomePageStepDefs extends AbstractStepDefs {
 
     @Then("^Check that Home page is opened.$")
     public void checkHomePageIsOpened() {
-        assertTrue(testUser.isLoggedIn() && homePage.isOpened());
+        assertTrue(usersPool.getUser().isLoggedIn() && homePage.isOpened());
     }
 }

@@ -26,7 +26,7 @@ public class AddressBookPage extends Page {
 
     @Step("Get current page URL.")
     public String getPageUrl() {
-        return driver.getCurrentUrl();
+        return getDriver().getCurrentUrl();
     }
 
     @Step("Get all shipping addresses on Shipping address book page.")
@@ -46,6 +46,6 @@ public class AddressBookPage extends Page {
 
     @Step("Check that Shipping address book page is opened.")
     public boolean isOpened() {
-        return driver.getCurrentUrl().equals(testProject.getShippingAddressBookUrl());
+        return getDriver().getCurrentUrl().equals(testProject.getShippingAddressBookUrl());
     }
 }

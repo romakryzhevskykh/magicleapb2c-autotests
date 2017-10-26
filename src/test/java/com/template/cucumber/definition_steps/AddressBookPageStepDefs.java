@@ -1,14 +1,14 @@
 package com.template.cucumber.definition_steps;
 
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.template.storefront.models.User;
+import com.template.helpers.UsersPool;
 import com.template.storefront.models.UserAddress;
 import com.template.storefront.pages.AddressBookPage;
 import com.template.storefront.pages.HomePage;
 import com.template.storefront.pages.LoginPage;
 import com.template.storefront.pages.StartPage;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import static org.testng.Assert.assertTrue;
 
 public class AddressBookPageStepDefs extends AbstractStepDefs {
 
-    @Autowired User testUser;
+    @Autowired UsersPool usersPool;
 
     @Autowired HomePage homePage;
     @Autowired LoginPage loginPage;
@@ -27,12 +27,12 @@ public class AddressBookPageStepDefs extends AbstractStepDefs {
     @Given("^Address book page opened.$")
     public void openAddressBookPage() {
         if (!addressBookPage.isOpened()) {
-            if(!testUser.isLoggedIn()) {
+            if(!usersPool.getUser().isLoggedIn()) {
                 if(!loginPage.isOpened()) {
                     startPage.open();
                     startPage.openLoginPage();
                 }
-                loginPage.loginAs(testUser);
+                loginPage.loginAs(usersPool.getUser());
             }
             homePage.openShippingAddressBook();
         }

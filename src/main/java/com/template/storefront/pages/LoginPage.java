@@ -31,6 +31,7 @@ public class LoginPage extends Page {
     }
 
     public void loginAs(User user) {
+        System.out.println("LOGIN: " + getDriver() + "  " + user);
         fillLoginFieldWith(user.getUsername());
         fillPasswordFieldWith(user.getPassword());
         clickOnSubmitButton();
@@ -39,6 +40,6 @@ public class LoginPage extends Page {
 
     @Step("Check that Login page is opened.")
     public boolean isOpened() {
-        return driver.getCurrentUrl().equals(testProject.getLoginUrl());
+        return getDriver().getCurrentUrl().equals(testProject.getLoginUrl());
     }
 }

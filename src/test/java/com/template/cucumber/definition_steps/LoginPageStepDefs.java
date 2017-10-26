@@ -1,17 +1,17 @@
 package com.template.cucumber.definition_steps;
 
+import com.template.helpers.UsersPool;
+import com.template.storefront.pages.HomePage;
+import com.template.storefront.pages.LoginPage;
+import com.template.storefront.pages.StartPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.template.storefront.models.User;
-import com.template.storefront.pages.HomePage;
-import com.template.storefront.pages.LoginPage;
-import com.template.storefront.pages.StartPage;
 
 public class LoginPageStepDefs extends AbstractStepDefs {
 
-    @Autowired User testUser;
+    @Autowired UsersPool usersPool;
 
     @Autowired HomePage homePage;
     @Autowired LoginPage loginPage;
@@ -20,9 +20,9 @@ public class LoginPageStepDefs extends AbstractStepDefs {
 
     @Given("^Login page opened.$")
     public void openLoginPage() {
-        if (testUser.isLoggedIn()) {
+        if (usersPool.getUser().isLoggedIn()) {
             homePage.open();
-            homePage.logout(testUser);
+            homePage.logout(usersPool.getUser());
             startPage.openLoginPage();
         } else if (!homePage.isOpened()) {
             startPage.open();
@@ -32,22 +32,22 @@ public class LoginPageStepDefs extends AbstractStepDefs {
 
     @When("Login to project as a basic customer.")
     public void loginToProject() {
-        loginPage.loginAs(testUser);
+        loginPage.loginAs(usersPool.getUser());
     }
 
     @And("^Fill login field with valid user email.$")
     public void fillLoginFieldWithValidEmail() {
-        loginPage.fillLoginFieldWith(testUser.getUsername());
+        loginPage.fillLoginFieldWith(usersPool.getUser().getUsername());
     }
 
     @And("^Fill password field with valid user password.$")
     public void fillPasswordFieldWithValidPassword() {
-        loginPage.fillPasswordFieldWith(testUser.getPassword());
+        loginPage.fillPasswordFieldWith(usersPool.getUser().getPassword());
     }
 
     @And("^Click on submit/login button for valid user.$")
     public void clickOnSubmitButton() {
         loginPage.clickOnSubmitButton();
-        testUser.setLoggedIn(true);
+        usersPool.getUser().setLoggedIn(true);
     }
 }
