@@ -1,12 +1,12 @@
 package com.template.storefront.models;
 
-public class TestProject {
+public class TemplateStorefront {
     private String startUrl;
     private String loginUrl;
     private String homeUrl;
     private String shippingAddressBookUrl;
 
-    public TestProject(String startUrl, String loginUrl, String homeUrl, String shippingAddressBookUrl) {
+    public TemplateStorefront(String startUrl, String loginUrl, String homeUrl, String shippingAddressBookUrl) {
         this.startUrl = startUrl;
         this.loginUrl = loginUrl;
         this.homeUrl = homeUrl;

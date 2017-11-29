@@ -1,6 +1,6 @@
 package com.template.cucumber.definition_steps;
 
-import com.template.helpers.UsersPool;
+import com.template.helpers.user_engine.UsersPool;
 import com.template.storefront.pages.HomePage;
 import com.template.storefront.pages.LoginPage;
 import com.template.storefront.pages.StartPage;
@@ -20,9 +20,9 @@ public class LoginPageStepDefs extends AbstractStepDefs {
 
     @Given("^Login page opened.$")
     public void openLoginPage() {
-        if (usersPool.getUser().isLoggedIn()) {
+        if (usersPool.getActiveUser().isLoggedIn()) {
             homePage.open();
-            homePage.logout(usersPool.getUser());
+            homePage.logout(usersPool.getActiveUser());
             startPage.openLoginPage();
         } else if (!homePage.isOpened()) {
             startPage.open();
@@ -32,22 +32,22 @@ public class LoginPageStepDefs extends AbstractStepDefs {
 
     @When("Login to project as a basic customer.")
     public void loginToProject() {
-        loginPage.loginAs(usersPool.getUser());
+        loginPage.loginAs(usersPool.getActiveUser());
     }
 
     @And("^Fill login field with valid user email.$")
     public void fillLoginFieldWithValidEmail() {
-        loginPage.fillLoginFieldWith(usersPool.getUser().getUsername());
+        loginPage.fillLoginFieldWith(usersPool.getActiveUser().getUsername());
     }
 
     @And("^Fill password field with valid user password.$")
     public void fillPasswordFieldWithValidPassword() {
-        loginPage.fillPasswordFieldWith(usersPool.getUser().getPassword());
+        loginPage.fillPasswordFieldWith(usersPool.getActiveUser().getPassword());
     }
 
     @And("^Click on submit/login button for valid user.$")
     public void clickOnSubmitButton() {
         loginPage.clickOnSubmitButton();
-        usersPool.getUser().setLoggedIn(true);
+        usersPool.getActiveUser().setLoggedIn(true);
     }
 }

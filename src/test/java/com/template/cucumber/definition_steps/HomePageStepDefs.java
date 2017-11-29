@@ -1,6 +1,6 @@
 package com.template.cucumber.definition_steps;
 
-import com.template.helpers.UsersPool;
+import com.template.helpers.user_engine.UsersPool;
 import com.template.storefront.pages.HomePage;
 import com.template.storefront.pages.LoginPage;
 import com.template.storefront.pages.StartPage;
@@ -22,12 +22,12 @@ public class HomePageStepDefs extends AbstractStepDefs {
 
     @Given("^Home page opened.$")
     public void openHomePage() {
-        if (!usersPool.getUser().isLoggedIn()) {
+        if (!usersPool.getActiveUser().isLoggedIn()) {
             if (!loginPage.isOpened()) {
                 startPage.open();
                 startPage.openLoginPage();
             }
-            loginPage.loginAs(usersPool.getUser());
+            loginPage.loginAs(usersPool.getActiveUser());
         } else if (!homePage.isOpened()) {
             homePage.open();
         }
@@ -57,6 +57,6 @@ public class HomePageStepDefs extends AbstractStepDefs {
 
     @Then("^Check that Home page is opened.$")
     public void checkHomePageIsOpened() {
-        assertTrue(usersPool.getUser().isLoggedIn() && homePage.isOpened());
+        assertTrue(usersPool.getActiveUser().isLoggedIn() && homePage.isOpened());
     }
 }

@@ -1,5 +1,8 @@
 Feature: Address book page is a page with address items
 
+  Background:
+    Given Switch to Storefront shopper.
+
   Scenario: Check that logged in user can open Shipping Address Book
     Given Home page opened.
     When Move cursor to my account drop down.

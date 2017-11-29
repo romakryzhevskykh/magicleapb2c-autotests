@@ -1,7 +1,9 @@
 package com.template.cucumber.runners;
 
 import com.template.helpers.SeleniumGridSettings;
-import com.template.helpers.WebDriverIstansiator;
+import com.template.helpers.web_engine.WebDriverSessions;
+import com.template.helpers.web_engine.WebDriverSetups;
+import com.template.helpers.web_engine.WebDriverThreadTestSetups;
 import cucumber.api.testng.CucumberFeatureWrapper;
 import cucumber.api.testng.TestNGCucumberRunner;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,20 +13,18 @@ import org.testng.annotations.*;
 
 @ContextConfiguration(locations = {"classpath:spring-application-context.xml"})
 public class CucumberTestsRunner extends AbstractTestNGSpringContextTests {
-    @Autowired WebDriverIstansiator webDriverPool;
+    @Autowired WebDriverSessions webDriverPool;
     @Autowired SeleniumGridSettings seleniumGridSettings;
-//
-    private static boolean isPreconditionSet = false;
+    @Autowired WebDriverThreadTestSetups webDriverThreadTestSetups;
+
     private TestNGCucumberRunner testNGCucumberRunner;
 
     @Parameters("browserName")
     @BeforeTest
     public void initSuite(String browserName) throws Exception {
-        if (!isPreconditionSet) {
-            super.springTestContextBeforeTestClass();
-            super.springTestContextPrepareTestInstance();
-            webDriverPool.setDriver(seleniumGridSettings.getHubUrl(), browserName);
-        }
+        super.springTestContextBeforeTestClass();
+        super.springTestContextPrepareTestInstance();
+        webDriverThreadTestSetups.setTlDriverSetups(new WebDriverSetups(seleniumGridSettings.getHubUrl(), browserName));
     }
 
     @BeforeClass
@@ -45,6 +45,11 @@ public class CucumberTestsRunner extends AbstractTestNGSpringContextTests {
     @AfterClass
     public void finishClass() {
         testNGCucumberRunner.finish();
+    }
+
+    @AfterTest
+    public void finishTestSuit() {
+        webDriverPool.dismissAll();
     }
 
     @AfterSuite(alwaysRun = true)

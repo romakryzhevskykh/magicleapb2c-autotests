@@ -1,6 +1,4 @@
-package com.template.helpers;
-
-import com.template.storefront.models.User;
+package com.template.helpers.user_engine;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -24,7 +22,6 @@ public class UserFactory {
                 this.createNewUser(userCredentials);
             }
         }
-
         return this.tlUser.get();
     }
 

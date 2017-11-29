@@ -1,7 +1,7 @@
 package com.template.storefront.pages;
 
-import com.template.storefront.models.TestProject;
-import com.template.storefront.models.User;
+import com.template.helpers.user_engine.User;
+import com.template.storefront.models.TemplateStorefront;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,9 +13,9 @@ import ru.yandex.qatools.allure.annotations.Step;
 import static com.template.storefront.page_elements.HomePageElements.*;
 
 @Component
-public class HomePage extends Page {
+public class HomePage extends StorefrontBasePage {
 
-    @Autowired TestProject testProject;
+    @Autowired TemplateStorefront testProject;
 
     @Step("Wait until Home page is opened.")
     public void waitForPageLoad() {

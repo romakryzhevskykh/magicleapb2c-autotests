@@ -1,13 +1,16 @@
-package com.template.storefront.models;
-
-import com.template.helpers.UserCredentials;
+package com.template.helpers.user_engine;
 
 public class User {
     private UserCredentials credentials;
     private boolean isLoggedIn = false;
+    private boolean isActive = false;
 
     public User(UserCredentials userCredentials) {
         this.credentials = userCredentials;
+    }
+
+    public UserRole getUserRole() {
+        return credentials.getUserRole();
     }
 
     public String getUsername() {
@@ -28,5 +31,13 @@ public class User {
 
     public void setLoggedIn(boolean loggedIn) {
         isLoggedIn = loggedIn;
+    }
+
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public boolean isActive() {
+        return isActive;
     }
 }

@@ -1,6 +1,6 @@
 package com.template.cucumber.definition_steps;
 
-import com.template.helpers.UsersPool;
+import com.template.helpers.user_engine.UsersPool;
 import com.template.storefront.models.UserAddress;
 import com.template.storefront.pages.AddressBookPage;
 import com.template.storefront.pages.HomePage;
@@ -27,12 +27,12 @@ public class AddressBookPageStepDefs extends AbstractStepDefs {
     @Given("^Address book page opened.$")
     public void openAddressBookPage() {
         if (!addressBookPage.isOpened()) {
-            if(!usersPool.getUser().isLoggedIn()) {
+            if(!usersPool.getActiveUser().isLoggedIn()) {
                 if(!loginPage.isOpened()) {
                     startPage.open();
                     startPage.openLoginPage();
                 }
-                loginPage.loginAs(usersPool.getUser());
+                loginPage.loginAs(usersPool.getActiveUser());
             }
             homePage.openShippingAddressBook();
         }

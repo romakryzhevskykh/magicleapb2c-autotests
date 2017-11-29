@@ -1,7 +1,7 @@
 package com.template.storefront.pages;
 
-import com.template.storefront.models.TestProject;
-import com.template.storefront.models.User;
+import com.template.helpers.user_engine.User;
+import com.template.storefront.models.TemplateStorefront;
 import org.openqa.selenium.By;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,9 +10,9 @@ import ru.yandex.qatools.allure.annotations.Step;
 import static com.template.storefront.page_elements.LoginPageElements.*;
 
 @Component
-public class LoginPage extends Page {
+public class LoginPage extends StorefrontBasePage {
     @Autowired HomePage homePage;
-    @Autowired TestProject testProject;
+    @Autowired TemplateStorefront testProject;
 
     @Step("Fill login field with {0}.")
     public void fillLoginFieldWith(String loginEmail) {

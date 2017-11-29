@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.template.storefront.models.TestProject;
+import com.template.storefront.models.TemplateStorefront;
 import com.template.storefront.models.UserAddress;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -15,9 +15,9 @@ import static com.template.storefront.page_elements.AddressBookPageElements.ADDR
 import static com.template.storefront.page_elements.AddressBookPageElements.SECTION_HEADER_XPATH;
 
 @Component
-public class AddressBookPage extends Page {
+public class AddressBookPage extends StorefrontBasePage {
 
-    @Autowired TestProject testProject;
+    @Autowired TemplateStorefront testProject;
 
     @Step("Get text of header section on Shipping address book page.")
     public String getSectionHeader() {

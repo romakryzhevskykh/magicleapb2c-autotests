@@ -1,6 +1,6 @@
 package com.template.cucumber.runners;
 
-import com.template.helpers.WebDriverIstansiator;
+import com.template.helpers.web_engine.WebDriverSessions;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import org.openqa.selenium.OutputType;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ru.yandex.qatools.allure.annotations.Attachment;
 
 public class CucumberHooks {
-    @Autowired WebDriverIstansiator webDriverPool;
+    @Autowired WebDriverSessions webDriverPool;
 
     @After
     public void onFailure(Scenario scenario) {
@@ -20,6 +20,6 @@ public class CucumberHooks {
 
     @Attachment("Screenshot")
     private byte[] captureScreenshot() {
-        return ((TakesScreenshot) webDriverPool.getDriver()).getScreenshotAs(OutputType.BYTES);
+        return ((TakesScreenshot) webDriverPool.getActiveDriver()).getScreenshotAs(OutputType.BYTES);
     }
 }
