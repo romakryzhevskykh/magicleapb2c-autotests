@@ -1,9 +1,6 @@
 package com.template.storefront.pages;
 
 import com.template.helpers.user_engine.User;
-import com.template.storefront.models.TemplateStorefront;
-import org.openqa.selenium.By;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -11,35 +8,40 @@ import static com.template.storefront.page_elements.LoginPageElements.*;
 
 @Component
 public class LoginPage extends StorefrontBasePage {
-    @Autowired HomePage homePage;
-    @Autowired TemplateStorefront testProject;
+    private final String pageUrlMethod = "powertools/en/USD/login";
 
-    @Step("Fill login field with {0}.")
-    public void fillLoginFieldWith(String loginEmail) {
-        $(By.id(USERNAME_FIELD_ID)).sendKeys(loginEmail);
+    public boolean isLoginPageOpened() {
+        return isCurrentURLEqualsToLoginPageURL() && isUserLoggedOut();
     }
 
-    @Step("Fill password field with {0}.")
-    public void fillPasswordFieldWith(String loginPassword) {
-        $(By.id(PASSWORD_FIELD_ID)).sendKeys(loginPassword);
+    @Step("Fill username field.")
+    public void fillUsernameFieldWith(String username) {
+        $(USERNAME_FIELD_XPATH).sendKeys(username);
     }
 
-    @Step("Click on Submit button.")
-    public void clickOnSubmitButton() {
-        $(By.id(LOGGING_BUTTON_ID)).click();
-        homePage.waitForPageLoad();
+    @Step("Fill password field.")
+    public void fillPasswordFieldWith(String password) {
+        $(PASSWORD_FIELD_XPATH).sendKeys(password);
     }
 
-    public void loginAs(User user) {
-        System.out.println("LOGIN: " + getDriver() + "  " + user);
-        fillLoginFieldWith(user.getUsername());
+    @Step("Click on Login button.")
+    public void clickOnLoginButton() {
+        $(LOG_IN_BUTTON_XPATH).click();
+    }
+
+    public void loginToStorefront(User user) {
+        fillUsernameFieldWith(user.getUsername());
         fillPasswordFieldWith(user.getPassword());
-        clickOnSubmitButton();
-        user.setLoggedIn(true);
+        clickOnLoginButton();
     }
 
-    @Step("Check that Login page is opened.")
-    public boolean isOpened() {
-        return getDriver().getCurrentUrl().equals(testProject.getLoginUrl());
+    @Step("Check that current url is Login page url.")
+    private boolean isCurrentURLEqualsToLoginPageURL() {
+        return getPageUrl().equals(getCurrentUrl());
+    }
+
+    @Override
+    public String getPageUrl() {
+        return storefrontProject.getBaseUrl() + pageUrlMethod;
     }
 }

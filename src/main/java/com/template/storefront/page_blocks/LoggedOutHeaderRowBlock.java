@@ -1,10 +1,10 @@
-package com.sarnova.storefront.page_blocks;
+package com.template.storefront.page_blocks;
 
-import com.sarnova.helpers.BasePageObject;
+import com.template.helpers.BasePageObject;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import static com.sarnova.storefront.page_elements.LoggedOutHeaderRowBlockElements.*;
+import static com.template.storefront.page_elements.LoggedOutHeaderRowBlockElements.SIGN_IN_BUTTON_XPATH;
 
 @Component
 public class LoggedOutHeaderRowBlock extends BasePageObject {

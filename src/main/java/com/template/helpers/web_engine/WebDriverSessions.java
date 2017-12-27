@@ -3,6 +3,8 @@ package com.template.helpers.web_engine;
 import com.template.helpers.user_engine.UserRole;
 import com.template.helpers.user_engine.UsersPool;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.stqa.selenium.factory.LooseWebDriverPool;
@@ -16,21 +18,28 @@ public class WebDriverSessions {
     @Autowired UsersPool usersPool;
     @Autowired WebDriverThreadTestSetups webDriverThreadTestSetups;
 
-    private InheritableThreadLocal<HashMap<UserRole, WebDriverSession>> tlDriversMap = new InheritableThreadLocal<HashMap<UserRole, WebDriverSession>>(){{
-        set(new HashMap<>());
-    }};
+    private InheritableThreadLocal<HashMap<UserRole, WebDriverSession>> tlDriversMap = new InheritableThreadLocal<>();
 
-    private InheritableThreadLocal<WebDriverPool> tlWebDriverPool = new InheritableThreadLocal<WebDriverPool>(){{
+    private InheritableThreadLocal<WebDriverPool> tlWebDriverPool = new InheritableThreadLocal<WebDriverPool>() {{
         set(new LooseWebDriverPool());
     }};
 
     public synchronized void setDriver(URL hubUrl, String browserName, UserRole userRole) {
-        WebDriver webDriver = tlWebDriverPool.get().getDriver(hubUrl, browserName);
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setBrowserName(browserName);
+        capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+        WebDriver webDriver;
+        if (tlWebDriverPool.get() == null) {
+            tlWebDriverPool.set(new LooseWebDriverPool());
+            webDriver = tlWebDriverPool.get().getDriver(hubUrl, capabilities);
+        } else
+            webDriver = tlWebDriverPool.get().getDriver(hubUrl, capabilities);
         tlDriversMap.get().put(userRole, new WebDriverSession(webDriver));
     }
 
     public synchronized void setDriverActive(UserRole userRole) {
-        if (tlDriversMap.get().isEmpty()) {
+        if (tlDriversMap.get() == null) {
+            tlDriversMap.set(new HashMap<>());
             setDriver(webDriverThreadTestSetups.getWebDriverSetups().getHubUrl(),
                     webDriverThreadTestSetups.getWebDriverSetups().getBrowserName(),
                     userRole);
@@ -38,7 +47,7 @@ public class WebDriverSessions {
             usersPool.setActiveUser(userRole);
         } else if (!usersPool.getActiveUser().getUserRole().equals(userRole)) {
             tlDriversMap.get().forEach((userRole1, webDriverSession) -> webDriverSession.setActive(false));
-            if(tlDriversMap.get().get(userRole) == null)
+            if (tlDriversMap.get().get(userRole) == null)
                 setDriver(webDriverThreadTestSetups.getWebDriverSetups().getHubUrl(),
                         webDriverThreadTestSetups.getWebDriverSetups().getBrowserName(),
                         userRole);

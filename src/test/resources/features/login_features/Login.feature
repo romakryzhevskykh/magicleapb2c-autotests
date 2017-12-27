@@ -1,9 +1,8 @@
-Feature: Login to TDSC
+Feature: Login to Demo site
 
-  Scenario: Login with positive credentials.
+  Scenario:Check that shopper have possibility to log in to Storefront and first of all see home page
     Given Switch to Storefront shopper.
-    Given Login page opened.
-    When Fill login field with valid user email.
-    And Fill password field with valid user password.
-    And Click on submit/login button for valid user.
+    Given Opened Start page.
+    When Click on Sign in button.
+    And Login to Storefront.
     Then Check that Home page is opened.

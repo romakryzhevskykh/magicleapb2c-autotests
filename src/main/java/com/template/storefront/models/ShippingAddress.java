@@ -1,13 +1,13 @@
 package com.template.storefront.models;
 
-public class UserAddress {
+public class ShippingAddress {
     private String fullName;
     private String street;
     private String cityState;
     private String zipCode;
     private String practiceName;
 
-    public UserAddress(String addressFromPage) {
+    public ShippingAddress(String addressFromPage) {
         String[] splittedAddress = addressFromPage.split("\n");
         this.fullName = splittedAddress[0].trim();
         this.street = splittedAddress[1].trim();
@@ -16,6 +16,10 @@ public class UserAddress {
         if (splittedAddress.length > 4) {
             this.practiceName = splittedAddress[4].replaceFirst("Practice name: ", "").trim();
         }
+    }
+
+    public static synchronized void getskdh() {
+
     }
 
     public String getFullName() {

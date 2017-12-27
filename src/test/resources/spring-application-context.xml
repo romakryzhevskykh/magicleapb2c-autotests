@@ -9,7 +9,7 @@
 	">
 
     <context:component-scan base-package="com.template.storefront.pages"/>
-    <!--<context:component-scan base-package="com.template.storefront.page_blocks"/>-->
+    <context:component-scan base-package="com.template.storefront.page_blocks"/>
     <context:component-scan base-package="com.template.helpers"/>
 
     <import resource="classpath:spring-credentials-config-context.xml" />

@@ -1,4 +1,4 @@
-package com.sarnova.storefront.page_blocks;
+package com.template.storefront.page_blocks;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

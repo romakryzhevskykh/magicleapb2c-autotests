@@ -1,11 +1,9 @@
 package com.template.storefront.pages;
 
+import com.template.storefront.models.ShippingAddress;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.template.storefront.models.TemplateStorefront;
-import com.template.storefront.models.UserAddress;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.ArrayList;
@@ -17,28 +15,23 @@ import static com.template.storefront.page_elements.AddressBookPageElements.SECT
 @Component
 public class AddressBookPage extends StorefrontBasePage {
 
-    @Autowired TemplateStorefront testProject;
+    private final String pageUrlMethod = "powertools/en/USD/my-account/address-book";
 
     @Step("Get text of header section on Shipping address book page.")
     public String getSectionHeader() {
         return $(SECTION_HEADER_XPATH).getText().trim();
     }
 
-    @Step("Get current page URL.")
-    public String getPageUrl() {
-        return getDriver().getCurrentUrl();
-    }
-
     @Step("Get all shipping addresses on Shipping address book page.")
-    public List<UserAddress> getShippingAddresses() {
+    public List<ShippingAddress> getShippingAddresses() {
         ArrayList<String> addressesText = new ArrayList<>();
         for (WebElement webElement : $$(By.xpath(ADDRESSES_INFO_ITEMS_TEXT_XPATH))) {
             addressesText.add(webElement.getText());
         }
 
-        ArrayList<UserAddress> userAddresses = new ArrayList<>();
+        ArrayList<ShippingAddress> userAddresses = new ArrayList<>();
         for (String address : addressesText) {
-            UserAddress userAddress = new UserAddress(address);
+            ShippingAddress userAddress = new ShippingAddress(address);
             userAddresses.add(userAddress);
         }
         return userAddresses;
@@ -46,6 +39,11 @@ public class AddressBookPage extends StorefrontBasePage {
 
     @Step("Check that Shipping address book page is opened.")
     public boolean isOpened() {
-        return getDriver().getCurrentUrl().equals(testProject.getShippingAddressBookUrl());
+        return getPageUrl().equals(getCurrentUrl());
+    }
+
+    @Override
+    public String getPageUrl() {
+        return storefrontProject.getBaseUrl() + pageUrlMethod;
     }
 }

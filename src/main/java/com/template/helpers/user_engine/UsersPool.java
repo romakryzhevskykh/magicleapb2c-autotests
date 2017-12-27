@@ -9,9 +9,7 @@ import java.util.ArrayList;
 public class UsersPool {
 
     @Autowired ArrayList<UserCredentials> userCredentialsList;
-    private InheritableThreadLocal<ArrayList<User>> tlUsersList = new InheritableThreadLocal<ArrayList<User>>() {{
-        set(new ArrayList<>());
-    }};
+    private InheritableThreadLocal<ArrayList<User>> tlUsersList = new InheritableThreadLocal<>();
 
     private UserFactory userFactory = new UserFactory();
 
@@ -21,7 +19,8 @@ public class UsersPool {
                 .orElseGet(() -> {
                     throw new NullPointerException("No such user role in properties: " + userRole.toString());
                 });
-        if (tlUsersList.get().isEmpty()) {
+        if (tlUsersList.get() == null) {
+            tlUsersList.set(new ArrayList<>());
             tlUsersList.get().add(userFactory.getUser(userCredentials));
             userFactory.getUser(userCredentials).setActive(true);
         } else if (!getActiveUser().getUserRole().equals(userRole)) {
