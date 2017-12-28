@@ -2,18 +2,16 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Suite1" parallel="tests">
-    <test name="Chrome suite1">
+    <test name="LoginSuite">
         <parameter name="browserName" value="chrome" />
         <classes>
-            <!--<class name="com.template.cucumber.AddressBookSuite"/>-->
             <class name="com.template.cucumber.LoginSuite"/>
         </classes>
     </test>
-    <test name="Chrome suite2">
+    <test name="AddressBookSuite">
         <parameter name="browserName" value="chrome" />
         <classes>
-            <!--<class name="com.template.cucumber.AddressBookSuite"/>-->
-            <class name="com.template.cucumber.LoginSuite"/>
+            <class name="com.template.cucumber.AddressBookSuite"/>
         </classes>
     </test>
 </suite>

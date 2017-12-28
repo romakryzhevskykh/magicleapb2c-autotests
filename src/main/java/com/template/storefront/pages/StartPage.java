@@ -13,7 +13,7 @@ public class StartPage extends StorefrontBasePage {
     private final String pageUrlMethod = "powertools/en/USD/";
 
     @Step("Check that Start page is opened.")
-    public boolean isStartPageOpened() {
+    public boolean isOpened() {
         return isCurrentURLEqualsToStartPageURL() && isUserLoggedOut();
     }
 

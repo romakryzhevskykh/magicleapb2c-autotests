@@ -37,11 +37,6 @@ public class AddressBookPage extends StorefrontBasePage {
         return userAddresses;
     }
 
-    @Step("Check that Shipping address book page is opened.")
-    public boolean isOpened() {
-        return getPageUrl().equals(getCurrentUrl());
-    }
-
     @Override
     public String getPageUrl() {
         return storefrontProject.getBaseUrl() + pageUrlMethod;

@@ -21,4 +21,12 @@ public class HeaderRowPageBlock {
     public void logoutFromStorefront() {
         loggedInHeaderRowBlock.clickOnSignOutButton();
     }
+
+    public void clickOnMyAccountMenu() {
+        loggedInHeaderRowBlock.clickOnMyAccountMenu();
+    }
+
+    public void clickOnAddressBookItemInMyAccount() {
+        loggedInHeaderRowBlock.clickOnAddressBookItemInMyAccount();
+    }
 }

@@ -41,7 +41,7 @@ public abstract class BasePageObject {
         }
     }
 
-    protected String getCurrentUrl() {
+    public String getCurrentUrl() {
         return getDriver().getCurrentUrl();
     }
 

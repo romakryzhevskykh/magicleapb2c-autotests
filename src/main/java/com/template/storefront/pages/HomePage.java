@@ -8,7 +8,7 @@ public class HomePage extends StorefrontBasePage {
 
     private final String pageUrlMethod = "powertools/en/USD/";
 
-    public boolean isHomePageOpened() {
+    public boolean isOpened() {
         return isCurrentURLEqualsToHomePageURL() && isUserLoggedIn();
     }
 
@@ -21,4 +21,5 @@ public class HomePage extends StorefrontBasePage {
     public String getPageUrl() {
         return storefrontProject.getBaseUrl() + pageUrlMethod;
     }
+
 }
