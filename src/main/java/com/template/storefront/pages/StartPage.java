@@ -21,11 +21,6 @@ public class StartPage extends StorefrontBasePage {
         loggedOutHeaderRowBlock.clickOnSignInButton();
     }
 
-    @Step("Open Start page using url.")
-    public void openStartPage() {
-        open(storefrontProject.getBaseUrl());
-    }
-
     @Step("Check that current url is Start page url.")
     private boolean isCurrentURLEqualsToStartPageURL() {
         return getPageUrl().equals(getCurrentUrl());

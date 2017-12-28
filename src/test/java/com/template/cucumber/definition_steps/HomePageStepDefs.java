@@ -22,7 +22,7 @@ public class HomePageStepDefs extends AbstractStepDefs {
     @Given("Home page opened.")
     public void openHomePage() {
         if (!homePage.isOpened()) {
-            if(headerRowPageBlock.isUserLoggedOut()) {
+            if (headerRowPageBlock.isUserLoggedOut()) {
                 loginPage.open();
                 loginPage.loginToStorefront(usersPool.getActiveUser());
             } else {

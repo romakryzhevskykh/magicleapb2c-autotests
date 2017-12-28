@@ -17,12 +17,12 @@ public class AddressBookPage extends StorefrontBasePage {
 
     private final String pageUrlMethod = "powertools/en/USD/my-account/address-book";
 
-    @Step("Get text of header section on Shipping address book page.")
+    @Step("Get text of header section on address book page.")
     public String getSectionHeader() {
         return $(SECTION_HEADER_XPATH).getText().trim();
     }
 
-    @Step("Get all shipping addresses on Shipping address book page.")
+    @Step("Get all shipping addresses on address book page.")
     public List<ShippingAddress> getShippingAddresses() {
         ArrayList<String> addressesText = new ArrayList<>();
         for (WebElement webElement : $$(By.xpath(ADDRESSES_INFO_ITEMS_TEXT_XPATH))) {

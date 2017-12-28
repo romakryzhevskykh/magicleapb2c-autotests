@@ -7,7 +7,7 @@ Feature: Address book page is a page with address items
     Given Home page opened.
     When Click on My Account menu.
     And Click on Address Book item in My Account drop down.
-    Then Check that Home page is opened.
+    Then Check that Address Book page is opened.
 
   Scenario: Check that page header is "Address Book"
     Given Address book page opened.

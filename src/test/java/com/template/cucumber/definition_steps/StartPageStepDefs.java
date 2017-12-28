@@ -17,7 +17,7 @@ public class StartPageStepDefs extends AbstractStepDefs {
             if(headerRowPageBlock.isUserLoggedIn()) {
                 headerRowPageBlock.logoutFromStorefront();
             } else if (!startPage.isOpened()) {
-                startPage.openStartPage();
+                startPage.open();
             }
         }
     }

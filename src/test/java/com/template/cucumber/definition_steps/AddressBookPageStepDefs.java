@@ -8,6 +8,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class AddressBookPageStepDefs extends AbstractStepDefs {
@@ -35,11 +36,11 @@ public class AddressBookPageStepDefs extends AbstractStepDefs {
 
     @Then("^Check that header equals to (.*).$")
     public void checkThatHeaderEqualsToAddressBook(String addressBookHeader) {
-        assertTrue(addressBookPage.getSectionHeader().trim().equals(addressBookHeader));
+        assertTrue(addressBookPage.getSectionHeader().trim().contains(addressBookHeader));
     }
 
     @Then("^Check that URL equals to (.*).$")
     public void checkThatURLEqualsTo(String addressBookURL) throws Throwable {
-        assertTrue(addressBookPage.getCurrentUrl().equals(addressBookURL));
+        assertEquals(addressBookPage.getCurrentUrl(), addressBookURL);
     }
 }
