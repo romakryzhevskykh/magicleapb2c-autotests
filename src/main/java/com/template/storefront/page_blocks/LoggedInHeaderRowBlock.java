@@ -13,7 +13,7 @@ public class LoggedInHeaderRowBlock extends BasePageObject {
 
     @Step("Check that user is logged in.")
     public boolean isUserLoggedIn() {
-        return isDisplayed($(MY_ACCOUNT_DROP_DOWM_XPATH));
+        return isDisplayed(MY_ACCOUNT_DROP_DOWM_XPATH);
     }
 
     @Step("Click on sign out button.")

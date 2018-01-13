@@ -13,6 +13,6 @@ public class LeftBarMenuBlock extends BasePageObject {
     }
 
     private boolean isOpened() {
-        return isDisplayed($(MENU_LABEL_ID));
+        return isDisplayed(MENU_LABEL_ID);
     }
 }

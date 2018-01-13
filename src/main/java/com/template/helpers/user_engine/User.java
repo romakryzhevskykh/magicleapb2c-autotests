@@ -21,6 +21,10 @@ public class User {
         return credentials.getPassword();
     }
 
+    public UserCredentials getUserCredentials() {
+        return credentials;
+    }
+
     public void setPassword(String password) {
         this.credentials.setPassword(password);
     }

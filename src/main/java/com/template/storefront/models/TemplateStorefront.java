@@ -1,13 +1,10 @@
 package com.template.storefront.models;
 
-public class TemplateStorefront {
-    private String baseUrl;
+import com.template.hybris.Cockpit;
+
+public class TemplateStorefront extends Cockpit {
 
     public TemplateStorefront(String baseUrl) {
         this.baseUrl = baseUrl;
-    }
-
-    public String getBaseUrl() {
-        return baseUrl;
     }
 }

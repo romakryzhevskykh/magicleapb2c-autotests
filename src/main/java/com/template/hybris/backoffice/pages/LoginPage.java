@@ -1,4 +1,6 @@
 package com.template.hybris.backoffice.pages;
 
-public class LoginPage {
+import com.template.hybris.backoffice.BackofficeBasePage;
+
+public class LoginPage extends BackofficeBasePage {
 }

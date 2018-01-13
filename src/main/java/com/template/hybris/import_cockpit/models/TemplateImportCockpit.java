@@ -1,13 +1,10 @@
 package com.template.hybris.import_cockpit.models;
 
-public class TemplateImportCockpit {
-    private String baseUrl;
+import com.template.hybris.Cockpit;
+
+public class TemplateImportCockpit extends Cockpit {
 
     public TemplateImportCockpit(String baseUrl) {
         this.baseUrl = baseUrl;
-    }
-
-    public String getBaseUrl() {
-        return baseUrl;
     }
 }

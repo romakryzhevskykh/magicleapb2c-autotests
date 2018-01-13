@@ -20,7 +20,7 @@ public class WebDriverSessions {
 
     private InheritableThreadLocal<HashMap<UserRole, WebDriverSession>> tlDriversMap = new InheritableThreadLocal<>();
 
-    private InheritableThreadLocal<WebDriverPool> tlWebDriverPool = new InheritableThreadLocal<WebDriverPool>();
+    private InheritableThreadLocal<WebDriverPool> tlWebDriverPool = new InheritableThreadLocal<>();
 
     public synchronized void setDriver(URL hubUrl, String browserName, UserRole userRole) {
         DesiredCapabilities capabilities = new DesiredCapabilities();

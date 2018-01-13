@@ -1,5 +1,6 @@
 package com.template.cucumber.runners;
 
+import com.template.helpers.ThreadVarsHashMap;
 import com.template.helpers.web_engine.WebDriverSessions;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -10,12 +11,18 @@ import ru.yandex.qatools.allure.annotations.Attachment;
 
 public class CucumberHooks {
     @Autowired WebDriverSessions webDriverPool;
+    @Autowired ThreadVarsHashMap threadVarsHashMap;
 
     @After
     public void onFailure(Scenario scenario) {
         if (scenario.isFailed()) {
             captureScreenshot();
         }
+    }
+
+    @After
+    public void clearThreadVars() {
+        threadVarsHashMap.clear();
     }
 
     @Attachment("Screenshot")

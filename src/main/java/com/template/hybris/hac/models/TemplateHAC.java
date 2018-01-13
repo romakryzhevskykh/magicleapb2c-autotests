@@ -1,13 +1,10 @@
 package com.template.hybris.hac.models;
 
-public class TemplateHAC {
-    private String baseUrl;
+import com.template.hybris.Cockpit;
+
+public class TemplateHAC extends Cockpit {
 
     public TemplateHAC(String baseUrl) {
         this.baseUrl = baseUrl;
-    }
-
-    public String getBaseUrl() {
-        return baseUrl;
     }
 }

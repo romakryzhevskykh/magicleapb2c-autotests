@@ -17,6 +17,8 @@ Feature: Address book page is a page with address items
     Given Address book page opened.
     Then Check that URL equals to https://demo-b2b.zaelab.com/powertools/en/USD/my-account/address-book.
 
-#  Scenario: Check that page contains street address that equals to "14 Francisco St"
-#    Given Address book page opened.
-#    Then Check that any address street equals to 14 Francisco St
+  Scenario: Check that new address book is displaying on Address Book page after creating
+    Given Address book page opened.
+    When Create new address book entry.
+    And Address book page opened.
+    Then Check that created address book entry is present in the list.
