@@ -1,6 +1,6 @@
 package com.template.cucumber.definition_steps;
 
-import com.template.helpers.user_engine.UsersPool;
+import com.template.helpers.user_engine.UserSessions;
 import com.template.storefront.page_blocks.HeaderRowPageBlock;
 import com.template.storefront.pages.HomePage;
 import com.template.storefront.pages.LoginPage;
@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.testng.Assert.assertTrue;
 
 public class HomePageStepDefs extends AbstractStepDefs {
-    @Autowired UsersPool usersPool;
+    @Autowired UserSessions userSessions;
 
     @Autowired HomePage homePage;
     @Autowired LoginPage loginPage;
@@ -24,7 +24,7 @@ public class HomePageStepDefs extends AbstractStepDefs {
         if (!homePage.isOpened()) {
             if (headerRowPageBlock.isUserLoggedOut()) {
                 loginPage.open();
-                loginPage.loginToStorefront(usersPool.getActiveUser());
+                loginPage.loginToStorefront(userSessions.getActiveUserSession());
             } else {
                 homePage.open();
             }

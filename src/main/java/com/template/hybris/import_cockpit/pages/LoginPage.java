@@ -1,10 +1,8 @@
 package com.template.hybris.import_cockpit.pages;
 
-import com.template.helpers.user_engine.User;
+import com.template.helpers.user_engine.UserSession;
 import com.template.hybris.import_cockpit.ImportCockpitBasePage;
-import com.template.hybris.import_cockpit.models.TemplateImportCockpit;
 import org.openqa.selenium.By;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -12,8 +10,6 @@ import static com.template.hybris.import_cockpit.page_elements.LoginPageElements
 
 @Component
 public class LoginPage extends ImportCockpitBasePage {
-
-    @Autowired private TemplateImportCockpit importCockpitProject;
 
     private final String pageUrlMethod = "login.zul";
 
@@ -36,7 +32,7 @@ public class LoginPage extends ImportCockpitBasePage {
         $(By.id(LOGIN_BUTTON_ID)).click();
     }
 
-    public void loginToImporCockpit(User user) {
+    public void loginToImporCockpit(UserSession user) {
         fillUsernameFieldWith(user.getUsername());
         fillPasswordFieldWith(user.getPassword());
         clickOnLoginButton();

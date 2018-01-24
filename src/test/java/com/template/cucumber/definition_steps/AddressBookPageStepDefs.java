@@ -1,6 +1,6 @@
 package com.template.cucumber.definition_steps;
 
-import com.template.helpers.user_engine.UsersPool;
+import com.template.helpers.user_engine.UserSessions;
 import com.template.storefront.models.AddressBookEntry;
 import com.template.storefront.page_blocks.HeaderRowPageBlock;
 import com.template.storefront.pages.AddressBookPage;
@@ -15,7 +15,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class AddressBookPageStepDefs extends AbstractStepDefs {
-    @Autowired UsersPool usersPool;
+    @Autowired UserSessions userSessions;
 
     @Autowired AddressBookPage addressBookPage;
     @Autowired LoginPage loginPage;
@@ -26,7 +26,7 @@ public class AddressBookPageStepDefs extends AbstractStepDefs {
         if (!addressBookPage.isOpened()) {
             if (headerRowPageBlock.isUserLoggedOut()) {
                 loginPage.open();
-                loginPage.loginToStorefront(usersPool.getActiveUser());
+                loginPage.loginToStorefront(userSessions.getActiveUserSession());
             }
             addressBookPage.open();
         }
@@ -49,12 +49,12 @@ public class AddressBookPageStepDefs extends AbstractStepDefs {
 
     @Then("^Create new address book entry.$")
     public void createNewAddressBookEntry() throws Throwable {
-        addressBookPage.addNewRandomAddress(usersPool.getActiveUser());
+        addressBookPage.addNewRandomAddress(userSessions.getActiveUserSession());
     }
 
     @Then("^Check that created address book entry is present in the list.$")
     public void checkThatCreatedAddressBookEntryIsPresentInTheList() throws Throwable {
-        ArrayList<AddressBookEntry> addressBookEntries = addressBookPage.getAddressesList();
+        ArrayList<AddressBookEntry> addressBookEntries = addressBookPage.getAddressesList(userSessions.getActiveUserSession());
         assertTrue(threadVarsHashMap.get("newAddress") != null);
         assertTrue(addressBookEntries.stream()
                 .anyMatch(addressBookEntry -> addressBookEntry.equals((AddressBookEntry) threadVarsHashMap.get("newAddress"))));

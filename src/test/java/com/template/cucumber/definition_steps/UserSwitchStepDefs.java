@@ -21,17 +21,17 @@ public class UserSwitchStepDefs {
     @Given("Switch to Storefront shopper.")
     public void switchToStorefrontAsShopper() {
         webDriverPool.setDriverActive(StorefrontUserRoles.SHOPPER);
-        if (webDriverPool.getActiveDriver().getCurrentUrl().equals("data:,")) {
-            storefrontStartPage.open();
-        }
+//        if (webDriverPool.getActiveDriver().getCurrentUrl().equals("data:,")) {
+//            storefrontStartPage.open();
+//        }
     }
 
     @Given("Switch to Storefront guest.")
     public void switchToStorefrontAsGuest() {
         webDriverPool.setDriverActive(StorefrontUserRoles.GUEST);
-        if (webDriverPool.getActiveDriver().getCurrentUrl().equals("data:,")) {
-            storefrontStartPage.open();
-        }
+//        if (webDriverPool.getActiveDriver().getCurrentUrl().equals("data:,")) {
+//            storefrontStartPage.open();
+//        }
     }
 
     @Given("Switch to Import cockpit import manager role.")

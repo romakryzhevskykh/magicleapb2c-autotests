@@ -105,6 +105,12 @@
             <artifactId>cucumber-spring</artifactId>
             <version>${cucumber-spring.version}</version>
         </dependency>
+        <!--In test mode JSON builder-->
+        <!--<dependency>-->
+            <!--<groupId>net.minidev</groupId>-->
+            <!--<artifactId>json-smart</artifactId>-->
+            <!--<version>1.0.9</version>-->
+        <!--</dependency>-->
     </dependencies>
 
     <build>

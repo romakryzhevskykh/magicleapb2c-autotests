@@ -1,7 +1,7 @@
 package com.template.storefront.page_blocks;
 
 import com.template.helpers.BasePageObject;
-import com.template.helpers.user_engine.User;
+import com.template.helpers.user_engine.UserSession;
 import com.template.storefront.managers.AddressBookEntriesManager;
 import com.template.storefront.models.AddressBookEntry;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -111,20 +111,20 @@ public class AddressBookAddUpdateEntryBlock extends BasePageObject {
     }
 
     @Step("Click on Save button.")
-    public void clickOnSaveButton(User activeUser) {
+    public void clickOnSaveButton(UserSession activeUser) {
         $(SAVE_ADDRESS_BUTTON_XPATH).click();
         if (!isDisplayed(ALERT_ERROR_MESSAGE_XPATH)) {
             AddressBookEntry.AddressBookEntryBuilder addressBookEntryBuilder =
-                    new AddressBookEntry.AddressBookEntryBuilder(activeUser.getUserCredentials())
+                    new AddressBookEntry.AddressBookEntryBuilder(activeUser.getUser())
                             .country(threadVarsHashMap.getString("newAddressCountry"))
                             .title(threadVarsHashMap.getString("newAddressTitle"))
                             .firstName(threadVarsHashMap.getString("newAddressFirstName"))
                             .lastName(threadVarsHashMap.getString("newAddressLastName"))
                             .addressLine1(threadVarsHashMap.getString("newAddressAddress1"))
-                            .addressLine2(threadVarsHashMap.getString("newAddressAddress1"))
-                            .town(threadVarsHashMap.getString("newAddressAddress1"))
-                            .postCode(threadVarsHashMap.getString("newAddressAddress1"))
-                            .phoneNumber(threadVarsHashMap.getString("newAddressAddress1"));
+                            .addressLine2(threadVarsHashMap.getString("newAddressAddress2"))
+                            .town(threadVarsHashMap.getString("newAddressTown"))
+                            .postCode(threadVarsHashMap.getString("newAddressPostCode"))
+                            .phoneNumber(threadVarsHashMap.getString("newAddressPhone"));
             AddressBookEntry createdAddressBookEntry = addressBookEntriesManager.createInstance(addressBookEntryBuilder);
             threadVarsHashMap.clear();
             threadVarsHashMap.put("newAddress", createdAddressBookEntry);

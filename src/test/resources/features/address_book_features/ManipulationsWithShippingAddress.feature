@@ -13,9 +13,9 @@ Feature: Address book page is a page with address items
     Given Address book page opened.
     Then Check that header equals to Address Book.
 
-  Scenario: Check that page URL is "https://demo-b2b.zaelab.com/powertools/en/USD/my-account/address-book"
+  Scenario: Check that page URL is "https://demo-66.zaelab.com/b2b/powertools/en/USD/my-account/address-book"
     Given Address book page opened.
-    Then Check that URL equals to https://demo-b2b.zaelab.com/powertools/en/USD/my-account/address-book.
+    Then Check that URL equals to https://demo-66.zaelab.com/b2b/powertools/en/USD/my-account/address-book.
 
   Scenario: Check that new address book is displaying on Address Book page after creating
     Given Address book page opened.

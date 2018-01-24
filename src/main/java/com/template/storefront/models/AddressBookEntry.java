@@ -1,6 +1,6 @@
 package com.template.storefront.models;
 
-import com.template.helpers.user_engine.UserCredentials;
+import com.template.helpers.user_engine.User;
 
 public class AddressBookEntry {
     private String country;
@@ -13,31 +13,48 @@ public class AddressBookEntry {
     private String state;
     private String postCode;
     private String phoneNumber;
-    private UserCredentials userCredentials;
+    private User user;
 
     private AddressBookEntry(AddressBookEntryBuilder addressBookEntryBuilder) {
-        this.country = addressBookEntryBuilder.country;
-        this.title = addressBookEntryBuilder.title;
-        this.firstName = addressBookEntryBuilder.firstName;
-        this.lastName = addressBookEntryBuilder.lastName;
-        this.addressLine1 = addressBookEntryBuilder.addressLine1;
-        this.addressLine2 = addressBookEntryBuilder.addressLine2;
-        this.town = addressBookEntryBuilder.town;
-        this.state = addressBookEntryBuilder.state;
-        this.postCode = addressBookEntryBuilder.postCode;
-        this.phoneNumber = addressBookEntryBuilder.phoneNumber;
-        this.userCredentials = addressBookEntryBuilder.userCredentials;
+        this.country = addressBookEntryBuilder.country != null ? addressBookEntryBuilder.country : "";
+        this.title = addressBookEntryBuilder.title != null ? addressBookEntryBuilder.title : "";
+        this.firstName = addressBookEntryBuilder.firstName != null ? addressBookEntryBuilder.firstName : "";
+        this.lastName = addressBookEntryBuilder.lastName != null ? addressBookEntryBuilder.lastName : "";
+        this.addressLine1 = addressBookEntryBuilder.addressLine1 != null ? addressBookEntryBuilder.addressLine1 : "";
+        this.addressLine2 = addressBookEntryBuilder.addressLine2 != null ? addressBookEntryBuilder.addressLine2 : "";
+        this.town = addressBookEntryBuilder.town != null ? addressBookEntryBuilder.town : "";
+        this.state = addressBookEntryBuilder.state != null ? addressBookEntryBuilder.state : "";
+        this.postCode = addressBookEntryBuilder.postCode != null ? addressBookEntryBuilder.postCode : "";
+        this.phoneNumber = addressBookEntryBuilder.phoneNumber != null ? addressBookEntryBuilder.phoneNumber : "";
+        this.user = addressBookEntryBuilder.user;
     }
 
-    public UserCredentials getUserCredentials() {
-        /**
-         * for future implementation to identify for which user this address has been created
+    public User getUser() {
+        /*
+          for future implementation to identify for which user this address has been created
          */
-        return userCredentials;
+        return user;
     }
 
     public boolean equals(AddressBookEntry addressBookEntry) {
-        return true;
+        return this.country.equalsIgnoreCase(addressBookEntry.country) && this.title.equals(addressBookEntry.title)
+                && this.firstName.equalsIgnoreCase(addressBookEntry.firstName) && this.lastName.equalsIgnoreCase(addressBookEntry.lastName)
+                && this.addressLine1.equals(addressBookEntry.addressLine1) && this.addressLine2.equals(addressBookEntry.addressLine2)
+                && this.town.equals(addressBookEntry.town) && this.state.equals(addressBookEntry.state)
+                && this.postCode.equals(addressBookEntry.postCode) && this.phoneNumber.equals(addressBookEntry.phoneNumber);
+    }
+
+    @Override
+    public String toString() {
+        return "Name: " + this.title + " " + this.firstName + " " + this.lastName + "\n" +
+                "Address line 1: " + this.addressLine1 + "\n" +
+                "Address line 2: " + this.addressLine2 + "\n" +
+                "Town/State: " + this.town + " " + this.state + "\n" +
+                "Country: " + this.country + "\n" +
+                "Post code: " + this.postCode + "\n" +
+                "Phone number: " + this.phoneNumber + "\n" +
+                "User name: " + (user.getLogin() != null ? user.getLogin() : "user is not set.");
+
     }
 
     public static class AddressBookEntryBuilder {
@@ -51,10 +68,10 @@ public class AddressBookEntry {
         private String state;
         private String postCode;
         private String phoneNumber;
-        private final UserCredentials userCredentials;
+        private final User user;
 
-        public AddressBookEntryBuilder(UserCredentials userCredentials) {
-            this.userCredentials = userCredentials;
+        public AddressBookEntryBuilder(User user) {
+            this.user = user;
         }
 
         public AddressBookEntryBuilder country(String country) {

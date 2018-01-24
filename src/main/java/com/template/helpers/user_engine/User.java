@@ -1,47 +1,96 @@
 package com.template.helpers.user_engine;
 
+import com.template.hybris.Cockpit;
+import com.template.hybris.backoffice.models.TemplateBackoffice;
+import com.template.hybris.hac.models.TemplateHAC;
+import com.template.hybris.import_cockpit.models.TemplateImportCockpit;
+import com.template.storefront.models.TemplateStorefront;
+
 public class User {
-    private UserCredentials credentials;
-    private boolean isLoggedIn = false;
-    private boolean isActive = false;
 
-    public User(UserCredentials userCredentials) {
-        this.credentials = userCredentials;
+    private String login;
+    private String password;
+    private UserRole userRole;
+    private Cockpit userCockpit;
+
+    public User(String login, String password, Cockpit userCockpit, String cockpitRole) {
+        this.login = login;
+        this.password = password;
+        this.userCockpit = userCockpit;
+        if (userCockpit instanceof TemplateStorefront) {
+            switch (cockpitRole) {
+                case "shopper":
+                    userRole = StorefrontUserRoles.SHOPPER;
+                    break;
+                case "guest":
+                    userRole = StorefrontUserRoles.GUEST;
+                    break;
+                default:
+                    userRole = null;
+                    break;
+            }
+        } else if (userCockpit instanceof TemplateBackoffice) {
+            switch (cockpitRole) {
+                case "admin":
+                    userRole = BackofficeUserRoles.ADMIN;
+                    break;
+                case "warehouse agent":
+                    userRole = BackofficeUserRoles.WAREHOUSE_AGENT;
+                    break;
+                case "customer support agent":
+                    userRole = BackofficeUserRoles.CUSTOMER_SUPPORT_AGENT;
+                    break;
+                default:
+                    userRole = null;
+                    break;
+            }
+        } else if (userCockpit instanceof TemplateHAC) {
+            switch (cockpitRole) {
+                case "admin":
+                    userRole = HACUserRoles.ADMIN;
+                    break;
+                default:
+                    userRole = null;
+                    break;
+            }
+        } else if (userCockpit instanceof TemplateImportCockpit) {
+            switch (cockpitRole) {
+                case "admin":
+                    userRole = ImportCockpitUserRoles.ADMIN;
+                    break;
+                case "importmanager":
+                    userRole = ImportCockpitUserRoles.IMPORT_MANAGER;
+                    break;
+                default:
+                    userRole = null;
+                    break;
+            }
+        } else {
+            userRole = null;
+        }
     }
 
-    public UserRole getUserRole() {
-        return credentials.getUserRole();
+    public String getLogin() {
+        return login;
     }
 
-    public String getUsername() {
-        return credentials.getLogin();
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {
-        return credentials.getPassword();
-    }
-
-    public UserCredentials getUserCredentials() {
-        return credentials;
+        return password;
     }
 
     public void setPassword(String password) {
-        this.credentials.setPassword(password);
+        this.password = password;
     }
 
-    public boolean isLoggedIn() {
-        return isLoggedIn;
+    public UserRole getUserRole() {
+        return userRole;
     }
 
-    public void setLoggedIn(boolean loggedIn) {
-        isLoggedIn = loggedIn;
-    }
-
-    public void setActive(boolean isActive) {
-        this.isActive = isActive;
-    }
-
-    public boolean isActive() {
-        return isActive;
+    public Cockpit getUserCockpit() {
+        return userCockpit;
     }
 }

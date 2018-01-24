@@ -1,6 +1,6 @@
 package com.template.storefront.pages;
 
-import com.template.helpers.user_engine.User;
+import com.template.helpers.user_engine.UserSession;
 import com.template.storefront.managers.AddressBookEntriesManager;
 import com.template.storefront.models.AddressBookEntry;
 import com.template.storefront.page_blocks.AddressBookAddUpdateEntryBlock;
@@ -27,17 +27,17 @@ public class AddressBookPage extends StorefrontBasePage {
     }
 
     @Step("Get all shipping addresses on address book page.")
-    public ArrayList<AddressBookEntry> getAddressesList() {
+    public ArrayList<AddressBookEntry> getAddressesList(UserSession userSession) {
         ArrayList<AddressBookEntry> userAddresses = new ArrayList<>();
         for (WebElement address : $$(By.xpath(ADDRESSES_INFO_ITEMS_TEXT_XPATH))) {
-            AddressBookEntry userAddress = addressBookEntriesManager.parseAddressFromHTML(address);
+            AddressBookEntry userAddress = addressBookEntriesManager.parseAddressFromHTML(address, userSession.getUser());
             userAddresses.add(userAddress);
         }
         return userAddresses;
     }
 
     @Step("Add new random address to Address Book.")
-    public void addNewRandomAddress(User activeUser) {
+    public void addNewRandomAddress(UserSession activeUser) {
         clickOnAddAddressButton();
         addressBookAddUpdateEntryBlock.clickOnCountryDropDown();
         addressBookAddUpdateEntryBlock.selectRandomCountryFromDropDown();

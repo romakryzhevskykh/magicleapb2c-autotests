@@ -1,5 +1,6 @@
 package com.template.storefront.managers;
 
+import com.template.helpers.user_engine.User;
 import com.template.storefront.models.AddressBookEntry;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -33,11 +34,11 @@ public class AddressBookEntriesManager {
     }
 
     public AddressBookEntry createInstance(AddressBookEntry.AddressBookEntryBuilder addressBookEntryBuilder) {
-        if(addressBookEntryBuilder == null) {
+        if (addressBookEntryBuilder == null) {
             throw new IllegalStateException("AddressBookEntryBuilder is incorrect!");
         }
         AddressBookEntry newAddressBookEntry = addressBookEntryBuilder.build();
-        if (newAddressBookEntry.getUserCredentials() != null)
+        if (newAddressBookEntry.getUser() != null)
             addTestAddress(newAddressBookEntry);
         return newAddressBookEntry;
     }
@@ -71,11 +72,11 @@ public class AddressBookEntriesManager {
         deleteInstance(addressBookEntry);
     }
 
-    public AddressBookEntry parseAddressFromHTML(WebElement addressFromAddressBookPage) {
+    public AddressBookEntry parseAddressFromHTML(WebElement addressFromAddressBookPage, User user) {
         List<WebElement> addressRows = addressFromAddressBookPage.findElements(By.xpath("li"));
         AddressBookEntry.AddressBookEntryBuilder addressBookEntryBuilder = null;
         if (addressRows.size() == 6) {
-            addressBookEntryBuilder = new AddressBookEntry.AddressBookEntryBuilder(null)
+            addressBookEntryBuilder = new AddressBookEntry.AddressBookEntryBuilder(user)
                     .title(addressRows.get(0).getText().trim().split(" ")[0])
                     .firstName(addressRows.get(0).getText().trim().split(" ")[1])
                     .lastName(addressRows.get(0).getText().trim().split(" ")[2])
@@ -88,7 +89,7 @@ public class AddressBookEntriesManager {
                     .postCode(addressRows.get(4).getText().trim().split(" ")[1])
                     .phoneNumber(addressRows.get(5).getText().trim());
         } else if (addressRows.size() == 5) {
-            addressBookEntryBuilder = new AddressBookEntry.AddressBookEntryBuilder(null)
+            addressBookEntryBuilder = new AddressBookEntry.AddressBookEntryBuilder(user)
                     .title(addressRows.get(0).getText().trim().split(" ")[0])
                     .firstName(addressRows.get(0).getText().trim().split(" ")[1])
                     .lastName(addressRows.get(0).getText().trim().split(" ")[2])
