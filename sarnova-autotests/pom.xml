@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>test</groupId>
-    <artifactId>com.template.template-automatedtests</artifactId>
+    <artifactId>sarnova-automatedtests</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>QA-Automation Tests Template</name>
+    <name>Sarnova Autotests</name>
 
     <properties>
         <testEnv>stage</testEnv>
