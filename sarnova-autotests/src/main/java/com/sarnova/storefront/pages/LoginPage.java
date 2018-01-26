@@ -24,7 +24,7 @@ public class LoginPage extends StorefrontBasePage {
 
     @Step("Click on Login button.")
     public void clickOnLoginButton() {
-        click($(LOG_IN_BUTTON_XPATH));
+        click(LOG_IN_BUTTON_XPATH);
     }
 
     public void loginToStorefront(UserSession userSession) {
@@ -36,6 +36,36 @@ public class LoginPage extends StorefrontBasePage {
     @Step("Check that current url is Login page url.")
     private boolean isCurrentURLEqualsToLoginPageURL() {
         return getPageUrl().equals(getCurrentUrl());
+    }
+
+    @Step("Check that Username label is present.")
+    public boolean checkUsernameLabelIsPresent() {
+        return isDisplayed(USERNAME_LABEL);
+    }
+
+    @Step("Get username label text.")
+    public String getUsernameLabelText() {
+        return $(USERNAME_LABEL).getText().trim();
+    }
+
+    @Step("Check that Username field is present.")
+    public boolean checkUsernameFieldIsPresent() {
+        return isDisplayed(By.id(USERNAME_FIELD_ID));
+    }
+
+    @Step("Check that Password label is present.")
+    public boolean checkPasswordLabelIsPresent() {
+        return isDisplayed(PASSWORD_LABEL);
+    }
+
+    @Step("Get password label text.")
+    public String getPasswordLabelText() {
+        return $(PASSWORD_LABEL).getText().trim();
+    }
+
+    @Step("Check that Password field is present.")
+    public boolean checkPasswordFieldIsPresent() {
+        return isDisplayed(By.id(PASSWORD_FIELD_ID));
     }
 
     @Override
