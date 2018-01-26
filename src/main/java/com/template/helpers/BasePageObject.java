@@ -1,10 +1,9 @@
 package com.template.helpers;
 
 import com.template.helpers.web_engine.WebDriverSessions;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -46,6 +45,36 @@ public abstract class BasePageObject {
         return getDriver().findElements(by);
     }
 
+    protected void click(String xpath, String... args) {
+        WebElement webElement = $(xpath, args);
+        webDriverPool.getActiveDriverSession().setShortImplicitWait();
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getShortTimeOut());
+            wait.until(ExpectedConditions.elementToBeClickable(webElement));
+            webElement.click();
+        } catch (WebDriverException ex) {
+            ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", webElement);
+            webElement.click();
+        } finally {
+            webDriverPool.getActiveDriverSession().restoreDefaultImplicitWait();
+        }
+    }
+
+    protected void click(By by) {
+        WebElement webElement = $(by);
+        webDriverPool.getActiveDriverSession().setShortImplicitWait();
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getShortTimeOut());
+            wait.until(ExpectedConditions.elementToBeClickable(webElement));
+            webElement.click();
+        } catch (WebDriverException ex) {
+            ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", webElement);
+            webElement.click();
+        } finally {
+            webDriverPool.getActiveDriverSession().restoreDefaultImplicitWait();
+        }
+    }
+
     public String getCurrentUrl() {
         return getDriver().getCurrentUrl();
     }
@@ -53,7 +82,18 @@ public abstract class BasePageObject {
     protected boolean isDisplayed(String xpath, String... args) {
         webDriverPool.getActiveDriverSession().setShortImplicitWait();
         try {
-            return getDriver().findElement(By.xpath(String.format(xpath, args))).isDisplayed();
+            return $(xpath, args).isDisplayed();
+        } catch (NoSuchElementException | NullPointerException ex) {
+            return false;
+        } finally {
+            webDriverPool.getActiveDriverSession().restoreDefaultImplicitWait();
+        }
+    }
+
+    protected boolean isDisplayed(By by) {
+        webDriverPool.getActiveDriverSession().setShortImplicitWait();
+        try {
+            return $(by).isDisplayed();
         } catch (NoSuchElementException | NullPointerException ex) {
             return false;
         } finally {
