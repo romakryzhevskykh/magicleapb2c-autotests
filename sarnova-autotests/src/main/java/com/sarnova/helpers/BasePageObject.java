@@ -1,10 +1,9 @@
 package com.sarnova.helpers;
 
 import com.sarnova.helpers.web_engine.WebDriverSessions;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -44,6 +43,20 @@ public abstract class BasePageObject {
 
     protected List<WebElement> $$(By by) {
         return getDriver().findElements(by);
+    }
+
+    protected void click(WebElement webElement) {
+        webDriverPool.getActiveDriverSession().setShortImplicitWait();
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getShortTimeOut());
+            wait.until(ExpectedConditions.elementToBeClickable(webElement));
+            webElement.click();
+        } catch (WebDriverException  ex) {
+            ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", webElement);
+            webElement.click();
+        } finally {
+            webDriverPool.getActiveDriverSession().restoreDefaultImplicitWait();
+        }
     }
 
     public String getCurrentUrl() {

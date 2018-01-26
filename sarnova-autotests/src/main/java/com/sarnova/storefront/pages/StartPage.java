@@ -7,7 +7,7 @@ import ru.yandex.qatools.allure.annotations.Step;
 
 @Component
 public class StartPage extends StorefrontBasePage {
-    private final String pageUrlMethod = "powertools/en/USD/";
+    private final String pageUrlMethod = "boundtree/en/USD/";
 
     @Autowired LoggedOutHeaderRowBlock loggedOutHeaderRowBlock;
 
