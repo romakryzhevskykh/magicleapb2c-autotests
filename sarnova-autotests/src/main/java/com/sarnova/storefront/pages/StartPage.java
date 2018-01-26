@@ -12,7 +12,7 @@ public class StartPage extends StorefrontBasePage {
     @Autowired LoggedOutHeaderRowBlock loggedOutHeaderRowBlock;
 
     @Step("Check that Start page is opened.")
-    public boolean isStartPageOpened() {
+    public boolean isOpened() {
         return isCurrentURLEqualsToStartPageURL() && isUserLoggedOut();
     }
 
@@ -20,14 +20,9 @@ public class StartPage extends StorefrontBasePage {
         loggedOutHeaderRowBlock.clickOnSignInButton();
     }
 
-    @Step("Open Start page using url.")
-    public void openStartPage() {
-        open(storefrontProject.getBaseUrl());
-    }
-
     @Step("Check that current url is Start page url.")
     private boolean isCurrentURLEqualsToStartPageURL() {
-        return storefrontProject.getBaseUrl().equals(getCurrentUrl());
+        return getPageUrl().equals(getCurrentUrl());
     }
 
     @Override

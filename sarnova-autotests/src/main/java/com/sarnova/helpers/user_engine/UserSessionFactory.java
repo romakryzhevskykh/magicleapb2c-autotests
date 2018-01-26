@@ -34,7 +34,7 @@ public class UserSessionFactory {
     }
 
     private String createKey(User user) {
-        return user.getLogin();
+        return user.getUsername();
     }
 
     private UserSession newUserSession(User user) {

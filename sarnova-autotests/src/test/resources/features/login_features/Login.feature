@@ -1,6 +1,6 @@
 Feature: Login to Demo site
 
-  Scenario:Check that shopper have possibility to log in to Storefront and first of all see home page
+  Scenario: Possibility to login with username and password credentials
     Given Switch to Storefront shopper.
     Given Opened Start page.
     When Click on Sign in button.

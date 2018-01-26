@@ -11,10 +11,6 @@ public class LoginPage extends StorefrontBasePage {
 
     private final String pageUrlMethod = "powertools/en/USD/login";
 
-    public boolean isLoginPageOpened() {
-        return isCurrentURLEqualsToLoginPageURL() && isUserLoggedOut();
-    }
-
     @Step("Fill username field.")
     public void fillUsernameFieldWith(String username) {
         $(USERNAME_FIELD_XPATH).sendKeys(username);
@@ -38,7 +34,7 @@ public class LoginPage extends StorefrontBasePage {
 
     @Step("Check that current url is Login page url.")
     private boolean isCurrentURLEqualsToLoginPageURL() {
-        return (storefrontProject.getBaseUrl() + pageUrlMethod).equals(getCurrentUrl());
+        return getPageUrl().equals(getCurrentUrl());
     }
 
     @Override

@@ -18,11 +18,11 @@ public class LoginPageStepDefs extends AbstractStepDefs {
 
     @Given("Opened Login page.")
     public void openLoginPage() {
-        if (!loginPage.isLoginPageOpened()) {
+        if (!loginPage.isOpened()) {
             if(headerRowPageBlock.isUserLoggedIn()) {
                 headerRowPageBlock.logoutFromStorefront();
-            } else if (!startPage.isStartPageOpened()) {
-                startPage.openStartPage();
+            } else if (!startPage.isOpened()) {
+                startPage.open();
             }
             startPage.clickOnSignInButton();
         }
