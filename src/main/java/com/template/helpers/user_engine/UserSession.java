@@ -14,7 +14,7 @@ public class UserSession {
     }
 
     public String getUsername() {
-        return user.getLogin();
+        return user.getUsername();
     }
 
     public String getPassword() {

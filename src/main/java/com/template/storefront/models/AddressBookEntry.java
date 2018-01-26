@@ -53,7 +53,7 @@ public class AddressBookEntry {
                 "Country: " + this.country + "\n" +
                 "Post code: " + this.postCode + "\n" +
                 "Phone number: " + this.phoneNumber + "\n" +
-                "User name: " + (user.getLogin() != null ? user.getLogin() : "user is not set.");
+                "User name: " + (user.getUsername() != null ? user.getUsername() : "user is not set.");
 
     }
 
