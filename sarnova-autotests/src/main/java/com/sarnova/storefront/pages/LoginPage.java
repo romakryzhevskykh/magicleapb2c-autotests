@@ -12,21 +12,6 @@ public class LoginPage extends StorefrontBasePage {
 
     private final String pageUrlMethod = "boundtree/en/USD/login";
 
-    @Step("Fill username field.")
-    public void fillUsernameFieldWith(String username) {
-        $(By.id(USERNAME_FIELD_ID)).sendKeys(username);
-    }
-
-    @Step("Fill password field.")
-    public void fillPasswordFieldWith(String password) {
-        $(By.id(PASSWORD_FIELD_ID)).sendKeys(password);
-    }
-
-    @Step("Click on Login button.")
-    public void clickOnLoginButton() {
-        click(LOG_IN_BUTTON_XPATH);
-    }
-
     public void loginToStorefront(UserSession userSession) {
         fillUsernameFieldWith(userSession.getUsername());
         fillPasswordFieldWith(userSession.getPassword());
@@ -53,6 +38,11 @@ public class LoginPage extends StorefrontBasePage {
         return isDisplayed(By.id(USERNAME_FIELD_ID));
     }
 
+    @Step("Fill username field.")
+    public void fillUsernameFieldWith(String username) {
+        $(By.id(USERNAME_FIELD_ID)).sendKeys(username);
+    }
+
     @Step("Check that Password label is present.")
     public boolean checkPasswordLabelIsPresent() {
         return isDisplayed(PASSWORD_LABEL);
@@ -66,6 +56,27 @@ public class LoginPage extends StorefrontBasePage {
     @Step("Check that Password field is present.")
     public boolean checkPasswordFieldIsPresent() {
         return isDisplayed(By.id(PASSWORD_FIELD_ID));
+    }
+
+    @Step("Fill password field.")
+    public void fillPasswordFieldWith(String password) {
+        $(By.id(PASSWORD_FIELD_ID)).sendKeys(password);
+    }
+
+
+    @Step("Check that Log in button is present.")
+    public boolean checkLogInButtonIsPresent() {
+        return isDisplayed(LOG_IN_BUTTON_XPATH);
+    }
+
+    @Step("Get log in button text.")
+    public String getLogInButtonText() {
+        return $(LOG_IN_BUTTON_XPATH).getText().trim();
+    }
+
+    @Step("Click on Login button.")
+    public void clickOnLoginButton() {
+        click(LOG_IN_BUTTON_XPATH);
     }
 
     @Override

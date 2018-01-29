@@ -66,4 +66,14 @@ public class LoginPageStepDefs extends AbstractStepDefs {
     public void checkPasswordFieldIsPresent() {
         assertTrue(loginPage.checkPasswordFieldIsPresent());
     }
+
+    @Then("^Check that Log in button is present.$")
+    public void checkLogInButtonIsPresent() {
+        assertTrue(loginPage.checkLogInButtonIsPresent());
+    }
+
+    @Then("^Check that Log in button text equals to (.*).$")
+    public void checkLogInButtonTextEqualsTo(String logInButtonText) {
+        assertEquals(loginPage.getLogInButtonText(), logInButtonText);
+    }
 }
