@@ -1,4 +1,4 @@
-Feature: Login to Demo site
+Feature: Login page functionality
 
   Background:
     Given Switch to Storefront shopper.
