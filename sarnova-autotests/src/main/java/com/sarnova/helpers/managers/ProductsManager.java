@@ -1,9 +1,6 @@
 package com.sarnova.helpers.managers;
 
-import com.sarnova.helpers.models.products.IndividualProduct;
-import com.sarnova.helpers.models.products.Product;
-import com.sarnova.helpers.models.products.ProductTestType;
-import com.sarnova.helpers.models.products.UnitOfMeasure;
+import com.sarnova.helpers.models.products.*;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -48,6 +45,27 @@ public class ProductsManager {
     }
 
     private void defineAndSetProductTestType(Product product) {
-        product.setProductTestType(ProductTestType.INDIVIDUAL_VALID);
+        if (product instanceof IndividualProduct) {
+            if (((IndividualProduct) product).getAccessoriesProducts().isEmpty()
+                    && ((IndividualProduct) product).getAlternativeProducts().isEmpty()
+                    && !((IndividualProduct) product).isDiscontinued()
+                    && !((IndividualProduct) product).isGroupMember()
+                    && !((IndividualProduct) product).getUnitsOfMeasurement().isEmpty()
+                    && ((IndividualProduct) product).getUnitsOfMeasurement().stream().noneMatch(uom -> uom.getListPrice() == null)
+                    && ((IndividualProduct) product).getUnitsOfMeasurement().stream().noneMatch(uom -> uom.getYourPrice() == null)) {
+                product.setProductTestType(ProductTestType.INDIVIDUAL_VALID);
+            }
+        } else if (product instanceof GroupProduct) {
+            product.setProductTestType(ProductTestType.GROUP_VALID);
+        }
+    }
+
+    public Product getProductBySku(String sku) {
+        return getTestProducts().stream()
+                .filter(product -> product.getSku().equals(sku))
+                .findAny()
+                .orElseGet(() -> {
+                    throw new NullPointerException("No product with SKU: " + sku + " in the test list.");
+                });
     }
 }

@@ -21,4 +21,9 @@ public abstract class Product {
     public ProductTestType getProductTestType() {
         return productTestType;
     }
+
+    @Override
+    public String toString() {
+        return "SKU: " + this.sku + ", name: " + this.name + ", product class: " + this.getClass();
+    }
 }

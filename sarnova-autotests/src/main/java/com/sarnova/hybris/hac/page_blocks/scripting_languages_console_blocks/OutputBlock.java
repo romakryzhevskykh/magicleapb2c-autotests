@@ -1,4 +1,6 @@
 package com.sarnova.hybris.hac.page_blocks.scripting_languages_console_blocks;
 
-public class OutputBlock {
+import com.sarnova.helpers.UIComponent;
+
+public class OutputBlock extends UIComponent {
 }

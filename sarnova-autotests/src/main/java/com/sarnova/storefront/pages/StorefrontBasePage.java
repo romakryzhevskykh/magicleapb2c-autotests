@@ -17,14 +17,4 @@ public abstract class StorefrontBasePage extends BasePageObject {
     protected boolean isUserLoggedOut() {
         return headerRowPageBlock.isUserLoggedOut();
     }
-
-    public boolean isOpened() {
-        return getPageUrl().equals(getCurrentUrl());
-    }
-
-    public void open() {
-        open(getPageUrl());
-    }
-
-    public abstract String getPageUrl();
 }

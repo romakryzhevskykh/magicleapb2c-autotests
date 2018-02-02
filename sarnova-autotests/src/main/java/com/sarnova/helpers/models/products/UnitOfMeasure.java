@@ -2,20 +2,20 @@ package com.sarnova.helpers.models.products;
 
 public class UnitOfMeasure {
     private final UOMType uomType;
-    private final double listPrice;
-    private final double yourPrice;
+    private final Double listPrice;
+    private final Double yourPrice;
 
-    public UnitOfMeasure(UOMType uomType, double listPrice, double yourPrice) {
+    public UnitOfMeasure(UOMType uomType, Double listPrice, Double yourPrice) {
         this.uomType = uomType;
         this.listPrice = listPrice;
         this.yourPrice = yourPrice;
     }
 
-    public double getListPrice() {
+    public Double getListPrice() {
         return listPrice;
     }
 
-    public double getYourPrice() {
+    public Double getYourPrice() {
         return yourPrice;
     }
 

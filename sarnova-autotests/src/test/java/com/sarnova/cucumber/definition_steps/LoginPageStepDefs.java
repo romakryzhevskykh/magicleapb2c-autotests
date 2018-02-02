@@ -1,6 +1,5 @@
 package com.sarnova.cucumber.definition_steps;
 
-import com.sarnova.helpers.user_engine.UserSessions;
 import com.sarnova.storefront.page_blocks.HeaderRowPageBlock;
 import com.sarnova.storefront.pages.LoginPage;
 import com.sarnova.storefront.pages.StartPage;
@@ -14,8 +13,6 @@ import static org.testng.Assert.assertTrue;
 
 public class LoginPageStepDefs extends AbstractStepDefs {
 
-    @Autowired UserSessions userSessions;
-
     @Autowired StartPage startPage;
     @Autowired LoginPage loginPage;
     @Autowired HeaderRowPageBlock headerRowPageBlock;
@@ -24,7 +21,7 @@ public class LoginPageStepDefs extends AbstractStepDefs {
     public void openLoginPage() {
         if (!loginPage.isOpened()) {
             if(headerRowPageBlock.isUserLoggedIn()) {
-                headerRowPageBlock.logoutFromStorefront();
+                headerRowPageBlock.logoutFromStorefront(userSessions.getActiveUserSession());
             } else if (!startPage.isOpened()) {
                 startPage.open();
             }

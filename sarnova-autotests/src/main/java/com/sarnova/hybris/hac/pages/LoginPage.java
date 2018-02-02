@@ -5,4 +5,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class LoginPage extends HACBasePage {
+    @Override
+    public String getPageUrl() {
+        return null;
+    }
 }

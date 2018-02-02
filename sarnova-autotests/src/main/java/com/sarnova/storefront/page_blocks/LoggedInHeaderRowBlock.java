@@ -1,6 +1,6 @@
 package com.sarnova.storefront.page_blocks;
 
-import com.sarnova.helpers.BasePageObject;
+import com.sarnova.helpers.UIComponent;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -8,7 +8,7 @@ import static com.sarnova.storefront.page_elements.LoggedInHeaderRowBlockElement
 import static com.sarnova.storefront.page_elements.LoggedInHeaderRowBlockElements.SIGN_OUT_BUTTON_XPATH;
 
 @Component
-public class LoggedInHeaderRowBlock extends BasePageObject {
+public class LoggedInHeaderRowBlock extends UIComponent {
 
     @Step("Check that user is logged in.")
     public boolean isUserLoggedIn() {
