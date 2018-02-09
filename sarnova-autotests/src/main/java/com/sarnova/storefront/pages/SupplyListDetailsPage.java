@@ -30,6 +30,11 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
         return $(SUPPLY_LIST_ACTIVE_STATUS_XPATH).getText().trim();
     }
 
+    @Step("Get Supply list id value.")
+    public String getSupplyListIdValue() {
+        return $(SUPPLY_LIST_ID_VALUE_XPATH).getText().trim();
+    }
+
     @Override
     public String getPageUrl() {
         return storefrontProject.getBaseUrl() + pageUrlMethod;
@@ -47,12 +52,13 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
     @Step("Get Supply list from page.")
     public SupplyList getSupplyListFromPage(User user) {
         String supplyListName = getSupplyListName();
+        String id = getSupplyListIdValue();
         String supplyListActiveStatus = getSupplyListActiveStatus();
         List<Document> supplyProductsRowsHTMLs = $$(SUPPLY_PRODUCTS_ROWS_XPATH)
                 .stream()
                 .map(webElement -> Jsoup.parse(webElement.getAttribute("innerHTML")))
                 .collect(Collectors.toList());
-        return supplyListsManager.parseSupplyListFromHTMLSupplyListDetailsPage(user, supplyListName,
+        return supplyListsManager.parseSupplyListFromHTMLSupplyListDetailsPage(user, supplyListName, id,
                 supplyListActiveStatus, supplyProductsRowsHTMLs);
     }
 }

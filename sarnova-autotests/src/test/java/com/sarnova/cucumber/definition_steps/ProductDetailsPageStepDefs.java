@@ -100,14 +100,15 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
     public void clickOnAddToSupplyListInAddToSupplyListPopUp() {
         productDetailsPage.clickOnAddToSupplyListButtonInAddToSupplyListPopUp();
 
-        String newSupplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
-        if (newSupplyListName != null && !newSupplyListName.isEmpty()) {
+        String supplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
+        if (supplyListName != null && !supplyListName.isEmpty() && supplyListsManager.getSupplyListByName(supplyListName) == null) {
+            String supplyListId = productDetailsPage.getSupplyListId();
             ArrayList<UnitOfMeasure> selectedUnitsOfMeasurement = (ArrayList<UnitOfMeasure>) threadVarsHashMap.get(TestKeyword.SELECTED_ON_PDP_UOMS);
             ArrayList<IndividualProduct> selectedIndividualProducts = selectedUnitsOfMeasurement
                     .stream()
                     .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
                     .collect(Collectors.toCollection(ArrayList::new));
-            supplyListsManager.createInstance(userSessions.getActiveUserSession().getUser(), newSupplyListName, selectedIndividualProducts);
+            supplyListsManager.createInstance(userSessions.getActiveUserSession().getUser(), supplyListName, supplyListId, selectedIndividualProducts);
         }
     }
 
