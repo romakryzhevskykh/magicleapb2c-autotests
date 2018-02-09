@@ -73,4 +73,9 @@ public class IndividualProduct extends Product {
     public ArrayList<IndividualProduct> getAlternativeProducts() {
         return alternativeProducts != null ?  alternativeProducts : new ArrayList<>();
     }
+
+    @Override
+    public String toString() {
+        return "Product name: " + this.name + ", SKU: " + this.sku;
+    }
 }

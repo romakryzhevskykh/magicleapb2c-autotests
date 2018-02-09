@@ -3,13 +3,15 @@ package com.sarnova.storefront.pages;
 import com.sarnova.helpers.managers.SupplyListsManager;
 import com.sarnova.helpers.models.supply_lists.SupplyList;
 import com.sarnova.helpers.user_engine.User;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.sarnova.storefront.page_elements.SupplyListDetailsPageElements.*;
 
@@ -46,8 +48,11 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
     public SupplyList getSupplyListFromPage(User user) {
         String supplyListName = getSupplyListName();
         String supplyListActiveStatus = getSupplyListActiveStatus();
-        List<WebElement> supplyProductsRowsElements = $$(SUPPLY_PRODUCTS_ROWS_XPATH);
+        List<Document> supplyProductsRowsHTMLs = $$(SUPPLY_PRODUCTS_ROWS_XPATH)
+                .stream()
+                .map(webElement -> Jsoup.parse(webElement.getAttribute("innerHTML")))
+                .collect(Collectors.toList());
         return supplyListsManager.parseSupplyListFromHTMLSupplyListDetailsPage(user, supplyListName,
-                supplyListActiveStatus, supplyProductsRowsElements);
+                supplyListActiveStatus, supplyProductsRowsHTMLs);
     }
 }

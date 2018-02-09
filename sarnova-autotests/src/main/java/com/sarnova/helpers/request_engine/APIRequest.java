@@ -13,15 +13,22 @@ import java.util.HashMap;
 
 public abstract class APIRequest implements API {
 
+    static {
+        SSLUtilities.trustAllHostnames();
+//        SSLUtilities.trustAllHttpsCertificates();
+//        SSLUtilities.trustAllTLSHttpsCertificates();
+    }
+
     protected String name;
     protected String systemAddress;
     protected ArrayList<String> value = new ArrayList<>();
     protected int connectionTimeout = 25000;
-    protected String stringOfPostParameters = "";
+    protected StringBuilder stringOfPostParameters = new StringBuilder();
     protected URL requestURL;
+    //    protected HttpURLConnection connection = null;
     protected HttpURLConnection connection = null;
     protected APIResponse response;
-    protected ArrayList<ParameterAndValue> parametersAndValues;
+    protected ArrayList<PostParameterAndValue> parametersAndValues;
     protected HashMap<String, String> headers = new HashMap<>();
 
     protected boolean isShortLogResponse = false;
@@ -112,15 +119,15 @@ public abstract class APIRequest implements API {
     }
 
     public void setGetParameterAndValue(String parameter, String value, DELIMITER delimiter) {
-        this.parametersAndValues.add(new ParameterAndValue(parameter, value, delimiter));
+        this.parametersAndValues.add(new PostParameterAndValue(parameter, value, delimiter));
     }
 
     public void setGetParameterAndValue(String parameter, String value) {
-        this.parametersAndValues.add(new ParameterAndValue(parameter, value));
+        this.parametersAndValues.add(new PostParameterAndValue(parameter, value));
     }
 
     public String getValueByParameter(String parameter) {
-        for (ParameterAndValue parameterAndValue : parametersAndValues) {
+        for (PostParameterAndValue parameterAndValue : parametersAndValues) {
             if (parameterAndValue.contains(parameter)) {
                 return parameterAndValue.getValue();
             }
@@ -132,7 +139,7 @@ public abstract class APIRequest implements API {
         String requestUrl = userSession.getUser().getUserCockpit().getBaseUrl() + getSystemAddress();
         String parametersWithSlashSeparator = "";
         String parametersWithAmpersandSeparator = "";
-        for (ParameterAndValue parameterAndValue : parametersAndValues)
+        for (PostParameterAndValue parameterAndValue : parametersAndValues)
             if (parameterAndValue.containsDelimiter(DELIMITER.FORWARD_SLASH))
                 parametersWithSlashSeparator += parameterAndValue.delimiter
                         + parameterAndValue.parameter

@@ -32,7 +32,7 @@ public class GeneralStepDefs extends AbstractStepDefs {
     @And("^Supply list that doesn't contain this products exists.$")
     public void existingSupplyListThatDoesNotContainThisProducts() {
         ArrayList<UnitOfMeasure> selectedUnitsOfMeasurement = ((ArrayList<UnitOfMeasure>) threadVarsHashMap.get(TestKeyword.SELECTED_ON_PDP_UOMS));
-        supplyListsManager.getTestSupplyLists()
+        String existingSupplyListName = supplyListsManager.getTestSupplyLists()
                 .stream()
                 .filter(supplyList -> supplyList.getSupplyProductsInList()
                         .stream()
@@ -55,6 +55,8 @@ public class GeneralStepDefs extends AbstractStepDefs {
                         add(individualProductThatDoNotContainSelectedUOMs);
                     }});
             return supplyListsManager.getSupplyListByName(newSupplyListName);
-        });
+        }).getName();
+
+        threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, existingSupplyListName);
     }
 }

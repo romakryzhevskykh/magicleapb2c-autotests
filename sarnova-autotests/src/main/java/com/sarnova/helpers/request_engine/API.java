@@ -15,8 +15,10 @@ public interface API {
             add("text/xml");
         }}),
         HTML(new ArrayList<String>() {{
+
             add("text/html");
             add("text/html; charset=UTF-8");
+            add("text/html;charset=UTF-8");
         }});
         ArrayList<String> contentTypes;
 
@@ -46,25 +48,25 @@ public interface API {
         }
     }
 
-    class ParameterAndValue {
+    class PostParameterAndValue<V> {
         String parameter;
-        String value;
+        V value;
         DELIMITER delimiter;
 
-        ParameterAndValue(String parameter, String value, DELIMITER delimiter) {
+        PostParameterAndValue(String parameter, V value, DELIMITER delimiter) {
             this.parameter = parameter;
             this.value = value;
             this.delimiter = delimiter;
         }
 
-        public <T> ParameterAndValue(String parameter, T value) {
+        public PostParameterAndValue(String parameter, V value) {
             this.parameter = parameter;
-            this.value = String.valueOf(value);
+            this.value = value;
             this.delimiter = DELIMITER.AMPERSAND;
         }
 
         public String getValue() {
-            return value;
+            return value.toString();
         }
 
         public boolean contains(String parameter) {

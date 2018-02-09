@@ -92,7 +92,7 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
     @And("^Enter alphanumeric text to name field in Add to Supply list pop-up.$")
     public void enterAlphanumericTextToNameFieldInAddToSupplyListPopUp() {
         String newSupplyListName = RandomStringUtils.randomAlphanumeric(10);
-        threadVarsHashMap.put(TestKeyword.NEW_SUPPLY_LIST_NAME, newSupplyListName);
+        threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, newSupplyListName);
         productDetailsPage.enterNewSupplyListNameText(newSupplyListName);
     }
 
@@ -100,7 +100,7 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
     public void clickOnAddToSupplyListInAddToSupplyListPopUp() {
         productDetailsPage.clickOnAddToSupplyListButtonInAddToSupplyListPopUp();
 
-        String newSupplyListName = threadVarsHashMap.getString(TestKeyword.NEW_SUPPLY_LIST_NAME);
+        String newSupplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
         if (newSupplyListName != null && !newSupplyListName.isEmpty()) {
             ArrayList<UnitOfMeasure> selectedUnitsOfMeasurement = (ArrayList<UnitOfMeasure>) threadVarsHashMap.get(TestKeyword.SELECTED_ON_PDP_UOMS);
             ArrayList<IndividualProduct> selectedIndividualProducts = selectedUnitsOfMeasurement
@@ -118,12 +118,12 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
 
     @And("^Select existing Supply list in Add to Supply list pop-up.$")
     public void selectExistingSupplyListInAddToSupplyListPopUp() {
-        String existingSupplyListName = threadVarsHashMap.getString(TestKeyword.EXISTING_SUPPLY_LIST_NAME);
+        String existingSupplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
         productDetailsPage.clickOnSelectExistingSupplyListDropDown();
         if (existingSupplyListName == null) {
             existingSupplyListName = productDetailsPage.getAnyExistingSupplyListNameFromDropDown();
             if (existingSupplyListName != null) {
-                threadVarsHashMap.put(TestKeyword.EXISTING_SUPPLY_LIST_NAME, existingSupplyListName);
+                threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, existingSupplyListName);
             } else {
                 throw new NullPointerException("Existing supply lists haven't been found for user: " + userSessions.getActiveUserSession().getUser());
             }

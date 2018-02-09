@@ -16,6 +16,12 @@ public class ProductsManager {
         addTestProduct(individualProduct);
     }
 
+    public void createInstance(String sku, String name, ArrayList<IndividualProduct> individualProducts) {
+        GroupProduct groupProduct = new GroupProduct(sku, name, individualProducts);
+        defineAndSetProductTestType(groupProduct);
+        addTestProduct(groupProduct);
+    }
+
     public ArrayList<Product> getTestProducts() {
         return testProducts;
     }

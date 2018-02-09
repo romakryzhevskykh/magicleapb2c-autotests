@@ -8,7 +8,7 @@ import ru.yandex.qatools.allure.annotations.Step;
 
 import static com.sarnova.hybris.import_cockpit.page_elements.LoginPageElements.*;
 
-@Component
+@Component("ImportCockpitLoginPage")
 public class LoginPage extends ImportCockpitBasePage {
 
     private final String pageUrlMethod = "login.zul";

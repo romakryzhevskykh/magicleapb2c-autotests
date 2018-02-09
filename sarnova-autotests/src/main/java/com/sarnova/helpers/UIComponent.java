@@ -51,7 +51,7 @@ public abstract class UIComponent {
             WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getShortTimeOut());
             wait.until(ExpectedConditions.elementToBeClickable(webElement));
             webElement.click();
-        } catch (WebDriverException ex) {
+        } catch (WebDriverException | NullPointerException ex) {
             ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", webElement);
             webElement.click();
         } finally {

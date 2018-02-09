@@ -2,8 +2,8 @@ package com.sarnova.helpers.request_engine;
 
 import com.sarnova.helpers.user_engine.UserSession;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -18,7 +18,7 @@ public class GETRequest extends APIRequest {
         return new GETRequest(name, getSystemAddress());
     }
 
-    public void sendGetRequest(UserSession userSession, ArrayList<ParameterAndValue> parametersAndValues) throws IOException {
+    public void sendGetRequest(UserSession userSession, ArrayList<PostParameterAndValue> parametersAndValues) throws IOException {
         this.parametersAndValues = parametersAndValues;
         sendGetRequest(userSession);
     }
@@ -29,7 +29,7 @@ public class GETRequest extends APIRequest {
             System.out.println("*******");
             System.out.println("API: " + this.name);
             System.out.println("Sending 'GET' request to URL : " + requestURL.toString());
-            connection = (HttpURLConnection) requestURL.openConnection();
+            connection = (HttpsURLConnection) requestURL.openConnection();
             connection.setRequestMethod("GET");
             //add request header
             connection.setRequestProperty("User-Agent", "Mozilla/5.0");
@@ -37,12 +37,12 @@ public class GETRequest extends APIRequest {
             connection.setConnectTimeout(connectionTimeout);
             connection.setReadTimeout(connectionTimeout);
 
-            if (userSession.getUsername() != null && userSession.getPassword() != null) {
-                String userpass = userSession.getUsername() + ":" + userSession.getPassword();
-                String basicAuth = "Basic " + base64Format(userpass);
-                connection.setRequestProperty("Authorization", basicAuth);
-                System.out.println("Set Authorization: " + basicAuth);
-            }
+//            if (userSession.getUsername() != null && userSession.getPassword() != null) {
+//                String userpass = userSession.getUsername() + ":" + userSession.getPassword();
+//                String basicAuth = "Basic " + base64Format(userpass);
+//                connection.setRequestProperty("Authorization", basicAuth);
+//                System.out.println("Set Authorization: " + basicAuth);
+//            }
 
             if (headers.size() > 0) {
                 for (Map.Entry<String, String> header : headers.entrySet()) {

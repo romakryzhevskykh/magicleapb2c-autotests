@@ -27,7 +27,7 @@ public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
 
     @Then("^Check that entered name is the name of Supply list on the Supply list details page.$")
     public void checkThatEnteredNameIsTheNameOfSupplyListOnTheSupplyListDetailsPage() {
-        String nameOfCreatedSupplyList = threadVarsHashMap.getString(TestKeyword.NEW_SUPPLY_LIST_NAME);
+        String nameOfCreatedSupplyList = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
         assertEquals(supplyListDetailsPage.getSupplyListName(), nameOfCreatedSupplyList);
     }
 

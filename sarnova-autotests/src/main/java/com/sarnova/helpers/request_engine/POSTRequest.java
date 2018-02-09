@@ -1,28 +1,31 @@
 package com.sarnova.helpers.request_engine;
 
 import com.sarnova.helpers.user_engine.UserSession;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 
 public class POSTRequest extends APIRequest {
-    private   ArrayList<ParameterAndValue> postParametersAndValues;
+    private ArrayList<PostParameterAndValue> postParametersAndValues;
 
-    public void addPostParameterAndValue(ParameterAndValue parameterAndValue) {
-        if(postParametersAndValues == null) {
+    public void addPostParameterAndValue(PostParameterAndValue parameterAndValue) {
+        if (postParametersAndValues == null) {
             this.postParametersAndValues = new ArrayList<>();
             this.postParametersAndValues.add(parameterAndValue);
         } else
             this.postParametersAndValues.add(parameterAndValue);
     }
 
-    public ArrayList<ParameterAndValue> getPostParametersAndValues() {
+    public ArrayList<PostParameterAndValue> getPostParametersAndValues() {
         return postParametersAndValues;
     }
 
@@ -35,29 +38,39 @@ public class POSTRequest extends APIRequest {
         return new POSTRequest(name, getSystemAddress());
     }
 
-    public void setPostParametersAndValues(ArrayList<ParameterAndValue> postParametersAndValues) {
-        if(postParametersAndValues != null) {
+    public void setFormDataPostParametersAndValues(ArrayList<PostParameterAndValue> postParametersAndValues) {
+        if (postParametersAndValues != null) {
             this.postParametersAndValues = postParametersAndValues;
-            this.stringOfPostParameters = "";
-            for (ParameterAndValue parameterAndValue : postParametersAndValues) {
+            for (PostParameterAndValue parameterAndValue : postParametersAndValues) {
                 try {
-                    this.stringOfPostParameters += parameterAndValue.parameter +
-                            "=" +
-                            URLEncoder.encode(parameterAndValue.value, "UTF-8");
+                    this.stringOfPostParameters.append(parameterAndValue.parameter).append("=")
+                            .append(URLEncoder.encode(parameterAndValue.getValue(), "UTF-8"));
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
                 if (!postParametersAndValues
                         .get(postParametersAndValues.size() - 1)
                         .equals(parameterAndValue)) {
-                    this.stringOfPostParameters += "&";
+                    this.stringOfPostParameters.append(DELIMITER.AMPERSAND);
                 }
             }
         }
     }
 
+    public void setPayloadPostParametersAndValues(ArrayList<PostParameterAndValue> payloadParametersAndValues) {
+        if (payloadParametersAndValues != null) {
+            this.postParametersAndValues = payloadParametersAndValues;
+            JSONObject jsonObject = new JSONObject();
+            for (PostParameterAndValue parameterAndValue : payloadParametersAndValues) {
+                jsonObject.put(parameterAndValue.parameter, parameterAndValue.value instanceof List ?
+                        new JSONArray((List)parameterAndValue.value) : parameterAndValue.getValue());
+            }
+            this.stringOfPostParameters.append(jsonObject.toString());
+        }
+    }
+
     public void setPostString(String postString) {
-        this.stringOfPostParameters = postString;
+        this.stringOfPostParameters.append(postString);
     }
 
 
@@ -65,31 +78,18 @@ public class POSTRequest extends APIRequest {
         sendPostRequest(userSession, this.postParametersAndValues);
     }
 
-    public void sendPostRequest(UserSession userSession, ArrayList<ParameterAndValue> postParametersAndValues) throws IOException {
-        //create post string
-        setPostParametersAndValues(postParametersAndValues);
+    public void sendPostRequest(UserSession userSession, ArrayList<PostParameterAndValue> postParametersAndValues) throws IOException {
         //create url without post parameters
         generateRequestURL(userSession);
-
         //Create connection
         System.out.println("*******");
         System.out.println("API: " + this.name);
         System.out.println("Sending 'POST' request to URL : " + requestURL.toString());
 
-        connection = (HttpURLConnection) requestURL.openConnection();
+        connection = (HttpsURLConnection) requestURL.openConnection();
         connection.setRequestMethod("POST");
-        connection.setRequestProperty("Content-Type",
-                "application/x-www-form-urlencoded");
-        connection.setRequestProperty("Content-Language", "en-US");
-        connection.setRequestProperty("Content-Length", "" +
-                Integer.toString(stringOfPostParameters.getBytes().length));
+        connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         connection.setRequestProperty("X-Requested-With", "XMLHttpRequest");
-
-        if(userSession.getUsername() != null && userSession.getPassword() != null){
-            String userpass = userSession.getUsername() + ":" + userSession.getPassword();
-            String basicAuth = "Basic " + base64Format(userpass);
-            connection.setRequestProperty ("Authorization", basicAuth);
-        }
 
         if (headers.size() > 0) {
             for (Map.Entry<String, String> header : headers.entrySet()) {
@@ -98,20 +98,25 @@ public class POSTRequest extends APIRequest {
             }
         }
 
+        if (userSession.getCookies() != null) {
+            connection.setRequestProperty("Cookie", String.join("; ", userSession.getCookies()));
+            System.out.println("Set cookies: " + connection.getRequestProperty("Cookie"));
+        }
+
         connection.setUseCaches(false);
         connection.setDoInput(true);
         connection.setDoOutput(true);
 
-        if (userSession.getCookies() != null)
-            for (String cookie : userSession.getCookies()) {
-                connection.setRequestProperty("Cookie", cookie);
-                System.out.println("Set cookie: " + cookie);
-            }
-
+        //create post data
+        if (connection.getRequestProperty("Content-Type").contains("json")) {
+            setPayloadPostParametersAndValues(postParametersAndValues);
+        } else {
+            setFormDataPostParametersAndValues(postParametersAndValues);
+        }
         //Send request
         System.out.println("POST parameters: " + stringOfPostParameters);
         DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-        wr.writeBytes(stringOfPostParameters);
+        wr.writeBytes(stringOfPostParameters.toString());
         wr.flush();
         wr.close();
 

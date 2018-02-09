@@ -3,6 +3,8 @@ package com.sarnova.helpers.request_engine;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -125,9 +127,9 @@ public class APIResponse implements API {
                     this.responseBody = new JSONArray(RESPONSE_STRING);
                 } catch (JSONException e) {/*ignore*/}
             }
-        else if (RESPONSE_CONTENT_TYPES.HTML.contains(contentType))
-            this.responseBody = RESPONSE_STRING;
-        else if (RESPONSE_CONTENT_TYPES.XML.contains(contentType))
+        else if (RESPONSE_CONTENT_TYPES.HTML.contains(contentType)) {
+            this.responseBody = Jsoup.parse(RESPONSE_STRING);
+        } else if (RESPONSE_CONTENT_TYPES.XML.contains(contentType))
             this.responseBody = RESPONSE_STRING;
         else {
             this.responseBody = RESPONSE_STRING;
@@ -135,8 +137,9 @@ public class APIResponse implements API {
         }
         if (isLogRequestShort) {
             System.out.println("Response text: " + RESPONSE_STRING.substring(0, 1000));
-        } else
+        } else {
             System.out.println("Response text: " + RESPONSE_STRING);
+        }
     }
 
     public void setLogRequestShort(boolean isLogRequestShort) {
@@ -156,5 +159,9 @@ public class APIResponse implements API {
         return responseBody instanceof HashMap ? new ArrayList<HashMap>() {{
             add((HashMap) responseBody);
         }} : (ArrayList<HashMap>) responseBody;
+    }
+
+    public Document getHTMLResponseDocument() {
+        return (Document) this.responseBody;
     }
 }
