@@ -15,6 +15,10 @@ public enum UOMType {
         this.fullName = fullName;
     }
 
+    public String getFullName() {
+        return fullName;
+    }
+
     public boolean equalsByFullName(String fullName) {
         return this.fullName.equalsIgnoreCase(fullName);
     }

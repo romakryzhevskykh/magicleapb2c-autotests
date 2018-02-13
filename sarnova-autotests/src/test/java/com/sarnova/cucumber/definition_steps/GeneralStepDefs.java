@@ -15,10 +15,9 @@ import cucumber.api.java.en.Given;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.function.BiFunction;
+import java.util.stream.Collectors;
 
 public class GeneralStepDefs extends AbstractStepDefs {
     @Autowired HeaderRowPageBlock headerRowPageBlock;
@@ -39,29 +38,34 @@ public class GeneralStepDefs extends AbstractStepDefs {
     @SuppressWarnings("unchecked")
     @And("^Supply list that doesn't contain this products exists.$")
     public void existingSupplyListThatDoesNotContainThisProducts() {
-        ArrayList<UnitOfMeasure> selectedUnitsOfMeasurement = ((ArrayList<UnitOfMeasure>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS));
+        HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = ((HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP));
         String existingSupplyListName = supplyListsManager.getTestSupplyLists()
                 .stream()
                 .filter(supplyList -> supplyList.getSupplyProductsInList()
                         .stream()
                         .flatMap(supplyListProduct -> supplyListProduct.getIndividualProduct().getUnitsOfMeasurement().stream())
-                        .noneMatch(selectedUnitsOfMeasurement::contains)
+                        .noneMatch(selectedUnitsOfMeasurement.keySet()::contains)
                 ).findAny()
-                .orElseGet(() -> createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts.apply(selectedUnitsOfMeasurement, 1))
+                .orElseGet(() -> createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts.apply(selectedUnitsOfMeasurement.keySet(), 1))
                 .getName();
 
         threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, existingSupplyListName);
     }
 
-    @Given("^Not empty Supply list.$")
-    public void notEmptySupplyList() {
+    @SuppressWarnings("unchecked")
+    @Given("^Supply list with at least (\\d+) active products.$")
+    public void notEmptySupplyList(int numberOfActiveProductsInSupplyList) {
+        //TODO after implementing UOMs to Supply list details page change logic to UOMs from products
         SupplyList notEmptySupplyList = supplyListsManager.getTestSupplyLists()
                 .stream()
                 .filter(supplyList -> supplyList.getSupplyProductsInList()
                         .stream()
-                        .anyMatch(SupplyListProduct::isActive))
+                        .filter(SupplyListProduct::isActive)
+                        .count() >= numberOfActiveProductsInSupplyList)
                 .findAny()
-                .orElseGet(() -> createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts.apply(Collections.EMPTY_LIST, 1));
+                .orElseGet(() ->
+                        createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts.apply(Collections.EMPTY_SET, numberOfActiveProductsInSupplyList)
+                );
         threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, notEmptySupplyList.getName());
     }
 
@@ -71,21 +75,22 @@ public class GeneralStepDefs extends AbstractStepDefs {
     }
 
     @SuppressWarnings("unchecked")
-    private BiFunction<List<UnitOfMeasure>, Integer, SupplyList> createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts = (selectedUnitsOfMeasurement, numberOfProducts) -> {
+    private BiFunction<Set<UnitOfMeasure>, Integer, SupplyList> createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts = (selectedUnitsOfMeasurement, numberOfProducts) -> {
         UserSession userSession = userSessions.getActiveUserSession();
         String newSupplyListName = RandomStringUtils.randomAlphanumeric(10);
-        IndividualProduct individualProductThatDoNotContainSelectedUOMs = productsManager.getTestIndividualProducts()
+        ArrayList<IndividualProduct> individualProductsThatDoNotContainSelectedUOMs = productsManager.getTestIndividualProducts()
                 .stream()
                 .filter(product -> product.getUnitsOfMeasurement()
                         .stream()
                         .noneMatch(selectedUnitsOfMeasurement::contains)
-                ).findAny().orElseGet(() -> {
-                    throw new NullPointerException("No test products without selected UOMs: " + selectedUnitsOfMeasurement);
-                });
-        supplyListsManager.createViaApi(userSession, newSupplyListName,
-                new ArrayList<IndividualProduct>() {{
-                    add(individualProductThatDoNotContainSelectedUOMs);
-                }});
+                ).collect(Collectors.toCollection(ArrayList::new));
+        List<IndividualProduct> productsToCreate;
+        if (individualProductsThatDoNotContainSelectedUOMs.size() >= numberOfProducts)
+            productsToCreate = individualProductsThatDoNotContainSelectedUOMs.subList(0, numberOfProducts);
+        else
+            throw new NullPointerException("No test products without selected UOMs: " + selectedUnitsOfMeasurement + " or quantity of products < " + numberOfProducts + "\n"
+                    + "List of filtered products: " + individualProductsThatDoNotContainSelectedUOMs);
+        supplyListsManager.createViaApi(userSession, newSupplyListName, productsToCreate);
         return supplyListsManager.getSupplyListByName(newSupplyListName);
     };
 }

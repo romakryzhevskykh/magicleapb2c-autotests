@@ -39,7 +39,7 @@ public class SupplyListsManager {
         return allSupplyLists;
     }
 
-    public void createInstance(User user, String name, String id, ArrayList<IndividualProduct> products) {
+    public void createInstance(User user, String name, String id, List<IndividualProduct> products) {
         ArrayList<SupplyListProduct> supplyListProducts = products
                 .stream()
                 .map(SupplyListProduct::new)
@@ -49,7 +49,7 @@ public class SupplyListsManager {
     }
 
     @SuppressWarnings("unchecked")
-    public void createViaApi(UserSession userSession, String name, ArrayList<IndividualProduct> products) {
+    public void createViaApi(UserSession userSession, String name, List<IndividualProduct> products) {
         GETRequest pageSourceToGetCSRF = GET_PDP_PAGE_SOURCE_TO_GET_CSRF_TOKEN.getClone();
         pageSourceToGetCSRF.setValue(products.stream().map(Product::getSku).findAny().orElse(null));
         try {

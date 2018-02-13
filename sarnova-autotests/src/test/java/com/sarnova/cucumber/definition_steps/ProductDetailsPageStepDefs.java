@@ -12,6 +12,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.stream.Collectors;
 
 import static org.testng.Assert.assertEquals;
@@ -53,18 +54,24 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
         assertEquals(productDetailsPage.getAddToSupplyListPopUpContent(), message);
     }
 
+    @SuppressWarnings("unchecked")
     @And("^Set QTY (\\d+) to any product\\(UOM\\) on the PDP.$")
     public void selectAnyProductUOMFromTheList(int qtyValueForAnyProductOnPDP) {
         Product product = (Product) threadVarsHashMap.get(TestKeyword.OPENED_PDP_PRODUCT);
-        ArrayList<UnitOfMeasure> unitsOfMeasurement = new ArrayList<>();
+        HashMap<UnitOfMeasure, Integer> unitsOfMeasurement;
+        if (threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP) == null) {
+            unitsOfMeasurement = new HashMap<>();
+            threadVarsHashMap.put(TestKeyword.SELECTED_UOMS_HASH_MAP, unitsOfMeasurement);
+        } else {
+            unitsOfMeasurement = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
+        }
         if (product instanceof IndividualProduct) {
             ((IndividualProduct) product).getUnitsOfMeasurement()
                     .stream()
                     .findAny()
                     .ifPresent(uom -> {
-                        unitsOfMeasurement.add(uom);
                         productDetailsPage.setQTYForProductUOMToValue(uom, qtyValueForAnyProductOnPDP);
-                        threadVarsHashMap.put(TestKeyword.SELECTED_UOMS, unitsOfMeasurement);
+                        unitsOfMeasurement.put(uom, qtyValueForAnyProductOnPDP);
                     });
         } else if (product instanceof GroupProduct) {
             ((GroupProduct) product).getIndividualProducts()
@@ -72,9 +79,8 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
                     .flatMap(individualProduct -> individualProduct.getUnitsOfMeasurement().stream())
                     .findAny()
                     .ifPresent(uom -> {
-                        unitsOfMeasurement.add(uom);
                         productDetailsPage.setQTYForProductUOMToValue(uom, qtyValueForAnyProductOnPDP);
-                        threadVarsHashMap.put(TestKeyword.SELECTED_UOMS, unitsOfMeasurement);
+                        unitsOfMeasurement.put(uom, qtyValueForAnyProductOnPDP);
                     });
         }
     }
@@ -96,15 +102,15 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
         productDetailsPage.enterNewSupplyListNameText(newSupplyListName);
     }
 
+    @SuppressWarnings("unchecked")
     @And("^Click on Add to Supply list in Add to Supply list pop-up.$")
     public void clickOnAddToSupplyListInAddToSupplyListPopUp() {
         productDetailsPage.clickOnAddToSupplyListButtonInAddToSupplyListPopUp();
-
         String supplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
         if (supplyListName != null && !supplyListName.isEmpty() && supplyListsManager.getSupplyListByName(supplyListName) == null) {
             String supplyListId = productDetailsPage.getSupplyListId();
-            ArrayList<UnitOfMeasure> selectedUnitsOfMeasurement = (ArrayList<UnitOfMeasure>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS);
-            ArrayList<IndividualProduct> selectedIndividualProducts = selectedUnitsOfMeasurement
+            HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
+            ArrayList<IndividualProduct> selectedIndividualProducts = selectedUnitsOfMeasurement.keySet()
                     .stream()
                     .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
                     .collect(Collectors.toCollection(ArrayList::new));
