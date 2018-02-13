@@ -38,7 +38,7 @@ public class POSTRequest extends APIRequest {
         return new POSTRequest(name, getSystemAddress());
     }
 
-    public void setFormDataPostParametersAndValues(ArrayList<PostParameterAndValue> postParametersAndValues) {
+    private void setFormDataPostParametersAndValues(ArrayList<PostParameterAndValue> postParametersAndValues) {
         if (postParametersAndValues != null) {
             this.postParametersAndValues = postParametersAndValues;
             for (PostParameterAndValue parameterAndValue : postParametersAndValues) {
@@ -57,7 +57,7 @@ public class POSTRequest extends APIRequest {
         }
     }
 
-    public void setPayloadPostParametersAndValues(ArrayList<PostParameterAndValue> payloadParametersAndValues) {
+    private void setPayloadPostParametersAndValues(ArrayList<PostParameterAndValue> payloadParametersAndValues) {
         if (payloadParametersAndValues != null) {
             this.postParametersAndValues = payloadParametersAndValues;
             JSONObject jsonObject = new JSONObject();

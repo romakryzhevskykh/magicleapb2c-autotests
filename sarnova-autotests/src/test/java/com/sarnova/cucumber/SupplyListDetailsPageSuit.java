@@ -5,8 +5,8 @@ import cucumber.api.CucumberOptions;
 
 @CucumberOptions(
         format={"pretty"},
-        features = "src/test/resources/features/pdp_features/individual_pdp_features"
+        features = "src/test/resources/features/supply_list_features/supply_list_details_page_features"
 )
 
-public class IndividualPDPSuite extends CucumberTestsRunner {
+public class SupplyListDetailsPageSuit extends CucumberTestsRunner {
 }
