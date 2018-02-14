@@ -3,32 +3,35 @@ Feature: Individual PDP Add to cart functionality
   Background:
     Given Switch to Storefront shopper.
     And User is logged in to Storefront.
-    And PDP for INDIVIDUAL_VALID product.
+    And Empty Cart.
 
-  Scenario: Check info message for Adding to supply list with empty selection.
+  Scenario: Check info message for Adding to cart with empty selection.
+    Given PDP for INDIVIDUAL, VALID product.
     When Set QTY values for products to 0 on PDP.
-    And Click on add to Supply list button.
-    Then Check that Add to cart pop-up displays Please set non-zero quantity to products you wish to add message on PDP.
+    And Click on Add to cart button on PDP.
+    Then Check that Add to cart pop-up displays Please provide a positive number to update the quantity of an item. message on PDP.
 
-  Scenario: Check that shopper can add product to new(with action of creating) Supply list.
+  Scenario: Check that shopper can add product(UOM) with QTY 1 to cart.
+    Given PDP for INDIVIDUAL, VALID product.
     When Set QTY 1 to any product(UOM) on the PDP.
-    And Click on add to Supply list button.
-    And Select Create a Supply list radio button in Add to Supply list pop-up.
-    And Enter alphanumeric text to name field in Add to Supply list pop-up.
-    And Click on Add to Supply list in Add to Supply list pop-up.
-    And Click on View Supply list in Add to Supply list pop-up.
-    Then Check that Supply list details page is opened.
-    Then Check that entered name is the name of Supply list on the Supply list details page.
-    Then Check that selected product(s) is(are) displayed on the Supply list details page.
+    And Click on Add to cart button on PDP.
+    And Click on Checkout button in Add to cart pop-up on PDP.
+    Then Check that only selected UOMs exist on Cart page.
+    And Check that selected UOMs have corresponding quantities on Cart page.
 
-  Scenario: Check that shopper can add product to existing(already created) Supply list.
-    When Set QTY 1 to any product(UOM) on the PDP.
-    And Supply list that doesn't contain this products exists.
-    And Click on add to Supply list button.
-    And Select Select a Supply list radio button in Add to Supply list pop-up.
-    And Select existing Supply list in Add to Supply list pop-up.
-    And Click on Add to Supply list in Add to Supply list pop-up.
-    And Click on View Supply list in Add to Supply list pop-up.
-    Then Check that Supply list details page is opened.
-    Then Check that entered name is the name of Supply list on the Supply list details page.
-    Then Check that selected product(s) is(are) displayed on the Supply list details page.
+  Scenario: Check that shopper can add product(UOM) with QTY > 1 to cart.
+    Given PDP for INDIVIDUAL, VALID product.
+    When Set QTY 2 to any product(UOM) on the PDP.
+    And Click on Add to cart button on PDP.
+    And Click on Checkout button in Add to cart pop-up on PDP.
+    Then Check that only selected UOMs exist on Cart page.
+    And Check that selected UOMs have corresponding quantities on Cart page.
+
+  Scenario: Check that shopper can add different product UOMs with different QTYs to cart from Individual PDP.
+    Given PDP for INDIVIDUAL, VALID, WITH_MORE_THAN_ONE_UOM product.
+    When Set QTY 2 to any product(UOM) on the PDP.
+    And Set QTY 1 to UOM from the same product that hasn't been selected on PDP.
+    And Click on Add to cart button on PDP.
+    And Click on Checkout button in Add to cart pop-up on PDP.
+    Then Check that only selected UOMs exist on Cart page.
+    And Check that selected UOMs have corresponding quantities on Cart page.

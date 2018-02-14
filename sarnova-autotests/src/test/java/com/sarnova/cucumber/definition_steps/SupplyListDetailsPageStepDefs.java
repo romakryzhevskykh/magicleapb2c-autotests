@@ -98,7 +98,13 @@ public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
     public void setQTYToAnyProductUOMThatHasNotBeenSelectedOnTheSupplyListDetailsPage(int qtyOfUOMToBeSelected) {
         //TODO after adding UOMs to Supply list details page
         String supplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
-        HashMap<UnitOfMeasure, Integer> selectedUOMs = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
+        HashMap<UnitOfMeasure, Integer> selectedUOMs;
+        if (threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP) == null) {
+            selectedUOMs = new HashMap<>();
+            threadVarsHashMap.put(TestKeyword.SELECTED_UOMS_HASH_MAP, selectedUOMs);
+        } else {
+            selectedUOMs = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
+        }
         ArrayList<IndividualProduct> selectedProducts = selectedUOMs.keySet()
                 .stream()
                 .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
@@ -111,14 +117,7 @@ public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
                 .flatMap(supplyListProduct -> supplyListProduct.getIndividualProduct().getUnitsOfMeasurement().stream())
                 .findAny().orElse(null);
         supplyListDetailsPage.setQTYForProductUOMToValue(unitOfMeasureThatHasNotBeenSelected, qtyOfUOMToBeSelected);
-        HashMap<UnitOfMeasure, Integer> unitsOfMeasurement;
-        if (threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP) == null) {
-            unitsOfMeasurement = new HashMap<>();
-            threadVarsHashMap.put(TestKeyword.SELECTED_UOMS_HASH_MAP, unitsOfMeasurement);
-        } else {
-            unitsOfMeasurement = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
-        }
-        unitsOfMeasurement.put(unitOfMeasureThatHasNotBeenSelected, qtyOfUOMToBeSelected);
+        selectedUOMs.put(unitOfMeasureThatHasNotBeenSelected, qtyOfUOMToBeSelected);
     }
 
     @And("^Click on Add to cart button on Supply list details page.$")
