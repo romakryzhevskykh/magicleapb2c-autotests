@@ -14,6 +14,7 @@ import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -36,10 +37,12 @@ public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
         assertEquals(supplyListDetailsPage.getSupplyListName(), nameOfCreatedSupplyList);
     }
 
+    @SuppressWarnings("unchecked")
     @Then("^Check that selected product\\(s\\) is\\(are\\) displayed on the Supply list details page.$")
     public void checkThatSelectedProductsAreDisplayedOnTheSupplyListDetailsPage() {
         Set<IndividualProduct> addedIndividualProducts =
-                ((ArrayList<UnitOfMeasure>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS))
+                ((HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP))
+                        .keySet()
                         .stream()
                         .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
                         .collect(Collectors.toSet());
@@ -58,6 +61,7 @@ public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
         supplyListDetailsPage.openSupplyListDetailsPageForSupplyLIst(supplyList);
     }
 
+    @SuppressWarnings("unchecked")
     @When("^Set QTY (\\d+) to any product\\(UOM\\) on the Supply list details page.$")
     public void setQTYToAnyProductUOMOnTheSupplyListDetailsPage(int qtyValueForAnyProductOnSLDP) {
         String supplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
@@ -68,9 +72,52 @@ public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
                 .flatMap(supplyListProduct -> supplyListProduct.getIndividualProduct().getUnitsOfMeasurement().stream())
                 .findAny().orElse(null);
         supplyListDetailsPage.setQTYForProductUOMToValue(randomUnitOfMeasure, qtyValueForAnyProductOnSLDP);
-        threadVarsHashMap.put(TestKeyword.SELECTED_UOMS, new ArrayList<UnitOfMeasure>() {{
-            add(randomUnitOfMeasure);
-        }});
+        HashMap<UnitOfMeasure, Integer> unitsOfMeasurement;
+        if (threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP) == null) {
+            unitsOfMeasurement = new HashMap<>();
+            threadVarsHashMap.put(TestKeyword.SELECTED_UOMS_HASH_MAP, unitsOfMeasurement);
+        } else {
+            unitsOfMeasurement = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
+        }
+        unitsOfMeasurement.put(randomUnitOfMeasure, qtyValueForAnyProductOnSLDP);
+    }
+
+    @When("^Set QTY (\\d+) to all products\\(UOMs\\) on the Supply list details page.$")
+    public void setQTYToAllProductsUOMsOnTheSupplyListDetailsPage(int qtyValueForAllProductOnSLDP) {
+        SupplyList supplyList = supplyListDetailsPage.getSupplyListFromPage(userSessions.getActiveUserSession().getUser());
+        supplyList.getSupplyProductsInList()
+                .stream()
+                .flatMap(supplyListProduct -> supplyListProduct.getIndividualProduct().getUnitsOfMeasurement().stream())
+                .forEach(unitOfMeasure ->
+                        supplyListDetailsPage.setQTYForProductUOMToValue(unitOfMeasure, qtyValueForAllProductOnSLDP)
+                );
+    }
+
+    @SuppressWarnings("unchecked")
+    @And("^Set QTY (\\d+) to any product\\(UOM\\) that hasn't been selected on the Supply list details page.$")
+    public void setQTYToAnyProductUOMThatHasNotBeenSelectedOnTheSupplyListDetailsPage(int qtyOfUOMToBeSelected) {
+        //TODO after adding UOMs to Supply list details page
+        String supplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
+        HashMap<UnitOfMeasure, Integer> selectedUOMs;
+        if (threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP) == null) {
+            selectedUOMs = new HashMap<>();
+            threadVarsHashMap.put(TestKeyword.SELECTED_UOMS_HASH_MAP, selectedUOMs);
+        } else {
+            selectedUOMs = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
+        }
+        ArrayList<IndividualProduct> selectedProducts = selectedUOMs.keySet()
+                .stream()
+                .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
+                .collect(Collectors.toCollection(ArrayList::new));
+        SupplyList supplyList = supplyListsManager.getSupplyListByName(supplyListName);
+        UnitOfMeasure unitOfMeasureThatHasNotBeenSelected = supplyList.getSupplyProductsInList()
+                .stream()
+                .filter(supplyListProduct -> supplyListProduct.isActive()
+                        && !selectedProducts.contains(supplyListProduct.getIndividualProduct()))
+                .flatMap(supplyListProduct -> supplyListProduct.getIndividualProduct().getUnitsOfMeasurement().stream())
+                .findAny().orElse(null);
+        supplyListDetailsPage.setQTYForProductUOMToValue(unitOfMeasureThatHasNotBeenSelected, qtyOfUOMToBeSelected);
+        selectedUOMs.put(unitOfMeasureThatHasNotBeenSelected, qtyOfUOMToBeSelected);
     }
 
     @And("^Click on Add to cart button on Supply list details page.$")
@@ -81,5 +128,10 @@ public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
     @And("^Click on Checkout button in Add to cart pop-up on Supply list details page.$")
     public void clickOnCheckoutButtonInAddToCartPopUpOnSupplyListDetailsPage() {
         supplyListDetailsPage.clickOnCheckoutButtonInAddToCartPopUp();
+    }
+
+    @Then("^Check that Add to cart pop-up displays (.*) message on Supply list details page.$")
+    public void checkThatAddToCartPopUpDisplaysMessage(String message) {
+        assertEquals(supplyListDetailsPage.getAddToCartPopUpMessage(), message);
     }
 }

@@ -2,22 +2,22 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Suite1" parallel="tests">
-    <!--<test name="LoginSuite">-->
-        <!--<parameter name="browserName" value="chrome" />-->
-        <!--<classes>-->
-            <!--<class name="com.sarnova.cucumber.LoginSuite"/>-->
-        <!--</classes>-->
-    <!--</test>-->
-    <!--<test name="IndividualPDPSuite">-->
-        <!--<parameter name="browserName" value="chrome" />-->
-        <!--<classes>-->
-            <!--<class name="com.sarnova.cucumber.IndividualPDPSuite"/>-->
-        <!--</classes>-->
-    <!--</test>-->
-    <test name="SupplyListDetailsPageSuite">
+    <test name="LoginSuite">
         <parameter name="browserName" value="chrome" />
         <classes>
-            <class name="com.sarnova.cucumber.SupplyListDetailsPageSuit"/>
+            <class name="com.sarnova.cucumber.LoginSuite"/>
+        </classes>
+    </test>
+    <test name="Add to Supply list">
+        <parameter name="browserName" value="chrome" />
+        <classes>
+            <class name="com.sarnova.cucumber.AddToSupplyListSuite"/>
+        </classes>
+    </test>
+    <test name="Add to cart and checkout suite">
+        <parameter name="browserName" value="chrome" />
+        <classes>
+            <class name="com.sarnova.cucumber.AddToCartSuite"/>
         </classes>
     </test>
 </suite>

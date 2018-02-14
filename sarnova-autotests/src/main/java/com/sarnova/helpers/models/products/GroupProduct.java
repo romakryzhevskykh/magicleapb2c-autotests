@@ -1,6 +1,7 @@
 package com.sarnova.helpers.models.products;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class GroupProduct extends Product {
 
@@ -14,5 +15,14 @@ public class GroupProduct extends Product {
 
     public ArrayList<IndividualProduct> getIndividualProducts() {
         return individualProducts;
+    }
+
+
+    @Override
+    public ArrayList<UnitOfMeasure> getUnitsOfMeasurement() {
+        return getIndividualProducts()
+                .stream()
+                .flatMap(individualProduct -> individualProduct.getUnitsOfMeasurement().stream())
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }

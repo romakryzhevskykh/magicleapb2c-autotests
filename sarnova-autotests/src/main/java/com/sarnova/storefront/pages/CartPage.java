@@ -30,4 +30,12 @@ public class CartPage extends StorefrontBasePage {
     public String getPageUrl() {
         return storefrontProject.getBaseUrl() + pageUrlMethod;
     }
+
+    public int getQTYOfUOM(UnitOfMeasure unitOfMeasure) {
+        return Integer.valueOf(
+                $(UOM_QTY_BY_SKU_AND_UOM_TYPE_XPATH,
+                        productsManager.getProductByUOM(unitOfMeasure).getSku(),
+                        unitOfMeasure.getUomType().getFullName()
+                ).getAttribute("value"));
+    }
 }

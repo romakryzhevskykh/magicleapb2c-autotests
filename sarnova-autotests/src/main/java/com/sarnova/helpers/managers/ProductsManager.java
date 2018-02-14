@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import us.codecraft.xsoup.Xsoup;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
@@ -41,12 +42,14 @@ public class ProductsManager {
         testProducts.add(product);
     }
 
-    public Product getProductByProductTestType(ProductTestType productType) {
+    public Product getProductByProductTestTypes(List<String> productTypes) {
         return getTestProducts().stream()
-                .filter(product -> product.getProductTestType().equals(productType))
+                .filter(product -> product.getProductTestTypes().containsAll(productTypes.stream()
+                        .map(ProductTestType::valueOf)
+                        .collect(Collectors.toCollection(ArrayList::new))))
                 .findAny()
                 .orElseGet(() -> {
-                    throw new NullPointerException("No such product type in the test products list: " + productType.toString());
+                    throw new NullPointerException("No such product type in the test products list: " + productTypes.toString());
                 });
     }
 
@@ -63,6 +66,7 @@ public class ProductsManager {
 
     private void defineAndSetProductTestType(Product product) {
         if (product instanceof IndividualProduct) {
+            product.addProductTestType(ProductTestType.INDIVIDUAL);
             if (((IndividualProduct) product).getAccessoriesProducts().isEmpty()
                     && ((IndividualProduct) product).getAlternativeProducts().isEmpty()
                     && !((IndividualProduct) product).isDiscontinued()
@@ -70,10 +74,14 @@ public class ProductsManager {
                     && !((IndividualProduct) product).getUnitsOfMeasurement().isEmpty()
                     && ((IndividualProduct) product).getUnitsOfMeasurement().stream().noneMatch(uom -> uom.getListPrice() == null)
                     && ((IndividualProduct) product).getUnitsOfMeasurement().stream().noneMatch(uom -> uom.getYourPrice() == null)) {
-                product.setProductTestType(ProductTestType.INDIVIDUAL_VALID);
+                product.addProductTestType(ProductTestType.VALID);
             }
+            if (((IndividualProduct) product).getUnitsOfMeasurement().size() > 1) {
+                product.addProductTestType(ProductTestType.WITH_MORE_THAN_ONE_UOM);
+            }
+
         } else if (product instanceof GroupProduct) {
-            product.setProductTestType(ProductTestType.GROUP_VALID);
+            product.addProductTestType(ProductTestType.GROUP);
         }
     }
 

@@ -13,4 +13,9 @@ public class AddToCartPopUpBlock extends UIComponent {
     public void clickOnCheckoutButtonInAddToCartPopUp() {
         click(CHECKOUT_BUTTON_XPATH);
     }
+
+    @Step("Get Add to cart pop-up's text content.")
+    public String getAddToCartPopUpContent() {
+        return $(CONTENT_MESSAGE_TEXT_XPATH).getText().trim();
+    }
 }

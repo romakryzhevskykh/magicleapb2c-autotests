@@ -12,6 +12,8 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.testng.Assert.assertEquals;
@@ -23,13 +25,13 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
     @Autowired private SupplyListsManager supplyListsManager;
 
     @Given("^PDP for (.*) product.$")
-    public void openPDPForProductType(String productType) {
-        Product product = productsManager.getProductByProductTestType(ProductTestType.valueOf(productType));
+    public void openPDPForProductType(List<String> productType) {
+        Product product = productsManager.getProductByProductTestTypes(productType);
         productDetailsPage.openPDPForProduct(product);
         threadVarsHashMap.put(TestKeyword.OPENED_PDP_PRODUCT, product);
     }
 
-    @And("^Set QTY values for products to (\\d+).$")
+    @And("^Set QTY values for products to (\\d+) on PDP.$")
     public void setQTYValuesForProductsTo(int qtyValueForAllProductsOnPDP) {
         Product product = (Product) threadVarsHashMap.get(TestKeyword.OPENED_PDP_PRODUCT);
         if (product instanceof IndividualProduct) {
@@ -48,35 +50,76 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
         productDetailsPage.clickOnAddToSupplyListButton();
     }
 
-    @Then("^Pop-up with (.*) message is opened.$")
-    public void checkThatPopUpIsOpenedWithMessage(String message) {
+    @Then("^Check that Add to Supply list pop-up displays (.*) message on PDP.$")
+    public void checkThatAddToSupplyListPopUpIsOpenedWithMessage(String message) {
         assertEquals(productDetailsPage.getAddToSupplyListPopUpContent(), message);
     }
 
+    @Then("^Check that Add to cart pop-up displays (.*) message on PDP.$")
+    public void checkThatAddToCartPopUpIsOpenedWithMessage(String message) {
+        assertEquals(productDetailsPage.getAddToCartPopUpContent(), message);
+    }
+
+    @SuppressWarnings("unchecked")
     @And("^Set QTY (\\d+) to any product\\(UOM\\) on the PDP.$")
     public void selectAnyProductUOMFromTheList(int qtyValueForAnyProductOnPDP) {
         Product product = (Product) threadVarsHashMap.get(TestKeyword.OPENED_PDP_PRODUCT);
-        ArrayList<UnitOfMeasure> unitsOfMeasurement = new ArrayList<>();
-        if (product instanceof IndividualProduct) {
-            ((IndividualProduct) product).getUnitsOfMeasurement()
-                    .stream()
-                    .findAny()
-                    .ifPresent(uom -> {
-                        unitsOfMeasurement.add(uom);
-                        productDetailsPage.setQTYForProductUOMToValue(uom, qtyValueForAnyProductOnPDP);
-                        threadVarsHashMap.put(TestKeyword.SELECTED_UOMS, unitsOfMeasurement);
-                    });
-        } else if (product instanceof GroupProduct) {
-            ((GroupProduct) product).getIndividualProducts()
-                    .stream()
-                    .flatMap(individualProduct -> individualProduct.getUnitsOfMeasurement().stream())
-                    .findAny()
-                    .ifPresent(uom -> {
-                        unitsOfMeasurement.add(uom);
-                        productDetailsPage.setQTYForProductUOMToValue(uom, qtyValueForAnyProductOnPDP);
-                        threadVarsHashMap.put(TestKeyword.SELECTED_UOMS, unitsOfMeasurement);
-                    });
+        HashMap<UnitOfMeasure, Integer> unitsOfMeasurement;
+        if (threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP) == null) {
+            unitsOfMeasurement = new HashMap<>();
+            threadVarsHashMap.put(TestKeyword.SELECTED_UOMS_HASH_MAP, unitsOfMeasurement);
+        } else {
+            unitsOfMeasurement = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
         }
+        product.getUnitsOfMeasurement()
+                .stream()
+                .findAny()
+                .ifPresent(uom -> {
+                    productDetailsPage.setQTYForProductUOMToValue(uom, qtyValueForAnyProductOnPDP);
+                    unitsOfMeasurement.put(uom, qtyValueForAnyProductOnPDP);
+                });
+    }
+
+    @SuppressWarnings("unchecked")
+    @And("^Set QTY (\\d+) to any product\\(UOM\\) that hasn't been selected on PDP.$")
+    public void setQTYToAnyProductUOMThatHasNotBeenSelectedOnThePDP(int qtyOfUOMToBeSelected) {
+        //TODO after adding UOMs to Supply list details page
+        Product openedProduct = (Product) threadVarsHashMap.get(TestKeyword.OPENED_PDP_PRODUCT);
+        HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement;
+        if (threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP) == null) {
+            selectedUnitsOfMeasurement = new HashMap<>();
+            threadVarsHashMap.put(TestKeyword.SELECTED_UOMS_HASH_MAP, selectedUnitsOfMeasurement);
+        } else {
+            selectedUnitsOfMeasurement = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
+        }
+        UnitOfMeasure unitOfMeasureThatHasNotBeenSelected = openedProduct.getUnitsOfMeasurement()
+                .stream()
+                .filter(unitOfMeasure -> !selectedUnitsOfMeasurement.keySet().contains(unitOfMeasure))
+                .findAny().orElse(null);
+        productDetailsPage.setQTYForProductUOMToValue(unitOfMeasureThatHasNotBeenSelected, qtyOfUOMToBeSelected);
+        selectedUnitsOfMeasurement.put(unitOfMeasureThatHasNotBeenSelected, qtyOfUOMToBeSelected);
+    }
+
+    @SuppressWarnings("unchecked")
+    @And("^Set QTY (\\d+) to UOM from the same product that hasn't been selected on PDP.$")
+    public void setQTYToUOMFromTheSameProductThatHasNotBeenSelectedOnThePDP(int qtyOfUOMToBeSelected) {
+        //TODO after adding UOMs to Supply list details page
+        Product openedProduct = (Product) threadVarsHashMap.get(TestKeyword.OPENED_PDP_PRODUCT);
+        HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement;
+        if (threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP) == null) {
+            selectedUnitsOfMeasurement = new HashMap<>();
+            threadVarsHashMap.put(TestKeyword.SELECTED_UOMS_HASH_MAP, selectedUnitsOfMeasurement);
+        } else {
+            selectedUnitsOfMeasurement = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
+        }
+        UnitOfMeasure unitOfMeasureThatHasNotBeenSelected = selectedUnitsOfMeasurement.keySet().stream()
+                .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
+                .flatMap(individualProduct -> individualProduct.getUnitsOfMeasurement().stream())
+                .filter(selectedUnitsOfMeasurement::containsKey)
+                .findAny().orElse(null);
+
+        productDetailsPage.setQTYForProductUOMToValue(unitOfMeasureThatHasNotBeenSelected, qtyOfUOMToBeSelected);
+        selectedUnitsOfMeasurement.put(unitOfMeasureThatHasNotBeenSelected, qtyOfUOMToBeSelected);
     }
 
     @And("^Select Create a Supply list radio button in Add to Supply list pop-up.$")
@@ -96,15 +139,15 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
         productDetailsPage.enterNewSupplyListNameText(newSupplyListName);
     }
 
+    @SuppressWarnings("unchecked")
     @And("^Click on Add to Supply list in Add to Supply list pop-up.$")
     public void clickOnAddToSupplyListInAddToSupplyListPopUp() {
         productDetailsPage.clickOnAddToSupplyListButtonInAddToSupplyListPopUp();
-
         String supplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
         if (supplyListName != null && !supplyListName.isEmpty() && supplyListsManager.getSupplyListByName(supplyListName) == null) {
             String supplyListId = productDetailsPage.getSupplyListId();
-            ArrayList<UnitOfMeasure> selectedUnitsOfMeasurement = (ArrayList<UnitOfMeasure>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS);
-            ArrayList<IndividualProduct> selectedIndividualProducts = selectedUnitsOfMeasurement
+            HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
+            ArrayList<IndividualProduct> selectedIndividualProducts = selectedUnitsOfMeasurement.keySet()
                     .stream()
                     .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
                     .collect(Collectors.toCollection(ArrayList::new));
@@ -130,5 +173,15 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
             }
         }
         productDetailsPage.selectExistingSupplyListFromDropDownBySupplyListName(existingSupplyListName);
+    }
+
+    @And("^Click on Add to cart button on PDP.$")
+    public void clickOnAddToCartButtonOnPDP() {
+        productDetailsPage.clickOnAddToCartButton();
+    }
+
+    @And("^Click on Checkout button in Add to cart pop-up on PDP.$")
+    public void clickOnCheckoutButtonInAddToCartPopUpOnPDP() {
+        productDetailsPage.clickOnCheckoutButtonInAddToCartPopUp();
     }
 }
