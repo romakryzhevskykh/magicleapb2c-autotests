@@ -8,16 +8,16 @@
             <!--<class name="com.sarnova.cucumber.LoginSuite"/>-->
         <!--</classes>-->
     <!--</test>-->
-    <!--<test name="IndividualPDPSuite">-->
-        <!--<parameter name="browserName" value="chrome" />-->
-        <!--<classes>-->
-            <!--<class name="com.sarnova.cucumber.IndividualPDPSuite"/>-->
-        <!--</classes>-->
-    <!--</test>-->
-    <test name="SupplyListDetailsPageSuite">
+    <test name="IndividualPDPSuite">
         <parameter name="browserName" value="chrome" />
         <classes>
-            <class name="com.sarnova.cucumber.SupplyListDetailsPageSuit"/>
+            <class name="com.sarnova.cucumber.IndividualPDPSuite"/>
         </classes>
     </test>
+    <!--<test name="SupplyListDetailsPageSuite">-->
+        <!--<parameter name="browserName" value="chrome" />-->
+        <!--<classes>-->
+            <!--<class name="com.sarnova.cucumber.SupplyListDetailsPageSuit"/>-->
+        <!--</classes>-->
+    <!--</test>-->
 </suite>

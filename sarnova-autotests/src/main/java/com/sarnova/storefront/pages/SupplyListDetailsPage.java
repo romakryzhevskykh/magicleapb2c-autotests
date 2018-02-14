@@ -95,6 +95,6 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
     }
 
     public String getAddToCartPopUpMessage() {
-        return addToCartPopUpBlock.getAddToSupplyListPopUpContent();
+        return addToCartPopUpBlock.getAddToCartPopUpContent();
     }
 }

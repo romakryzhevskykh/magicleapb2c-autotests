@@ -30,7 +30,7 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.OPENED_PDP_PRODUCT, product);
     }
 
-    @And("^Set QTY values for products to (\\d+).$")
+    @And("^Set QTY values for products to (\\d+) on PDP.$")
     public void setQTYValuesForProductsTo(int qtyValueForAllProductsOnPDP) {
         Product product = (Product) threadVarsHashMap.get(TestKeyword.OPENED_PDP_PRODUCT);
         if (product instanceof IndividualProduct) {
@@ -49,9 +49,14 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
         productDetailsPage.clickOnAddToSupplyListButton();
     }
 
-    @Then("^Pop-up with (.*) message is opened.$")
-    public void checkThatPopUpIsOpenedWithMessage(String message) {
+    @Then("^Check that Add to Supply list pop-up displays (.*) message on PDP.$")
+    public void checkThatAddToSupplyListPopUpIsOpenedWithMessage(String message) {
         assertEquals(productDetailsPage.getAddToSupplyListPopUpContent(), message);
+    }
+
+    @Then("^Check that Add to cart pop-up displays (.*) message on PDP.$")
+    public void checkThatAddToCartPopUpIsOpenedWithMessage(String message) {
+        assertEquals(productDetailsPage.getAddToCartPopUpContent(), message);
     }
 
     @SuppressWarnings("unchecked")
@@ -136,5 +141,15 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
             }
         }
         productDetailsPage.selectExistingSupplyListFromDropDownBySupplyListName(existingSupplyListName);
+    }
+
+    @And("^Click on Add to cart button on PDP.$")
+    public void clickOnAddToCartButtonOnPDP() {
+        productDetailsPage.clickOnAddToCartButton();
+    }
+
+    @And("^Click on Checkout button in Add to cart pop-up on PDP.$")
+    public void clickOnCheckoutButtonInAddToCartPopUpOnPDP() {
+        productDetailsPage.clickOnCheckoutButtonInAddToCartPopUp();
     }
 }

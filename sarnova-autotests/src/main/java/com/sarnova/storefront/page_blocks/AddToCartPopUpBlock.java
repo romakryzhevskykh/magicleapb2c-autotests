@@ -15,7 +15,7 @@ public class AddToCartPopUpBlock extends UIComponent {
     }
 
     @Step("Get Add to cart pop-up's text content.")
-    public String getAddToSupplyListPopUpContent() {
+    public String getAddToCartPopUpContent() {
         return $(CONTENT_MESSAGE_TEXT_XPATH).getText().trim();
     }
 }
