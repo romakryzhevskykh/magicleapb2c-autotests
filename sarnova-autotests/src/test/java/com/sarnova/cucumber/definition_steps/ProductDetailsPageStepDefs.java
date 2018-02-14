@@ -53,7 +53,7 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
         assertEquals(productDetailsPage.getAddToSupplyListPopUpContent(), message);
     }
 
-    @And("^Set QTY (\\d+) to any product\\(UOM\\) from the list.$")
+    @And("^Set QTY (\\d+) to any product\\(UOM\\) on the PDP.$")
     public void selectAnyProductUOMFromTheList(int qtyValueForAnyProductOnPDP) {
         Product product = (Product) threadVarsHashMap.get(TestKeyword.OPENED_PDP_PRODUCT);
         ArrayList<UnitOfMeasure> unitsOfMeasurement = new ArrayList<>();
@@ -64,7 +64,7 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
                     .ifPresent(uom -> {
                         unitsOfMeasurement.add(uom);
                         productDetailsPage.setQTYForProductUOMToValue(uom, qtyValueForAnyProductOnPDP);
-                        threadVarsHashMap.put(TestKeyword.SELECTED_ON_PDP_UOMS, unitsOfMeasurement);
+                        threadVarsHashMap.put(TestKeyword.SELECTED_UOMS, unitsOfMeasurement);
                     });
         } else if (product instanceof GroupProduct) {
             ((GroupProduct) product).getIndividualProducts()
@@ -74,7 +74,7 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
                     .ifPresent(uom -> {
                         unitsOfMeasurement.add(uom);
                         productDetailsPage.setQTYForProductUOMToValue(uom, qtyValueForAnyProductOnPDP);
-                        threadVarsHashMap.put(TestKeyword.SELECTED_ON_PDP_UOMS, unitsOfMeasurement);
+                        threadVarsHashMap.put(TestKeyword.SELECTED_UOMS, unitsOfMeasurement);
                     });
         }
     }
@@ -100,14 +100,15 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
     public void clickOnAddToSupplyListInAddToSupplyListPopUp() {
         productDetailsPage.clickOnAddToSupplyListButtonInAddToSupplyListPopUp();
 
-        String newSupplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
-        if (newSupplyListName != null && !newSupplyListName.isEmpty()) {
-            ArrayList<UnitOfMeasure> selectedUnitsOfMeasurement = (ArrayList<UnitOfMeasure>) threadVarsHashMap.get(TestKeyword.SELECTED_ON_PDP_UOMS);
+        String supplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
+        if (supplyListName != null && !supplyListName.isEmpty() && supplyListsManager.getSupplyListByName(supplyListName) == null) {
+            String supplyListId = productDetailsPage.getSupplyListId();
+            ArrayList<UnitOfMeasure> selectedUnitsOfMeasurement = (ArrayList<UnitOfMeasure>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS);
             ArrayList<IndividualProduct> selectedIndividualProducts = selectedUnitsOfMeasurement
                     .stream()
                     .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
                     .collect(Collectors.toCollection(ArrayList::new));
-            supplyListsManager.createInstance(userSessions.getActiveUserSession().getUser(), newSupplyListName, selectedIndividualProducts);
+            supplyListsManager.createInstance(userSessions.getActiveUserSession().getUser(), supplyListName, supplyListId, selectedIndividualProducts);
         }
     }
 

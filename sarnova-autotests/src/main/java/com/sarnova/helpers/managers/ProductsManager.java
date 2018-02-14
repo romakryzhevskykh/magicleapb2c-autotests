@@ -1,9 +1,12 @@
 package com.sarnova.helpers.managers;
 
 import com.sarnova.helpers.models.products.*;
+import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Component;
+import us.codecraft.xsoup.Xsoup;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @Component
 public class ProductsManager {
@@ -24,6 +27,14 @@ public class ProductsManager {
 
     public ArrayList<Product> getTestProducts() {
         return testProducts;
+    }
+
+    public ArrayList<IndividualProduct> getTestIndividualProducts() {
+        return testProducts
+                .stream()
+                .filter(product -> product instanceof IndividualProduct)
+                .map(product -> (IndividualProduct) product)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public void addTestProduct(Product product) {
@@ -73,5 +84,19 @@ public class ProductsManager {
                 .orElseGet(() -> {
                     throw new NullPointerException("No product with SKU: " + sku + " in the test list.");
                 });
+    }
+
+    public ArrayList<UnitOfMeasure> parseUnitsOfMeasurementFromCartPageHTML(ArrayList<? extends Element> unitsOfMeasurementRows) {
+        return unitsOfMeasurementRows.stream()
+                .flatMap(unitOfMeasureRow -> ((IndividualProduct) getProductBySku(
+                        Xsoup.select(unitOfMeasureRow, "//div[@class=item__info]/div[@class=item__code]/text()")
+                                .get().trim()))
+                        .getUnitsOfMeasurement()
+                        .stream()
+                        .filter(unitOfMeasure -> unitOfMeasure.getUomType().equalsByFullName(
+                                Xsoup.select(unitOfMeasureRow, "//div[@class=item__unit]/text()")
+                                        .get().trim())
+                        )
+                ).collect(Collectors.toCollection(ArrayList::new));
     }
 }

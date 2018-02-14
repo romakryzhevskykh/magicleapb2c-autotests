@@ -1,7 +1,21 @@
 package com.sarnova.helpers.models.products;
 
 public enum UOMType {
-    CS,
+    CS("Case"),
     BX,
-    EA
+    EA("Each");
+
+    final String fullName;
+
+    UOMType() {
+        this.fullName = "";
+    }
+
+    UOMType(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public boolean equalsByFullName(String fullName) {
+        return this.fullName.equalsIgnoreCase(fullName);
+    }
 }

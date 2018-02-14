@@ -6,8 +6,12 @@ public class SupplyListDetailsPageElements {
 
     private static final String SUPPLY_LIST_HEADER_XPATH = "//div[@class = 'well well-tertiary well-lg']";
     public static final String SUPPLY_LIST_ACTIVE_STATUS_XPATH = SUPPLY_LIST_HEADER_XPATH + "//div[@class = 'col-sm-4 item-wrapper']/div/span[3]//span";
+    public static final String SUPPLY_LIST_ID_VALUE_XPATH = SUPPLY_LIST_HEADER_XPATH + "//div[@class = 'col-sm-2 item-wrapper']//span[@class = 'item-value']";
+    public static final String ADD_TO_CART_BUTTON_XPATH = "//button[contains(@id,'addIndividualsToCartButton')]";
 
     public static final String SUPPLY_PRODUCTS_ROWS_XPATH = "//ul[@class = 'item__list']/table/tbody/tr/td";
     public static final String SUPPLY_PRODUCTS_SKUS_XPATH = SUPPLY_PRODUCTS_ROWS_XPATH + "//div[@class= 'item__code']";
     public static final String SUPPLY_PRODUCT_ROW_BY_SKU_XPATH = SUPPLY_PRODUCTS_ROWS_XPATH + "[div//div[@class= 'item__code'][. ='%s']]";
+    public static final String UOM_ROW_BY_SKU_AND_UOM_TYPE_XPATH = SUPPLY_PRODUCT_ROW_BY_SKU_XPATH + "/div[@class='item__list--item'][div[@class='item__unit']//option[.='%s']]";
+    public static final String SUPPLY_PRODUCT_ROW_QTY_FIELD_BY_SKU_AND_UOM_TYPE_XPATH = UOM_ROW_BY_SKU_AND_UOM_TYPE_XPATH + "//input[contains(@class, 'js-qty-selector-input')]";
 }

@@ -1,4 +1,4 @@
-package com.sarnova.storefront.page_elements;
+package com.sarnova.storefront.page_block_elements;
 
 public class LoggedInHeaderRowBlockElements {
 

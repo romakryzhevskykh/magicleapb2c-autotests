@@ -3,17 +3,20 @@ package com.sarnova.storefront.pages;
 import com.sarnova.helpers.managers.ProductsManager;
 import com.sarnova.helpers.models.products.Product;
 import com.sarnova.helpers.models.products.UnitOfMeasure;
-import org.openqa.selenium.By;
+import com.sarnova.storefront.page_blocks.AddToSupplyListPopUpBlock;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import static com.sarnova.storefront.page_elements.ProductDetailsPageElements.*;
+import static com.sarnova.storefront.page_elements.ProductDetailsPageElements.ADD_TO_SUPPLY_LIST_BUTTONS_XPATH;
+import static com.sarnova.storefront.page_elements.ProductDetailsPageElements.QTY_FIELD_BY_SKU_AND_UOM_TYPE_XPATH;
 
 @Component
 public class ProductDetailsPage extends StorefrontBasePage {
     @Autowired private ProductsManager productsManager;
+
+    @Autowired private AddToSupplyListPopUpBlock addToSupplyListPopUpBlock;
 
     private final String pageUrlMethod = "boundtree/en/USD/p/%s";
 
@@ -33,11 +36,6 @@ public class ProductDetailsPage extends StorefrontBasePage {
         }
     }
 
-    @Override
-    public String getPageUrl() {
-        return storefrontProject.getBaseUrl() + pageUrlMethod;
-    }
-
     public String getPageUrlForProduct(Product product) {
         return null;
     }
@@ -47,52 +45,48 @@ public class ProductDetailsPage extends StorefrontBasePage {
         open(String.format(getPageUrl(), product.getSku()));
     }
 
-    @Step("Get Add to Supply list pop-up's text content.")
     public String getAddToSupplyListPopUpContent() {
-        return $(ADD_TO_SUPPLY_LIST_POP_UP_CONTENT_XPATH).getText().trim();
+        return addToSupplyListPopUpBlock.getAddToSupplyListPopUpContent();
     }
 
-    @Step("Select create new Supply list radio button in Add to Supply list pop-up.")
     public void clickOnCreateNewSupplyListInAddToSupplyListPopUp() {
-        click(ADD_TO_SUPPLY_LIST_POP_UP_CREATE_NEW_SUPPLY_LIST_RADIO_BUTTON_XPATH);
+        addToSupplyListPopUpBlock.clickOnCreateNewSupplyListInAddToSupplyListPopUp();
     }
 
-    @Step("Select select Supply list radio button in Add to Supply list pop-up.")
     public void clickOnSelectSupplyListInAddToSupplyListPopUp() {
-        click(ADD_TO_SUPPLY_LIST_POP_UP_SELECT_SUPPLY_LIST_RADIO_BUTTON_XPATH);
+        addToSupplyListPopUpBlock.clickOnSelectSupplyListInAddToSupplyListPopUp();
     }
 
-    @Step("Enter new Supply list name: {0} in Add to Supply list pop-up.")
     public void enterNewSupplyListNameText(String newSupplyListName) {
-        $(By.id(ADD_TO_SUPPLY_LIST_POP_UP_NEW_SUPPLY_LIST_NAME_FIELD_ID)).sendKeys(newSupplyListName);
+        addToSupplyListPopUpBlock.enterNewSupplyListNameText(newSupplyListName);
     }
 
-    @Step("Click on Add to Supply list button in Add to Supply list pop-up.")
     public void clickOnAddToSupplyListButtonInAddToSupplyListPopUp() {
-        click(ADD_TO_SUPPLY_LIST_POP_UP_ADD_TO_SUPPLY_LIST_BUTTON_XPATH);
+        addToSupplyListPopUpBlock.clickOnAddToSupplyListButtonInAddToSupplyListPopUp();
     }
 
-    @Step("Click on View Supply list button in Add to Supply list pop-up.")
     public void clickOnViewSupplyListButtonInAddToSupplyListPopUp() {
-        click(ADD_TO_SUPPLY_LIST_POP_UP_VIEW_SUPPLY_LIST_BUTTON_XPATH);
+        addToSupplyListPopUpBlock.clickOnViewSupplyListButtonInAddToSupplyListPopUp();
     }
 
-    @Step("Click on Select Your Supply list drop-down.")
     public void clickOnSelectExistingSupplyListDropDown() {
-        click(By.id(ADD_TO_SUPPLY_LIST_POP_UP_EXISTING_LISTS_DROP_DOWN_ID));
+        addToSupplyListPopUpBlock.clickOnSelectExistingSupplyListDropDown();
     }
 
-    @Step("Select {0} Supply list from drop-down.")
     public void selectExistingSupplyListFromDropDownBySupplyListName(String existingSupplyListName) {
-        click(ADD_TO_SUPPLY_LIST_POP_UP_EXISTING_SUPPLY_LIST_IN_DROP_DOWN_BY_NAME_XPATH, existingSupplyListName);
+        addToSupplyListPopUpBlock.selectExistingSupplyListFromDropDownBySupplyListName(existingSupplyListName);
     }
 
-    @Step("Get name of any existing Supply list in the drop-down.")
     public String getAnyExistingSupplyListNameFromDropDown() {
-        return $$(ADD_TO_SUPPLY_LIST_POP_UP_EXISTING_SUPPLY_LISTS_IN_DROP_DOWN_XPATH)
-                .stream()
-                .map(webElement -> webElement.getText().trim())
-                .findAny()
-                .orElse(null);
+        return addToSupplyListPopUpBlock.getAnyExistingSupplyListNameFromDropDown();
+    }
+
+    public String getSupplyListId() {
+        return addToSupplyListPopUpBlock.getSupplyListId();
+    }
+
+    @Override
+    public String getPageUrl() {
+        return storefrontProject.getBaseUrl() + pageUrlMethod;
     }
 }

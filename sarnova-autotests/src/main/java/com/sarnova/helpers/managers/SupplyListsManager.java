@@ -1,5 +1,6 @@
 package com.sarnova.helpers.managers;
 
+import com.google.common.collect.Iterables;
 import com.sarnova.helpers.models.products.IndividualProduct;
 import com.sarnova.helpers.models.products.Product;
 import com.sarnova.helpers.models.supply_lists.SupplyList;
@@ -16,6 +17,7 @@ import us.codecraft.xsoup.Xsoup;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,12 +39,12 @@ public class SupplyListsManager {
         return allSupplyLists;
     }
 
-    public void createInstance(User user, String name, ArrayList<IndividualProduct> products) {
+    public void createInstance(User user, String name, String id, ArrayList<IndividualProduct> products) {
         ArrayList<SupplyListProduct> supplyListProducts = products
                 .stream()
                 .map(SupplyListProduct::new)
                 .collect(Collectors.toCollection(ArrayList::new));
-        SupplyList newSupplyList = new SupplyList(user, name, supplyListProducts);
+        SupplyList newSupplyList = new SupplyList(user, name, id, supplyListProducts);
         testSupplyLists.add(newSupplyList);
     }
 
@@ -74,14 +76,20 @@ public class SupplyListsManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        createInstance(userSession.getUser(), name, products);
+        String id = Iterables
+                .getLast(Arrays.asList(
+                        Xsoup.select(createNewSupplyList.getResponse().getHTMLResponseDocument(), "//a/@href")
+                                .get()
+                                .split("/")
+                ));
+        createInstance(userSession.getUser(), name, id, products);
     }
 
     public SupplyList getSupplyListByName(String name) {
         return testSupplyLists.stream().filter(supplyList -> supplyList.getName().equals(name)).findAny().orElse(null);
     }
 
-    public SupplyList parseSupplyListFromHTMLSupplyListDetailsPage(User user, String name, String activeStatus,
+    public SupplyList parseSupplyListFromHTMLSupplyListDetailsPage(User user, String name, String id, String activeStatus,
                                                                    List<Document> supplyListProductsHtml) {
         ArrayList<SupplyListProduct> supplyListProducts = new ArrayList<>();
         supplyListProducts.addAll(supplyListProductsHtml
@@ -100,7 +108,7 @@ public class SupplyListsManager {
                 })
                 .collect(Collectors.toList())
         );
-        SupplyList supplyList = new SupplyList(user, name, supplyListProducts);
+        SupplyList supplyList = new SupplyList(user, name, id, supplyListProducts);
         supplyList.setActive(activeStatus.equals("Inactivate"));
         return supplyList;
     }

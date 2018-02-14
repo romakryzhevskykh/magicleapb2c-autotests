@@ -1,0 +1,62 @@
+package com.sarnova.helpers.managers;
+
+import com.sarnova.helpers.models.products.UnitOfMeasure;
+import com.sarnova.helpers.request_engine.API;
+import com.sarnova.helpers.request_engine.GETRequest;
+import com.sarnova.helpers.request_engine.POSTRequest;
+import com.sarnova.helpers.user_engine.UserSession;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import us.codecraft.xsoup.Xsoup;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+@Component
+public class CartManager {
+    @Autowired ProductsManager productsManager;
+
+    private POSTRequest REMOVE_ENTRY_FROM_CART = new POSTRequest("Remove entry from active cart", "/boundtree/en/USD/cart/entry/execute/REMOVE");
+    private GETRequest GET_CART_PAGE_SOURCE = new GETRequest("Get cart page source", "/boundtree/en/USD/cart");
+
+    @SuppressWarnings("unchecked")
+    public void emptyActiveCart(UserSession userSession) {
+        ArrayList<UnitOfMeasure> unitsOfMeasurementInCart = getUOMsFromCartPage(userSession);
+        String csrfToken = getCartPageCsrfToken(userSession);
+        for (int i = 0; i < unitsOfMeasurementInCart.size(); i++) {
+            try {
+                POSTRequest removeEntryFromCart = REMOVE_ENTRY_FROM_CART.getClone();
+                removeEntryFromCart.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", csrfToken));
+                removeEntryFromCart.addPostParameterAndValue(new API.PostParameterAndValue("entryNumbers", "0"));
+                removeEntryFromCart.sendPostRequest(userSession);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private String getCartPageCsrfToken(UserSession userSession) {
+        GETRequest getCartPageSource = GET_CART_PAGE_SOURCE.getClone();
+        try {
+            getCartPageSource.sendGetRequest(userSession);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Document htmlResponse = getCartPageSource.getResponse().getHTMLResponseDocument();
+        return Xsoup.select(htmlResponse, "//input[@name=CSRFToken]/@value").list().stream().findAny().orElse(null);
+    }
+
+    private ArrayList<UnitOfMeasure> getUOMsFromCartPage(UserSession userSession) {
+        GETRequest getCartPageSource = GET_CART_PAGE_SOURCE.getClone();
+        try {
+            getCartPageSource.sendGetRequest(userSession);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Document htmlResponse = getCartPageSource.getResponse().getHTMLResponseDocument();
+        ArrayList<Element> unitsOfMeasurementRows = Xsoup.select(htmlResponse, "//table/tbody/tr/td/li[@class=item__list--item]").getElements();
+        return productsManager.parseUnitsOfMeasurementFromCartPageHTML(unitsOfMeasurementRows);
+    }
+}

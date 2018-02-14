@@ -9,10 +9,12 @@ public class SupplyList {
     private ArrayList<SupplyListProduct> supplyProductsInList;
     private final User user;
     private String name;
+    private final String id;
 
-    public SupplyList(User user, String name, ArrayList<SupplyListProduct> supplyIndividualProducts) {
+    public SupplyList(User user, String name, String id, ArrayList<SupplyListProduct> supplyIndividualProducts) {
         this.user = user;
         this.name = name;
+        this.id = id;
         this.isActive = true;
         this.supplyProductsInList = supplyIndividualProducts;
     }
@@ -51,5 +53,9 @@ public class SupplyList {
 
     public ArrayList<SupplyListProduct> getSupplyProductsInList() {
         return supplyProductsInList;
+    }
+
+    public String getId() {
+        return id;
     }
 }
