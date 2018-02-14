@@ -8,14 +8,10 @@ import ru.yandex.qatools.allure.annotations.Step;
 
 import static com.sarnova.hybris.import_cockpit.page_elements.LoginPageElements.*;
 
-@Component
+@Component("ImportCockpitLoginPage")
 public class LoginPage extends ImportCockpitBasePage {
 
     private final String pageUrlMethod = "login.zul";
-
-    public boolean isLoginPageOpened() {
-        return isCurrentURLEqualsToLoginPageURL();
-    }
 
     @Step("Fill Import cockpit's username field.")
     public void fillUsernameFieldWith(String username) {
@@ -38,8 +34,8 @@ public class LoginPage extends ImportCockpitBasePage {
         clickOnLoginButton();
     }
 
-    @Step("Check that current url is Import cockpit's Login page url.")
-    private boolean isCurrentURLEqualsToLoginPageURL() {
-        return (importCockpitProject.getBaseUrl() + pageUrlMethod).equals(getCurrentUrl());
+    @Override
+    public String getPageUrl() {
+        return importCockpitProject.getBaseUrl() + pageUrlMethod;
     }
 }

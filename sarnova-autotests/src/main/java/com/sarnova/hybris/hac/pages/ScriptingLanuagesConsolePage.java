@@ -19,4 +19,8 @@ public class ScriptingLanuagesConsolePage extends HACBasePage {
         //TO DO
     }
 
+    @Override
+    public String getPageUrl() {
+        return null;
+    }
 }

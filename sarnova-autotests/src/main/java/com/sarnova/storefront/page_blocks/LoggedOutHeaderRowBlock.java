@@ -1,13 +1,13 @@
 package com.sarnova.storefront.page_blocks;
 
-import com.sarnova.helpers.BasePageObject;
+import com.sarnova.helpers.UIComponent;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import static com.sarnova.storefront.page_elements.LoggedOutHeaderRowBlockElements.SIGN_IN_BUTTON_XPATH;
 
 @Component
-public class LoggedOutHeaderRowBlock extends BasePageObject {
+public class LoggedOutHeaderRowBlock extends UIComponent {
 
     @Step("Click on Sign in button.")
     public void clickOnSignInButton() {

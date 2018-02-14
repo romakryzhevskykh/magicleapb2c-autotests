@@ -7,9 +7,9 @@ import com.sarnova.helpers.web_engine.WebDriverSessions;
 import cucumber.api.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class UserSwitchStepDefs {
+public class UserSwitchStepDefs extends AbstractStepDefs {
 
-    @Autowired protected WebDriverSessions webDriverPool;
+    @Autowired WebDriverSessions webDriverPool;
 
     @Given("Switch to Backoffice Admin user.")
     public void switchToBackofficeAdmin() {
@@ -25,7 +25,6 @@ public class UserSwitchStepDefs {
     @Given("Switch to Storefront guest.")
     public void switchToStorefrontAsGuest() {
         webDriverPool.setDriverActive(StorefrontUserRoles.GUEST);
-
     }
 
     @Given("Switch to Import cockpit import manager role.")

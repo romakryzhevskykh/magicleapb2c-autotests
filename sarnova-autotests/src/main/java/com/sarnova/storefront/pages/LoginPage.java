@@ -16,6 +16,8 @@ public class LoginPage extends StorefrontBasePage {
         fillUsernameFieldWith(userSession.getUsername());
         fillPasswordFieldWith(userSession.getPassword());
         clickOnLoginButton();
+        userSession.setLoggedIn(true);
+        userSession.setCookies(getDriver().manage().getCookies());
     }
 
     @Step("Check that current url is Login page url.")

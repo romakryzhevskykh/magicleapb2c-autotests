@@ -6,7 +6,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class StartPageStepDefs {
+public class StartPageStepDefs extends AbstractStepDefs {
 
     @Autowired StartPage startPage;
     @Autowired HeaderRowPageBlock headerRowPageBlock;
@@ -15,7 +15,7 @@ public class StartPageStepDefs {
     public void openLoginPage() {
         if (!startPage.isOpened()) {
             if(headerRowPageBlock.isUserLoggedIn()) {
-                headerRowPageBlock.logoutFromStorefront();
+                headerRowPageBlock.logoutFromStorefront(userSessions.getActiveUserSession());
             } else if (!startPage.isOpened()) {
                 startPage.open();
             }
