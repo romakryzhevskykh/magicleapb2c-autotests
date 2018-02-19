@@ -38,4 +38,8 @@ public class CartPage extends StorefrontBasePage {
                         unitOfMeasure.getUomType().getFullName()
                 ).getAttribute("value"));
     }
+
+    public void clickOnCheckoutButton() {
+        click(CHECKOUT_BUTTONS_XPATH);
+    }
 }

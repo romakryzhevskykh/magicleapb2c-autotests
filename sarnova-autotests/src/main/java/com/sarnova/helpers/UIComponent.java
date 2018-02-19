@@ -2,6 +2,7 @@ package com.sarnova.helpers;
 
 import com.sarnova.helpers.web_engine.WebDriverSessions;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +94,48 @@ public abstract class UIComponent {
             return false;
         } finally {
             webDriverPool.getActiveDriverSession().restoreDefaultImplicitWait();
+        }
+    }
+
+    protected void waitUntilPageIsFullyLoaded() {
+        waitHTMLTemplateLoad();
+        waitJQueryRequestsLoad();
+    }
+
+    public void waitHTMLTemplateLoad() {
+        WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getTimeOut());
+        ExpectedCondition<Boolean> pageLoadCondition = driver1
+                -> ((JavascriptExecutor) driver1).executeScript("return document.readyState").equals("complete");
+        wait.until(pageLoadCondition);
+    }
+
+    public void waitJQueryRequestsLoad() {
+        WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getTimeOut());
+        try {
+            Thread.sleep((long) (1000 * webDriverPool.getActiveDriverSession().getShortTimeOut() / 20));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ExpectedCondition<Boolean> jQueryLoadCondition = driver1 -> {
+            boolean result;
+            JavascriptExecutor js = (JavascriptExecutor) driver1;
+            try {
+                result = (Boolean) js.executeScript("return jQuery.active == 0");
+            } catch (WebDriverException ex) {
+                result = true;
+                System.out.println("[INFO] No jQueries.");
+            }
+            return result;
+        };
+        try {
+            wait.until(jQueryLoadCondition);
+        } catch (TimeoutException ex) {
+            System.out.println("[WARNING] Timeout exception after " + webDriverPool.getActiveDriverSession().getTimeOut() + " Seconds. Possible problem - browser hovered(not responding)!");
+        }
+        try {
+            Thread.sleep((long) (1000 * webDriverPool.getActiveDriverSession().getShortTimeOut() / 20));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }

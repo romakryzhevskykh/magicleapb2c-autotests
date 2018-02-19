@@ -13,6 +13,9 @@ import us.codecraft.xsoup.Xsoup;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Component
 public class CartManager {
@@ -20,6 +23,7 @@ public class CartManager {
 
     private POSTRequest REMOVE_ENTRY_FROM_CART = new POSTRequest("Remove entry from active cart", "/boundtree/en/USD/cart/entry/execute/REMOVE");
     private GETRequest GET_CART_PAGE_SOURCE = new GETRequest("Get cart page source", "/boundtree/en/USD/cart");
+    private POSTRequest ADD_UOMS_TO_CART = new POSTRequest("Add UOMs to cart", "/cart/addIndividualList");
 
     @SuppressWarnings("unchecked")
     public void emptyActiveCart(UserSession userSession) {
@@ -58,5 +62,29 @@ public class CartManager {
         Document htmlResponse = getCartPageSource.getResponse().getHTMLResponseDocument();
         ArrayList<Element> unitsOfMeasurementRows = Xsoup.select(htmlResponse, "//table/tbody/tr/td/li[@class=item__list--item]").getElements();
         return productsManager.parseUnitsOfMeasurementFromCartPageHTML(unitsOfMeasurementRows);
+    }
+
+    @SuppressWarnings("unchecked")
+    public void addUOMsToCartViaApi(UserSession userSession, HashMap<UnitOfMeasure, Integer> unitsOfMeasurementToAdd) {
+        POSTRequest addUOMsToCart = ADD_UOMS_TO_CART.getClone();
+        int counter = 0;
+        for(Map.Entry<UnitOfMeasure, Integer> unitOfMeasure : unitsOfMeasurementToAdd.entrySet()) {
+            addUOMsToCart.addPostParameterAndValue(new API.PostParameterAndValue("productList[" + counter + "].unit",
+                    unitOfMeasure.getKey().getUomType().name()));
+            addUOMsToCart.addPostParameterAndValue(new API.PostParameterAndValue("productList[" + counter + "].qty",
+                    unitOfMeasure.getValue()));
+            addUOMsToCart.addPostParameterAndValue(new API.PostParameterAndValue("productList[" + counter + "].productCode",
+                    productsManager.getProductByUOM(unitOfMeasure.getKey()).getSku()));
+        }
+        String csrfToken = productsManager.getCSRFTokenFromPDPOf(userSession, unitsOfMeasurementToAdd.keySet()
+                .stream()
+                .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
+                .collect(Collectors.toList()));
+        addUOMsToCart.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", csrfToken));
+        try {
+            addUOMsToCart.sendPostRequest(userSession);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

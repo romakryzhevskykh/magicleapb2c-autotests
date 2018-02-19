@@ -2,14 +2,10 @@ package com.sarnova.helpers.models.products;
 
 public enum UOMType {
     CS("Case"),
-    BX,
+    BX("Box"),
     EA("Each");
 
     final String fullName;
-
-    UOMType() {
-        this.fullName = "";
-    }
 
     UOMType(String fullName) {
         this.fullName = fullName;

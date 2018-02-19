@@ -4,6 +4,7 @@ import com.sarnova.helpers.models.products.UnitOfMeasure;
 import com.sarnova.storefront.pages.CartPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -44,5 +45,15 @@ public class CartPageStepDefs extends AbstractStepDefs {
     @And("^Check that there are no products on Cart page.$")
     public void checkThatThereAreNoProductsOnCartPage() {
         assertTrue(cartPage.getUnitsOfMeasurementInCart().isEmpty());
+    }
+
+    @When("^Click on Checkout button on Cart page.$")
+    public void clickOnCheckoutButtonOnCartPage() {
+        cartPage.clickOnCheckoutButton();
+    }
+
+    @Then("^Check that Cart page is opened.$")
+    public void checkThatCartPageIsOpened() {
+        assertTrue(cartPage.isOpened());
     }
 }

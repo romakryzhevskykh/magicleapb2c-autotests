@@ -6,7 +6,6 @@ import com.sarnova.helpers.models.products.Product;
 import com.sarnova.helpers.models.supply_lists.SupplyList;
 import com.sarnova.helpers.models.supply_lists.SupplyListProduct;
 import com.sarnova.helpers.request_engine.API;
-import com.sarnova.helpers.request_engine.GETRequest;
 import com.sarnova.helpers.request_engine.POSTRequest;
 import com.sarnova.helpers.user_engine.User;
 import com.sarnova.helpers.user_engine.UserSession;
@@ -26,7 +25,6 @@ public class SupplyListsManager {
     @Autowired ProductsManager productsManager;
 
     private POSTRequest CREATE_NEW_SUPPLY_LIST = new POSTRequest("Create new Supply list by User session, number of products and name", "boundtree/en/USD/my-account/supply-lists/addProduct/");
-    private GETRequest GET_PDP_PAGE_SOURCE_TO_GET_CSRF_TOKEN = new GETRequest("Get PDP source to get CSRFToken to create new Supply list", "boundtree/en/USD/p/%s");
 
     private ArrayList<SupplyList> allSupplyLists;
     private ArrayList<SupplyList> testSupplyLists = new ArrayList<>();
@@ -50,15 +48,7 @@ public class SupplyListsManager {
 
     @SuppressWarnings("unchecked")
     public void createViaApi(UserSession userSession, String name, List<IndividualProduct> products) {
-        GETRequest pageSourceToGetCSRF = GET_PDP_PAGE_SOURCE_TO_GET_CSRF_TOKEN.getClone();
-        pageSourceToGetCSRF.setValue(products.stream().map(Product::getSku).findAny().orElse(null));
-        try {
-            pageSourceToGetCSRF.sendGetRequest(userSession);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Document htmlResponse = pageSourceToGetCSRF.getResponse().getHTMLResponseDocument();
-        String csrfToken = Xsoup.select(htmlResponse, "//form[@id=productListAddToCartForm]//input[@name=CSRFToken]/@value").get();
+        String csrfToken = productsManager.getCSRFTokenFromPDPOf(userSession, products);
 
         POSTRequest createNewSupplyList = CREATE_NEW_SUPPLY_LIST.getClone();
         createNewSupplyList.setHeader("CSRFToken", csrfToken);

@@ -4,6 +4,7 @@ import com.sarnova.helpers.managers.CartManager;
 import com.sarnova.helpers.managers.ProductsManager;
 import com.sarnova.helpers.managers.SupplyListsManager;
 import com.sarnova.helpers.models.products.IndividualProduct;
+import com.sarnova.helpers.models.products.Product;
 import com.sarnova.helpers.models.products.UnitOfMeasure;
 import com.sarnova.helpers.models.supply_lists.SupplyList;
 import com.sarnova.helpers.models.supply_lists.SupplyListProduct;
@@ -93,4 +94,22 @@ public class GeneralStepDefs extends AbstractStepDefs {
         supplyListsManager.createViaApi(userSession, newSupplyListName, productsToCreate);
         return supplyListsManager.getSupplyListByName(newSupplyListName);
     };
+
+    @SuppressWarnings("unchecked")
+    @Given("^Add to cart (.*) product with quantity (\\d+).$")
+    public void cartWithProducts(List<String> productTypes, int qtyOfProducts) {
+        HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement;
+        if (threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP) == null) {
+            selectedUnitsOfMeasurement = new HashMap<>();
+            threadVarsHashMap.put(TestKeyword.SELECTED_UOMS_HASH_MAP, selectedUnitsOfMeasurement);
+        } else {
+            selectedUnitsOfMeasurement = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
+        }
+        Product selectedProduct = productsManager.getProductByProductTestTypes(productTypes);
+        UnitOfMeasure selectedUOM = selectedProduct.getUnitsOfMeasurement().stream().findAny().orElse(null);
+        selectedUnitsOfMeasurement.put(selectedUOM, qtyOfProducts);
+        cartManager.addUOMsToCartViaApi(userSessions.getActiveUserSession(), new HashMap<UnitOfMeasure, Integer>() {{
+            put(selectedUOM, qtyOfProducts);
+        }});
+    }
 }

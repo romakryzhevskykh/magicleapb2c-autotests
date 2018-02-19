@@ -45,6 +45,10 @@ public class WebDriverSession {
         return shortTimeOut;
     }
 
+    public int getTimeOut() {
+        return shortTimeOut;
+    }
+
     //only for WebDriverSessions usage
     public void dismiss() {
         webDriver.quit();
