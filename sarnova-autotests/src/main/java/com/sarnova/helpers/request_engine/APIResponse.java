@@ -119,6 +119,9 @@ public class APIResponse implements API {
     }
 
     public void getResponseWithActualObjectType(String RESPONSE_STRING) {
+//        if(RESPONSE_STRING == null) {
+//            return;
+//        }
         if (RESPONSE_CONTENT_TYPES.JSON.contains(contentType))
             try {
                 this.responseBody = new JSONObject(RESPONSE_STRING);
