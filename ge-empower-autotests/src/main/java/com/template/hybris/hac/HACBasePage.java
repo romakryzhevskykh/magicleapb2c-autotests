@@ -4,7 +4,7 @@ import com.template.helpers.BasePageObject;
 import com.template.hybris.hac.models.TemplateHAC;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class HACBasePage extends BasePageObject {
+public abstract class HACBasePage extends BasePageObject {
 
     @Autowired
     protected TemplateHAC templateHAC;

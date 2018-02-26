@@ -8,13 +8,13 @@ import com.template.storefront.models.TemplateStorefront;
 
 public class User {
 
-    private String login;
+    private String username;
     private String password;
     private UserRole userRole;
     private Cockpit userCockpit;
 
-    public User(String login, String password, Cockpit userCockpit, String cockpitRole) {
-        this.login = login;
+    public User(String username, String password, Cockpit userCockpit, String cockpitRole) {
+        this.username = username;
         this.password = password;
         this.userCockpit = userCockpit;
         if (userCockpit instanceof TemplateStorefront) {
@@ -70,12 +70,12 @@ public class User {
         }
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

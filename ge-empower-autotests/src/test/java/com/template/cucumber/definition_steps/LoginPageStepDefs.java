@@ -1,6 +1,5 @@
 package com.template.cucumber.definition_steps;
 
-import com.template.helpers.user_engine.UserSessions;
 import com.template.storefront.page_blocks.HeaderRowPageBlock;
 import com.template.storefront.pages.LoginPage;
 import com.template.storefront.pages.StartPage;
@@ -9,8 +8,6 @@ import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class LoginPageStepDefs extends AbstractStepDefs {
-
-    @Autowired UserSessions userSessions;
 
     @Autowired StartPage startPage;
     @Autowired LoginPage loginPage;

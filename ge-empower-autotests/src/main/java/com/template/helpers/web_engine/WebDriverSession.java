@@ -41,8 +41,18 @@ public class WebDriverSession {
         webDriver.manage().timeouts().implicitlyWait(value, timeUnit);
     }
 
+    public int getShortTimeOut() {
+        return shortTimeOut;
+    }
+
+    public int getTimeOut() {
+        return shortTimeOut;
+    }
+
     //only for WebDriverSessions usage
     public void dismiss() {
         webDriver.quit();
     }
+
+
 }

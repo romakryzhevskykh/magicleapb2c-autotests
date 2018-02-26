@@ -55,8 +55,8 @@ public class AddressBookPageStepDefs extends AbstractStepDefs {
     @Then("^Check that created address book entry is present in the list.$")
     public void checkThatCreatedAddressBookEntryIsPresentInTheList() throws Throwable {
         ArrayList<AddressBookEntry> addressBookEntries = addressBookPage.getAddressesList(userSessions.getActiveUserSession());
-        assertTrue(threadVarsHashMap.get("newAddress") != null);
+        assertTrue(threadVarsHashMap.get(TestKeyword.NEW_ADDRESS) != null);
         assertTrue(addressBookEntries.stream()
-                .anyMatch(addressBookEntry -> addressBookEntry.equals((AddressBookEntry) threadVarsHashMap.get("newAddress"))));
+                .anyMatch(addressBookEntry -> addressBookEntry.equals((AddressBookEntry) threadVarsHashMap.get(TestKeyword.NEW_ADDRESS))));
     }
 }
