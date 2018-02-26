@@ -1,4 +1,4 @@
-package com.template.storefront.pages;
+package com.template.storefront;
 
 import com.template.helpers.BasePageObject;
 import com.template.storefront.models.TemplateStorefront;

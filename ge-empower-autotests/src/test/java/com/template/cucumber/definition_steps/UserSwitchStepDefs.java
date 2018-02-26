@@ -21,9 +21,9 @@ public class UserSwitchStepDefs {
         webDriverPool.setDriverActive(StorefrontUserRoles.SHOPPER);
     }
 
-    @Given("Switch to Storefront guest.")
-    public void switchToStorefrontAsGuest() {
-        webDriverPool.setDriverActive(StorefrontUserRoles.GUEST);
+    @Given("Switch to Storefront admin.")
+    public void switchToStorefrontAsAdmin() {
+        webDriverPool.setDriverActive(StorefrontUserRoles.ADMIN);
     }
 
     @Given("Switch to Import cockpit import manager role.")
