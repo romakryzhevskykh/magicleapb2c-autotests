@@ -2,5 +2,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Suite1" parallel="tests">
-
+    <test name="LoginSuite">
+        <parameter name="browserName" value="chrome" />
+        <classes>
+            <class name="com.geempower.cucumber.AccountManagementSuite"/>
+        </classes>
+    </test>
 </suite>
