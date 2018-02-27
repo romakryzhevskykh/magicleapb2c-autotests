@@ -11,10 +11,10 @@ public class UserSwitchStepDefs {
 
     @Autowired protected WebDriverSessions webDriverPool;
 
-    @Given("Switch to Backoffice Admin user.")
-    public void switchToBackofficeAdmin() {
-        webDriverPool.setDriverActive(BackofficeUserRoles.ADMIN);
-    }
+//    @Given("Switch to Backoffice Admin user.")
+//    public void switchToBackofficeAdmin() {
+//        webDriverPool.setDriverActive(BackofficeUserRoles.ADMIN);
+//    }
 
     @Given("Switch to Storefront shopper.")
     public void switchToStorefrontAsShopper() {
@@ -26,8 +26,8 @@ public class UserSwitchStepDefs {
         webDriverPool.setDriverActive(StorefrontUserRoles.EMPOWERADMIN);
     }
 
-    @Given("Switch to Import cockpit import manager role.")
-    public void switchToImportCockpitAsImportManager() {
-        webDriverPool.setDriverActive(ImportCockpitUserRoles.IMPORT_MANAGER);
-    }
+//    @Given("Switch to Import cockpit import manager role.")
+//    public void switchToImportCockpitAsImportManager() {
+//        webDriverPool.setDriverActive(ImportCockpitUserRoles.IMPORT_MANAGER);
+//    }
 }

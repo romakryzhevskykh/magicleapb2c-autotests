@@ -6,7 +6,7 @@ Feature: Some actions on Account Management page
     And Account management page is opened.
 
     Scenario: Check that user able to choose appropriate account
-#      When Choose "North America" region
+#      When Choose North_America region
 #      When Search for NA "1318501" account
 #      When Click "1318501" account
 #      When Click "Skip" button

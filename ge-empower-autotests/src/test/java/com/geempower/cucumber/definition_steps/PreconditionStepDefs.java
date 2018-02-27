@@ -3,6 +3,7 @@ package com.geempower.cucumber.definition_steps;
 import com.geempower.storefront.page_blocks.HeaderBlock;
 import com.geempower.storefront.pages.AccountManagementPage;
 import com.geempower.storefront.pages.LoginPage;
+import com.geempower.storefront.pages.OrdersPage;
 import com.geempower.storefront.pages.SsoLoginPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -17,6 +18,8 @@ public class PreconditionStepDefs extends AbstractStepDefs {
     private SsoLoginPage ssoLoginPage;
     @Autowired
     private AccountManagementPage accountManagementPage;
+    @Autowired
+    private OrdersPage ordersPage;
 
     @Given("^User is logged in to Storefront.$")
     public void userIsLoggedInToStorefront() {
@@ -36,6 +39,13 @@ public class PreconditionStepDefs extends AbstractStepDefs {
     public void accountManagementPageIsOpened() {
         if (!accountManagementPage.isOpened()) {
             accountManagementPage.open();
+        }
+    }
+
+    @And("^Orders page is opened.$")
+    public void ordersPageIsOpened() {
+        if (!ordersPage.isOpened()) {
+            ordersPage.open();
         }
     }
 }
