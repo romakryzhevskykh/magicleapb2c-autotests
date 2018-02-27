@@ -19,6 +19,7 @@ public class CucumberTestsRunner extends AbstractTestNGSpringContextTests {
 
     private TestNGCucumberRunner testNGCucumberRunner;
 
+
     @Parameters("browserName")
     @BeforeTest
     public void initSuite(String browserName) throws Exception {
