@@ -11,6 +11,7 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
     @Autowired RegionsManager regionsManager;
     @Autowired AccountManagementPage accountManagementPage;
 
+
     @When("^Choose (.*) region.$")
     public void chooseRegion(String regionName) {
         Region chosenRegion = regionsManager.getRegionByName(regionName);
@@ -18,6 +19,10 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.CHOSEN_REGION, chosenRegion);
     }
 
+    @And("^Close Account management page.$")
+    public void clickOnCancelButton() {
+        accountManagementPage.clickOnCancelButton();
+    }
 
     @And("^Search random account for chosen region.$")
     public void searchForChosenRegionAccount() {

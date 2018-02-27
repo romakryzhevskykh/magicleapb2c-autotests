@@ -5,7 +5,7 @@ import cucumber.api.CucumberOptions;
 
 @CucumberOptions(
         format = {"pretty"},
-        features = "src/test/resources/features/AccountManagement.feature"
+        features = "src/test/resources/features/Dashboard.feature"
 )
-public class AccountManagementSuite extends CucumberTestsRunner {
+public class DashboardSuite extends CucumberTestsRunner {
 }
