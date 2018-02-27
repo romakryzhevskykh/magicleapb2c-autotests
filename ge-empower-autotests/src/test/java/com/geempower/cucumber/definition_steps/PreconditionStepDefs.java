@@ -1,10 +1,7 @@
 package com.geempower.cucumber.definition_steps;
 
 import com.geempower.storefront.page_blocks.HeaderBlock;
-import com.geempower.storefront.pages.AccountManagementPage;
-import com.geempower.storefront.pages.LoginPage;
-import com.geempower.storefront.pages.OrdersPage;
-import com.geempower.storefront.pages.SsoLoginPage;
+import com.geempower.storefront.pages.*;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +17,8 @@ public class PreconditionStepDefs extends AbstractStepDefs {
     private AccountManagementPage accountManagementPage;
     @Autowired
     private OrdersPage ordersPage;
+    @Autowired
+    private DashboardPage dashboardPage;
 
     @Given("^User is logged in to Storefront.$")
     public void userIsLoggedInToStorefront() {
@@ -37,6 +36,7 @@ public class PreconditionStepDefs extends AbstractStepDefs {
 
     @And("^Account management page is opened.$")
     public void accountManagementPageIsOpened() {
+        accountManagementPage.waitUntilPageIsFullyLoaded();
         if (!accountManagementPage.isOpened()) {
             accountManagementPage.open();
         }
@@ -44,8 +44,18 @@ public class PreconditionStepDefs extends AbstractStepDefs {
 
     @And("^Orders page is opened.$")
     public void ordersPageIsOpened() {
+        accountManagementPage.waitUntilPageIsFullyLoaded();
         if (!ordersPage.isOpened()) {
             ordersPage.open();
         }
     }
+
+    @And("^Dashboard page is opened.$")
+    public void dashboardPageIsOpened() {
+        accountManagementPage.waitUntilPageIsFullyLoaded();
+        if (!dashboardPage.isOpened()) {
+            dashboardPage.open();
+        }
+    }
+
 }

@@ -97,7 +97,7 @@ public abstract class UIComponent {
         }
     }
 
-    protected void waitUntilPageIsFullyLoaded() {
+    public void waitUntilPageIsFullyLoaded() {
         waitHTMLTemplateLoad();
         waitJQueryRequestsLoad();
     }

@@ -5,7 +5,7 @@ import cucumber.api.CucumberOptions;
 
 @CucumberOptions(
         format={"pretty"},
-        features = "src/test/resources/features/"
+        features = "src/test/resources/features/AccountManagement.feature"
 )
 public class AccountManagementSuite extends CucumberTestsRunner{
 }
