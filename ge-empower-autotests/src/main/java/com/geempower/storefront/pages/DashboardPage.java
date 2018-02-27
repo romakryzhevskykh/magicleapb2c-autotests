@@ -12,7 +12,12 @@ public class DashboardPage extends StorefrontBasePage {
 
     @Override
     public String getPageUrl() {
-        return storefrontProject.getBaseUrl().concat(pageUri);
+        return storefrontProject.getBaseUrl();
+    }
+
+    @Override
+    public boolean isOpened() {
+        return getCurrentUrl().equals(getPageUrl());
     }
 
     public boolean orderStatusWidgetIsDisplayed() {
@@ -37,5 +42,15 @@ public class DashboardPage extends StorefrontBasePage {
 
     public boolean recentListWidgetIsDisplayed() {
         return isDisplayed(RECENT_LIST_WIDGET_XPATH);
+    }
+
+    public void skipTrainingLevel() {
+        click(SKIP_BUTTON_XPATH);
+    }
+
+    public String isSelectedAccountIsDisplayed() {
+        waitUntilPageIsFullyLoaded();
+        return $(ACCOUNT_INFO_XPATH).getText();
+
     }
 }

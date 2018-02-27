@@ -4,8 +4,8 @@ import com.geempower.cucumber.runners.CucumberTestsRunner;
 import cucumber.api.CucumberOptions;
 
 @CucumberOptions(
-        format={"pretty"},
+        format = {"pretty"},
         features = "src/test/resources/features/AccountManagement.feature"
 )
-public class AccountManagementSuite extends CucumberTestsRunner{
+public class AccountManagementSuite extends CucumberTestsRunner {
 }
