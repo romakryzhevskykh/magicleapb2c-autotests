@@ -8,8 +8,6 @@ import static com.geempower.storefront.page_elements.DashboardPageElements.*;
 @Component
 public class DashboardPage extends StorefrontBasePage {
 
-    private final String pageUri = "";
-
     @Override
     public String getPageUrl() {
         return storefrontProject.getBaseUrl();

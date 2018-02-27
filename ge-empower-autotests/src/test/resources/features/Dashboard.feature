@@ -7,7 +7,7 @@ Feature: Some actions on Dashboard page
     And Close Account management page.
 
   Scenario: Check that user able to open Dashboard page
-    And Dashboard page is opened.
+    When Dashboard page is opened.
     And Order Status widget is displayed.
     And Featured Updates widget is displayed.
     And Order Search widget is displayed.
