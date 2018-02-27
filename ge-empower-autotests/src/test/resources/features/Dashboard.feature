@@ -3,12 +3,10 @@ Feature: Some actions on Dashboard page
   Background:
     Given Switch to Storefront admin.
     And User is logged in to Storefront.
-    And Account management page is opened.
-    And Close Account management page.
+    And Dashboard page is opened.
 
   Scenario: Check that user able to open Dashboard page
-    When Dashboard page is opened.
-    And Order Status widget is displayed.
+    When Order Status widget is displayed.
     And Featured Updates widget is displayed.
     And Order Search widget is displayed.
     And Price and Availability widget is displayed.

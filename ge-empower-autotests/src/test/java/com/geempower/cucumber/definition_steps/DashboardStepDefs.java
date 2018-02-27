@@ -48,7 +48,7 @@ public class DashboardStepDefs extends AbstractStepDefs {
         dashboardPage.skipTrainingLevel();
     }
 
-    @Then("^Dashboard page is opened.")
+    @Then("^Check that Dashboard page is opened.")
     public void isDashboardPageOpened() {
         assertTrue(dashboardPage.isOpened());
     }
