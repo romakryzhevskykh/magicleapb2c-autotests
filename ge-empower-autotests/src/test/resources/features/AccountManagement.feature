@@ -6,8 +6,9 @@ Feature: Some actions on Account Management page
     And Account management page is opened.
 
     Scenario: Check that user able to choose appropriate account
-#      When Choose North_America region
-#      When Search for NA "1318501" account
-#      When Click "1318501" account
-#      When Click "Skip" button
-#      Then Dashboard page is opened
+      When Choose North_America region.
+      And Search random account for chosen region.
+      And Click on chosen account.
+      When Click on Skip button.
+      Then Dashboard page is opened.
+      Then Chosen account is displayed in account box on Dashboard page.
