@@ -6,7 +6,7 @@
         <parameter name="browserName" value="chrome" />
         <classes>
             <class name="com.geempower.cucumber.AccountManagementSuite"/>
-            <!--<class name="com.geempower.cucumber.DashboardSuite"/>-->
+            <class name="com.geempower.cucumber.DashboardSuite"/>
         </classes>
     </test>
 </suite>
