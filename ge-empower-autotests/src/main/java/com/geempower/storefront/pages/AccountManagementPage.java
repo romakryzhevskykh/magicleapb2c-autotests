@@ -21,7 +21,12 @@ public class AccountManagementPage extends StorefrontBasePage {
         return storefrontProject.getBaseUrl().concat(pageUri);
     }
 
-    public void selectAppropriateRegionFromRegionList(Region chosenRegion){
+    @Override
+    public boolean isOpened() {
+        return getCurrentUrl().contains(getPageUrl());
+    }
+
+    public void selectAppropriateRegionFromRegionList(Region chosenRegion) {
         waitUntilPageIsFullyLoaded();
         openRegionsList();
         chooseRegion(chosenRegion);
@@ -33,7 +38,7 @@ public class AccountManagementPage extends StorefrontBasePage {
     }
 
     @Step("Open regions list")
-    public void openRegionsList(){
+    public void openRegionsList() {
         click(REGION_COMBOBOX_XPATH);
     }
 
@@ -43,12 +48,12 @@ public class AccountManagementPage extends StorefrontBasePage {
     }
 
     @Step("Set account number to search field")
-    public void setAccountNumberToSearchField(String accountName){
+    public void setAccountNumberToSearchField(String accountName) {
         $(SEARCH_FIELD_XPATH).sendKeys(accountName);
     }
 
     @Step("Click on Search account button")
-    public void clickOnSearchButton(){
+    public void clickOnSearchButton() {
         click(SEARCH_BUTTON_XPATH);
         waitUntilPageIsFullyLoaded();
     }

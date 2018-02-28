@@ -3,10 +3,11 @@
 
 <suite name="Suite1" parallel="tests">
     <test name="LoginSuite">
-        <parameter name="browserName" value="chrome" />
+        <parameter name="browserName" value="chrome"/>
         <classes>
             <class name="com.geempower.cucumber.AccountManagementSuite"/>
             <class name="com.geempower.cucumber.DashboardSuite"/>
+            <class name="com.geempower.cucumber.ShipmentSuite"/>
         </classes>
     </test>
 </suite>

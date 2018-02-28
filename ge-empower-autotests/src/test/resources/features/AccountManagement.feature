@@ -10,5 +10,5 @@ Feature: Some actions on Account Management page
       And Search random account for chosen region.
       And Click on chosen account.
       When Click on Skip button.
-      Then Check that Dashboard page is opened.
+      Then Dashboard page is opened.
       Then Chosen account is displayed in account box on Dashboard page.
