@@ -1,7 +1,7 @@
-Feature: Some actions on Account Management page
+Feature: Some actions on Account Management page as admin
 
   Background:
-    Given Switch to Storefront admin.
+    Given Switch to Storefront as admin.
     And User is logged in to Storefront.
     And Account management page is opened.
 

@@ -1,7 +1,7 @@
 Feature: Some actions on Dashboard page
 
   Background:
-    Given Switch to Storefront admin.
+    Given Switch to Storefront as admin.
     And User is logged in to Storefront.
     And Dashboard page is opened.
 
