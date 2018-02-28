@@ -98,6 +98,7 @@ public class AccountManagementPage extends StorefrontBasePage {
 
     @Step("Switch to pending tab")
     public void switchToPendingTab() {
+        waitForElementToDisappear(By.xpath(FULL_SCREEN_PROGRESS_INDICATOR_XPATH));
         click(PENDING_FOR_APPROVAL_TAB_XPATH);
         waitUntilPageIsFullyLoaded();
     }
