@@ -48,6 +48,11 @@ public class DashboardStepDefs extends AbstractStepDefs {
         dashboardPage.skipTrainingLevel();
     }
 
+    @Then("^Check that Dashboard page is opened.")
+    public void isDashboardPageOpened() {
+        assertTrue(dashboardPage.isOpened());
+    }
+
     @Then("^Chosen account is displayed in account box on Dashboard page.$")
     public void chosenAccountIsDisplayedInAccountsBoxOnDashboardPage() {
         String chosenAccount = threadVarsHashMap.getString(TestKeyword.CHOSEN_ACCOUNT);
