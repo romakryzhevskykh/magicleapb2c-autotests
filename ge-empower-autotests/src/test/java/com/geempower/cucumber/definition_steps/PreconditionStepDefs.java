@@ -19,6 +19,8 @@ public class PreconditionStepDefs extends AbstractStepDefs {
     private OrdersPage ordersPage;
     @Autowired
     private DashboardPage dashboardPage;
+    @Autowired
+    private ShipmentsPage shipmentsPage;
 
     @Given("^User is logged in to Storefront.$")
     public void userIsLoggedInToStorefront() {
@@ -52,8 +54,17 @@ public class PreconditionStepDefs extends AbstractStepDefs {
 
     @And("^Dashboard page is opened.$")
     public void dashboardPageIsOpened() {
+        accountManagementPage.waitUntilPageIsFullyLoaded();
         if (!dashboardPage.isOpened()) {
             dashboardPage.open();
+        }
+    }
+
+    @And("^Shipments page is opened.$")
+    public void shipmentsPageIsOpened() {
+        accountManagementPage.waitUntilPageIsFullyLoaded();
+        if (!shipmentsPage.isOpened()) {
+            shipmentsPage.open();
         }
     }
 

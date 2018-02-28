@@ -11,7 +11,7 @@ public class LoginPage extends StorefrontBasePage {
 
     @Override
     public boolean isOpened() {
-        return getCurrentUrl().contains(getPageUrl());
+        return getCurrentUrl().equals(getPageUrl());
     }
 
     @Override
