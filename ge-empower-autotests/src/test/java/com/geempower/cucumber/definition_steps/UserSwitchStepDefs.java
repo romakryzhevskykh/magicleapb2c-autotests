@@ -16,12 +16,12 @@ public class UserSwitchStepDefs {
 //        webDriverPool.setDriverActive(BackofficeUserRoles.ADMIN);
 //    }
 
-    @Given("Switch to Storefront shopper.")
+    @Given("Switch to Storefront as shopper.")
     public void switchToStorefrontAsShopper() {
         webDriverPool.setDriverActive(StorefrontUserRoles.SHOPPER);
     }
 
-    @Given("Switch to Storefront admin.")
+    @Given("Switch to Storefront as admin.")
     public void switchToStorefrontAsAdmin() {
         webDriverPool.setDriverActive(StorefrontUserRoles.EMPOWERADMIN);
     }
