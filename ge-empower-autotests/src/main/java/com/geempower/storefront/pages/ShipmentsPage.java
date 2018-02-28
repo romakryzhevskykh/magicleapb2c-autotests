@@ -23,12 +23,12 @@ public class ShipmentsPage extends StorefrontBasePage {
 
     @Override
     public boolean isOpened() {
-        return getCurrentUrl().contains(getPageUrl());
+        return getCurrentUrl().equals(getPageUrl());
     }
 
     @Step("Get Shipment title")
     public String getShipmentsTitle() {
-        return $(By.xpath(SHIPMENTS_TITLE_XPATH)).getText().trim();
+        return $(By.xpath(SHIPMENTS_TITLE_XPATH)).getText();
     }
 
     @Step("Color boxes are displayed")

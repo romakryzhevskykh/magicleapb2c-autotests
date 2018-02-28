@@ -8,6 +8,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class ShipmentsStepDefs extends AbstractStepDefs {
@@ -16,7 +17,7 @@ public class ShipmentsStepDefs extends AbstractStepDefs {
 
     @When("^(.*) title is displayed on Shipments page.$")
     public void checkShipmentsTitle(String shipmentTitle) {
-        assertTrue(shipmentsPage.getShipmentsTitle().contains(shipmentTitle));
+        assertEquals(shipmentsPage.getShipmentsTitle(),shipmentTitle);
     }
 
     @And("^Color boxes are displayed on Shipments page.$")

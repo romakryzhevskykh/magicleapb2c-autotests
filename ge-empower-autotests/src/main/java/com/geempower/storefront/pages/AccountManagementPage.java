@@ -26,6 +26,11 @@ public class AccountManagementPage extends StorefrontBasePage {
         return storefrontProject.getBaseUrl().concat(pageUri);
     }
 
+    @Override
+    public boolean isOpened() {
+        return getCurrentUrl().equals(getPageUrl());
+    }
+
     public void selectAppropriateRegionFromRegionList(Region chosenRegion) {
         waitUntilPageIsFullyLoaded();
         openRegionsList();
@@ -57,6 +62,7 @@ public class AccountManagementPage extends StorefrontBasePage {
         click(SEARCH_BUTTON_XPATH);
         waitUntilPageIsFullyLoaded();
     }
+
     @Step
     public void selectFirstAccount() {
         click(FIRST_ACCOUNT_FROM_LIST_OF_ACCOUNTS_XPATH);
@@ -73,19 +79,23 @@ public class AccountManagementPage extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
         click(REQUEST_ACCOUNT_BUTTON);
     }
+
     @Step
     public void selectRegionFromRegionsListInRequestAccountPopupByCounter(Region chosenRegion, int counter) {
         click(REGIONS_DROP_DOWN_BY_COUNTER_IN_POPUP_XPATH, String.valueOf(counter));
         chooseRegion(chosenRegion);
     }
+
     @Step
     public void setAccountNumberToAccountFieldInPopup(String account, int counter) {
         $(REGIONS_ACCOUNT_FIELD_BY_COUNTER_IN_POPUP_XPATH, String.valueOf(counter)).sendKeys(account);
     }
+
     @Step
     public void clickOnSendRequestButtonInPopUp() {
         click(By.id(SEND_EXTERNAL_REQUEST_BUTTON_ID));
     }
+
     @Step
     public void switchToPendingTab() {
         click(PENDING_FOR_APPROVAL_TAB_XPATH);

@@ -16,7 +16,7 @@ public class DashboardPage extends StorefrontBasePage {
 
     @Override
     public boolean isOpened() {
-        return getCurrentUrl().contains(getPageUrl());
+        return getCurrentUrl().equals(getPageUrl());
     }
 
     @Step("Check that Order Status widget is displayed")
