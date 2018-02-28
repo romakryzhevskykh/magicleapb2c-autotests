@@ -57,7 +57,7 @@ public class AccountManagementPage extends StorefrontBasePage {
         click(SEARCH_BUTTON_XPATH);
         waitUntilPageIsFullyLoaded();
     }
-
+    @Step
     public void selectFirstAccount() {
         click(FIRST_ACCOUNT_FROM_LIST_OF_ACCOUNTS_XPATH);
         waitUntilPageIsFullyLoaded();
@@ -68,30 +68,31 @@ public class AccountManagementPage extends StorefrontBasePage {
         $(By.xpath(CANCEL_BUTTON_XPATH)).click();
     }
 
-
+    @Step
     public void openRequestAccountPopup() {
         waitUntilPageIsFullyLoaded();
         click(REQUEST_ACCOUNT_BUTTON);
     }
-
+    @Step
     public void selectRegionFromRegionsListInRequestAccountPopupByCounter(Region chosenRegion, int counter) {
         click(REGIONS_DROP_DOWN_BY_COUNTER_IN_POPUP_XPATH, String.valueOf(counter));
         chooseRegion(chosenRegion);
     }
-
+    @Step
     public void setAccountNumberToAccountFieldInPopup(String account, int counter) {
         $(REGIONS_ACCOUNT_FIELD_BY_COUNTER_IN_POPUP_XPATH, String.valueOf(counter)).sendKeys(account);
     }
-
+    @Step
     public void clickOnSendRequestButtonInPopUp() {
         click(By.id(SEND_EXTERNAL_REQUEST_BUTTON_ID));
     }
-
+    @Step
     public void switchToPendingTab() {
         click(PENDING_FOR_APPROVAL_TAB_XPATH);
         waitUntilPageIsFullyLoaded();
     }
 
+    @Step
     public ArrayList<String> getListOfRequestedAccounts() {
         waitUntilPageIsFullyLoaded();
         ArrayList<String> pendingAccountsOnPendingTab = new ArrayList<>();
@@ -104,6 +105,7 @@ public class AccountManagementPage extends StorefrontBasePage {
         return pendingAccountsOnPendingTab;
     }
 
+    @Step
     public void removeRequestedAccounts(int countOfRequestedAccount) {
         for (int i = 0; i < countOfRequestedAccount; i++) {
             click(MORE_ACTIONS_THREE_DOT_ICON_XPATH);
