@@ -11,9 +11,6 @@ import static com.geempower.storefront.page_elements.ShipmentsPageElements.*;
 @Component
 public class ShipmentsPage extends StorefrontBasePage {
 
-    @Autowired
-    private ShipmentsPage shipmentsPage;
-
     private final String pageUri = "aftership/dashboard";
 
     @Override
@@ -47,5 +44,9 @@ public class ShipmentsPage extends StorefrontBasePage {
 
     public boolean feedbackButtonIsDisplayed() {
         return isDisplayed(FEEDBACK_BUTTON_XPATH);
+    }
+
+    public void clickOnDownloadButton() {
+        click(DOWNLOAD_BUTTON_XPATH);
     }
 }

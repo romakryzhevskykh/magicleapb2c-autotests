@@ -39,4 +39,9 @@ public class ShipmentsStepDefs extends AbstractStepDefs {
     public void feedbackButtonIsDisplayed() {
         assertTrue(shipmentsPage.feedbackButtonIsDisplayed());
     }
+
+    @When("^Click on Download button on Shipments page.$")
+    public void clickOnDownloadButtonOnShipmentsPage() {
+        shipmentsPage.clickOnDownloadButton();
+    }
 }

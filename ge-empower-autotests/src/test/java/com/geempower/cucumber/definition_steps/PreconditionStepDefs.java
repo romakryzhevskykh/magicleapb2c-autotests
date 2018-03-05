@@ -4,6 +4,7 @@ import com.geempower.storefront.page_blocks.HeaderBlock;
 import com.geempower.storefront.pages.*;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class PreconditionStepDefs extends AbstractStepDefs {
@@ -21,6 +22,8 @@ public class PreconditionStepDefs extends AbstractStepDefs {
     private DashboardPage dashboardPage;
     @Autowired
     private ShipmentsPage shipmentsPage;
+    @Autowired
+    private MyCartPage myCartPage;
 
     @Given("^User is logged in to Storefront.$")
     public void userIsLoggedInToStorefront() {
@@ -68,4 +71,12 @@ public class PreconditionStepDefs extends AbstractStepDefs {
         }
     }
 
+    @And("^My Cart page is opened.$")
+    public void myCartPageIsOpened() {
+        myCartPage.waitUntilPageIsFullyLoaded();
+        if (!myCartPage.isOpened()) {
+            myCartPage.open();
+        }
+
+    }
 }
