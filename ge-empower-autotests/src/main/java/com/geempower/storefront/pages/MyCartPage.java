@@ -25,6 +25,6 @@ public class MyCartPage extends StorefrontBasePage {
 
     @Step("Get My Cart title")
     public String getMyCartTitle() {
-        return $(By.xpath(MY_CART_TITLE_XPATH)).getText();
+        return $(MY_CART_TITLE_XPATH).getText();
     }
 }

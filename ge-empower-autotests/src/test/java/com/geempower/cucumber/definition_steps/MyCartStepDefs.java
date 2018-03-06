@@ -13,7 +13,7 @@ public class MyCartStepDefs extends AbstractStepDefs {
 
     @Then("(.*) title is displayed on My Cart page.")
     public void checkMyCartTitle(String myCartTitle) {
-        assertEquals(myCartPage.getMyCartTitle(),myCartTitle);
+        assertEquals(myCartPage.getMyCartTitle(), myCartTitle);
     }
 
 }
