@@ -9,6 +9,7 @@
             <class name="com.geempower.cucumber.DashboardSuite"/>
             <class name="com.geempower.cucumber.ShipmentSuite"/>
             <class name="com.geempower.cucumber.MyCartSuite"/>
+            <class name="com.geempower.cucumber.OrdersSuite"/>
         </classes>
     </test>
 </suite>
