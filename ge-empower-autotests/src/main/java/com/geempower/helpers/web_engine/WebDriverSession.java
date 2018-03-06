@@ -12,7 +12,7 @@ public class WebDriverSession {
 
     public WebDriverSession(WebDriver webDriver) {
         this.webDriver = webDriver;
-        this.webDriver.manage().window().maximize();
+        this.webDriver.manage().window().fullscreen();
         this.webDriver.manage().timeouts().pageLoadTimeout(timeOut, TimeUnit.SECONDS);
         this.changeImplicitWait(timeOut, TimeUnit.SECONDS);
     }
