@@ -12,4 +12,6 @@ public class ShipmentsPageElements {
     public final static String HELP_BUTTON_XPATH = ".//*[@id='help_button']";
     public final static String FEEDBACK_BUTTON_XPATH = ".//button[@class='feedback-btn feedback-btn-blue']";
 
+    public final static String EXCEL_BUTTON_ID = "exportShipmentsToEXCEL";
+
 }

@@ -17,7 +17,7 @@ public class ShipmentsStepDefs extends AbstractStepDefs {
 
     @When("^(.*) title is displayed on Shipments page.$")
     public void checkShipmentsTitle(String shipmentTitle) {
-        assertEquals(shipmentsPage.getShipmentsTitle(),shipmentTitle);
+        assertEquals(shipmentsPage.getShipmentsTitle(), shipmentTitle);
     }
 
     @And("^Color boxes are displayed on Shipments page.$")
@@ -38,5 +38,10 @@ public class ShipmentsStepDefs extends AbstractStepDefs {
     @Then("^Feedback button is displayed on Shipments page.$")
     public void feedbackButtonIsDisplayed() {
         assertTrue(shipmentsPage.feedbackButtonIsDisplayed());
+    }
+
+    @When("^Click on Download button on Shipments page.$")
+    public void clickOnDownloadButtonOnShipmentsPage() {
+        shipmentsPage.clickOnDownloadButton();
     }
 }

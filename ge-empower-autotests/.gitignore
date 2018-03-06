@@ -3,4 +3,3 @@ target/
 .idea/
 ge-empower-automatedtests.iml
 .DS_Store
-src/test/resources/META-INF

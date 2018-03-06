@@ -16,8 +16,6 @@ import static com.geempower.storefront.page_elements.AccountManagementPageElemen
 
 @Component
 public class AccountManagementPage extends StorefrontBasePage {
-    @Autowired
-    private AccountManagementPage accountManagementPage;
 
     private final String pageUri = "my-account/manage-accounts";
 

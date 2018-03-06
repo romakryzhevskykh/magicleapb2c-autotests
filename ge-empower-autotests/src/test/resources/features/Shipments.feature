@@ -11,3 +11,8 @@ Feature: Some actions on Shipments page
     And Shipment table header is displayed on Shipments page.
     And Help button is displayed on Shipments page.
     Then Feedback button is displayed on Shipments page.
+
+# @todo Continue from this place
+#  Scenario: Check that download pop-up can be opened and basic elements are present
+#    When Click on Download button on Shipments page.
+#    And Check that Download header title is displayed in the Download pop-up on Shipments page.

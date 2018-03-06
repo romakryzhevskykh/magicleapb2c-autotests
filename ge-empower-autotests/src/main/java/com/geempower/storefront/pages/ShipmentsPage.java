@@ -11,9 +11,6 @@ import static com.geempower.storefront.page_elements.ShipmentsPageElements.*;
 @Component
 public class ShipmentsPage extends StorefrontBasePage {
 
-    @Autowired
-    private ShipmentsPage shipmentsPage;
-
     private final String pageUri = "aftership/dashboard";
 
     @Override
@@ -28,7 +25,7 @@ public class ShipmentsPage extends StorefrontBasePage {
 
     @Step("Get Shipment title")
     public String getShipmentsTitle() {
-        return $(By.xpath(SHIPMENTS_TITLE_XPATH)).getText();
+        return $(SHIPMENTS_TITLE_XPATH).getText();
     }
 
     @Step("Color boxes are displayed")
@@ -41,11 +38,18 @@ public class ShipmentsPage extends StorefrontBasePage {
         return isDisplayed(SHIPMENTS_TABLE_FILTERS_XPATH);
     }
 
+    @Step("Help button is displayed")
     public boolean helpButtonIsDisplayed() {
         return isDisplayed(HELP_BUTTON_XPATH);
     }
 
+    @Step("Feedback button is displayed")
     public boolean feedbackButtonIsDisplayed() {
         return isDisplayed(FEEDBACK_BUTTON_XPATH);
+    }
+
+    @Step("Click on Download button")
+    public void clickOnDownloadButton() {
+        click(DOWNLOAD_BUTTON_XPATH);
     }
 }
