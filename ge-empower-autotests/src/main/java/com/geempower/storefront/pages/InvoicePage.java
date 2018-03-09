@@ -4,12 +4,12 @@ import com.geempower.storefront.StorefrontBasePage;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import static com.geempower.storefront.page_elements.SavedItemsPageElements.*;
+import static com.geempower.storefront.page_elements.InvoicePageElements.*;
 
 
 @Component
-public class SavedItemsPage extends StorefrontBasePage {
-    private final String pageUri = "savedLists";
+public class InvoicePage extends StorefrontBasePage {
+    private final String pageUri = "invoice";
 
     @Override
     public String getPageUrl() {
@@ -18,11 +18,11 @@ public class SavedItemsPage extends StorefrontBasePage {
 
     @Override
     public boolean isOpened() {
-        return getCurrentUrl().equals(getPageUrl());
+        return getCurrentUrl().contains(getPageUrl());
     }
 
-    @Step("Get All Items title")
-    public String getAllItemsTitle() {
-        return $(ALL_ITEMS_TITLE_XPATH).getText();
+    @Step("Get Invoice title")
+    public String getInvoicesTitle() {
+        return $(ALL_INVOICES_TITLE_XPATH).getText();
     }
 }

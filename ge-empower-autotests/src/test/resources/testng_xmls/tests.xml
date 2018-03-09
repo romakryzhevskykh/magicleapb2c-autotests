@@ -11,6 +11,7 @@
             <class name="com.geempower.cucumber.MyCartSuite"/>
             <class name="com.geempower.cucumber.OrdersSuite"/>
             <class name="com.geempower.cucumber.SavedItemsSuite"/>
+            <class name="com.geempower.cucumber.InvoiceSuite"/>
         </classes>
     </test>
 </suite>
