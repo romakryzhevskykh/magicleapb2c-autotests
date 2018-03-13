@@ -14,11 +14,12 @@
             <class name="com.sarnova.cucumber.AddToSupplyListSuite"/>
         </classes>
     </test>
-    <test name="Add to cart and checkout suite">
+    <test name="Cart functionality and checkout suite">
         <parameter name="browserName" value="chrome" />
         <classes>
             <class name="com.sarnova.cucumber.AddToCartSuite"/>
-            <class name="com.sarnova.cucumber.CheckoutSuite"/>
+            <!--<class name="com.sarnova.cucumber.CheckoutSuite"/>-->
+            <class name="com.sarnova.cucumber.AddToSupplyListFromCartSuit"/>
         </classes>
     </test>
 </suite>

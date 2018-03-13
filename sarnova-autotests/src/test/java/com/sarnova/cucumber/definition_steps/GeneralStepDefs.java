@@ -97,7 +97,7 @@ public class GeneralStepDefs extends AbstractStepDefs {
 
     @SuppressWarnings("unchecked")
     @Given("^Add to cart (.*) product with quantity (\\d+).$")
-    public void cartWithProducts(List<String> productTypes, int qtyOfProducts) {
+    public void cartWithProducts(List<String> productTypes, int qtyOfProduct) {
         HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement;
         if (threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP) == null) {
             selectedUnitsOfMeasurement = new HashMap<>();
@@ -107,9 +107,39 @@ public class GeneralStepDefs extends AbstractStepDefs {
         }
         Product selectedProduct = productsManager.getProductByProductTestTypes(productTypes);
         UnitOfMeasure selectedUOM = selectedProduct.getUnitsOfMeasurement().stream().findAny().orElse(null);
-        selectedUnitsOfMeasurement.put(selectedUOM, qtyOfProducts);
+        selectedUnitsOfMeasurement.put(selectedUOM, qtyOfProduct);
         cartManager.addUOMsToCartViaApi(userSessions.getActiveUserSession(), new HashMap<UnitOfMeasure, Integer>() {{
-            put(selectedUOM, qtyOfProducts);
+            put(selectedUOM, qtyOfProduct);
+        }});
+    }
+
+    @SuppressWarnings("unchecked")
+    @And("^Add to cart (.*) product with quantity (\\d+) that hasn't been added before.$")
+    public void setQTYToAnyProductUOMThatHasNotBeenSelectedOnThePDP(List<String> productTypes, int qtyOfProduct) {
+        HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement;
+        if (threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP) == null) {
+            selectedUnitsOfMeasurement = new HashMap<>();
+            threadVarsHashMap.put(TestKeyword.SELECTED_UOMS_HASH_MAP, selectedUnitsOfMeasurement);
+        } else {
+            selectedUnitsOfMeasurement = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
+        }
+        List<IndividualProduct> selectedProducts = selectedUnitsOfMeasurement.keySet()
+                        .stream()
+                        .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
+                        .distinct()
+                        .collect(Collectors.toList());
+        IndividualProduct selectedProduct = productsManager.getUniqueProductsByProductsQuantityAndTestTypes(
+                selectedProducts.size() + 1,
+                productTypes)
+                .stream()
+                .map(product -> (IndividualProduct) product)
+                .filter(product -> !selectedProducts.contains(product))
+                .findAny()
+                .orElse(null);
+        UnitOfMeasure selectedUOM = selectedProduct.getUnitsOfMeasurement().stream().findAny().orElse(null);
+        selectedUnitsOfMeasurement.put(selectedUOM, qtyOfProduct);
+        cartManager.addUOMsToCartViaApi(userSessions.getActiveUserSession(), new HashMap<UnitOfMeasure, Integer>() {{
+            put(selectedUOM, qtyOfProduct);
         }});
     }
 }
