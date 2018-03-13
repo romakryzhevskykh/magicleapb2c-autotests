@@ -13,6 +13,7 @@
             <class name="com.geempower.cucumber.SavedItemsSuite"/>
             <class name="com.geempower.cucumber.InvoiceSuite"/>
             <class name="com.geempower.cucumber.ProductsSuite"/>
+            <class name="com.geempower.cucumber.ReturnsSuite"/>
         </classes>
     </test>
 </suite>
