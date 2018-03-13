@@ -45,7 +45,7 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
         }
     }
 
-    @When("^Click on add to Supply list button.$")
+    @When("^Click on add to Supply list button on PDP.$")
     public void clickOnAddToSupplyListButton() {
         productDetailsPage.clickOnAddToSupplyListButton();
     }
@@ -121,17 +121,17 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
         selectedUnitsOfMeasurement.put(unitOfMeasureThatHasNotBeenSelected, qtyOfUOMToBeSelected);
     }
 
-    @And("^Select Create a Supply list radio button in Add to Supply list pop-up.$")
+    @And("^Select Create a Supply list radio button in Add to Supply list pop-up on PDP.$")
     public void selectCreateASupplyListRadioButtonInAddToSupplyListPopUp() {
         productDetailsPage.clickOnCreateNewSupplyListInAddToSupplyListPopUp();
     }
 
-    @And("^Select Select a Supply list radio button in Add to Supply list pop-up.$")
+    @And("^Select Select a Supply list radio button in Add to Supply list pop-up on PDP.$")
     public void selectSelectASupplyListRadioButtonInAddToSupplyListPopUp() {
         productDetailsPage.clickOnSelectSupplyListInAddToSupplyListPopUp();
     }
 
-    @And("^Enter alphanumeric text to name field in Add to Supply list pop-up.$")
+    @And("^Enter alphanumeric text to name field in Add to Supply list pop-up on PDP.$")
     public void enterAlphanumericTextToNameFieldInAddToSupplyListPopUp() {
         String newSupplyListName = RandomStringUtils.randomAlphanumeric(10);
         threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, newSupplyListName);
@@ -139,7 +139,7 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
     }
 
     @SuppressWarnings("unchecked")
-    @And("^Click on Add to Supply list in Add to Supply list pop-up.$")
+    @And("^Click on Add to Supply list in Add to Supply list pop-up on PDP.$")
     public void clickOnAddToSupplyListInAddToSupplyListPopUp() {
         productDetailsPage.clickOnAddToSupplyListButtonInAddToSupplyListPopUp();
         String supplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
@@ -154,12 +154,12 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
         }
     }
 
-    @And("^Click on View Supply list in Add to Supply list pop-up.$")
+    @And("^Click on View Supply list in Add to Supply list pop-up on PDP.$")
     public void clickOnViewSupplyListInAddToSupplyListPopUp() {
         productDetailsPage.clickOnViewSupplyListButtonInAddToSupplyListPopUp();
     }
 
-    @And("^Select existing Supply list in Add to Supply list pop-up.$")
+    @And("^Select existing Supply list in Add to Supply list pop-up on PDP.$")
     public void selectExistingSupplyListInAddToSupplyListPopUp() {
         String existingSupplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
         productDetailsPage.clickOnSelectExistingSupplyListDropDown();
