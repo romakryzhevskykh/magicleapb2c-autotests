@@ -2,18 +2,19 @@ package com.sarnova.storefront.pages;
 
 import com.sarnova.helpers.managers.ProductsManager;
 import com.sarnova.helpers.managers.SupplyListsManager;
+import com.sarnova.helpers.models.products.IndividualProduct;
 import com.sarnova.helpers.models.products.UnitOfMeasure;
 import com.sarnova.helpers.models.supply_lists.SupplyList;
+import com.sarnova.helpers.models.supply_lists.SupplyListProduct;
 import com.sarnova.helpers.user_engine.User;
 import com.sarnova.storefront.page_blocks.AddToCartPopUpBlock;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -61,12 +62,33 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
         String supplyListName = getSupplyListName();
         String id = getSupplyListIdValue();
         String supplyListActiveStatus = getSupplyListActiveStatus();
-        List<Document> supplyProductsRowsHTMLs = $$(SUPPLY_PRODUCTS_ROWS_XPATH)
-                .stream()
-                .map(webElement -> Jsoup.parse(webElement.getAttribute("innerHTML")))
+        List<SupplyListProduct> activeSupplyProducts = getActiveProducts();
+        List<SupplyListProduct> inactiveSupplyProducts = getInactiveProducts();
+        List<SupplyListProduct> supplyListProducts = new ArrayList<SupplyListProduct>() {{
+            addAll(activeSupplyProducts);
+            addAll(inactiveSupplyProducts);
+        }};
+        SupplyList supplyList = new SupplyList(user, supplyListName, id, supplyListProducts);
+        supplyList.setActive(supplyListActiveStatus.equals("Inactivate"));
+        return supplyList;
+    }
+
+    @Step("Get active products from the list.")
+    public List<SupplyListProduct> getActiveProducts() {
+        return $$(ACTIVE_PRODUCTS_ROWS_XPATH).stream()
+                .map(webElement -> new SupplyListProduct(
+                        (IndividualProduct) productsManager.getProductBySku(webElement.getAttribute("data-product-code")),
+                        true))
                 .collect(Collectors.toList());
-        return supplyListsManager.parseSupplyListFromHTMLSupplyListDetailsPage(user, supplyListName, id,
-                supplyListActiveStatus, supplyProductsRowsHTMLs);
+    }
+
+    @Step("Get active products from the list.")
+    public List<SupplyListProduct> getInactiveProducts() {
+        return $$(INACTIVE_PRODUCTS_ROWS_XPATH).stream()
+                .map(webElement -> new SupplyListProduct(
+                        (IndividualProduct) productsManager.getProductBySku(webElement.getAttribute("data-product-code")),
+                        false))
+                .collect(Collectors.toList());
     }
 
     @Step("Open Supply list details page for supply list id {0} by link.")

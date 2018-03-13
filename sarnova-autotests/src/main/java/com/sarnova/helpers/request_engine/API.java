@@ -9,6 +9,7 @@ public interface API {
             add("application/json");
             add("text/javascript");
             add("text/javascript; encoding=utf-8");
+            add("application/json;charset=UTF-8");
             add("application/json; charset=utf-8");
         }}),
         XML(new ArrayList<String>() {{

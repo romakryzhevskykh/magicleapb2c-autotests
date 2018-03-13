@@ -7,6 +7,5 @@ import org.springframework.stereotype.Component;
 public class ConsoleMenuItemsBlock extends UIComponent {
 
     public void clickOnScriptingLanguagesItem() {
-        //TODO
     }
 }

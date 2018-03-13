@@ -7,4 +7,6 @@ public class CartPageElements {
     public static final String UOM_ROW_BY_SKU_AND_UOM_TYPE_XPATH = PRODUCTS_ROWS_XPATH + "[div[@class='item__info']/div[@class='item__code'][.='%s'] and div[@class= 'item__unit'][contains(., '%s')]]";
     public static final String UOM_QTY_BY_SKU_AND_UOM_TYPE_XPATH = UOM_ROW_BY_SKU_AND_UOM_TYPE_XPATH + "//input[@name = 'initialQuantity']";
 
+    public static final String CHECKOUT_BUTTONS_XPATH = "//button[contains(@class, 'btn--continue-checkout')]";
+
 }

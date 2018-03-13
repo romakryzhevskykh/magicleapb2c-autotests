@@ -18,6 +18,7 @@
         <parameter name="browserName" value="chrome" />
         <classes>
             <class name="com.sarnova.cucumber.AddToCartSuite"/>
+            <class name="com.sarnova.cucumber.CheckoutSuite"/>
         </classes>
     </test>
 </suite>

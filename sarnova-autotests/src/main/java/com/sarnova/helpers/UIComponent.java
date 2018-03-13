@@ -2,6 +2,7 @@ package com.sarnova.helpers;
 
 import com.sarnova.helpers.web_engine.WebDriverSessions;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +86,13 @@ public abstract class UIComponent {
         }
     }
 
+    public void waitUntilVisible(By locator) {
+        WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getTimeOut());
+        ExpectedCondition<Boolean> pageLoadCondition = driver1
+                -> (Boolean)((JavascriptExecutor)driver1).executeScript("return arguments[0].complete", $(locator));
+        wait.until(pageLoadCondition);
+    }
+
     protected boolean isDisplayed(By by) {
         webDriverPool.getActiveDriverSession().setShortImplicitWait();
         try {
@@ -93,6 +101,85 @@ public abstract class UIComponent {
             return false;
         } finally {
             webDriverPool.getActiveDriverSession().restoreDefaultImplicitWait();
+        }
+    }
+
+    public void waitElementAttributeIsNotEmpty(String xpath, String attributeName) {
+        WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getTimeOut());
+        ExpectedCondition<Boolean> pageLoadCondition = driver1
+                -> (!$(xpath).getAttribute(attributeName).isEmpty());
+        wait.until(pageLoadCondition);
+    }
+
+    protected void waitUntilPageIsFullyLoaded() {
+        waitHTMLTemplateLoad();
+        waitJQueryRequestsLoad();
+    }
+
+    public void waitHTMLTemplateLoad() {
+        WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getTimeOut());
+        ExpectedCondition<Boolean> pageLoadCondition = driver1
+                -> ((JavascriptExecutor) driver1).executeScript("return document.readyState").toString().equals("complete");
+        wait.until(pageLoadCondition);
+    }
+
+    public void waitForAngularLoad() {
+        WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getTimeOut());
+        try {
+            Thread.sleep((long) (1000 * webDriverPool.getActiveDriverSession().getShortTimeOut() / 20));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ExpectedCondition<Boolean> angularLoadCondition = driver1 -> {
+            boolean result;
+            JavascriptExecutor js = (JavascriptExecutor) driver1;
+            try {
+                result = (Boolean) js.executeScript("return angular.element(document).injector().get('$http').pendingRequests.length === 0");
+            } catch (WebDriverException ex) {
+                result = true;
+                System.out.println("[INFO] No Angular.");
+            }
+            return result;
+        };
+        try {
+            wait.until(angularLoadCondition);
+        } catch (TimeoutException ex) {
+            System.out.println("[WARNING] Timeout exception after " + webDriverPool.getActiveDriverSession().getTimeOut() + " Seconds. Possible problem - browser hovered(not responding)!");
+        }
+        try {
+            Thread.sleep((long) (1000 * webDriverPool.getActiveDriverSession().getShortTimeOut() / 20));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void waitJQueryRequestsLoad() {
+        WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getTimeOut());
+        try {
+            Thread.sleep((long) (1000 * webDriverPool.getActiveDriverSession().getShortTimeOut() / 20));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ExpectedCondition<Boolean> jQueryLoadCondition = driver1 -> {
+            boolean result;
+            JavascriptExecutor js = (JavascriptExecutor) driver1;
+            try {
+                result = (Boolean) js.executeScript("return jQuery.active == 0");
+            } catch (WebDriverException ex) {
+                result = true;
+                System.out.println("[INFO] No jQueries.");
+            }
+            return result;
+        };
+        try {
+            wait.until(jQueryLoadCondition);
+        } catch (TimeoutException ex) {
+            System.out.println("[WARNING] Timeout exception after " + webDriverPool.getActiveDriverSession().getTimeOut() + " Seconds. Possible problem - browser hovered(not responding)!");
+        }
+        try {
+            Thread.sleep((long) (1000 * webDriverPool.getActiveDriverSession().getShortTimeOut() / 20));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }

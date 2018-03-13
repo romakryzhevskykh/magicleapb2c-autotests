@@ -4,6 +4,8 @@ public enum ProductTestType {
     INDIVIDUAL,
     VALID,
     WITH_MORE_THAN_ONE_UOM,
+    LICENSE_RESTRICTED,
+    DISCONTINUED,
     WITH_ACCESSORIES,
     GROUP
 //

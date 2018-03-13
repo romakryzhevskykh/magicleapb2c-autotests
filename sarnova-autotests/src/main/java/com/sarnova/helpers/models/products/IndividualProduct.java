@@ -6,13 +6,15 @@ public class IndividualProduct extends Product {
 
     private boolean isGroupMember = false;
     private boolean isDiscontinued = false;
+    private boolean isLicenseRestricted = false;
     private ArrayList<IndividualProduct> accessoriesProducts;
     private ArrayList<IndividualProduct> alternativeProducts;
     private final ArrayList<UnitOfMeasure> unitsOfMeasurement;
 
-    public IndividualProduct(String sku, String name, ArrayList<UnitOfMeasure> unitsOfMeasurement,
+    public IndividualProduct(String sku, String name, String isLicenseRestricted, ArrayList<UnitOfMeasure> unitsOfMeasurement,
                              ArrayList<IndividualProduct> accessoriesProducts, ArrayList<IndividualProduct> alternativeProducts) {
         super(sku, name);
+        this.isLicenseRestricted = Boolean.valueOf(isLicenseRestricted);
         this.unitsOfMeasurement = unitsOfMeasurement;
         this.accessoriesProducts = accessoriesProducts;
         this.alternativeProducts = alternativeProducts;
@@ -77,5 +79,9 @@ public class IndividualProduct extends Product {
     @Override
     public String toString() {
         return "Product name: " + this.name + ", SKU: " + this.sku;
+    }
+
+    public boolean isLicenseRestricted() {
+        return isLicenseRestricted;
     }
 }
