@@ -59,7 +59,7 @@ public class ProductsManager {
                 });
     }
 
-    public ArrayList<Product> getUniqueProductsByProductsNumberAndTestTypes(int numberOfProductsToReturn, List<String> productTypes) {
+    public ArrayList<Product> getUniqueProductsByProductsQuantityAndTestTypes(int numberOfProductsToReturn, List<String> productTypes) {
         ArrayList<Product> selectedProducts = new ArrayList<>();
         for (int i = 0; i < numberOfProductsToReturn; i++) {
             selectedProducts.add(getTestProducts().stream()
@@ -75,7 +75,7 @@ public class ProductsManager {
         return selectedProducts;
     }
 
-    public ArrayList<UnitOfMeasure> getUniqueUOMsByUOMsNumberAndProductTestTypes(int numberOfProductsToReturn, List<String> productTypes) {
+    public ArrayList<UnitOfMeasure> getUniqueUOMsByUOMsQuantityAndProductTestTypes(int numberOfProductsToReturn, List<String> productTypes) {
         ArrayList<UnitOfMeasure> selectedUOMs = new ArrayList<>();
         for (int i = 0; i < numberOfProductsToReturn; i++) {
             selectedUOMs.add(getTestProducts().stream()

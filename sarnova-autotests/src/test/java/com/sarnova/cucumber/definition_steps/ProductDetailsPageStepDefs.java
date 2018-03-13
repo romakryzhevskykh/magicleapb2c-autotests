@@ -35,12 +35,10 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
     public void setQTYValuesForProductsTo(int qtyValueForAllProductsOnPDP) {
         Product product = (Product) threadVarsHashMap.get(TestKeyword.OPENED_PDP_PRODUCT);
         if (product instanceof IndividualProduct) {
-            ((IndividualProduct) product).getUnitsOfMeasurement()
+            product.getUnitsOfMeasurement()
                     .forEach(uom -> productDetailsPage.setQTYForProductUOMToValue(uom, qtyValueForAllProductsOnPDP));
         } else if (product instanceof GroupProduct) {
-            ((GroupProduct) product).getIndividualProducts()
-                    .stream()
-                    .flatMap(individualProduct -> individualProduct.getUnitsOfMeasurement().stream())
+            product.getUnitsOfMeasurement()
                     .forEach(uom -> productDetailsPage.setQTYForProductUOMToValue(uom, qtyValueForAllProductsOnPDP));
         }
     }
