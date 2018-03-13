@@ -18,4 +18,9 @@ public enum UOMType {
     public boolean equalsByFullName(String fullName) {
         return this.fullName.equalsIgnoreCase(fullName);
     }
+
+    public boolean equalsByAbbreviation(String abbreviation) {
+        return this.name().equalsIgnoreCase(abbreviation);
+    }
+
 }

@@ -24,6 +24,7 @@ public class ProductDetailsPage extends StorefrontBasePage {
     @Step("Click on Add to Supply list button on PDP.")
     public void clickOnAddToSupplyListButton() {
         click(ADD_TO_SUPPLY_LIST_BUTTONS_XPATH);
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Set QTY: {1} for product UOM: {0}.")
@@ -44,6 +45,8 @@ public class ProductDetailsPage extends StorefrontBasePage {
     @Step("Open PDP for product {0} by link.")
     public void openPDPForProduct(Product product) {
         open(String.format(getPageUrl(), product.getSku()));
+        waitUntilPageIsFullyLoaded();
+        waitElementAttributeIsNotEmpty(MAIN_PAGE_CONTAINER_XPATH, "style");
     }
 
     public String getAddToSupplyListPopUpContent() {
@@ -101,5 +104,6 @@ public class ProductDetailsPage extends StorefrontBasePage {
 
     public void clickOnAddToCartButton() {
         click(ADD_TO_CART_BUTTONS_XPATH);
+        waitUntilPageIsFullyLoaded();
     }
 }

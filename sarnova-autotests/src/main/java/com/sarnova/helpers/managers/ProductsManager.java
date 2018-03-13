@@ -141,14 +141,13 @@ public class ProductsManager {
 
     public ArrayList<UnitOfMeasure> parseUnitsOfMeasurementFromCartPageHTML(ArrayList<? extends Element> unitsOfMeasurementRows) {
         return unitsOfMeasurementRows.stream()
-                .flatMap(unitOfMeasureRow -> ((IndividualProduct) getProductBySku(
+                .flatMap(unitOfMeasureRow -> (getProductBySku(
                         Xsoup.select(unitOfMeasureRow, "//div[@class=item__info]/div[@class=item__code]/text()")
                                 .get().trim()))
                         .getUnitsOfMeasurement()
                         .stream()
-                        .filter(unitOfMeasure -> unitOfMeasure.getUomType().equalsByFullName(
-                                Xsoup.select(unitOfMeasureRow, "//div[@class=item__unit]/text()")
-                                        .get().trim())
+                        .filter(unitOfMeasure -> unitOfMeasure.getUomType().equalsByAbbreviation(
+                                Xsoup.select(unitOfMeasureRow, "//div[@class=item__unit]/text()").get().trim())
                         )
                 ).collect(Collectors.toCollection(ArrayList::new));
     }

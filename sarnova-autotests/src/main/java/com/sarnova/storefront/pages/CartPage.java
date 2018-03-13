@@ -35,7 +35,7 @@ public class CartPage extends StorefrontBasePage {
         return Integer.valueOf(
                 $(UOM_QTY_BY_SKU_AND_UOM_TYPE_XPATH,
                         productsManager.getProductByUOM(unitOfMeasure).getSku(),
-                        unitOfMeasure.getUomType().getFullName()
+                        unitOfMeasure.getUomType().name()
                 ).getAttribute("value"));
     }
 

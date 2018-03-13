@@ -9,7 +9,6 @@ import com.sarnova.helpers.request_engine.API;
 import com.sarnova.helpers.request_engine.POSTRequest;
 import com.sarnova.helpers.user_engine.User;
 import com.sarnova.helpers.user_engine.UserSession;
-import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import us.codecraft.xsoup.Xsoup;
@@ -79,27 +78,27 @@ public class SupplyListsManager {
         return testSupplyLists.stream().filter(supplyList -> supplyList.getName().equals(name)).findAny().orElse(null);
     }
 
-    public SupplyList parseSupplyListFromHTMLSupplyListDetailsPage(User user, String name, String id, String activeStatus,
-                                                                   List<Document> supplyListProductsHtml) {
-        ArrayList<SupplyListProduct> supplyListProducts = new ArrayList<>();
-        supplyListProducts.addAll(supplyListProductsHtml
-                .stream()
-                .map(supplyListProductHtml -> {
-                    SupplyListProduct supplyListProduct = new SupplyListProduct((IndividualProduct) productsManager
-                            .getProductBySku(
-                                    Xsoup.select(supplyListProductHtml, "//div[@class=item__code]/text()")
-                                            .get().trim()));
-
-                    supplyListProduct.setActive(
-                            Xsoup.select(supplyListProductHtml, "//div[@class=item__info]//span/text()")
-                                    .get().trim()
-                                    .equals("Inactivate"));
-                    return supplyListProduct;
-                })
-                .collect(Collectors.toList())
-        );
-        SupplyList supplyList = new SupplyList(user, name, id, supplyListProducts);
-        supplyList.setActive(activeStatus.equals("Inactivate"));
-        return supplyList;
-    }
+//    public SupplyList parseSupplyListFromHTMLSupplyListDetailsPage(User user, String name, String id, String activeStatus,
+//                                                                   List<Document> supplyListProductsHtml) {
+//        ArrayList<SupplyListProduct> supplyListProducts = new ArrayList<>();
+//        supplyListProducts.addAll(supplyListProductsHtml
+//                .stream()
+//                .map(supplyListProductHtml -> {
+//                    SupplyListProduct supplyListProduct = new SupplyListProduct((IndividualProduct) productsManager
+//                            .getProductBySku(
+//                                    Xsoup.select(supplyListProductHtml, "/@data-product-code")
+//                                            .get().trim()));
+//
+//                    supplyListProduct.setActive(
+//                            Xsoup.select(supplyListProductHtml, "//div[@class=item__info]//span/text()")
+//                                    .get().trim()
+//                                    .equals("Inactivate"));
+//                    return supplyListProduct;
+//                })
+//                .collect(Collectors.toList())
+//        );
+//        SupplyList supplyList = new SupplyList(user, name, id, supplyListProducts);
+//        supplyList.setActive(activeStatus.equals("Inactivate"));
+//        return supplyList;
+//    }
 }

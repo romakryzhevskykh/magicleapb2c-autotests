@@ -56,13 +56,13 @@ public class GeneralStepDefs extends AbstractStepDefs {
     @SuppressWarnings("unchecked")
     @Given("^Supply list with at least (\\d+) active products.$")
     public void notEmptySupplyList(int numberOfActiveProductsInSupplyList) {
-        //TODO after implementing UOMs to Supply list details page change logic to UOMs from products
         SupplyList notEmptySupplyList = supplyListsManager.getTestSupplyLists()
                 .stream()
                 .filter(supplyList -> supplyList.getSupplyProductsInList()
                         .stream()
                         .filter(SupplyListProduct::isActive)
-                        .count() >= numberOfActiveProductsInSupplyList)
+                        .mapToLong(supplyListProduct -> supplyListProduct.getIndividualProduct().getUnitsOfMeasurement().size())
+                        .sum() >= numberOfActiveProductsInSupplyList)
                 .findAny()
                 .orElseGet(() ->
                         createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts.apply(Collections.EMPTY_SET, numberOfActiveProductsInSupplyList)

@@ -13,7 +13,6 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -96,7 +95,6 @@ public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
     @SuppressWarnings("unchecked")
     @And("^Set QTY (\\d+) to any product\\(UOM\\) that hasn't been selected on the Supply list details page.$")
     public void setQTYToAnyProductUOMThatHasNotBeenSelectedOnTheSupplyListDetailsPage(int qtyOfUOMToBeSelected) {
-        //TODO after adding UOMs to Supply list details page
         String supplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
         HashMap<UnitOfMeasure, Integer> selectedUOMs;
         if (threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP) == null) {
@@ -105,16 +103,12 @@ public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
         } else {
             selectedUOMs = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
         }
-        ArrayList<IndividualProduct> selectedProducts = selectedUOMs.keySet()
-                .stream()
-                .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
-                .collect(Collectors.toCollection(ArrayList::new));
         SupplyList supplyList = supplyListsManager.getSupplyListByName(supplyListName);
         UnitOfMeasure unitOfMeasureThatHasNotBeenSelected = supplyList.getSupplyProductsInList()
                 .stream()
-                .filter(supplyListProduct -> supplyListProduct.isActive()
-                        && !selectedProducts.contains(supplyListProduct.getIndividualProduct()))
+                .filter(SupplyListProduct::isActive)
                 .flatMap(supplyListProduct -> supplyListProduct.getIndividualProduct().getUnitsOfMeasurement().stream())
+                .filter(unitOfMeasure -> !selectedUOMs.containsKey(unitOfMeasure))
                 .findAny().orElse(null);
         supplyListDetailsPage.setQTYForProductUOMToValue(unitOfMeasureThatHasNotBeenSelected, qtyOfUOMToBeSelected);
         selectedUOMs.put(unitOfMeasureThatHasNotBeenSelected, qtyOfUOMToBeSelected);
