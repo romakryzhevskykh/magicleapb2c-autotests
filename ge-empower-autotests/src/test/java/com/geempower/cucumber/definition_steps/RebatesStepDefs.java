@@ -1,7 +1,6 @@
 package com.geempower.cucumber.definition_steps;
 
 import com.geempower.storefront.pages.RebatesPage;
-import com.geempower.storefront.pages.ReturnsPage;
 import cucumber.api.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
 
