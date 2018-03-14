@@ -147,4 +147,9 @@ public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
     public void checkThatSupplyListIsDeactivatedOnSupplyListDetailsPage() {
         assertTrue(supplyListDetailsPage.isSupplyListInactive());
     }
+
+    @Then("^Check that Supply list is activated on Supply list details page.$")
+    public void checkThatSupplyListIsActivatedOnSupplyListDetailsPage() {
+        assertTrue(supplyListDetailsPage.isSupplyListActive());
+    }
 }

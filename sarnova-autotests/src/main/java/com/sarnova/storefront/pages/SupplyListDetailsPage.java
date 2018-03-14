@@ -132,6 +132,9 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
 
     @Step("Change Supply list status.")
     public void changeSupplyListStatus() {
+        SupplyList supplyList = supplyListsManager.getSupplyListByName(getSupplyListName());
         click(SUPPLY_LIST_ACTIVE_STATUS_XPATH);
+        supplyList.setActive(!supplyList.isActive());
+        waitUntilPageIsFullyLoaded();
     }
 }

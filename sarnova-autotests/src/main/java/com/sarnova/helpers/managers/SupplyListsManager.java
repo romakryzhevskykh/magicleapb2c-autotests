@@ -7,6 +7,7 @@ import com.sarnova.helpers.models.supply_lists.SupplyList;
 import com.sarnova.helpers.models.supply_lists.SupplyListProduct;
 import com.sarnova.helpers.request_engine.API;
 import com.sarnova.helpers.request_engine.POSTRequest;
+import com.sarnova.helpers.request_engine.PUTRequest;
 import com.sarnova.helpers.user_engine.User;
 import com.sarnova.helpers.user_engine.UserSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class SupplyListsManager {
     @Autowired ProductsManager productsManager;
 
     private POSTRequest CREATE_NEW_SUPPLY_LIST = new POSTRequest("Create new Supply list by User session, number of products and name", "boundtree/en/USD/my-account/supply-lists/addProduct/");
+    private PUTRequest DEACTIVATE_SUPPLY_LIST = new PUTRequest("Deactivate Supply list", "boundtree/en/USD/my-account/supply-lists/%s/deactivate");
 
     private ArrayList<SupplyList> allSupplyLists;
     private ArrayList<SupplyList> testSupplyLists = new ArrayList<>();
@@ -76,6 +78,17 @@ public class SupplyListsManager {
 
     public SupplyList getSupplyListByName(String name) {
         return testSupplyLists.stream().filter(supplyList -> supplyList.getName().equals(name)).findAny().orElse(null);
+    }
+
+    public void deactivate(UserSession userSession, SupplyList activeSupplyList) {
+        PUTRequest deactivateSupplyList = DEACTIVATE_SUPPLY_LIST.getClone();
+        deactivateSupplyList.setValue(activeSupplyList.getId());
+        try {
+            deactivateSupplyList.sendPutRequest(userSession);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        activeSupplyList.setActive(false);
     }
 
 //    public SupplyList parseSupplyListFromHTMLSupplyListDetailsPage(User user, String name, String id, String activeStatus,
