@@ -119,4 +119,19 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
     public String getAddToCartPopUpMessage() {
         return addToCartPopUpBlock.getAddToCartPopUpContent();
     }
+
+    @Step("Check that Supply list is active.")
+    public boolean isSupplyListActive() {
+        return getSupplyListActiveStatus().equals("Inactivate");
+    }
+
+    @Step("Check that Supply list is inactive.")
+    public boolean isSupplyListInactive() {
+        return getSupplyListActiveStatus().equals("Reactivate");
+    }
+
+    @Step("Change Supply list status.")
+    public void changeSupplyListStatus() {
+        click(SUPPLY_LIST_ACTIVE_STATUS_XPATH);
+    }
 }

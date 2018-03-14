@@ -128,4 +128,23 @@ public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
     public void checkThatAddToCartPopUpDisplaysMessage(String message) {
         assertEquals(supplyListDetailsPage.getAddToCartPopUpMessage(), message);
     }
+
+    @When("^Click on deactivate button on Supply list details page.$")
+    public void deactivateSupplyList() {
+        if (supplyListDetailsPage.isSupplyListActive()) {
+            supplyListDetailsPage.changeSupplyListStatus();
+        }
+    }
+
+    @When("^Click on activate button on Supply list details page.$")
+    public void activateSupplyList() {
+        if (!supplyListDetailsPage.isSupplyListActive()) {
+            supplyListDetailsPage.changeSupplyListStatus();
+        }
+    }
+
+    @Then("^Check that Supply list is deactivated on Supply list details page.$")
+    public void checkThatSupplyListIsDeactivatedOnSupplyListDetailsPage() {
+        assertTrue(supplyListDetailsPage.isSupplyListInactive());
+    }
 }

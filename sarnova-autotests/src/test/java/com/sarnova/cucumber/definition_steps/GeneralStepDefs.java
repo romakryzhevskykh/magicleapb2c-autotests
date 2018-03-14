@@ -58,6 +58,7 @@ public class GeneralStepDefs extends AbstractStepDefs {
     public void notEmptySupplyList(int numberOfActiveProductsInSupplyList) {
         SupplyList notEmptySupplyList = supplyListsManager.getTestSupplyLists()
                 .stream()
+                .filter(SupplyList::isActive)
                 .filter(supplyList -> supplyList.getSupplyProductsInList()
                         .stream()
                         .filter(SupplyListProduct::isActive)
@@ -68,6 +69,19 @@ public class GeneralStepDefs extends AbstractStepDefs {
                         createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts.apply(Collections.EMPTY_SET, numberOfActiveProductsInSupplyList)
                 );
         threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, notEmptySupplyList.getName());
+    }
+
+    @SuppressWarnings("unchecked")
+    @Given("^Active Supply list exists.$")
+    public void notEmptySupplyList() {
+        SupplyList activeSupplyList = supplyListsManager.getTestSupplyLists()
+                .stream()
+                .filter(SupplyList::isActive)
+                .findAny()
+                .orElseGet(() ->
+                        createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts.apply(Collections.EMPTY_SET, 1)
+                );
+        threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, activeSupplyList.getName());
     }
 
     @Given("^Empty Cart.$")
