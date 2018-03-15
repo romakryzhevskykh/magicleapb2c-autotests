@@ -17,6 +17,7 @@
             <class name="com.geempower.cucumber.RebatesSuite"/>
             <class name="com.geempower.cucumber.SpecialPricingSuite"/>
             <class name="com.geempower.cucumber.ManageUsersSuite"/>
+            <class name="com.geempower.cucumber.ProfileSuite"/>
         </classes>
     </test>
 </suite>

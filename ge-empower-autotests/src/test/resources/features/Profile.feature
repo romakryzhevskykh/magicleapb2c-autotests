@@ -1,0 +1,9 @@
+Feature: Some actions on Profile page
+
+  Background:
+    Given Switch to Storefront as admin.
+    And User is logged in to Storefront.
+
+  Scenario: Check that user able to open Profile page and correct header title is displayed
+    And Profile page is opened.
+    Then Modify Profile title is displayed on Profile page.
