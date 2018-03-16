@@ -3,7 +3,7 @@ Feature: Some actions on Saved Items page
   Background:
     Given Switch to Storefront as admin.
     And User is logged in to Storefront.
+    And Saved Items page is opened.
 
   Scenario: Check that user able to open Saved Items page and correct header title is displayed
-    And Saved Items page is opened.
     Then All Items title is displayed on Saved Items page.

@@ -18,7 +18,7 @@ public class ProductsPage extends StorefrontBasePage {
 
     @Override
     public boolean isOpened() {
-        return getCurrentUrl().contains(getPageUrl());
+        return getCurrentUrl().equals(getPageUrl());
     }
 
     @Step("Get Products title")
