@@ -2,6 +2,10 @@ package com.geempower.storefront.pages;
 
 import com.geempower.storefront.StorefrontBasePage;
 import org.springframework.stereotype.Component;
+import ru.yandex.qatools.allure.annotations.Step;
+
+import static com.geempower.storefront.page_elements.OrdersPageElements.*;
+
 
 @Component
 public class OrdersPage extends StorefrontBasePage {
@@ -11,5 +15,10 @@ public class OrdersPage extends StorefrontBasePage {
     @Override
     public String getPageUrl() {
         return storefrontProject.getBaseUrl().concat(pageUri);
+    }
+
+    @Step("Get Orders title")
+    public String getOrdersTitle() {
+        return $(ALL_ORDERS_TITLE_XPATH).getText();
     }
 }

@@ -4,7 +4,6 @@ import com.geempower.storefront.page_blocks.HeaderBlock;
 import com.geempower.storefront.pages.*;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
-import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class PreconditionStepDefs extends AbstractStepDefs {
@@ -24,6 +23,22 @@ public class PreconditionStepDefs extends AbstractStepDefs {
     private ShipmentsPage shipmentsPage;
     @Autowired
     private MyCartPage myCartPage;
+    @Autowired
+    private SavedItemsPage savedItemsPage;
+    @Autowired
+    private InvoicePage invoicePage;
+    @Autowired
+    private ProductsPage productsPage;
+    @Autowired
+    private ReturnsPage returnsPage;
+    @Autowired
+    private RebatesPage rebatesPage;
+    @Autowired
+    private SpecialPricingPage specialPricingPage;
+    @Autowired
+    private ManageUsersPage manageUsersPage;
+    @Autowired
+    private ProfilePage profilePage;
 
     @Given("^User is logged in to Storefront.$")
     public void userIsLoggedInToStorefront() {
@@ -77,6 +92,71 @@ public class PreconditionStepDefs extends AbstractStepDefs {
         if (!myCartPage.isOpened()) {
             myCartPage.open();
         }
-
     }
+
+    @And("^Saved Items page is opened.$")
+    public void savedItemsPageIsOpened() {
+        savedItemsPage.waitUntilPageIsFullyLoaded();
+        if (!savedItemsPage.isOpened()) {
+            savedItemsPage.open();
+        }
+    }
+
+    @And("^Invoice page is opened.$")
+    public void invoicePageIsOpened() {
+        invoicePage.waitUntilPageIsFullyLoaded();
+        if (!invoicePage.isOpened()) {
+            invoicePage.open();
+        }
+    }
+
+    @And("^Products page is opened.$")
+    public void productsPageIsOpened() {
+        productsPage.waitUntilPageIsFullyLoaded();
+        if (!productsPage.isOpened()) {
+            productsPage.open();
+        }
+    }
+
+    @And("^Returns page is opened.$")
+    public void returnsPageIsOpened() {
+        returnsPage.waitUntilPageIsFullyLoaded();
+        if (!returnsPage.isOpened()) {
+            returnsPage.open();
+        }
+    }
+
+    @And("^Rebates page is opened.$")
+    public void rebatesPageIsOpened() {
+        rebatesPage.waitUntilPageIsFullyLoaded();
+        if (!rebatesPage.isOpened()) {
+            rebatesPage.open();
+        }
+    }
+
+    @And("^Special Pricing page is opened.$")
+    public void specialPricingPageIsOpened() {
+        specialPricingPage.waitUntilPageIsFullyLoaded();
+        if (!specialPricingPage.isOpened()) {
+            specialPricingPage.open();
+        }
+    }
+
+    @And("^Manage Users page is opened.$")
+    public void manageUsersPageIsOpened() {
+        manageUsersPage.waitUntilPageIsFullyLoaded();
+        if (!manageUsersPage.isOpened()) {
+            manageUsersPage.open();
+        }
+    }
+
+    @And("^Profile page is opened.$")
+    public void profilePageIsOpened() {
+        profilePage.waitUntilPageIsFullyLoaded();
+        if (!profilePage.isOpened()) {
+            profilePage.open();
+        }
+    }
+
+
 }

@@ -4,13 +4,12 @@ import com.geempower.storefront.StorefrontBasePage;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import static com.geempower.storefront.page_elements.MyCartPageElements.*;
+import static com.geempower.storefront.page_elements.RebatesPageElements.*;
 
 
 @Component
-public class MyCartPage extends StorefrontBasePage {
-
-    private final String pageUri = "checkout";
+public class RebatesPage extends StorefrontBasePage {
+    private final String pageUri = "rebate";
 
     @Override
     public String getPageUrl() {
@@ -22,8 +21,8 @@ public class MyCartPage extends StorefrontBasePage {
         return getCurrentUrl().equals(getPageUrl());
     }
 
-    @Step("Get My Cart title")
-    public String getMyCartTitle() {
-        return $(MY_CART_TITLE_XPATH).getText();
+    @Step("Get Rebates title")
+    public String getRebatesTitle() {
+        return $(ALL_REBATES_TITLE_XPATH).getText();
     }
 }

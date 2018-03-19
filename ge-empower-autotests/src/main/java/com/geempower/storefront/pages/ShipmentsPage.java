@@ -1,8 +1,6 @@
 package com.geempower.storefront.pages;
 
 import com.geempower.storefront.StorefrontBasePage;
-import org.openqa.selenium.By;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 

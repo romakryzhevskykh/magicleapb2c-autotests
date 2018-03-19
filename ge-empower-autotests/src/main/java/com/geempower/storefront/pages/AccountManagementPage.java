@@ -61,7 +61,7 @@ public class AccountManagementPage extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
     }
 
-    @Step
+    @Step("Select first account")
     public void selectFirstAccount() {
         click(FIRST_ACCOUNT_FROM_LIST_OF_ACCOUNTS_XPATH);
         waitUntilPageIsFullyLoaded();
