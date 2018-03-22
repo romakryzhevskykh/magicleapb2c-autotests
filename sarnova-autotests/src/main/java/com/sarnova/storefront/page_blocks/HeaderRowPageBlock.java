@@ -24,9 +24,7 @@ public class HeaderRowPageBlock extends UIComponent {
     @Step("Logout from Storefront.")
     public void logoutFromStorefront(UserSession userSession) {
         loggedInHeaderRowBlock.clickOnMyAccountDropDownButton();
-        loggedInHeaderRowBlock.clickOnSignOutItemInMyAccountMenu();
-        userSession.setLoggedIn(false);
-        userSession.setCookies(getDriver().manage().getCookies());
+        loggedInHeaderRowBlock.clickOnSignOutItemInMyAccountMenu(userSession);
     }
 
     public void openMyAccountMenu() {
@@ -81,7 +79,7 @@ public class HeaderRowPageBlock extends UIComponent {
         loggedInHeaderRowBlock.clickOnHelpNewToBoundtreeItemInMyAccountMenu();
     }
 
-    public void clickOnSignOutItemInMyAccountMenu() {
-        loggedInHeaderRowBlock.clickOnSignOutItemInMyAccountMenu();
+    public void clickOnSignOutItemInMyAccountMenu(UserSession userSession) {
+        loggedInHeaderRowBlock.clickOnSignOutItemInMyAccountMenu(userSession);
     }
 }

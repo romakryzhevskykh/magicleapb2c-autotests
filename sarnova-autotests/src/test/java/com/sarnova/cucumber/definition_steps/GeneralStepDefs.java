@@ -157,7 +157,7 @@ public class GeneralStepDefs extends AbstractStepDefs {
 
     @When("^Click on Sign Out item in My Account menu.$")
     public void clickOnSignOutItemInMyAccountMenu() {
-        headerRowPageBlock.clickOnSignOutItemInMyAccountMenu();
+        headerRowPageBlock.clickOnSignOutItemInMyAccountMenu(userSessions.getActiveUserSession());
     }
 
     @Then("^Check that Start page is opened.$")

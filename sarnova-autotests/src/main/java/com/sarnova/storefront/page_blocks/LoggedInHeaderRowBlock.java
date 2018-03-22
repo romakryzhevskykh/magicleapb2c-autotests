@@ -1,6 +1,7 @@
 package com.sarnova.storefront.page_blocks;
 
 import com.sarnova.helpers.UIComponent;
+import com.sarnova.helpers.user_engine.UserSession;
 import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
@@ -113,7 +114,9 @@ public class LoggedInHeaderRowBlock extends UIComponent {
     }
 
     @Step("Click on Sign Out item in My account menu.")
-    public void clickOnSignOutItemInMyAccountMenu() {
+    public void clickOnSignOutItemInMyAccountMenu(UserSession userSession) {
         click(SIGN_OUT_ITEM_XPATH);
+        userSession.setLoggedIn(false);
+        userSession.setCookies(getDriver().manage().getCookies());
     }
 }
