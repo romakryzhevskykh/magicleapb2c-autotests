@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.testng.Assert.assertEquals;
@@ -27,8 +28,8 @@ public class CartPageStepDefs extends AbstractStepDefs {
     @SuppressWarnings("unchecked")
     @Then("^Check that only selected UOMs exist on Cart page.$")
     public void checkThatSelectedUOMsExistOnCartPage() {
-        HashMap<UnitOfMeasure, Integer> addedToCartUnitsOfMeasurement = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
-        ArrayList<UnitOfMeasure> unitsOfMeasurementInCart = cartPage.getUnitsOfMeasurementInCart();
+        HashMap<UnitOfMeasure, Integer> addedToCartUnitsOfMeasurement = getSelectedUOMS();
+        List<UnitOfMeasure> unitsOfMeasurementInCart = cartPage.getUnitsOfMeasurementInCart();
         addedToCartUnitsOfMeasurement.keySet().forEach(addedUOM ->
                 assertTrue(unitsOfMeasurementInCart.contains(addedUOM))
         );
@@ -38,7 +39,7 @@ public class CartPageStepDefs extends AbstractStepDefs {
     @SuppressWarnings("unchecked")
     @And("^Check that selected UOMs have corresponding quantities on Cart page.$")
     public void checkThatSelectedUOMsHaveCorrespondingQuantitiesOnCartPage() {
-        HashMap<UnitOfMeasure, Integer> addedToCartUnitsOfMeasurement = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
+        HashMap<UnitOfMeasure, Integer> addedToCartUnitsOfMeasurement = getSelectedUOMS();
         addedToCartUnitsOfMeasurement.forEach((unitOfMeasure, qtyOfUOM) ->
                 assertEquals(cartPage.getQTYOfUOM(unitOfMeasure), qtyOfUOM.intValue())
         );
@@ -72,12 +73,10 @@ public class CartPageStepDefs extends AbstractStepDefs {
     @SuppressWarnings("unchecked")
     @When("^Click on add to Supply list button for any selected UOMs on Cart page.$")
     public void clickOnAddToSupplyListButtonForAnySelectedUOM() {
-        HashMap<UnitOfMeasure, Integer> addedToCartUnitsOfMeasurement = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
+        HashMap<UnitOfMeasure, Integer> addedToCartUnitsOfMeasurement = getSelectedUOMS();
         UnitOfMeasure unitOfMeasureToBeSelected = addedToCartUnitsOfMeasurement.keySet().stream().findAny().orElse(null);
         cartPage.clickOnAddToSupplyListButtonForUOM(unitOfMeasureToBeSelected);
-        threadVarsHashMap.put(TestKeyword.SELECTED_UOMS_HASH_MAP, new HashMap<UnitOfMeasure, Integer>() {{
-            put(unitOfMeasureToBeSelected, 1);
-        }});
+        addedToCartUnitsOfMeasurement.put(unitOfMeasureToBeSelected, 1);
     }
 
     @And("^Select Select a Supply list radio button in Add to Supply list pop-up on Cart page.$")
@@ -107,12 +106,23 @@ public class CartPageStepDefs extends AbstractStepDefs {
         String supplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
         if (supplyListName != null && !supplyListName.isEmpty() && supplyListsManager.getSupplyListByName(supplyListName) == null) {
             String supplyListId = cartPage.getSupplyListId();
-            HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
+            HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = getSelectedUOMS();
             ArrayList<IndividualProduct> selectedIndividualProducts = selectedUnitsOfMeasurement.keySet()
                     .stream()
                     .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
                     .collect(Collectors.toCollection(ArrayList::new));
             supplyListsManager.createInstance(userSessions.getActiveUserSession().getUser(), supplyListName, supplyListId, selectedIndividualProducts);
+        } else if (supplyListsManager.getSupplyListByName(supplyListName) != null) {
+            HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = getSelectedUOMS();
+            ArrayList<IndividualProduct> selectedIndividualProducts = selectedUnitsOfMeasurement.keySet()
+                    .stream()
+                    .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
+                    .collect(Collectors.toCollection(ArrayList::new));
+            supplyListsManager.getSupplyListByName(supplyListName)
+                    .addSupplyProductsToList(selectedIndividualProducts
+                            .stream()
+                            .map(selectedIndividualProduct -> supplyListsManager.createSupplyProductInstance(selectedIndividualProduct))
+                            .collect(Collectors.toList()));
         }
     }
 

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class UserSessions {
 
     @Autowired private ArrayList<User> usersList;
+    private ArrayList<UserSession> allSessionsList = new ArrayList<>();
     private InheritableThreadLocal<ArrayList<UserSession>> tlUserSession = new InheritableThreadLocal<>();
 
     private UserSessionFactory userFactory = new UserSessionFactory();
@@ -22,12 +23,14 @@ public class UserSessions {
         if (tlUserSession.get() == null) {
             tlUserSession.set(new ArrayList<>());
             tlUserSession.get().add(userFactory.getUserSession(user));
+            allSessionsList.add(userFactory.getUserSession(user));
             userFactory.getUserSession(user).setActive(true);
         } else if (!getActiveUserSession().getUserRole().equals(userRole)) {
             tlUserSession.get().forEach(user1 -> user1.setActive(false));
             tlUserSession.get().stream().filter(user1 -> user1.getUserRole().equals(userRole)).findFirst()
                     .orElseGet(() -> {
                         tlUserSession.get().add(userFactory.getUserSession(user));
+                        allSessionsList.add(userFactory.getUserSession(user));
                         return userFactory.getUserSession(user);
                     }).setActive(true);
         }
@@ -44,5 +47,9 @@ public class UserSessions {
         TODO: create UsersManager, instantiate users via manager and Spring xml
          */
         return usersList;
+    }
+
+    public UserSession getAnyUserSessionForUser(User user) {
+        return allSessionsList.stream().filter(userSession -> userSession.getUser().equals(user)).findAny().orElse(null);
     }
 }

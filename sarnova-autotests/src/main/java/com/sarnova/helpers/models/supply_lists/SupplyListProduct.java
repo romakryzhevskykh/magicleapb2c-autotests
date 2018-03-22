@@ -31,4 +31,9 @@ public class SupplyListProduct {
     public IndividualProduct getIndividualProduct() {
         return individualProduct;
     }
+
+    @Override
+    public String toString() {
+        return this.individualProduct.toString() + ", active status: " + this.isActive;
+    }
 }

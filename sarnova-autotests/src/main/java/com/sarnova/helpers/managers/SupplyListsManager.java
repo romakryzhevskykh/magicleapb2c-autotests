@@ -6,9 +6,13 @@ import com.sarnova.helpers.models.products.Product;
 import com.sarnova.helpers.models.supply_lists.SupplyList;
 import com.sarnova.helpers.models.supply_lists.SupplyListProduct;
 import com.sarnova.helpers.request_engine.API;
+import com.sarnova.helpers.request_engine.GETRequest;
 import com.sarnova.helpers.request_engine.POSTRequest;
+import com.sarnova.helpers.request_engine.PUTRequest;
 import com.sarnova.helpers.user_engine.User;
 import com.sarnova.helpers.user_engine.UserSession;
+import com.sarnova.helpers.user_engine.UserSessions;
+import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import us.codecraft.xsoup.Xsoup;
@@ -22,8 +26,13 @@ import java.util.stream.Collectors;
 @Component
 public class SupplyListsManager {
     @Autowired ProductsManager productsManager;
+    @Autowired UserSessions userSessions;
 
     private POSTRequest CREATE_NEW_SUPPLY_LIST = new POSTRequest("Create new Supply list by User session, number of products and name", "boundtree/en/USD/my-account/supply-lists/addProduct/");
+    private PUTRequest DEACTIVATE_SUPPLY_LIST = new PUTRequest("Deactivate Supply list", "boundtree/en/USD/my-account/supply-lists/%s/deactivate");
+    private PUTRequest DEACTIVATE_PRODUCT_IN_SUPPLY_LIST = new PUTRequest("Deactivate product in the Supply list", "/boundtree/en/USD/my-account/supply-lists/%s/deactivate/%s");
+    private POSTRequest CHANGE_FAVORITE_STATUS_FOR_SUPPLY_LIST = new POSTRequest("Change Supply list favorite status", "/my-account/supply-lists/%s/toggleFavorite");
+    private GETRequest SUPPLY_LIST_DETAILS_PAGE = new GETRequest("Supply list details page", "/boundtree/en/USD/my-account/supply-lists/%s");
 
     private ArrayList<SupplyList> allSupplyLists;
     private ArrayList<SupplyList> testSupplyLists = new ArrayList<>();
@@ -39,10 +48,14 @@ public class SupplyListsManager {
     public void createInstance(User user, String name, String id, List<IndividualProduct> products) {
         ArrayList<SupplyListProduct> supplyListProducts = products
                 .stream()
-                .map(SupplyListProduct::new)
+                .map(this::createSupplyProductInstance)
                 .collect(Collectors.toCollection(ArrayList::new));
         SupplyList newSupplyList = new SupplyList(user, name, id, supplyListProducts);
         testSupplyLists.add(newSupplyList);
+    }
+
+    public SupplyListProduct createSupplyProductInstance(IndividualProduct individualProduct) {
+        return new SupplyListProduct(individualProduct);
     }
 
     @SuppressWarnings("unchecked")
@@ -76,6 +89,82 @@ public class SupplyListsManager {
 
     public SupplyList getSupplyListByName(String name) {
         return testSupplyLists.stream().filter(supplyList -> supplyList.getName().equals(name)).findAny().orElse(null);
+    }
+
+    public void deactivate(UserSession userSession, SupplyList activeSupplyList) {
+        PUTRequest deactivateSupplyList = DEACTIVATE_SUPPLY_LIST.getClone();
+        deactivateSupplyList.setValue(activeSupplyList.getId());
+        try {
+            deactivateSupplyList.sendPutRequest(userSession);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        activeSupplyList.setActive(false);
+    }
+
+    public void deactivate(SupplyList activeSupplyList) {
+        UserSession userSession = userSessions.getAnyUserSessionForUser(activeSupplyList.getUser());
+        if (userSession != null) {
+            deactivate(userSession, activeSupplyList);
+        } else {
+            System.out.println("[ERROR]: Can not deactivate Supply list. User has no active sessions!");
+        }
+    }
+
+    public void deactivateProductInList(UserSession userSession, SupplyList activeSupplyList, SupplyListProduct supplyListProduct) {
+        PUTRequest deactivateProductInSupplyList = DEACTIVATE_PRODUCT_IN_SUPPLY_LIST.getClone();
+        deactivateProductInSupplyList.setValue(activeSupplyList.getId());
+        deactivateProductInSupplyList.setValue(supplyListProduct.getSku());
+        try {
+            deactivateProductInSupplyList.sendPutRequest(userSession);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        supplyListProduct.setActive(false);
+    }
+
+    @SuppressWarnings("unchecked")
+    public void markSupplyListAsFavorite(UserSession activeUserSession, SupplyList supplyList) {
+        String csrfToken = getCsrfTokenFromSLDP(activeUserSession, supplyList);
+        POSTRequest toggleSupplyListFavoriteStatus = CHANGE_FAVORITE_STATUS_FOR_SUPPLY_LIST.getClone();
+        toggleSupplyListFavoriteStatus.setValue(supplyList.getId());
+        toggleSupplyListFavoriteStatus.addPostParameterAndValue(new API.PostParameterAndValue("favorite", "true"));
+        toggleSupplyListFavoriteStatus.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", csrfToken));
+        try {
+            toggleSupplyListFavoriteStatus.sendPostRequest(activeUserSession);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        supplyList.setFavorite(true);
+    }
+
+    @SuppressWarnings("unchecked")
+    public void markSupplyListAsNotFavorite(UserSession activeUserSession, SupplyList supplyList) {
+        String csrfToken = getCsrfTokenFromSLDP(activeUserSession, supplyList);
+        POSTRequest toggleSupplyListFavoriteStatus = CHANGE_FAVORITE_STATUS_FOR_SUPPLY_LIST.getClone();
+        toggleSupplyListFavoriteStatus.setValue(supplyList.getId());
+        toggleSupplyListFavoriteStatus.addPostParameterAndValue(new API.PostParameterAndValue("favorite", "false"));
+        toggleSupplyListFavoriteStatus.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", csrfToken));
+        try {
+            toggleSupplyListFavoriteStatus.sendPostRequest(activeUserSession);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        supplyList.setFavorite(true);
+    }
+
+    private String getCsrfTokenFromSLDP(UserSession userSession, SupplyList supplyList) {
+        GETRequest supplyListDetailsPage = SUPPLY_LIST_DETAILS_PAGE.getClone();
+        supplyListDetailsPage.setValue(supplyList.getId());
+
+        try {
+            supplyListDetailsPage.sendGetRequest(userSession);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Document htmlResponse = supplyListDetailsPage.getResponse().getHTMLResponseDocument();
+        return Xsoup.select(htmlResponse, "//input[@name=CSRFToken]/@value").get();
     }
 
 //    public SupplyList parseSupplyListFromHTMLSupplyListDetailsPage(User user, String name, String id, String activeStatus,

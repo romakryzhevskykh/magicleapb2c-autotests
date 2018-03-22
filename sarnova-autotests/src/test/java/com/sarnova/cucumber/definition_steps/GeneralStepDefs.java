@@ -1,5 +1,6 @@
 package com.sarnova.cucumber.definition_steps;
 
+import com.sarnova.helpers.GeneralPageActivities;
 import com.sarnova.helpers.managers.CartManager;
 import com.sarnova.helpers.managers.ProductsManager;
 import com.sarnova.helpers.managers.SupplyListsManager;
@@ -24,6 +25,7 @@ public class GeneralStepDefs extends AbstractStepDefs {
     @Autowired HeaderRowPageBlock headerRowPageBlock;
     @Autowired LoginPage loginPage;
 
+    @Autowired private GeneralPageActivities generalPageActivities;
     @Autowired private SupplyListsManager supplyListsManager;
     @Autowired private ProductsManager productsManager;
     @Autowired private CartManager cartManager;
@@ -39,7 +41,7 @@ public class GeneralStepDefs extends AbstractStepDefs {
     @SuppressWarnings("unchecked")
     @And("^Supply list that doesn't contain this products exists.$")
     public void existingSupplyListThatDoesNotContainThisProducts() {
-        HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = ((HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP));
+        HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = getSelectedUOMS();
         String existingSupplyListName = supplyListsManager.getTestSupplyLists()
                 .stream()
                 .filter(supplyList -> supplyList.getSupplyProductsInList()
@@ -71,19 +73,6 @@ public class GeneralStepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, notEmptySupplyList.getName());
     }
 
-    @SuppressWarnings("unchecked")
-    @Given("^Active Supply list exists.$")
-    public void notEmptySupplyList() {
-        SupplyList activeSupplyList = supplyListsManager.getTestSupplyLists()
-                .stream()
-                .filter(SupplyList::isActive)
-                .findAny()
-                .orElseGet(() ->
-                        createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts.apply(Collections.EMPTY_SET, 1)
-                );
-        threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, activeSupplyList.getName());
-    }
-
     @Given("^Empty Cart.$")
     public void emptyCart() {
         cartManager.emptyActiveCart(userSessions.getActiveUserSession());
@@ -112,13 +101,7 @@ public class GeneralStepDefs extends AbstractStepDefs {
     @SuppressWarnings("unchecked")
     @Given("^Add to cart (.*) product with quantity (\\d+).$")
     public void cartWithProducts(List<String> productTypes, int qtyOfProduct) {
-        HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement;
-        if (threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP) == null) {
-            selectedUnitsOfMeasurement = new HashMap<>();
-            threadVarsHashMap.put(TestKeyword.SELECTED_UOMS_HASH_MAP, selectedUnitsOfMeasurement);
-        } else {
-            selectedUnitsOfMeasurement = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
-        }
+        HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = getSelectedUOMS();
         Product selectedProduct = productsManager.getProductByProductTestTypes(productTypes);
         UnitOfMeasure selectedUOM = selectedProduct.getUnitsOfMeasurement().stream().findAny().orElse(null);
         selectedUnitsOfMeasurement.put(selectedUOM, qtyOfProduct);
@@ -130,18 +113,12 @@ public class GeneralStepDefs extends AbstractStepDefs {
     @SuppressWarnings("unchecked")
     @And("^Add to cart (.*) product with quantity (\\d+) that hasn't been added before.$")
     public void setQTYToAnyProductUOMThatHasNotBeenSelectedOnThePDP(List<String> productTypes, int qtyOfProduct) {
-        HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement;
-        if (threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP) == null) {
-            selectedUnitsOfMeasurement = new HashMap<>();
-            threadVarsHashMap.put(TestKeyword.SELECTED_UOMS_HASH_MAP, selectedUnitsOfMeasurement);
-        } else {
-            selectedUnitsOfMeasurement = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
-        }
+        HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = getSelectedUOMS();
         List<IndividualProduct> selectedProducts = selectedUnitsOfMeasurement.keySet()
-                        .stream()
-                        .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
-                        .distinct()
-                        .collect(Collectors.toList());
+                .stream()
+                .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
+                .distinct()
+                .collect(Collectors.toList());
         IndividualProduct selectedProduct = productsManager.getUniqueProductsByProductsQuantityAndTestTypes(
                 selectedProducts.size() + 1,
                 productTypes)
@@ -155,5 +132,126 @@ public class GeneralStepDefs extends AbstractStepDefs {
         cartManager.addUOMsToCartViaApi(userSessions.getActiveUserSession(), new HashMap<UnitOfMeasure, Integer>() {{
             put(selectedUOM, qtyOfProduct);
         }});
+    }
+
+    @SuppressWarnings("unchecked")
+    @Given("^Active Supply list exists.$")
+    public void notEmptyActiveSupplyList() {
+        SupplyList activeSupplyList = supplyListsManager.getTestSupplyLists()
+                .stream()
+                .filter(SupplyList::isActive)
+                .findAny()
+                .orElseGet(() ->
+                        createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts.apply(Collections.EMPTY_SET, 1)
+                );
+        threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, activeSupplyList.getName());
+    }
+
+
+    @SuppressWarnings("unchecked")
+    @Given("^Active Supply list with at least (\\d+) active products exists.$")
+    public void activeSupplyListWithAtLeastActiveProductsQuantity(int qtyOfActiveProducts) {
+        SupplyList activeSupplyList = supplyListsManager.getTestSupplyLists()
+                .stream()
+                .filter(SupplyList::isActive)
+                .filter(supplyList -> supplyList.getSupplyProductsInList()
+                        .stream()
+                        .filter(SupplyListProduct::isActive)
+                        .count() >= qtyOfActiveProducts)
+                .findAny()
+                .orElseGet(() ->
+                        createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts.apply(Collections.EMPTY_SET, qtyOfActiveProducts)
+                );
+        threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, activeSupplyList.getName());
+    }
+
+    @SuppressWarnings("unchecked")
+    @Given("^Active Supply list with only (\\d+) active products exists.$")
+    public void activeSupplyListWithOnlyActiveProductsQuantity(int qtyOfActiveProducts) {
+        SupplyList activeSupplyList = supplyListsManager.getTestSupplyLists()
+                .stream()
+                .filter(SupplyList::isActive)
+                .filter(supplyList -> supplyList.getSupplyProductsInList()
+                        .stream()
+                        .filter(SupplyListProduct::isActive)
+                        .count() == qtyOfActiveProducts)
+                .findAny()
+                .orElseGet(() ->
+                        createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts.apply(Collections.EMPTY_SET, qtyOfActiveProducts)
+                );
+        threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, activeSupplyList.getName());
+    }
+
+    @SuppressWarnings("unchecked")
+    @Given("^Inactive Supply list exists.$")
+    public void inactiveSupplyListExists() {
+        SupplyList inactiveSupplyList = supplyListsManager.getTestSupplyLists()
+                .stream()
+                .filter(supplyList -> !supplyList.isActive())
+                .findAny()
+                .orElseGet(() ->
+                        createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts.apply(Collections.EMPTY_SET, 1)
+                );
+        if (inactiveSupplyList.isActive())
+            supplyListsManager.deactivate(userSessions.getActiveUserSession(), inactiveSupplyList);
+        threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, inactiveSupplyList.getName());
+    }
+
+    @Given("^Active Supply list with at least (\\d+) inactive products exists.$")
+    public void activeSupplyListWithAtLeastInactiveProductsExists(int qtyOfInactiveProducts) {
+        SupplyList activeSupplyList = supplyListsManager.getTestSupplyLists()
+                .stream()
+                .filter(SupplyList::isActive)
+                .filter(supplyList -> supplyList.getSupplyProductsInList()
+                        .stream()
+                        .filter(supplyListProduct -> !supplyListProduct.isActive())
+                        .count() >= qtyOfInactiveProducts)
+                .findAny()
+                .orElseGet(() ->
+                        createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts.apply(Collections.EMPTY_SET, qtyOfInactiveProducts)
+                );
+        if(activeSupplyList.getSupplyProductsInList()
+                .stream()
+                .filter(supplyListProduct -> !supplyListProduct.isActive())
+                .count() < qtyOfInactiveProducts) {
+            activeSupplyList.getSupplyProductsInList().forEach(supplyListProduct -> {
+                supplyListsManager.deactivateProductInList(userSessions.getActiveUserSession(), activeSupplyList, supplyListProduct);
+            });
+        }
+        threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, activeSupplyList.getName());
+    }
+
+    @Given("^Active not favorite Supply list exists.$")
+    public void activeNotFavoriteSupplyListExists() {
+        SupplyList activeSupplyList = supplyListsManager.getTestSupplyLists()
+                .stream()
+                .filter(SupplyList::isActive)
+                .filter(supplyList -> !supplyList.isFavorite())
+                .findAny()
+                .orElseGet(() ->
+                        createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts.apply(Collections.EMPTY_SET, 1)
+                );
+        threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, activeSupplyList.getName());
+    }
+
+    @Given("^Active favorite Supply list exists.$")
+    public void activeFavoriteSupplyListExists() {
+        SupplyList activeSupplyList = supplyListsManager.getTestSupplyLists()
+                .stream()
+                .filter(SupplyList::isActive)
+                .filter(SupplyList::isFavorite)
+                .findAny()
+                .orElseGet(() ->
+                        createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts.apply(Collections.EMPTY_SET, 1)
+                );
+        if (!activeSupplyList.isFavorite()) {
+            supplyListsManager.markSupplyListAsFavorite(userSessions.getActiveUserSession(), activeSupplyList);
+        }
+        threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, activeSupplyList.getName());
+    }
+
+    @And("^Refresh page.$")
+    public void refreshPage() throws Throwable {
+        generalPageActivities.refreshPage();
     }
 }
