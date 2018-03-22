@@ -5,6 +5,7 @@ import com.sarnova.helpers.models.products.Product;
 import com.sarnova.helpers.models.products.UnitOfMeasure;
 import com.sarnova.storefront.page_blocks.AddToCartPopUpBlock;
 import com.sarnova.storefront.page_blocks.AddToSupplyListPopUpBlock;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,11 @@ public class ProductDetailsPage extends StorefrontBasePage {
     public void clickOnAddToSupplyListButton() {
         click(ADD_TO_SUPPLY_LIST_BUTTONS_XPATH);
         waitUntilPageIsFullyLoaded();
+        if (isDisplayed(By.xpath(SUPPLY_POP_UP_IMGAGES_XPATH))) {
+            $$(SUPPLY_POP_UP_IMGAGES_XPATH).forEach(webElement ->
+                    waitUntil(driver1 -> (webElement.getSize().getHeight() == 65 && webElement.getSize().getWidth() == 65))
+            );
+        }
     }
 
     @Step("Set QTY: {1} for product UOM: {0}.")
@@ -105,5 +111,6 @@ public class ProductDetailsPage extends StorefrontBasePage {
     public void clickOnAddToCartButton() {
         click(ADD_TO_CART_BUTTONS_XPATH);
         waitUntilPageIsFullyLoaded();
+        waitUntilVisible(By.id(POP_UP_ID));
     }
 }

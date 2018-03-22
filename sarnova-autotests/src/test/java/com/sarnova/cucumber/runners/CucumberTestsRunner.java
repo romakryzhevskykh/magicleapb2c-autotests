@@ -1,6 +1,8 @@
 package com.sarnova.cucumber.runners;
 
 import com.sarnova.helpers.SeleniumGridSettings;
+import com.sarnova.helpers.managers.SupplyListsManager;
+import com.sarnova.helpers.models.supply_lists.SupplyList;
 import com.sarnova.helpers.web_engine.WebDriverSessions;
 import com.sarnova.helpers.web_engine.WebDriverSetups;
 import com.sarnova.helpers.web_engine.WebDriverThreadTestSetups;
@@ -16,6 +18,8 @@ public class CucumberTestsRunner extends AbstractTestNGSpringContextTests {
     @Autowired WebDriverSessions webDriverPool;
     @Autowired SeleniumGridSettings seleniumGridSettings;
     @Autowired WebDriverThreadTestSetups webDriverThreadTestSetups;
+
+    @Autowired SupplyListsManager supplyListsManager;
 
     private TestNGCucumberRunner testNGCucumberRunner;
 
@@ -54,5 +58,9 @@ public class CucumberTestsRunner extends AbstractTestNGSpringContextTests {
 
     @AfterSuite(alwaysRun = true)
     public void tearDownClass() throws Exception {
+        supplyListsManager.getTestSupplyLists()
+                .stream()
+                .filter(SupplyList::isActive)
+                .forEach(supplyList -> supplyListsManager.deactivate(supplyList));
     }
 }

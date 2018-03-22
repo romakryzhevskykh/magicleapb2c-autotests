@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.sarnova.storefront.page_elements.CartPageElements.*;
@@ -22,10 +24,12 @@ public class CartPage extends StorefrontBasePage {
 
     private String pageUrlMethod = "boundtree/en/USD/cart";
 
-    public ArrayList<UnitOfMeasure> getUnitsOfMeasurementInCart() {
-        ArrayList<Document> unitsOfMeasurementRows = $$(PRODUCTS_ROWS_XPATH).stream()
+    public List<UnitOfMeasure> getUnitsOfMeasurementInCart() {
+        List<Document> unitsOfMeasurementRows = isDisplayed(PRODUCTS_ROWS_XPATH) ?
+                $$(PRODUCTS_ROWS_XPATH).stream()
                 .map(productWebElement -> Jsoup.parse(productWebElement.getAttribute("innerHTML")))
-                .collect(Collectors.toCollection(ArrayList::new));
+                .collect(Collectors.toCollection(ArrayList::new)) :
+                Collections.EMPTY_LIST;
         return productsManager.parseUnitsOfMeasurementFromCartPageHTML(unitsOfMeasurementRows);
     }
 

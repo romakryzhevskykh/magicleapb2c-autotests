@@ -14,6 +14,7 @@ import us.codecraft.xsoup.Xsoup;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -27,7 +28,7 @@ public class CartManager {
 
     @SuppressWarnings("unchecked")
     public void emptyActiveCart(UserSession userSession) {
-        ArrayList<UnitOfMeasure> unitsOfMeasurementInCart = getUOMsFromCartPage(userSession);
+        List<UnitOfMeasure> unitsOfMeasurementInCart = getUOMsFromCartPage(userSession);
         String csrfToken = getCartPageCsrfToken(userSession);
         for (int i = 0; i < unitsOfMeasurementInCart.size(); i++) {
             try {
@@ -52,7 +53,7 @@ public class CartManager {
         return Xsoup.select(htmlResponse, "//input[@name=CSRFToken]/@value").list().stream().findAny().orElse(null);
     }
 
-    private ArrayList<UnitOfMeasure> getUOMsFromCartPage(UserSession userSession) {
+    private List<UnitOfMeasure> getUOMsFromCartPage(UserSession userSession) {
         GETRequest getCartPageSource = GET_CART_PAGE_SOURCE.getClone();
         try {
             getCartPageSource.sendGetRequest(userSession);

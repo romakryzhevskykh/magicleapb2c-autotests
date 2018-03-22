@@ -2,25 +2,25 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Suite1" parallel="tests">
-    <!--<test name="LoginSuite">-->
-        <!--<parameter name="browserName" value="chrome" />-->
-        <!--<classes>-->
-            <!--<class name="com.sarnova.cucumber.LoginSuite"/>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="LoginSuite">
+        <parameter name="browserName" value="chrome" />
+        <classes>
+            <class name="com.sarnova.cucumber.LoginSuite"/>
+        </classes>
+    </test>
     <test name="Supply lists functionality">
         <parameter name="browserName" value="chrome" />
         <classes>
-            <!--<class name="com.sarnova.cucumber.AddToSupplyListSuite"/>-->
+            <class name="com.sarnova.cucumber.AddToSupplyListSuite"/>
             <class name="com.sarnova.cucumber.SupplyListsFunctionalitySuit"/>
         </classes>
     </test>
-    <!--<test name="Cart functionality and checkout suite">-->
-        <!--<parameter name="browserName" value="chrome" />-->
-        <!--<classes>-->
-            <!--<class name="com.sarnova.cucumber.AddToCartSuite"/>-->
-            <!--&lt;!&ndash;<class name="com.sarnova.cucumber.CheckoutSuite"/>&ndash;&gt;-->
-            <!--<class name="com.sarnova.cucumber.AddToSupplyListFromCartSuit"/>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="Cart functionality and checkout suite">
+        <parameter name="browserName" value="chrome" />
+        <classes>
+            <class name="com.sarnova.cucumber.AddToCartSuite"/>
+            <!--<class name="com.sarnova.cucumber.CheckoutSuite"/>-->
+            <class name="com.sarnova.cucumber.AddToSupplyListFromCartSuit"/>
+        </classes>
+    </test>
 </suite>

@@ -3,6 +3,7 @@ package com.sarnova.cucumber.definition_steps;
 import com.sarnova.helpers.managers.ProductsManager;
 import com.sarnova.helpers.managers.SupplyListsManager;
 import com.sarnova.helpers.models.products.IndividualProduct;
+import com.sarnova.helpers.models.products.Product;
 import com.sarnova.helpers.models.products.UnitOfMeasure;
 import com.sarnova.helpers.models.supply_lists.SupplyList;
 import com.sarnova.helpers.models.supply_lists.SupplyListProduct;
@@ -11,11 +12,15 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -39,12 +44,11 @@ public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
     @SuppressWarnings("unchecked")
     @Then("^Check that selected product\\(s\\) is\\(are\\) displayed on the Supply list details page.$")
     public void checkThatSelectedProductsAreDisplayedOnTheSupplyListDetailsPage() {
-        Set<IndividualProduct> addedIndividualProducts =
-                ((HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP))
-                        .keySet()
-                        .stream()
-                        .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
-                        .collect(Collectors.toSet());
+        Set<IndividualProduct> addedIndividualProducts = getSelectedUOMS()
+                .keySet()
+                .stream()
+                .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
+                .collect(Collectors.toSet());
         SupplyList supplyList = supplyListDetailsPage.getSupplyListFromPage(userSessions.getActiveUserSession().getUser());
         addedIndividualProducts.forEach(individualProduct ->
                 assertTrue(supplyList.getSupplyProductsInList().stream()
@@ -69,15 +73,11 @@ public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
                 .stream()
                 .filter(SupplyListProduct::isActive)
                 .flatMap(supplyListProduct -> supplyListProduct.getIndividualProduct().getUnitsOfMeasurement().stream())
-                .findAny().orElse(null);
+                .findAny().orElseGet(() -> {
+                    throw new NullPointerException("No UOMs for this condition!");
+                });
         supplyListDetailsPage.setQTYForProductUOMToValue(randomUnitOfMeasure, qtyValueForAnyProductOnSLDP);
-        HashMap<UnitOfMeasure, Integer> unitsOfMeasurement;
-        if (threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP) == null) {
-            unitsOfMeasurement = new HashMap<>();
-            threadVarsHashMap.put(TestKeyword.SELECTED_UOMS_HASH_MAP, unitsOfMeasurement);
-        } else {
-            unitsOfMeasurement = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
-        }
+        HashMap<UnitOfMeasure, Integer> unitsOfMeasurement = getSelectedUOMS();
         unitsOfMeasurement.put(randomUnitOfMeasure, qtyValueForAnyProductOnSLDP);
     }
 
@@ -86,6 +86,7 @@ public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
         SupplyList supplyList = supplyListDetailsPage.getSupplyListFromPage(userSessions.getActiveUserSession().getUser());
         supplyList.getSupplyProductsInList()
                 .stream()
+                .filter(SupplyListProduct::isActive)
                 .flatMap(supplyListProduct -> supplyListProduct.getIndividualProduct().getUnitsOfMeasurement().stream())
                 .forEach(unitOfMeasure ->
                         supplyListDetailsPage.setQTYForProductUOMToValue(unitOfMeasure, qtyValueForAllProductOnSLDP)
@@ -96,20 +97,16 @@ public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
     @And("^Set QTY (\\d+) to any product\\(UOM\\) that hasn't been selected on the Supply list details page.$")
     public void setQTYToAnyProductUOMThatHasNotBeenSelectedOnTheSupplyListDetailsPage(int qtyOfUOMToBeSelected) {
         String supplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
-        HashMap<UnitOfMeasure, Integer> selectedUOMs;
-        if (threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP) == null) {
-            selectedUOMs = new HashMap<>();
-            threadVarsHashMap.put(TestKeyword.SELECTED_UOMS_HASH_MAP, selectedUOMs);
-        } else {
-            selectedUOMs = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
-        }
+        HashMap<UnitOfMeasure, Integer> selectedUOMs = getSelectedUOMS();
         SupplyList supplyList = supplyListsManager.getSupplyListByName(supplyListName);
         UnitOfMeasure unitOfMeasureThatHasNotBeenSelected = supplyList.getSupplyProductsInList()
                 .stream()
                 .filter(SupplyListProduct::isActive)
                 .flatMap(supplyListProduct -> supplyListProduct.getIndividualProduct().getUnitsOfMeasurement().stream())
                 .filter(unitOfMeasure -> !selectedUOMs.containsKey(unitOfMeasure))
-                .findAny().orElse(null);
+                .findAny().orElseGet(() -> {
+                    throw new NullPointerException("No UOMs for this condition!");
+                });
         supplyListDetailsPage.setQTYForProductUOMToValue(unitOfMeasureThatHasNotBeenSelected, qtyOfUOMToBeSelected);
         selectedUOMs.put(unitOfMeasureThatHasNotBeenSelected, qtyOfUOMToBeSelected);
     }
@@ -151,5 +148,207 @@ public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
     @Then("^Check that Supply list is activated on Supply list details page.$")
     public void checkThatSupplyListIsActivatedOnSupplyListDetailsPage() {
         assertTrue(supplyListDetailsPage.isSupplyListActive());
+    }
+
+    @SuppressWarnings("unchecked")
+    @When("^Click on deactivate any product button on Supply list details page.$")
+    public void clickOnDeactivateAnyProductButtonOnSupplyListDetailsPage() {
+        HashMap<UnitOfMeasure, Integer> selectedUOMs = getSelectedUOMS();
+        SupplyList currentSupplyList = supplyListsManager.getSupplyListByName(supplyListDetailsPage.getSupplyListName());
+        SupplyListProduct activatedSupplyListProduct = currentSupplyList.getSupplyProductsInList()
+                .stream()
+                .filter(SupplyListProduct::isActive)
+                .findAny().orElseGet(() -> {
+                    throw new NullPointerException("No products for this condition!");
+                });
+        supplyListDetailsPage.deactivateProduct(activatedSupplyListProduct);
+        selectedUOMs.putAll(activatedSupplyListProduct.getIndividualProduct().getUnitsOfMeasurement()
+                .stream()
+                .collect(Collectors.toMap(unitOfMeasure -> unitOfMeasure, unitOfMeasure -> 1))
+        );
+    }
+
+    @SuppressWarnings("unchecked")
+    @When("^Click on activate any product button on Supply list details page.$")
+    public void clickOnActivateAnyProductButtonOnSupplyListDetailsPage() {
+        HashMap<UnitOfMeasure, Integer> selectedUOMs = getSelectedUOMS();
+        SupplyList currentSupplyList = supplyListsManager.getSupplyListByName(supplyListDetailsPage.getSupplyListName());
+        SupplyListProduct deactivatedSupplyListProduct = currentSupplyList.getSupplyProductsInList()
+                .stream()
+                .filter(supplyListProduct1 -> !supplyListProduct1.isActive())
+                .findAny().orElseGet(() -> {
+                    throw new NullPointerException("No products for this condition!");
+                });
+        supplyListDetailsPage.activateProduct(deactivatedSupplyListProduct);
+        selectedUOMs.putAll(deactivatedSupplyListProduct.getIndividualProduct().getUnitsOfMeasurement()
+                .stream()
+                .collect(Collectors.toMap(unitOfMeasure -> unitOfMeasure, unitOfMeasure -> 1))
+        );
+    }
+
+    @Then("^Check that (.*) message is shown on Supply list details page.$")
+    public void checkThatThereSNoActiveEntriesInThisSupplyListMessageIsShownOnSupplyListDetailsPage(String messageOnSLDP) {
+        assertTrue(supplyListDetailsPage.checkThatTextContentMessageIsDisplayed());
+        assertEquals(supplyListDetailsPage.getTextContentMessageInActiveProductsBlock(), messageOnSLDP);
+    }
+
+    @Then("^Click on Show inactivate entries checkbox on Supply list details page.$")
+    public void clickOnShowInactivateEntriesCheckboxOnSupplyListDetailsPage() {
+        supplyListDetailsPage.showInactiveSupplyProducts();
+    }
+
+    @SuppressWarnings("unchecked")
+    @And("^Check that product is deactivated on Supply list details page.$")
+    public void checkThatProductIsDeactivatedOnSupplyListDetailsPage() {
+        List<IndividualProduct> deactivatedProducts = supplyListDetailsPage.getDeactivatedProducts();
+        HashMap<UnitOfMeasure, Integer> selectedUOMs = getSelectedUOMS();
+        List<IndividualProduct> testDeactivatedProducts = selectedUOMs.keySet()
+                .stream()
+                .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
+                .distinct()
+                .collect(Collectors.toList());
+        assertTrue(deactivatedProducts.containsAll(testDeactivatedProducts));
+    }
+
+    @SuppressWarnings("unchecked")
+    @And("^Check that product is activated on Supply list details page.$")
+    public void checkThatProductIsActivatedOnSupplyListDetailsPage() {
+        List<IndividualProduct> activatedProducts = supplyListDetailsPage.getActivatedProducts();
+        HashMap<UnitOfMeasure, Integer> selectedUOMs = getSelectedUOMS();
+        List<IndividualProduct> testActivatedProducts = selectedUOMs.keySet()
+                .stream()
+                .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
+                .distinct()
+                .collect(Collectors.toList());
+        assertTrue(activatedProducts.containsAll(testActivatedProducts));
+    }
+
+    @SuppressWarnings("unchecked")
+    @And("^Check that other activated products did not change their statuses on Supply list details page.$")
+    public void checkThatOtherActivatedProductsDidNotChangeTheirStatusesOnSupplyListDetailsPage() {
+        List<IndividualProduct> activatedProducts = supplyListDetailsPage.getActivatedProducts();
+        List<IndividualProduct> expectedActiveProducts =
+                supplyListsManager.getSupplyListByName(supplyListDetailsPage.getSupplyListName())
+                        .getSupplyProductsInList().stream()
+                        .filter(SupplyListProduct::isActive)
+                        .map(SupplyListProduct::getIndividualProduct)
+                        .collect(Collectors.toList());
+        assertEquals(activatedProducts.size(), expectedActiveProducts.size());
+        assertTrue(activatedProducts.containsAll(expectedActiveProducts));
+    }
+
+    @When("^Mark Supply list as favourite on Supply list details page.$")
+    public void markSupplyListAsFavouriteOnSupplyListDetailsPage() {
+        SupplyList currentSupplyList = supplyListsManager.getSupplyListByName(supplyListDetailsPage.getSupplyListName());
+        supplyListDetailsPage.markAsFavorite();
+        currentSupplyList.setFavorite(true);
+    }
+
+    @When("^Unmark Supply list as favourite on Supply list details page.$")
+    public void unmarkSupplyListAsFavouriteOnSupplyListDetailsPage() {
+        SupplyList currentSupplyList = supplyListsManager.getSupplyListByName(supplyListDetailsPage.getSupplyListName());
+        supplyListDetailsPage.markAsUnFavorite();
+        currentSupplyList.setFavorite(false);
+    }
+
+    @Then("^Click on Supply lists drop-down in Header on Supply list details page.$")
+    public void clickOnSupplyListsDropDownInHeader() {
+        supplyListDetailsPage.clickOnFavoriteSupplyListsDropDown();
+    }
+
+    @And("^Check that current Supply list is displayed in favorite Supply lists drop-down on Supply list details page.$")
+    public void checkThatCurrentSupplyListIsDisplayedInFavoriteSupplyListsDropDownOnSupplyListDetailsPage() {
+        List<String> favoriteSupplyListNames = supplyListDetailsPage.getSupplyListNamesFromFavoriteSupplyListsDropDown();
+        String testSupplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
+        assertTrue(favoriteSupplyListNames.stream()
+                .anyMatch(supplyListName -> supplyListName.equals(StringUtils.capitalize(testSupplyListName))));
+    }
+
+    @And("^Check that current Supply list is not displayed in favorite Supply lists drop-down on Supply list details page.$")
+    public void checkThatCurrentSupplyListIsNotDisplayedInFavoriteSupplyListsDropDownOnSupplyListDetailsPage() {
+        List<String> favoriteSupplyListNames = supplyListDetailsPage.getSupplyListNamesFromFavoriteSupplyListsDropDown();
+        String testSupplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
+        assertTrue(favoriteSupplyListNames.stream()
+                .noneMatch(supplyListName -> supplyListName.equals(StringUtils.capitalize(testSupplyListName))));
+    }
+
+    @Given("^Open Quick add block on Supply list details page.$")
+    public void openQuickAddBlockOnSupplyListDetailsPage() {
+        supplyListDetailsPage.openQuickAddBlockOnSupplyListDetailsPage();
+    }
+
+    @And("^Enter not exist (.*) product SKU to any empty row on Supply list details page.$")
+    public void enterNotExistProductSKUToAnyEmptyRowOnSupplyListDetailsPage(List<String> productTypes) {
+        String testSupplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
+        SupplyList currentSupplyList = supplyListsManager.getSupplyListByName(testSupplyListName);
+        HashMap<UnitOfMeasure, Integer> selectedUOMs = getSelectedUOMS();
+        List<Product> individualProductsInCurrentSL = currentSupplyList.getSupplyProductsInList().stream()
+                .map(SupplyListProduct::getIndividualProduct)
+                .collect(Collectors.toList());
+        List<Product> selectedProducts = Stream.concat(individualProductsInCurrentSL.stream(),
+                selectedUOMs.keySet()
+                        .stream()
+                        .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
+                        .distinct()
+        ).distinct().collect(Collectors.toList());
+        Product newProduct = productsManager.getUniqueProductsByProductsQuantityAndTestTypes(
+                selectedProducts.size() + 1, productTypes).stream()
+                .filter(product -> !selectedProducts.contains(product))
+                .findAny().orElseGet(() -> {
+                    throw new NullPointerException("No products for this condition!");
+                });
+        threadVarsHashMap.put(TestKeyword.QUICK_ADD_TEXT, newProduct.getSku());
+        supplyListDetailsPage.enterSkuToEmptyQuickAddRow(newProduct.getSku());
+        if (newProduct instanceof IndividualProduct)
+            selectedUOMs.putAll(newProduct.getUnitsOfMeasurement()
+                    .stream()
+                    .collect(Collectors.toMap(unitOfMeasure -> unitOfMeasure, unitOfMeasure -> 1))
+            );
+    }
+
+    @And("^Enter exist product SKU to any empty row on Supply list details page.$")
+    public void enterExistProductSKUToAnyEmptyRowOnSupplyListDetailsPage() {
+        String testSupplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
+        SupplyList currentSupplyList = supplyListsManager.getSupplyListByName(testSupplyListName);
+        IndividualProduct individualProductInCurrentSL = currentSupplyList.getSupplyProductsInList().stream()
+                .map(SupplyListProduct::getIndividualProduct)
+                .findAny().orElseGet(() -> {
+                    throw new NullPointerException("No products for this condition!");
+                });
+        threadVarsHashMap.put(TestKeyword.QUICK_ADD_TEXT, individualProductInCurrentSL.getSku());
+        supplyListDetailsPage.enterSkuToEmptyQuickAddRow(individualProductInCurrentSL.getSku());
+    }
+
+    @And("^Enter random text to any empty row on Supply list details page.$")
+    public void enterRandomTextToAnyEmptyRowOnSupplyListDetailsPage() {
+        String randomText = RandomStringUtils.randomAlphanumeric(10);
+        threadVarsHashMap.put(TestKeyword.QUICK_ADD_TEXT, randomText);
+        supplyListDetailsPage.enterSkuToEmptyQuickAddRow(randomText);
+    }
+
+    @And("^Click on Add to this list button on Supply list details page.$")
+    public void clickOnAddToThisListButtonOnSupplyListDetailsPage() {
+        String testSupplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
+        SupplyList currentSupplyList = supplyListsManager.getSupplyListByName(testSupplyListName);
+        supplyListDetailsPage.clickOnQuickAddToThisSupplyListButton();
+        HashMap<UnitOfMeasure, Integer> selectedUOMs = getSelectedUOMS();
+        currentSupplyList.addSupplyProductsToList(selectedUOMs.keySet()
+                .stream()
+                .map(uom -> productsManager.getProductByUOM(uom))
+                .distinct()
+                .map(individualProduct -> supplyListsManager.createSupplyProductInstance(individualProduct))
+                .collect(Collectors.toList()));
+    }
+
+    @Then("^Check that (.*) error message is displayed for used row.$")
+    public void checkThatErrorMessageErrorMessageIsDisplayedForUsedRow(String expectedErrorMessage) {
+        String enteredText = threadVarsHashMap.getString(TestKeyword.QUICK_ADD_TEXT);
+        String rowErrorMessage;
+        try {
+            rowErrorMessage = supplyListDetailsPage.getErrorMessageForQuickAddRowWithEnteredValue(enteredText);
+        } catch (NullPointerException ex) {
+            throw new AssertionError(ex);
+        }
+        assertEquals(rowErrorMessage, expectedErrorMessage);
     }
 }

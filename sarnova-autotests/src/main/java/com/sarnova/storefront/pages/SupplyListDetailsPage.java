@@ -8,6 +8,7 @@ import com.sarnova.helpers.models.supply_lists.SupplyList;
 import com.sarnova.helpers.models.supply_lists.SupplyListProduct;
 import com.sarnova.helpers.user_engine.User;
 import com.sarnova.storefront.page_blocks.AddToCartPopUpBlock;
+import com.sarnova.storefront.page_blocks.LoggedInHeaderRowBlock;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +26,7 @@ import static com.sarnova.storefront.page_elements.SupplyListDetailsPageElements
 public class SupplyListDetailsPage extends StorefrontBasePage {
     @Autowired private SupplyListsManager supplyListsManager;
     @Autowired private ProductsManager productsManager;
+    @Autowired private LoggedInHeaderRowBlock loggedInHeaderRowBlock;
 
     @Autowired private AddToCartPopUpBlock addToCartPopUpBlock;
     private final String pageUrlMethod = "boundtree/en/USD/my-account/supply-lists/%s";
@@ -82,13 +85,18 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
                 .collect(Collectors.toList());
     }
 
-    @Step("Get active products from the list.")
+
+    @SuppressWarnings("unchecked")
+    @Step("Get inactive products from the list.")
     public List<SupplyListProduct> getInactiveProducts() {
-        return $$(INACTIVE_PRODUCTS_ROWS_XPATH).stream()
-                .map(webElement -> new SupplyListProduct(
-                        (IndividualProduct) productsManager.getProductBySku(webElement.getAttribute("data-product-code")),
-                        false))
-                .collect(Collectors.toList());
+        if (isDisplayed(By.id(SHOW_INACTIVE_ENTRIES_BUTTON_ID)))
+            return $$(INACTIVE_PRODUCTS_ROWS_XPATH).stream()
+                    .map(webElement -> new SupplyListProduct(
+                            (IndividualProduct) productsManager.getProductBySku(webElement.getAttribute("data-product-code")),
+                            false))
+                    .collect(Collectors.toList());
+        else
+            return Collections.EMPTY_LIST;
     }
 
     @Step("Open Supply list details page for supply list id {0} by link.")
@@ -136,5 +144,158 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
         click(SUPPLY_LIST_ACTIVE_STATUS_XPATH);
         supplyList.setActive(!supplyList.isActive());
         waitUntilPageIsFullyLoaded();
+    }
+
+    @Step("Activate product: {0}.")
+    public void activateProduct(SupplyListProduct supplyListProduct) {
+        click(INACTIVE_PRODUCT_ACTIVATE_BUTTON_BY_SKU_XPATH, supplyListProduct.getSku());
+        waitUntilPageIsFullyLoaded();
+        supplyListProduct.setActive(true);
+    }
+
+    @Step("Deactivate product: {0}.")
+    public void deactivateProduct(SupplyListProduct supplyListProduct) {
+        click(ACTIVE_PRODUCT_DEACTIVATE_BUTTON_BY_SKU_XPATH, supplyListProduct.getSku());
+        waitUntilPageIsFullyLoaded();
+        supplyListProduct.setActive(false);
+    }
+
+    @Step("Click on Show inactive entries checkbox.")
+    public void clickOnShowInactiveEntriesCheckbox() {
+        click(By.id(SHOW_INACTIVE_ENTRIES_BUTTON_ID));
+        waitUntilPageIsFullyLoaded();
+    }
+
+    @Step("Show inactive Supply products.")
+    public void showInactiveSupplyProducts() {
+        if (!areInactiveSupplyListsBlockVisible()) {
+            clickOnShowInactiveEntriesCheckbox();
+        }
+    }
+
+    @Step("Hide inactive Supply products.")
+    public void hideInactiveSupplyProducts() {
+        if (areInactiveSupplyListsBlockVisible()) {
+            clickOnShowInactiveEntriesCheckbox();
+        }
+    }
+
+    @Step("Check that inactive Supply products are visible.")
+    public boolean areInactiveSupplyListsBlockVisible() {
+        return isDisplayed(INACTIVE_PRODUCTS_BLOCK_XPATH);
+    }
+
+    @Step("Check that text message content is displayed in Active products block.")
+    public boolean checkThatTextContentMessageIsDisplayed() {
+        return isDisplayed(ACTIVE_PRODUCTS_BLOCK_TEXT_CONTENT);
+    }
+
+    @Step("Get text message content in Active products block.")
+    public String getTextContentMessageInActiveProductsBlock() {
+        return $(ACTIVE_PRODUCTS_BLOCK_TEXT_CONTENT).getText();
+    }
+
+    @Step("Get list of deactivated products.")
+    public List<IndividualProduct> getDeactivatedProducts() {
+        return $$(INACTIVE_PRODUCTS_ROWS_XPATH)
+                .stream()
+                .map(webElement -> webElement.getAttribute("data-product-code"))
+                .map(sku -> productsManager.getProductBySku(sku))
+                .map(product -> (IndividualProduct) product)
+                .collect(Collectors.toList());
+    }
+
+    @Step("Get list of active products.")
+    public List<IndividualProduct> getActivatedProducts() {
+        return $$(ACTIVE_PRODUCTS_ROWS_XPATH)
+                .stream()
+                .map(webElement -> webElement.getAttribute("data-product-code"))
+                .map(sku -> productsManager.getProductBySku(sku))
+                .map(product -> (IndividualProduct) product)
+                .collect(Collectors.toList());
+    }
+
+    @Step("Get Supply list favorite status.")
+    public boolean isSupplyListFavorite() {
+        return $(FAVORITE_CHECKBOX_XPATH).isSelected();
+    }
+
+    @Step("Mark Supply list as favorite.")
+    public void markAsFavorite() {
+        if (!isSupplyListFavorite()) {
+            clickOnFavoriteCheckbox();
+        }
+    }
+
+    @Step("Make Supply list as un-favorite.")
+    public void markAsUnFavorite() {
+        if (isSupplyListFavorite()) {
+            clickOnFavoriteCheckbox();
+        }
+    }
+
+    @Step("Click on favorite checkbox.")
+    public void clickOnFavoriteCheckbox() {
+        click(FAVORITE_CHECKBOX_XPATH);
+        waitJQueryRequestsLoad();
+    }
+
+    public void clickOnFavoriteSupplyListsDropDown() {
+        loggedInHeaderRowBlock.clickOnFavoriteSupplyListsDropDown();
+    }
+
+    public List<String> getSupplyListNamesFromFavoriteSupplyListsDropDown() {
+        return loggedInHeaderRowBlock.getFavoriteSupplyListsFromSupplyListsDropDown();
+    }
+
+    @Step("Open Quick add block.")
+    public void openQuickAddBlockOnSupplyListDetailsPage() {
+        if (!isQuickAddBlockOpened()) {
+            clickOnQuickAddCheckbox();
+        }
+    }
+
+    @Step("Close Quick add block.")
+    public void closeQuickAddBlockOnSupplyListDetailsPage() {
+        if (!isQuickAddBlockOpened()) {
+            clickOnQuickAddCheckbox();
+        }
+    }
+
+    @Step("Is Quick add block opened.")
+    public boolean isQuickAddBlockOpened() {
+        return isDisplayed(QUICK_ADD_SUPPLY_LIST_BLOCK_XPATH);
+    }
+
+    @Step("Click on Quick add checkbox.")
+    public void clickOnQuickAddCheckbox() {
+        click(By.id(QUICK_ADD_CHECKBOX_ID));
+        waitJQueryRequestsLoad();
+    }
+
+    @Step("Enter SKU value to any empty Quick add row: {0}.")
+    public void enterSkuToEmptyQuickAddRow(String newProductSKU) {
+        WebElement emptyRow = $$(QUICK_ADD_ROW_TEXT_FIELDS_XPATH).stream()
+                .filter(webElement -> webElement.getAttribute("value").isEmpty())
+                .findFirst().orElseGet(() -> {
+                    throw new NullPointerException("No empty rows!");
+                });
+        emptyRow.sendKeys(newProductSKU);
+        blurElement(emptyRow);
+        waitJQueryRequestsLoad();
+    }
+
+    @Step("Click on Add to this Supply list Quick Add button.")
+    public void clickOnQuickAddToThisSupplyListButton() {
+        click(QUICK_ADD_TO_THIS_SUPPLY_LIST_BUTTON_XPATH);
+        waitUntilPageIsFullyLoaded();
+    }
+
+    public String getErrorMessageForQuickAddRowWithEnteredValue(String enteredText) throws NullPointerException {
+        for (int i = 1; i <= $$(QUICK_ADD_ROWS).size(); i++) {
+            if ($(QUICK_ADD_ROW_TEXT_FIELD_BY_NUMBER_XPATH, String.valueOf(i)).getAttribute("value").equals(enteredText))
+                return $(QUICK_ADD_ROW_ERROR_TEXT_BY_ROW_NUMBER_XPATH, String.valueOf(i)).getText();
+        }
+        throw new NullPointerException("No field with such entered value: " + enteredText);
     }
 }

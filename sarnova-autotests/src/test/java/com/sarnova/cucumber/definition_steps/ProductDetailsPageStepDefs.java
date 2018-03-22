@@ -2,7 +2,10 @@ package com.sarnova.cucumber.definition_steps;
 
 import com.sarnova.helpers.managers.ProductsManager;
 import com.sarnova.helpers.managers.SupplyListsManager;
-import com.sarnova.helpers.models.products.*;
+import com.sarnova.helpers.models.products.GroupProduct;
+import com.sarnova.helpers.models.products.IndividualProduct;
+import com.sarnova.helpers.models.products.Product;
+import com.sarnova.helpers.models.products.UnitOfMeasure;
 import com.sarnova.storefront.pages.ProductDetailsPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -62,13 +65,7 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
     @And("^Set QTY (\\d+) to any product\\(UOM\\) on the PDP.$")
     public void selectAnyProductUOMFromTheList(int qtyValueForAnyProductOnPDP) {
         Product product = (Product) threadVarsHashMap.get(TestKeyword.OPENED_PDP_PRODUCT);
-        HashMap<UnitOfMeasure, Integer> unitsOfMeasurement;
-        if (threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP) == null) {
-            unitsOfMeasurement = new HashMap<>();
-            threadVarsHashMap.put(TestKeyword.SELECTED_UOMS_HASH_MAP, unitsOfMeasurement);
-        } else {
-            unitsOfMeasurement = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
-        }
+        HashMap<UnitOfMeasure, Integer> unitsOfMeasurement = getSelectedUOMS();
         product.getUnitsOfMeasurement()
                 .stream()
                 .findAny()
@@ -82,13 +79,7 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
     @And("^Set QTY (\\d+) to any product\\(UOM\\) that hasn't been selected on PDP.$")
     public void setQTYToAnyProductUOMThatHasNotBeenSelectedOnThePDP(int qtyOfUOMToBeSelected) {
         Product openedProduct = (Product) threadVarsHashMap.get(TestKeyword.OPENED_PDP_PRODUCT);
-        HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement;
-        if (threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP) == null) {
-            selectedUnitsOfMeasurement = new HashMap<>();
-            threadVarsHashMap.put(TestKeyword.SELECTED_UOMS_HASH_MAP, selectedUnitsOfMeasurement);
-        } else {
-            selectedUnitsOfMeasurement = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
-        }
+        HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = getSelectedUOMS();
         UnitOfMeasure unitOfMeasureThatHasNotBeenSelected = openedProduct.getUnitsOfMeasurement()
                 .stream()
                 .filter(unitOfMeasure -> !selectedUnitsOfMeasurement.containsKey(unitOfMeasure))
@@ -101,13 +92,7 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
     @And("^Set QTY (\\d+) to UOM from the same product that hasn't been selected on PDP.$")
     public void setQTYToUOMFromTheSameProductThatHasNotBeenSelectedOnThePDP(int qtyOfUOMToBeSelected) {
         Product openedProduct = (Product) threadVarsHashMap.get(TestKeyword.OPENED_PDP_PRODUCT);
-        HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement;
-        if (threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP) == null) {
-            selectedUnitsOfMeasurement = new HashMap<>();
-            threadVarsHashMap.put(TestKeyword.SELECTED_UOMS_HASH_MAP, selectedUnitsOfMeasurement);
-        } else {
-            selectedUnitsOfMeasurement = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
-        }
+        HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = getSelectedUOMS();
         UnitOfMeasure unitOfMeasureThatHasNotBeenSelected = selectedUnitsOfMeasurement.keySet().stream()
                 .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
                 .flatMap(individualProduct -> individualProduct.getUnitsOfMeasurement().stream())
@@ -143,12 +128,23 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
         String supplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
         if (supplyListName != null && !supplyListName.isEmpty() && supplyListsManager.getSupplyListByName(supplyListName) == null) {
             String supplyListId = productDetailsPage.getSupplyListId();
-            HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
+            HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = getSelectedUOMS();
             ArrayList<IndividualProduct> selectedIndividualProducts = selectedUnitsOfMeasurement.keySet()
                     .stream()
                     .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
                     .collect(Collectors.toCollection(ArrayList::new));
             supplyListsManager.createInstance(userSessions.getActiveUserSession().getUser(), supplyListName, supplyListId, selectedIndividualProducts);
+        } else if (supplyListsManager.getSupplyListByName(supplyListName) != null) {
+            HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = getSelectedUOMS();
+            ArrayList<IndividualProduct> selectedIndividualProducts = selectedUnitsOfMeasurement.keySet()
+                    .stream()
+                    .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
+                    .collect(Collectors.toCollection(ArrayList::new));
+            supplyListsManager.getSupplyListByName(supplyListName)
+                    .addSupplyProductsToList(selectedIndividualProducts
+                            .stream()
+                            .map(selectedIndividualProduct -> supplyListsManager.createSupplyProductInstance(selectedIndividualProduct))
+                            .collect(Collectors.toList()));
         }
     }
 

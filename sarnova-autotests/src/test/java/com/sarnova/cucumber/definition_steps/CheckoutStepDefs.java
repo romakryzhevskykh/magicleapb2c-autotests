@@ -43,13 +43,7 @@ public class CheckoutStepDefs extends AbstractStepDefs {
     @SuppressWarnings("unchecked")
     @Then("^Check that only license-restricted products are displaying in pop-up.$")
     public void checkThatOnlyLicenseRestrictedProductsAreDisplayingInPopUp() {
-        HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement;
-        if (threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP) == null) {
-            selectedUnitsOfMeasurement = new HashMap<>();
-            threadVarsHashMap.put(TestKeyword.SELECTED_UOMS_HASH_MAP, selectedUnitsOfMeasurement);
-        } else {
-            selectedUnitsOfMeasurement = (HashMap<UnitOfMeasure, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_UOMS_HASH_MAP);
-        }
+        HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = getSelectedUOMS();
         ArrayList<IndividualProduct> selectedProducts = selectedUnitsOfMeasurement.keySet()
                 .stream()
                 .map(productsManager::getProductByUOM)

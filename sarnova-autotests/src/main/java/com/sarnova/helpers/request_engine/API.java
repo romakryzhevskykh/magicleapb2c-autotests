@@ -16,7 +16,7 @@ public interface API {
             add("text/xml");
         }}),
         HTML(new ArrayList<String>() {{
-
+            add("text/html;charset=ISO-8859-1");
             add("text/html");
             add("text/html; charset=UTF-8");
             add("text/html;charset=UTF-8");

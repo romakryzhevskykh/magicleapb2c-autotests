@@ -12,6 +12,7 @@ public abstract class BasePageObject extends UIComponent {
 
     public void open() {
         open(getPageUrl());
+        waitUntilPageIsFullyLoaded();
     }
 
     public abstract String getPageUrl();
