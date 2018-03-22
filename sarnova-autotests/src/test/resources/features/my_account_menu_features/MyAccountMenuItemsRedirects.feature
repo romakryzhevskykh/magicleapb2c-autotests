@@ -1,4 +1,4 @@
-Feature: Menu items visibility and ordering.
+Feature: Menu items on click redirects functionality.
 
   Background:
     Given Switch to Storefront shopper.

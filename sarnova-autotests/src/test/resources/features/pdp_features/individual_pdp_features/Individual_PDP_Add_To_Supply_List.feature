@@ -1,4 +1,4 @@
-Feature: Individual PDP Supply list functionality
+Feature: Individual PDP add to Supply list functionality
 
   Background:
     Given Switch to Storefront shopper.

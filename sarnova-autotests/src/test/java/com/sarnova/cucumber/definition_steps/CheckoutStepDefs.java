@@ -44,16 +44,17 @@ public class CheckoutStepDefs extends AbstractStepDefs {
     @Then("^Check that only license-restricted products are displaying in pop-up.$")
     public void checkThatOnlyLicenseRestrictedProductsAreDisplayingInPopUp() {
         HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = getSelectedUOMS();
-        ArrayList<IndividualProduct> selectedProducts = selectedUnitsOfMeasurement.keySet()
+        ArrayList<IndividualProduct> selectedLicenseRestrectedProducts = selectedUnitsOfMeasurement.keySet()
                 .stream()
                 .map(productsManager::getProductByUOM)
                 .distinct()
+                .filter(IndividualProduct::isLicenseRestricted)
                 .collect(Collectors.toCollection(ArrayList::new));
 
         ArrayList<IndividualProduct> productsInLicenseRestrictedPopUp = checkoutPage.getProductsInCheckLicensePopUp();
-        assertEquals(selectedProducts.size(), productsInLicenseRestrictedPopUp.size());
+        assertEquals(productsInLicenseRestrictedPopUp.size(), selectedLicenseRestrectedProducts.size());
         productsInLicenseRestrictedPopUp.forEach(productInLicenseRestrictedPopUp
-                -> assertTrue(selectedProducts.contains(productInLicenseRestrictedPopUp)));
+                -> assertTrue(selectedLicenseRestrectedProducts.contains(productInLicenseRestrictedPopUp)));
     }
 
     @And("^Click on Continue button on Checkout Shipping method step in License pop-up.$")
