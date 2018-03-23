@@ -26,6 +26,7 @@ public class SupplyListsPage extends StorefrontBasePage {
     @Step("Click on Show inactive entries checkbox.")
     public void clickOnShowInactiveEntriesCheckbox() {
         click(SHOW_INACTIVE_ENTRIES_CHECKBOX_XPATH);
+        waitJQueryRequestsLoad();
     }
 
     @Step("Show inactive Supply lists.")
@@ -89,6 +90,13 @@ public class SupplyListsPage extends StorefrontBasePage {
         click(DEACTIVATE_SUPPLY_LIST_BUTTON_BY_ID_XPATH, supplyList.getId());
         clickOnDeactivateButtonInDeleteSLPopUp();
         supplyList.setActive(false);
+        waitUntilPageIsFullyLoaded();
+    }
+
+    @Step("Click on Activate {0}.")
+    public void activateSupplyList(SupplyList supplyList) {
+        click(ACTIVATE_SUPPLY_LIST_BUTTON_BY_ID_XPATH, supplyList.getId());
+        supplyList.setActive(true);
         waitUntilPageIsFullyLoaded();
     }
 

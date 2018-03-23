@@ -13,6 +13,7 @@ public class SupplyListsPageElements {
 
     public static final String IS_FAVORITE_SUPPLY_LIST_CHECKBOX_BY_ID_XPATH = "//input[@type='checkbox' and @class = 'js-savedlist-favorite-checkbox' and @data-saved-list-code = '%s']";
     public static final String DEACTIVATE_SUPPLY_LIST_BUTTON_BY_ID_XPATH = "//a[@class = 'js-delete-saved-list remove-item-link' and @data-savedlist-id = '%s']";
+    public static final String ACTIVATE_SUPPLY_LIST_BUTTON_BY_ID_XPATH = "//a[@class='js-restore-saved-list remove-item-link' and @data-savedlist-id='%s']/span";
 
     private static final String DEACTIVATE_SUPPLY_LIST_POP_UP_XPATH = "//div[@class='js-savedlist_delete_confirm_modal' and @id='colorbox']";
     private static final String DEACTIVATE_SUPPLY_LIST_POP_UP_ACTIONS_XPATH = DEACTIVATE_SUPPLY_LIST_POP_UP_XPATH + "//div[@class='modal-actions']";

@@ -55,4 +55,11 @@ public class SupplyListsPageStepDefs extends AbstractStepDefs {
         SupplyList testSupplyList = supplyListsManager.getSupplyListByName(supplyListName);
         supplyListsPage.deactivateSupplyList(testSupplyList);
     }
+
+    @When("^Click on activate button on Supply lists page.$")
+    public void clickOnActivateButtonOnSupplyListsPage() {
+        String supplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
+        SupplyList testSupplyList = supplyListsManager.getSupplyListByName(supplyListName);
+        supplyListsPage.activateSupplyList(testSupplyList);
+    }
 }
