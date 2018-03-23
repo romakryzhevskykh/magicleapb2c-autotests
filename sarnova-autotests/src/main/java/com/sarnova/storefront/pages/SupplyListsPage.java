@@ -1,6 +1,7 @@
 package com.sarnova.storefront.pages;
 
 import com.sarnova.helpers.managers.SupplyListsManager;
+import com.sarnova.helpers.models.supply_lists.SupplyList;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,18 +26,19 @@ public class SupplyListsPage extends StorefrontBasePage {
     @Step("Click on Show inactive entries checkbox.")
     public void clickOnShowInactiveEntriesCheckbox() {
         click(SHOW_INACTIVE_ENTRIES_CHECKBOX_XPATH);
+        waitJQueryRequestsLoad();
     }
 
     @Step("Show inactive Supply lists.")
     public void showInactiveSupplyLists() {
-        if(!areInactiveSupplyListsBlockVisible()) {
+        if (!areInactiveSupplyListsBlockVisible()) {
             clickOnShowInactiveEntriesCheckbox();
         }
     }
 
     @Step("Hide inactive Supply lists.")
     public void hideInactiveSupplyLists() {
-        if(areInactiveSupplyListsBlockVisible()) {
+        if (areInactiveSupplyListsBlockVisible()) {
             clickOnShowInactiveEntriesCheckbox();
         }
     }
@@ -54,5 +56,52 @@ public class SupplyListsPage extends StorefrontBasePage {
     @Step("Get active Supply lists.")
     public List<String> getActiveSupplyLists() {
         return $$(ACTIVE_SUPPLY_LISTS_NAMES_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    @Step("Mark {0} as favorite.")
+    public void markAsFavorite(SupplyList supplyList) {
+        if (!isFavorite(supplyList)) {
+            clickOnFavoriteCheckbox(supplyList);
+            supplyList.setFavorite(true);
+        }
+    }
+
+    @Step("Unmark {0} as favorite.")
+    public void unmarkAsFavorite(SupplyList supplyList) {
+        if (isFavorite(supplyList)) {
+            clickOnFavoriteCheckbox(supplyList);
+            supplyList.setFavorite(false);
+        }
+    }
+
+    @Step("Click on favorite checkbox {0}.")
+    private void clickOnFavoriteCheckbox(SupplyList supplyList) {
+        click(IS_FAVORITE_SUPPLY_LIST_CHECKBOX_BY_ID_XPATH, supplyList.getId());
+        waitJQueryRequestsLoad();
+    }
+
+    @Step("Is {0} favorite?")
+    private boolean isFavorite(SupplyList supplyList) {
+        return $(IS_FAVORITE_SUPPLY_LIST_CHECKBOX_BY_ID_XPATH, supplyList.getId()).isSelected();
+    }
+
+    @Step("Click on Deactivate {0}.")
+    public void deactivateSupplyList(SupplyList supplyList) {
+        click(DEACTIVATE_SUPPLY_LIST_BUTTON_BY_ID_XPATH, supplyList.getId());
+        clickOnDeactivateButtonInDeleteSLPopUp();
+        supplyList.setActive(false);
+        waitUntilPageIsFullyLoaded();
+    }
+
+    @Step("Click on Activate {0}.")
+    public void activateSupplyList(SupplyList supplyList) {
+        click(ACTIVATE_SUPPLY_LIST_BUTTON_BY_ID_XPATH, supplyList.getId());
+        supplyList.setActive(true);
+        waitUntilPageIsFullyLoaded();
+    }
+
+    @Step("Click on Deactivate button in Delete pop-up.")
+    public void clickOnDeactivateButtonInDeleteSLPopUp() {
+        click(DEACTIVATE_SUPPLY_LIST_POP_UP_DEACTIVATE_BUTTON_XPATH);
     }
 }
