@@ -26,11 +26,11 @@ public class ProductDetailsPage extends StorefrontBasePage {
     public void clickOnAddToSupplyListButton() {
         click(ADD_TO_SUPPLY_LIST_BUTTONS_XPATH);
         waitUntilPageIsFullyLoaded();
-        if (isDisplayed(By.xpath(SUPPLY_POP_UP_IMGAGES_XPATH))) {
-            $$(SUPPLY_POP_UP_IMGAGES_XPATH).forEach(webElement ->
-                    waitUntil(driver1 -> (webElement.getSize().getHeight() == 65 && webElement.getSize().getWidth() == 65))
-            );
-        }
+//        if (isDisplayed(By.xpath(SUPPLY_POP_UP_IMAGES_XPATH))) {
+//            $$(SUPPLY_POP_UP_IMAGES_XPATH).forEach(webElement ->
+//                    waitUntil(driver1 -> (webElement.getSize().getHeight() == 65 && webElement.getSize().getWidth() == 65))
+//            );
+//        }
     }
 
     @Step("Set QTY: {1} for product UOM: {0}.")

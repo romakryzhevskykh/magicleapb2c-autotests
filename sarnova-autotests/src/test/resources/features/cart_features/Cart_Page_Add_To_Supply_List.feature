@@ -1,4 +1,4 @@
-Feature: Cart page functionality(Add to Supply list)
+Feature: Cart page Add to Supply list functionality.
 
   Background:
     Given Switch to Storefront shopper.

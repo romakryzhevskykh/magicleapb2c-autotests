@@ -1,257 +1,167 @@
 package com.sarnova.cucumber.definition_steps;
 
 import com.sarnova.helpers.GeneralPageActivities;
-import com.sarnova.helpers.managers.CartManager;
-import com.sarnova.helpers.managers.ProductsManager;
-import com.sarnova.helpers.managers.SupplyListsManager;
-import com.sarnova.helpers.models.products.IndividualProduct;
-import com.sarnova.helpers.models.products.Product;
-import com.sarnova.helpers.models.products.UnitOfMeasure;
-import com.sarnova.helpers.models.supply_lists.SupplyList;
-import com.sarnova.helpers.models.supply_lists.SupplyListProduct;
-import com.sarnova.helpers.user_engine.UserSession;
 import com.sarnova.storefront.page_blocks.HeaderRowPageBlock;
-import com.sarnova.storefront.pages.LoginPage;
+import com.sarnova.storefront.pages.*;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import org.apache.commons.lang3.RandomStringUtils;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.*;
-import java.util.function.BiFunction;
-import java.util.stream.Collectors;
+import java.util.List;
+
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class GeneralStepDefs extends AbstractStepDefs {
-    @Autowired HeaderRowPageBlock headerRowPageBlock;
-    @Autowired LoginPage loginPage;
-
     @Autowired private GeneralPageActivities generalPageActivities;
-    @Autowired private SupplyListsManager supplyListsManager;
-    @Autowired private ProductsManager productsManager;
-    @Autowired private CartManager cartManager;
-
-    @Given("^User is logged in to Storefront.$")
-    public void userIsLoggedInToStorefront() {
-        if (headerRowPageBlock.isUserLoggedOut()) {
-            loginPage.open();
-            loginPage.loginToStorefront(userSessions.getActiveUserSession());
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    @And("^Supply list that doesn't contain this products exists.$")
-    public void existingSupplyListThatDoesNotContainThisProducts() {
-        HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = getSelectedUOMS();
-        String existingSupplyListName = supplyListsManager.getTestSupplyLists()
-                .stream()
-                .filter(supplyList -> supplyList.getSupplyProductsInList()
-                        .stream()
-                        .flatMap(supplyListProduct -> supplyListProduct.getIndividualProduct().getUnitsOfMeasurement().stream())
-                        .noneMatch(selectedUnitsOfMeasurement.keySet()::contains)
-                ).findAny()
-                .orElseGet(() -> createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts.apply(selectedUnitsOfMeasurement.keySet(), 1))
-                .getName();
-
-        threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, existingSupplyListName);
-    }
-
-    @SuppressWarnings("unchecked")
-    @Given("^Supply list with at least (\\d+) active products.$")
-    public void notEmptySupplyList(int numberOfActiveProductsInSupplyList) {
-        SupplyList notEmptySupplyList = supplyListsManager.getTestSupplyLists()
-                .stream()
-                .filter(SupplyList::isActive)
-                .filter(supplyList -> supplyList.getSupplyProductsInList()
-                        .stream()
-                        .filter(SupplyListProduct::isActive)
-                        .mapToLong(supplyListProduct -> supplyListProduct.getIndividualProduct().getUnitsOfMeasurement().size())
-                        .sum() >= numberOfActiveProductsInSupplyList)
-                .findAny()
-                .orElseGet(() ->
-                        createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts.apply(Collections.EMPTY_SET, numberOfActiveProductsInSupplyList)
-                );
-        threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, notEmptySupplyList.getName());
-    }
-
-    @Given("^Empty Cart.$")
-    public void emptyCart() {
-        cartManager.emptyActiveCart(userSessions.getActiveUserSession());
-    }
-
-    @SuppressWarnings("unchecked")
-    private BiFunction<Set<UnitOfMeasure>, Integer, SupplyList> createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts = (selectedUnitsOfMeasurement, numberOfProducts) -> {
-        UserSession userSession = userSessions.getActiveUserSession();
-        String newSupplyListName = RandomStringUtils.randomAlphanumeric(10);
-        ArrayList<IndividualProduct> individualProductsThatDoNotContainSelectedUOMs = productsManager.getTestIndividualProducts()
-                .stream()
-                .filter(product -> product.getUnitsOfMeasurement()
-                        .stream()
-                        .noneMatch(selectedUnitsOfMeasurement::contains)
-                ).collect(Collectors.toCollection(ArrayList::new));
-        List<IndividualProduct> productsToCreate;
-        if (individualProductsThatDoNotContainSelectedUOMs.size() >= numberOfProducts)
-            productsToCreate = individualProductsThatDoNotContainSelectedUOMs.subList(0, numberOfProducts);
-        else
-            throw new NullPointerException("No test products without selected UOMs: " + selectedUnitsOfMeasurement + " or quantity of products < " + numberOfProducts + "\n"
-                    + "List of filtered products: " + individualProductsThatDoNotContainSelectedUOMs);
-        supplyListsManager.createViaApi(userSession, newSupplyListName, productsToCreate);
-        return supplyListsManager.getSupplyListByName(newSupplyListName);
-    };
-
-    @SuppressWarnings("unchecked")
-    @Given("^Add to cart (.*) product with quantity (\\d+).$")
-    public void cartWithProducts(List<String> productTypes, int qtyOfProduct) {
-        HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = getSelectedUOMS();
-        Product selectedProduct = productsManager.getProductByProductTestTypes(productTypes);
-        UnitOfMeasure selectedUOM = selectedProduct.getUnitsOfMeasurement().stream().findAny().orElse(null);
-        selectedUnitsOfMeasurement.put(selectedUOM, qtyOfProduct);
-        cartManager.addUOMsToCartViaApi(userSessions.getActiveUserSession(), new HashMap<UnitOfMeasure, Integer>() {{
-            put(selectedUOM, qtyOfProduct);
-        }});
-    }
-
-    @SuppressWarnings("unchecked")
-    @And("^Add to cart (.*) product with quantity (\\d+) that hasn't been added before.$")
-    public void setQTYToAnyProductUOMThatHasNotBeenSelectedOnThePDP(List<String> productTypes, int qtyOfProduct) {
-        HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = getSelectedUOMS();
-        List<IndividualProduct> selectedProducts = selectedUnitsOfMeasurement.keySet()
-                .stream()
-                .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
-                .distinct()
-                .collect(Collectors.toList());
-        IndividualProduct selectedProduct = productsManager.getUniqueProductsByProductsQuantityAndTestTypes(
-                selectedProducts.size() + 1,
-                productTypes)
-                .stream()
-                .map(product -> (IndividualProduct) product)
-                .filter(product -> !selectedProducts.contains(product))
-                .findAny()
-                .orElse(null);
-        UnitOfMeasure selectedUOM = selectedProduct.getUnitsOfMeasurement().stream().findAny().orElse(null);
-        selectedUnitsOfMeasurement.put(selectedUOM, qtyOfProduct);
-        cartManager.addUOMsToCartViaApi(userSessions.getActiveUserSession(), new HashMap<UnitOfMeasure, Integer>() {{
-            put(selectedUOM, qtyOfProduct);
-        }});
-    }
-
-    @SuppressWarnings("unchecked")
-    @Given("^Active Supply list exists.$")
-    public void notEmptyActiveSupplyList() {
-        SupplyList activeSupplyList = supplyListsManager.getTestSupplyLists()
-                .stream()
-                .filter(SupplyList::isActive)
-                .findAny()
-                .orElseGet(() ->
-                        createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts.apply(Collections.EMPTY_SET, 1)
-                );
-        threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, activeSupplyList.getName());
-    }
-
-
-    @SuppressWarnings("unchecked")
-    @Given("^Active Supply list with at least (\\d+) active products exists.$")
-    public void activeSupplyListWithAtLeastActiveProductsQuantity(int qtyOfActiveProducts) {
-        SupplyList activeSupplyList = supplyListsManager.getTestSupplyLists()
-                .stream()
-                .filter(SupplyList::isActive)
-                .filter(supplyList -> supplyList.getSupplyProductsInList()
-                        .stream()
-                        .filter(SupplyListProduct::isActive)
-                        .count() >= qtyOfActiveProducts)
-                .findAny()
-                .orElseGet(() ->
-                        createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts.apply(Collections.EMPTY_SET, qtyOfActiveProducts)
-                );
-        threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, activeSupplyList.getName());
-    }
-
-    @SuppressWarnings("unchecked")
-    @Given("^Active Supply list with only (\\d+) active products exists.$")
-    public void activeSupplyListWithOnlyActiveProductsQuantity(int qtyOfActiveProducts) {
-        SupplyList activeSupplyList = supplyListsManager.getTestSupplyLists()
-                .stream()
-                .filter(SupplyList::isActive)
-                .filter(supplyList -> supplyList.getSupplyProductsInList()
-                        .stream()
-                        .filter(SupplyListProduct::isActive)
-                        .count() == qtyOfActiveProducts)
-                .findAny()
-                .orElseGet(() ->
-                        createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts.apply(Collections.EMPTY_SET, qtyOfActiveProducts)
-                );
-        threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, activeSupplyList.getName());
-    }
-
-    @SuppressWarnings("unchecked")
-    @Given("^Inactive Supply list exists.$")
-    public void inactiveSupplyListExists() {
-        SupplyList inactiveSupplyList = supplyListsManager.getTestSupplyLists()
-                .stream()
-                .filter(supplyList -> !supplyList.isActive())
-                .findAny()
-                .orElseGet(() ->
-                        createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts.apply(Collections.EMPTY_SET, 1)
-                );
-        if (inactiveSupplyList.isActive())
-            supplyListsManager.deactivate(userSessions.getActiveUserSession(), inactiveSupplyList);
-        threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, inactiveSupplyList.getName());
-    }
-
-    @Given("^Active Supply list with at least (\\d+) inactive products exists.$")
-    public void activeSupplyListWithAtLeastInactiveProductsExists(int qtyOfInactiveProducts) {
-        SupplyList activeSupplyList = supplyListsManager.getTestSupplyLists()
-                .stream()
-                .filter(SupplyList::isActive)
-                .filter(supplyList -> supplyList.getSupplyProductsInList()
-                        .stream()
-                        .filter(supplyListProduct -> !supplyListProduct.isActive())
-                        .count() >= qtyOfInactiveProducts)
-                .findAny()
-                .orElseGet(() ->
-                        createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts.apply(Collections.EMPTY_SET, qtyOfInactiveProducts)
-                );
-        if(activeSupplyList.getSupplyProductsInList()
-                .stream()
-                .filter(supplyListProduct -> !supplyListProduct.isActive())
-                .count() < qtyOfInactiveProducts) {
-            activeSupplyList.getSupplyProductsInList().forEach(supplyListProduct -> {
-                supplyListsManager.deactivateProductInList(userSessions.getActiveUserSession(), activeSupplyList, supplyListProduct);
-            });
-        }
-        threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, activeSupplyList.getName());
-    }
-
-    @Given("^Active not favorite Supply list exists.$")
-    public void activeNotFavoriteSupplyListExists() {
-        SupplyList activeSupplyList = supplyListsManager.getTestSupplyLists()
-                .stream()
-                .filter(SupplyList::isActive)
-                .filter(supplyList -> !supplyList.isFavorite())
-                .findAny()
-                .orElseGet(() ->
-                        createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts.apply(Collections.EMPTY_SET, 1)
-                );
-        threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, activeSupplyList.getName());
-    }
-
-    @Given("^Active favorite Supply list exists.$")
-    public void activeFavoriteSupplyListExists() {
-        SupplyList activeSupplyList = supplyListsManager.getTestSupplyLists()
-                .stream()
-                .filter(SupplyList::isActive)
-                .filter(SupplyList::isFavorite)
-                .findAny()
-                .orElseGet(() ->
-                        createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts.apply(Collections.EMPTY_SET, 1)
-                );
-        if (!activeSupplyList.isFavorite()) {
-            supplyListsManager.markSupplyListAsFavorite(userSessions.getActiveUserSession(), activeSupplyList);
-        }
-        threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, activeSupplyList.getName());
-    }
+    @Autowired HeaderRowPageBlock headerRowPageBlock;
+    @Autowired StartPage startPage;
+    @Autowired AccountDashboardPage accountDashboardPage;
+    @Autowired OrderHistoryPage orderHistoryPage;
+    @Autowired SupplyListsPage supplyListsPage;
+    @Autowired SavedCartsPage savedCartsPage;
+    @Autowired SavedCreditCardsPage savedCreditCardsPage;
+    @Autowired QuotesPage quotesPage;
+    @Autowired ReportsPage reportsPage;
+    @Autowired AccountInformationPage accountInformationPage;
+    @Autowired CustomCategoryPage customCategoryPage;
+    @Autowired HelpNewToBoundtreePage helpNewToBoundtreePage;
 
     @And("^Refresh page.$")
     public void refreshPage() throws Throwable {
         generalPageActivities.refreshPage();
+    }
+
+    @Then("^Check that (.*) item is present in My Account menu.$")
+    public void checkThatItemIsPresentInMyAccountMenu(String menuItemName) {
+        List<String> myAccountItemNames = headerRowPageBlock.getMyAccountMenuNames();
+        assertTrue(myAccountItemNames.contains(menuItemName));
+    }
+
+    @And("^Check that (.*) item index item is (\\d+).$")
+    public void checkThatAccountDashboardItemIndexItemIs(String menuItemName, int itemIndexNumber) {
+        int rowIndex = headerRowPageBlock.getIndexOfMyAccountMenuItemByName(menuItemName);
+        assertEquals(rowIndex, itemIndexNumber);
+    }
+
+    @And("^My Account menu is opened.$")
+    public void myAccountMenuIsOpened() {
+        headerRowPageBlock.openMyAccountMenu();
+    }
+
+    @Then("^Check that My Account menu has only (\\d+) items.$")
+    public void checkThatMyAccountMenuHasOnlyItems(int expectedNumberOfMyAccountItems) {
+        assertEquals(headerRowPageBlock.getMyAccountMenuNames().size(), expectedNumberOfMyAccountItems);
+    }
+
+    @When("^Click on Account Dashboard item in My Account menu.$")
+    public void clickOnAccountDashboardItemInMyAccountMenu() {
+        headerRowPageBlock.clickOnAccountDashboardItemInMyAccountMenu();
+    }
+
+    @Then("^Check that Account Dashboard page is opened.$")
+    public void checkThatAccountDashboardPageIsOpened() {
+        assertTrue(accountDashboardPage.isOpened());
+    }
+
+    @When("^Click on Order History item in My Account menu.$")
+    public void clickOnOrderHistoryItemInMyAccountMenu() {
+        headerRowPageBlock.clickOnOrderHistoryItemInMyAccountMenu();
+    }
+
+    @Then("^Check that Order History page is opened.$")
+    public void checkThatOrderHistoryPageIsOpened() {
+        assertTrue(orderHistoryPage.isOpened());
+    }
+
+    @When("^Click on Supply Lists item in My Account menu.$")
+    public void clickOnSupplyListsItemInMyAccountMenu() {
+        headerRowPageBlock.clickOnSupplyListsItemInMyAccountMenu();
+    }
+
+    @Then("^Check that Supply Lists page is opened.$")
+    public void checkThatSupplyListsPageIsOpened() {
+        assertTrue(supplyListsPage.isOpened());
+    }
+
+    @When("^Click on Saved Carts item in My Account menu.$")
+    public void clickOnSavedCartsItemInMyAccountMenu() {
+        headerRowPageBlock.clickOnSavedCartsItemInMyAccountMenu();
+    }
+
+    @Then("^Check that Saved Carts page is opened.$")
+    public void checkThatSavedCartsPageIsOpened() {
+        assertTrue(savedCartsPage.isOpened());
+    }
+
+    @When("^Click on Saved Credit Cards item in My Account menu.$")
+    public void clickOnSavedCreditCardsItemInMyAccountMenu() {
+        headerRowPageBlock.clickOnSavedCreditCardsItemInMyAccountMenu();
+    }
+
+    @Then("^Check that Saved Credit Cards page is opened.$")
+    public void checkThatSavedCreditCardsPageIsOpened() {
+        assertTrue(savedCreditCardsPage.isOpened());
+    }
+
+    @When("^Click on Quotes item in My Account menu.$")
+    public void clickOnQuotesItemInMyAccountMenu() {
+        headerRowPageBlock.clickOnQuotesItemInMyAccountMenu();
+    }
+
+    @Then("^Check that Quotes page is opened.$")
+    public void checkThatQuotesPageIsOpened() {
+        assertTrue(quotesPage.isOpened());
+    }
+
+    @When("^Click on Reports item in My Account menu.$")
+    public void clickOnReportsItemInMyAccountMenu() {
+        headerRowPageBlock.clickOnReportsItemInMyAccountMenu();
+    }
+
+    @And("^Check that Reports page is opened.$")
+    public void checkThatReportsPageIsOpened() {
+        assertTrue(reportsPage.isOpened());
+    }
+
+    @When("^Click on Account Information item in My Account menu.$")
+    public void clickOnAccountInformationItemInMyAccountMenu() {
+        headerRowPageBlock.clickOnAccountInformationItemInMyAccountMenu();
+    }
+
+    @Then("^Check that Account Information page is opened.$")
+    public void checkThatAccountInformationPageIsOpened() {
+        assertTrue(accountInformationPage.isOpened());
+    }
+
+    @When("^Click on Custom Category item in My Account menu.$")
+    public void clickOnCustomCategoryItemInMyAccountMenu() {
+        headerRowPageBlock.clickOnCustomCategoryItemInMyAccountMenu();
+    }
+
+    @Then("^Check that Custom Category page is opened.$")
+    public void checkThatCustomCategoryPageIsOpened() {
+        assertTrue(customCategoryPage.isOpened());
+    }
+
+    @When("^Click on Help/New To Boundtree\\? item in My Account menu.$")
+    public void clickOnHelpNewToBoundtreeItemInMyAccountMenu() {
+        headerRowPageBlock.clickOnHelpNewToBoundtreeItemInMyAccountMenu();
+    }
+
+    @Then("^Check that Help/New To Boundtree\\? page is opened.$")
+    public void checkThatHelpNewToBoundtreePageIsOpened() {
+        assertTrue(helpNewToBoundtreePage.isOpened());
+    }
+
+    @When("^Click on Sign Out item in My Account menu.$")
+    public void clickOnSignOutItemInMyAccountMenu() {
+        headerRowPageBlock.clickOnSignOutItemInMyAccountMenu(userSessions.getActiveUserSession());
+    }
+
+    @Then("^Check that Start page is opened.$")
+    public void checkThatStartPageIsOpened() {
+        assertTrue(startPage.isOpened());
     }
 }

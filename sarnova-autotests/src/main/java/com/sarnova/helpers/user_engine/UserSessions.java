@@ -50,6 +50,9 @@ public class UserSessions {
     }
 
     public UserSession getAnyUserSessionForUser(User user) {
-        return allSessionsList.stream().filter(userSession -> userSession.getUser().equals(user)).findAny().orElse(null);
+        return allSessionsList.stream()
+                .filter(userSession -> userSession.getUser().equals(user))
+                .filter(UserSession::isLoggedIn)
+                .findAny().orElse(null);
     }
 }
