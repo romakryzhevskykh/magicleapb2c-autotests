@@ -24,5 +24,6 @@ Feature: Make Supply list favorite or deactivate favourite flag from Supply List
     Given Active favorite Supply list exists.
     And Open Supply lists page.
     When Click on deactivate button on Supply lists page.
+    And Refresh page.
     Then Click on Supply lists drop-down in Header on Supply list details page.
     And Check that current Supply list is not displayed in favorite Supply lists drop-down on Supply list details page.

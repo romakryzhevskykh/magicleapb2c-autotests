@@ -75,7 +75,7 @@ public class SupplyListsPage extends StorefrontBasePage {
 
     @Step("Click on favorite checkbox {0}.")
     private void clickOnFavoriteCheckbox(SupplyList supplyList) {
-        $(IS_FAVORITE_SUPPLY_LIST_CHECKBOX_BY_ID_XPATH, supplyList.getId());
+        click(IS_FAVORITE_SUPPLY_LIST_CHECKBOX_BY_ID_XPATH, supplyList.getId());
         waitJQueryRequestsLoad();
     }
 
@@ -86,8 +86,14 @@ public class SupplyListsPage extends StorefrontBasePage {
 
     @Step("Click on Deactivate {0}.")
     public void deactivateSupplyList(SupplyList supplyList) {
-        $(DEACTIVATE_SUPPLY_LIST_BUTTON_BY_ID_XPATH).click();
+        click(DEACTIVATE_SUPPLY_LIST_BUTTON_BY_ID_XPATH, supplyList.getId());
+        clickOnDeactivateButtonInDeleteSLPopUp();
         supplyList.setActive(false);
         waitUntilPageIsFullyLoaded();
+    }
+
+    @Step("Click on Deactivate button in Delete pop-up.")
+    public void clickOnDeactivateButtonInDeleteSLPopUp() {
+        click(DEACTIVATE_SUPPLY_LIST_POP_UP_DEACTIVATE_BUTTON_XPATH);
     }
 }
