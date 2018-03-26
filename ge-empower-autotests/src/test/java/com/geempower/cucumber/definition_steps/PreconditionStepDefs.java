@@ -78,7 +78,6 @@ public class PreconditionStepDefs extends AbstractStepDefs {
     @And("^Dashboard page is opened.$")
     public void dashboardPageIsOpened() {
         accountManagementPage.waitUntilPageIsFullyLoaded();
-        productManager.getProductWithAllDataByRegion(userSessions.getActiveUserSession(), RegionType.NORTH_AMERICA);
         if (!dashboardPage.isOpened()) {
             dashboardPage.open();
         }
