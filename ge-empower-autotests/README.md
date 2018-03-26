@@ -24,8 +24,8 @@ with following params and own credentials for prod and stage environment:
     .idea/
     src/test/resources/META-INF
     target
-4. update your driver to the latest driver version:
-    brew install chromedriver
+4. Install your driver to the latest driver version:
+    brew install chromedriver (only for mac os)
 
 #dependencies:
 - download and set up Maven
