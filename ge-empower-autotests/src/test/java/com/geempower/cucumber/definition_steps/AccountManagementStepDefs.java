@@ -3,18 +3,15 @@ package com.geempower.cucumber.definition_steps;
 import com.geempower.helpers.managers.RegionsManager;
 import com.geempower.helpers.models.Region;
 import com.geempower.storefront.pages.AccountManagementPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.openqa.selenium.By;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.geempower.storefront.page_elements.AccountManagementPageElements.SEND_EXTERNAL_REQUEST_BUTTON_ID;
 import static org.testng.Assert.assertTrue;
 
 public class AccountManagementStepDefs extends AbstractStepDefs {
