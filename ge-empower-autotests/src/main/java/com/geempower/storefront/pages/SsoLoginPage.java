@@ -1,6 +1,7 @@
 package com.geempower.storefront.pages;
 
 import com.geempower.helpers.user_engine.User;
+import com.geempower.helpers.user_engine.UserSession;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
 import org.springframework.stereotype.Component;
@@ -21,10 +22,11 @@ public class SsoLoginPage extends StorefrontBasePage {
         return storefrontProject.getSsoLoginUrl();
     }
 
-    public void loginToStorefront(User user) {
-        fillUsername(user.getUsername());
-        fillPassword(user.getPassword());
+    public void loginToStorefront(UserSession userSession) {
+        fillUsername(userSession.getUsername());
+        fillPassword(userSession.getPassword());
         clickOnLoginButton();
+        userSession.setCookies(getDriver().manage().getCookies());
     }
 
     @Step("Fill Username field on Login Page with {0}")

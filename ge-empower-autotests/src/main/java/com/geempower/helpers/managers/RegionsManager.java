@@ -27,4 +27,11 @@ public class RegionsManager {
                 .findAny()
                 .orElse(null);
     }
+
+    public Region getRegionByValue(String regionNameValue) {
+        return regions.stream()
+                .filter(region -> region.getRegionType().getRegionName().equalsIgnoreCase(regionNameValue))
+                .findAny()
+                .orElse(null);
+    }
 }

@@ -1,5 +1,7 @@
 package com.geempower.cucumber.definition_steps;
 
+import com.geempower.helpers.managers.ProductManager;
+import com.geempower.helpers.models.RegionType;
 import com.geempower.storefront.page_blocks.HeaderBlock;
 import com.geempower.storefront.pages.*;
 import cucumber.api.java.en.And;
@@ -39,6 +41,9 @@ public class PreconditionStepDefs extends AbstractStepDefs {
     private ManageUsersPage manageUsersPage;
     @Autowired
     private ProfilePage profilePage;
+    @Autowired
+    private ProductManager productManager;
+
 
     @Given("^User is logged in to Storefront.$")
     public void userIsLoggedInToStorefront() {
@@ -49,7 +54,7 @@ public class PreconditionStepDefs extends AbstractStepDefs {
             if (loginPage.isOpened()) {
                 loginPage.loginToStorefront(userSessions.getActiveUserSession().getUser());
             } else if (ssoLoginPage.isOpened()) {
-                ssoLoginPage.loginToStorefront(userSessions.getActiveUserSession().getUser());
+                ssoLoginPage.loginToStorefront(userSessions.getActiveUserSession());
             }
         }
     }
@@ -73,6 +78,7 @@ public class PreconditionStepDefs extends AbstractStepDefs {
     @And("^Dashboard page is opened.$")
     public void dashboardPageIsOpened() {
         accountManagementPage.waitUntilPageIsFullyLoaded();
+        productManager.getProductWithAllDataByRegion(userSessions.getActiveUserSession(), RegionType.NORTH_AMERICA);
         if (!dashboardPage.isOpened()) {
             dashboardPage.open();
         }
