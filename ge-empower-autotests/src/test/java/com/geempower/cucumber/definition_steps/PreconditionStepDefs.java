@@ -77,7 +77,7 @@ public class PreconditionStepDefs extends AbstractStepDefs {
 
     @And("^Dashboard page is opened.$")
     public void dashboardPageIsOpened() {
-        accountManagementPage.waitUntilPageIsFullyLoaded();
+        dashboardPage.waitUntilPageIsFullyLoaded();
         if (!dashboardPage.isOpened()) {
             dashboardPage.open();
         }
@@ -85,7 +85,7 @@ public class PreconditionStepDefs extends AbstractStepDefs {
 
     @And("^Shipments page is opened.$")
     public void shipmentsPageIsOpened() {
-        accountManagementPage.waitUntilPageIsFullyLoaded();
+        shipmentsPage.waitUntilPageIsFullyLoaded();
         if (!shipmentsPage.isOpened()) {
             shipmentsPage.open();
         }
@@ -162,6 +162,5 @@ public class PreconditionStepDefs extends AbstractStepDefs {
             profilePage.open();
         }
     }
-
 
 }
