@@ -2,7 +2,7 @@ package com.geempower.storefront.pages;
 
 import com.geempower.storefront.StorefrontBasePage;
 
-public class OrderEntry3 extends StorefrontBasePage {
+public class OrderEntry2Page extends StorefrontBasePage {
 
     private final String pageUri = "checkout";
 
