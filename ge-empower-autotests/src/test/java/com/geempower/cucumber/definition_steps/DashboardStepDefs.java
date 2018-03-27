@@ -1,6 +1,8 @@
 package com.geempower.cucumber.definition_steps;
 
+import com.geempower.storefront.page_blocks.PriceAndAvailabilityBlock;
 import com.geempower.storefront.pages.DashboardPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -12,6 +14,8 @@ import static org.testng.Assert.assertTrue;
 public class DashboardStepDefs extends AbstractStepDefs {
     @Autowired
     private DashboardPage dashboardPage;
+    @Autowired
+    private PriceAndAvailabilityBlock priceAndAvailabilityBlock;
 
     @And("^Order Status widget is displayed.$")
     public void orderStatusWidgetIsDisplayed() {
@@ -57,6 +61,17 @@ public class DashboardStepDefs extends AbstractStepDefs {
     public void chosenAccountIsDisplayedInAccountsBoxOnDashboardPage() {
         String chosenAccount = threadVarsHashMap.getString(TestKeyword.CHOSEN_ACCOUNT);
         assertTrue(dashboardPage.isSelectedAccountIsDisplayed().contains(chosenAccount));
+    }
 
+    @And("^Click on P&A button.$")
+    public void clickOnPAButton() throws Throwable {
+        priceAndAvailabilityBlock.clickOnCheckPAButton();
+    }
+
+    @When("^User set catalogueNo to Copy & Paste field.$")
+    public void userSetCatalogueNoToCopyPasteField() throws Throwable {
+        threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
+        String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
+        priceAndAvailabilityBlock.setCatalogueNoToTheCopyAndPasteField(catalogueNo);
     }
 }
