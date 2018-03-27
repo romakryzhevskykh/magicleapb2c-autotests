@@ -15,6 +15,11 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
         return storefrontProject.getBaseUrl().concat(pageUri);
     }
 
+    @Override
+    public boolean isOpened() {
+        return getCurrentUrl().equals(getPageUrl());
+    }
+
     @Step("Select all checkboxes")
     public void clickOnAllCheckboxes() {
         click(ALL_CHECKBOXES_XPATH);

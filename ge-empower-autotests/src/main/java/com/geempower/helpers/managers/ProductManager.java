@@ -1,6 +1,7 @@
 package com.geempower.helpers.managers;
 
 import com.geempower.helpers.models.Product;
+import com.geempower.helpers.models.Region;
 import com.geempower.helpers.models.RegionType;
 import com.geempower.helpers.request_engine.GETRequest;
 import com.geempower.helpers.user_engine.UserSession;
@@ -26,12 +27,12 @@ public class ProductManager {
         productsList.add(new Product(catalogueNo, regionsManager.getRegionByValue(region), id));
     }
 
-    public Product getProductByRegion(RegionType region) {
-        return productsList.stream().filter(product -> product.getRegion().getRegionType().equals(region)).findAny().get();
+    public Product getProductByRegion(Region region) {
+        return productsList.stream().filter(product -> product.getRegion().equals(region)).findAny().get();
     }
 
-    public Product getProductWithAllDataByRegion(UserSession userSession, RegionType region) {
-        return productsList.stream().filter(product -> product.getRegion().getRegionType().equals(region))
+    public Product getProductWithAllDataByRegion(UserSession userSession, Region region) {
+        return productsList.stream().filter(product -> product.getRegion().equals(region))
                 .filter(product -> product.getListPrice() != null).findAny()
                 .orElseGet(() -> {
                     Product product = getProductByRegion(region);

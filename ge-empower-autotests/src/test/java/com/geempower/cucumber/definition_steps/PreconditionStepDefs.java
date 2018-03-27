@@ -43,6 +43,8 @@ public class PreconditionStepDefs extends AbstractStepDefs {
     private ProfilePage profilePage;
     @Autowired
     private ProductManager productManager;
+    @Autowired
+    private PriceAndAvailabilityPage priceAndAvailabilityPage;
 
 
     @Given("^User is logged in to Storefront.$")
@@ -72,14 +74,6 @@ public class PreconditionStepDefs extends AbstractStepDefs {
         accountManagementPage.waitUntilPageIsFullyLoaded();
         if (!ordersPage.isOpened()) {
             ordersPage.open();
-        }
-    }
-
-    @And("^Dashboard page is opened.$")
-    public void dashboardPageIsOpened() {
-        dashboardPage.waitUntilPageIsFullyLoaded();
-        if (!dashboardPage.isOpened()) {
-            dashboardPage.open();
         }
     }
 
@@ -160,6 +154,14 @@ public class PreconditionStepDefs extends AbstractStepDefs {
         profilePage.waitUntilPageIsFullyLoaded();
         if (!profilePage.isOpened()) {
             profilePage.open();
+        }
+    }
+
+    @And("^Price&Availability page is opened.$")
+    public void priceAndAvailabilityPageIsOpened() {
+        priceAndAvailabilityPage.waitUntilPageIsFullyLoaded();
+        if (!priceAndAvailabilityPage.isOpened()) {
+            priceAndAvailabilityPage.open();
         }
     }
 
