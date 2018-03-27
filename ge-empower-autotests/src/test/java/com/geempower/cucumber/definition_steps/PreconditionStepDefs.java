@@ -77,14 +77,6 @@ public class PreconditionStepDefs extends AbstractStepDefs {
         }
     }
 
-    @And("^Dashboard page is opened.$")
-    public void dashboardPageIsOpened() {
-        dashboardPage.waitUntilPageIsFullyLoaded();
-        if (!dashboardPage.isOpened()) {
-            dashboardPage.open();
-        }
-    }
-
     @And("^Shipments page is opened.$")
     public void shipmentsPageIsOpened() {
         shipmentsPage.waitUntilPageIsFullyLoaded();

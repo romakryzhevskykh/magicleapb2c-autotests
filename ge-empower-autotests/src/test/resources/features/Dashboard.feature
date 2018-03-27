@@ -29,6 +29,7 @@ Feature: Some actions on Dashboard page
 #    When Choose North_America region.
 #    And Search random account for chosen region.
 #    And Dashboard page is opened.
+#    When Click on Skip button.
 #    When User set catalogNo. to Product Number field.
 #    And Click on P&A button.
 #    Then Price&Availability page is opened.
