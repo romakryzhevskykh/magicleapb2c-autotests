@@ -22,7 +22,15 @@ Feature: Some actions on Dashboard page
     Given Select test product for chosen region.
     When User set catalogueNo to Copy & Paste field.
     And Click on P&A button.
-    Then Price&Availability page is opened.
+    And Price&Availability page is opened.
+    Then Check that default quantity is equals to 1.
+    Then Check that description, list price, final net price, availability are equal to data from PDP.
+    When Quantity is changed to 1000 items.
+    And All products are selected on P&A page.
+    And Update Price & Availability is clicked.
+    Then Extend Price is changed to correct value.
+
+
 
 #  Scenario: Check that user is able to place order via Product Number field using P&A block in North America region
 #    And Account management page is opened.
