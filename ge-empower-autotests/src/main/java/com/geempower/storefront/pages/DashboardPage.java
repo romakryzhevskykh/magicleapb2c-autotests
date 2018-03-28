@@ -1,6 +1,7 @@
 package com.geempower.storefront.pages;
 
 import com.geempower.storefront.StorefrontBasePage;
+import org.openqa.selenium.By;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -53,6 +54,11 @@ public class DashboardPage extends StorefrontBasePage {
     public void skipTrainingLevel() {
         waitUntilPageIsFullyLoaded();
         click(SKIP_BUTTON_XPATH);
+    }
+
+    @Step("Click on Close Cookies button")
+    public void closeCookiesPopUp() {
+        click(By.id(CLOSE_COOKIES_BUTTON_ID));
     }
 
     @Step("Check selected account is displayed")

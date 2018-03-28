@@ -24,5 +24,10 @@ public class PriceAndAvailabilityBlock extends UIComponent {
     public void setCatalogueNoToTheCopyAndPasteField(String catalogueNo){
         $(By.id(COPY_AND_PASTE_FIELD_ID)).sendKeys(catalogueNo);
     }
+
+    @Step("Enter CatalogueNo. to the Product field")
+    public void setCatalogueNoToProductField(String catalogueNo){
+        $(By.id(FIRST_PRODUCT_ROW_ID)).sendKeys(catalogueNo);
+    }
 }
 

@@ -9,5 +9,6 @@ public class DashboardPageElements {
     public final static String RECENT_LIST_WIDGET_XPATH = ".//div[contains(@class,'trainingLayerRecentListsTooltip')]";
     public final static String SKIP_BUTTON_XPATH = "//a[contains(@class,'introjs-button')]";
     public final static String ACCOUNT_INFO_XPATH = ".//span[@class='account-info-text']/span";
+    public final static String CLOSE_COOKIES_BUTTON_ID = "_evh-ric-c";
 
 }
