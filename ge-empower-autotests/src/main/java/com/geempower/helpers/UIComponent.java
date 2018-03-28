@@ -11,7 +11,8 @@ import java.util.List;
 
 public abstract class UIComponent {
 
-    @Autowired protected WebDriverSessions webDriverPool;
+    @Autowired
+    protected WebDriverSessions webDriverPool;
 
     protected WebDriver getDriver() {
         return webDriverPool.getActiveDriver();
@@ -46,12 +47,13 @@ public abstract class UIComponent {
     }
 
     protected void click(String xpath, String... args) {
-        WebElement webElement = $(xpath, args);
         webDriverPool.getActiveDriverSession().setShortImplicitWait();
+        WebElement webElement = $(xpath, args);
         try {
             WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getShortTimeOut());
             wait.until(ExpectedConditions.elementToBeClickable(webElement));
             webElement.click();
+            webDriverPool.getActiveDriverSession().restoreDefaultImplicitWait();
         } catch (WebDriverException | NullPointerException ex) {
             ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", webElement);
             webElement.click();
@@ -139,11 +141,11 @@ public abstract class UIComponent {
         }
     }
 
-    public void waitForElementToDisappear(By by){
-        for(int i=0;i<=5;++i){
-            if(!$(by).isDisplayed()){
+    public void waitForElementToDisappear(By by) {
+        for (int i = 0; i <= 5; ++i) {
+            if (!$(by).isDisplayed()) {
                 break;
-            }else{
+            } else {
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
