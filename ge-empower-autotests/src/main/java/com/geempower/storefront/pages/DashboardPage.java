@@ -51,6 +51,7 @@ public class DashboardPage extends StorefrontBasePage {
 
     @Step("Click on Skip training button")
     public void skipTrainingLevel() {
+        waitUntilPageIsFullyLoaded();
         click(SKIP_BUTTON_XPATH);
     }
 
