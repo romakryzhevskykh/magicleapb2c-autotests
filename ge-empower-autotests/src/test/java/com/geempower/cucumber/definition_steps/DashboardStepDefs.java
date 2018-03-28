@@ -17,14 +17,6 @@ public class DashboardStepDefs extends AbstractStepDefs {
     @Autowired
     private PriceAndAvailabilityBlock priceAndAvailabilityBlock;
 
-    @And("^Dashboard page is opened.$")
-    public void dashboardPageIsOpened() {
-        dashboardPage.waitUntilPageIsFullyLoaded();
-        if (!dashboardPage.isOpened()) {
-            dashboardPage.open();
-        }
-    }
-
     @And("^Order Status widget is displayed.$")
     public void orderStatusWidgetIsDisplayed() {
         assertTrue(dashboardPage.orderStatusWidgetIsDisplayed());

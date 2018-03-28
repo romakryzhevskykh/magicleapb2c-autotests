@@ -9,7 +9,7 @@ public abstract class StorefrontBasePage extends BasePageObject {
     @Autowired
     protected EmpowerStorefront storefrontProject;
 
-    @Step("Check that Shipping address book page is opened.")
+    @Step
     public boolean isOpened() {
         return getPageUrl().equals(getCurrentUrl());
     }
