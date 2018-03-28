@@ -37,6 +37,7 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs{
     @And("^Update Price & Availability button is clicked.$")
     public void updatePriceAvailabilityIsClicked() {
         priceAndAvailabilityPage.clickOnUpdatePAButton();
+        priceAndAvailabilityPage.waitUntilPageIsFullyLoaded();
     }
 
     @SuppressWarnings("unchecked")

@@ -53,12 +53,16 @@ public class DashboardPage extends StorefrontBasePage {
     @Step("Click on Skip training button")
     public void skipTrainingLevel() {
         waitUntilPageIsFullyLoaded();
-        click(SKIP_BUTTON_XPATH);
+        if (isDisplayed(SKIP_BUTTON_XPATH)) {
+            click(SKIP_BUTTON_XPATH);
+        }
     }
 
     @Step("Click on Close Cookies button")
     public void closeCookiesPopUp() {
-        click(By.id(CLOSE_COOKIES_BUTTON_ID));
+        if (isDisplayed(By.id(CLOSE_COOKIES_BUTTON_ID))) {
+            click(By.id(CLOSE_COOKIES_BUTTON_ID));
+        }
     }
 
     @Step("Check selected account is displayed")
