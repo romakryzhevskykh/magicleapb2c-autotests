@@ -2,7 +2,6 @@ package com.geempower.cucumber.definition_steps;
 
 import com.geempower.helpers.models.Product;
 import com.geempower.storefront.pages.PriceAndAvailabilityPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -50,15 +49,19 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs{
             double finalActualPrice = finalNetPrice * quantityOfEachProduct;
             assertEquals(finalActualPrice, Double.parseDouble(priceAndAvailabilityPage.getNewExtendPrice(product)));
         });
-      
+    }
+
+    @SuppressWarnings("unchecked")
     @Then("^Check that default quantity is equals to (.*) on the Price&Availability page.$")
     public void checkQtyValue(String qtyValue) {
-        assertEquals(priceAndAvailabilityPage.getQtyValue(), qtyValue);
+        HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
+        selectedProducts.keySet().forEach(product -> assertEquals(priceAndAvailabilityPage.getQtyValue(product), qtyValue));
+
     }
 
     @Then("^Check that description, list price, final net price, availability are equal to data from PDP.$")
-    public void checkThatDescriptionListPriceFinalNetPriceAvailabilityAreEqualToDataFromPDP() throws Throwable {
-        threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
+    public void checkThatDescriptionListPriceFinalNetPriceAvailabilityAreEqualToDataFromPDP() {
+        HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         String description = getSelectedProducts().keySet().stream().findAny().get().getDescription();
         String listPrice = getSelectedProducts().keySet().stream().findAny().get().getListPrice().trim();
         String finalNetPrice = getSelectedProducts().keySet().stream().findAny().get().getFinalNetPrice();
@@ -67,6 +70,6 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs{
         assertEquals(priceAndAvailabilityPage.getDescription(), description);
         assertEquals(priceAndAvailabilityPage.getListPrice(), listPrice);
         assertEquals(priceAndAvailabilityPage.getFinalNetPrice(), finalNetPrice);
-        assertTrue(priceAndAvailabilityPage.getAvailability().contains(availability));
+        selectedProducts.keySet().forEach(product -> assertTrue(priceAndAvailabilityPage.getAvailability(product).contains(availability)));
     }
 }

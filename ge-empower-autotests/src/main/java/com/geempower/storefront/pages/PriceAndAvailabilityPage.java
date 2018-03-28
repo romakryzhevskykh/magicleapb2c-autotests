@@ -52,8 +52,9 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
     }
 
     @Step("Get Availability")
-    public String getAvailability() {
-        return $(AVAILABILITY_FIELD_XPATH).getText();
+    public String getAvailability(Product product) {
+        return $(AVAILABILITY_FIELD_XPATH, product.getCatalogueNo().toUpperCase()).getText();
+    }
 
     @Step("Set quantity to quantity field")
     public void setQuantityForProduct(Product product, int quantity) {
@@ -64,11 +65,11 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
     @Step("Click on Update Price and Availability button")
     public void clickOnUpdatePAButton() {
         click(UPDATE_PRICE_AND_AVAILABILITY_BUTTON_XPATH);
-        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Getting final extend price for product")
     public String getNewExtendPrice(Product product) {
-        return $(EXTENDED_PRICE_XPATH, product.getCatalogueNo()).getText();
+        waitUntilPageIsFullyLoaded();
+        return $(EXTENDED_PRICE_XPATH, product.getCatalogueNo().toUpperCase()).getText();
     }
 }
