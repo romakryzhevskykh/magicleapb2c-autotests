@@ -60,6 +60,12 @@ public class DashboardStepDefs extends AbstractStepDefs {
         dashboardPage.skipTrainingLevel();
     }
 
+    @When("^Close cookies pop-up.$")
+    public void clickOnCloseCookieButton() {
+        dashboardPage.closeCookiesPopUp();
+        dashboardPage.waitUntilPageIsFullyLoaded();
+    }
+
     @Then("^Check that Dashboard page is opened.")
     public void isDashboardPageOpened() {
         assertTrue(dashboardPage.isOpened());
@@ -81,5 +87,12 @@ public class DashboardStepDefs extends AbstractStepDefs {
         threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
         priceAndAvailabilityBlock.setCatalogueNoToTheCopyAndPasteField(catalogueNo);
+    }
+
+    @When("^User set catalogNo to Product Number field.$")
+    public void userSetCatalogueNoToProductField() throws Throwable{
+        threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
+        String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
+        priceAndAvailabilityBlock.setCatalogueNoToProductField(catalogueNo);
     }
 }

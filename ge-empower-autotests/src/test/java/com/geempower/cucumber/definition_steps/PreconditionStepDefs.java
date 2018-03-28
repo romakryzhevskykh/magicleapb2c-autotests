@@ -6,6 +6,7 @@ import com.geempower.storefront.page_blocks.HeaderBlock;
 import com.geempower.storefront.pages.*;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class PreconditionStepDefs extends AbstractStepDefs {
