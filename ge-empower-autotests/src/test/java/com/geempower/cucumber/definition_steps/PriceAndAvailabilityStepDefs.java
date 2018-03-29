@@ -13,7 +13,7 @@ import java.util.Random;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class PriceAndAvailabilityStepDefs extends AbstractStepDefs{
+public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
     @Autowired
     private PriceAndAvailabilityPage priceAndAvailabilityPage;
 
@@ -23,7 +23,7 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs{
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         selectedProducts.keySet().forEach(product -> {
             Random random = new Random();
-            int randomQuantity = 400 + random.nextInt((1000 - 400) +1);
+            int randomQuantity = 400 + random.nextInt((1000 - 400) + 1);
             priceAndAvailabilityPage.setQuantityForProduct(product, randomQuantity);
             selectedProducts.put(product, randomQuantity);
         });
@@ -38,6 +38,43 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs{
     public void updatePriceAvailabilityIsClicked() {
         priceAndAvailabilityPage.clickOnUpdatePAButton();
         priceAndAvailabilityPage.waitUntilPageIsFullyLoaded();
+    }
+
+    @When("^User clicks on Add to Cart button.$")
+    public void clickOnAddToCartButton() {
+        priceAndAvailabilityPage.clickOnAddToCartButton();
+    }
+
+    @Then("^Check that count of added items is displayed on My Cart icon.$")
+    public void counterIconIsDisplayed() {
+        assertTrue(priceAndAvailabilityPage.counterIconIsDisplayed());
+    }
+
+    @When("^User clicks on My Cart icon.$")
+    public void clickOnMyCartIcon() {
+        priceAndAvailabilityPage.clickOnMyCartIcon();
+    }
+
+    @When ("^User clicks on Checkout button.$")
+    public void clickOnCheckoutButton(){
+        priceAndAvailabilityPage.clickOnCheckoutButton();
+    }
+
+    @Then("^Correct Line Items is displayed in the Checkout pop-up.$")
+    public void checkoutLineItemValueIsCorrect() {
+        HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
+        assertEquals(priceAndAvailabilityPage.getLineItemsValue(), selectedProducts.keySet().size());
+    }
+
+    @Then("^Correct Order Value is displayed in the Checkout pop-up.$")
+    public void checkoutOrderValueIsCorrect() {
+        HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
+        selectedProducts.keySet().forEach(product -> {
+            double finalNetPrice = Double.parseDouble(product.getFinalNetPrice());
+            double quantityOfEachProduct = (double) selectedProducts.get(product);
+            double finalActualPrice = finalNetPrice * quantityOfEachProduct;
+            assertEquals(finalActualPrice, Double.parseDouble(priceAndAvailabilityPage.getOrderValueFromCheckoutPopUp()));
+        });
     }
 
     @SuppressWarnings("unchecked")
