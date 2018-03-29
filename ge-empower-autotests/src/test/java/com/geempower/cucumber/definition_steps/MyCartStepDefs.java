@@ -1,7 +1,6 @@
 package com.geempower.cucumber.definition_steps;
 
 import com.geempower.storefront.pages.MyCartPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -24,7 +23,6 @@ public class MyCartStepDefs extends AbstractStepDefs {
         assertTrue(myCartPage.areOrderStepIconsDisplayed());
         assertTrue(myCartPage.isMainOrderDataDisplayedOnTheTopRight());
         assertTrue(myCartPage.isBuildOrderInformationInputPresent());
-        assertEquals(myCartPage.getMyCartTitle(), "Build Order");
         assertTrue(myCartPage.isAddItemButtonPresent());
         assertTrue(myCartPage.isDeleteItemButtonPresent());
         assertTrue(myCartPage.isUpdatePriceAndAvailabilityButtonPresent());
