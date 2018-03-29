@@ -56,6 +56,11 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
         return $(AVAILABILITY_FIELD_XPATH, product.getCatalogueNo().toUpperCase()).getText();
     }
 
+    @Step("Get Line Items value")
+    public String getLineItems(){
+        return $(LINE_ITEMS_VALUE_XPATH).getText();
+    }
+
     @Step("Set quantity to quantity field")
     public void setQuantityForProduct(Product product, int quantity) {
         $(QUANTITY_INPUT_XPATH, product.getCatalogueNo().toUpperCase()).clear();
@@ -71,5 +76,23 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
     public String getNewExtendPrice(Product product) {
         waitUntilPageIsFullyLoaded();
         return $(EXTENDED_PRICE_XPATH, product.getCatalogueNo().toUpperCase()).getText();
+    }
+
+    @Step("Get Order Value from checkout pop-up")
+    public String getOrderValue(){
+        String orderValue = $(ORDER_VALUE_XPATH).getText();
+        return orderValue.substring(0, orderValue.length() - 4);
+    }
+    @Step("Check that cart count icon is displayed")
+    public boolean counterIconIsDisplayed() {
+        return isDisplayed(CART_COUNT_ICON_XPATH);
+    }
+
+    public void clickOnMyCartIcon() {
+        $(CART_ICON_XPATH).click();
+    }
+
+    public void clickOnCheckoutButton() {
+        $(CHECKOUT_BUTTON_XPATH).click();
     }
 }

@@ -30,6 +30,15 @@ Feature: Some actions on Dashboard page
     And All products are selected on P&A page.
     And Update Price & Availability button is clicked.
     Then Extend Price is changed to correct value.
+    When User clicks on Add to Cart button.
+    Then Check that count of added items is displayed on My Cart icon.
+    When User clicks on My Cart icon.
+#@Todo need to remove comment when test will be complete
+#    Then Correct Line Items is displayed in the Checkout pop-up.
+#@Todo need to remove comment when test will be complete
+#    Then Correct Order Value are displayed in the Checkout pop-up.
+    When User clicks on Checkout button.
+    Then My Cart page is opened.
 
   Scenario: Check that user is able to place order via Product Number field using P&A block in North America region
     And Account management page is opened.
@@ -48,4 +57,14 @@ Feature: Some actions on Dashboard page
     And All products are selected on P&A page.
     And Update Price & Availability button is clicked.
     Then Extend Price is changed to correct value.
+    And All products are selected on P&A page.
+    When User clicks on Add to Cart button.
+    Then Check that count of added items is displayed on My Cart icon.
+    When User clicks on My Cart icon.
+#@Todo need to remove comment when test will be complete
+#    Then Correct Line Items is displayed in the Checkout pop-up.
+#@Todo need to remove comment when test will be complete
+#    Then Correct Order Value are displayed in the Checkout pop-up.
+    When User clicks on Checkout button.
+    Then My Cart page is opened.
 
