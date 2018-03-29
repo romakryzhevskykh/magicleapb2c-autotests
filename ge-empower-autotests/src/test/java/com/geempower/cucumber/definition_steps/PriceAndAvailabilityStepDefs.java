@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.HashMap;
 import java.util.Random;
 
-import static com.geempower.storefront.page_elements.PriceAndAvailabilityPageElements.EXTENDED_PRICE_XPATH;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
