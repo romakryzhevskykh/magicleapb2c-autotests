@@ -29,6 +29,7 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
     @Step("Click on Add to Card button")
     public void clickOnAddToCartButton() {
         click(ADD_TO_CARD_BUTTON_XPATH);
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Get Qty value")
@@ -57,7 +58,7 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
     }
 
     @Step("Get Line Items value")
-    public String getLineItems(){
+    public String getLineItemsValue() {
         return $(LINE_ITEMS_VALUE_XPATH).getText();
     }
 
@@ -79,19 +80,23 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
     }
 
     @Step("Get Order Value from checkout pop-up")
-    public String getOrderValue(){
+    public String getOrderValueFromCheckoutPopUp() {
         String orderValue = $(ORDER_VALUE_XPATH).getText();
         return orderValue.substring(0, orderValue.length() - 4);
     }
+
     @Step("Check that cart count icon is displayed")
     public boolean counterIconIsDisplayed() {
         return isDisplayed(CART_COUNT_ICON_XPATH);
     }
 
+    @Step("Click on My Cart button")
     public void clickOnMyCartIcon() {
         $(CART_ICON_XPATH).click();
+        waitUntilPageIsFullyLoaded();
     }
 
+    @Step("Click on Checkout button")
     public void clickOnCheckoutButton() {
         $(CHECKOUT_BUTTON_XPATH).click();
     }

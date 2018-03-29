@@ -43,7 +43,6 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
     @When("^User clicks on Add to Cart button.$")
     public void clickOnAddToCartButton() {
         priceAndAvailabilityPage.clickOnAddToCartButton();
-        priceAndAvailabilityPage.waitUntilPageIsFullyLoaded();
     }
 
     @Then("^Check that count of added items is displayed on My Cart icon.$")
@@ -54,7 +53,6 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
     @When("^User clicks on My Cart icon.$")
     public void clickOnMyCartIcon() {
         priceAndAvailabilityPage.clickOnMyCartIcon();
-        priceAndAvailabilityPage.waitUntilPageIsFullyLoaded();
     }
 
     @When ("^User clicks on Checkout button.$")
@@ -65,7 +63,7 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
     @Then("^Correct Line Items is displayed in the Checkout pop-up.$")
     public void checkoutLineItemValueIsCorrect() {
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
-        assertEquals(priceAndAvailabilityPage.getLineItems(), selectedProducts.keySet().size());
+        assertEquals(priceAndAvailabilityPage.getLineItemsValue(), selectedProducts.keySet().size());
     }
 
     @Then("^Correct Order Value are displayed in the Checkout pop-up.$")
@@ -75,7 +73,7 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
             double finalNetPrice = Double.parseDouble(product.getFinalNetPrice());
             double quantityOfEachProduct = (double) selectedProducts.get(product);
             double finalActualPrice = finalNetPrice * quantityOfEachProduct;
-            assertEquals(finalActualPrice, Double.parseDouble(priceAndAvailabilityPage.getOrderValue()));
+            assertEquals(finalActualPrice, Double.parseDouble(priceAndAvailabilityPage.getOrderValueFromCheckoutPopUp()));
         });
     }
 
