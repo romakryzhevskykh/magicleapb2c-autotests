@@ -36,7 +36,7 @@ Feature: Some actions on Dashboard page
 #@Todo need to remove comment when test will be complete
 #    Then Correct Line Items is displayed in the Checkout pop-up.
 #@Todo need to remove comment when test will be complete
-#    Then Correct Order Value are displayed in the Checkout pop-up.
+#    Then Correct Order Value is displayed in the Checkout pop-up.
     When User clicks on Checkout button.
     Then My Cart page is opened.
 
@@ -64,7 +64,7 @@ Feature: Some actions on Dashboard page
 #@Todo need to remove comment when test will be complete
 #    Then Correct Line Items is displayed in the Checkout pop-up.
 #@Todo need to remove comment when test will be complete
-#    Then Correct Order Value are displayed in the Checkout pop-up.
+#    Then Correct Order Value is displayed in the Checkout pop-up.
     When User clicks on Checkout button.
     Then My Cart page is opened.
 

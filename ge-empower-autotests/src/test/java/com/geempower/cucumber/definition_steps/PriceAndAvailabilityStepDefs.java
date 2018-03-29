@@ -66,7 +66,7 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
         assertEquals(priceAndAvailabilityPage.getLineItemsValue(), selectedProducts.keySet().size());
     }
 
-    @Then("^Correct Order Value are displayed in the Checkout pop-up.$")
+    @Then("^Correct Order Value is displayed in the Checkout pop-up.$")
     public void checkoutOrderValueIsCorrect() {
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         selectedProducts.keySet().forEach(product -> {
