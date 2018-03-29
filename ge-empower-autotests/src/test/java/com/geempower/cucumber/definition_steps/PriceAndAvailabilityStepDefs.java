@@ -55,6 +55,7 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs{
     @SuppressWarnings("unchecked")
     @Then("^Check that default quantity is equals to (.*) on the Price&Availability page.$")
     public void checkQtyValue(String qtyValue) {
+        priceAndAvailabilityPage.waitUntilPageIsFullyLoaded();
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         selectedProducts.keySet().forEach(product -> assertEquals(priceAndAvailabilityPage.getQtyValue(product), qtyValue));
 

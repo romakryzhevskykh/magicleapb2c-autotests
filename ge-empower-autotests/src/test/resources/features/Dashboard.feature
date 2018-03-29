@@ -44,4 +44,8 @@ Feature: Some actions on Dashboard page
     Then Price&Availability page is opened.
     Then Check that default quantity is equals to 1 on the Price&Availability page.
     Then Check that description, list price, final net price, availability are equal to data from PDP.
+    When Quantity is changed to random quantity of items for each product.
+    And All products are selected on P&A page.
+    And Update Price & Availability button is clicked.
+    Then Extend Price is changed to correct value.
 
