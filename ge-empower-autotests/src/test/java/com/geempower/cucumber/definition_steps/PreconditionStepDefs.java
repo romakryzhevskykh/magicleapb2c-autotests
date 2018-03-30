@@ -69,6 +69,7 @@ public class PreconditionStepDefs extends AbstractStepDefs {
         if (!accountManagementPage.isOpened()) {
             accountManagementPage.open();
         }
+        accountManagementPage.isAccountPageFullyLoaded();
     }
 
     @And("^Orders page is opened.$")

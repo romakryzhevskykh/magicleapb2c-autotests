@@ -123,4 +123,10 @@ public class AccountManagementPage extends StorefrontBasePage {
             waitForElementToDisappear(By.xpath(CANCEL_REQUEST_CONFIRMATION_POPUP_XPATH));
         }
     }
+
+    public void isAccountPageFullyLoaded(){
+        if(!$(APPROVED_ACCOUNT_ROW_XPATH).isDisplayed()){
+            getDriver().navigate().refresh();
+        }
+    }
 }
