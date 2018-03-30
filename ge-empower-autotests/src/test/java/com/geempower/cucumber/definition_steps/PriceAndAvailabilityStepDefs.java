@@ -37,7 +37,6 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
     @And("^Update Price & Availability button is clicked.$")
     public void updatePriceAvailabilityIsClicked() {
         priceAndAvailabilityPage.clickOnUpdatePAButton();
-        priceAndAvailabilityPage.waitUntilPageIsFullyLoaded();
     }
 
     @When("^User clicks on Add to Cart button.$")
@@ -63,7 +62,7 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
     @Then("^Correct Line Items is displayed in the Checkout pop-up.$")
     public void checkoutLineItemValueIsCorrect() {
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
-        assertEquals(priceAndAvailabilityPage.getLineItemsValue(), selectedProducts.keySet().size());
+        assertTrue(priceAndAvailabilityPage.getLineItemsValue() == selectedProducts.keySet().size());
     }
 
     @Then("^Correct Order Value is displayed in the Checkout pop-up.$")

@@ -21,4 +21,5 @@ public class AccountManagementPageElements {
     public final static String CONFIRMATION_FOR_CANCELING_REQUEST_XPATH = "//button[@id='cancelPendingBtn']";
     public final static String CANCEL_REQUEST_CONFIRMATION_POPUP_XPATH = "//body[@id='empower']/div[@id='page']/div[@id='cancel-am-request-modal']/div[@class='modal-dialog']/div[@class='modal-content']";
     public final static String FULL_SCREEN_PROGRESS_INDICATOR_XPATH = "//div[@id='FullScreenProgressIndicatorModalDialog']";
+    public final static String APPROVED_ACCOUNT_ROW_XPATH = "//*[@class='my-pending-accounts-wrapper']//tr[@role='row' and @class='odd' or @class='even']";
 }

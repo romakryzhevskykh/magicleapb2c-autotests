@@ -41,6 +41,7 @@ public class SsoLoginPage extends StorefrontBasePage {
 
     @Step("Click on Sign In button")
     public void clickOnLoginButton(){
-        click(By.id(LOGIN_BUTTON_ID));
+//        click(By.id(LOGIN_BUTTON_ID));
+        $(By.id(LOGIN_BUTTON_ID)).click();
     }
 }

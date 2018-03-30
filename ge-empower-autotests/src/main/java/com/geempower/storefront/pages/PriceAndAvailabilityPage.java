@@ -23,12 +23,13 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
 
     @Step("Select all checkboxes")
     public void clickOnAllCheckboxes() {
+        waitUntilPageIsFullyLoaded();
         click(ALL_CHECKBOXES_XPATH);
     }
 
     @Step("Click on Add to Card button")
     public void clickOnAddToCartButton() {
-        click(ADD_TO_CARD_BUTTON_XPATH);
+        $(ADD_TO_CARD_BUTTON_XPATH).click();
         waitUntilPageIsFullyLoaded();
     }
 
@@ -58,8 +59,8 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
     }
 
     @Step("Get Line Items value")
-    public String getLineItemsValue() {
-        return $(LINE_ITEMS_VALUE_XPATH).getText();
+    public int getLineItemsValue() {
+        return Integer.parseInt($(LINE_ITEMS_VALUE_XPATH).getText());
     }
 
     @Step("Set quantity to quantity field")
@@ -71,6 +72,7 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
     @Step("Click on Update Price and Availability button")
     public void clickOnUpdatePAButton() {
         click(UPDATE_PRICE_AND_AVAILABILITY_BUTTON_XPATH);
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Getting final extend price for product")
@@ -87,6 +89,12 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
 
     @Step("Check that cart count icon is displayed")
     public boolean counterIconIsDisplayed() {
+        waitUntilPageIsFullyLoaded();
+        try {
+            Thread.sleep(6000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return isDisplayed(CART_COUNT_ICON_XPATH);
     }
 
