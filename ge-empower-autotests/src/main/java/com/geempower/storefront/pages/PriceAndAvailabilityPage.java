@@ -90,11 +90,6 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
     @Step("Check that cart count icon is displayed")
     public boolean counterIconIsDisplayed() {
         waitUntilPageIsFullyLoaded();
-        try {
-            Thread.sleep(6000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         return isDisplayed(CART_COUNT_ICON_XPATH);
     }
 
