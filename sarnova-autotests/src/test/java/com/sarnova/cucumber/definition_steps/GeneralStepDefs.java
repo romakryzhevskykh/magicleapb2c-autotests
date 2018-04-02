@@ -20,13 +20,18 @@ public class GeneralStepDefs extends AbstractStepDefs {
     @Autowired AccountDashboardPage accountDashboardPage;
     @Autowired OrderHistoryPage orderHistoryPage;
     @Autowired SupplyListsPage supplyListsPage;
+    @Autowired PurchaseRequestsPage purchaseRequestsPage;
     @Autowired SavedCartsPage savedCartsPage;
     @Autowired SavedCreditCardsPage savedCreditCardsPage;
     @Autowired QuotesPage quotesPage;
     @Autowired ReportsPage reportsPage;
     @Autowired AccountInformationPage accountInformationPage;
     @Autowired CustomCategoryPage customCategoryPage;
+    @Autowired QuotasAndParLevelsPage quotasAndParLevelsPage;
+    @Autowired BusinessInfoPage businessInfoPage;
     @Autowired HelpNewToBoundtreePage helpNewToBoundtreePage;
+    @Autowired UsersPage usersPage;
+    @Autowired UserGroupsPage userGroupsPage;
 
     @And("^Refresh page.$")
     public void refreshPage() throws Throwable {
@@ -78,6 +83,16 @@ public class GeneralStepDefs extends AbstractStepDefs {
     @When("^Click on Supply Lists item in My Account menu.$")
     public void clickOnSupplyListsItemInMyAccountMenu() {
         headerRowPageBlock.clickOnSupplyListsItemInMyAccountMenu();
+    }
+
+    @When("^Click on Purchase Requests item in My Account menu.$")
+    public void clickOnPurchaseRequestsItemInMyAccountMenu() {
+        headerRowPageBlock.clickOnPurchaseRequestsItemInMyAccountMenu();
+    }
+
+    @Then("^Check that Purchase Requests page is opened.$")
+    public void checkThatPurchaseRequestsPageIsOpened() {
+        assertTrue(purchaseRequestsPage.isOpened());
     }
 
     @Then("^Check that Supply Lists page is opened.$")
@@ -145,6 +160,26 @@ public class GeneralStepDefs extends AbstractStepDefs {
         assertTrue(customCategoryPage.isOpened());
     }
 
+    @When("^Click on Quotas and Par Levels item in My Account menu.$")
+    public void clickOnQuotasAndParLevelsItemInMyAccountMenu() {
+        headerRowPageBlock.clickOnQuotasAndParLevelsItemInMyAccountMenu();
+    }
+
+    @Then("^Check that Quotas and Par Levels page is opened.$")
+    public void checkThatQuotasAndParLevelsPageIsOpened() {
+        assertTrue(quotasAndParLevelsPage.isOpened());
+    }
+
+    @When("^Click on Business Info item in My Account menu.$")
+    public void clickOnBusinessInfoItemInMyAccountMenu() {
+        headerRowPageBlock.clickOnBusinessInfoItemInMyAccountMenu();
+    }
+
+    @Then("^Check that Business Info page is opened.$")
+    public void checkThatBusinessInfoPageIsOpened() {
+        assertTrue(businessInfoPage.isOpened());
+    }
+
     @When("^Click on Help/New To Boundtree\\? item in My Account menu.$")
     public void clickOnHelpNewToBoundtreeItemInMyAccountMenu() {
         headerRowPageBlock.clickOnHelpNewToBoundtreeItemInMyAccountMenu();
@@ -153,6 +188,26 @@ public class GeneralStepDefs extends AbstractStepDefs {
     @Then("^Check that Help/New To Boundtree\\? page is opened.$")
     public void checkThatHelpNewToBoundtreePageIsOpened() {
         assertTrue(helpNewToBoundtreePage.isOpened());
+    }
+
+    @When("^Click on Users item in My Account menu.$")
+    public void clickOnUsersItemInMyAccountMenu() {
+        headerRowPageBlock.clickOnUsersItemInMyAccountMenu();
+    }
+
+    @Then("^Check that Users page is opened.$")
+    public void checkThatUsersPageIsOpened() {
+        assertTrue(usersPage.isOpened());
+    }
+
+    @When("^Click on User Groups item in My Account menu.$")
+    public void clickOnUserGroupsItemInMyAccountMenu() {
+        headerRowPageBlock.clickOnUserGroupsItemInMyAccountMenu();
+    }
+
+    @Then("^Check that User Groups page is opened.$")
+    public void checkThatUserGroupsPageIsOpened() {
+        assertTrue(userGroupsPage.isOpened());
     }
 
     @When("^Click on Sign Out item in My Account menu.$")

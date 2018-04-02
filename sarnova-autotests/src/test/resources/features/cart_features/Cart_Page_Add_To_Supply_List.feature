@@ -1,7 +1,7 @@
 Feature: Cart page Add to Supply list functionality.
 
   Background:
-    Given Switch to Storefront shopper.
+    Given Switch to Storefront owner.
     And User is logged in to Storefront.
     And Empty Cart.
     And Add to cart INDIVIDUAL, VALID product with quantity 1.

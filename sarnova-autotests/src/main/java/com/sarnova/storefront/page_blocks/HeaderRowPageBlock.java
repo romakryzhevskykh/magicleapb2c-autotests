@@ -82,4 +82,24 @@ public class HeaderRowPageBlock extends UIComponent {
     public void clickOnSignOutItemInMyAccountMenu(UserSession userSession) {
         loggedInHeaderRowBlock.clickOnSignOutItemInMyAccountMenu(userSession);
     }
+
+    public void clickOnPurchaseRequestsItemInMyAccountMenu() {
+        loggedInHeaderRowBlock.clickOnPurchaseRequestsItemInMyAccountMenu();
+    }
+
+    public void clickOnQuotasAndParLevelsItemInMyAccountMenu() {
+        loggedInHeaderRowBlock.clickOnQuotasAndParLevelsItemInMyAccountMenu();
+    }
+
+    public void clickOnBusinessInfoItemInMyAccountMenu() {
+        loggedInHeaderRowBlock.clickOnBusinessInfoItemInMyAccountMenu();
+    }
+
+    public void clickOnUsersItemInMyAccountMenu() {
+        loggedInHeaderRowBlock.clickOnUsersItemInMyAccountMenu();
+    }
+
+    public void clickOnUserGroupsItemInMyAccountMenu() {
+        loggedInHeaderRowBlock.clickOnUserGroupsItemInMyAccountMenu();
+    }
 }

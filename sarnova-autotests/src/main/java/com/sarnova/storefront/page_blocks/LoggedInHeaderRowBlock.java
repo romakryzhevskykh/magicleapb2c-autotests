@@ -119,4 +119,29 @@ public class LoggedInHeaderRowBlock extends UIComponent {
         userSession.setLoggedIn(false);
         userSession.setCookies(getDriver().manage().getCookies());
     }
+
+    @Step("Click on Purchase Requests item in My account menu.")
+    public void clickOnPurchaseRequestsItemInMyAccountMenu() {
+        click(PURCHASE_REQUESTS_ITEM_XPATH);
+    }
+
+    @Step("Click on Quotas And Par Levels item in My account menu.")
+    public void clickOnQuotasAndParLevelsItemInMyAccountMenu() {
+        click(QUOTAS_AND_PAR_LEVELS_ITEM_XPATH);
+    }
+
+    @Step("Click on Business Info item in My account menu.")
+    public void clickOnBusinessInfoItemInMyAccountMenu() {
+        click(BUSINESS_INFO_ITEM_XPATH);
+    }
+
+    @Step("Click on Users item in My account menu.")
+    public void clickOnUsersItemInMyAccountMenu() {
+        click(USERS_ITEM_XPATH);
+    }
+
+    @Step("Click on User Groups item in My account menu.")
+    public void clickOnUserGroupsItemInMyAccountMenu() {
+        click(USER_GROUPS_ITEM_XPATH);
+    }
 }

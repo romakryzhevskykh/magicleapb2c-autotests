@@ -1,7 +1,7 @@
 Feature: Individual PDP add to Supply list functionality
 
   Background:
-    Given Switch to Storefront shopper.
+    Given Switch to Storefront owner.
     And User is logged in to Storefront.
     And PDP for INDIVIDUAL, VALID product.
 

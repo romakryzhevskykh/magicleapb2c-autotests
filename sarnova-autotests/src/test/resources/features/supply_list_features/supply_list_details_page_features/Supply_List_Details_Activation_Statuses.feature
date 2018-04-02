@@ -1,7 +1,7 @@
 Feature: Deactivation and activation features for products and supply lists on SLD page
 
   Background:
-    Given Switch to Storefront shopper.
+    Given Switch to Storefront owner.
     And User is logged in to Storefront.
 
   Scenario: Check that user can deactivate Supply list on SLDP.

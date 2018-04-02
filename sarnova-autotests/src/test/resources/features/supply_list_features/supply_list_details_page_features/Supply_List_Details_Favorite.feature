@@ -1,7 +1,7 @@
 Feature: Make Supply list favorite or deactivate favourite flag from SLDP.
 
   Background:
-    Given Switch to Storefront shopper.
+    Given Switch to Storefront owner.
     And User is logged in to Storefront.
 
   Scenario: Check that user can mark Supply list as favorite on SLDP.

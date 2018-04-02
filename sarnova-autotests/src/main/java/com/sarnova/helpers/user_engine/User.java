@@ -19,11 +19,14 @@ public class User {
         this.userCockpit = userCockpit;
         if (userCockpit instanceof SarnovaStorefront) {
             switch (cockpitRole) {
-                case "shopper":
-                    userRole = StorefrontUserRoles.SHOPPER;
+                case "admin":
+                    userRole = StorefrontUserRoles.ADMIN;
+                    break;
+                case "buyer":
+                    userRole = StorefrontUserRoles.BUYER;
                     break;
                 case "guest":
-                    userRole = StorefrontUserRoles.GUEST;
+                    userRole = StorefrontUserRoles.GUEST_CONSUMER;
                     break;
                 default:
                     userRole = null;

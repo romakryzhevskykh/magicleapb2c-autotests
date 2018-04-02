@@ -1,7 +1,7 @@
 Feature: Deactivation and activation features for supply lists on Supply lists page.
 
   Background:
-    Given Switch to Storefront shopper.
+    Given Switch to Storefront owner.
     And User is logged in to Storefront.
 
   Scenario: Check that user can deactivate Supply list on Supply lists page.
