@@ -17,6 +17,8 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
     @Autowired
     private PriceAndAvailabilityPage priceAndAvailabilityPage;
 
+    private final double delta = 0.000001;
+
     @SuppressWarnings("unchecked")
     @When("^Quantity is changed to random quantity of items for each product.$")
     public void setRandomQuantityOfProduct() {
@@ -72,7 +74,7 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
             double finalNetPrice = Double.parseDouble(product.getFinalNetPrice());
             double quantityOfEachProduct = (double) selectedProducts.get(product);
             double finalActualPrice = finalNetPrice * quantityOfEachProduct;
-            assertEquals(finalActualPrice, Double.parseDouble(priceAndAvailabilityPage.getOrderValueFromCheckoutPopUp()));
+            assertEquals(finalActualPrice, Double.parseDouble(priceAndAvailabilityPage.getOrderValueFromCheckoutPopUp()), delta);
         });
     }
 
@@ -84,7 +86,7 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
             double finalNetPrice = Double.parseDouble(product.getFinalNetPrice());
             double quantityOfEachProduct = (double) selectedProducts.get(product);
             double finalActualPrice = finalNetPrice * quantityOfEachProduct;
-            assertEquals(finalActualPrice, Double.parseDouble(priceAndAvailabilityPage.getNewExtendPrice(product)));
+            assertEquals(finalActualPrice, Double.parseDouble(priceAndAvailabilityPage.getNewExtendPrice(product)), delta);
         });
     }
 

@@ -17,6 +17,7 @@ public class MyCartPageElements {
     public final static String UPDATE_PRICE_AND_AVAILABILITY_BUTTON_XPATH = ".//button[@id='updatePricesBtn']";
     public final static String MAIN_ORDER_DATA_TOP_RIGHT_XPATH = "//div[@id='build-order']/div[@class='row']/div[contains(@class,'return-order-title')]";
     public final static String DISCARD_ORDER_BUTTON_XPATH = "//button[@class='btn primary-btn cancel-cart-btn']";
+    public final static String GREEN_CONFIRMATION_POP_UP_ID = "toast-container";
 
 
 

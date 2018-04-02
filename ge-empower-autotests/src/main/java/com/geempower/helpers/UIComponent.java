@@ -142,16 +142,10 @@ public abstract class UIComponent {
     }
 
     public void waitForElementToDisappear(By by) {
-        for (int i = 0; i <= 5; ++i) {
-            if (!$(by).isDisplayed()) {
-                break;
-            } else {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
+        WebElement webElement = $(by);
+        webDriverPool.getActiveDriverSession().setShortImplicitWait();
+        WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getShortTimeOut());
+        wait.until(ExpectedConditions.presenceOfElementLocated(by));
+        wait.until(ExpectedConditions.invisibilityOf(webElement));
         }
-    }
 }
