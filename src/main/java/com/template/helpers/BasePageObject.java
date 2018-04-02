@@ -1,18 +1,17 @@
-package com.geempower.helpers;
+package com.template.helpers;
 
-import com.geempower.helpers.web_engine.WebDriverSessions;
+import com.template.helpers.web_engine.WebDriverSessions;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-public abstract class UIComponent {
+public abstract class BasePageObject {
 
-    @Autowired
-    protected WebDriverSessions webDriverPool;
+    @Autowired protected WebDriverSessions webDriverPool;
+    @Autowired protected ThreadVarsHashMap threadVarsHashMap;
 
     protected WebDriver getDriver() {
         return webDriverPool.getActiveDriver();
@@ -47,14 +46,13 @@ public abstract class UIComponent {
     }
 
     protected void click(String xpath, String... args) {
-        webDriverPool.getActiveDriverSession().setShortImplicitWait();
         WebElement webElement = $(xpath, args);
+        webDriverPool.getActiveDriverSession().setShortImplicitWait();
         try {
             WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getShortTimeOut());
             wait.until(ExpectedConditions.elementToBeClickable(webElement));
             webElement.click();
-            webDriverPool.getActiveDriverSession().restoreDefaultImplicitWait();
-        } catch (WebDriverException | NullPointerException ex) {
+        } catch (WebDriverException ex) {
             ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", webElement);
             webElement.click();
         } finally {
@@ -77,6 +75,10 @@ public abstract class UIComponent {
         }
     }
 
+    public String getCurrentUrl() {
+        return getDriver().getCurrentUrl();
+    }
+
     protected boolean isDisplayed(String xpath, String... args) {
         webDriverPool.getActiveDriverSession().setShortImplicitWait();
         try {
@@ -97,62 +99,5 @@ public abstract class UIComponent {
         } finally {
             webDriverPool.getActiveDriverSession().restoreDefaultImplicitWait();
         }
-    }
-
-    public void waitUntilPageIsFullyLoaded() {
-        waitHTMLTemplateLoad();
-        waitJQueryRequestsLoad();
-    }
-
-    public void waitHTMLTemplateLoad() {
-        WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getTimeOut());
-        ExpectedCondition<Boolean> pageLoadCondition = driver1
-                -> ((JavascriptExecutor) driver1).executeScript("return document.readyState").equals("complete");
-        wait.until(pageLoadCondition);
-    }
-
-    public void waitJQueryRequestsLoad() {
-        WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getTimeOut());
-        try {
-            Thread.sleep((long) (1000 * webDriverPool.getActiveDriverSession().getShortTimeOut() / 20));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        ExpectedCondition<Boolean> jQueryLoadCondition = driver1 -> {
-            boolean result;
-            JavascriptExecutor js = (JavascriptExecutor) driver1;
-            try {
-                result = (Boolean) js.executeScript("return jQuery.active == 0");
-            } catch (WebDriverException ex) {
-                result = true;
-                System.out.println("[INFO] No jQueries.");
-            }
-            return result;
-        };
-        try {
-            wait.until(jQueryLoadCondition);
-        } catch (TimeoutException ex) {
-            System.out.println("[WARNING] Timeout exception after " + webDriverPool.getActiveDriverSession().getTimeOut() + " Seconds. Possible problem - browser hovered(not responding)!");
-        }
-        try {
-            Thread.sleep((long) (1000 * webDriverPool.getActiveDriverSession().getShortTimeOut() / 20));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void waitForElementToDisappear(By by) {
-        WebElement webElement = $(by);
-        webDriverPool.getActiveDriverSession().setShortImplicitWait();
-        WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getShortTimeOut());
-        wait.until(ExpectedConditions.presenceOfElementLocated(by));
-        wait.until(ExpectedConditions.invisibilityOf(webElement));
-        }
-
-    public void waitForElementWithAppropriateTextToAppear(By by, String text) {
-        webDriverPool.getActiveDriverSession().setShortImplicitWait();
-        WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getShortTimeOut());
-        wait.until(ExpectedConditions.textToBe(by, text));
-
     }
 }
