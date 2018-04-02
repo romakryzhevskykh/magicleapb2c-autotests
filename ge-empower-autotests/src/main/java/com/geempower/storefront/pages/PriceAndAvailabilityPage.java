@@ -2,9 +2,11 @@ package com.geempower.storefront.pages;
 
 import com.geempower.helpers.models.Product;
 import com.geempower.storefront.StorefrontBasePage;
+import org.openqa.selenium.By;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
+import static com.geempower.storefront.page_elements.MyCartPageElements.GREEN_CONFIRMATION_POP_UP_ID;
 import static com.geempower.storefront.page_elements.PriceAndAvailabilityPageElements.*;
 
 @Component
@@ -95,6 +97,7 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
 
     @Step("Click on My Cart button")
     public void clickOnMyCartIcon() {
+        waitForElementToDisappear(By.id(GREEN_CONFIRMATION_POP_UP_ID));
         $(CART_ICON_XPATH).click();
         waitUntilPageIsFullyLoaded();
     }
