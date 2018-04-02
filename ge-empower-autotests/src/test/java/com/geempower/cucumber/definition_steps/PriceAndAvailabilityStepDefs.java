@@ -17,6 +17,8 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
     @Autowired
     private PriceAndAvailabilityPage priceAndAvailabilityPage;
 
+    private final double delta = 0.000001;
+
     @SuppressWarnings("unchecked")
     @When("^Quantity is changed to random quantity of items for each product.$")
     public void setRandomQuantityOfProduct() {
@@ -37,7 +39,6 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
     @And("^Update Price & Availability button is clicked.$")
     public void updatePriceAvailabilityIsClicked() {
         priceAndAvailabilityPage.clickOnUpdatePAButton();
-        priceAndAvailabilityPage.waitUntilPageIsFullyLoaded();
     }
 
     @When("^User clicks on Add to Cart button.$")
@@ -63,7 +64,7 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
     @Then("^Correct Line Items is displayed in the Checkout pop-up.$")
     public void checkoutLineItemValueIsCorrect() {
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
-        assertEquals(priceAndAvailabilityPage.getLineItemsValue(), selectedProducts.keySet().size());
+        assertTrue(priceAndAvailabilityPage.getLineItemsValue() == selectedProducts.keySet().size());
     }
 
     @Then("^Correct Order Value is displayed in the Checkout pop-up.$")
@@ -73,7 +74,7 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
             double finalNetPrice = Double.parseDouble(product.getFinalNetPrice());
             double quantityOfEachProduct = (double) selectedProducts.get(product);
             double finalActualPrice = finalNetPrice * quantityOfEachProduct;
-            assertEquals(finalActualPrice, Double.parseDouble(priceAndAvailabilityPage.getOrderValueFromCheckoutPopUp()));
+            assertEquals(finalActualPrice, Double.parseDouble(priceAndAvailabilityPage.getOrderValueFromCheckoutPopUp()), delta);
         });
     }
 
@@ -85,7 +86,7 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
             double finalNetPrice = Double.parseDouble(product.getFinalNetPrice());
             double quantityOfEachProduct = (double) selectedProducts.get(product);
             double finalActualPrice = finalNetPrice * quantityOfEachProduct;
-            assertEquals(finalActualPrice, Double.parseDouble(priceAndAvailabilityPage.getNewExtendPrice(product)));
+            assertEquals(finalActualPrice, Double.parseDouble(priceAndAvailabilityPage.getNewExtendPrice(product)), delta);
         });
     }
 

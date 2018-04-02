@@ -2,9 +2,11 @@ package com.geempower.storefront.pages;
 
 import com.geempower.helpers.models.Product;
 import com.geempower.storefront.StorefrontBasePage;
+import org.openqa.selenium.By;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
+import static com.geempower.storefront.page_elements.MyCartPageElements.GREEN_CONFIRMATION_POP_UP_ID;
 import static com.geempower.storefront.page_elements.PriceAndAvailabilityPageElements.*;
 
 @Component
@@ -23,12 +25,13 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
 
     @Step("Select all checkboxes")
     public void clickOnAllCheckboxes() {
+        waitUntilPageIsFullyLoaded();
         click(ALL_CHECKBOXES_XPATH);
     }
 
     @Step("Click on Add to Card button")
     public void clickOnAddToCartButton() {
-        click(ADD_TO_CARD_BUTTON_XPATH);
+        $(ADD_TO_CARD_BUTTON_XPATH).click();
         waitUntilPageIsFullyLoaded();
     }
 
@@ -58,8 +61,8 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
     }
 
     @Step("Get Line Items value")
-    public String getLineItemsValue() {
-        return $(LINE_ITEMS_VALUE_XPATH).getText();
+    public int getLineItemsValue() {
+        return Integer.parseInt($(LINE_ITEMS_VALUE_XPATH).getText());
     }
 
     @Step("Set quantity to quantity field")
@@ -71,6 +74,7 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
     @Step("Click on Update Price and Availability button")
     public void clickOnUpdatePAButton() {
         click(UPDATE_PRICE_AND_AVAILABILITY_BUTTON_XPATH);
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Getting final extend price for product")
@@ -87,11 +91,13 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
 
     @Step("Check that cart count icon is displayed")
     public boolean counterIconIsDisplayed() {
+        waitUntilPageIsFullyLoaded();
         return isDisplayed(CART_COUNT_ICON_XPATH);
     }
 
     @Step("Click on My Cart button")
     public void clickOnMyCartIcon() {
+        waitForElementToDisappear(By.id(GREEN_CONFIRMATION_POP_UP_ID));
         $(CART_ICON_XPATH).click();
         waitUntilPageIsFullyLoaded();
     }
