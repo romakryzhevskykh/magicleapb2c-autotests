@@ -40,7 +40,7 @@ Feature: Some actions on Dashboard page
     Then My Cart page is opened.
     Then All necessary elements are displayed on the My Cart page.
     When User clicks on the Next top button.
-    Then Shipping And Billing step is opened.
+    Then Shipping And Billing step is displayed.
     Then All necessary elements are displayed on the Order Details block at OE 2 page.
     Then All necessary elements are displayed on the Address Details block at OE 2 page.
     Then All necessary elements are displayed on the Shipment Details block at OE 2 page.
@@ -90,7 +90,7 @@ Feature: Some actions on Dashboard page
     Then My Cart page is opened.
     Then All necessary elements are displayed on the My Cart page.
     When User clicks on the Next top button.
-    Then Shipping And Billing step is opened.
+    Then Shipping And Billing step is displayed.
     Then All necessary elements are displayed on the Order Details block at OE 2 page.
     Then All necessary elements are displayed on the Address Details block at OE 2 page.
     Then All necessary elements are displayed on the Shipment Details block at OE 2 page.
