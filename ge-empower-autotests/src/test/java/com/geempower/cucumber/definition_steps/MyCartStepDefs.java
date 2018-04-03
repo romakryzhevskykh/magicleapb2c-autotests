@@ -37,8 +37,8 @@ public class MyCartStepDefs extends AbstractStepDefs {
         myCartPage.clickOnCancelButton();
     }
 
-    @When("^User clicks on the Next top button.$")
-    public void userClicksOnTheNextTopButton() {
+    @When("^User clicks on the Next top button on the My Cart page.$")
+    public void userClicksOnTheNextTopButtonOnTheMyCartPage() {
         myCartPage.clickOnTheNextTopButton();
     }
 
