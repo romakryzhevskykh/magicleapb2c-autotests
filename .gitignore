@@ -6,3 +6,10 @@ target
 com.template.template-automatedtests.iml
 sarnova-autotests
 ge-empower-autotests
+bin
+.project
+.settings
+.classpath
+.settings
+.metadata
+test-output
