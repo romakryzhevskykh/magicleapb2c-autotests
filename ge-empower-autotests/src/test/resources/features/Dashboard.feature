@@ -1,4 +1,4 @@
-Feature: Some actions on Dashboard page
+Feature: Dashboard elements and widgets checking, Order creation via the P&A block.
 
   Background:
     Given Switch to Storefront as admin.
@@ -39,25 +39,25 @@ Feature: Some actions on Dashboard page
     When User clicks on Checkout button.
     Then My Cart page is opened.
     Then All necessary elements are displayed on the My Cart page.
-    When User clicks on the Next top button.
-    Then Shipping And Billing step is displayed.
+    When User clicks on the Next top button on the My Cart page.
+    Then Shipping And Billing step is displayed at the OE 2 page.
     Then All necessary elements are displayed on the Order Details block at OE 2 page.
     Then All necessary elements are displayed on the Address Details block at OE 2 page.
     Then All necessary elements are displayed on the Shipment Details block at OE 2 page.
-    Then All necessary elements are displayed on the Product Details block.
-    When User fills PO no.
-    And Select Shipment Address.
+    Then All necessary elements are displayed on the Product Details block at the OE 2 page.
+    When User fills PO no. to the PO no. field at the OE 2 page.
+    And Select Shipment Address from the existing addresses at the OE 2 page.
     Then Selected Shipment address is equal to Ship to field value.
-    When User clicks on the Bottom Next button.
+    When User clicks on the Bottom Next button at the OE 2 page.
     Then Order Summary step is opened.
-#    Then All necessary elements are displayed on the Order Summary block on Third Order Entry page.
-#    Then All necessary elements are displayed on the Address Details block on Third Order Entry page.
-#    Then All necessary elements are displayed on the Shipment Details block on Third Order Entry page.
-#    Then All necessary elements are displayed on the Product Details block on Third Order Entry page.
-    Then PO no. is correct.
-    When User clicks on Place Order button.
+    Then All necessary elements are displayed on the Order Summary block on at OE 3 page.
+    Then All necessary elements are displayed on the Address Details block at OE 3 page.
+    Then All necessary elements are displayed on the Shipment Details block at OE 3 page.
+    Then All necessary elements are displayed on the Product Details block at OE 3 page.
+    Then PO no. is correct at the OE 3 page.
+    When User clicks on Place Order button at the OE 3 page.
     And Terms and Conditions pop-up is confirmed.
-    Then Order Successful pop-up appears.
+    Then Order Successful pop-up appears at the OE 3 page.
     When User closes the pop-up.
     Then Orders Details page is opened.
     Then GE Order No. is correct.
@@ -89,25 +89,25 @@ Feature: Some actions on Dashboard page
     When User clicks on Checkout button.
     Then My Cart page is opened.
     Then All necessary elements are displayed on the My Cart page.
-    When User clicks on the Next top button.
-    Then Shipping And Billing step is displayed.
+    When User clicks on the Next top button on the My Cart page.
+    Then Shipping And Billing step is displayed at the OE 2 page.
     Then All necessary elements are displayed on the Order Details block at OE 2 page.
     Then All necessary elements are displayed on the Address Details block at OE 2 page.
     Then All necessary elements are displayed on the Shipment Details block at OE 2 page.
-    Then All necessary elements are displayed on the Product Details block.
-    When User fills PO no.
-    And Select Shipment Address.
+    Then All necessary elements are displayed on the Product Details block at the OE 2 page.
+    When User fills PO no. to the PO no. field at the OE 2 page.
+    And Select Shipment Address from the existing addresses at the OE 2 page.
     Then Selected Shipment address is equal to Ship to field value.
-    When User clicks on the Bottom Next button.
+    When User clicks on the Bottom Next button at the OE 2 page.
     Then Order Summary step is opened.
-#    Then All necessary elements are displayed on the Order Summary block on Third Order Entry page.
-#    Then All necessary elements are displayed on the Address Details block on Third Order Entry page.
-#    Then All necessary elements are displayed on the Shipment Details block on Third Order Entry page.
-#    Then All necessary elements are displayed on the Product Details block on Third Order Entry page.
-    Then PO no. is correct.
-    When User clicks on Place Order button.
+    Then All necessary elements are displayed on the Order Summary block on at OE 3 page.
+    Then All necessary elements are displayed on the Address Details block at OE 3 page.
+    Then All necessary elements are displayed on the Shipment Details block at OE 3 page.
+    Then All necessary elements are displayed on the Product Details block at OE 3 page.
+    Then PO no. is correct at the OE 3 page.
+    When User clicks on Place Order button at the OE 3 page.
     And Terms and Conditions pop-up is confirmed.
-    Then Order Successful pop-up appears.
+    Then Order Successful pop-up appears at the OE 3 page.
     When User closes the pop-up.
     Then Orders Details page is opened.
     Then GE Order No. is correct.

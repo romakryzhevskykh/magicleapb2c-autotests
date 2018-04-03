@@ -50,7 +50,7 @@ public class WebDriverSession {
     }
 
     public int getTimeOut() {
-        return shortTimeOut;
+        return timeOut;
     }
 
     //only for WebDriverSessions usage

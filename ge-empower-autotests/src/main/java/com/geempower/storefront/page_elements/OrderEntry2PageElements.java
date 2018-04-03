@@ -23,7 +23,6 @@ public class OrderEntry2PageElements {
     public final static String PRODUCT_DETAILS_BLOCK_CURRENCY_XPATH = PRODUCT_DETAILS_BLOCK_XPATH + "//td[@class='data-table-currency-col']";
     public final static String PRODUCT_DETAILS_BLOCK_EST_DELIVERY_DATE_XPATH = PRODUCT_DETAILS_BLOCK_XPATH + "//span[@class='est_del_date_1']";
     public final static String PRODUCT_DETAILS_BLOCK_REQ_DELIVERY_DATE_XPATH = PRODUCT_DETAILS_BLOCK_XPATH + "//div[@class='input-group date datetimepicker future-date mycart-datepicker']/input";
-    
 
     public final static String SHIPMENT_ADDRESS_TITLE_XPATH = "//*[@id='shipping-billing-info']//label[contains (text(),'Shipment Address')]";
     public final static String ADDRESS_DETAILS_HEADER_XPATH = "//*[@id='shipping-billing-info']//h4[contains (text(),'Address Details')]";
