@@ -51,4 +51,35 @@ public class OrderEntry2StepDefs extends AbstractStepDefs {
             assertEquals(orderEntry2Page.getEstDeliveryDateFromTheProductDetailsBlock(), orderEntry2Page.getReqDeliveryDateFromTheProductDetailsBlock());
         });
     }
+
+    @Then("^Shipping And Billing step is displayed.$")
+    public void shippingAndBillingStepTitleIsDisplayed() {
+        assertTrue(orderEntry2Page.shippingAndBillingStepTitleIsDisplayed());
+    }
+
+    @Then("^All necessary elements are displayed on the Order Details block at OE 2 page.$")
+    public void allNecessaryElementsAreDisplayedOnTheOrderDetailsBlock() {
+        assertTrue(orderEntry2Page.orderDetailsHeaderIsDisplayed());
+        assertTrue(orderEntry2Page.jobNameFieldIsDisplayed());
+        assertTrue(orderEntry2Page.payerTitleIsDisplayed());
+    }
+
+    @Then("^All necessary elements are displayed on the Address Details block at OE 2 page.$")
+    public void allNecessaryElementsAreDisplayedOnTheAddressDetailsBlockAtOEPage() {
+        assertTrue(orderEntry2Page.addressDetailsHeaderIsDisplayed());
+        assertTrue(orderEntry2Page.manageAddressButtonIsDisplayed());
+        assertTrue(orderEntry2Page.shipmentAddressTitleIsDisplayed());
+    }
+
+    @Then("^All necessary elements are displayed on the Shipment Details block at OE 2 page.$")
+    public void allNecessaryElementsAreDisplayedOnTheShipmentDetailsBlockAtOEPage() {
+        assertTrue(orderEntry2Page.shipmentDetailsHeaderIsDisplayed());
+        assertTrue(orderEntry2Page.shipPaymentMethodTitleIsDisplayed());
+        assertTrue(orderEntry2Page.shippingNoteTitleIsDisplayed());
+        assertTrue(orderEntry2Page.shipMethodTitleIsDisplayed());
+        assertTrue(orderEntry2Page.requestedDeliveryDateTitleIsDisplayed());
+        assertTrue(orderEntry2Page.partiallyDeliveryTitleTitleIsDisplayed());
+        assertTrue(orderEntry2Page.requestedDeliveryTitleTitleIsDisplayed());
+    }
 }
+
