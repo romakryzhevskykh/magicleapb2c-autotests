@@ -89,5 +89,6 @@ public class MyCartPage extends StorefrontBasePage {
 
     public void clickOnTheNextTopButton() {
         $(BUILD_ORDER_TOP_NEXT_BUTTON_XPATH).click();
+        waitUntilPageIsFullyLoaded();
     }
 }
