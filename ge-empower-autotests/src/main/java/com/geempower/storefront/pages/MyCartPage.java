@@ -90,5 +90,6 @@ public class MyCartPage extends StorefrontBasePage {
     @Step("Click on the Top Next button on the My Cart page")
     public void clickOnTheNextTopButton() {
         $(BUILD_ORDER_TOP_NEXT_BUTTON_XPATH).click();
+        waitUntilPageIsFullyLoaded();
     }
 }
