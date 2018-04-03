@@ -50,10 +50,10 @@ Feature: Some actions on Dashboard page
     Then Selected Shipment address is equal to Ship to field value.
     When User clicks on the Bottom Next button.
     Then Order Summary step is opened.
-    Then All necessary elements are displayed on the Order Summary block.
-    Then All necessary elements are displayed on the Address Details block.
-    Then All necessary elements are displayed on the Shipment Details block.
-    Then All necessary elements are displayed on the Product Details block.
+    Then All necessary elements are displayed on the Order Summary block on Third Order Entry page.
+    Then All necessary elements are displayed on the Address Details block on Third Order Entry page.
+    Then All necessary elements are displayed on the Shipment Details block on Third Order Entry page.
+    Then All necessary elements are displayed on the Product Details block on Third Order Entry page.
     Then PO no. is correct.
     When User clicks on Place Order button.
     And Terms and Conditions pop-up is confirmed.

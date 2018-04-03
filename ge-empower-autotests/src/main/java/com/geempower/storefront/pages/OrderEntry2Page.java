@@ -21,12 +21,12 @@ public class OrderEntry2Page extends StorefrontBasePage {
         return storefrontProject.getBaseUrl().concat(pageUri);
     }
 
-    @Step("Click on the bottom Next button on the second Order entry page")
+    @Step("Click on the bottom Next button on the second Order entry page.")
     public void clickOnTheNextBottomButton() {
         $(SHIPPING_BILLING_BOTTOM_NEXT_BUTTON_XPATH).click();
     }
 
-    @Step("User fills unique Po No on the second Order entry page")
+    @Step("User fills unique Po No on the second Order entry page.")
     public String fillUniquePoNo() {
         waitUntilPageIsFullyLoaded();
         String uniquePoNo = Long.toString(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().getEpochSecond());
@@ -35,7 +35,7 @@ public class OrderEntry2Page extends StorefrontBasePage {
         return uniquePoNo;
     }
 
-    @Step("User chooses first shipping address from the addresses list on the second Order entry page")
+    @Step("User chooses first shipping address from the addresses list on the second Order entry page.")
     public String chooseAppropriateAddressFromTheShippingAddressList(){
         waitUntilPageIsFullyLoaded();
         $(SHIPPING_ADDRESS_LIST_OPEN_XPATH).click();
@@ -44,8 +44,45 @@ public class OrderEntry2Page extends StorefrontBasePage {
         return addressDropdown.getOptions().get(1).getText();
     }
 
-    @Step("Getting the value from Ship To field on the second Order entry page")
+    @Step("Getting the value from Ship To field on the second Order entry page.")
     public String getShipToValue() {
         return $(SHIP_TO_FIELD_VALUE_XPATH).getText();
     }
+
+    @Step("Getting the Catalog No. from the Product details block.")
+    public String getCatalogNoFromTheProductDetailsBlock() {
+        waitUntilPageIsFullyLoaded();
+        return $(PRODUCT_DETAILS_BLOCK_CATALOG_NO_XPATH).getText();
+    }
+
+    @Step("Getting the Description from the Product details block.")
+    public String getDescriptionFromTheProductDetailsBlock() {
+        return $(PRODUCT_DETAILS_BLOCK_DESCRIPTION_XPATH).getText();
+    }
+
+    @Step("Getting the Quantity of product from the Product details block.")
+    public int getQuantityFromTheProductDetailsBlock() {
+        return Integer.parseInt($(PRODUCT_DETAILS_BLOCK_QUANTITY_XPATH).getText());
+    }
+
+    @Step("Getting the Extended price from the Product details block.")
+    public double getExtendedPriceFromTheProductDetailsBlock() {
+        return Double.parseDouble($(PRODUCT_DETAILS_BLOCK_EXTENDED_PRICE_XPATH).getText());
+    }
+
+    @Step("Getting the Currency from the Product details block.")
+    public String getCurrencyFromTheProductDetailsBlock() {
+        return $(PRODUCT_DETAILS_BLOCK_CURRENCY_XPATH).getText();
+    }
+
+    @Step("Getting the Est delivery date from the Product details block.")
+    public String getEstDeliveryDateFromTheProductDetailsBlock() {
+        return $(PRODUCT_DETAILS_BLOCK_EST_DELIVERY_DATE_XPATH).getText();
+    }
+
+    @Step("Getting the Req delivery date from the Product details block.")
+    public String getReqDeliveryDateFromTheProductDetailsBlock() {
+        return $(PRODUCT_DETAILS_BLOCK_REQ_DELIVERY_DATE_XPATH).getAttribute("value");
+    }
+
 }
