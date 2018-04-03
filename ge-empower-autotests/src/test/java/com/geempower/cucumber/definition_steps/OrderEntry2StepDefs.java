@@ -52,8 +52,8 @@ public class OrderEntry2StepDefs extends AbstractStepDefs {
         });
     }
 
-    @Then("^Shipping And Billing step is opened.$")
-    public void shippingAndBillingStepTitleIsOpen() {
+    @Then("^Shipping And Billing step is displayed.$")
+    public void shippingAndBillingStepTitleIsDisplayed() {
         assertTrue(orderEntry2Page.shippingAndBillingStepTitleIsDisplayed());
     }
 
