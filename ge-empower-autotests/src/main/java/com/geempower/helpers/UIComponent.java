@@ -147,5 +147,12 @@ public abstract class UIComponent {
         WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getShortTimeOut());
         wait.until(ExpectedConditions.presenceOfElementLocated(by));
         wait.until(ExpectedConditions.invisibilityOf(webElement));
-        }
+    }
+
+    public void waitForElementWithAppropriateTextToAppear(By by, String text) {
+        webDriverPool.getActiveDriverSession().setImplicitWait();
+        WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getTimeOut());
+        wait.until(ExpectedConditions.textToBe(by, text));
+
+    }
 }

@@ -44,25 +44,24 @@ Feature: Some actions on Dashboard page
     Then All necessary elements are displayed on the Order Details block at OE 2 page.
     Then All necessary elements are displayed on the Address Details block at OE 2 page.
     Then All necessary elements are displayed on the Shipment Details block at OE 2 page.
-#    Then All necessary elements are displayed on the Product Details block.
-#    When User fills PO no.
-#    And Select Shipment Address.
-#    Then Selected Shipment address is equal to Ship to field value.
-#    When User clicks on the Bottom Next button.
-#    Then Order Summary step is opened.
-#    Then All necessary elements are displayed on the Order Summary block.
-#    Then All necessary elements are displayed on the Address Details block.
-#    Then All necessary elements are displayed on the Shipment Details block.
-#    Then All necessary elements are displayed on the Product Details block.
-#    Then PO no. is correct.
-#    When User clicks on Place Order button.
-#    And Terms and Conditions pop-up is confirmed.
-#    Then Order Successful pop-up appears.
-#    When User closes the pop-up.
-#    Then Orders Details page is opened.
-#    Then GE Order No. is correct.
-#    Then Total Net Price is equal to Extend Price.
-    And User cancels the order by clicking on the Cancel button.
+    Then All necessary elements are displayed on the Product Details block.
+    When User fills PO no.
+    And Select Shipment Address.
+    Then Selected Shipment address is equal to Ship to field value.
+    When User clicks on the Bottom Next button.
+    Then Order Summary step is opened.
+    Then All necessary elements are displayed on the Order Summary block on Third Order Entry page.
+    Then All necessary elements are displayed on the Address Details block on Third Order Entry page.
+    Then All necessary elements are displayed on the Shipment Details block on Third Order Entry page.
+    Then All necessary elements are displayed on the Product Details block on Third Order Entry page.
+    Then PO no. is correct.
+    When User clicks on Place Order button.
+    And Terms and Conditions pop-up is confirmed.
+    Then Order Successful pop-up appears.
+    When User closes the pop-up.
+    Then Orders Details page is opened.
+    Then GE Order No. is correct.
+    Then Total Net Price is equal to Extend Price.
 
   Scenario: Check that user is able to place order via Product Number field using P&A block in North America region
     And Account management page is opened.
@@ -95,22 +94,21 @@ Feature: Some actions on Dashboard page
     Then All necessary elements are displayed on the Order Details block at OE 2 page.
     Then All necessary elements are displayed on the Address Details block at OE 2 page.
     Then All necessary elements are displayed on the Shipment Details block at OE 2 page.
-#    Then All necessary elements are displayed on the Product Details block.
-#    When User fills PO no.
-#    And Select Shipment Address.
-#    Then Selected Shipment address is equal to Ship to field value.
-#    When User clicks on the Bottom Next button.
-#    Then Order Summary step is opened.
-#    Then All necessary elements are displayed on the Order Summary block.
-#    Then All necessary elements are displayed on the Address Details block.
-#    Then All necessary elements are displayed on the Shipment Details block.
-#    Then All necessary elements are displayed on the Product Details block.
-#    Then PO no. is correct.
-#    When User clicks on Place Order button.
-#    And Terms and Conditions pop-up is confirmed.
-#    Then Order Successful pop-up appears.
-#    When User closes the pop-up.
-#    Then Orders Details page is opened.
-#    Then GE Order No. is correct.
-#    Then Total Net Price is equal to Extend Price.
-    And User cancels the order by clicking on the Cancel button.
+    Then All necessary elements are displayed on the Product Details block.
+    When User fills PO no.
+    And Select Shipment Address.
+    Then Selected Shipment address is equal to Ship to field value.
+    When User clicks on the Bottom Next button.
+    Then Order Summary step is opened.
+    Then All necessary elements are displayed on the Order Summary block on Third Order Entry page.
+    Then All necessary elements are displayed on the Address Details block on Third Order Entry page.
+    Then All necessary elements are displayed on the Shipment Details block on Third Order Entry page.
+    Then All necessary elements are displayed on the Product Details block on Third Order Entry page.
+    Then PO no. is correct.
+    When User clicks on Place Order button.
+    And Terms and Conditions pop-up is confirmed.
+    Then Order Successful pop-up appears.
+    When User closes the pop-up.
+    Then Orders Details page is opened.
+    Then GE Order No. is correct.
+    Then Total Net Price is equal to Extend Price.

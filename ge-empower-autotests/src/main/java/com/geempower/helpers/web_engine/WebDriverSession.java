@@ -37,6 +37,10 @@ public class WebDriverSession {
         changeImplicitWait(shortTimeOut, TimeUnit.SECONDS);
     }
 
+    public void setImplicitWait() {
+        changeImplicitWait(timeOut, TimeUnit.SECONDS);
+    }
+
     private void changeImplicitWait(int value, TimeUnit timeUnit) {
         webDriver.manage().timeouts().implicitlyWait(value, timeUnit);
     }
