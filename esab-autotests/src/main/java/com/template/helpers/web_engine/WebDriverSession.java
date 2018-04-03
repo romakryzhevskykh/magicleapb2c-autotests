@@ -45,4 +45,9 @@ public class WebDriverSession {
     public void dismiss() {
         webDriver.quit();
     }
+
+	public long getShortTimeOut() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
