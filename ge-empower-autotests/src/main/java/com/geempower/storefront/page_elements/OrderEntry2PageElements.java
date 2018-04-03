@@ -8,7 +8,6 @@ public class OrderEntry2PageElements {
     public final static String JOB_NAME_FIELD_ID = "jobName";
     public final static String PAYER_TITLE_XPATH = "//*[@id='shipping-billing-info']//label[contains (text(),'Payer')]";
   
-    public final static String SHIPPING_BILLING_TITLE_XPATH = ".//*[@id='shipping-billing-info']/div[1]/div[1]/ul/li[2]";
     public final static String SHIPPING_ADDRESS_FIELD_ID = "select2-shipmentAddress-container";
     public final static String SHIPPING_BILLING_TOP_NEXT_BUTTON_XPATH = ".//*[@id='shipping-billing-info']/div[1]/div[2]/div/ul/li/button";
     public final static String SHIPPING_BILLING_BOTTOM_NEXT_BUTTON_XPATH = "//*[@class='order-titles order-bottom-steps clearfix']//*[@class='btn primary-btn vaidateCheckoutBtn']";
