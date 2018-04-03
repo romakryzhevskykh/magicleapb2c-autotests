@@ -59,9 +59,9 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     And Terms and Conditions pop-up is confirmed.
     Then Order Successful pop-up appears at the OE 3 page.
     When User closes the pop-up.
-#    Then Orders Details page is opened.
-#    Then GE Order No. is correct.
-#    Then Total Net Price is equal to Extend Price.
+    Then Orders Details page is opened.
+    Then GE Order No. is correct.
+    Then Total Net Price is equal to Extend Price.
 
   Scenario: Check that user is able to place order via Product Number field using P&A block in North America region
     And Account management page is opened.
@@ -109,6 +109,6 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     And Terms and Conditions pop-up is confirmed.
     Then Order Successful pop-up appears at the OE 3 page.
     When User closes the pop-up.
-#    Then Orders Details page is opened.
-#    Then GE Order No. is correct.
-#    Then Total Net Price is equal to Extend Price.
+    Then Orders Details page is opened.
+    Then GE Order No. is correct.
+    Then Total Net Price is equal to Extend Price.
