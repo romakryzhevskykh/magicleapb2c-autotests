@@ -1,11 +1,12 @@
 package com.geempower.storefront.pages;
 
+import com.geempower.helpers.models.Product;
 import com.geempower.storefront.StorefrontBasePage;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import static com.geempower.storefront.page_elements.MyCartPageElements.*;
-
+import static com.geempower.storefront.page_elements.PriceAndAvailabilityPageElements.EXTENDED_PRICE_XPATH;
 
 @Component
 public class MyCartPage extends StorefrontBasePage {
@@ -91,5 +92,30 @@ public class MyCartPage extends StorefrontBasePage {
     public void clickOnTheNextTopButton() {
         $(BUILD_ORDER_TOP_NEXT_BUTTON_XPATH).click();
         waitUntilPageIsFullyLoaded();
+    }
+
+    @Step("Get Qty value")
+    public String getQtyValue(Product product) {
+        return $(QTY_VALUE_INPUT_XPATH, product.getCatalogueNo().toUpperCase()).getAttribute("value");
+    }
+
+    public void setQuantityForProduct(Product product, int randomQuantity) {
+        $(QTY_VALUE_INPUT_XPATH, product.getCatalogueNo().toUpperCase()).clear();
+        $(QTY_VALUE_INPUT_XPATH, product.getCatalogueNo().toUpperCase()).sendKeys(Integer.toString(randomQuantity));
+    }
+
+    public void clickOnSelectAllCheckbox() {
+        waitUntilPageIsFullyLoaded();
+        $(ALL_CHECKBOXES_XPATH).click();
+    }
+
+    public void clickOnUpdatePAButton() {
+        $(UPDATE_PRICE_AND_AVAILABILITY_BUTTON_XPATH).click();
+    }
+
+    public String getNewExtendPrice(Product product) {
+        waitUntilPageIsFullyLoaded();
+        return $(EXTENDED_PRICE_ON_MY_CART_XPATH, product.getCatalogueNo().toUpperCase()).getText();
+
     }
 }

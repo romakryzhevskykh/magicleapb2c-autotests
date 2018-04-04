@@ -96,7 +96,6 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
         priceAndAvailabilityPage.waitUntilPageIsFullyLoaded();
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         selectedProducts.keySet().forEach(product -> assertEquals(priceAndAvailabilityPage.getQtyValue(product), qtyValue));
-
     }
 
     @Then("^Check that description, list price, final net price, availability are equal to data from PDP.$")
