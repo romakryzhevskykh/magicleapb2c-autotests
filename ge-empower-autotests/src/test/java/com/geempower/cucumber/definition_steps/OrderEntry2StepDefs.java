@@ -1,6 +1,6 @@
 package com.geempower.cucumber.definition_steps;
 
-import com.geempower.helpers.models.Product;
+import com.geempower.helpers.models.*;
 import com.geempower.storefront.pages.OrderEntry2Page;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
@@ -74,7 +74,11 @@ public class OrderEntry2StepDefs extends AbstractStepDefs {
     @Then("^All necessary elements are displayed on the Shipment Details block at OE 2 page.$")
     public void allNecessaryElementsAreDisplayedOnTheShipmentDetailsBlockAtOE2Page() {
         assertTrue(orderEntry2Page.shipmentDetailsHeaderIsDisplayed());
-        assertTrue(orderEntry2Page.shipPaymentMethodTitleIsDisplayed());
+        Region chosenRegion = (Region) threadVarsHashMap.get(TestKeyword.CHOSEN_REGION);
+        if (!chosenRegion.getRegionType().getRegionName().equals("ASIA") &&
+                (!chosenRegion.getRegionType().getRegionName().equals("EMEA"))) {
+            assertTrue(orderEntry2Page.shipPaymentMethodTitleIsDisplayed());
+        }
         assertTrue(orderEntry2Page.shippingNoteTitleIsDisplayed());
         assertTrue(orderEntry2Page.shipMethodTitleIsDisplayed());
         assertTrue(orderEntry2Page.requestedDeliveryDateTitleIsDisplayed());

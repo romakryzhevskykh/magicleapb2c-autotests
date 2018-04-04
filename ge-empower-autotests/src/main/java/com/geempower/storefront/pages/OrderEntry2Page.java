@@ -24,6 +24,14 @@ public class OrderEntry2Page extends StorefrontBasePage {
     @Step("Click on the bottom Next button on the second OE 2 page.")
     public void clickOnTheNextBottomButton() {
         $(SHIPPING_BILLING_BOTTOM_NEXT_BUTTON_XPATH).click();
+        waitUntilPageIsFullyLoaded();
+        if (isDisplayed(MINIMUM_SHIPMENT_CHARGES_EMEA_MODAL_XPATH)) {
+            click(CONTINUE_EMEA_BUTTON_XPATH);
+        }
+        if (isDisplayed(MINIMUM_SHIPMENT_CHARGES_NA_MODAL_XPATH)) {
+            click(CONTINUE_NA_BUTTON_XPATH);
+        }
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("User fills unique Po No on the OE 2 page.")
@@ -87,6 +95,7 @@ public class OrderEntry2Page extends StorefrontBasePage {
 
     @Step("Shipping And Billing Step Title Is Displayed on the OE 2 page.")
     public boolean shippingAndBillingStepTitleIsDisplayed() {
+        waitUntilPageIsFullyLoaded();
         return isDisplayed(SHIPPING_BILLING_TITLE_XPATH);
     }
 

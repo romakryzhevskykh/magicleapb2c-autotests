@@ -36,4 +36,9 @@ public class OrderEntry2PageElements {
     public final static String PARTIAL_DELIVERY_TITLE_XPATH = "//label[contains (text(),'partial delivery')]";
     public final static String BEFORE_DELIVERY_DATE_TITLE_XPATH = "//label[contains (text(),'delivery date')]";
 
+    public final static String MINIMUM_SHIPMENT_CHARGES_EMEA_MODAL_XPATH = "//div[@id='minimum-shipment-charges-emea-modal']//div[@class='modal-dialog']";
+    public final static String MINIMUM_SHIPMENT_CHARGES_LA_MODAL_XPATH = "//div[@id='minimum-shipment-charges-mexico-modal']//div[@class='modal-dialog']";
+    public final static String MINIMUM_SHIPMENT_CHARGES_NA_MODAL_XPATH = "//div[@id='minimum-shipment-charges-modal']//div[@class='modal-dialog']";
+    public final static String CONTINUE_NA_BUTTON_XPATH = "//div[@id='minimum-shipment-charges-modal']//button[@data-target='#order-summary']";
+    public final static String CONTINUE_EMEA_BUTTON_XPATH = "//div[@id='minimum-shipment-charges-emea-modal']//button[@data-target='#order-summary']";
 }
