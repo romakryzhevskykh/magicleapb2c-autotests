@@ -2,7 +2,7 @@ package com.sarnova.cucumber.definition_steps;
 
 import com.sarnova.helpers.user_engine.BackofficeUserRoles;
 import com.sarnova.helpers.user_engine.ImportCockpitUserRoles;
-import com.sarnova.helpers.user_engine.StorefrontUserRoles;
+import com.sarnova.helpers.user_engine.StorefrontUserRole;
 import com.sarnova.helpers.web_engine.WebDriverSessions;
 import cucumber.api.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,21 +18,26 @@ public class UserSwitchStepDefs extends AbstractStepDefs {
 
     @Given("Switch to Storefront owner.")
     public void switchToStorefrontAsOwner() {
-        webDriverPool.setDriverActive(StorefrontUserRoles.ADMIN);
+        webDriverPool.setDriverActive(StorefrontUserRole.ADMIN);
     }
 
     @Given("Switch to Storefront shopper.")
     public void switchToStorefrontAsShopper() {
-        webDriverPool.setDriverActive(StorefrontUserRoles.BUYER);
+        webDriverPool.setDriverActive(StorefrontUserRole.BUYER);
     }
 
     @Given("Switch to Storefront guest.")
     public void switchToStorefrontAsGuest() {
-        webDriverPool.setDriverActive(StorefrontUserRoles.GUEST_CONSUMER);
+        webDriverPool.setDriverActive(StorefrontUserRole.GUEST_CONSUMER);
     }
 
     @Given("Switch to Import cockpit import manager role.")
     public void switchToImportCockpitAsImportManager() {
         webDriverPool.setDriverActive(ImportCockpitUserRoles.IMPORT_MANAGER);
+    }
+
+    @Given("Switch to Storefront cockpit test user.")
+    public void switchToStorefrontCockpitAsTestUser() {
+        webDriverPool.setDriverActive(StorefrontUserRole.TEST_USER);
     }
 }

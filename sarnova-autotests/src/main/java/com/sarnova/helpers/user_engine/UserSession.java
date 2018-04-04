@@ -17,8 +17,8 @@ public class UserSession {
         this.user = user;
     }
 
-    public UserRole getUserRole() {
-        return user.getUserRole();
+    public ArrayList<UserRole> getUserRoles() {
+        return user.getUserRoles();
     }
 
     public String getUsername() {

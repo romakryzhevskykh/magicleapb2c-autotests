@@ -1,7 +1,6 @@
-package com.sarnova.storefront.page_blocks;
+package com.sarnova.storefront.pages;
 
-import com.sarnova.helpers.UIComponent;
-import com.sarnova.helpers.user_engine.StorefrontUserRoles;
+import com.sarnova.helpers.user_engine.UserRole;
 import com.sarnova.helpers.user_engine.UserTitle;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -11,7 +10,8 @@ import ru.yandex.qatools.allure.annotations.Step;
 import static com.sarnova.storefront.page_block_elements.EditUserBlockElements.*;
 
 @Component
-public class EditUserBlock extends UIComponent {
+public class EditUserPage extends StorefrontBasePage {
+    private String pageUrlMethod = "boundtree/en/USD/my-company/organization-management/manage-users/edit?user=%s";
 
     @Step("Select title: {0}.")
     public void selectTitle(UserTitle userTitle) {
@@ -19,30 +19,30 @@ public class EditUserBlock extends UIComponent {
     }
 
     @Step("Fill first name field: {0}.")
-    public void fillFirstNameOnEditUserPage(String firstName) {
+    public void fillFirstName(String firstName) {
         $(By.id(FIRST_NAME_FIELD_ID)).clear();
         $(By.id(FIRST_NAME_FIELD_ID)).sendKeys(firstName);
     }
 
     @Step("Fill last name field: {0}.")
-    public void fillLastNameOnEditUserPage(String lastName) {
+    public void fillLastName(String lastName) {
         $(By.id(LAST_NAME_FIELD_ID)).clear();
         $(By.id(LAST_NAME_FIELD_ID)).sendKeys(lastName);
     }
 
     @Step("Fill email field: {0}.")
-    public void fillEmailOnEditUserPage(String email) {
+    public void fillEmail(String email) {
         $(By.id(EMAIL_FIELD_ID)).clear();
         $(By.id(EMAIL_FIELD_ID)).sendKeys(email);
     }
 
     @Step("Select parent unit.")
-    public void selectAnyParentUnitOnEditUserPage() {
+    public void selectAnyParentUnit() {
         //TODO
     }
 
     @Step("Click on user role checkbox: {0}.")
-    public void selectUserRoleOnEditUserPage(StorefrontUserRoles storefrontUserRole) {
+    public void selectUserRole(UserRole storefrontUserRole) {
         click(ROLE_CHECKBOX_BY_CODE_XPATH, storefrontUserRole.getRoleCode());
     }
 
@@ -52,12 +52,17 @@ public class EditUserBlock extends UIComponent {
     }
 
     @Step("Click on save button.")
-    public void clickOnSaveButtonOnEditUserPage() {
+    public void clickOnSaveButton() {
         click(SAVE_BUTTON_XPATH);
     }
 
     @Step("Deselect all user roles.")
-    public void deselectAllSelectedUserRolesOnEditUserPage() {
+    public void deselectAllSelectedUserRoles() {
         $$(ROLE_CHECKBOXES_XPATH).stream().filter(WebElement::isSelected).forEach(WebElement::click);
+    }
+
+    @Override
+    public String getPageUrl() {
+        return storefrontProject + pageUrlMethod;
     }
 }
