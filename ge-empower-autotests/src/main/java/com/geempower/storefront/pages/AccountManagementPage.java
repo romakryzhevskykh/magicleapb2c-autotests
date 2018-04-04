@@ -42,7 +42,8 @@ public class AccountManagementPage extends StorefrontBasePage {
 
     @Step("Open regions list")
     public void openRegionsList() {
-        click(REGION_COMBOBOX_XPATH);
+        waitUntilPageIsFullyLoaded();
+        $(REGION_COMBOBOX_XPATH).click();
     }
 
     public void searchAccountForChosenRegion(String accountName) {

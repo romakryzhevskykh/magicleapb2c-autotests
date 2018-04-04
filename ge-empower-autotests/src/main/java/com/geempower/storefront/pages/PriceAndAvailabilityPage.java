@@ -85,6 +85,7 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
 
     @Step("Get Order Value from checkout pop-up")
     public String getOrderValueFromCheckoutPopUp() {
+        waitUntilPageIsFullyLoaded();
         String orderValue = $(ORDER_VALUE_XPATH).getText();
         return orderValue.substring(0, orderValue.length() - 4);
     }

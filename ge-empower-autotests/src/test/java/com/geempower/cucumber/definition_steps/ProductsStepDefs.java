@@ -5,8 +5,10 @@ import com.geempower.helpers.managers.RegionsManager;
 import com.geempower.helpers.models.Product;
 import com.geempower.helpers.models.Region;
 import com.geempower.storefront.pages.ProductsPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
@@ -32,6 +34,12 @@ public class ProductsStepDefs extends AbstractStepDefs {
         HashMap<Product, Integer> selectedProducts = getSelectedProducts();
         selectedProducts.put(productManager.getProductWithAllDataByRegion(userSessions.getActiveUserSession(), chosenRegion), 0);
         threadVarsHashMap.put(TestKeyword.SELECTED_PRODUCTS, selectedProducts);
+    }
 
+    @When("^User search for a product by catalog No. on the Products page.$")
+    public void userSearchForAProductByCatalogNoOnTheProductsPage() {
+        threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
+        String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
+        productsPage.setCatalogNoToSearchField(catalogueNo);
     }
 }

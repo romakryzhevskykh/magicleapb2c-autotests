@@ -25,4 +25,11 @@ public class ProductsPage extends StorefrontBasePage {
     public String getProductsTitle() {
         return $(ALL_PRODUCTS_TITLE_XPATH).getText();
     }
+
+    public void setCatalogNoToSearchField(String catalogueNo) {
+        waitUntilPageIsFullyLoaded();
+        $(SEARCH_PRODUCT_INPUT).clear();
+        $(SEARCH_PRODUCT_INPUT).sendKeys(catalogueNo);
+        $(SEARCH_PRODUCT_ICON).click();
+    }
 }

@@ -14,11 +14,11 @@ public class MyCartPageElements {
     public final static String BUILD_ORDER_FORM_WRAPPER_XPATH = "//*[@class='add-new-order-form-wrapper']";
     public final static String DELETE_ITEM_BUTTON_XPATH = ".//button[@data-target='#delete-item-modal']";
     public final static String UPDATE_PRICE_AND_AVAILABILITY_BUTTON_XPATH = ".//button[@id='updatePricesBtn']";
+    public final static String EXTENDED_PRICE_ON_MY_CART_XPATH = "//tr[contains(@class, 'price-item') and td/a[@data-product = '%s']]/td[contains(@class,'col extendedPrice')]";
     public final static String MAIN_ORDER_DATA_TOP_RIGHT_XPATH = "//div[@id='build-order']/div[@class='row']/div[contains(@class,'return-order-title')]";
     public final static String DISCARD_ORDER_BUTTON_XPATH = "//button[@class='btn primary-btn cancel-cart-btn']";
     public final static String GREEN_CONFIRMATION_POP_UP_ID = "toast-container";
-
-
-
+    public final static String QTY_VALUE_INPUT_XPATH = "//tr[contains(@class, 'price-item') and td/a[@data-product = '%s']]/td[contains(@class,'qty-input')]/input";
+    public final static String ALL_CHECKBOXES_XPATH = ".//label[contains(@class,'myCheckbox select-all-desk-js')]";
 
 }

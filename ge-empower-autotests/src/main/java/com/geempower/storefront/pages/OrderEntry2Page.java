@@ -87,6 +87,7 @@ public class OrderEntry2Page extends StorefrontBasePage {
 
     @Step("Shipping And Billing Step Title Is Displayed on the OE 2 page.")
     public boolean shippingAndBillingStepTitleIsDisplayed() {
+        waitUntilPageIsFullyLoaded();
         return isDisplayed(SHIPPING_BILLING_TITLE_XPATH);
     }
 
