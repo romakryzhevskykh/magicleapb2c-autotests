@@ -13,9 +13,9 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     And Recent Orders widget is displayed.
     Then Recent Lists widget is displayed.
 
-  Scenario Outline: Check that user is able to place order via Copy&Paste field using P&A block in North America region
+  Scenario: Check that user is able to place order via Copy&Paste field using P&A block in North America region
     And Account management page is opened.
-    When Choose <Region> region.
+    When Choose North_America region.
     And Search random account for chosen region.
     And Click on chosen account.
     And Dashboard page is opened.
@@ -24,7 +24,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     When User set catalogueNo to Copy & Paste field.
     And Click on P&A button.
     And Price&Availability page is opened.
-    Then Check that default quantity is equals to <DefaultQuantity> on the Price&Availability page.
+    Then Check that default quantity is equals to 1 on the Price&Availability page.
     Then Check that description, list price, final net price, availability are equal to data from PDP.
     When Quantity is changed to random quantity of items for each product.
     And All products are selected on P&A page.
@@ -62,11 +62,6 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then Orders Details page is opened.
     Then GE Order No. is correct.
     Then Total Net Price is equal to Extend Price.
-
-    Examples:
-      | Region        | DefaultQuantity |
-      | North_America | 1               |
-      | EMEA          | 12              |
 
   Scenario: Check that user is able to place order via Product Number field using P&A block in North America region
     And Account management page is opened.
