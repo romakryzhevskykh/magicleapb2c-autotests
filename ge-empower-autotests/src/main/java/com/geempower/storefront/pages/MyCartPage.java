@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import static com.geempower.storefront.page_elements.MyCartPageElements.*;
-import static com.geempower.storefront.page_elements.PriceAndAvailabilityPageElements.EXTENDED_PRICE_XPATH;
 
 @Component
 public class MyCartPage extends StorefrontBasePage {
@@ -99,20 +98,24 @@ public class MyCartPage extends StorefrontBasePage {
         return $(QTY_VALUE_INPUT_XPATH, product.getCatalogueNo().toUpperCase()).getAttribute("value");
     }
 
+    @Step("Set Quantity value to qty. field for each product")
     public void setQuantityForProduct(Product product, int randomQuantity) {
         $(QTY_VALUE_INPUT_XPATH, product.getCatalogueNo().toUpperCase()).clear();
         $(QTY_VALUE_INPUT_XPATH, product.getCatalogueNo().toUpperCase()).sendKeys(Integer.toString(randomQuantity));
     }
 
+    @Step("Select all products by clicking on All checkbox")
     public void clickOnSelectAllCheckbox() {
         waitUntilPageIsFullyLoaded();
         $(ALL_CHECKBOXES_XPATH).click();
     }
 
+    @Step("Clicking on P&A button")
     public void clickOnUpdatePAButton() {
         $(UPDATE_PRICE_AND_AVAILABILITY_BUTTON_XPATH).click();
     }
 
+    @Step("Getting the updated Extended price")
     public String getNewExtendPrice(Product product) {
         waitUntilPageIsFullyLoaded();
         return $(EXTENDED_PRICE_ON_MY_CART_XPATH, product.getCatalogueNo().toUpperCase()).getText();
