@@ -69,7 +69,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     | EMEA              |
     | ASIA              |
 
-  Scenario: Check that user is able to place order via Product Number field using P&A block in North America region
+  Scenario Outline: Check that user is able to place order via Product Number field using P&A block in North America region
     And Account management page is opened.
     When Choose <region> region.
     And Search random account for chosen region.
@@ -112,7 +112,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then Total Net Price is equal to Extend Price.
 
   Examples:
-  | region            |
-  | North_America     |
-  | EMEA              |
-  | ASIA              |
+    | region            |
+    | North_America     |
+    | EMEA              |
+    | ASIA              |
