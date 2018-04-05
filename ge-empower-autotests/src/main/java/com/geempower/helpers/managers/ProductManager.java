@@ -2,7 +2,6 @@ package com.geempower.helpers.managers;
 
 import com.geempower.helpers.models.Product;
 import com.geempower.helpers.models.Region;
-import com.geempower.helpers.models.RegionType;
 import com.geempower.helpers.request_engine.GETRequest;
 import com.geempower.helpers.user_engine.UserSession;
 import org.jsoup.nodes.Document;
@@ -23,7 +22,7 @@ public class ProductManager {
     RegionsManager regionsManager;
     ArrayList<Product> productsList = new ArrayList<>();
 
-    private void createInstance(String catalogueNo, String region, String id) {
+    public void createInstance(String catalogueNo, String region, String id) {
         productsList.add(new Product(catalogueNo, regionsManager.getRegionByValue(region), id));
     }
 

@@ -4,9 +4,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class Order {
-    @Getter @Setter Integer extendPrice;
+    @Getter @Setter Long orderId;
+    @Getter @Setter Double finalOrderPrice;
     @Getter @Setter HashMap<Product, Integer> product;
+
+    public Order(long orderId, double finalOrderPrice){
+        this.orderId = orderId;
+        this.finalOrderPrice = finalOrderPrice;
+    }
 }

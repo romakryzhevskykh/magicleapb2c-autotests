@@ -1,5 +1,6 @@
 package com.geempower.cucumber.definition_steps;
 
+import com.geempower.helpers.managers.OrderManager;
 import com.geempower.helpers.models.Product;
 import com.geempower.helpers.models.Region;
 import com.geempower.storefront.pages.OrderEntry3Page;
@@ -15,6 +16,8 @@ import static org.testng.Assert.*;
 public class OrderEntry3StepDefs extends AbstractStepDefs {
     @Autowired
     private OrderEntry3Page orderEntry3Page;
+    @Autowired
+    private OrderManager orderManager;
 
     private static double delta = 0.0001;
 
@@ -40,7 +43,14 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
 
     @Then("^(.*) pop-up appears at the OE 3 page.$")
     public void orderSuccessfulPopUpAppears(String title) throws Throwable {
-        threadVarsHashMap.put(TestKeyword.GE_ORDER_NO, orderEntry3Page.getGEOrderNoFromOrderSuccessPopUp(title));
+        String orderNo = orderEntry3Page.getGEOrderNoFromOrderSuccessPopUp(title);
+        HashMap<Product, Integer> selectedProduct = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
+        double finalOrderPrice = selectedProduct.keySet().stream()
+                .mapToDouble(product -> Double.parseDouble(product.getFinalNetPrice()) * selectedProduct.get(product))
+                .sum();
+        orderManager.createOrderInstance(finalOrderPrice, Long.parseLong(orderNo));
+        threadVarsHashMap.put(TestKeyword.GE_ORDER_NO, orderNo);
+
     }
 
     @When("^User closes the pop-up.$")
