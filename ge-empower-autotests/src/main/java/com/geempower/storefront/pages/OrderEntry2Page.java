@@ -1,6 +1,5 @@
 package com.geempower.storefront.pages;
 
-import com.geempower.helpers.models.Region;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
