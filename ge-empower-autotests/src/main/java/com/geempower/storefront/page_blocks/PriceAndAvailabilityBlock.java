@@ -18,6 +18,7 @@ public class PriceAndAvailabilityBlock extends UIComponent {
     @Step("Click on Check P&A button")
     public void clickOnCheckPAButton() {
         click(By.id(CHECK_PRICE_AND_AVAILABILITY_BUTTON_ID));
+
     }
 
     @Step("Send CatalogueNo. to the Copy&Paste field")

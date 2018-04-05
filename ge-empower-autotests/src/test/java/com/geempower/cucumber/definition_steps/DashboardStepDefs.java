@@ -87,4 +87,14 @@ public class DashboardStepDefs extends AbstractStepDefs {
         String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
         priceAndAvailabilityBlock.setCatalogueNoToProductField(catalogueNo);
     }
+
+    @And("^Select address from address field.$")
+    public void selectAddressFromAddressField() {
+        threadVarsHashMap.put(TestKeyword.LA_SHIP_ADDRESS, dashboardPage.selectAddressFromAddressField());
+    }
+
+    @And("^Click on Submit button.$")
+    public void clickOnSubmitButton() {
+        dashboardPage.clickOnSubmitButton();
+    }
 }

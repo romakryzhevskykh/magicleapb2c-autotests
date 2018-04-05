@@ -3,6 +3,7 @@ package com.geempower.cucumber.definition_steps;
 import com.geempower.helpers.models.Product;
 import com.geempower.helpers.models.Region;
 import com.geempower.storefront.pages.OrderEntry3Page;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -92,5 +93,12 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
         assertTrue(orderEntry3Page.jobNameTitleIsDisplayed());
         assertTrue(orderEntry3Page.payerTitleIsDisplayed());
         assertFalse(orderEntry3Page.payerInfoIsEmpty());
+    }
+
+    @Then("^Payer and Shipment Addresses are correct at the OE 3 page.$")
+    public void payerAndShipmentAddressesAreCorrectAtTheOE3Page() {
+        String shipmentAddress = (String) threadVarsHashMap.get(TestKeyword.LA_SHIP_ADDRESS);
+        assertEquals(shipmentAddress, orderEntry3Page.getPayerAddress());
+        assertEquals(shipmentAddress, orderEntry3Page.getShipmentAddress());
     }
 }

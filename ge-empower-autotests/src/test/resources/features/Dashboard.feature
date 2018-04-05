@@ -13,7 +13,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     And Recent Orders widget is displayed.
     Then Recent Lists widget is displayed.
 
-  Scenario Outline: Check that user is able to place order via Copy&Paste field using P&A block in North America region
+  Scenario Outline: Check that user is able to place order via Copy&Paste field using P&A block in NA, EMEA, ASIA regions
     And Account management page is opened.
     When Choose <region> region.
     And Search random account for chosen region.
@@ -69,9 +69,9 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     | EMEA              |
     | ASIA              |
 
-  Scenario Outline: Check that user is able to place order via Product Number field using P&A block in North America region
+  Scenario Outline: Check that user is able to place order via Product Number field using P&A block in the Latin America region
     And Account management page is opened.
-    When Choose <region> region.
+    When Choose Latin_America region.
     And Search random account for chosen region.
     And Dashboard page is opened.
     When Click on Skip button.
@@ -79,13 +79,12 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Given Select test product for chosen region.
     When User set catalogNo to Product Number field.
     And Click on P&A button.
+    And Select address from address field.
+    And Click on Submit button.
     Then Price&Availability page is opened.
     Then Check that default quantity is equals to 1 on the Price&Availability page.
     Then Check that description, list price, final net price, availability are equal to data from PDP.
-    When Quantity is changed to random quantity of items for each product.
-    And All products are selected on P&A page.
-    And Update Price & Availability button is clicked.
-    Then Extend Price is changed to correct value.
+    And Put <default quantity> to the hashmap on P&A page.
     And All products are selected on P&A page.
     When User clicks on Add to Cart button.
     Then Check that count of added items is displayed on My Cart icon.
@@ -94,15 +93,22 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then Correct Order Value is displayed in the Checkout pop-up.
     When User clicks on Checkout button.
     Then My Cart page is opened.
-    Then All necessary elements are displayed on the My Cart page.
     When User clicks on the Next top button on the My Cart page.
     Then Shipping And Billing step is displayed at the OE 2 page.
+    Then Payer and Shipment Addresses are correct at the OE 2 page.
     When User fills PO no. to the PO no. field at the OE 2 page.
-    And Select Shipment Address from the existing addresses at the OE 2 page.
-    Then Selected Shipment address is equal to Ship to field value.
+    When User selects Carrier from drop-down at the OE 2 page.
+    When User fill Carrier Account No. field at the OE 2 page.
+    When User clicks on the Bottom Next button at the OE 2 page.
+    And Click on Add More Items button in the Minimum Shipment Charges pop-up at the OE 2 page.
+    When Quantity is changed to random quantity of items for each product on the My Cart page.
+    And All products are selected on the My Cart page.
+    And Update Price & Availability button is clicked on the My Cart page.
+    Then Extend Price is changed to correct value on the My Cart page.
+    When User clicks on the Next top button on the My Cart page.
     When User clicks on the Bottom Next button at the OE 2 page.
     Then Order Summary step is opened.
-    Then PO no. is correct at the OE 3 page.
+    Then Payer and Shipment Addresses are correct at the OE 3 page.
     When User clicks on Place Order button at the OE 3 page.
     And Terms and Conditions pop-up is confirmed.
     Then Order Successful pop-up appears at the OE 3 page.
@@ -111,8 +117,6 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then GE Order No. is correct.
     Then Total Net Price is equal to Extend Price.
 
-  Examples:
-    | region            |
-    | North_America     |
-    | EMEA              |
-    | ASIA              |
+    Examples:
+      | default quantity |
+      | 1                |

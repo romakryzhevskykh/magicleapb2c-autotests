@@ -7,8 +7,10 @@ public class OrderEntry2PageElements {
     public final static String PO_NO_FIELD_ID = "poNumber";
     public final static String JOB_NAME_FIELD_ID = "jobName";
     public final static String PAYER_TITLE_XPATH = "//*[@id='shipping-billing-info']//label[contains (text(),'Payer')]";
+    public final static String PAYER_BLOCK_VALUE_XPATH = "//*[@id='shipping-billing-info']//label[contains (text(),'Payer')]//following-sibling::p";
   
     public final static String SHIPPING_ADDRESS_FIELD_ID = "select2-shipmentAddress-container";
+    public final static String SHIPPING_ADDRESS_BLOCK_VALUE_XPATH = "//*[@id='shipping-billing-info']//label[contains (text(),'Shipment Address')]//following-sibling::p";
     public final static String SHIPPING_BILLING_TOP_NEXT_BUTTON_XPATH = ".//*[@id='shipping-billing-info']/div[1]/div[2]/div/ul/li/button";
     public final static String SHIPPING_BILLING_BOTTOM_NEXT_BUTTON_XPATH = "//*[@class='order-titles order-bottom-steps clearfix']//*[@class='btn primary-btn vaidateCheckoutBtn']";
     public final static String SHIPPING_ADDRESS_LIST_OPEN_XPATH = "//*[@id='select2-shipmentAddress-container']/../span[@class='select2-selection__arrow']";
@@ -35,10 +37,15 @@ public class OrderEntry2PageElements {
     public final static String REQUESTED_DELIVERY_DATE_TITLE_XPATH = "//*[@id='shipping-billing-info']//label[contains (text(),'Requested Delivery Date')]";
     public final static String PARTIAL_DELIVERY_TITLE_XPATH = "//label[contains (text(),'partial delivery')]";
     public final static String BEFORE_DELIVERY_DATE_TITLE_XPATH = "//label[contains (text(),'delivery date')]";
+    public final static String CARRIER_FIELD_XPATH = "//span[@aria-labelledby='select2-carrier-select-container']";
+    public final static String CARRIER_FIRST_DROP_DOWN_ITEM_XPATH = ".//*[@class='select2-results']/ul[1]";
+    public final static String CARRIER_ACCOUNT_NO_FIELD_ID = "carrier-account";
 
     public final static String MINIMUM_SHIPMENT_CHARGES_EMEA_MODAL_XPATH = "//div[@id='minimum-shipment-charges-emea-modal']//div[@class='modal-dialog']";
     public final static String MINIMUM_SHIPMENT_CHARGES_LA_MODAL_XPATH = "//div[@id='minimum-shipment-charges-mexico-modal']//div[@class='modal-dialog']";
     public final static String MINIMUM_SHIPMENT_CHARGES_NA_MODAL_XPATH = "//div[@id='minimum-shipment-charges-modal']//div[@class='modal-dialog']";
     public final static String CONTINUE_NA_BUTTON_XPATH = "//div[@id='minimum-shipment-charges-modal']//button[@data-target='#order-summary']";
     public final static String CONTINUE_EMEA_BUTTON_XPATH = "//div[@id='minimum-shipment-charges-emea-modal']//button[@data-target='#order-summary']";
+
+    public final static String ADD_MORE_ITEMS_BUTTON_XPATH = "//div[@id='minimum-shipment-charges-mexico-modal']//button[@data-target='#build-order']";
 }

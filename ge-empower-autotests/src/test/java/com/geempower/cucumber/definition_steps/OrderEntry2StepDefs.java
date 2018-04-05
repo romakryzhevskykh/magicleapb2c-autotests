@@ -3,6 +3,7 @@ package com.geempower.cucumber.definition_steps;
 import com.geempower.helpers.models.Product;
 import com.geempower.helpers.models.Region;
 import com.geempower.storefront.pages.OrderEntry2Page;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -85,6 +86,27 @@ public class OrderEntry2StepDefs extends AbstractStepDefs {
         assertTrue(orderEntry2Page.requestedDeliveryDateTitleIsDisplayed());
         assertTrue(orderEntry2Page.partiallyDeliveryTitleTitleIsDisplayed());
         assertTrue(orderEntry2Page.requestedDeliveryTitleTitleIsDisplayed());
+    }
+
+    @Then("^Payer and Shipment Addresses are correct at the OE 2 page.$")
+    public void payerAndShipmentAddressesAreCorrectAtTheOE2Page(){
+        String shipmentAddress = (String) threadVarsHashMap.get(TestKeyword.LA_SHIP_ADDRESS);
+        assertEquals(shipmentAddress, orderEntry2Page.getPayerAddress());
+        assertEquals(shipmentAddress, orderEntry2Page.getShipmentAddress());
+    }
+
+    @When("^User selects Carrier from drop-down at the OE 2 page.$")
+    public void userSelectsCarrierAtTheOEPage() {
+        orderEntry2Page.selectCarrierFromDropDown();
+    }
+    @When("^User fill Carrier Account No. field at the OE 2 page.$")
+    public void userFillCarrierAccountNo() {
+        orderEntry2Page.fillCarrierAccountNo();
+    }
+
+    @And("^Click on Add More Items button in the Minimum Shipment Charges pop-up at the OE 2 page.$")
+    public void clickOnAddMoreItemsButtonInTheMinimumShipmentChargesPopUpAtTheOEPage(){
+        orderEntry2Page.clickOnAddMoreItemsButton();
     }
 }
 
