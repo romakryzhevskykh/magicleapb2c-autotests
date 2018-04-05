@@ -1,6 +1,7 @@
 package com.geempower.cucumber.definition_steps;
 
-import com.geempower.helpers.models.*;
+import com.geempower.helpers.models.Product;
+import com.geempower.helpers.models.Region;
 import com.geempower.storefront.pages.OrderEntry2Page;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
