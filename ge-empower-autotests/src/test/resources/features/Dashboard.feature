@@ -13,9 +13,9 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     And Recent Orders widget is displayed.
     Then Recent Lists widget is displayed.
 
-  Scenario: Check that user is able to place order via Copy&Paste field using P&A block in North America region
+  Scenario Outline: Check that user is able to place order via Copy&Paste field using P&A block in North America region
     And Account management page is opened.
-    When Choose North_America region.
+    When Choose <region> region.
     And Search random account for chosen region.
     And Click on chosen account.
     And Dashboard page is opened.
@@ -63,9 +63,15 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then GE Order No. is correct.
     Then Total Net Price is equal to Extend Price.
 
+  Examples:
+    | region            |
+    | North_America     |
+    | EMEA              |
+    | ASIA              |
+
   Scenario: Check that user is able to place order via Product Number field using P&A block in North America region
     And Account management page is opened.
-    When Choose North_America region.
+    When Choose <region> region.
     And Search random account for chosen region.
     And Dashboard page is opened.
     When Click on Skip button.
@@ -91,19 +97,11 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then All necessary elements are displayed on the My Cart page.
     When User clicks on the Next top button on the My Cart page.
     Then Shipping And Billing step is displayed at the OE 2 page.
-    Then All necessary elements are displayed on the Order Details block at OE 2 page.
-    Then All necessary elements are displayed on the Address Details block at OE 2 page.
-    Then All necessary elements are displayed on the Shipment Details block at OE 2 page.
-    Then All necessary elements are displayed on the Product Details block at the OE 2 page.
     When User fills PO no. to the PO no. field at the OE 2 page.
     And Select Shipment Address from the existing addresses at the OE 2 page.
     Then Selected Shipment address is equal to Ship to field value.
     When User clicks on the Bottom Next button at the OE 2 page.
     Then Order Summary step is opened.
-    Then All necessary elements are displayed on the Order Summary block on at OE 3 page.
-    Then All necessary elements are displayed on the Address Details block at OE 3 page.
-    Then All necessary elements are displayed on the Shipment Details block at OE 3 page.
-    Then All necessary elements are displayed on the Product Details block at OE 3 page.
     Then PO no. is correct at the OE 3 page.
     When User clicks on Place Order button at the OE 3 page.
     And Terms and Conditions pop-up is confirmed.
@@ -112,3 +110,9 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then Orders Details page is opened.
     Then GE Order No. is correct.
     Then Total Net Price is equal to Extend Price.
+
+  Examples:
+  | region            |
+  | North_America     |
+  | EMEA              |
+  | ASIA              |
