@@ -11,3 +11,5 @@ bin
 .metadata
 test-output
 esab-autotests/target
+.recommenders
+esab-autotests/log4j-application.log
