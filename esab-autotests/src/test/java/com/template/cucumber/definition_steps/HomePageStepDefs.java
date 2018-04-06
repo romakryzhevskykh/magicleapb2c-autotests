@@ -12,8 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.testng.Assert.assertTrue;
 
+import org.apache.log4j.Logger;
+
 public class HomePageStepDefs extends AbstractStepDefs {
-    @Autowired UserSessions userSessions;
+    
+	final static Logger logger = Logger.getLogger(HomePageStepDefs.class);
+	
+	@Autowired UserSessions userSessions;
 
     @Autowired HomePage homePage;
     @Autowired LoginPage loginPage;
@@ -43,6 +48,7 @@ public class HomePageStepDefs extends AbstractStepDefs {
 
     @Then("Check that Home page is opened.")
     public void checkThatHomePageIsOpened() {
-        assertTrue(homePage.isOpened());
+    	logger.warn("Check Homepage is opened");
+        assertTrue(homePage.isOpened(), "Home page is not opened");
     }
 }
