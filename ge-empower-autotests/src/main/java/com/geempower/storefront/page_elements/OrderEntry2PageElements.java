@@ -1,6 +1,7 @@
 package com.geempower.storefront.page_elements;
 
 public class OrderEntry2PageElements {
+    public final static String BUILD_ORDER_TITLE_XPATH = ".//h4[contains (text(),'Build Order')]";
     public final static String SHIPPING_BILLING_TITLE_XPATH = ".//li[@class='shipping-billing-info active']";
 
     public final static String ORDER_DETAILS_HEADER_XPATH = ".//h4[contains (text(),'Order Details')]";

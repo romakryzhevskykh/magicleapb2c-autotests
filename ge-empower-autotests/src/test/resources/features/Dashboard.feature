@@ -73,6 +73,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     And Account management page is opened.
     When Choose Latin_America region.
     And Search random account for chosen region.
+    And Click on chosen account.
     And Dashboard page is opened.
     When Click on Skip button.
     When Close cookies pop-up.
