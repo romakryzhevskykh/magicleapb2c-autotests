@@ -8,7 +8,7 @@ public class OrderEntry3PageElements {
     public final static String PO_NUMBER_SUMMARY_XPATH = ".//*[@class='poNumberSummary']";
     public final static String TERMS_AND_CONDITIONS_CHECKBOX_XPATH = "//div[@id='terms-condition-modal']//ins";
     public final static String SUBMIT_ORDER_BUTTON_IN_TERMS_POP_UP_XPATH = "//button[@class='btn primary-btn submit-order-btn']";
-    public final static String ORDER_CONFIRMATION_POP_UP_TITLE_XPATH= "//div[@id='order-confirmation-modal']//h4";
+    public final static String ORDER_CONFIRMATION_POP_UP_TITLE_XPATH = "//div[@id='order-confirmation-modal']//h4";
     public final static String GE_ORDER_NUMBER_ON_THE_CONFIRMATION_POP_UP_XPATH = "//div[@id='order-confirmation-modal']//span[@class='orderNumber']";
     public final static String CLOSE_ORDER_CONFIRMATION_POP_UP_XPATH = "//*[@id='order-confirmation-modal']//button[@type='button']";
 
@@ -41,5 +41,8 @@ public class OrderEntry3PageElements {
     public final static String JOB_NAME_TITLE_XPATH = ORDER_SUMMARY_FORM_XPATH + "//label[contains (text(),'Job Name')]";
     public final static String PAYER_TITLE_XPATH = ORDER_SUMMARY_FORM_XPATH + "//label[contains (text(),'Payer')]";
     public final static String PAYER_DATA_XPATH = "//p[@class='billToSummary']";
+
+    public final static String PAYER_BLOCK_VALUE_XPATH = "//p[@class='billToSummary']";
+    public final static String SHIPPING_ADDRESS_BLOCK_VALUE_XPATH = "//p[@class='shipmentAddressSummary']";
 
 }

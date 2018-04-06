@@ -173,4 +173,14 @@ public class OrderEntry3Page extends StorefrontBasePage {
     public boolean payerInfoIsEmpty() {
         return $(PAYER_DATA_XPATH).getText().isEmpty();
     }
+
+    @Step("Getting Payer Address on the OE 3 page.")
+    public String getPayerAddress() {
+        return $(PAYER_BLOCK_VALUE_XPATH).getText();
+    }
+
+    @Step("Getting Shipment Address on the OE 3 page.")
+    public String getShipmentAddress() {
+        return $(SHIPPING_ADDRESS_BLOCK_VALUE_XPATH).getText();
+    }
 }

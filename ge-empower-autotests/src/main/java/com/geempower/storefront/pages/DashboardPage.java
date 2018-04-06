@@ -71,4 +71,14 @@ public class DashboardPage extends StorefrontBasePage {
         return $(ACCOUNT_INFO_XPATH).getText();
 
     }
+
+    @Step("Select Address from address field")
+    public String selectAddressFromAddressField() {
+        waitUntilPageIsFullyLoaded();
+        return $(By.id(SELECT_SHIP_ADDRESS_FIELD_ID)).getText();
+    }
+    @Step("Click on Submit button")
+    public void clickOnSubmitButton() {
+        click(SUBMIT_SHIP_ADDRESS_BUTTON_XPATH);
+    }
 }

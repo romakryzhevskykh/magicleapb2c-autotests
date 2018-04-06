@@ -100,6 +100,7 @@ public class MyCartPage extends StorefrontBasePage {
 
     @Step("Set Quantity value to qty. field for each product")
     public void setQuantityForProduct(Product product, int randomQuantity) {
+        waitUntilPageIsFullyLoaded();
         $(QTY_VALUE_INPUT_XPATH, product.getCatalogueNo().toUpperCase()).clear();
         $(QTY_VALUE_INPUT_XPATH, product.getCatalogueNo().toUpperCase()).sendKeys(Integer.toString(randomQuantity));
     }

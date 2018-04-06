@@ -7,5 +7,6 @@ public enum TestKeyword {
     SELECTED_PRODUCTS,
     CHOSEN_ACCOUNT,
     PO_NO,
-    GE_ORDER_NO
+    GE_ORDER_NO,
+    LA_SHIP_ADDRESS
 }

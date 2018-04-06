@@ -163,4 +163,28 @@ public class OrderEntry2Page extends StorefrontBasePage {
     public boolean requestedDeliveryTitleTitleIsDisplayed() {
         return isDisplayed(BEFORE_DELIVERY_DATE_TITLE_XPATH);
     }
+
+    @Step("Getting Payer Address on the OE 2 page.")
+    public String getPayerAddress() {
+        return $(PAYER_BLOCK_VALUE_XPATH).getText();
+    }
+
+    @Step("Getting Shipment Address on the OE 2 page.")
+    public String getShipmentAddress() {
+        return $(SHIPPING_ADDRESS_BLOCK_VALUE_XPATH).getText();
+    }
+    @Step("Selects Carrier from drop-down at the OE 2 page.")
+    public void selectCarrierFromDropDown() {
+        click(CARRIER_FIELD_XPATH);
+        click(CARRIER_FIRST_DROP_DOWN_ITEM_XPATH);
+    }
+
+    public void fillCarrierAccountNo() {
+        String uniqueCarrierAccountNo = Long.toString(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().getEpochSecond());
+        $(By.id(CARRIER_ACCOUNT_NO_FIELD_ID)).sendKeys(uniqueCarrierAccountNo);
+    }
+
+    public void clickOnAddMoreItemsButton() {
+        click(ADD_MORE_ITEMS_BUTTON_XPATH);
+    }
 }
