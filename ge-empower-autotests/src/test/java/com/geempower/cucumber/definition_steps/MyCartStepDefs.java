@@ -67,7 +67,7 @@ public class MyCartStepDefs extends AbstractStepDefs {
         });
     }
 
-    @And("^All products are selected on the My Cart page page.$")
+    @And("^All products are selected on the My Cart page.$")
     public void allProductsAreSelectedOnTheMyCartPagePage() {
         myCartPage.clickOnSelectAllCheckbox();
     }

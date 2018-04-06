@@ -10,7 +10,7 @@ Feature: Some actions on Products page
 
   Scenario Outline: Check that user is able to place order from the Products pageAnd Account management page is opened.
     And Account management page is opened.
-    When Choose <Region> region.
+    When Choose <region> region.
     And Search random account for chosen region.
     And Click on chosen account.
     And Products page is opened.
@@ -25,9 +25,9 @@ Feature: Some actions on Products page
     Then Correct Order Value is displayed in the Checkout pop-up on the Product Sub-Detail page.
     When User clicks on Checkout button.
     Then My Cart page is opened.
-    Then Check that default quantity is equals to <DefaultQuantity> on the My Cart page.
+    Then Check that default quantity is equals to 1 on the My Cart page.
     When Quantity is changed to random quantity of items for each product on the My Cart page.
-    And All products are selected on the My Cart page page.
+    And All products are selected on the My Cart page.
     And Update Price & Availability button is clicked on the My Cart page.
     Then Extend Price is changed to correct value on the My Cart page.
     When User clicks on the Next top button on the My Cart page.
@@ -47,5 +47,7 @@ Feature: Some actions on Products page
     Then Total Net Price is equal to Extend Price.
 
     Examples:
-      | Region        | DefaultQuantity |
-      | North_America | 1               |
+      | region        |
+      | North_America |
+      | ASIA          |
+      | EMEA          |

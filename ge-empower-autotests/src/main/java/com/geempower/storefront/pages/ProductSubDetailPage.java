@@ -23,6 +23,7 @@ public class ProductSubDetailPage extends StorefrontBasePage {
 
     @Step("Choose selected product by catalog no.")
     public void chooseSelectedProductsByCatalogNo(String catalogNo) {
+        waitUntilPageIsFullyLoaded();
         $(SELECTED_PRODUCT_CHECKBOX_XPATH, catalogNo.toUpperCase()).click();
     }
 

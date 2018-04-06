@@ -1,5 +1,6 @@
 package com.geempower.cucumber.definition_steps;
 
+import com.geempower.helpers.managers.OrderManager;
 import com.geempower.helpers.models.Product;
 import com.geempower.helpers.models.Region;
 import com.geempower.storefront.pages.OrderEntry3Page;
@@ -15,6 +16,8 @@ import static org.testng.Assert.*;
 public class OrderEntry3StepDefs extends AbstractStepDefs {
     @Autowired
     private OrderEntry3Page orderEntry3Page;
+    @Autowired
+    private OrderManager orderManager;
 
     private static double delta = 0.0001;
 
@@ -38,9 +41,14 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
         orderEntry3Page.submitTermsAndConditions();
     }
 
+    @SuppressWarnings("unchecked")
     @Then("^(.*) pop-up appears at the OE 3 page.$")
     public void orderSuccessfulPopUpAppears(String title) throws Throwable {
-        threadVarsHashMap.put(TestKeyword.GE_ORDER_NO, orderEntry3Page.getGEOrderNoFromOrderSuccessPopUp(title));
+        String orderNo = orderEntry3Page.getGEOrderNoFromOrderSuccessPopUp(title);
+        HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
+        orderManager.createOrderInstance(Long.parseLong(orderNo), selectedProducts);
+        threadVarsHashMap.put(TestKeyword.GE_ORDER_NO, orderNo);
+
     }
 
     @When("^User closes the pop-up.$")
@@ -48,6 +56,7 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
         orderEntry3Page.closeOrderConfirmationPopUp();
     }
 
+    @SuppressWarnings("unchecked")
     @Then("^All necessary elements are displayed on the Product Details block at OE 3 page.$")
     public void allNecessaryElementsAreDisplayedOnTheProductDetailsBlock() {
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
