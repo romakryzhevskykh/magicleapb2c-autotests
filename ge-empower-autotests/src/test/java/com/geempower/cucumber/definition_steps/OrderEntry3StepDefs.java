@@ -41,14 +41,12 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
         orderEntry3Page.submitTermsAndConditions();
     }
 
+    @SuppressWarnings("unchecked")
     @Then("^(.*) pop-up appears at the OE 3 page.$")
     public void orderSuccessfulPopUpAppears(String title) throws Throwable {
         String orderNo = orderEntry3Page.getGEOrderNoFromOrderSuccessPopUp(title);
-        HashMap<Product, Integer> selectedProduct = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
-        double finalOrderPrice = selectedProduct.keySet().stream()
-                .mapToDouble(product -> Double.parseDouble(product.getFinalNetPrice()) * selectedProduct.get(product))
-                .sum();
-        orderManager.createOrderInstance(finalOrderPrice, Long.parseLong(orderNo));
+        HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
+        orderManager.createOrderInstance(Long.parseLong(orderNo), selectedProducts);
         threadVarsHashMap.put(TestKeyword.GE_ORDER_NO, orderNo);
 
     }
@@ -58,6 +56,7 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
         orderEntry3Page.closeOrderConfirmationPopUp();
     }
 
+    @SuppressWarnings("unchecked")
     @Then("^All necessary elements are displayed on the Product Details block at OE 3 page.$")
     public void allNecessaryElementsAreDisplayedOnTheProductDetailsBlock() {
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
