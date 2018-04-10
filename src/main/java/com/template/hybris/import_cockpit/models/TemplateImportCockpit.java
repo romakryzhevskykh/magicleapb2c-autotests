@@ -7,4 +7,9 @@ public class TemplateImportCockpit extends Cockpit {
     public TemplateImportCockpit(String baseUrl) {
         this.baseUrl = baseUrl;
     }
+
+    @Override
+    public String getLoginUrl() {
+        return null;
+    }
 }

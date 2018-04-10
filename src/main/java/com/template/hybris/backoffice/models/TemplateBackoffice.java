@@ -7,4 +7,9 @@ public class TemplateBackoffice extends Cockpit {
     public TemplateBackoffice(String baseUrl) {
         this.baseUrl = baseUrl;
     }
+
+    @Override
+    public String getLoginUrl() {
+        return null;
+    }
 }

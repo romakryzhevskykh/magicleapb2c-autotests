@@ -1,8 +1,9 @@
 package com.template.helpers.user_engine;
 
-public enum StorefrontUserRoles implements UserRole {
+public enum StorefrontUserRole implements UserRole {
     SHOPPER,
-    GUEST;
+    GUEST,
+    TEST_USER;
 
     @Override
     public String toString() {

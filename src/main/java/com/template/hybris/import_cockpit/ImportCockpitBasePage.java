@@ -7,4 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ImportCockpitBasePage extends BasePageObject {
 
     @Autowired protected TemplateImportCockpit importCockpitProject;
+
+    @Override
+    public String getPageUrl() {
+        return null;
+    }
 }

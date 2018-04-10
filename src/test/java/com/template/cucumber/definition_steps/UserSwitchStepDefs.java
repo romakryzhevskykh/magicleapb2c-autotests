@@ -1,8 +1,8 @@
 package com.template.cucumber.definition_steps;
 
-import com.template.helpers.user_engine.BackofficeUserRoles;
-import com.template.helpers.user_engine.ImportCockpitUserRoles;
-import com.template.helpers.user_engine.StorefrontUserRoles;
+import com.template.helpers.user_engine.BackofficeUserRole;
+import com.template.helpers.user_engine.ImportCockpitUserRole;
+import com.template.helpers.user_engine.StorefrontUserRole;
 import com.template.helpers.web_engine.WebDriverSessions;
 import com.template.storefront.pages.StartPage;
 import cucumber.api.java.en.Given;
@@ -15,27 +15,21 @@ public class UserSwitchStepDefs {
 
     @Given("Switch to Backoffice Admin user.")
     public void switchToBackofficeAdmin() {
-        webDriverPool.setDriverActive(BackofficeUserRoles.ADMIN);
+        webDriverPool.setDriverActive(BackofficeUserRole.ADMIN);
     }
 
     @Given("Switch to Storefront shopper.")
     public void switchToStorefrontAsShopper() {
-        webDriverPool.setDriverActive(StorefrontUserRoles.SHOPPER);
-//        if (webDriverPool.getActiveDriver().getCurrentUrl().equals("data:,")) {
-//            storefrontStartPage.open();
-//        }
+        webDriverPool.setDriverActive(StorefrontUserRole.SHOPPER);
     }
 
     @Given("Switch to Storefront guest.")
     public void switchToStorefrontAsGuest() {
-        webDriverPool.setDriverActive(StorefrontUserRoles.GUEST);
-//        if (webDriverPool.getActiveDriver().getCurrentUrl().equals("data:,")) {
-//            storefrontStartPage.open();
-//        }
+        webDriverPool.setDriverActive(StorefrontUserRole.GUEST);
     }
 
     @Given("Switch to Import cockpit import manager role.")
     public void switchToImportCockpitAsImportManager() {
-        webDriverPool.setDriverActive(ImportCockpitUserRoles.IMPORT_MANAGER);
+        webDriverPool.setDriverActive(ImportCockpitUserRole.IMPORT_MANAGER);
     }
 }

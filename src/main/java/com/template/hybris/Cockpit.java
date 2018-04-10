@@ -6,4 +6,6 @@ public abstract class Cockpit {
     public String getBaseUrl() {
         return baseUrl;
     }
+
+    public abstract String getLoginUrl();
 }

@@ -9,4 +9,8 @@ public class BackofficeBasePage extends BasePageObject {
     @Autowired
     protected TemplateBackoffice templateBackoffice;
 
+    @Override
+    public String getPageUrl() {
+        return null;
+    }
 }

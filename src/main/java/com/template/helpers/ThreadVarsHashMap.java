@@ -7,19 +7,19 @@ import java.util.HashMap;
 @Component
 public class ThreadVarsHashMap {
 
-    private InheritableThreadLocal<HashMap<String, Object>> tlHashMapList = new InheritableThreadLocal<>();
+    private InheritableThreadLocal<HashMap<Enum, Object>> tlHashMapList = new InheritableThreadLocal<>();
 
-    public void put(String key, Object value) {
+    public void put(Enum key, Object value) {
         if (tlHashMapList.get() == null) tlHashMapList.set(new HashMap<>());
         tlHashMapList.get().put(key, value);
     }
 
-    public Object get(String key) {
+    public Object get(Enum key) {
         if (tlHashMapList.get() == null) return null;
         else return tlHashMapList.get().getOrDefault(key, null);
     }
 
-    public String getString(String key) {
+    public String getString(Enum key) {
         if (tlHashMapList.get() == null) return null;
         else return tlHashMapList.get().get(key) != null ? tlHashMapList.get().get(key).toString() : null;
     }

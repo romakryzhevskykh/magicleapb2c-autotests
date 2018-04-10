@@ -1,8 +1,8 @@
 package com.template.hybris.hac.page_blocks.scripting_languages_console_blocks;
 
-import com.template.helpers.BasePageObject;
+import com.template.helpers.UIComponent;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EditStatementBlock extends BasePageObject {
+public class EditStatementBlock extends UIComponent {
 }

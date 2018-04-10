@@ -36,19 +36,57 @@ public class AddressBookPage extends StorefrontBasePage {
         return userAddresses;
     }
 
-    @Step("Add new random address to Address Book.")
-    public void addNewRandomAddress(UserSession activeUser) {
-        clickOnAddAddressButton();
+
+    public void selectCountryFromDropDown(String countryName) {
+        addressBookAddUpdateEntryBlock.selectCountryFromDropDown(countryName);
+    }
+
+    public void clickOnCountryDropDown() {
         addressBookAddUpdateEntryBlock.clickOnCountryDropDown();
-        addressBookAddUpdateEntryBlock.selectRandomCountryFromDropDown();
+    }
+
+    public String getRandomCountryFromDropDown() {
+        return addressBookAddUpdateEntryBlock.getRandomCountryFromDropDown();
+    }
+
+    public String getRandomTitleFromDropDown() {
+        return addressBookAddUpdateEntryBlock.getRandomTitleFromDropDown();
+    }
+
+    public void selectTitleFromDropDown(String titleName) {
+        addressBookAddUpdateEntryBlock.selectTitleFromDropDown(titleName);
+    }
+
+    public void clickOnTitleDropDown() {
         addressBookAddUpdateEntryBlock.clickOnTitleDropDown();
-        addressBookAddUpdateEntryBlock.selectRandomTitleFromDropDown();
-        addressBookAddUpdateEntryBlock.fillFirstNameWithRandomText();
-        addressBookAddUpdateEntryBlock.fillLastNameWithRandomText();
-        addressBookAddUpdateEntryBlock.fillAddress1WithRandomText();
-        addressBookAddUpdateEntryBlock.fillTownWithRandomText();
-        addressBookAddUpdateEntryBlock.fillPostCodeWithRandomText();
-        addressBookAddUpdateEntryBlock.clickOnSaveButton(activeUser);
+    }
+
+    public void fillFirstName(String firstName) {
+        addressBookAddUpdateEntryBlock.fillFirstNameWithText(firstName);
+    }
+
+    public void fillLastName(String lastName) {
+        addressBookAddUpdateEntryBlock.fillLastNameWithText(lastName);
+    }
+
+    public void fillAddress1With(String address1) {
+        addressBookAddUpdateEntryBlock.fillAddress1WithText(address1);
+    }
+
+    public void fillTownWith(String towm) {
+        addressBookAddUpdateEntryBlock.fillTownWithText(towm);
+    }
+
+    public void fillPostCode(String postCode) {
+        addressBookAddUpdateEntryBlock.fillPostCodeWithText(postCode);
+    }
+
+    public void clickOnSaveButton() {
+        addressBookAddUpdateEntryBlock.clickOnSaveButton();
+    }
+
+    public boolean isAlertOnCreateNewAddress() {
+        return addressBookAddUpdateEntryBlock.isAlert();
     }
 
     @Step("Click on Add Address button.")

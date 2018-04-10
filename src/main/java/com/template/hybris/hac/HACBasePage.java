@@ -9,4 +9,8 @@ public class HACBasePage extends BasePageObject {
     @Autowired
     protected TemplateHAC templateHAC;
 
+    @Override
+    public String getPageUrl() {
+        return null;
+    }
 }
