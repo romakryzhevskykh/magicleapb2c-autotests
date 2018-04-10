@@ -15,23 +15,23 @@ import static org.testng.Assert.assertTrue;
 
 public class GeneralStepDefs extends AbstractStepDefs {
     @Autowired private GeneralPageActivities generalPageActivities;
-    @Autowired HeaderRowPageBlock headerRowPageBlock;
-    @Autowired StartPage startPage;
-    @Autowired AccountDashboardPage accountDashboardPage;
-    @Autowired OrderHistoryPage orderHistoryPage;
-    @Autowired SupplyListsPage supplyListsPage;
-    @Autowired PurchaseRequestsPage purchaseRequestsPage;
-    @Autowired SavedCartsPage savedCartsPage;
-    @Autowired SavedCreditCardsPage savedCreditCardsPage;
-    @Autowired QuotesPage quotesPage;
-    @Autowired ReportsPage reportsPage;
-    @Autowired AccountInformationPage accountInformationPage;
-    @Autowired CustomCategoryPage customCategoryPage;
-    @Autowired QuotasAndParLevelsPage quotasAndParLevelsPage;
-    @Autowired BusinessInfoPage businessInfoPage;
-    @Autowired HelpNewToBoundtreePage helpNewToBoundtreePage;
-    @Autowired UsersPage usersPage;
-    @Autowired UserGroupsPage userGroupsPage;
+    @Autowired private HeaderRowPageBlock headerRowPageBlock;
+    @Autowired private StartPage startPage;
+    @Autowired private AccountDashboardPage accountDashboardPage;
+    @Autowired private OrderHistoryPage orderHistoryPage;
+    @Autowired private SupplyListsPage supplyListsPage;
+    @Autowired private PurchaseRequestsPage purchaseRequestsPage;
+    @Autowired private SavedCartsPage savedCartsPage;
+    @Autowired private SavedCreditCardsPage savedCreditCardsPage;
+    @Autowired private QuotesPage quotesPage;
+    @Autowired private ReportsPage reportsPage;
+    @Autowired private AccountInformationPage accountInformationPage;
+    @Autowired private CustomCategoryPage customCategoryPage;
+    @Autowired private QuotasAndParLevelsPage quotasAndParLevelsPage;
+    @Autowired private BusinessInfoPage businessInfoPage;
+    @Autowired private HelpNewToBoundtreePage helpNewToBoundtreePage;
+    @Autowired private UsersPage usersPage;
+    @Autowired private UserGroupsPage userGroupsPage;
 
     @And("^Refresh page.$")
     public void refreshPage() throws Throwable {
@@ -219,4 +219,5 @@ public class GeneralStepDefs extends AbstractStepDefs {
     public void checkThatStartPageIsOpened() {
         assertTrue(startPage.isOpened());
     }
+
 }

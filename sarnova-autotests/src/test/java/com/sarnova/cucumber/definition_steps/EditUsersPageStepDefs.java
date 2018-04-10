@@ -1,9 +1,6 @@
 package com.sarnova.cucumber.definition_steps;
 
-import com.sarnova.helpers.user_engine.StorefrontUserRole;
-import com.sarnova.helpers.user_engine.UserRole;
-import com.sarnova.helpers.user_engine.UserTitle;
-import com.sarnova.helpers.user_engine.UsersManager;
+import com.sarnova.helpers.user_engine.*;
 import com.sarnova.storefront.pages.EditUserPage;
 import cucumber.api.java.en.And;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -15,6 +12,13 @@ import java.util.Random;
 public class EditUsersPageStepDefs extends AbstractStepDefs {
     @Autowired EditUserPage editUserPage;
     @Autowired UsersManager usersManager;
+
+    @And("^Open Test user edit page.$")
+    public void openTestUserEditPage() {
+        String username = threadVarsHashMap.getString(TestKeyword.TEST_USER_USERNAME);
+        User user = usersManager.getUserByUsername(username);
+        editUserPage.open(user);
+    }
 
     @And("^Select any title on Edit user page.$")
     public void selectAnyTitleOnEditUserPage() {
@@ -44,6 +48,7 @@ public class EditUsersPageStepDefs extends AbstractStepDefs {
     public void fillEmailFieldWithARandomEmailOnEditUserPage() {
         String randomEmail = RandomStringUtils.randomAlphabetic(10) + "@" + RandomStringUtils.randomAlphabetic(5) + ".com";
         threadVarsHashMap.put(TestKeyword.EDIT_USER_EMAIL, randomEmail);
+        threadVarsHashMap.put(TestKeyword.EDIT_USER_USERNAME, randomEmail);
         editUserPage.fillEmail(randomEmail);
     }
 
@@ -56,9 +61,7 @@ public class EditUsersPageStepDefs extends AbstractStepDefs {
     @And("^Select any user Role on Edit user page.$")
     public void selectAnyUserRoleOnEditUserPage() {
         editUserPage.deselectAllSelectedUserRoles();
-        Random generator = new Random();
-        int randomIndex = generator.nextInt(StorefrontUserRole.getRoles().length);
-        StorefrontUserRole storefrontUserRole = StorefrontUserRole.getRoles()[randomIndex];
+        StorefrontUserRole storefrontUserRole = StorefrontUserRole.getRandom();
         ArrayList<UserRole> storefrontUserRoles = getSelectedUserRoles();
         storefrontUserRoles.add(storefrontUserRole);
         storefrontUserRoles.forEach(userRole -> editUserPage.selectUserRole(userRole));
@@ -66,6 +69,14 @@ public class EditUsersPageStepDefs extends AbstractStepDefs {
 
     @And("^Click on Save button on Edit user page.$")
     public void clickOnSaveButtonOnEditUserPage() {
+        User user = usersManager.getUserByUsername(threadVarsHashMap.getString(TestKeyword.TEST_USER_USERNAME));
         editUserPage.clickOnSaveButton();
+        user.setUserTitle((UserTitle) threadVarsHashMap.get(TestKeyword.EDIT_USER_TITLE));
+        user.setUsername(threadVarsHashMap.getString(TestKeyword.EDIT_USER_USERNAME));
+        user.setEmail(threadVarsHashMap.getString(TestKeyword.EDIT_USER_EMAIL));
+        user.setFirstName(threadVarsHashMap.getString(TestKeyword.EDIT_USER_FIRST_NAME));
+        user.setLastName(threadVarsHashMap.getString(TestKeyword.EDIT_USER_LAST_NAME));
+        user.getUserRoles().clear();
+        user.getUserRoles().addAll(getSelectedUserRoles());
     }
 }

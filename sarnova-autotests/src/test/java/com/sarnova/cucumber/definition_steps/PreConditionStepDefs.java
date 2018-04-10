@@ -8,7 +8,9 @@ import com.sarnova.helpers.models.products.Product;
 import com.sarnova.helpers.models.products.UnitOfMeasure;
 import com.sarnova.helpers.models.supply_lists.SupplyList;
 import com.sarnova.helpers.models.supply_lists.SupplyListProduct;
+import com.sarnova.helpers.user_engine.User;
 import com.sarnova.helpers.user_engine.UserSession;
+import com.sarnova.helpers.user_engine.UsersManager;
 import com.sarnova.storefront.page_blocks.HeaderRowPageBlock;
 import com.sarnova.storefront.pages.LoginPage;
 import cucumber.api.java.en.And;
@@ -27,6 +29,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     @Autowired private SupplyListsManager supplyListsManager;
     @Autowired private ProductsManager productsManager;
     @Autowired private CartManager cartManager;
+    @Autowired private UsersManager usersManager;
 
     @Given("^User is logged in to Storefront.$")
     public void userIsLoggedInToStorefront() {
@@ -208,7 +211,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
                 .orElseGet(() ->
                         createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts.apply(Collections.EMPTY_SET, qtyOfInactiveProducts)
                 );
-        if(activeSupplyList.getSupplyProductsInList()
+        if (activeSupplyList.getSupplyProductsInList()
                 .stream()
                 .filter(supplyListProduct -> !supplyListProduct.isActive())
                 .count() < qtyOfInactiveProducts) {
@@ -246,5 +249,15 @@ public class PreConditionStepDefs extends AbstractStepDefs {
             supplyListsManager.markSupplyListAsFavorite(userSessions.getActiveUserSession(), activeSupplyList);
         }
         threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, activeSupplyList.getName());
+    }
+
+    @And("^Test user is present.$")
+    public void testUserIsPresent() {
+        User testUser = usersManager.getTestUser();
+        if (testUser == null) {
+            usersManager.createTestUserByApi(userSessions.getActiveUserSession());
+            testUser = usersManager.getTestUser();
+        }
+        threadVarsHashMap.put(TestKeyword.TEST_USER_USERNAME, testUser.getUsername());
     }
 }

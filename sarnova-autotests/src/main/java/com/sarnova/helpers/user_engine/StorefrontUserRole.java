@@ -2,6 +2,7 @@ package com.sarnova.helpers.user_engine;
 
 import org.apache.commons.lang.StringUtils;
 
+import java.util.Random;
 import java.util.stream.Stream;
 
 public enum StorefrontUserRole implements UserRole {
@@ -49,6 +50,12 @@ public enum StorefrontUserRole implements UserRole {
 
     public String getRoleCode() {
         return roleCode;
+    }
+
+    public static StorefrontUserRole getRandom() {
+        Random generator = new Random();
+        int randomIndex = generator.nextInt(StorefrontUserRole.getRoles().length);
+        return StorefrontUserRole.getRoles()[randomIndex];
     }
 
     @Override

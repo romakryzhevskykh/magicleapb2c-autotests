@@ -1,5 +1,7 @@
 package com.sarnova.helpers.user_engine;
 
+import java.util.Random;
+
 public enum UserTitle {
     MISS("Miss"),
     MR("Mr"),
@@ -16,5 +18,11 @@ public enum UserTitle {
 
     public String getTitleText() {
         return titleText;
+    }
+
+    public static UserTitle getRandom() {
+        Random generator = new Random();
+        int randomIndex = generator.nextInt(UserTitle.values().length);
+        return UserTitle.values()[randomIndex];
     }
 }

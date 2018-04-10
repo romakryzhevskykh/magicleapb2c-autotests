@@ -6,4 +6,5 @@ public class UserDetailsPageElements {
     public final static String EMAIL_FIELD_VALUE_XPATH = GENERAL_USER_INFO_XPATH + "//div[@class='col-sm-4'][1]/div[@class='item-group'][1]/span[@class='item-value']";
     public final static String NAME_FIELD_VALUE_XPATH = GENERAL_USER_INFO_XPATH + "//div[@class='col-sm-4'][1]/div[@class='item-group'][2]/span[@class='item-value']";
     public final static String ROLES_FIELD_VALUE_XPATH = GENERAL_USER_INFO_XPATH + "//div[@class='col-sm-4'][3]/div[@class='item-group'][1]/span[@class='item-value']";
+    public final static String STATUS_FIELD_VALUE_XPATH = GENERAL_USER_INFO_XPATH + "//div[@class='col-sm-4'][3]/div[@class='item-group'][2]/span[@class='item-value']";
 }

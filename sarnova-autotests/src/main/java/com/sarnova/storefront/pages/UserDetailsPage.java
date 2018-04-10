@@ -48,6 +48,11 @@ public class UserDetailsPage extends StorefrontBasePage {
                 .collect(Collectors.toList());
     }
 
+    @Step("Get user status.")
+    public String getStatus() {
+        return $(STATUS_FIELD_VALUE_XPATH).getText().trim();
+    }
+
     @Override
     public String getPageUrl() {
         return storefrontProject.getBaseUrl() + pageUrlMethod;

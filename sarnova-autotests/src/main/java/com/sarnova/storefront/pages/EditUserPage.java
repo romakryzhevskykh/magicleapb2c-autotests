@@ -1,5 +1,6 @@
 package com.sarnova.storefront.pages;
 
+import com.sarnova.helpers.user_engine.User;
 import com.sarnova.helpers.user_engine.UserRole;
 import com.sarnova.helpers.user_engine.UserTitle;
 import org.openqa.selenium.By;
@@ -12,6 +13,11 @@ import static com.sarnova.storefront.page_block_elements.EditUserBlockElements.*
 @Component
 public class EditUserPage extends StorefrontBasePage {
     private String pageUrlMethod = "boundtree/en/USD/my-company/organization-management/manage-users/edit?user=%s";
+
+    @Step("Open edit user page: {0}.")
+    public void open(User user) {
+        open(String.format(getPageUrl(), user.getUsername()));
+    }
 
     @Step("Select title: {0}.")
     public void selectTitle(UserTitle userTitle) {
@@ -63,6 +69,6 @@ public class EditUserPage extends StorefrontBasePage {
 
     @Override
     public String getPageUrl() {
-        return storefrontProject + pageUrlMethod;
+        return storefrontProject.getBaseUrl() + pageUrlMethod;
     }
 }

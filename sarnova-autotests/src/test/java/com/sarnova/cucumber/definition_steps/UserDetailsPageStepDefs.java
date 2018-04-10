@@ -21,7 +21,7 @@ public class UserDetailsPageStepDefs extends AbstractStepDefs {
 
     @Then("Check that User details page is opened.")
     public void checkThatUserDetailsPageIsOpened() {
-        User user = usersManager.getUserByUsername(threadVarsHashMap.getString(TestKeyword.EDIT_USER_EMAIL));
+        User user = usersManager.getUserByUsername(threadVarsHashMap.getString(TestKeyword.EDIT_USER_USERNAME));
         assertTrue(userDetailsPage.isOpened(user));
     }
 
@@ -50,8 +50,6 @@ public class UserDetailsPageStepDefs extends AbstractStepDefs {
     public void checkThatUserRolesFieldIsEqualToSetOnUserDetailsPage() {
         ArrayList<UserRole> setUserRole = getSelectedUserRoles();
         List<UserRole> actualUserRole = userDetailsPage.getRoles();
-        System.out.println(setUserRole);
-        System.out.println(actualUserRole);
         assertEquals(setUserRole.size(), actualUserRole.size());
         assertTrue(actualUserRole.containsAll(setUserRole));
     }
@@ -59,5 +57,10 @@ public class UserDetailsPageStepDefs extends AbstractStepDefs {
     @And("^Check that User parent unit field is equal to set on User details page.$")
     public void checkThatUserParentUnitFieldIsEqualToSetOnUserDetailsPage() {
 
+    }
+
+    @And("^Check that User status is Enable on User details page.$")
+    public void checkThatUserStatusIsEnableOnUserDetailsPage() {
+        assertEquals(userDetailsPage.getStatus(), "Enable");
     }
 }

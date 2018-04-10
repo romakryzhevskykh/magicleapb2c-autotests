@@ -7,7 +7,6 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class CreateUsersPageStepDefs extends AbstractStepDefs {
     @Autowired CreateUserPage createUserPage;
@@ -16,9 +15,7 @@ public class CreateUsersPageStepDefs extends AbstractStepDefs {
     @And("^Select any title on Create user page.$")
     public void selectAnyTitleOnEditUserPage() {
         createUserPage.clickOnTitleDropDown();
-        Random generator = new Random();
-        int randomIndex = generator.nextInt(UserTitle.values().length);
-        UserTitle randomTitle = UserTitle.values()[randomIndex];
+        UserTitle randomTitle = UserTitle.getRandom();
         threadVarsHashMap.put(TestKeyword.EDIT_USER_TITLE, randomTitle);
         createUserPage.selectTitle(randomTitle);
     }
@@ -41,6 +38,7 @@ public class CreateUsersPageStepDefs extends AbstractStepDefs {
     public void fillEmailFieldWithARandomEmailOnEditUserPage() {
         String randomEmail = RandomStringUtils.randomAlphabetic(10) + "@" + RandomStringUtils.randomAlphabetic(5) + ".com";
         threadVarsHashMap.put(TestKeyword.EDIT_USER_EMAIL, randomEmail);
+        threadVarsHashMap.put(TestKeyword.EDIT_USER_USERNAME, randomEmail);
         createUserPage.fillEmail(randomEmail);
     }
 
@@ -53,9 +51,7 @@ public class CreateUsersPageStepDefs extends AbstractStepDefs {
     @And("^Select any user Role on Create user page.$")
     public void selectAnyUserRoleOnEditUserPage() {
         createUserPage.deselectAllSelectedUserRoles();
-        Random generator = new Random();
-        int randomIndex = generator.nextInt(StorefrontUserRole.getRoles().length);
-        StorefrontUserRole storefrontUserRole = StorefrontUserRole.getRoles()[randomIndex];
+        StorefrontUserRole storefrontUserRole = StorefrontUserRole.getRandom();
         ArrayList<UserRole> storefrontUserRoles = getSelectedUserRoles();
         storefrontUserRoles.add(storefrontUserRole);
         storefrontUserRoles.forEach(userRole -> createUserPage.selectUserRole(userRole));
@@ -64,11 +60,11 @@ public class CreateUsersPageStepDefs extends AbstractStepDefs {
     @And("^Click on Save button on Create user page.$")
     public void clickOnSaveButtonOnEditUserPage() {
         createUserPage.clickOnSaveButton();
-        usersManager.createTestInstance(threadVarsHashMap.getString(TestKeyword.EDIT_USER_EMAIL),
+        usersManager.createTestInstance(threadVarsHashMap.getString(TestKeyword.EDIT_USER_USERNAME),
                 "",
                 userSessions.getActiveUserSession().getUser().getUserCockpit(),
                 getSelectedUserRoles());
-        User user = usersManager.getUserByUsername(threadVarsHashMap.getString(TestKeyword.EDIT_USER_EMAIL));
+        User user = usersManager.getUserByUsername(threadVarsHashMap.getString(TestKeyword.EDIT_USER_USERNAME));
         user.setEmail(threadVarsHashMap.getString(TestKeyword.EDIT_USER_EMAIL));
         user.setUserTitle((UserTitle) threadVarsHashMap.get(TestKeyword.EDIT_USER_TITLE));
         user.setFirstName(threadVarsHashMap.getString(TestKeyword.EDIT_USER_FIRST_NAME));
