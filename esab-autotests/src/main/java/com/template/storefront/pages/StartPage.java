@@ -15,7 +15,7 @@ public class StartPage extends StorefrontBasePage {
 
     @Step("Check that Start page is opened.")
     public boolean isOpened() {
-        return isCurrentURLEqualsToStartPageURL() && isUserLoggedOut();
+        return isCurrentURLEqualsToStartPageURL() && isUserLoggedIn();
     }
 
     public void clickOnSignInButton() {

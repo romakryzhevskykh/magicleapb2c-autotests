@@ -6,3 +6,4 @@ Feature: Login to ESAB site
 #    When Click on Sign in button.
     And Login to Storefront.
     Then Check that Home page is opened.
+    Then Check that user is logged in ESAB.

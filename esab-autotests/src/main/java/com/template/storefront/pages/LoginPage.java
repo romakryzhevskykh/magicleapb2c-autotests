@@ -8,7 +8,8 @@ import static com.template.storefront.page_elements.LoginPageElements.*;
 
 @Component
 public class LoginPage extends StorefrontBasePage {
-    private final String pageUrlMethod = "powertools/en/USD/login";
+    //private final String pageUrlMethod = "powertools/en/USD/login";
+	private final String pageUrlMethod = "/esab/en/login";
 
     public boolean isOpened() {
         return isCurrentURLEqualsToLoginPageURL() && isUserLoggedOut();

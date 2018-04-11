@@ -14,6 +14,9 @@ public abstract class StorefrontBasePage extends BasePageObject {
     protected boolean isUserLoggedIn() {
         return headerRowPageBlock.isUserLoggedIn();
     }
+    protected boolean isUserLoggedInEsab() {
+        return headerRowPageBlock.isUserLoggedEsab();
+    }
 
     protected boolean isUserLoggedOut() {
         return headerRowPageBlock.isUserLoggedOut();

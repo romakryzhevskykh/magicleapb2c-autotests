@@ -12,6 +12,10 @@ public class HeaderRowPageBlock {
     public boolean isUserLoggedIn() {
         return loggedInHeaderRowBlock.isUserLoggedIn();
     }
+    
+    public boolean isUserLoggedEsab() {
+        return loggedInHeaderRowBlock.isUserLoggedInEsab();
+    }
 
     public boolean isUserLoggedOut() {
         return loggedOutHeaderRowBlock.isUserLoggedOut();

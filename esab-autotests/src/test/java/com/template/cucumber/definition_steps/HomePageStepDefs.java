@@ -48,7 +48,14 @@ public class HomePageStepDefs extends AbstractStepDefs {
 
     @Then("Check that Home page is opened.")
     public void checkThatHomePageIsOpened() {
-    	logger.warn("Check Homepage is opened");
-        assertTrue(homePage.isOpened(), "Home page is not opened");
+    	logger.info("Check Homepage is opened");
+        assertTrue(homePage.pageIsOpened(), "Home page is not opened");
     }
+    
+    @Then("Check that user is logged in ESAB.")
+    public void checkThatUserIsLOggedIn() {
+    	logger.info("Check User is logged in");
+        assertTrue(homePage.userIsLoggedIn(), "User is not logged in");
+    }
+    
 }

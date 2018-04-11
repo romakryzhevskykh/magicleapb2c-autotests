@@ -6,10 +6,16 @@ import ru.yandex.qatools.allure.annotations.Step;
 @Component
 public class HomePage extends StorefrontBasePage {
 
-    private final String pageUrlMethod = "powertools/en/USD/";
+    //private final String pageUrlMethod = "powertools/en/USD/";
+	private final String pageUrlMethod = "/esab/en/";
+	
 
-    public boolean isOpened() {
-        return isCurrentURLEqualsToHomePageURL() && isUserLoggedIn();
+    public boolean pageIsOpened() {
+        return isCurrentURLEqualsToHomePageURL();
+    }
+    
+    public boolean userIsLoggedIn(){
+    	return isUserLoggedInEsab();
     }
 
     @Step("Check that current url is Home page url.")

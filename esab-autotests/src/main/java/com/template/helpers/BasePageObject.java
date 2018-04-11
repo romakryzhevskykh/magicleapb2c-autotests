@@ -1,6 +1,8 @@
 package com.template.helpers;
 
 import com.template.helpers.web_engine.WebDriverSessions;
+
+import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -12,6 +14,7 @@ public abstract class BasePageObject {
 
     @Autowired protected WebDriverSessions webDriverPool;
     @Autowired protected ThreadVarsHashMap threadVarsHashMap;
+    final static Logger logger = Logger.getLogger(BasePageObject.class);
 
     protected WebDriver getDriver() {
         return webDriverPool.getActiveDriver();
@@ -99,5 +102,18 @@ public abstract class BasePageObject {
         } finally {
             webDriverPool.getActiveDriverSession().restoreDefaultImplicitWait();
         }
+    }
+    
+    protected boolean isStringContainsText(String xpath, String text){
+    	webDriverPool.getActiveDriverSession().setShortImplicitWait();
+    	boolean IsTextPresent = false; 
+    	if($(xpath)!= null){
+    		logger.info("Dashboard welcome text: " + $(xpath).getText());
+        	IsTextPresent = $(xpath).getText().contains(text);	
+    	}else{
+    		logger.error("There is no desired webelement");
+    	}
+    	webDriverPool.getActiveDriverSession().restoreDefaultImplicitWait();
+    	return IsTextPresent;
     }
 }
