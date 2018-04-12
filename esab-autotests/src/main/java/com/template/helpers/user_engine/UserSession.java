@@ -44,4 +44,8 @@ public class UserSession {
     public boolean isActive() {
         return isActive;
     }
+    
+    public String getName(){
+    	return user.getName();
+    }
 }

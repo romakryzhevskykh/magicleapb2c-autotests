@@ -12,11 +12,13 @@ public class User {
     private String password;
     private UserRole userRole;
     private Cockpit userCockpit;
+    private String name;
 
-    public User(String username, String password, Cockpit userCockpit, String cockpitRole) {
+    public User(String username, String password, Cockpit userCockpit, String cockpitRole, String name) {
         this.username = username;
         this.password = password;
         this.userCockpit = userCockpit;
+        this.name = name;
         if (userCockpit instanceof TemplateStorefront) {
             switch (cockpitRole) {
                 case "shopper":
@@ -93,4 +95,13 @@ public class User {
     public Cockpit getUserCockpit() {
         return userCockpit;
     }
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 }
