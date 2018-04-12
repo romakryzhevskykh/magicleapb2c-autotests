@@ -1,6 +1,7 @@
 package com.geempower.cucumber.definition_steps;
 
 import com.geempower.storefront.pages.ReturnsPage;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,5 +14,10 @@ public class ReturnsStepDefs extends AbstractStepDefs {
     @Then("^(.*) title is displayed on Returns page.$")
     public void checkAllCasesTitle(String allCasesTitle) {
         assertEquals(returnsPage.getReturnsTitle(), allCasesTitle);
+    }
+
+    @And("^Click on Create Request button.$")
+    public void clickOnCreateRequestButton(){
+        returnsPage.clickOnCreateRequestButton();
     }
 }

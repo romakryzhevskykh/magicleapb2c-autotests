@@ -1,6 +1,7 @@
 package com.geempower.storefront.pages;
 
 import com.geempower.storefront.StorefrontBasePage;
+import org.openqa.selenium.By;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -24,6 +25,11 @@ public class ReturnsPage extends StorefrontBasePage {
     @Step("Get Returns title")
     public String getReturnsTitle() {
         return $(ALL_CASES_TITLE_XPATH).getText();
+    }
+
+    @Step("Click on Create Request Button")
+    public void clickOnCreateRequestButton() {
+        click(By.id(CREATE_REQUEST_BUTTON_ID));
     }
 }
 
