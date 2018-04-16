@@ -1,4 +1,4 @@
-package com.geempower.storefront.pages;
+package com.geempower.storefront.pages.Order;
 
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;

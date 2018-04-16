@@ -1,4 +1,4 @@
-package com.geempower.storefront.pages;
+package com.geempower.storefront.pages.Product;
 
 import com.geempower.storefront.StorefrontBasePage;
 import org.springframework.stereotype.Component;

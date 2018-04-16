@@ -2,7 +2,7 @@ package com.geempower.cucumber.definition_steps;
 
 import com.geempower.helpers.managers.OrderManager;
 import com.geempower.helpers.models.Order;
-import com.geempower.storefront.pages.OrderDetailsPage;
+import com.geempower.storefront.pages.Order.OrderDetailsPage;
 import cucumber.api.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
 

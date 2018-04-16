@@ -2,6 +2,7 @@ package com.geempower.helpers;
 
 import com.geempower.helpers.web_engine.WebDriverSessions;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -47,23 +48,24 @@ public abstract class UIComponent {
     }
 
     protected void click(String xpath, String... args) {
-        webDriverPool.getActiveDriverSession().setShortImplicitWait();
         WebElement webElement = $(xpath, args);
-        try {
-            WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getShortTimeOut());
-            wait.until(ExpectedConditions.elementToBeClickable(webElement));
-            webElement.click();
-            webDriverPool.getActiveDriverSession().restoreDefaultImplicitWait();
-        } catch (WebDriverException | NullPointerException ex) {
-            ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", webElement);
-            webElement.click();
-        } finally {
-            webDriverPool.getActiveDriverSession().restoreDefaultImplicitWait();
-        }
+        click(webElement);
+    }
+
+    protected void moveToElement(WebElement webElement){
+        WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getShortTimeOut());
+        Actions actions = new Actions(getDriver());
+        actions.moveToElement(webElement);
+        actions.perform();
+        wait.until(ExpectedConditions.elementToBeClickable(webElement));
     }
 
     protected void click(By by) {
         WebElement webElement = $(by);
+        click(webElement);
+    }
+
+    protected void click(WebElement webElement) {
         webDriverPool.getActiveDriverSession().setShortImplicitWait();
         try {
             WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getShortTimeOut());

@@ -1,4 +1,4 @@
-package com.geempower.storefront.pages;
+package com.geempower.storefront.pages.Order;
 
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
@@ -95,12 +95,13 @@ public class OrderEntry2Page extends StorefrontBasePage {
 
     @Step("Shipping And Billing Step Title Is Displayed on the OE 2 page.")
     public boolean shippingAndBillingStepTitleIsDisplayed() {
-        waitForElementToDisappear(By.xpath(BUILD_ORDER_TITLE_XPATH));
+        waitForElementToDisappear(By.xpath(SHIPPING_BILLING_TITLE_XPATH));
         return isDisplayed(SHIPPING_BILLING_TITLE_XPATH);
     }
 
     @Step("Order Details Header Is Displayed on the OE 2 page.")
     public boolean orderDetailsHeaderIsDisplayed() {
+        waitUntilPageIsFullyLoaded();
         return isDisplayed(ORDER_DETAILS_HEADER_XPATH);
     }
 
