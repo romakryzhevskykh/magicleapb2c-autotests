@@ -35,6 +35,7 @@ public class ReturnCreation1Page extends StorefrontBasePage {
     public void selectFirstInvoiceNo() {
         waitUntilPageIsFullyLoaded();
         click(FIRST_INVOICE_NO_IN_TABLE_XPATH);
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Get Invoice No.")
@@ -54,8 +55,9 @@ public class ReturnCreation1Page extends StorefrontBasePage {
         click(TOP_NEXT_BUTTON_XPATH);
     }
 
-    @Step("Get Catalogue No.")
+    @Step("Get Catalog No.")
     public String getCatalogueNo() {
+        waitUntilPageIsFullyLoaded();
         return $(FIRST_ACTIVE_CATALOGUE_NO_IN_TABLE_XPATH).getText();
     }
 }

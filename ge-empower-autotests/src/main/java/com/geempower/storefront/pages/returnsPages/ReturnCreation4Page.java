@@ -10,7 +10,7 @@ import static com.geempower.storefront.page_elements.returnsCreationPageElements
 @Component
 public class ReturnCreation4Page extends StorefrontBasePage {
 
-    private final String pageUri = "returnTracking";
+    private final String pageUri = "returnRequest4";
 
     @Override
     public String getPageUrl() {

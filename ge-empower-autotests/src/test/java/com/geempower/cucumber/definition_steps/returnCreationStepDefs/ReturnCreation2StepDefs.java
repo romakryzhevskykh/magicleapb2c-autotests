@@ -8,6 +8,7 @@ import cucumber.api.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static junit.framework.TestCase.assertTrue;
+import static org.testng.Assert.assertEquals;
 
 public class ReturnCreation2StepDefs extends AbstractStepDefs {
 
@@ -17,6 +18,12 @@ public class ReturnCreation2StepDefs extends AbstractStepDefs {
     @Then("^Return Creation 2 page is displayed.$")
     public void returnCreation2pageIsDisplayed() {
         assertTrue(returnCreation2Page.returnCreation2pageIsDisplayed());
+    }
+
+    @Then ("^Correct catalog No is displayed on Return Creation 2 page.$")
+    public void correctCatalogNoIsDispalyed(){
+        String catalogNo = (String) threadVarsHashMap.get(TestKeyword.CATALOG_NO);
+        assertEquals(catalogNo, returnCreation2Page.getCatalogNo());
     }
 
     @And("^Select (.*) Reason for Request on Return Creation 2 page.$")

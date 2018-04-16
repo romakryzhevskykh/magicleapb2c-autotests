@@ -3,9 +3,10 @@ Feature: Return creation tests
   Background:
     Given Switch to Storefront as admin.
     And User is logged in to Storefront.
-    And Returns page is opened.
+
 
 #  Scenario: Check that user able to open Returns page and correct header title is displayed
+#    And Returns page is opened.
 #    Then All Cases title is displayed on Returns page.
 
   Scenario Outline: Check that user is able to create returns in NA, EMEA, ASIA regions
@@ -21,6 +22,7 @@ Feature: Return creation tests
     And Select First Product in the Product List table on Return Creation 1 page.
     And Click on the Next button Return Creation 1 page.
     Then Return Creation 2 page is displayed.
+    Then Correct catalog No is displayed on Return Creation 2 page.
     And Select Shortage Reason for Request on Return Creation 2 page.
     And Select Credit Requested Action on Return Creation 2 page.
     And Set value 1 to the Qty. field on Return Creation 2 page.
@@ -38,6 +40,9 @@ Feature: Return creation tests
     Then Correct Requested Action, Column of Shrink Wrap and Additional Info are displayed on Return Creation 4 page.
     When Click on Submit Request button on Return Creation 4 page.
     And Submit Terms and Conditions for Sale of Products and Services pop-up on Return Creation 4 page.
+#    Then Request Submission Successful pop-up is displayed on Return Creation 4 page.
+#    When Close Request Submission Successful pop-up on Return Creation 4 page.
+#    Then All Cases title is displayed on Returns page.
 
     Examples:
       | region        |

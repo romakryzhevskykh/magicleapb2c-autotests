@@ -12,7 +12,7 @@ import static com.geempower.storefront.page_elements.returnsCreationPageElements
 @Component
 public class ReturnCreation2Page extends StorefrontBasePage {
 
-    private final String pageUri = "returnTracking";
+    private final String pageUri = "returnRequest2";
 
     @Override
     public String getPageUrl() {
@@ -40,7 +40,7 @@ public class ReturnCreation2Page extends StorefrontBasePage {
         click(FIRST_ROW_REQUESTED_ACTION_FIELD_XPATH);
         $$(REQUESTED_ACTION_DROP_DOWN_ELEMENTS_XPATH).stream()
                 .filter(webElement -> webElement.getText().equals(action)).findAny().ifPresent(WebElement::click);
-
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Set value to the Qty field")
@@ -57,11 +57,16 @@ public class ReturnCreation2Page extends StorefrontBasePage {
 
     @Step("Get Reason For Request")
     public String getReasonForRequest() {
-        return $(REASON_FOR_REQUEST_ACTIVE_TITLE_XPATH).getText();
+        return $(FIRST_ROW_REASON_FOR_REQUEST_FIELD_XPATH).getText().trim();
     }
 
     @Step("Get Requested Action")
     public String getRequestedAction() {
         return $(SELECTED_FIRST_ROW_REQUESTED_ACTION_FIELD_XPATH).getText();
+    }
+
+    @Step("Get Catalog No")
+    public String getCatalogNo() {
+        return $(CATALOG_NO_VALUE_XPATH).getText();
     }
 }

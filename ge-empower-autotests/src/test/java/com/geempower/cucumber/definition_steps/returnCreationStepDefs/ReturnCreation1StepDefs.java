@@ -34,6 +34,7 @@ public class ReturnCreation1StepDefs extends AbstractStepDefs {
     @And("Select First Product in the Product List table on Return Creation 1 page.$")
     public void selectFirstProduct() {
         returnCreation1Page.selectFirstProduct();
+        threadVarsHashMap.put(TestKeyword.CATALOG_NO, returnCreation1Page.getCatalogueNo());
     }
 
     @And ("Click on the Next button Return Creation 1 page.$")
