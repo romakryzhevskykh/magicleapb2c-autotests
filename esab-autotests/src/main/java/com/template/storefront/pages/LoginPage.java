@@ -1,5 +1,6 @@
 package com.template.storefront.pages;
 
+import com.template.helpers.BasePageObject;
 import com.template.helpers.user_engine.UserSession;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
@@ -27,7 +28,8 @@ public class LoginPage extends StorefrontBasePage {
 
     @Step("Click on Login button.")
     public void clickOnLoginButton() {
-        $(LOG_IN_BUTTON_XPATH).click();
+        //$(LOG_IN_BUTTON_XPATH).click();
+    	click(LOG_IN_BUTTON_XPATH);
     }
 
     public void loginToStorefront(UserSession user) {

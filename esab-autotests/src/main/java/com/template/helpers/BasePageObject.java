@@ -15,6 +15,18 @@ public abstract class BasePageObject {
     @Autowired protected WebDriverSessions webDriverPool;
     @Autowired protected ThreadVarsHashMap threadVarsHashMap;
     final static Logger logger = Logger.getLogger(BasePageObject.class);
+    private WebDriverWait wait;
+    
+    protected WebDriverWait initWebDriverWait(){
+    	if(wait==null){
+    		logger.info("WebDriver wait, object is not created yet. Create object");
+    		wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getShortTimeOut());
+    		logger.info("WebDriver wait, object has been created");
+    	}else{
+    		logger.info("WebDriver wait, object has already created. Return object");
+    	}
+    	return wait;
+    }
 
     protected WebDriver getDriver() {
         return webDriverPool.getActiveDriver();
@@ -52,8 +64,7 @@ public abstract class BasePageObject {
         WebElement webElement = $(xpath, args);
         webDriverPool.getActiveDriverSession().setShortImplicitWait();
         try {
-            WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getShortTimeOut());
-            wait.until(ExpectedConditions.elementToBeClickable(webElement));
+            initWebDriverWait().until(ExpectedConditions.elementToBeClickable(webElement));
             webElement.click();
         } catch (WebDriverException ex) {
             ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", webElement);
@@ -67,8 +78,7 @@ public abstract class BasePageObject {
         WebElement webElement = $(by);
         webDriverPool.getActiveDriverSession().setShortImplicitWait();
         try {
-            WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getShortTimeOut());
-            wait.until(ExpectedConditions.elementToBeClickable(webElement));
+            initWebDriverWait().until(ExpectedConditions.elementToBeClickable(webElement));
             webElement.click();
         } catch (WebDriverException ex) {
             ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", webElement);

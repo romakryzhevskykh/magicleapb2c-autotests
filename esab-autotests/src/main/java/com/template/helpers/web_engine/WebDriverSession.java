@@ -47,7 +47,6 @@ public class WebDriverSession {
     }
 
 	public long getShortTimeOut() {
-		// TODO Auto-generated method stub
-		return 0;
+		return shortTimeOut;
 	}
 }
