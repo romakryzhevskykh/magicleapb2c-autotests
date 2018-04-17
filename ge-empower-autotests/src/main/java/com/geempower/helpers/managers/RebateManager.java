@@ -17,6 +17,10 @@ public class RebateManager {
     }
 
     public Rebate getRebateById(String rebateId) {
-        return rebatesList.stream().filter(rebate -> rebate.getId() == rebateId).findAny().orElse(null);
+        return rebatesList.stream().filter(rebate -> rebate.getId().equals(rebateId)).findAny().orElse(null);
+    }
+
+    public Rebate getRebateBySpaQuoteNo(long spaNo){
+        return rebatesList.stream().filter(rebate -> rebate.getSpaQuoteNo() == spaNo).findAny().orElse(null);
     }
 }

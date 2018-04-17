@@ -9,8 +9,8 @@ Feature: Some actions on Rebates page
     And Click on chosen account.
     And Rebates page is opened.
 
-  Scenario: Check that user able to open Rebates page and correct header title is displayed.
-    Then All Rebates title is displayed on Rebates page.
+#  Scenario: Check that user able to open Rebates page and correct header title is displayed.
+#    Then All Rebates title is displayed on Rebates page.
 
   Scenario: Check that user is able to place rebate manually.
     When Users click on the Create Rebate button on the All Rebates page.
@@ -35,6 +35,7 @@ Feature: Some actions on Rebates page
     Then Request Submission Successful pop-up is displayed.
     And Rebate is created with all parameters.
     Then All Rebates title is displayed on Rebates page.
+    Then Created rebate is appeared on the All Rebates page.
 
 
 
