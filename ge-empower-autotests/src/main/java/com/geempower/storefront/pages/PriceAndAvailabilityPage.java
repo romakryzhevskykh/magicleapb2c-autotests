@@ -83,7 +83,7 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
         return $(EXTENDED_PRICE_XPATH, product.getCatalogueNo().toUpperCase()).getText();
     }
 
-    @Step("Get Order Value from checkout pop-up")
+    @Step("Get order Value from checkout pop-up")
     public String getOrderValueFromCheckoutPopUp() {
         waitUntilPageIsFullyLoaded();
         String orderValue = $(ORDER_VALUE_XPATH).getText();
