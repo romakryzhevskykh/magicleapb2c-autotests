@@ -1,10 +1,10 @@
-package com.geempower.storefront.pages;
+package com.geempower.storefront.pages.order;
 
 import com.geempower.storefront.StorefrontBasePage;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import static com.geempower.storefront.page_elements.OrderDetailsPageElements.*;
+import static com.geempower.storefront.page_elements.order.OrderDetailsPageElements.*;
 
 @Component
 public class OrderDetailsPage extends StorefrontBasePage {

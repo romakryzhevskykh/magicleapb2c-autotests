@@ -1,10 +1,10 @@
-package com.geempower.storefront.pages;
+package com.geempower.storefront.pages.product;
 
 import com.geempower.storefront.StorefrontBasePage;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import static com.geempower.storefront.page_elements.ProductsPageElements.*;
+import static com.geempower.storefront.page_elements.product.ProductsPageElements.*;
 
 
 @Component
@@ -26,6 +26,7 @@ public class ProductsPage extends StorefrontBasePage {
         return $(ALL_PRODUCTS_TITLE_XPATH).getText();
     }
 
+    @Step("Set Catalog No to the search field")
     public void setCatalogNoToSearchField(String catalogueNo) {
         waitUntilPageIsFullyLoaded();
         $(SEARCH_PRODUCT_INPUT).clear();

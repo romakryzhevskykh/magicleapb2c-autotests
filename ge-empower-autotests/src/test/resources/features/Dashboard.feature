@@ -40,7 +40,6 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then My Cart page is opened.
     Then All necessary elements are displayed on the My Cart page.
     When User clicks on the Next top button on the My Cart page.
-    Then Shipping And Billing step is displayed at the OE 2 page.
     Then All necessary elements are displayed on the Order Details block at OE 2 page.
     Then All necessary elements are displayed on the Address Details block at OE 2 page.
     Then All necessary elements are displayed on the Shipment Details block at OE 2 page.
@@ -95,7 +94,6 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     When User clicks on Checkout button.
     Then My Cart page is opened.
     When User clicks on the Next top button on the My Cart page.
-    Then Shipping And Billing step is displayed at the OE 2 page.
     Then Payer and Shipment Addresses are correct at the OE 2 page.
     When User fills PO no. to the PO no. field at the OE 2 page.
     When User selects Carrier from drop-down at the OE 2 page.

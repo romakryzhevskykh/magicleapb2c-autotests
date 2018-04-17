@@ -1,6 +1,7 @@
-package com.geempower.cucumber.definition_steps;
+package com.geempower.cucumber.definition_steps.order;
 
-import com.geempower.storefront.pages.OrdersPage;
+import com.geempower.cucumber.definition_steps.AbstractStepDefs;
+import com.geempower.storefront.pages.order.OrdersPage;
 import cucumber.api.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -26,7 +26,7 @@ public class PriceAndAvailabilityBlock extends UIComponent {
         $(By.id(COPY_AND_PASTE_FIELD_ID)).sendKeys(catalogueNo);
     }
 
-    @Step("Enter CatalogueNo. to the Product field")
+    @Step("Enter CatalogueNo. to the product field")
     public void setCatalogueNoToProductField(String catalogueNo){
         $(By.id(FIRST_PRODUCT_ROW_ID)).sendKeys(catalogueNo);
     }

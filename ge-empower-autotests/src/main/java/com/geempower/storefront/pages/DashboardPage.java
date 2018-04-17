@@ -20,7 +20,7 @@ public class DashboardPage extends StorefrontBasePage {
         return getCurrentUrl().equals(getPageUrl());
     }
 
-    @Step("Check that Order Status widget is displayed")
+    @Step("Check that order Status widget is displayed")
     public boolean orderStatusWidgetIsDisplayed() {
         return isDisplayed(ORDER_STATUS_WIDGET_XPATH);
     }
@@ -30,7 +30,7 @@ public class DashboardPage extends StorefrontBasePage {
         return isDisplayed(FEATURED_UPDATES_WIDGET_XPATH);
     }
 
-    @Step("Check that Order Search widget is displayed")
+    @Step("Check that order Search widget is displayed")
     public boolean orderSearchWidgetIsDisplayed() {
         return isDisplayed(ORDER_SEARCH_WIDGET_XPATH);
     }

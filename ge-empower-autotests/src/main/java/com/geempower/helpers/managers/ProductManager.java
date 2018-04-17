@@ -16,7 +16,7 @@ import static com.geempower.helpers.managers.ManagerWebElements.*;
 
 @Component
 public class ProductManager {
-    private GETRequest GET_PRODUCT_DETAILS_FROM_PDP = new GETRequest("Get PD By Product Id.", "p/product_detail/%s");
+    private GETRequest GET_PRODUCT_DETAILS_FROM_PDP = new GETRequest("Get PD By product Id.", "p/product_detail/%s");
 
     @Autowired
     RegionsManager regionsManager;

@@ -1,4 +1,4 @@
-package com.geempower.storefront.page_elements;
+package com.geempower.storefront.page_elements.product;
 
 public class ProductSubDetailPageElements {
     public final static String SELECTED_PRODUCT_CHECKBOX_XPATH = "//table[@id='DataTables_Table_0']//tr[@role='row' and td/a[@data-code-view='%s']]//div[@class='checkbox']//ins[@class='iCheck-helper']";

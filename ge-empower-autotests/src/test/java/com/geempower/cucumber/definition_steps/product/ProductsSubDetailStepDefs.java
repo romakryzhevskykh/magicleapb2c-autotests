@@ -1,8 +1,9 @@
-package com.geempower.cucumber.definition_steps;
+package com.geempower.cucumber.definition_steps.product;
 
+import com.geempower.cucumber.definition_steps.AbstractStepDefs;
+import com.geempower.cucumber.definition_steps.TestKeyword;
 import com.geempower.helpers.models.Product;
-import com.geempower.storefront.pages.ProductSubDetailPage;
-import cucumber.api.PendingException;
+import com.geempower.storefront.pages.product.ProductSubDetailPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;

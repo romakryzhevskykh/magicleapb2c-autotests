@@ -1,4 +1,4 @@
-package com.geempower.storefront.page_elements;
+package com.geempower.storefront.page_elements.order;
 
 public class OrderEntry3PageElements {
 
@@ -36,8 +36,8 @@ public class OrderEntry3PageElements {
     public final static String ACCEPT_EARLY_DELIVERY_TITLE_XPATH = "//label[contains (text(),'Accept early delivery')]";
 
     public final static String PO_NO_TITLE_XPATH = ORDER_SUMMARY_FORM_XPATH + "//label[contains (text(),'PO No.')]";
-    public final static String ORDER_SUMMARY_TITLE_XPATH = ".//h4[contains (text(),'Order Summary')]";
-    public final static String ORDER_NOTE_TITLE_XPATH = ".//label[contains (text(),'Order Note')]";
+    public final static String ORDER_SUMMARY_TITLE_XPATH = ".//h4[contains (text(),'order Summary')]";
+    public final static String ORDER_NOTE_TITLE_XPATH = ".//label[contains (text(),'order Note')]";
     public final static String JOB_NAME_TITLE_XPATH = ORDER_SUMMARY_FORM_XPATH + "//label[contains (text(),'Job Name')]";
     public final static String PAYER_TITLE_XPATH = ORDER_SUMMARY_FORM_XPATH + "//label[contains (text(),'Payer')]";
     public final static String PAYER_DATA_XPATH = "//p[@class='billToSummary']";

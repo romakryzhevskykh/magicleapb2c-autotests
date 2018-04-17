@@ -1,4 +1,4 @@
-package com.geempower.storefront.pages;
+package com.geempower.storefront.pages.order;
 
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
@@ -9,7 +9,7 @@ import ru.yandex.qatools.allure.annotations.Step;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
-import static com.geempower.storefront.page_elements.OrderEntry2PageElements.*;
+import static com.geempower.storefront.page_elements.order.OrderEntry2PageElements.*;
 
 @Component
 public class OrderEntry2Page extends StorefrontBasePage {
@@ -57,50 +57,51 @@ public class OrderEntry2Page extends StorefrontBasePage {
         return $(SHIP_TO_FIELD_VALUE_XPATH).getText();
     }
 
-    @Step("Getting the Catalog No. from the Product details block on the OE 2 page.")
+    @Step("Getting the Catalog No. from the product details block on the OE 2 page.")
     public String getCatalogNoFromTheProductDetailsBlock() {
         waitUntilPageIsFullyLoaded();
         return $(PRODUCT_DETAILS_BLOCK_CATALOG_NO_XPATH).getText();
     }
 
-    @Step("Getting the Description from the Product details block on the OE 2 page.")
+    @Step("Getting the Description from the product details block on the OE 2 page.")
     public String getDescriptionFromTheProductDetailsBlock() {
         return $(PRODUCT_DETAILS_BLOCK_DESCRIPTION_XPATH).getText();
     }
 
-    @Step("Getting the Quantity of product from the Product details block on the OE 2 page.")
+    @Step("Getting the Quantity of product from the product details block on the OE 2 page.")
     public int getQuantityFromTheProductDetailsBlock() {
         return Integer.parseInt($(PRODUCT_DETAILS_BLOCK_QUANTITY_XPATH).getText());
     }
 
-    @Step("Getting the Extended price from the Product details block on the OE 2 page.")
+    @Step("Getting the Extended price from the product details block on the OE 2 page.")
     public double getExtendedPriceFromTheProductDetailsBlock() {
         return Double.parseDouble($(PRODUCT_DETAILS_BLOCK_EXTENDED_PRICE_XPATH).getText());
     }
 
-    @Step("Getting the Currency from the Product details block on the OE 2 page.")
+    @Step("Getting the Currency from the product details block on the OE 2 page.")
     public String getCurrencyFromTheProductDetailsBlock() {
         return $(PRODUCT_DETAILS_BLOCK_CURRENCY_XPATH).getText();
     }
 
-    @Step("Getting the Est delivery date from the Product details block on the OE 2 page.")
+    @Step("Getting the Est delivery date from the product details block on the OE 2 page.")
     public String getEstDeliveryDateFromTheProductDetailsBlock() {
         return $(PRODUCT_DETAILS_BLOCK_EST_DELIVERY_DATE_XPATH).getText();
     }
 
-    @Step("Getting the Req delivery date from the Product details block on the OE 2 page.")
+    @Step("Getting the Req delivery date from the product details block on the OE 2 page.")
     public String getReqDeliveryDateFromTheProductDetailsBlock() {
         return $(PRODUCT_DETAILS_BLOCK_REQ_DELIVERY_DATE_XPATH).getAttribute("value");
     }
 
     @Step("Shipping And Billing Step Title Is Displayed on the OE 2 page.")
     public boolean shippingAndBillingStepTitleIsDisplayed() {
-        waitForElementToDisappear(By.xpath(BUILD_ORDER_TITLE_XPATH));
+        waitForElementToDisappear(By.xpath(SHIPPING_BILLING_TITLE_XPATH));
         return isDisplayed(SHIPPING_BILLING_TITLE_XPATH);
     }
 
-    @Step("Order Details Header Is Displayed on the OE 2 page.")
+    @Step("order Details Header Is Displayed on the OE 2 page.")
     public boolean orderDetailsHeaderIsDisplayed() {
+        waitUntilPageIsFullyLoaded();
         return isDisplayed(ORDER_DETAILS_HEADER_XPATH);
     }
 

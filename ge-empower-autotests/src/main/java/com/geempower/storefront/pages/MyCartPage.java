@@ -34,7 +34,7 @@ public class MyCartPage extends StorefrontBasePage {
                 $(ORDER_SUMMARY_STEP_ICON_XPATH).isDisplayed();
     }
 
-    @Step("Is build Order Information input present")
+    @Step("Is build order Information input present")
     public boolean isBuildOrderInformationInputPresent() {
         return $(BUILD_ORDER_FORM_WRAPPER_XPATH).isDisplayed() &&
                 $(BUILD_ORDER_INFORMATION_INPUT_XPATH).isDisplayed();
@@ -80,7 +80,7 @@ public class MyCartPage extends StorefrontBasePage {
         return $(CANCEL_BUTTON_XPATH).isDisplayed();
     }
 
-    @Step("Cancel the Order by clicking on the Cancel button.")
+    @Step("Cancel the order by clicking on the Cancel button.")
     public void clickOnCancelButton() {
         $(CANCEL_BUTTON_XPATH).click();
         waitUntilPageIsFullyLoaded();

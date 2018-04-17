@@ -1,4 +1,4 @@
-package com.geempower.storefront.pages;
+package com.geempower.storefront.pages.order;
 
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import static com.geempower.storefront.page_elements.OrderEntry3PageElements.*;
+import static com.geempower.storefront.page_elements.order.OrderEntry3PageElements.*;
 
 @Component
 public class OrderEntry3Page extends StorefrontBasePage {
@@ -30,7 +30,7 @@ public class OrderEntry3Page extends StorefrontBasePage {
         return $(PO_NUMBER_SUMMARY_XPATH).getText();
     }
 
-    @Step("User clicks on Place order button on the third Order entry page.")
+    @Step("User clicks on Place order button on the third order entry page.")
     public void clickOnThePlaceOrderButton() {
         waitUntilPageIsFullyLoaded();
         JavascriptExecutor je = (JavascriptExecutor) getDriver();
@@ -46,7 +46,7 @@ public class OrderEntry3Page extends StorefrontBasePage {
         $(SUBMIT_ORDER_BUTTON_IN_TERMS_POP_UP_XPATH).click();
     }
 
-    @Step("Getting the GE Order No. from the 'Order successful' pop-up.")
+    @Step("Getting the GE order No. from the 'order successful' pop-up.")
     public String getGEOrderNoFromOrderSuccessPopUp(String title) {
         waitForElementWithAppropriateTextToAppear(By.xpath(ORDER_CONFIRMATION_POP_UP_TITLE_XPATH), title);
         return $(GE_ORDER_NUMBER_ON_THE_CONFIRMATION_POP_UP_XPATH).getText();
@@ -58,38 +58,38 @@ public class OrderEntry3Page extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
     }
 
-    @Step("Getting the Catalog No. from the Product details block.")
+    @Step("Getting the Catalog No. from the product details block.")
     public String getCatalogNoFromTheProductDetailsBlock() {
         waitUntilPageIsFullyLoaded();
         return $(PRODUCT_DETAILS_BLOCK_CATALOG_NO_XPATH).getText();
     }
 
-    @Step("Getting the Description from the Product details block.")
+    @Step("Getting the Description from the product details block.")
     public String getDescriptionFromTheProductDetailsBlock() {
         return $(PRODUCT_DETAILS_BLOCK_DESCRIPTION_XPATH).getText();
     }
 
-    @Step("Getting the Quantity of product from the Product details block.")
+    @Step("Getting the Quantity of product from the product details block.")
     public int getQuantityFromTheProductDetailsBlock() {
         return Integer.parseInt($(PRODUCT_DETAILS_BLOCK_QUANTITY_XPATH).getText());
     }
 
-    @Step("Getting the Extended price from the Product details block.")
+    @Step("Getting the Extended price from the product details block.")
     public double getExtendedPriceFromTheProductDetailsBlock() {
         return Double.parseDouble($(PRODUCT_DETAILS_BLOCK_EXTENDED_PRICE_XPATH).getText());
     }
 
-    @Step("Getting the Currency from the Product details block.")
+    @Step("Getting the Currency from the product details block.")
     public String getCurrencyFromTheProductDetailsBlock() {
         return $(PRODUCT_DETAILS_BLOCK_CURRENCY_XPATH).getText();
     }
 
-    @Step("Getting the Est delivery date from the Product details block.")
+    @Step("Getting the Est delivery date from the product details block.")
     public String getEstDeliveryDateFromTheProductDetailsBlock() {
         return $(PRODUCT_DETAILS_BLOCK_EST_DELIVERY_DATE_XPATH).getText();
     }
 
-    @Step("Getting the Req delivery date from the Product details block.")
+    @Step("Getting the Req delivery date from the product details block.")
     public String getReqDeliveryDateFromTheProductDetailsBlock() {
         return $(PRODUCT_DETAILS_BLOCK_REQ_DELIVERY_DATE_XPATH).getText();
     }
@@ -144,12 +144,12 @@ public class OrderEntry3Page extends StorefrontBasePage {
         return isDisplayed(ACCEPT_EARLY_DELIVERY_TITLE_XPATH);
     }
 
-    @Step("Check that Order summary is displayed on the OE 3 page.")
+    @Step("Check that order summary is displayed on the OE 3 page.")
     public boolean orderSummaryTitleIsDisplayed() {
         return isDisplayed(ORDER_SUMMARY_TITLE_XPATH);
     }
 
-    @Step("Check that Order note is displayed on the OE 3 page.")
+    @Step("Check that order note is displayed on the OE 3 page.")
     public boolean orderNoteTitleIsDisplayed() {
         return isDisplayed(ORDER_NOTE_TITLE_XPATH);
     }

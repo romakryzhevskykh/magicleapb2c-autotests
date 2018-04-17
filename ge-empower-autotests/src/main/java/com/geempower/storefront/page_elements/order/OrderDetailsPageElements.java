@@ -1,4 +1,4 @@
-package com.geempower.storefront.page_elements;
+package com.geempower.storefront.page_elements.order;
 
 public class OrderDetailsPageElements {
     public final static String GE_ORDER_NO_XPATH = ".//a[@class='text-status-grey']";

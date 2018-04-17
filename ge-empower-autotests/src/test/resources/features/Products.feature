@@ -31,7 +31,6 @@ Feature: Some actions on Products page
     And Update Price & Availability button is clicked on the My Cart page.
     Then Extend Price is changed to correct value on the My Cart page.
     When User clicks on the Next top button on the My Cart page.
-    Then Shipping And Billing step is displayed at the OE 2 page.
     When User fills PO no. to the PO no. field at the OE 2 page.
     And Select Shipment Address from the existing addresses at the OE 2 page.
     Then Selected Shipment address is equal to Ship to field value.

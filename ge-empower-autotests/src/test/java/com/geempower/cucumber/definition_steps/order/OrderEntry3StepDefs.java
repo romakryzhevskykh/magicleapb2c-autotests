@@ -1,10 +1,11 @@
-package com.geempower.cucumber.definition_steps;
+package com.geempower.cucumber.definition_steps.order;
 
+import com.geempower.cucumber.definition_steps.AbstractStepDefs;
+import com.geempower.cucumber.definition_steps.TestKeyword;
 import com.geempower.helpers.managers.OrderManager;
 import com.geempower.helpers.models.Product;
 import com.geempower.helpers.models.Region;
-import com.geempower.storefront.pages.OrderEntry3Page;
-import cucumber.api.PendingException;
+import com.geempower.storefront.pages.order.OrderEntry3Page;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -38,13 +39,13 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
     }
 
     @And("^Terms and Conditions pop-up is confirmed.$")
-    public void termsAndConditionsPopUpIsConfirmed() throws Throwable {
+    public void termsAndConditionsPopUpIsConfirmed() {
         orderEntry3Page.submitTermsAndConditions();
     }
 
     @SuppressWarnings("unchecked")
     @Then("^(.*) pop-up appears at the OE 3 page.$")
-    public void orderSuccessfulPopUpAppears(String title) throws Throwable {
+    public void orderSuccessfulPopUpAppears(String title) {
         String orderNo = orderEntry3Page.getGEOrderNoFromOrderSuccessPopUp(title);
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         orderManager.createOrderInstance(Long.parseLong(orderNo), selectedProducts);
