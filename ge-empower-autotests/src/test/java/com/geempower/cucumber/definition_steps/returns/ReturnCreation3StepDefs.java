@@ -1,9 +1,8 @@
-package com.geempower.cucumber.definition_steps.returnCreationStepDefs;
+package com.geempower.cucumber.definition_steps.returns;
 
 import com.geempower.cucumber.definition_steps.AbstractStepDefs;
 import com.geempower.cucumber.definition_steps.TestKeyword;
-import com.geempower.storefront.pages.returnsPages.ReturnCreation3Page;
-import cucumber.api.PendingException;
+import com.geempower.storefront.pages.returns.ReturnCreation3Page;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -48,11 +47,13 @@ public class ReturnCreation3StepDefs extends AbstractStepDefs {
         returnCreation3Page.clickOnNextButton();
     }
 
-    @Then("^Correct Reason for request and Requested action are displayed on Return Creation 3 page.$")
+    @Then("^Correct Сatalog No, Reason for request and Requested action are displayed on Return Creation 3 page.$")
     public void correctReasonForRequestAndRequestedActionAreDisplayedOnReturnCreationPage() {
         String reasonForRequest = (String) threadVarsHashMap.get(TestKeyword.REASON_FOR_REQUEST);
         String requestedAction = (String) threadVarsHashMap.get(TestKeyword.REQUESTED_ACTION);
+        String catalogNo = (String) threadVarsHashMap.get(TestKeyword.CATALOG_NO);
         assertEquals(reasonForRequest, returnCreation3Page.getReasonForRequest());
         assertEquals(requestedAction, returnCreation3Page.getRequestedAction());
+        assertEquals(catalogNo, returnCreation3Page.getCatalogNo());
     }
 }

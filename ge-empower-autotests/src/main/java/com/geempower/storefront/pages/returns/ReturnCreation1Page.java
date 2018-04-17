@@ -1,11 +1,11 @@
-package com.geempower.storefront.pages.returnsPages;
+package com.geempower.storefront.pages.returns;
 
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.Keys;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import static com.geempower.storefront.page_elements.returnsCreationPageElements.ReturnsCreation1PageElements.*;
+import static com.geempower.storefront.page_elements.returns.ReturnsCreation1PageElements.*;
 
 
 @Component
@@ -39,8 +39,8 @@ public class ReturnCreation1Page extends StorefrontBasePage {
     }
 
     @Step("Get Invoice No.")
-    public String getInvoiceNo() {
-        return $(FIRST_ACTIVE_INVOICE_NO_IN_TABLE_XPATH).getText();
+    public long getInvoiceNo() {
+        return Long.parseLong($(FIRST_ACTIVE_INVOICE_NO_IN_TABLE_XPATH).getText());
     }
 
     @Step("Select first product in table")

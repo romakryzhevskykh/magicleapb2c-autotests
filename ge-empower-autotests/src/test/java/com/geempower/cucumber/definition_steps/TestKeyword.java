@@ -14,5 +14,6 @@ public enum TestKeyword {
     REQUESTED_ACTION,
     COLOR_OF_SHRINK,
     ADDITIONAL_INFO,
-    CATALOG_NO
+    CATALOG_NO,
+    REQUEST_CONFIRM_N0
 }

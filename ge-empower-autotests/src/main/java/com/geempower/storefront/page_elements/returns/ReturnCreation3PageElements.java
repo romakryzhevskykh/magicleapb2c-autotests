@@ -1,4 +1,4 @@
-package com.geempower.storefront.page_elements.returnsCreationPageElements;
+package com.geempower.storefront.page_elements.returns;
 
 public class ReturnCreation3PageElements {
     public final static String ADDITIONAL_INFORMATION_ACTIVE_TITLE_XPATH = ".//li[@class='return-additional-info active']";
@@ -9,4 +9,6 @@ public class ReturnCreation3PageElements {
     public final static String BOTTOM_NEXT_BUTTON_XPATH = "//*[@class='return-tab-content']//button[@class='btn primary-btn next-button-step3']";
     public final static String REASON_FOR_REQUEST_VALUE_XPATH = ".//td[@class='create-reason-request-col ']/span[1]";
     public final static String REQUESTED_ACTION_VALUE_XPATH = ".//td[@class='create-requested-action-col']";
+    public final static String CATALOG_NO_VALUE_XPATH = "//table[@class='table info-table create-return-table create-return-additional-info-table']//td[@class='create-catalog-col']";
+
 }

@@ -1,4 +1,4 @@
-package com.geempower.storefront.pages.returnsPages;
+package com.geempower.storefront.pages.returns;
 
 import com.geempower.storefront.StorefrontBasePage;
 import org.springframework.stereotype.Component;
@@ -7,7 +7,7 @@ import ru.yandex.qatools.allure.annotations.Step;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
-import static com.geempower.storefront.page_elements.returnsCreationPageElements.ReturnCreation3PageElements.*;
+import static com.geempower.storefront.page_elements.returns.ReturnCreation3PageElements.*;
 
 
 @Component
@@ -70,5 +70,10 @@ public class ReturnCreation3Page extends StorefrontBasePage {
     @Step("Get Requested Action")
     public String getRequestedAction() {
         return $(REQUESTED_ACTION_VALUE_XPATH).getText();
+    }
+
+    @Step("Get Catalog No")
+    public String getCatalogNo() {
+        return $(CATALOG_NO_VALUE_XPATH).getText();
     }
 }

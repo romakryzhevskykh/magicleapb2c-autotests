@@ -1,4 +1,4 @@
-package com.geempower.storefront.page_elements.returnsCreationPageElements;
+package com.geempower.storefront.page_elements.returns;
 
 public class ReturnCreation2PageElements {
     public final static String REASON_FOR_REQUEST_ACTIVE_TITLE_XPATH = ".//li[@class='return-reason-request active']";

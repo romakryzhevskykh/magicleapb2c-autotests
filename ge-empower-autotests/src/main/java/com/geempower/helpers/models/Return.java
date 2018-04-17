@@ -9,16 +9,15 @@ public class Return {
     @Getter int qty;
     @Getter final String reasonForRequest;
     @Getter double netPrice;
-    @Getter double requestedCredit;
     @Getter String requestedAction;
     @Getter String requestSubType;
     @Getter String additionalInformation;
 
-    public Return(String id, String catalogueNo, long invoiceNo, String reasonForRequest, double requestedCredit){
+    public Return(String id, String catalogueNo, long invoiceNo, String reasonForRequest, String requestedAction){
         this.id = id;
         this.catalogueNo = catalogueNo;
         this.invoiceNo = invoiceNo;
         this.reasonForRequest = reasonForRequest;
-        this.requestedCredit = requestedCredit;
+        this.requestedAction = requestedAction;
     }
 }

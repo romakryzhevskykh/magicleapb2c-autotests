@@ -1,4 +1,4 @@
-package com.geempower.storefront.page_elements.returnsCreationPageElements;
+package com.geempower.storefront.page_elements.returns;
 
 public class ReturnCreation4PageElements {
     public final static String REQUEST_SUMMARY_ACTIVE_TITLE_XPATH = ".//li[@class='return-request-summary active']";
@@ -10,6 +10,10 @@ public class ReturnCreation4PageElements {
     public final static String COLOR_OF_SHRINK_WRAP_VALUE_XPATH = "//table[@class='table info-table return-tracking-table']//label[contains (text(),'Color of Shrink Wrap')]/following-sibling::p";
     public final static String ADDITIONAL_INFO_VALUE_XPATH = "//table[@class='table info-table return-tracking-table']//label[contains (text(),'Additional Information')]/following-sibling::p";
     public final static String TERMS_AND_CONDITIONS_POP_UP_XPATH = ".//*[@id='terms-condition-modal']//h4[@class='modal-title']";
+    public final static String REQUEST_SUBMISSION_POP_UP_ID = "return-success-header";
     public final static String AGREED_CHECKBOX_POP_UP_XPATH = "//div[@id='terms-condition-modal']//ins[@class='iCheck-helper']";
-    public final static String SUBMIT_TERMS_POPUP_BUTTON_XPATH = "//div[@id='terms-condition-modal']//ins[@class='iCheck-helper']";
+    public final static String SUBMIT_TERMS_POPUP_BUTTON_ID = "submitReturnRequest";
+    public final static String CATALOG_NO_VALUE_XPATH = ".//td[@class='create-summary-catalog-col']";
+    public final static String REQUEST_CONFIRM_NUMBER_ID = "requestConfNumberSuccess";
+    public final static String CLOSE_REQUEST_BUTTON_XPATH = ".//*[@class='btn secondary-btn cancel-return-request-btn-js']";
 }

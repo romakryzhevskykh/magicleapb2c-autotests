@@ -1,6 +1,7 @@
-package com.geempower.cucumber.definition_steps;
+package com.geempower.cucumber.definition_steps.returns;
 
-import com.geempower.storefront.pages.ReturnsPage;
+import com.geempower.cucumber.definition_steps.AbstractStepDefs;
+import com.geempower.storefront.pages.returns.ReturnsPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,11 +1,11 @@
-package com.geempower.storefront.pages;
+package com.geempower.storefront.pages.returns;
 
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import static com.geempower.storefront.page_elements.ReturnsPageElements.*;
+import static com.geempower.storefront.page_elements.returns.ReturnsPageElements.*;
 
 
 @Component

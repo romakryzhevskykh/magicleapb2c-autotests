@@ -25,25 +25,27 @@ Feature: Return creation tests
     Then Correct catalog No is displayed on Return Creation 2 page.
     And Select Shortage Reason for Request on Return Creation 2 page.
     And Select Credit Requested Action on Return Creation 2 page.
-    And Set value 1 to the Qty. field on Return Creation 2 page.
+    And Set value <qty> to the Qty. field on Return Creation 2 page.
     And Click on Next button on Return Creation 2 page.
     Then Return Creation 3 page is displayed.
-    Then Correct Reason for request and Requested action are displayed on Return Creation 3 page.
+    Then Correct Сatalog No, Reason for request and Requested action are displayed on Return Creation 3 page.
     When Click on Additional Info button on Return Creation 3 page.
     And Set color of shrink field on Return Creation 3 page.
     And Set Additional Information field on Return Creation 3 page.
     And Click on Save button on Return Creation 3 page.
     And Click on Next button on Return Creation 3 page.
     Then Return Creation 4 page is displayed.
-    Then Correct Reason for request and Requested action are displayed on Return Creation 4 page.
+    Then Correct Сatalog No, Reason for request and Requested action are displayed on Return Creation 4 page.
     When Expand return row on Return Creation 4 page.
     Then Correct Requested Action, Column of Shrink Wrap and Additional Info are displayed on Return Creation 4 page.
     When Click on Submit Request button on Return Creation 4 page.
     And Submit Terms and Conditions for Sale of Products and Services pop-up on Return Creation 4 page.
-#    Then Request Submission Successful pop-up is displayed on Return Creation 4 page.
-#    When Close Request Submission Successful pop-up on Return Creation 4 page.
-#    Then All Cases title is displayed on Returns page.
+    Then Request Submission Successful pop-up is displayed on Return Creation 4 page.
+    When Return is created on Return Creation 4 page.
+    Then All Cases title is displayed on Returns page.
 
     Examples:
-      | region        |
-      | North_America |
+      | region        | qty  |
+      | North_America |  1   |
+      | EMEA          |  1   |
+      | ASIA          |  1   |

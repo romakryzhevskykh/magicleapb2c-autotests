@@ -1,8 +1,8 @@
-package com.geempower.cucumber.definition_steps.returnCreationStepDefs;
+package com.geempower.cucumber.definition_steps.returns;
 
 import com.geempower.cucumber.definition_steps.AbstractStepDefs;
 import com.geempower.cucumber.definition_steps.TestKeyword;
-import com.geempower.storefront.pages.returnsPages.ReturnCreation2Page;
+import com.geempower.storefront.pages.returns.ReturnCreation2Page;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;

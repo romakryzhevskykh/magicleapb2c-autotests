@@ -1,4 +1,4 @@
-package com.geempower.storefront.pages.returnsPages;
+package com.geempower.storefront.pages.returns;
 
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
 
-import static com.geempower.storefront.page_elements.returnsCreationPageElements.ReturnCreation2PageElements.*;
+import static com.geempower.storefront.page_elements.returns.ReturnCreation2PageElements.*;
 
 @Component
 public class ReturnCreation2Page extends StorefrontBasePage {
