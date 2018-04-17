@@ -25,8 +25,8 @@ public class ReturnCreation2Page extends StorefrontBasePage {
     }
 
 
-    @Step("Return Creation 2 page Is Opened.")
-    public boolean returnCreation2pageIsOpened() {
+    @Step("Reason for Request title is displayed.")
+    public boolean reasonForRequestTitleIsDisplayed() {
         waitUntilPageIsFullyLoaded();
         return isDisplayed(REASON_FOR_REQUEST_ACTIVE_TITLE_XPATH);
     }

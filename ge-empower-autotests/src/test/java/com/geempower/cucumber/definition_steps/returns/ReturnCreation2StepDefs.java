@@ -17,7 +17,7 @@ public class ReturnCreation2StepDefs extends AbstractStepDefs {
 
     @Then("^Return Creation 2 page is opened.$")
     public void returnCreation2pageIsOpened() {
-        assertTrue(returnCreation2Page.isOpened() && returnCreation2Page.returnCreation2pageIsOpened());
+        assertTrue(returnCreation2Page.isOpened() && returnCreation2Page.reasonForRequestTitleIsDisplayed());
     }
 
     @Then("^Correct catalog No is displayed on Return Creation 2 page.$")

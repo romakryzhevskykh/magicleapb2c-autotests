@@ -27,15 +27,17 @@ public class OrderEntry2PageElements {
     public final static String PRODUCT_DETAILS_BLOCK_EST_DELIVERY_DATE_XPATH = PRODUCT_DETAILS_BLOCK_XPATH + "//span[@class='est_del_date_1']";
     public final static String PRODUCT_DETAILS_BLOCK_REQ_DELIVERY_DATE_XPATH = PRODUCT_DETAILS_BLOCK_XPATH + "//div[@class='input-group date datetimepicker future-date mycart-datepicker']/input";
 
-    public final static String SHIPMENT_ADDRESS_TITLE_XPATH = "//*[@id='shipping-billing-info']//label[contains (text(),'Shipment Address')]";
-    public final static String ADDRESS_DETAILS_HEADER_XPATH = "//*[@id='shipping-billing-info']//h4[contains (text(),'Address Details')]";
+    private final static String SHIPPING_BILLING_INFO = "//*[@id='shipping-billing-info']";
+    public final static String SHIPMENT_ADDRESS_TITLE_XPATH = SHIPPING_BILLING_INFO + "//label[contains (text(),'Shipment Address')]";
+    public final static String ADDRESS_DETAILS_HEADER_XPATH = SHIPPING_BILLING_INFO + "//h4[contains (text(),'Address Details')]";
+    public final static String SHIPPING_DETAILS_HEADER_XPATH = SHIPPING_BILLING_INFO + "//h4[contains (text(),'Shipment Details')]";
+    public final static String SHIP_PAYMENT_METHOD_TITLE_XPATH = SHIPPING_BILLING_INFO + "//label[contains (text(),'Ship Payment Method')]";
+    public final static String SHIP_METHOD_TITLE_XPATH = SHIPPING_BILLING_INFO + "//label[contains (text(),'Ship Method')]";
+    public final static String SHIPPING_NOTE_TITLE_XPATH = SHIPPING_BILLING_INFO + "//label[contains (text(),'Shipping Note')]";
+    public final static String REQUESTED_DELIVERY_DATE_TITLE_XPATH = SHIPPING_BILLING_INFO + "//label[contains (text(),'Requested Delivery Date')]";
+
     public final static String MANAGE_ADDRESS_BUTTON_XPATH = ".//*[@data-target='#manage-address-modal']";
 
-    public final static String SHIPPING_DETAILS_HEADER_XPATH = "//*[@id='shipping-billing-info']//h4[contains (text(),'Shipment Details')]";
-    public final static String SHIP_PAYMENT_METHOD_TITLE_XPATH = "//*[@id='shipping-billing-info']//label[contains (text(),'Ship Payment Method')]";
-    public final static String SHIP_METHOD_TITLE_XPATH = "//*[@id='shipping-billing-info']//label[contains (text(),'Ship Method')]";
-    public final static String SHIPPING_NOTE_TITLE_XPATH = "//*[@id='shipping-billing-info']//label[contains (text(),'Shipping Note')]";
-    public final static String REQUESTED_DELIVERY_DATE_TITLE_XPATH = "//*[@id='shipping-billing-info']//label[contains (text(),'Requested Delivery Date')]";
     public final static String PARTIAL_DELIVERY_TITLE_XPATH = "//label[contains (text(),'partial delivery')]";
     public final static String BEFORE_DELIVERY_DATE_TITLE_XPATH = "//label[contains (text(),'delivery date')]";
     public final static String CARRIER_FIELD_XPATH = "//span[@aria-labelledby='select2-carrier-select-container']";
@@ -45,8 +47,8 @@ public class OrderEntry2PageElements {
     public final static String MINIMUM_SHIPMENT_CHARGES_EMEA_MODAL_XPATH = "//div[@id='minimum-shipment-charges-emea-modal']//div[@class='modal-dialog']";
     public final static String MINIMUM_SHIPMENT_CHARGES_LA_MODAL_XPATH = "//div[@id='minimum-shipment-charges-mexico-modal']//div[@class='modal-dialog']";
     public final static String MINIMUM_SHIPMENT_CHARGES_NA_MODAL_XPATH = "//div[@id='minimum-shipment-charges-modal']//div[@class='modal-dialog']";
+
     public final static String CONTINUE_NA_BUTTON_XPATH = "//div[@id='minimum-shipment-charges-modal']//button[@data-target='#order-summary']";
     public final static String CONTINUE_EMEA_BUTTON_XPATH = "//div[@id='minimum-shipment-charges-emea-modal']//button[@data-target='#order-summary']";
-
     public final static String ADD_MORE_ITEMS_BUTTON_XPATH = "//div[@id='minimum-shipment-charges-mexico-modal']//button[@data-target='#build-order']";
 }

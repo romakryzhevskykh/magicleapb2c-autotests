@@ -44,5 +44,4 @@ public class OrderEntry3PageElements {
 
     public final static String PAYER_BLOCK_VALUE_XPATH = "//p[@class='billToSummary']";
     public final static String SHIPPING_ADDRESS_BLOCK_VALUE_XPATH = "//p[@class='shipmentAddressSummary']";
-
 }

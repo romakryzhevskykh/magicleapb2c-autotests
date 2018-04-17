@@ -11,7 +11,7 @@ import static com.geempower.storefront.page_elements.returns.ReturnsCreation1Pag
 @Component
 public class ReturnCreation1Page extends StorefrontBasePage {
 
-    private final String pageUri = "returnTracking";
+    private final String pageUri = "returnRequest";
 
     @Override
     public String getPageUrl() {
@@ -40,14 +40,14 @@ public class ReturnCreation1Page extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
         click(FIRST_INVOICE_NO_IN_TABLE_XPATH);
         waitUntilPageIsFullyLoaded();
-        return Long.parseLong($(FIRST_INVOICE_NO_IN_TABLE_XPATH).getText());
+        return Long.parseLong($(FIRST_ACTIVE_INVOICE_NO_IN_TABLE_XPATH).getText());
     }
 
     @Step("Select first product in table")
     public String selectFirstProduct() {
         waitUntilPageIsFullyLoaded();
         click(FIRST_CHECKBOX_IN_TABLE_XPATH);
-        return $(FIRST_CHECKBOX_IN_TABLE_XPATH).getText();
+        return $(FIRST_ACTIVE_CATALOGUE_NO_IN_TABLE_XPATH ).getText();
     }
 
     @Step("Click on Top Next button")
