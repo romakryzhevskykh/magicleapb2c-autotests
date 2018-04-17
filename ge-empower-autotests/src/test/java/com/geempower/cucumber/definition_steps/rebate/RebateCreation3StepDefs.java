@@ -20,14 +20,14 @@ public class RebateCreation3StepDefs extends AbstractStepDefs {
     @Autowired private RebateCreation3Page rebateCreation3Page;
 
     @Then("^Request summary step is opened.$")
-    public void requestSummaryStepIsOpened() throws Throwable {
+    public void requestSummaryStepIsOpened() {
         assertTrue(rebateCreation3Page.isOpened());
         assertTrue(rebateCreation3Page.thirdStepIsOpened());
     }
 
     @SuppressWarnings("unchecked")
     @Then("^All data has been replaced correctly from second to third step.$")
-    public void allDataHasBeenReplacedCorrectlyFromSecondToThirdStep() throws Throwable {
+    public void allDataHasBeenReplacedCorrectlyFromSecondToThirdStep() {
         String accountNo = (String) threadVarsHashMap.get(TestKeyword.CHOSEN_ACCOUNT);
         long spaNo = (long) threadVarsHashMap.get(TestKeyword.REBATE_SPA_NO);
         String catalogNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
@@ -38,7 +38,7 @@ public class RebateCreation3StepDefs extends AbstractStepDefs {
     }
 
     @When("^User clicks on the Submit rebate button.$")
-    public void userClicksOnTheSubmitRebateButton() throws Throwable {
+    public void userClicksOnTheSubmitRebateButton() {
         rebateCreation3Page.clickOnSubmitButton();
     }
 
@@ -48,13 +48,13 @@ public class RebateCreation3StepDefs extends AbstractStepDefs {
     }
 
     @Then("^(.*) pop-up is displayed.$")
-    public void requestSubmissionSuccessfulPopUpIsDisplayed(String popupTitle) throws Throwable {
+    public void requestSubmissionSuccessfulPopUpIsDisplayed(String popupTitle) {
         assertTrue(rebateCreation3Page.submissionPopupIsAppeared(popupTitle));
     }
 
     @SuppressWarnings("unchecked")
     @And("^Rebate is created with all parameters.$")
-    public void rebateIsCreatedWithAllParameters() throws Throwable {
+    public void rebateIsCreatedWithAllParameters() {
         rebateManager.createRebateInstance(rebateCreation3Page.getRebateId(),
                 (long) threadVarsHashMap.get(TestKeyword.REBATE_SPA_NO),
                 threadVarsHashMap.getString(TestKeyword.REBATE_END_CUSTOMER_NO),

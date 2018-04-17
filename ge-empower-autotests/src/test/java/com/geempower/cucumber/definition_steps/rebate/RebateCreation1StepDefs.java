@@ -51,24 +51,24 @@ public class RebateCreation1StepDefs extends AbstractStepDefs {
     }
 
     @And("^Sets correct End Customer Invoice Date.$")
-    public void setsCorrectEndCustomerInvoiceDate() throws Throwable {
+    public void setsCorrectEndCustomerInvoiceDate() {
         rebateCreation1Page.setEndCustomerInvoiceDate();
     }
 
     @And("^Sets random Distributor Invoice No.$")
-    public void setsRandomDistributorInvoiceNo() throws Throwable {
+    public void setsRandomDistributorInvoiceNo() {
         threadVarsHashMap.put(TestKeyword.REBATE_DISTRIBUTOR_INVOICE_NO, rebateCreation1Page.setRandomDistributorInvoiceNo());
     }
 
     @SuppressWarnings("unchecked")
     @And("^Sets random Qty. Sold.$")
-    public void setsRandomQtySold() throws Throwable {
+    public void setsRandomQtySold() {
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         selectedProducts.keySet().forEach(product -> selectedProducts.put(product, rebateCreation1Page.setRandomQtySold()));
     }
 
     @When("^User clicks on the Next top button on the first rebate creation step.$")
-    public void userClicksOnTheNextTopButtonOnTheFirstRebateCreationStep() throws Throwable {
+    public void userClicksOnTheNextTopButtonOnTheFirstRebateCreationStep() {
         rebateCreation1Page.clickOnTopNextButton();
     }
 

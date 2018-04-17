@@ -17,14 +17,14 @@ public class RebateCreation2StepDefs extends AbstractStepDefs {
     @Autowired private RebateCreation2Page rebateCreation2Page;
 
     @Then("^Second step is opened.$")
-    public void secondStepIsOpened() throws Throwable {
+    public void secondStepIsOpened() {
         assertTrue(rebateCreation2Page.isOpened());
         assertTrue(rebateCreation2Page.secondStepIsOpened());
     }
 
     @SuppressWarnings("unchecked")
     @Then("^All data has been replaced correctly from first to second step.$")
-    public void allDataHasBeenReplacedCorrectlyFromFirstToSecondStep() throws Throwable {
+    public void allDataHasBeenReplacedCorrectlyFromFirstToSecondStep() {
         String accountNo = (String) threadVarsHashMap.get(TestKeyword.CHOSEN_ACCOUNT);
         long spaNo = (long) threadVarsHashMap.get(TestKeyword.REBATE_SPA_NO);
         String catalogNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
@@ -36,7 +36,7 @@ public class RebateCreation2StepDefs extends AbstractStepDefs {
     }
 
     @When("^User clicks on the Next top button on the second rebate creation step.$")
-    public void userClicksOnTheNextTopButtonOnTheSecondRebateCreationStep() throws Throwable {
+    public void userClicksOnTheNextTopButtonOnTheSecondRebateCreationStep() {
         rebateCreation2Page.clickOnNextButtonOnSecondPage();
     }
 }

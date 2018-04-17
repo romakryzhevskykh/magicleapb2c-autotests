@@ -24,7 +24,7 @@ public class RebateCreation1Page extends StorefrontBasePage {
         return getCurrentUrl().equals(getPageUrl());
     }
 
-    @Step("CCheck that first Step Is Opened")
+    @Step("Check that first Step Is Opened")
     public boolean firstStepIsOpened() {
         waitUntilPageIsFullyLoaded();
         return $(REBATE_CREATE_REQUEST_ACTIVE_STEP_XPATH).isDisplayed();

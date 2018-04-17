@@ -39,13 +39,13 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
     }
 
     @And("^Terms and Conditions pop-up is confirmed.$")
-    public void termsAndConditionsPopUpIsConfirmed() throws Throwable {
+    public void termsAndConditionsPopUpIsConfirmed() {
         orderEntry3Page.submitTermsAndConditions();
     }
 
     @SuppressWarnings("unchecked")
     @Then("^(.*) pop-up appears at the OE 3 page.$")
-    public void orderSuccessfulPopUpAppears(String title) throws Throwable {
+    public void orderSuccessfulPopUpAppears(String title) {
         String orderNo = orderEntry3Page.getGEOrderNoFromOrderSuccessPopUp(title);
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         orderManager.createOrderInstance(Long.parseLong(orderNo), selectedProducts);

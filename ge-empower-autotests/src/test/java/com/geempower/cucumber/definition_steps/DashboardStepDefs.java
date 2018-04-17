@@ -70,12 +70,12 @@ public class DashboardStepDefs extends AbstractStepDefs {
     }
 
     @And("^Click on P&A button.$")
-    public void clickOnPAButton() throws Throwable {
+    public void clickOnPAButton() {
         priceAndAvailabilityBlock.clickOnCheckPAButton();
     }
 
     @When("^User set catalogueNo to Copy & Paste field.$")
-    public void userSetCatalogueNoToCopyPasteField() throws Throwable {
+    public void userSetCatalogueNoToCopyPasteField() {
         threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
         priceAndAvailabilityBlock.setCatalogueNoToTheCopyAndPasteField(catalogueNo);
