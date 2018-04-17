@@ -39,12 +39,14 @@ public class ProductsSubDetailStepDefs extends AbstractStepDefs {
     }
 
 
+    @SuppressWarnings("unchecked")
     @Then("^Correct Line Items is displayed in the Checkout pop-up on the Product Sub-Detail page.$")
     public void correctLineItemsIsDisplayedInTheCheckoutPopUpOnTheProductSubDetailPage() {
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         assertTrue(productSubDetailPage.getLineItemsValue() == selectedProducts.keySet().size());
     }
 
+    @SuppressWarnings("unchecked")
     @Then("^Correct Order Value is displayed in the Checkout pop-up on the Product Sub-Detail page.$")
     public void checkoutOrderValueIsCorrect() {
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);

@@ -76,6 +76,7 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
         accountManagementPage.switchToPendingTab();
     }
 
+    @SuppressWarnings("unchecked")
     @Then("^Requested accounts are displayed on Pending for approval tab.$")
     public void requestedAccountsAreDisplayedOnPendingForApprovalTab() {
         ArrayList<String> chosenAccounts = (ArrayList<String>) threadVarsHashMap.get(TestKeyword.CHOSEN_ACCOUNT);

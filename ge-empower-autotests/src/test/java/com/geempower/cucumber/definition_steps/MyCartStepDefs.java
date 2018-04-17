@@ -2,7 +2,6 @@ package com.geempower.cucumber.definition_steps;
 
 import com.geempower.helpers.models.Product;
 import com.geempower.storefront.pages.MyCartPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -49,6 +48,7 @@ public class MyCartStepDefs extends AbstractStepDefs {
         myCartPage.clickOnTheNextTopButton();
     }
 
+    @SuppressWarnings("unchecked")
     @Then("^Check that default quantity is equals to (.*) on the My Cart page.$")
     public void checkThatDefaultQuantityIsEqualsToDefaultQuantityOnTheMyCartPage(String qtyValue) {
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
@@ -77,6 +77,7 @@ public class MyCartStepDefs extends AbstractStepDefs {
         myCartPage.clickOnUpdatePAButton();
     }
 
+    @SuppressWarnings("unchecked")
     @Then("^Extend Price is changed to correct value on the My Cart page.$")
     public void extendPriceIsChangedToCorrectValueOnTheMyCartPage() {
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);

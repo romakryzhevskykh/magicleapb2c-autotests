@@ -6,6 +6,7 @@ import com.geempower.storefront.pages.*;
 import com.geempower.storefront.pages.order.OrdersPage;
 import com.geempower.storefront.pages.product.ProductsPage;
 import com.geempower.storefront.pages.rebate.RebatesPage;
+import com.geempower.storefront.pages.returns.ReturnsPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;

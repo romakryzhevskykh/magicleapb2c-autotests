@@ -41,6 +41,7 @@ public class OrderEntry2StepDefs extends AbstractStepDefs {
         orderEntry2Page.clickOnTheNextBottomButton();
     }
 
+    @SuppressWarnings("unchecked")
     @Then("^All necessary elements are displayed on the Product Details block at the OE 2 page.$")
     public void allNecessaryElementsAreDisplayedOnTheProductDetailsBlockAtOE2Page() {
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
