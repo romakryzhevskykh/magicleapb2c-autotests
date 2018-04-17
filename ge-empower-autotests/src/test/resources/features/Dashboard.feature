@@ -82,7 +82,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     And Select address from address field.
     And Click on Submit button.
     Then Price&Availability page is opened.
-    Then Check that default quantity is equals to 1 on the Price&Availability page.
+    Then Check that default quantity is equals to <default quantity> on the Price&Availability page.
     Then Check that description, list price, final net price, availability are equal to data from PDP.
     And Put <default quantity> to the hashmap on P&A page.
     And All products are selected on P&A page.

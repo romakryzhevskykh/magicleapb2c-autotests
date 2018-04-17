@@ -4,7 +4,7 @@ public class OrderEntry2PageElements {
     public final static String BUILD_ORDER_TITLE_XPATH = ".//h4[contains (text(),'Build order')]";
     public final static String SHIPPING_BILLING_TITLE_XPATH = ".//li[@class='shipping-billing-info active']";
 
-    public final static String ORDER_DETAILS_HEADER_XPATH = ".//h4[contains (text(),'order Details')]";
+    public final static String ORDER_DETAILS_HEADER_XPATH = ".//h4[contains (text(),'Order Details')]";
     public final static String PO_NO_FIELD_ID = "poNumber";
     public final static String JOB_NAME_FIELD_ID = "jobName";
     public final static String PAYER_TITLE_XPATH = "//*[@id='shipping-billing-info']//label[contains (text(),'Payer')]";
