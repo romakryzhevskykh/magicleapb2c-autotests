@@ -61,12 +61,14 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
         priceAndAvailabilityPage.clickOnCheckoutButton();
     }
 
+    @SuppressWarnings("unchecked")
     @Then("^Correct Line Items is displayed in the Checkout pop-up.$")
     public void checkoutLineItemValueIsCorrect() {
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         assertTrue(priceAndAvailabilityPage.getLineItemsValue() == selectedProducts.keySet().size());
     }
 
+    @SuppressWarnings("unchecked")
     @Then("^Correct Order Value is displayed in the Checkout pop-up.$")
     public void checkoutOrderValueIsCorrect() {
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
@@ -98,6 +100,7 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
         selectedProducts.keySet().forEach(product -> assertEquals(priceAndAvailabilityPage.getQtyValue(product), qtyValue));
     }
 
+    @SuppressWarnings("unchecked")
     @Then("^Check that description, list price, final net price, availability are equal to data from PDP.$")
     public void checkThatDescriptionListPriceFinalNetPriceAvailabilityAreEqualToDataFromPDP() {
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
@@ -113,6 +116,7 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
     }
 
 
+    @SuppressWarnings("unchecked")
     @And ("^Put (.*) to the hashmap on P&A page.$")
     public void putDefaultQuantityToTheHashmap(int defaulQuantity){
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);

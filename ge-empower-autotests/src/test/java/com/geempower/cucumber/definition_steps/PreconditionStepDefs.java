@@ -1,13 +1,11 @@
 package com.geempower.cucumber.definition_steps;
 
 import com.geempower.helpers.managers.ProductManager;
-import com.geempower.helpers.models.RegionType;
 import com.geempower.storefront.page_blocks.HeaderBlock;
 import com.geempower.storefront.pages.*;
-import cucumber.api.PendingException;
+import com.geempower.storefront.pages.returns.ReturnsPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class PreconditionStepDefs extends AbstractStepDefs {
