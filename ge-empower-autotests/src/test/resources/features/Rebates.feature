@@ -36,8 +36,3 @@ Feature: Some actions on Rebates page
     And Rebate is created with all parameters.
     Then All Rebates title is displayed on Rebates page.
     Then Created rebate is appeared on the All Rebates page.
-
-
-
-
-
