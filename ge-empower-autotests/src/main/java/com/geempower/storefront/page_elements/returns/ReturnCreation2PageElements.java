@@ -10,5 +10,4 @@ public class ReturnCreation2PageElements {
     public final static String FIRST_QTY_FIELD_XPATH = "(.//*[@class='form-control qty-input-val done'])[1]";
     public final static String BOTTOM_NEXT_BUTTON_ID = "returnRequest2NextButton";
     public final static String CATALOG_NO_VALUE_XPATH = ".//*[@id='returnTrackingTableStep2']/tbody/tr/td[2]";
-
 }

@@ -19,9 +19,14 @@ public class ReturnCreation2Page extends StorefrontBasePage {
         return storefrontProject.getBaseUrl().concat(pageUri);
     }
 
+    @Override
+    public boolean isOpened() {
+        return getCurrentUrl().equals(getPageUrl());
+    }
 
-    @Step("Return Creation 2 page Is Displayed.")
-    public boolean returnCreation2pageIsDisplayed() {
+
+    @Step("Return Creation 2 page Is Opened.")
+    public boolean returnCreation2pageIsOpened() {
         waitUntilPageIsFullyLoaded();
         return isDisplayed(REASON_FOR_REQUEST_ACTIVE_TITLE_XPATH);
     }

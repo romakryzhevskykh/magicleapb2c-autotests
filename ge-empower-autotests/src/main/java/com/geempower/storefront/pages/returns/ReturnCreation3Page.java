@@ -20,9 +20,14 @@ public class ReturnCreation3Page extends StorefrontBasePage {
         return storefrontProject.getBaseUrl().concat(pageUri);
     }
 
+    @Override
+    public boolean isOpened() {
+        return getCurrentUrl().equals(getPageUrl());
+    }
 
-    @Step("Return Creation 3 page Is Displayed.")
-    public boolean returnCreation3pageIsDisplayed() {
+
+    @Step("Return Creation 3 page Is Opened.")
+    public boolean returnCreation3pageIsOpened() {
         waitUntilPageIsFullyLoaded();
         return isDisplayed(ADDITIONAL_INFORMATION_ACTIVE_TITLE_XPATH);
     }

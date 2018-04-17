@@ -10,7 +10,7 @@ import static org.testng.Assert.assertEquals;
 
 public class ReturnsStepDefs extends AbstractStepDefs {
     @Autowired
-    ReturnsPage returnsPage;
+    private ReturnsPage returnsPage;
 
     @Then("^(.*) title is displayed on Returns page.$")
     public void checkAllCasesTitle(String allCasesTitle) {

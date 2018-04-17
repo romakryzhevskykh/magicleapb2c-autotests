@@ -9,4 +9,3 @@ public class ReturnsCreation1PageElements {
     public final static String TOP_NEXT_BUTTON_XPATH = ".//*[contains(@class,'return-order-title')]//*[@class = 'btn primary-btn next-button-step1']";
     public final static String FIRST_ACTIVE_CATALOGUE_NO_IN_TABLE_XPATH = ".//*[@id='return-invoice-line-table']/tbody/tr[1]/td[3]";
 }
-

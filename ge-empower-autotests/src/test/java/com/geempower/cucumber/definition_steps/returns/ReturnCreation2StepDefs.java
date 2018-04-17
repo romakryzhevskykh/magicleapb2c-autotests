@@ -13,37 +13,37 @@ import static org.testng.Assert.assertEquals;
 public class ReturnCreation2StepDefs extends AbstractStepDefs {
 
     @Autowired
-    ReturnCreation2Page returnCreation2Page;
+    private ReturnCreation2Page returnCreation2Page;
 
-    @Then("^Return Creation 2 page is displayed.$")
-    public void returnCreation2pageIsDisplayed() {
-        assertTrue(returnCreation2Page.returnCreation2pageIsDisplayed());
+    @Then("^Return Creation 2 page is opened.$")
+    public void returnCreation2pageIsOpened() {
+        assertTrue(returnCreation2Page.isOpened() && returnCreation2Page.returnCreation2pageIsOpened());
     }
 
-    @Then ("^Correct catalog No is displayed on Return Creation 2 page.$")
-    public void correctCatalogNoIsDispalyed(){
-        String catalogNo = (String) threadVarsHashMap.get(TestKeyword.CATALOG_NO);
+    @Then("^Correct catalog No is displayed on Return Creation 2 page.$")
+    public void correctCatalogNoIsDispalyed() {
+        String catalogNo = (String) threadVarsHashMap.get(TestKeyword.RETURN_CATALOG_NO);
         assertEquals(catalogNo, returnCreation2Page.getCatalogNo());
     }
 
     @And("^Select (.*) Reason for Request on Return Creation 2 page.$")
     public void selectReasonForRequest(String reason) {
         returnCreation2Page.selectReasonForRequest(reason);
-        threadVarsHashMap.put(TestKeyword.REASON_FOR_REQUEST, returnCreation2Page.getReasonForRequest());
+        threadVarsHashMap.put(TestKeyword.RETURN_REASON_FOR_REQUEST, returnCreation2Page.getReasonForRequest());
     }
 
     @And("^Select (.*) Requested Action on Return Creation 2 page.$")
     public void selectRequestedAction(String action) {
         returnCreation2Page.selectRequestedAction(action);
-        threadVarsHashMap.put(TestKeyword.REQUESTED_ACTION, returnCreation2Page.getRequestedAction());
+        threadVarsHashMap.put(TestKeyword.RETURN_REQUESTED_ACTION, returnCreation2Page.getRequestedAction());
     }
 
     @And("^Set value (.*) to the Qty. field on Return Creation 2 page.$")
-    public void SetQtyValue(String qty) {
+    public void setQtyValue(String qty) {
         returnCreation2Page.setQtyValue(qty);
     }
 
-    @And ("^Click on Next button on Return Creation 2 page.$")
+    @And("^Click on Next button on Return Creation 2 page.$")
     public void clickOnNextButton() {
         returnCreation2Page.clickOnNextButton();
     }

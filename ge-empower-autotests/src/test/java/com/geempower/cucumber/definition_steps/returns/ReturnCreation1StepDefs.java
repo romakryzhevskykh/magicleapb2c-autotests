@@ -13,11 +13,11 @@ import static junit.framework.TestCase.assertTrue;
 public class ReturnCreation1StepDefs extends AbstractStepDefs {
 
     @Autowired
-    ReturnCreation1Page returnCreation1Page;
+    private ReturnCreation1Page returnCreation1Page;
 
-    @Then("Return Creation 1 page is displayed.$")
-    public void returnCreation1pageIsDisplayed() {
-        assertTrue(returnCreation1Page.returnCreation1pageIsDisplayed());
+    @Then("Return Creation 1 page is opened.$")
+    public void returnCreation1pageIsOpened() {
+        assertTrue(returnCreation1Page.isOpened() && returnCreation1Page.returnCreation1pageIsOpened());
     }
 
     @When("Search All PO No. in the Search field on Return Creation 1 page.$")
@@ -26,20 +26,17 @@ public class ReturnCreation1StepDefs extends AbstractStepDefs {
     }
 
     @And("Select First Invoice No. in the Search Result table on Return Creation 1 page.$")
-    public void selectFirstInvoiceNo(){
-        returnCreation1Page.selectFirstInvoiceNo();
-        threadVarsHashMap.put(TestKeyword.INVOICE_NO, returnCreation1Page.getInvoiceNo());
+    public void selectFirstInvoiceNo() {
+        threadVarsHashMap.put(TestKeyword.RETURN_INVOICE_NO, returnCreation1Page.selectFirstInvoiceNo());
     }
 
     @And("Select First Product in the Product List table on Return Creation 1 page.$")
     public void selectFirstProduct() {
-        returnCreation1Page.selectFirstProduct();
-        threadVarsHashMap.put(TestKeyword.CATALOG_NO, returnCreation1Page.getCatalogueNo());
+        threadVarsHashMap.put(TestKeyword.RETURN_CATALOG_NO, returnCreation1Page.selectFirstProduct());
     }
 
-    @And ("Click on the Next button Return Creation 1 page.$")
+    @And("Click on the Next button Return Creation 1 page.$")
     public void clickOnNextButton() {
         returnCreation1Page.clickOnNextButton();
     }
-
 }

@@ -17,9 +17,13 @@ public class ReturnCreation4Page extends StorefrontBasePage {
         return storefrontProject.getBaseUrl().concat(pageUri);
     }
 
+    @Override
+    public boolean isOpened() {
+        return getCurrentUrl().equals(getPageUrl());
+    }
 
     @Step("Return Creation 4 page Is Displayed.")
-    public boolean returnCreation4pageIsDisplayed() {
+    public boolean returnCreation4pageIsOpened() {
         waitUntilPageIsFullyLoaded();
         return isDisplayed(REQUEST_SUMMARY_ACTIVE_TITLE_XPATH);
     }
@@ -31,7 +35,7 @@ public class ReturnCreation4Page extends StorefrontBasePage {
 
     @Step("Get Invoice No.")
     public long getInvoiceNo() {
-        return Long.parseLong(($(INVOICE_NO_VALUE_XPATH).getText().substring(1)));
+        return Long.parseLong($(INVOICE_NO_VALUE_XPATH).getText().substring(1));
     }
 
     @Step("Click Expand Row Button.")

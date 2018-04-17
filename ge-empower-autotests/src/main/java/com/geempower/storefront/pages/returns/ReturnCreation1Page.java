@@ -18,9 +18,13 @@ public class ReturnCreation1Page extends StorefrontBasePage {
         return storefrontProject.getBaseUrl().concat(pageUri);
     }
 
+    @Override
+    public boolean isOpened() {
+        return getPageUrl().equals(getCurrentUrl());
+    }
 
-    @Step("Return Creation 1 page Is Displayed.")
-    public boolean returnCreation1pageIsDisplayed() {
+    @Step("Return Creation 1 page Is Opened.")
+    public boolean returnCreation1pageIsOpened() {
         return isDisplayed(IDENTIFY_PRODUCTS_PAGE_ACTIVE_TITLE_XPATH);
     }
 
@@ -31,22 +35,19 @@ public class ReturnCreation1Page extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
     }
 
-    @Step("Select First Invoice No. in table")
-    public void selectFirstInvoiceNo() {
+    @Step("Select first Invoice No. in table")
+    public long selectFirstInvoiceNo() {
         waitUntilPageIsFullyLoaded();
         click(FIRST_INVOICE_NO_IN_TABLE_XPATH);
         waitUntilPageIsFullyLoaded();
-    }
-
-    @Step("Get Invoice No.")
-    public long getInvoiceNo() {
-        return Long.parseLong($(FIRST_ACTIVE_INVOICE_NO_IN_TABLE_XPATH).getText());
+        return Long.parseLong($(FIRST_INVOICE_NO_IN_TABLE_XPATH).getText());
     }
 
     @Step("Select first product in table")
-    public void selectFirstProduct() {
+    public String selectFirstProduct() {
         waitUntilPageIsFullyLoaded();
         click(FIRST_CHECKBOX_IN_TABLE_XPATH);
+        return $(FIRST_CHECKBOX_IN_TABLE_XPATH).getText();
     }
 
     @Step("Click on Top Next button")

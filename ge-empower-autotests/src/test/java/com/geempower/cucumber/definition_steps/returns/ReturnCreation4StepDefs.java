@@ -15,20 +15,20 @@ import static org.testng.Assert.assertEquals;
 public class ReturnCreation4StepDefs extends AbstractStepDefs {
 
     @Autowired
-    ReturnCreation4Page returnCreation4Page;
+    private ReturnCreation4Page returnCreation4Page;
     @Autowired
-    ReturnManager returnManager;
+    private ReturnManager returnManager;
 
-    @Then("^Return Creation 4 page is displayed.$")
-    public void returnCreation4pageIsDisplayed() {
-        assertTrue(returnCreation4Page.returnCreation4pageIsDisplayed());
+    @Then("^Return Creation 4 page is opened.$")
+    public void returnCreation4pageIsOpened() {
+        assertTrue(returnCreation4Page.isOpened() && returnCreation4Page.returnCreation4pageIsOpened());
     }
 
     @Then("^Correct Сatalog No, Reason for request and Requested action are displayed on Return Creation 4 page.$")
     public void checkReasonForRequestAndRequestedActionAreDisplayedCorrectly() {
-        String reasonForRequest = (String) threadVarsHashMap.get(REASON_FOR_REQUEST);
-        long invoiceNo = (long) threadVarsHashMap.get(INVOICE_NO);
-        String catalogNo = (String) threadVarsHashMap.get(CATALOG_NO);
+        String reasonForRequest = (String) threadVarsHashMap.get(RETURN_REASON_FOR_REQUEST);
+        long invoiceNo = (long) threadVarsHashMap.get(RETURN_INVOICE_NO);
+        String catalogNo = (String) threadVarsHashMap.get(RETURN_CATALOG_NO);
         assertEquals(reasonForRequest, returnCreation4Page.getReasonForRequest());
         assertEquals(invoiceNo, returnCreation4Page.getInvoiceNo());
         assertEquals(catalogNo, returnCreation4Page.getCatalogNo());
@@ -41,9 +41,9 @@ public class ReturnCreation4StepDefs extends AbstractStepDefs {
 
     @Then("^Correct Requested Action, Column of Shrink Wrap and Additional Info are displayed on Return Creation 4 page.$")
     public void checkRequestActionShrinkAndAdditionalInfo() {
-        String requestedAction = (String) threadVarsHashMap.get(REQUESTED_ACTION);
-        String colorOfShrink = (String) threadVarsHashMap.get(COLOR_OF_SHRINK);
-        String additionalInfo = (String) threadVarsHashMap.get(ADDITIONAL_INFO);
+        String requestedAction = (String) threadVarsHashMap.get(RETURN_REQUESTED_ACTION);
+        String colorOfShrink = (String) threadVarsHashMap.get(RETURN_COLOR_OF_SHRINK);
+        String additionalInfo = (String) threadVarsHashMap.get(RETURN_ADDITIONAL_INFO);
         assertEquals(requestedAction, returnCreation4Page.getRequestedAction());
         assertEquals(colorOfShrink, returnCreation4Page.getColorOfShrink());
         assertEquals(additionalInfo, returnCreation4Page.getAdditionalInfo());
@@ -62,16 +62,16 @@ public class ReturnCreation4StepDefs extends AbstractStepDefs {
     @Then("^(.*) pop-up is displayed on Return Creation 4 page.$")
     public void requestPopUpIsDisplayed(String popUpTitle) {
         returnCreation4Page.requestPopUpIsDisplayed(popUpTitle);
-        threadVarsHashMap.put(REQUEST_CONFIRM_N0, returnCreation4Page.getRequestConfirmNo());
+        threadVarsHashMap.put(RETURN_REQUEST_CONFIRM_N0, returnCreation4Page.getRequestConfirmNo());
     }
 
     @When("^Return is created on Return Creation 4 page.$")
     public void returnIsCreated() {
         returnManager.createReturnInstance(returnCreation4Page.getRequestConfirmNo(),
-                threadVarsHashMap.getString(CATALOG_NO),
-                (long) threadVarsHashMap.get(INVOICE_NO),
-                threadVarsHashMap.getString(REASON_FOR_REQUEST),
-                threadVarsHashMap.getString(REQUESTED_ACTION));
+                threadVarsHashMap.getString(RETURN_CATALOG_NO),
+                (long) threadVarsHashMap.get(RETURN_INVOICE_NO),
+                threadVarsHashMap.getString(RETURN_REASON_FOR_REQUEST),
+                threadVarsHashMap.getString(RETURN_REQUESTED_ACTION));
         returnCreation4Page.closeRequestPopUp();
     }
 }

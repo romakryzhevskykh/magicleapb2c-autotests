@@ -14,11 +14,11 @@ import static org.testng.Assert.assertEquals;
 public class ReturnCreation3StepDefs extends AbstractStepDefs {
 
     @Autowired
-    ReturnCreation3Page returnCreation3Page;
+    private ReturnCreation3Page returnCreation3Page;
 
-    @Then("^Return Creation 3 page is displayed.$")
-    public void returnCreation3pageIsDisplayed() {
-        assertTrue(returnCreation3Page.returnCreation3pageIsDisplayed());
+    @Then("^Return Creation 3 page is opened.$")
+    public void returnCreation3pageIsOpened() {
+        assertTrue(returnCreation3Page.isOpened() && returnCreation3Page.returnCreation3pageIsOpened());
     }
 
     @When("^Click on Additional Info button on Return Creation 3 page.$")
@@ -28,12 +28,12 @@ public class ReturnCreation3StepDefs extends AbstractStepDefs {
 
     @And("^Set color of shrink field on Return Creation 3 page.$")
     public void setColorOfShrinkField() {
-        threadVarsHashMap.put(TestKeyword.COLOR_OF_SHRINK, returnCreation3Page.setColorOfShrinkField());
+        threadVarsHashMap.put(TestKeyword.RETURN_COLOR_OF_SHRINK, returnCreation3Page.setColorOfShrinkField());
     }
 
     @And("^Set Additional Information field on Return Creation 3 page.$")
     public void setAdditionalInformationField() {
-        threadVarsHashMap.put(TestKeyword.ADDITIONAL_INFO, returnCreation3Page.setAdditionalInformationField());
+        threadVarsHashMap.put(TestKeyword.RETURN_ADDITIONAL_INFO, returnCreation3Page.setAdditionalInformationField());
 
     }
 
@@ -49,9 +49,9 @@ public class ReturnCreation3StepDefs extends AbstractStepDefs {
 
     @Then("^Correct Сatalog No, Reason for request and Requested action are displayed on Return Creation 3 page.$")
     public void correctReasonForRequestAndRequestedActionAreDisplayedOnReturnCreationPage() {
-        String reasonForRequest = (String) threadVarsHashMap.get(TestKeyword.REASON_FOR_REQUEST);
-        String requestedAction = (String) threadVarsHashMap.get(TestKeyword.REQUESTED_ACTION);
-        String catalogNo = (String) threadVarsHashMap.get(TestKeyword.CATALOG_NO);
+        String reasonForRequest = (String) threadVarsHashMap.get(TestKeyword.RETURN_REASON_FOR_REQUEST);
+        String requestedAction = (String) threadVarsHashMap.get(TestKeyword.RETURN_REQUESTED_ACTION);
+        String catalogNo = (String) threadVarsHashMap.get(TestKeyword.RETURN_CATALOG_NO);
         assertEquals(reasonForRequest, returnCreation3Page.getReasonForRequest());
         assertEquals(requestedAction, returnCreation3Page.getRequestedAction());
         assertEquals(catalogNo, returnCreation3Page.getCatalogNo());

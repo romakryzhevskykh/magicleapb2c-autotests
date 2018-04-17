@@ -3,13 +3,11 @@ package com.geempower.storefront;
 import com.geempower.helpers.BasePageObject;
 import com.geempower.storefront.models.EmpowerStorefront;
 import org.springframework.beans.factory.annotation.Autowired;
-import ru.yandex.qatools.allure.annotations.Step;
 
 public abstract class StorefrontBasePage extends BasePageObject {
     @Autowired
     protected EmpowerStorefront storefrontProject;
 
-    @Step
     public boolean isOpened() {
         return getPageUrl().equals(getCurrentUrl());
     }
