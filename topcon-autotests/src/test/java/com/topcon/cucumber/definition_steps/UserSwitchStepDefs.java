@@ -8,7 +8,7 @@ import com.topcon.storefront.pages.StartPage;
 import cucumber.api.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class UserSwitchStepDefs {
+public class UserSwitchStepDefs extends AbstractStepDefs {
 
     @Autowired protected WebDriverSessions webDriverPool;
     @Autowired StartPage storefrontStartPage;
