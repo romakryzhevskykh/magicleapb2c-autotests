@@ -8,10 +8,10 @@
             <class name="com.topcon.cucumber.LoginSuite"/>
         </classes>
     </test>
-    <test name="AddressBookSuite">
-        <parameter name="browserName" value="chrome" />
-        <classes>
-            <class name="com.topcon.cucumber.AddressBookSuite"/>
-        </classes>
-    </test>
+    <!--<test name="AddressBookSuite">-->
+        <!--<parameter name="browserName" value="chrome" />-->
+        <!--<classes>-->
+            <!--<class name="com.topcon.cucumber.AddressBookSuite"/>-->
+        <!--</classes>-->
+    <!--</test>-->
 </suite>
