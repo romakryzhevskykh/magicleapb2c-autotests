@@ -19,7 +19,6 @@ public class HomePageStepDefs extends AbstractStepDefs {
 	final static Logger logger = Logger.getLogger(HomePageStepDefs.class);
 	
 	@Autowired UserSessions userSessions;
-
     @Autowired HomePage homePage;
     @Autowired LoginPage loginPage;
     @Autowired HeaderRowPageBlock headerRowPageBlock;

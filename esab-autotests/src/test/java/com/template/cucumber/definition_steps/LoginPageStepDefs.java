@@ -10,26 +10,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class LoginPageStepDefs extends AbstractStepDefs {
 
-    @Autowired UserSessions userSessions;
+	@Autowired
+	UserSessions userSessions;
 
-    @Autowired StartPage startPage;
-    @Autowired LoginPage loginPage;
-    @Autowired HeaderRowPageBlock headerRowPageBlock;
+	@Autowired
+	StartPage startPage;
+	@Autowired
+	LoginPage loginPage;
+	@Autowired
+	HeaderRowPageBlock headerRowPageBlock;
 
-    @Given("Opened Login page.")
-    public void openLoginPage() {
-        if (!loginPage.isOpened()) {
-            if(headerRowPageBlock.isUserLoggedIn()) {
-                headerRowPageBlock.logoutFromStorefront();
-            } else if (!startPage.isOpened()) {
-                startPage.open();
-            }
-            startPage.clickOnSignInButton();
-        }
-    }
+	@Given("Opened Login page.")
+	public void openLoginPage() {
+		if (!loginPage.isOpened()) {
+			if (headerRowPageBlock.isUserLoggedIn()) {
+				headerRowPageBlock.logoutFromStorefront();
+			} else if (!startPage.isOpened()) {
+				startPage.open();
+			}
+			startPage.clickOnSignInButton();
+		}
+	}
 
-    @When("Login to Storefront.")
-    public void loginToStorefront() {
-        loginPage.loginToStorefront(userSessions.getActiveUserSession());
-    }
+	@When("Login to Storefront.")
+	public void loginToStorefront() {
+		loginPage.loginToStorefront(userSessions.getActiveUserSession());
+	}
+
+	@When("Click on Register button.")
+	public void clickOnRegisterButton() {
+		loginPage.clickOnRegisterButton();
+	}
 }

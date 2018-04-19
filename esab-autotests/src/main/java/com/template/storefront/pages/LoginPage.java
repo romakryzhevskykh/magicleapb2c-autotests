@@ -28,7 +28,6 @@ public class LoginPage extends StorefrontBasePage {
 
     @Step("Click on Login button.")
     public void clickOnLoginButton() {
-        //$(LOG_IN_BUTTON_XPATH).click();
     	click(LOG_IN_BUTTON_XPATH);
     }
 
@@ -36,6 +35,10 @@ public class LoginPage extends StorefrontBasePage {
         fillUsernameFieldWith(user.getUsername());
         fillPasswordFieldWith(user.getPassword());
         clickOnLoginButton();
+    }
+    
+    public void goToRegisterPage(){
+    	clickOnRegisterButton();
     }
 
     @Step("Check that current url is Login page url.")
@@ -46,5 +49,10 @@ public class LoginPage extends StorefrontBasePage {
     @Override
     public String getPageUrl() {
         return storefrontProject.getBaseUrl() + pageUrlMethod;
+    }
+    
+    @Step("Click on Register button.")
+    public void clickOnRegisterButton(){
+    	click(REGISTER_BUTTON_XPATH);
     }
 }
