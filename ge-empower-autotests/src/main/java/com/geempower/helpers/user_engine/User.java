@@ -24,6 +24,9 @@ public class User {
                 case "empoweradmin":
                     userRole = StorefrontUserRoles.EMPOWERADMIN;
                     break;
+                case "internaluser":
+                    userRole = StorefrontUserRoles.INTERNALUSER;
+                    break;
                 default:
                     userRole = null;
                     break;
