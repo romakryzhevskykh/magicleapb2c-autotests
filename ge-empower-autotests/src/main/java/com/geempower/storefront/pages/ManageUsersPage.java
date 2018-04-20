@@ -4,8 +4,7 @@ import com.geempower.storefront.StorefrontBasePage;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import static com.geempower.storefront.page_elements.ManageUsersPageElements.*;
-
+import static com.geempower.storefront.page_elements.manageUsers.ManageUsersPageElements.*;
 
 @Component
 public class ManageUsersPage extends StorefrontBasePage {

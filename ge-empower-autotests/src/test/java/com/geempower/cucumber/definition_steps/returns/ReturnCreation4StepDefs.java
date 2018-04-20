@@ -24,7 +24,7 @@ public class ReturnCreation4StepDefs extends AbstractStepDefs {
         assertTrue(returnCreation4Page.isOpened() && returnCreation4Page.returnCreation4pageIsOpened());
     }
 
-    @Then("^Correct Сatalog No, Reason for request and Requested action are displayed on Return Creation 4 page.$")
+    @Then("^Correct Catalog No, Reason for request and Requested action are displayed on Return Creation 4 page.$")
     public void checkReasonForRequestAndRequestedActionAreDisplayedCorrectly() {
         String reasonForRequest = (String) threadVarsHashMap.get(RETURN_REASON_FOR_REQUEST);
         long invoiceNo = (long) threadVarsHashMap.get(RETURN_INVOICE_NO);

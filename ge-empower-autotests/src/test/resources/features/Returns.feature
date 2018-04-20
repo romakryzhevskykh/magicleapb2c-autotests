@@ -27,14 +27,14 @@ Feature: Return creation tests
     And Set value 1 to the Qty. field on Return Creation 2 page.
     And Click on Next button on Return Creation 2 page.
     Then Return Creation 3 page is opened.
-    Then Correct Сatalog No, Reason for request and Requested action are displayed on Return Creation 3 page.
+    Then Correct Catalog No, Reason for request and Requested action are displayed on Return Creation 3 page.
     When Click on Additional Info button on Return Creation 3 page.
     And Set color of shrink field on Return Creation 3 page.
     And Set Additional Information field on Return Creation 3 page.
     And Click on Save button on Return Creation 3 page.
     And Click on Next button on Return Creation 3 page.
     Then Return Creation 4 page is opened.
-    Then Correct Сatalog No, Reason for request and Requested action are displayed on Return Creation 4 page.
+    Then Correct Catalog No, Reason for request and Requested action are displayed on Return Creation 4 page.
     When Expand return row on Return Creation 4 page.
     Then Correct Requested Action, Column of Shrink Wrap and Additional Info are displayed on Return Creation 4 page.
     When Click on Submit Request button on Return Creation 4 page.
