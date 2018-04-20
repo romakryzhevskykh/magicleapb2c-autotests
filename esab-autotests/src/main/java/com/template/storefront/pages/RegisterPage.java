@@ -51,9 +51,9 @@ public class RegisterPage extends StorefrontBasePage {
 		verifyWebElementsTextValuesEqual(verificationSecondlineText, REGISTRATION_PAGE_SECOND_LINE_TEXT_XPATH);
 	}
 	//TODO: implement send text method
-	@Step("Fill in text into the field")
-	public void fillInSimpleInput(){
-		
+	@Step("Fill in First and Last name.")
+	public void fillInFirstLastNameInput(String firstNameLastName){
+		fillInTextInput(firstNameLastName, FIRST_AND_LAST_NAME_XPATH);
 	}
 
 }

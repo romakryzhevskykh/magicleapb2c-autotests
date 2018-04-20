@@ -250,7 +250,7 @@ public abstract class BasePageObject {
 	protected void fillInTextInput(String textForInput, String xpath, String... args) {
 		WebElement webElement = getWebElement(xpath, args);
 		if (webElement != null) {
-			logger.info("Send text: " + textForInput + "into web element" + webElement);
+			logger.info("Send text: " + textForInput + " into web element" + webElement);
 			webElement.sendKeys(textForInput);
 		}
 	}

@@ -44,5 +44,9 @@ public class RegisterPageStepDefs extends AbstractStepDefs {
 		logger.info("Verify register page second line text");
 		registerPage.verifyRegisterPageSecondLineText();
 	}
+	@Then("^Input First name and LastName: (.*) into First and Last name field$")
+	public void inputTextIntoFirstLastName(String firstLastName){
+		registerPage.fillInFirstLastNameInput(firstLastName);
+	}
 
 }
