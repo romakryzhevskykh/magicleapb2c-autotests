@@ -12,4 +12,5 @@ bin
 test-output
 esab-autotests/target
 .recommenders
-esab-autotests/log4j-application.log
+esab-autotests/*.log
+

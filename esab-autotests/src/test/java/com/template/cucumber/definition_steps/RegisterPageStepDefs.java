@@ -29,5 +29,20 @@ public class RegisterPageStepDefs extends AbstractStepDefs {
 		logger.info("Verify register page is Opened");
 		assertTrue(registerPage.isCurrentUrlIsRegisterPageUrl(), "Current page is not registratin page");
 	}
+	@And ("Verify field label names on Register page.")
+	public void verifyRegisterPageFieldLabels(){
+		logger.info("Verify register page field labels");
+		registerPage.verifyRegisterPageFieldLabels();
+	}
+	@And ("Verify headline text on Register page.")
+	public void verifyHeadLineText(){
+		logger.info("Verify register page headline text");
+		registerPage.verifyRegisterPageHeadLineText();
+	}
+	@And ("Verify second line text on Register page.")
+	public void verifySecondLineText(){
+		logger.info("Verify register page second line text");
+		registerPage.verifyRegisterPageSecondLineText();
+	}
 
 }
