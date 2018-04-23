@@ -47,7 +47,7 @@ public class ReturnCreation3StepDefs extends AbstractStepDefs {
         returnCreation3Page.clickOnNextButton();
     }
 
-    @Then("^Correct Сatalog No, Reason for request and Requested action are displayed on Return Creation 3 page.$")
+    @Then("^Correct Catalog No, Reason for request and Requested action are displayed on Return Creation 3 page.$")
     public void correctReasonForRequestAndRequestedActionAreDisplayedOnReturnCreationPage() {
         String reasonForRequest = (String) threadVarsHashMap.get(TestKeyword.RETURN_REASON_FOR_REQUEST);
         String requestedAction = (String) threadVarsHashMap.get(TestKeyword.RETURN_REQUESTED_ACTION);
