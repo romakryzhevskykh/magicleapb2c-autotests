@@ -26,6 +26,11 @@ public class UserSwitchStepDefs {
         webDriverPool.setDriverActive(StorefrontUserRoles.EMPOWERADMIN);
     }
 
+    @Given("Switch to Storefront as internalUser.")
+    public void switchToStorefrontAsInternalUser() {
+        webDriverPool.setDriverActive(StorefrontUserRoles.INTERNALUSER);
+    }
+
 //    @Given("Switch to Import cockpit import manager role.")
 //    public void switchToImportCockpitAsImportManager() {
 //        webDriverPool.setDriverActive(ImportCockpitUserRoles.IMPORT_MANAGER);
