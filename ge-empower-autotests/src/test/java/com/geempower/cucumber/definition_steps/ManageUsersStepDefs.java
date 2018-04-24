@@ -1,7 +1,7 @@
 package com.geempower.cucumber.definition_steps;
 
 import com.geempower.storefront.pages.ManageUsersPage;
-import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,21 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
 
     @When("^Admin opens Users tab.$")
     public void adminOpensUsersTab() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        manageUsersPage.openUsersTab();
+    }
+
+    @And("^Sets (.*) email to the email field.$")
+    public void setsValidEmailToTheEmailField(String email) {
+        manageUsersPage.setEmailToTheSearchField(email);
+    }
+
+    @And("^Click on the Search button.$")
+    public void clickOnTheSearchButton() {
+        manageUsersPage.clickOnSearchUserButton();
+    }
+
+    @Then("^Appropriate user with appropriate (.*) email is displayed in the users list.$")
+    public void appropriateUserWithAppropriateEmailEmailIsDisplayedInTheUsersList(String email) {
+        assertEquals(manageUsersPage.isUserFoundByEmail(), email);
     }
 }
