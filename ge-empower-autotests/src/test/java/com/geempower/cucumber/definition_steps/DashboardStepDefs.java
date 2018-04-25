@@ -2,14 +2,12 @@ package com.geempower.cucumber.definition_steps;
 
 import com.geempower.storefront.page_blocks.PriceAndAvailabilityBlock;
 import com.geempower.storefront.pages.DashboardPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.testng.Assert.assertTrue;
-
 
 public class DashboardStepDefs extends AbstractStepDefs {
     @Autowired
@@ -82,7 +80,7 @@ public class DashboardStepDefs extends AbstractStepDefs {
     }
 
     @When("^User set catalogNo to Product Number field.$")
-    public void userSetCatalogueNoToProductField() throws Throwable{
+    public void userSetCatalogueNoToProductField() throws Throwable {
         threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
         priceAndAvailabilityBlock.setCatalogueNoToProductField(catalogueNo);
@@ -96,5 +94,11 @@ public class DashboardStepDefs extends AbstractStepDefs {
     @And("^Click on Submit button.$")
     public void clickOnSubmitButton() {
         dashboardPage.clickOnSubmitButton();
+    }
+
+    @Then("^User is able to use GE site.$")
+    public void userIsAbleToUseGESite() {
+        dashboardPage.open();
+        assertTrue(dashboardPage.isOpened());
     }
 }
