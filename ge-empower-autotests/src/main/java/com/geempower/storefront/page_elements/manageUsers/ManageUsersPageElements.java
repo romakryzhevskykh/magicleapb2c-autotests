@@ -12,16 +12,32 @@ public class ManageUsersPageElements {
     public final static String USER_TERM_INPUT_XPATH = "//input[@id='userterm']";
     public final static String ACCOUNT_DETAIL_SEARCH_INPUT_XPATH = "//input[@class='form-control account-detail-search ui-autocomplete-input']";
     public final static String SEARCH_USER_BY_PARAMS_BUTTON_XPATH = "//button[@class='btn primary-btn user-search-btn']";
-    private final static String USERS_TABLE_XPATH = "//table[@id='examl']/tbody/";
-    private final static String FIRST_USER_XPATH = "tr[1]/";
-    public final static String USER_SSO_FIELD_XPATH = USERS_TABLE_XPATH + FIRST_USER_XPATH + "td[2]";
-    public final static String USER_EMAIL_FIELD_XPATH = USERS_TABLE_XPATH + FIRST_USER_XPATH + "td[5]";
-    public final static String USER_ROLE_FIELD_XPATH = USERS_TABLE_XPATH + FIRST_USER_XPATH + "td[4]";
-    public final static String USER_ID_FIELD_XPATH = USERS_TABLE_XPATH + FIRST_USER_XPATH + "td[3]";
+    public final static String USERS_TABLE_XPATH = "//table[@id='examl']/tbody/";
+    public final static String FIRST_USER_XPATH = "tr[1]";
+    public final static String USER_NAME_FIELD_XPATH = USERS_TABLE_XPATH + FIRST_USER_XPATH + "/td[2]";
+    public final static String USER_EMAIL_FIELD_XPATH = USERS_TABLE_XPATH + FIRST_USER_XPATH + "/td[5]";
+    public final static String USER_ROLE_FIELD_XPATH = USERS_TABLE_XPATH + FIRST_USER_XPATH + "/td[4]";
+    public final static String USER_ID_FIELD_XPATH = USERS_TABLE_XPATH + FIRST_USER_XPATH + "/td[3]";
     public final static String USER_PHONE_FIELD_XPATH = USERS_TABLE_XPATH + FIRST_USER_XPATH + "td[6]";
-    public final static String USER_REVALIDATION_DATE_FIELD_XPATH = USERS_TABLE_XPATH + FIRST_USER_XPATH + "td[7]";
-    public final static String USER_STATUS_FIELD_XPATH = USERS_TABLE_XPATH + FIRST_USER_XPATH + "td[8]";
+    public final static String USER_REVALIDATION_DATE_FIELD_XPATH = USERS_TABLE_XPATH + FIRST_USER_XPATH + "/td[7]";
+    public final static String USER_STATUS_FIELD_XPATH = USERS_TABLE_XPATH + FIRST_USER_XPATH + "/td[8]";
+    public final static String FIRST_NAME_LINK_XPATH = USER_NAME_FIELD_XPATH +"/a";
 
     //REVALIDATION TAB
     public final static String REVALIDATION_TAB_XPATH = "//a[@aria-controls='revalidation']";
+
+    //USER DETAIL BLOCK
+    public final static String ADD_ACCOUNT_BUTTON_XPATH = ".//i[@data-original-title='Add Account']";
+
+    //Add Account pop-up
+    public final static String ADD_ACCOUNT_TITLE_XPATH = ".//*[@id='add-account-modal']//h4[@class='modal-title']";
+    public final static String SALES_OFFICE_CODE_FIELD_ID = "requestSalesOfficeCode";
+    public final static String MODIFY_ACTIVE_BUTTON_XPATH = ".//*[@class='btn primary-btn request-account-search-btn sales-update add-sales-btn' and not(@disabled)]";
+    public final static String SELECT_REGION_FIELD_ID = "select2-searchRegion-container";
+    public final static String REGION_DROP_DOWN_LIST_ELEMENTS_XPATH = ".//*[@id='select2-searchRegion-results']/li";
+    public final static String SALES_OFFICE_CODE_SECOND_FIELD_ID = "salesOfficeCodeInput";
+    public final static String SEARCH_BUTTON = ".//*[@class='btn primary-btn manageuser-account-search-btn']";
+    public final static String ADD_NEW_ACCOUNTS_TABLE_ID = "addNewAccountsTable";
+    public final static String ACCOUNT_NAME_NEW_ACC_TABLE_XPATH = ".//*[@id='addNewAccountsTable']/tbody/tr[1]/td[3]";
+
 }

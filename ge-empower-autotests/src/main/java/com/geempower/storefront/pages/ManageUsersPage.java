@@ -1,6 +1,8 @@
 package com.geempower.storefront.pages;
 
 import com.geempower.storefront.StorefrontBasePage;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -48,4 +50,62 @@ public class ManageUsersPage extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
         return $(USER_EMAIL_FIELD_XPATH).getText();
     }
+
+    @Step("Click on User Name in the table.")
+    public void clickOnTheUserNameInTheTable() {
+        click(FIRST_NAME_LINK_XPATH);
+        waitUntilPageIsFullyLoaded();
+    }
+
+    @Step("Click on Add Account Button In User Detail Block .")
+    public void clickOnAddAccountButtonInUserDetailBlock() {
+        click(ADD_ACCOUNT_BUTTON_XPATH);
+    }
+
+    @Step("Add Account Pop Up Title is Displayed On Manage Users Page.")
+    public void addAccountPopUpIsDisplayedOnManageUsersPage(String popUpTitle) {
+        waitForElementWithAppropriateTextToAppear(By.xpath(ADD_ACCOUNT_TITLE_XPATH), popUpTitle);
+    }
+
+    @Step("Set SO Code To The Sales Eng Code Field.")
+    public void setSoCodeToTheSalesEngCodeField(String code) {
+        $(By.id(SALES_OFFICE_CODE_FIELD_ID)).sendKeys(code);
+    }
+
+    @Step("Click on Modify Button.")
+    public void clickOnModifyButtonInTheAddAccountPopUp() {
+        $(MODIFY_ACTIVE_BUTTON_XPATH).click();
+    }
+
+    @Step("Select Region")
+    public void selectRegion(String region) {
+        waitUntilPageIsFullyLoaded();
+        click(By.id(SELECT_REGION_FIELD_ID));
+        $$(REGION_DROP_DOWN_LIST_ELEMENTS_XPATH).stream()
+                .filter(webElement -> webElement.getText().equals(region)).findAny().ifPresent(WebElement::click);
+    }
+
+    @Step("Set SO Code To The Second Sales Eng Code Field.")
+    public void setSoCodeToTheSecondSalesEngCodeField(String code) {
+        waitUntilPageIsFullyLoaded();
+        $(By.id(SALES_OFFICE_CODE_SECOND_FIELD_ID)).sendKeys(code);
+    }
+
+    @Step("Click On Search Button In The Add Account Pop-Up.")
+    public void clickOnTheSearchButtonInTheAddAccountPopUp() {
+        waitUntilPageIsFullyLoaded();
+        $(SEARCH_BUTTON).click();
+    }
+
+    @Step("Check that Add New Accounts Table Is Displayed in the Add Account Pop-Up.")
+    public void addNewAccountsTableIsDisplayed() {
+        isDisplayed(By.id(ADD_NEW_ACCOUNTS_TABLE_ID));
+    }
+
+    @Step("Get Account Name from Add Account Pop-Up.")
+    public String getAccountNameFromAddAccPopUp() {
+        isDisplayed(ACCOUNT_NAME_NEW_ACC_TABLE_XPATH);
+        return $(ACCOUNT_NAME_NEW_ACC_TABLE_XPATH).getText();
+    }
+
 }

@@ -46,6 +46,7 @@ public class AccountManagementPage extends StorefrontBasePage {
         $(REGION_COMBOBOX_XPATH).click();
     }
 
+    @Step("Search account for chosen region.")
     public void searchAccountForChosenRegion(String accountName) {
         setAccountNumberToSearchField(accountName);
         clickOnSearchButton();
@@ -129,5 +130,10 @@ public class AccountManagementPage extends StorefrontBasePage {
         if(!$(APPROVED_ACCOUNT_ROW_XPATH).isDisplayed()){
             getDriver().navigate().refresh();
         }
+    }
+
+    @Step("Get Account Name")
+    public String getAccountName() {
+        return $(ACCOUNT_NAME_VALUE_IN_TABLE_XPATH).getText();
     }
 }
