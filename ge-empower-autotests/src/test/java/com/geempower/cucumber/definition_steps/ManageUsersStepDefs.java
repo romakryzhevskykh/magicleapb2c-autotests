@@ -89,32 +89,4 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         assertEquals(deactivationDate, actualDate);
         assertEquals(deactivatedBy, threadVarsHashMap.getString(TestKeyword.USER_FIRST_AND_LAST_NAME));
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

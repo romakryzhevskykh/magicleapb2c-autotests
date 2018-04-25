@@ -80,7 +80,7 @@ public class DashboardStepDefs extends AbstractStepDefs {
     }
 
     @When("^User set catalogNo to Product Number field.$")
-    public void userSetCatalogueNoToProductField() throws Throwable {
+    public void userSetCatalogueNoToProductField() {
         threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
         priceAndAvailabilityBlock.setCatalogueNoToProductField(catalogueNo);
