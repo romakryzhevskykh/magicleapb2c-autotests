@@ -13,15 +13,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class UserDetailsPageStepDefs extends AbstractStepDefs {
     @Autowired UsersManager usersManager;
     @Autowired UserDetailsPage userDetailsPage;
 
-    @Then("Check that User details page is opened.")
+    @And("^Open Test user details page.$")
+    public void openTestUserEditPage() {
+        String username = threadVarsHashMap.getString(TestKeyword.TEST_USER_USERNAME);
+        User user = usersManager.getUserByUsername(username);
+        userDetailsPage.open(user);
+    }
+
+    @Then("Check that Test user details page is opened.")
     public void checkThatUserDetailsPageIsOpened() {
-        User user = usersManager.getUserByUsername(threadVarsHashMap.getString(TestKeyword.EDIT_USER_USERNAME));
+        User user = usersManager.getUserByUsername(threadVarsHashMap.getString(TestKeyword.TEST_USER_USERNAME));
+        assertFalse(user == null);
         assertTrue(userDetailsPage.isOpened(user));
     }
 
@@ -52,6 +61,11 @@ public class UserDetailsPageStepDefs extends AbstractStepDefs {
         List<UserRole> actualUserRole = userDetailsPage.getRoles();
         assertEquals(setUserRole.size(), actualUserRole.size());
         assertTrue(actualUserRole.containsAll(setUserRole));
+    }
+
+    @And("Click on Reset password button on User details page.")
+    public void clickOnResetPasswordButton() {
+        userDetailsPage.clickOnResetPasswordButton();
     }
 
     @And("^Check that User parent unit field is equal to set on User details page.$")

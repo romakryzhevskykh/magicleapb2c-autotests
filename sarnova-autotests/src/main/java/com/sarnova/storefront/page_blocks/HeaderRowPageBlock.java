@@ -27,6 +27,18 @@ public class HeaderRowPageBlock extends UIComponent {
         loggedInHeaderRowBlock.clickOnSignOutItemInMyAccountMenu(userSession);
     }
 
+    public List<String> getSupplyListNamesFromFavoriteSupplyListsDropDown() {
+        return loggedInHeaderRowBlock.getFavoriteSupplyListsFromSupplyListsDropDown();
+    }
+
+    public void clickOnFavoriteSupplyListsDropDown() {
+        loggedInHeaderRowBlock.clickOnFavoriteSupplyListsDropDown();
+    }
+
+    public boolean isFavoriteSupplyListsDropDownPresent() {
+        return loggedInHeaderRowBlock.isFavoriteSupplyListsDropDownPresent();
+    }
+
     public void openMyAccountMenu() {
         loggedInHeaderRowBlock.openMyAccountMenu();
     }

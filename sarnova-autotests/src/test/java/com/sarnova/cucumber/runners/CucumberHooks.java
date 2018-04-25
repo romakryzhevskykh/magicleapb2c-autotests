@@ -17,6 +17,7 @@ public class CucumberHooks {
     public void onFailure(Scenario scenario) {
         if (scenario.isFailed()) {
             captureScreenshot();
+            System.out.println(threadVarsHashMap);
         }
     }
 

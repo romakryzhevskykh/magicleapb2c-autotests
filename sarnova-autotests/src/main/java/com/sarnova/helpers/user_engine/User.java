@@ -1,8 +1,10 @@
 package com.sarnova.helpers.user_engine;
 
+import com.sarnova.helpers.models.users.UserGroup;
 import com.sarnova.hybris.Cockpit;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class User {
 
@@ -12,8 +14,9 @@ public class User {
     private String email;
     private String username;
     private String password;
-    private ArrayList<UserRole> userRoles = new ArrayList<>();
+    private Set<UserRole> userRoles = new HashSet<>();
     private Cockpit userCockpit;
+    private Set<UserGroup> userGroups = new HashSet<>();
     private boolean isEnabled;
 
     public User(String username, String password, Cockpit userCockpit) {
@@ -39,7 +42,7 @@ public class User {
         this.password = password;
     }
 
-    public ArrayList<UserRole> getUserRoles() {
+    public Set<UserRole> getUserRoles() {
         return userRoles;
     }
 
@@ -90,5 +93,9 @@ public class User {
 
     public void setUserTitle(UserTitle userTitle) {
         this.userTitle = userTitle;
+    }
+
+    public Set<UserGroup> getUserGroups() {
+        return userGroups;
     }
 }

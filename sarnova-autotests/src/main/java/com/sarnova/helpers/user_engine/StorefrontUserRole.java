@@ -24,7 +24,7 @@ public enum StorefrontUserRole implements UserRole {
     }
 
     StorefrontUserRole() {
-        this.roleCode = null;
+        this.roleCode = "";
         this.isTest = true;
     }
 

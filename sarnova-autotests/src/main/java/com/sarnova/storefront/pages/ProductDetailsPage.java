@@ -113,4 +113,9 @@ public class ProductDetailsPage extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
         waitUntilVisible(By.id(POP_UP_ID));
     }
+
+    @Step("Is Add to Supply list button visible?")
+    public boolean isAddToSupplyListButtonVisible() {
+        return isDisplayed(ADD_TO_SUPPLY_LIST_BUTTONS_XPATH);
+    }
 }

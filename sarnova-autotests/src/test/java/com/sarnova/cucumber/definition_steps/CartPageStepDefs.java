@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class CartPageStepDefs extends AbstractStepDefs {
@@ -141,5 +142,15 @@ public class CartPageStepDefs extends AbstractStepDefs {
         String newSupplyListName = RandomStringUtils.randomAlphanumeric(10);
         threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, newSupplyListName);
         cartPage.enterNewSupplyListNameText(newSupplyListName);
+    }
+
+    @Then("^Check that Add to Supply list button is not visible on Cart page.$")
+    public void checkThatAddToSupplyListButtonIsNotVisibleOnCartPage() {
+        assertFalse(cartPage.isAddToSupplyListButtonVisible());
+    }
+
+    @Then("^Check that Add to Supply list button is visible on Cart page.$")
+    public void checkThatAddToSupplyListButtonIsVisibleOnCartPage() {
+        assertTrue(cartPage.isAddToSupplyListButtonVisible());
     }
 }

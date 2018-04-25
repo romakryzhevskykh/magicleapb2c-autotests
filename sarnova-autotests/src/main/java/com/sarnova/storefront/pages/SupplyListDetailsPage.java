@@ -36,6 +36,11 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
         return $(By.id(SUPPLY_LIST_NAME_ID)).getText().trim();
     }
 
+    @Step("Is Supply list details header is visible.")
+    public boolean isHeaderVisible() {
+        return isDisplayed(SUPPLY_LIST_HEADER_XPATH);
+    }
+
     @Step("Get Supply list active status.")
     public String getSupplyListActiveStatus() {
         return $(SUPPLY_LIST_ACTIVE_STATUS_XPATH).getText().trim();
@@ -72,7 +77,7 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
             addAll(inactiveSupplyProducts);
         }};
         SupplyList supplyList = new SupplyList(user, supplyListName, id, supplyListProducts);
-        supplyList.setActive(supplyListActiveStatus.equals("Inactivate"));
+        supplyList.setActive(supplyListActiveStatus.equalsIgnoreCase("Inactivate"));
         return supplyList;
     }
 
@@ -120,6 +125,11 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
         click(ADD_TO_CART_BUTTON_XPATH);
     }
 
+    @Step("Is Add to cart button visible?")
+    public boolean isAddToCartButtonVisible() {
+        return isDisplayed(ADD_TO_CART_BUTTON_XPATH);
+    }
+
     public void clickOnCheckoutButtonInAddToCartPopUp() {
         addToCartPopUpBlock.clickOnCheckoutButtonInAddToCartPopUp();
     }
@@ -130,12 +140,12 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
 
     @Step("Check that Supply list is active.")
     public boolean isSupplyListActive() {
-        return getSupplyListActiveStatus().equals("Inactivate");
+        return getSupplyListActiveStatus().equalsIgnoreCase("Inactivate");
     }
 
     @Step("Check that Supply list is inactive.")
     public boolean isSupplyListInactive() {
-        return getSupplyListActiveStatus().equals("Reactivate");
+        return getSupplyListActiveStatus().equalsIgnoreCase("Reactivate");
     }
 
     @Step("Change Supply list status.")
@@ -158,6 +168,11 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
         click(ACTIVE_PRODUCT_DEACTIVATE_BUTTON_BY_SKU_XPATH, supplyListProduct.getSku());
         waitUntilPageIsFullyLoaded();
         supplyListProduct.setActive(false);
+    }
+
+    @Step("Is deactivate product button visible for {0}.")
+    public boolean isDeactivateProductButtonVisible(SupplyListProduct supplyListProduct) {
+        return isDisplayed(ACTIVE_PRODUCT_DEACTIVATE_BUTTON_BY_SKU_XPATH, supplyListProduct.getSku());
     }
 
     @Step("Click on Show inactive entries checkbox.")
@@ -220,6 +235,11 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
         return $(FAVORITE_CHECKBOX_XPATH).isSelected();
     }
 
+    @Step("Is Supply list favorite checkbox visible?")
+    public boolean isSupplyListFavoriteCheckboxVisible() {
+        return isDisplayed(FAVORITE_CHECKBOX_XPATH);
+    }
+
     @Step("Mark Supply list as favorite.")
     public void markAsFavorite() {
         if (!isSupplyListFavorite()) {
@@ -238,14 +258,6 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
     public void clickOnFavoriteCheckbox() {
         click(FAVORITE_CHECKBOX_XPATH);
         waitJQueryRequestsLoad();
-    }
-
-    public void clickOnFavoriteSupplyListsDropDown() {
-        loggedInHeaderRowBlock.clickOnFavoriteSupplyListsDropDown();
-    }
-
-    public List<String> getSupplyListNamesFromFavoriteSupplyListsDropDown() {
-        return loggedInHeaderRowBlock.getFavoriteSupplyListsFromSupplyListsDropDown();
     }
 
     @Step("Open Quick add block.")
@@ -297,5 +309,33 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
                 return $(QUICK_ADD_ROW_ERROR_TEXT_BY_ROW_NUMBER_XPATH, String.valueOf(i)).getText();
         }
         throw new NullPointerException("No field with such entered value: " + enteredText);
+    }
+
+    @Step("Is QTY field visible for {0}.")
+    public boolean isQuantityFieldVisibleForProduct(SupplyListProduct supplyListProduct) {
+        return isDisplayed(SUPPLY_PRODUCT_ROW_QTY_FIELD_BY_SKU_AND_UOM_TYPE_XPATH, supplyListProduct.getSku(),
+                supplyListProduct.getIndividualProduct().getUnitsOfMeasurement().stream()
+                        .map(unitOfMeasure -> unitOfMeasure.getUomType().toString())
+                        .findAny().orElse(null));
+    }
+
+    @Step("Is Quick add checkbox visible?")
+    public boolean isQuickAddCheckboxVisible() {
+        return isDisplayed(By.id(QUICK_ADD_CHECKBOX_ID));
+    }
+
+    @Step("Is Edit button visible?")
+    public boolean isEditButtonVisible() {
+        return isDisplayed(EDIT_SUPPLY_LIST_BUTTON_XPATH);
+    }
+
+    @Step("Is Change Supply list status button visible?")
+    public boolean isChangeStatusButtonVisible() {
+        return isDisplayed(SUPPLY_LIST_ACTIVE_STATUS_XPATH);
+    }
+
+    @Step("Is Share checkbox visible?")
+    public boolean isShareCheckboxVisible() {
+        return isDisplayed(By.id(SHOW_SHARE_FUNC_CHECKBOX_ID));
     }
 }

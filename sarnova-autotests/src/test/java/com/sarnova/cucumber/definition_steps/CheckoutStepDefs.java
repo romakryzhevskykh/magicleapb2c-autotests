@@ -23,6 +23,11 @@ public class CheckoutStepDefs extends AbstractStepDefs {
     @When("^Click on Next button on Checkout Shipping address step.$")
     public void clickOnNextButtonOnShippingAddressStep() {
         checkoutPage.clickOnNextButtonOnShippingAddressStep();
+        try {
+            Thread.sleep(6000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Then("^Check that Check license pop-up is not displayed on Checkout Shipping method step.$")

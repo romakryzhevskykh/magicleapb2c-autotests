@@ -3,15 +3,16 @@ package com.sarnova.cucumber.definition_steps;
 import com.sarnova.helpers.managers.CartManager;
 import com.sarnova.helpers.managers.ProductsManager;
 import com.sarnova.helpers.managers.SupplyListsManager;
+import com.sarnova.helpers.managers.UserGroupsManager;
 import com.sarnova.helpers.models.products.IndividualProduct;
 import com.sarnova.helpers.models.products.Product;
 import com.sarnova.helpers.models.products.UnitOfMeasure;
 import com.sarnova.helpers.models.supply_lists.SupplyList;
 import com.sarnova.helpers.models.supply_lists.SupplyListProduct;
-import com.sarnova.helpers.user_engine.User;
-import com.sarnova.helpers.user_engine.UserSession;
-import com.sarnova.helpers.user_engine.UsersManager;
+import com.sarnova.helpers.models.users.UserGroup;
+import com.sarnova.helpers.user_engine.*;
 import com.sarnova.storefront.page_blocks.HeaderRowPageBlock;
+import com.sarnova.storefront.pages.HomePage;
 import com.sarnova.storefront.pages.LoginPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -25,8 +26,10 @@ import java.util.stream.Collectors;
 public class PreConditionStepDefs extends AbstractStepDefs {
     @Autowired HeaderRowPageBlock headerRowPageBlock;
     @Autowired LoginPage loginPage;
+    @Autowired HomePage homePage;
 
     @Autowired private SupplyListsManager supplyListsManager;
+    @Autowired private UserGroupsManager userGroupsManager;
     @Autowired private ProductsManager productsManager;
     @Autowired private CartManager cartManager;
     @Autowired private UsersManager usersManager;
@@ -36,6 +39,12 @@ public class PreConditionStepDefs extends AbstractStepDefs {
         if (headerRowPageBlock.isUserLoggedOut()) {
             loginPage.open();
             loginPage.loginToStorefront(userSessions.getActiveUserSession());
+        } else if (!headerRowPageBlock.isUserLoggedOut() && !headerRowPageBlock.isUserLoggedIn()) {
+            homePage.open();
+            if (headerRowPageBlock.isUserLoggedOut()) {
+                loginPage.open();
+                loginPage.loginToStorefront(userSessions.getActiveUserSession());
+            }
         }
     }
 
@@ -45,6 +54,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
         HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = getSelectedUOMS();
         String existingSupplyListName = supplyListsManager.getTestSupplyLists()
                 .stream()
+                .filter(supplyList -> supplyList.getUser() == userSessions.getActiveUserSession().getUser())
                 .filter(supplyList -> supplyList.getSupplyProductsInList()
                         .stream()
                         .flatMap(supplyListProduct -> supplyListProduct.getIndividualProduct().getUnitsOfMeasurement().stream())
@@ -61,6 +71,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     public void notEmptySupplyList(int numberOfActiveProductsInSupplyList) {
         SupplyList notEmptySupplyList = supplyListsManager.getTestSupplyLists()
                 .stream()
+                .filter(supplyList -> supplyList.getUser() == userSessions.getActiveUserSession().getUser())
                 .filter(SupplyList::isActive)
                 .filter(supplyList -> supplyList.getSupplyProductsInList()
                         .stream()
@@ -95,7 +106,23 @@ public class PreConditionStepDefs extends AbstractStepDefs {
         else
             throw new NullPointerException("No test products without selected UOMs: " + selectedUnitsOfMeasurement + " or quantity of products < " + numberOfProducts + "\n"
                     + "List of filtered products: " + individualProductsThatDoNotContainSelectedUOMs);
+        boolean restorePermission = false;
+        UserGroup restoreUserGroup = null;
+        if (userSession.getUser().getUserRoles().stream().anyMatch(UserRole::isTest)) {
+            if (userSession.getUser().getUserGroups().stream().noneMatch(userGroup -> userGroup.getPermissions().contains(Permission.MANAGE_SUPPLY_LISTS))) {
+                restorePermission = true;
+                restoreUserGroup = userSession.getUser().getUserGroups().stream().findAny().orElse(null);
+                userGroupsManager.addPermissionToUserGroup(userSessions.getAnyUserSessionForUser(usersManager.getUserByRole(StorefrontUserRole.ADMIN)),
+                        restoreUserGroup,
+                        Permission.MANAGE_SUPPLY_LISTS);
+            }
+        }
         supplyListsManager.createViaApi(userSession, newSupplyListName, productsToCreate);
+        if (restorePermission) {
+            userGroupsManager.removePermissionToUserGroup(userSessions.getAnyUserSessionForUser(usersManager.getUserByRole(StorefrontUserRole.ADMIN)),
+                    restoreUserGroup,
+                    Permission.MANAGE_SUPPLY_LISTS);
+        }
         return supplyListsManager.getSupplyListByName(newSupplyListName);
     };
 
@@ -140,6 +167,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     public void notEmptyActiveSupplyList() {
         SupplyList activeSupplyList = supplyListsManager.getTestSupplyLists()
                 .stream()
+                .filter(supplyList -> supplyList.getUser() == userSessions.getActiveUserSession().getUser())
                 .filter(SupplyList::isActive)
                 .findAny()
                 .orElseGet(() ->
@@ -148,12 +176,12 @@ public class PreConditionStepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, activeSupplyList.getName());
     }
 
-
     @SuppressWarnings("unchecked")
     @Given("^Active Supply list with at least (\\d+) active products exists.$")
     public void activeSupplyListWithAtLeastActiveProductsQuantity(int qtyOfActiveProducts) {
         SupplyList activeSupplyList = supplyListsManager.getTestSupplyLists()
                 .stream()
+                .filter(supplyList -> supplyList.getUser() == userSessions.getActiveUserSession().getUser())
                 .filter(SupplyList::isActive)
                 .filter(supplyList -> supplyList.getSupplyProductsInList()
                         .stream()
@@ -171,6 +199,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     public void activeSupplyListWithOnlyActiveProductsQuantity(int qtyOfActiveProducts) {
         SupplyList activeSupplyList = supplyListsManager.getTestSupplyLists()
                 .stream()
+                .filter(supplyList -> supplyList.getUser() == userSessions.getActiveUserSession().getUser())
                 .filter(SupplyList::isActive)
                 .filter(supplyList -> supplyList.getSupplyProductsInList()
                         .stream()
@@ -188,6 +217,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     public void inactiveSupplyListExists() {
         SupplyList inactiveSupplyList = supplyListsManager.getTestSupplyLists()
                 .stream()
+                .filter(supplyList -> supplyList.getUser() == userSessions.getActiveUserSession().getUser())
                 .filter(supplyList -> !supplyList.isActive())
                 .findAny()
                 .orElseGet(() ->
@@ -202,6 +232,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     public void activeSupplyListWithAtLeastInactiveProductsExists(int qtyOfInactiveProducts) {
         SupplyList activeSupplyList = supplyListsManager.getTestSupplyLists()
                 .stream()
+                .filter(supplyList -> supplyList.getUser() == userSessions.getActiveUserSession().getUser())
                 .filter(SupplyList::isActive)
                 .filter(supplyList -> supplyList.getSupplyProductsInList()
                         .stream()
@@ -226,6 +257,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     public void activeNotFavoriteSupplyListExists() {
         SupplyList activeSupplyList = supplyListsManager.getTestSupplyLists()
                 .stream()
+                .filter(supplyList -> supplyList.getUser() == userSessions.getActiveUserSession().getUser())
                 .filter(SupplyList::isActive)
                 .filter(supplyList -> !supplyList.isFavorite())
                 .findAny()
@@ -239,6 +271,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     public void activeFavoriteSupplyListExists() {
         SupplyList activeSupplyList = supplyListsManager.getTestSupplyLists()
                 .stream()
+                .filter(supplyList -> supplyList.getUser() == userSessions.getActiveUserSession().getUser())
                 .filter(SupplyList::isActive)
                 .filter(SupplyList::isFavorite)
                 .findAny()
@@ -259,5 +292,73 @@ public class PreConditionStepDefs extends AbstractStepDefs {
             testUser = usersManager.getTestUser();
         }
         threadVarsHashMap.put(TestKeyword.TEST_USER_USERNAME, testUser.getUsername());
+    }
+
+    //    Test user with set password
+    @And("^Valid test user is present.$")
+    public void validTestUserIsPresent() {
+        User testUser = usersManager.getTestUser();
+        if (testUser == null) {
+            usersManager.createTestUserByApi(userSessions.getActiveUserSession());
+            testUser = usersManager.getTestUser();
+            usersManager.resetPassword(userSessions.getActiveUserSession(), testUser);
+        } else if (testUser.getPassword().isEmpty()) {
+            usersManager.resetPassword(userSessions.getActiveUserSession(), testUser);
+        }
+        threadVarsHashMap.put(TestKeyword.TEST_USER_USERNAME, testUser.getUsername());
+    }
+
+    @And("^Test user group is present.$")
+    public void testUserGroupIsPresent() {
+        if (userGroupsManager.getUserGroups().isEmpty())
+            userGroupsManager.createUserGroup(userSessions.getActiveUserSession());
+        threadVarsHashMap.put(TestKeyword.TEST_USER_GROUP_UID, userGroupsManager.getUserGroups().stream().findAny().get().getUId());
+    }
+
+    @And("^Test user has only test user group assigned.$")
+    public void testUserHasOnlyTestUserGroupAssigned() {
+        UserGroup testUserGroup = userGroupsManager.getUserGroupByUid(threadVarsHashMap.getString(TestKeyword.TEST_USER_GROUP_UID));
+        User testUser = usersManager.getUserByUsername(threadVarsHashMap.getString(TestKeyword.TEST_USER_USERNAME));
+        usersManager.initUserGroups(userSessions.getActiveUserSession(), testUser);
+        if (testUser.getUserGroups().isEmpty() || !testUser.getUserGroups().stream().allMatch(userGroup -> userGroup == testUserGroup)) {
+            usersManager.removeAllUserGroupsForUser(userSessions.getActiveUserSession(), testUser);
+            usersManager.setUserGroupForUser(userSessions.getActiveUserSession(), testUser, testUserGroup);
+        }
+    }
+
+    @And("^Test user group has no any permissions.$")
+    public void testUserGroupHasNoAnyPermissions() {
+        UserGroup testUserGroup = userGroupsManager.getUserGroupByUid(threadVarsHashMap.getString(TestKeyword.TEST_USER_GROUP_UID));
+        userGroupsManager.initPermissionsToTheUserGroup(userSessions.getActiveUserSession(), testUserGroup);
+        userGroupsManager.removePermissionsToUserGroup(userSessions.getActiveUserSession(), testUserGroup, testUserGroup.getPermissions());
+    }
+
+    @And("^Test user group has only (.*) permission.$")
+    public void testUserGroupHasOnlyPermission(String permissionName) {
+        Permission testPermission = Permission.valueOf(permissionName);
+        UserGroup testUserGroup = userGroupsManager.getUserGroupByUid(threadVarsHashMap.getString(TestKeyword.TEST_USER_GROUP_UID));
+        if (!testUserGroup.isInitiated())
+            userGroupsManager.initPermissionsToTheUserGroup(userSessions.getActiveUserSession(), testUserGroup);
+        if (testUserGroup.getPermissions().isEmpty()) {
+            userGroupsManager.addPermissionToUserGroup(userSessions.getActiveUserSession(), testUserGroup, testPermission);
+        } else if (!testUserGroup.getPermissions().stream().allMatch(permission -> permission == testPermission)) {
+            if (!testUserGroup.getPermissions().contains(testPermission)) {
+                userGroupsManager.removePermissionsToUserGroup(userSessions.getActiveUserSession(), testUserGroup, testUserGroup.getPermissions());
+                userGroupsManager.addPermissionToUserGroup(userSessions.getActiveUserSession(), testUserGroup, testPermission);
+            } else {
+                ArrayList<Permission> permissionsToRemove = new ArrayList<>();
+                permissionsToRemove.addAll(testUserGroup.getPermissions());
+                permissionsToRemove.remove(testPermission);
+                userGroupsManager.removePermissionsToUserGroup(userSessions.getActiveUserSession(), testUserGroup, permissionsToRemove);
+            }
+        }
+    }
+
+    @And("^Supply list is shared with Test user.$")
+    public void supplyListIsSharedWithTestUser() {
+        String existingSupplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
+        SupplyList supplyList = supplyListsManager.getSupplyListByName(existingSupplyListName);
+        User userToShareWith = usersManager.getUserByUsername(threadVarsHashMap.getString(TestKeyword.TEST_USER_USERNAME));
+        supplyListsManager.shareSupplyListWithUser(userSessions.getActiveUserSession(), userToShareWith, supplyList);
     }
 }

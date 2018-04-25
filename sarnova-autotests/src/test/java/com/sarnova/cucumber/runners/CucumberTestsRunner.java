@@ -2,7 +2,11 @@ package com.sarnova.cucumber.runners;
 
 import com.sarnova.helpers.SeleniumGridSettings;
 import com.sarnova.helpers.managers.SupplyListsManager;
+import com.sarnova.helpers.managers.UserGroupsManager;
 import com.sarnova.helpers.models.supply_lists.SupplyList;
+import com.sarnova.helpers.user_engine.StorefrontUserRole;
+import com.sarnova.helpers.user_engine.UserSessions;
+import com.sarnova.helpers.user_engine.UsersManager;
 import com.sarnova.helpers.web_engine.WebDriverSessions;
 import com.sarnova.helpers.web_engine.WebDriverSetups;
 import com.sarnova.helpers.web_engine.WebDriverThreadTestSetups;
@@ -20,6 +24,9 @@ public class CucumberTestsRunner extends AbstractTestNGSpringContextTests {
     @Autowired WebDriverThreadTestSetups webDriverThreadTestSetups;
 
     @Autowired SupplyListsManager supplyListsManager;
+    @Autowired UserGroupsManager userGroupsManager;
+    @Autowired UsersManager usersManager;
+    @Autowired UserSessions userSessions;
 
     private TestNGCucumberRunner testNGCucumberRunner;
 
@@ -62,5 +69,9 @@ public class CucumberTestsRunner extends AbstractTestNGSpringContextTests {
                 .stream()
                 .filter(SupplyList::isActive)
                 .forEach(supplyList -> supplyListsManager.deactivate(supplyList));
+        userGroupsManager.deleteAllCreatedUserGroups(userSessions.getAnyUserSessionForUser(usersManager.getUsers()
+                .stream()
+                .filter(user -> user.getUserRoles().contains(StorefrontUserRole.ADMIN))
+                .findAny().get()));
     }
 }

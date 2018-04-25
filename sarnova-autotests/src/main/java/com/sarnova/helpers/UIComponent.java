@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
+import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.List;
 
@@ -17,17 +18,20 @@ public abstract class UIComponent {
         return webDriverPool.getActiveDriver();
     }
 
+    @Step("Accept alert.")
     protected void alertHandling() {
         getDriver().switchTo().alert().accept();
     }
 
+
+    @Step("Open page {0}.")
     protected void open(String url) {
         try {
             getDriver().get(url);
         } catch (UnhandledAlertException ex) {
-            System.out.println("WARNING: Unexpected alert!");
+            System.out.println("WARNING: Unexpected alert: " + ex);
             alertHandling();
-            getDriver().get(url);
+            open(url);
         }
     }
 
@@ -35,9 +39,9 @@ public abstract class UIComponent {
         try {
             return getDriver().findElement(By.xpath(String.format(xpath, args)));
         } catch (UnhandledAlertException ex) {
-            System.out.println("WARNING: Unexpected alert!");
+            System.out.println("WARNING: Unexpected alert: " + ex);
             alertHandling();
-            return getDriver().findElement(By.xpath(String.format(xpath, args)));
+            return $(xpath, args);
         } catch (NoSuchElementException ex) {
             return null;
         }
@@ -49,7 +53,7 @@ public abstract class UIComponent {
         } catch (UnhandledAlertException ex) {
             System.out.println("WARNING: Unexpected alert!");
             alertHandling();
-            return getDriver().findElement(by);
+            return $(by);
         } catch (NoSuchElementException ex) {
             return null;
         }
@@ -71,7 +75,6 @@ public abstract class UIComponent {
             wait.until(ExpectedConditions.elementToBeClickable(webElement));
             try {
                 webElement.click();
-
             } catch (UnhandledAlertException ex) {
                 System.out.println("WARNING: Unexpected alert!");
                 alertHandling();
@@ -151,6 +154,7 @@ public abstract class UIComponent {
         }
     }
 
+    @Step("Wait until page is fully loaded.")
     protected void waitUntilPageIsFullyLoaded() {
         waitHTMLTemplateLoad();
         waitJQueryRequestsLoad();
@@ -166,7 +170,11 @@ public abstract class UIComponent {
 
     public void waitUntil(ExpectedCondition<Boolean> expectedCondition) {
         WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getTimeOut());
-        wait.until(expectedCondition);
+        try {
+            wait.until(expectedCondition);
+        } catch (UnhandledAlertException ex) {
+            System.out.println("[ERROR]: " + ex);
+        }
     }
 
     public void waitForAngularLoad() {

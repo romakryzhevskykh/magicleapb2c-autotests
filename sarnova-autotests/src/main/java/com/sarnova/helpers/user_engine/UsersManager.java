@@ -1,6 +1,9 @@
 package com.sarnova.helpers.user_engine;
 
+import com.sarnova.helpers.managers.UserGroupsManager;
+import com.sarnova.helpers.models.users.UserGroup;
 import com.sarnova.helpers.request_engine.API;
+import com.sarnova.helpers.request_engine.GETRequest;
 import com.sarnova.helpers.request_engine.POSTRequest;
 import com.sarnova.hybris.Cockpit;
 import com.sarnova.hybris.backoffice.models.SarnovaBackoffice;
@@ -8,11 +11,22 @@ import com.sarnova.hybris.hac.models.SarnovaHAC;
 import com.sarnova.hybris.import_cockpit.models.SarnovaImportCockpit;
 import com.sarnova.storefront.models.SarnovaStorefront;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
+import us.codecraft.xsoup.Xsoup;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class UsersManager {
+    @Autowired UserGroupsManager userGroupsManager;
+
     POSTRequest CREATE_REQUEST = new POSTRequest("Create new test user", "boundtree/en/USD/my-company/organization-management/manage-users/create");
+    POSTRequest RESET_PASSWORD = new POSTRequest("Reset password to User", "my-company/organization-management/manage-users/resetpassword?user=%s");
+    POSTRequest REMOVE_GROUP_FROM_USER = new POSTRequest("Remove group from user", "my-company/organization-management/manage-users/usergroups/deselect/");
+    POSTRequest ADD_GROUP_TO_USER = new POSTRequest("Add group to user", "my-company/organization-management/manage-users/usergroups/select/");
+    GETRequest USER_DETAILS_PAGE = new GETRequest("User details page", "my-company/organization-management/manage-users/details/");
     ArrayList<User> users = new ArrayList<>();
 
     public void createInstance(String username, String password, Cockpit userCockpit, ArrayList<String> cockpitRoles) {
@@ -36,7 +50,7 @@ public class UsersManager {
         String lastName = RandomStringUtils.randomAlphabetic(10);
         String email = RandomStringUtils.randomAlphabetic(10) + "@" + RandomStringUtils.randomAlphabetic(5) + ".com";
         String username = email;
-        StorefrontUserRole role = StorefrontUserRole.getRandom();
+        StorefrontUserRole role = StorefrontUserRole.TEST_USER;
         ArrayList<StorefrontUserRole> userRoles = new ArrayList<StorefrontUserRole>() {{
             add(role);
         }};
@@ -45,15 +59,59 @@ public class UsersManager {
         createUser.addPostParameterAndValue(new API.PostParameterAndValue("firstName", firstName));
         createUser.addPostParameterAndValue(new API.PostParameterAndValue("lastName", lastName));
         createUser.addPostParameterAndValue(new API.PostParameterAndValue("email", email));
-        createUser.addPostParameterAndValue(new API.PostParameterAndValue("parentB2BUnit", "112395_ESHIP005"));
+        createUser.addPostParameterAndValue(new API.PostParameterAndValue("parentB2BUnit", "112395"));
         userRoles.forEach(userRole -> createUser.addPostParameterAndValue(new API.PostParameterAndValue("roles", role.getRoleCode())));
         createUser.addPostParameterAndValue(new API.PostParameterAndValue("_roles", "on"));
+        createUser.setHeader("Upgrade-Insecure-Requests", "1");
+        try {
+            createUser.sendPostRequest(userSession);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         createTestInstance(username, "", userSession.getUser().getUserCockpit(), userRoles);
         User user = getUserByUsername(username);
         user.setEmail(email);
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setUserTitle(userTitle);
+    }
+
+    @SuppressWarnings("unchecked")
+    public void resetPassword(UserSession activeUserSession, User userToResetPassword) {
+        POSTRequest resetPassword = RESET_PASSWORD.getClone();
+        String passwordToSet = RandomStringUtils.randomAlphanumeric(10);
+        resetPassword.setValue(userToResetPassword.getUsername());
+        resetPassword.addPostParameterAndValue(new API.PostParameterAndValue("uid", userToResetPassword.getUsername()));
+        resetPassword.addPostParameterAndValue(new API.PostParameterAndValue("newPassword", passwordToSet));
+        resetPassword.addPostParameterAndValue(new API.PostParameterAndValue("checkNewPassword", passwordToSet));
+        resetPassword.setHeader("Upgrade-Insecure-Requests", "1");
+        try {
+            resetPassword.sendPostRequest(activeUserSession);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        userToResetPassword.setPassword(passwordToSet);
+    }
+
+    public void initUserGroups(UserSession activeUserSession, User user) {
+        user.getUserGroups().clear();
+        GETRequest userDetailsPage = USER_DETAILS_PAGE.getClone();
+        userDetailsPage.setGetParameterAndValue("user", user.getUsername());
+        try {
+            userDetailsPage.sendGetRequest(activeUserSession);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Document htmlResponse = userDetailsPage.getResponse().getHTMLResponseDocument();
+        Elements elements = Xsoup.select(htmlResponse, "//div[@class=account-list]/div").getElements();
+        if (elements.last().className().equals("account-cards")) {
+            Xsoup.select(elements.last(), "/div/div/ul/li[1]/a/text()").getElements().forEach(element -> {
+                if (userGroupsManager.getUserGroupByUid(element.text().trim()) == null) {
+                    userGroupsManager.createInstance(element.text().trim());
+                }
+                user.getUserGroups().add(userGroupsManager.getUserGroupByUid(element.text().trim()));
+            });
+        }
     }
 
     public ArrayList<User> getUsers() {
@@ -129,5 +187,44 @@ public class UsersManager {
             userRoles.add(userRole);
         });
         return userRoles;
+    }
+
+    @SuppressWarnings("unchecked")
+    public void removeAllUserGroupsForUser(UserSession activeUserSession, User user) {
+        user.getUserGroups().forEach(userGroup -> {
+            POSTRequest removeGroup = REMOVE_GROUP_FROM_USER.getClone();
+            removeGroup.setGetParameterAndValue("user", user.getUsername());
+            removeGroup.setGetParameterAndValue("usergroup", userGroup.getUId());
+
+            removeGroup.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", ""));
+            try {
+                removeGroup.sendPostRequest(activeUserSession);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        user.getUserGroups().clear();
+    }
+
+    @SuppressWarnings("unchecked")
+    public void setUserGroupForUser(UserSession activeUserSession, User user, UserGroup userGroup) {
+        POSTRequest addGroup = ADD_GROUP_TO_USER.getClone();
+        addGroup.setGetParameterAndValue("user", user.getUsername());
+        addGroup.setGetParameterAndValue("usergroup", userGroup.getUId());
+
+        addGroup.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", ""));
+        try {
+            addGroup.sendPostRequest(activeUserSession);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        user.getUserGroups().add(userGroup);
+    }
+
+    public User getUserByRole(StorefrontUserRole userRole) {
+        return getUsers().stream()
+                .filter(user -> user.getUserRoles().stream().noneMatch(UserRole::isTest))
+                .filter(user -> user.getUserRoles().contains(userRole))
+                .findAny().orElse(null);
     }
 }

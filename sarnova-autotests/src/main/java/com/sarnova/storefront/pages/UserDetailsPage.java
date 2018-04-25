@@ -16,9 +16,14 @@ import static com.sarnova.storefront.page_elements.UserDetailsPageElements.*;
 public class UserDetailsPage extends StorefrontBasePage {
 
     private String pageUrlMethod = "boundtree/en/USD/my-company/organization-management/manage-users/details?user=%s";
+
     @Step("Is details page opened for {0}.")
     public boolean isOpened(User user) {
         return getDecodedCurrentUrl().equals(String.format(getPageUrl(), user.getUsername().toLowerCase()));
+    }
+
+    public void open(User user) {
+        open(String.format(getPageUrl(), user.getUsername()));
     }
 
     @Step("Get title field text.")
@@ -46,6 +51,11 @@ public class UserDetailsPage extends StorefrontBasePage {
         return Stream.of($(ROLES_FIELD_VALUE_XPATH).getText().split("\n"))
                 .map(StorefrontUserRole::getRoleByRoleName)
                 .collect(Collectors.toList());
+    }
+
+    @Step("Click on Reset password button.")
+    public void clickOnResetPasswordButton() {
+        click(RESET_PASSWORD_BUTTON_XPATH);
     }
 
     @Step("Get user status.")

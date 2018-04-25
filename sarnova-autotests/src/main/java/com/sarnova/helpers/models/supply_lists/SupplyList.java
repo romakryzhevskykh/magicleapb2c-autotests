@@ -2,6 +2,7 @@ package com.sarnova.helpers.models.supply_lists;
 
 import com.sarnova.helpers.user_engine.User;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,6 +11,7 @@ public class SupplyList {
     private boolean isFavorite;
     private List<SupplyListProduct> supplyProductsInList;
     private final User user;
+    private ArrayList<User> sharedWithUsers = new ArrayList<>();
     private String name;
     private final String id;
 

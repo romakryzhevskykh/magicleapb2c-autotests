@@ -17,7 +17,7 @@ public class UserSession {
         this.user = user;
     }
 
-    public ArrayList<UserRole> getUserRoles() {
+    public Set<UserRole> getUserRoles() {
         return user.getUserRoles();
     }
 

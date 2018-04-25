@@ -98,4 +98,9 @@ public class CartPage extends StorefrontBasePage {
     public void enterNewSupplyListNameText(String newSupplyListName) {
         addToSupplyListPopUpBlock.enterNewSupplyListNameText(newSupplyListName);
     }
+
+    @Step("Is Add to Supply list button visible?")
+    public boolean isAddToSupplyListButtonVisible() {
+        return isDisplayed(ADD_TO_SUPPLY_LIST_BUTTONS_XPATH);
+    }
 }

@@ -7,8 +7,6 @@ import org.json.JSONObject;
 import javax.net.ssl.HttpsURLConnection;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -42,12 +40,14 @@ public class POSTRequest extends APIRequest {
         if (postParametersAndValues != null) {
             this.postParametersAndValues = postParametersAndValues;
             for (PostParameterAndValue parameterAndValue : postParametersAndValues) {
-                try {
+//                try {
+//                    this.stringOfPostParameters.append(parameterAndValue.parameter).append("=")
+//                            .append(URLEncoder.encode(parameterAndValue.getValue(), "UTF-8"));
                     this.stringOfPostParameters.append(parameterAndValue.parameter).append("=")
-                            .append(URLEncoder.encode(parameterAndValue.getValue(), "UTF-8"));
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
+                            .append(parameterAndValue.getValue());
+//                } catch (UnsupportedEncodingException e) {
+//                    e.printStackTrace();
+//                }
                 if (!postParametersAndValues
                         .get(postParametersAndValues.size() - 1)
                         .equals(parameterAndValue)) {

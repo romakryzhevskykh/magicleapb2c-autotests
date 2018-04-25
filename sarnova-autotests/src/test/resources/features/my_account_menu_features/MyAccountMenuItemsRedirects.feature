@@ -43,7 +43,7 @@ Feature: Menu items on click redirects functionality.
 
   Scenario: Check that Custom Category My Account menu item redirects to Custom Category page.
     When Click on Custom Category item in My Account menu.
-    Then Check that Custom Category page is opened.
+    Then Check that Custom Categories page is opened.
 
   Scenario: Check that Quotas and Par Levels My Account menu item redirects to Quotas and Par Levels page.
     When Click on Quotas and Par Levels item in My Account menu.

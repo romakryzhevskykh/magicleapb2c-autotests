@@ -6,6 +6,7 @@ import com.sarnova.storefront.pages.*;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -95,11 +96,6 @@ public class GeneralStepDefs extends AbstractStepDefs {
         assertTrue(purchaseRequestsPage.isOpened());
     }
 
-    @Then("^Check that Supply Lists page is opened.$")
-    public void checkThatSupplyListsPageIsOpened() {
-        assertTrue(supplyListsPage.isOpened());
-    }
-
     @When("^Click on Saved Carts item in My Account menu.$")
     public void clickOnSavedCartsItemInMyAccountMenu() {
         headerRowPageBlock.clickOnSavedCartsItemInMyAccountMenu();
@@ -153,11 +149,6 @@ public class GeneralStepDefs extends AbstractStepDefs {
     @When("^Click on Custom Category item in My Account menu.$")
     public void clickOnCustomCategoryItemInMyAccountMenu() {
         headerRowPageBlock.clickOnCustomCategoryItemInMyAccountMenu();
-    }
-
-    @Then("^Check that Custom Category page is opened.$")
-    public void checkThatCustomCategoryPageIsOpened() {
-        assertTrue(customCategoryPage.isOpened());
     }
 
     @When("^Click on Quotas and Par Levels item in My Account menu.$")
@@ -218,6 +209,32 @@ public class GeneralStepDefs extends AbstractStepDefs {
     @Then("^Check that Start page is opened.$")
     public void checkThatStartPageIsOpened() {
         assertTrue(startPage.isOpened());
+    }
+
+    @And("^Check that current Supply list is displayed in favorite Supply lists drop-down in page header.$")
+    public void checkThatCurrentSupplyListIsDisplayedInFavoriteSupplyListsDropDownOnSupplyListDetailsPage() {
+        List<String> favoriteSupplyListNames = headerRowPageBlock.getSupplyListNamesFromFavoriteSupplyListsDropDown();
+        String testSupplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
+        assertTrue(favoriteSupplyListNames.stream()
+                .anyMatch(supplyListName -> supplyListName.equals(StringUtils.capitalize(testSupplyListName))));
+    }
+
+    @And("^Check that current Supply list is not displayed in favorite Supply lists drop-down in page header.$")
+    public void checkThatCurrentSupplyListIsNotDisplayedInFavoriteSupplyListsDropDownOnSupplyListDetailsPage() {
+        List<String> favoriteSupplyListNames = headerRowPageBlock.getSupplyListNamesFromFavoriteSupplyListsDropDown();
+        String testSupplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
+        assertTrue(favoriteSupplyListNames.stream()
+                .noneMatch(supplyListName -> supplyListName.equals(StringUtils.capitalize(testSupplyListName))));
+    }
+
+    @Then("^Click on Supply lists drop-down in Header.$")
+    public void clickOnSupplyListsDropDownInHeader() {
+        headerRowPageBlock.clickOnFavoriteSupplyListsDropDown();
+    }
+
+    @Then("^Check that Supply lists drop-down is present in Header.$")
+    public void checkThatSupplyListsDropDownIsPresentInHeader() {
+        assertTrue(headerRowPageBlock.isFavoriteSupplyListsDropDownPresent());
     }
 
 }

@@ -19,6 +19,11 @@ public class LoggedInHeaderRowBlock extends UIComponent {
         return isDisplayed(MY_ACCOUNT_DROP_DOWN_XPATH);
     }
 
+    @Step("Is favorite Supply lists drop-down present.")
+    public boolean isFavoriteSupplyListsDropDownPresent() {
+        return isDisplayed(SUPPLY_LISTS_DROP_DOWN_XPATH);
+    }
+
     @Step("Click on favorite Supply lists drop-down.")
     public void clickOnFavoriteSupplyListsDropDown() {
         click(SUPPLY_LISTS_DROP_DOWN_XPATH);
@@ -58,7 +63,8 @@ public class LoggedInHeaderRowBlock extends UIComponent {
                 .filter(webElement -> webElement.getText().contains(menuItemName))
                 .findFirst()
                 .orElseGet(() -> {
-                    throw new NullPointerException("Row is absent: " + menuItemName);
+                    throw new NullPointerException("Row is absent: " + menuItemName
+                            + " in the list: " + myAccountItems.stream().map(WebElement::getText).collect(Collectors.toList()));
                 });
         return myAccountItems.indexOf(searchedItem) + 1;
     }

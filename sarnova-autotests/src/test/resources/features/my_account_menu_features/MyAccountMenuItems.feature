@@ -69,10 +69,10 @@ Feature: Menu items visibility and ordering.
     Then Check that Custom Category item index item is 10.
 
   Scenario: Check that Quotas and Par Levels item is present in My Account menu.
-    Then Check that Quotas and Par Levels item is present in My Account menu.
+    Then Check that Quotas And Par Levels item is present in My Account menu.
 
   Scenario: Check that Quotas and Par Levels item is 11 in My Account menu.
-    Then Check that Quotas and Par Levels item index item is 11.
+    Then Check that Quotas And Par Levels item index item is 11.
 
   Scenario: Check that Business Info item is present in My Account menu.
     Then Check that Business Info item is present in My Account menu.

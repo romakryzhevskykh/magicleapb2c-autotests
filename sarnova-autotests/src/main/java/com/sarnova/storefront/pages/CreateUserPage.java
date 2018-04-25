@@ -54,6 +54,7 @@ public class CreateUserPage extends StorefrontBasePage {
     @Step("Click on save button.")
     public void clickOnSaveButton() {
         click(SAVE_BUTTON_XPATH);
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Deselect all user roles.")
