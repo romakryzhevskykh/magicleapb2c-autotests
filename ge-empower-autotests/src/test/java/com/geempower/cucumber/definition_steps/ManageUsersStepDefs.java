@@ -18,7 +18,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
 
     @Then("^(.*) title is displayed on Manage Users page.$")
     public void checkManageUsersTitle(String manageUsersTitle) {
-        assertEquals(manageUsersPage.getManageUsersTitle(), manageUsersTitle);
+        assertEquals(manageUsersTitle, manageUsersPage.getManageUsersTitle());
     }
 
     @When("^Admin opens Users tab.$")
@@ -38,12 +38,12 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
 
     @Then("^Appropriate user with appropriate (.*) email is displayed in the users list.$")
     public void appropriateUserWithAppropriateEmailEmailIsDisplayedInTheUsersList(String email) {
-        assertEquals(manageUsersPage.isUserFoundByEmail(), email);
+        assertEquals(email, manageUsersPage.isUserFoundByEmail());
     }
 
-    @When("^Click on the user name in the table.$")
-    public void clickOnTheUserNameInTheTable() {
-        manageUsersPage.clickOnTheUserNameInTheTable();
+    @When("^Click on the first user name in the table.$")
+    public void clickOnTheFirstUserNameInTheTable() {
+        manageUsersPage.clickOnTheFirstUserNameInTheTable();
     }
 
     @When("^Click on Add account button in User Detail block.$")
@@ -54,7 +54,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     @Then("^(.*) pop-up is displayed on Manage Users page.$")
     public void addAccountPopUpIsDisplayedOnManageUsersPage(String popUpTitle) {
         assertTrue(manageUsersPage.isAddAccountPopUpDisplayed());
-        assertEquals(manageUsersPage.getAddAccPopUpTitle(), popUpTitle);
+        assertEquals(popUpTitle, manageUsersPage.getAddAccPopUpTitle());
     }
 
     @When("^Set (.*) SO code to the Sales Office Code field in the Add Account pop-up.$")
@@ -73,14 +73,13 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     }
 
     @And("^Select (.*) in the Region field in the Add Account pop-up.$")
-    public void selectRegion(String region) {
-        manageUsersPage.selectRegion(region);
+    public void selectRegionInTheAddAccountPopUp(String region) {
+        manageUsersPage.selectRegionInTheAddAccountPopUp(region);
     }
 
     @And("^Set (.*) SO code to the Second Sales Office Code field in the Add Account pop-up.$")
     public void setSoCodeToTheSecondSalesOfficeCodeField(String code) {
         manageUsersPage.setSoCodeToTheSecondSalesOfficeCodeField(code);
-        threadVarsHashMap.put(TestKeyword.MANAGE_USERS_SO_CODE, code);
     }
 
     @And("^Click on the Search button in the Add Account pop-up.$")
@@ -90,13 +89,13 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
 
     @Then("^Add New Accounts table is displayed in the Add Account pop-up.$")
     public void addNewAccountsTableIsDisplayed() {
-        manageUsersPage.addNewAccountsTableIsDisplayed();
+        assertTrue(manageUsersPage.addNewAccountsTableIsDisplayed());
         threadVarsHashMap.put(TestKeyword.MANAGE_USERS_ACCOUNT_NAME, manageUsersPage.getAccountNameFromAddAccPopUp());
     }
 
     @Then("^Account from SO code is displayed in the the All Accounts tab.$")
     public void accountFromSOCodeIsDisplayedInTheTheAllAccountsTab() {
-        String accountName = (String) threadVarsHashMap.get(TestKeyword.MANAGE_USERS_ACCOUNT_NAME);
+        String accountName = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NAME);
         assertEquals(accountName, iWantToBlock.getAccountName());
     }
 
@@ -105,10 +104,9 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         iWantToBlock.clickOnSalesOfficeCodesTab();
     }
 
-    @Then("^Appropriate Sales Office Code is displayed in the SO Codes table.$")
-    public void AppropriateSalesOfficeCodeIsDisplayedInTheTable() {
-        String salesCode = (String) threadVarsHashMap.get(TestKeyword.MANAGE_USERS_SO_CODE);
-        assertEquals(salesCode, iWantToBlock.getSoCode());
+    @Then("^(.*) Sales Office Code is displayed in the SO Codes table.$")
+    public void AppropriateSalesOfficeCodeIsDisplayedInTheTable(String code) {
+        assertEquals(code, iWantToBlock.getSoCode());
     }
 
     @And("^Select All Sales Office Codes checkbox in SO Codes tab.$")
@@ -124,7 +122,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     @Then("^(.*) pop-up is displayed on I Want To Block.$")
     public void removeAccountPopUpTitleIsEqualToRemoveAccount(String popUpTitle) {
         assertTrue(iWantToBlock.isRemoveAccountPopUpIsDisplayed());
-        assertEquals(iWantToBlock.getRemoveAccPopUpTitle(), popUpTitle);
+        assertEquals(popUpTitle, iWantToBlock.getRemoveAccPopUpTitle());
     }
 
     @And("^Click on Remove button in the Remove Account pop-up.$")
@@ -134,6 +132,6 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
 
     @Then("^(.*) title is displayed in Sales Office Code table.$")
     public void getNoDataTitle(String title) {
-        assertEquals(iWantToBlock.getNoDataTitle(), title);
+        assertEquals(title, iWantToBlock.getNoDataTitle());
     }
 }

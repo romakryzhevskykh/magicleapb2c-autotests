@@ -25,7 +25,7 @@ Feature: Some actions on Manage Users page
     And Sets <email> email to the email field.
     And Click on the Search button.
     Then Appropriate user with appropriate <email> email is displayed in the users list.
-    When Click on the user name in the table.
+    When Click on the first user name in the table.
     When Click on Add account button in User Detail block.
     Then Add Account pop-up is displayed on Manage Users page.
     And Select North America in the Region field in the Add Account pop-up.
@@ -37,7 +37,7 @@ Feature: Some actions on Manage Users page
     And Expand Modify an Account tab in I Want To Block.
     Then Account from SO code is displayed in the the All Accounts tab.
     When Click on Sales Office Codes tab In Modify an Account Tab.
-    Then Appropriate Sales Office Code is displayed in the SO Codes table.
+    Then <soCode> Sales Office Code is displayed in the SO Codes table.
     Given Switch to Storefront as internalUser.
     And User is logged in to Storefront.
     And Account management page is opened.

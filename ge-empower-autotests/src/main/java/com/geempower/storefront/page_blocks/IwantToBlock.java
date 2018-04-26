@@ -46,7 +46,6 @@ public class IwantToBlock extends UIComponent {
 
     @Step("Get Remove Acc Pop-Up Title")
     public String getRemoveAccPopUpTitle() {
-        waitForElementWithAppropriateTextToAppear(By.xpath(REMOVE_ACCOUNT_POP_UP_TITLE_XPATH), "Remove Account");
         return $(REMOVE_ACCOUNT_POP_UP_TITLE_XPATH).getText();
     }
 
@@ -63,7 +62,7 @@ public class IwantToBlock extends UIComponent {
 
     @Step("Is Remove Account Pop-Up Is Displayed")
     public boolean isRemoveAccountPopUpIsDisplayed() {
-        waitUntilPageIsFullyLoaded();
+        waitForElementWithAppropriateTextToAppear(By.xpath(REMOVE_ACCOUNT_POP_UP_TITLE_XPATH), "Remove Account");
         return isDisplayed(REMOVE_ACCOUNT_POP_UP_XPATH);
     }
 }

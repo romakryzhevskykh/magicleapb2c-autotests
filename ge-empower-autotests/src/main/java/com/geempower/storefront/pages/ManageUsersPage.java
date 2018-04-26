@@ -51,13 +51,13 @@ public class ManageUsersPage extends StorefrontBasePage {
         return $(USER_EMAIL_FIELD_XPATH).getText();
     }
 
-    @Step("Click on User Name in the table.")
-    public void clickOnTheUserNameInTheTable() {
+    @Step("Click on the first User Name in the table.")
+    public void clickOnTheFirstUserNameInTheTable() {
         click(FIRST_NAME_LINK_XPATH);
         waitUntilPageIsFullyLoaded();
     }
 
-    @Step("Click on Add Account Button In User Detail Block .")
+    @Step("Click on Add Account Button In User Detail Block.")
     public void clickOnAddAccountButtonInUserDetailBlock() {
         click(ADD_ACCOUNT_BUTTON_XPATH);
     }
@@ -73,13 +73,13 @@ public class ManageUsersPage extends StorefrontBasePage {
         $(By.id(SALES_OFFICE_CODE_FIELD_ID)).sendKeys(code);
     }
 
-    @Step("Click on Modify Button.")
+    @Step("Click on Modify Button In The Add Account Pop-Up.")
     public void clickOnModifyButtonInTheAddAccountPopUp() {
         $(MODIFY_ACTIVE_BUTTON_XPATH).click();
     }
 
-    @Step("Select Region")
-    public void selectRegion(String region) {
+    @Step("Select Region In The Add Account Pop-Up.")
+    public void selectRegionInTheAddAccountPopUp(String region) {
         waitUntilPageIsFullyLoaded();
         click(By.id(SELECT_REGION_FIELD_ID));
         $$(REGION_DROP_DOWN_LIST_ELEMENTS_XPATH).stream()
@@ -99,17 +99,18 @@ public class ManageUsersPage extends StorefrontBasePage {
     }
 
     @Step("Check that Add New Accounts Table Is Displayed in the Add Account Pop-Up.")
-    public void addNewAccountsTableIsDisplayed() {
-        isDisplayed(By.id(ADD_NEW_ACCOUNTS_TABLE_ID));
+    public boolean addNewAccountsTableIsDisplayed() {
+        waitUntilPageIsFullyLoaded();
+        return isDisplayed(By.id(ADD_NEW_ACCOUNTS_TABLE_ID));
     }
 
     @Step("Get Account Name from Add Account Pop-Up.")
     public String getAccountNameFromAddAccPopUp() {
-        isDisplayed(ACCOUNT_NAME_NEW_ACC_TABLE_XPATH);
+        waitUntilPageIsFullyLoaded();
         return $(ACCOUNT_NAME_NEW_ACC_TABLE_XPATH).getText();
     }
 
-    @Step("Is Add Account Pop-up is displayed ")
+    @Step("Is Add Account Pop-up is displayed.")
     public boolean isAddAccountPopUpDisplayed() {
         waitUntilPageIsFullyLoaded();
         return isDisplayed(ADD_ACCOUNT_POP_UP_XPATH);

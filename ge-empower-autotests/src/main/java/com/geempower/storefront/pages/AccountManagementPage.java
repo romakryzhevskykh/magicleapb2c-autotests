@@ -1,16 +1,12 @@
 package com.geempower.storefront.pages;
 
 import com.geempower.helpers.models.Region;
-import com.geempower.helpers.models.RegionType;
 import com.geempower.storefront.StorefrontBasePage;
-import org.apache.commons.lang.text.StrTokenizer;
 import org.openqa.selenium.By;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.geempower.storefront.page_elements.AccountManagementPageElements.*;
 
@@ -132,8 +128,8 @@ public class AccountManagementPage extends StorefrontBasePage {
         }
     }
 
-    @Step("Get Account Name")
-    public String getAccountName() {
+    @Step("Get First Account Name In The Table")
+    public String getFirstAccountNameInTheTable() {
         return $(ACCOUNT_NAME_VALUE_IN_TABLE_XPATH).getText();
     }
 }

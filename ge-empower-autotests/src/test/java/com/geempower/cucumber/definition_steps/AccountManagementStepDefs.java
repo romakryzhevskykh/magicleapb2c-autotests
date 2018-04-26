@@ -93,32 +93,13 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
 
     @And("^Search account from SO code.$")
     public void searchAccountFromSOCode() {
-        String accountName = (String) threadVarsHashMap.get(TestKeyword.MANAGE_USERS_ACCOUNT_NAME);
+        String accountName = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NAME);
         accountManagementPage.searchAccountByAccountName(accountName);
     }
 
     @Then("^Appropriate account is displayed in the table on Account Management Page.$")
     public void appropriateAccountIsDisplayedInTheTable() {
-        String accountName = (String) threadVarsHashMap.get(TestKeyword.MANAGE_USERS_ACCOUNT_NAME);
-        assertEquals(accountName, accountManagementPage.getAccountName());
+        String accountName = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NAME);
+        assertEquals(accountName, accountManagementPage.getFirstAccountNameInTheTable());
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
