@@ -11,7 +11,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
   Scenario Outline: Check that admin is able to find user by email
     When Admin opens Users tab.
     And Sets <email> email to the email field.
-    And Click on the Search button.
+    And Clicks on the Search button.
     Then Appropriate user with appropriate <email> email is displayed in the users list.
 
     Examples:
@@ -49,9 +49,9 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     And Click on Remove button in the Remove Account pop-up.
     Then No data available in table title is displayed in Sales Office Code table.
 
-      Examples:
-      | email                | soCode |
-      | test123rest@ge.com   | USG2   |
+    Examples:
+      | email              | soCode |
+      | test123rest@ge.com | USG2   |
 
   Scenario Outline: Check that admin is able to find user by some account from each region
     When Admin opens Users tab.
