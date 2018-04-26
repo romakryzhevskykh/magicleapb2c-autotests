@@ -46,8 +46,8 @@ public class AccountManagementPage extends StorefrontBasePage {
         $(REGION_COMBOBOX_XPATH).click();
     }
 
-    @Step("Search account for chosen region.")
-    public void searchAccountForChosenRegion(String accountName) {
+    @Step("Search account by account name.")
+    public void searchAccountByAccountName(String accountName) {
         setAccountNumberToSearchField(accountName);
         clickOnSearchButton();
     }

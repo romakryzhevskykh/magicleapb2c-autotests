@@ -63,12 +63,13 @@ public class ManageUsersPage extends StorefrontBasePage {
     }
 
     @Step("Add Account Pop Up Title is Displayed On Manage Users Page.")
-    public void addAccountPopUpIsDisplayedOnManageUsersPage(String popUpTitle) {
-        waitForElementWithAppropriateTextToAppear(By.xpath(ADD_ACCOUNT_TITLE_XPATH), popUpTitle);
+    public String getAddAccPopUpTitle() {
+        waitUntilPageIsFullyLoaded();
+        return $(ADD_ACCOUNT_TITLE_XPATH).getText();
     }
 
-    @Step("Set SO Code To The Sales Eng Code Field.")
-    public void setSoCodeToTheSalesEngCodeField(String code) {
+    @Step("Set SO Code To The Sales Office Code Field.")
+    public void setSoCodeToTheSalesOfficeCodeField(String code) {
         $(By.id(SALES_OFFICE_CODE_FIELD_ID)).sendKeys(code);
     }
 
@@ -85,8 +86,8 @@ public class ManageUsersPage extends StorefrontBasePage {
                 .filter(webElement -> webElement.getText().equals(region)).findAny().ifPresent(WebElement::click);
     }
 
-    @Step("Set SO Code To The Second Sales Eng Code Field.")
-    public void setSoCodeToTheSecondSalesEngCodeField(String code) {
+    @Step("Set SO Code To The Second Sales Office Code Field.")
+    public void setSoCodeToTheSecondSalesOfficeCodeField(String code) {
         waitUntilPageIsFullyLoaded();
         $(By.id(SALES_OFFICE_CODE_SECOND_FIELD_ID)).sendKeys(code);
     }
@@ -94,7 +95,7 @@ public class ManageUsersPage extends StorefrontBasePage {
     @Step("Click On Search Button In The Add Account Pop-Up.")
     public void clickOnTheSearchButtonInTheAddAccountPopUp() {
         waitUntilPageIsFullyLoaded();
-        $(SEARCH_BUTTON).click();
+        $(SEARCH_BUTTON_XPATH).click();
     }
 
     @Step("Check that Add New Accounts Table Is Displayed in the Add Account Pop-Up.")

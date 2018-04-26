@@ -41,7 +41,7 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
             throw new NullPointerException("No Accounts in the selected region");
         });
         threadVarsHashMap.put(TestKeyword.CHOSEN_ACCOUNT, accountName);
-        accountManagementPage.searchAccountForChosenRegion(accountName);
+        accountManagementPage.searchAccountByAccountName(accountName);
     }
 
     @And("^Click on chosen account.$")
@@ -94,7 +94,7 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
     @And("^Search account from SO code.$")
     public void searchAccountFromSOCode() {
         String accountName = (String) threadVarsHashMap.get(TestKeyword.MANAGE_USERS_ACCOUNT_NAME);
-        accountManagementPage.searchAccountForChosenRegion(accountName);
+        accountManagementPage.searchAccountByAccountName(accountName);
     }
 
     @Then("^Appropriate account is displayed in the table on Account Management Page.$")

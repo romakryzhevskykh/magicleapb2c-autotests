@@ -52,12 +52,12 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
 
     @Then("^(.*) pop-up is displayed on Manage Users page.$")
     public void addAccountPopUpIsDisplayedOnManageUsersPage(String popUpTitle) {
-        manageUsersPage.addAccountPopUpIsDisplayedOnManageUsersPage(popUpTitle);
+        assertEquals(manageUsersPage.getAddAccPopUpTitle(), popUpTitle);
     }
 
-    @When("^Set (.*) SO code to the Sales Eng Code field in the Add Account pop-up.$")
-    public void setSoCodeToTheSalesEngCodeField(String code) {
-        manageUsersPage.setSoCodeToTheSalesEngCodeField(code);
+    @When("^Set (.*) SO code to the Sales Office Code field in the Add Account pop-up.$")
+    public void setSoCodeToTheSalesOfficeCodeField(String code) {
+        manageUsersPage.setSoCodeToTheSalesOfficeCodeField(code);
     }
 
     @And("^Click on Modify button in the Add Account pop-up.$")
@@ -75,9 +75,9 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         manageUsersPage.selectRegion(region);
     }
 
-    @And("^Set (.*) SO code to the Second Sales Eng Code field in the Add Account pop-up.$")
-    public void setSoCodeToTheSecondSalesEngCodeField(String code) {
-        manageUsersPage.setSoCodeToTheSecondSalesEngCodeField(code);
+    @And("^Set (.*) SO code to the Second Sales Office Code field in the Add Account pop-up.$")
+    public void setSoCodeToTheSecondSalesOfficeCodeField(String code) {
+        manageUsersPage.setSoCodeToTheSecondSalesOfficeCodeField(code);
         threadVarsHashMap.put(TestKeyword.MANAGE_USERS_SO_CODE, code);
     }
 
@@ -120,8 +120,8 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     }
 
     @Then("^(.*) pop-up is displayed on I Want To Block.$")
-    public void removeAccountPopUpIsDisplayedOnManageUsersPage(String popUpTitle) {
-        iWantToBlock.removeAccountPopUpIsDisplayedOnManageUsersPage(popUpTitle);
+    public void removeAccountPopUpTitleIsEqualToRemoveAccount(String popUpTitle) {
+        assertEquals(iWantToBlock.getRemoveAccPopUpTitle(), popUpTitle);
     }
 
     @And("^Click on Remove button in the Remove Account pop-up.$")
@@ -129,8 +129,8 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         iWantToBlock.clickOnRemoveButtonInTheRemoveAccountPopUp();
     }
 
-    @Then("^Empty Sales Office Code table is displayed in SO Codes tab.$")
-    public void emptySalesOfficeCodeTableIsDisplayedInSOCodesTab() {
-        iWantToBlock.emptySalesOfficeCodeTableIsDisplayedInSOCodesTab();
+    @Then("^(.*) title is displayed in Sales Office Code table.$")
+    public void getNoDataTitle(String title) {
+        assertEquals(iWantToBlock.getNoDataTitle(), title);
     }
 }

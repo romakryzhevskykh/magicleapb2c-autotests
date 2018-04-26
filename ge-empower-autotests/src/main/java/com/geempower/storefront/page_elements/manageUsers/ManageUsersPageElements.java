@@ -36,7 +36,7 @@ public class ManageUsersPageElements {
     public final static String SELECT_REGION_FIELD_ID = "select2-searchRegion-container";
     public final static String REGION_DROP_DOWN_LIST_ELEMENTS_XPATH = ".//*[@id='select2-searchRegion-results']/li";
     public final static String SALES_OFFICE_CODE_SECOND_FIELD_ID = "salesOfficeCodeInput";
-    public final static String SEARCH_BUTTON = ".//*[@class='btn primary-btn manageuser-account-search-btn']";
+    public final static String SEARCH_BUTTON_XPATH = ".//*[@class='btn primary-btn manageuser-account-search-btn']";
     public final static String ADD_NEW_ACCOUNTS_TABLE_ID = "addNewAccountsTable";
     public final static String ACCOUNT_NAME_NEW_ACC_TABLE_XPATH = ".//*[@id='addNewAccountsTable']/tbody/tr[1]/td[3]";
 

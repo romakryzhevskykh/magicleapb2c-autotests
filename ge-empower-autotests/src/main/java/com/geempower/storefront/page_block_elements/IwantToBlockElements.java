@@ -10,6 +10,6 @@ public class IwantToBlockElements {
     public final static String ALL_SO_CODES_CHECKBOX_XPATH = ".//div[@id='approved-salesofficecode']//*[contains(@class, 'select-all-user-accounts')]/label";
     public final static String REMOVE_SO_CODES_BUTTON_XPATH = ".//*[@data-target='#remove-salesoffice-modal']";
     public final static String REMOVE_ACCOUNT_POP_UP_TITLE_XPATH = ".//*[@id='remove-salesoffice-modal']//h4";
-    public final static String REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP = ".//*[@class='btn primary-btn remove-salesoffice-btn']";
+    public final static String REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_XPATH = ".//*[@class='btn primary-btn remove-salesoffice-btn']";
     public final static String EMPTY_SO_CODES_TABLE_XPATH = ".//*[@id='approved-salesofficecode']//*[@class='dataTables_empty']";
 }
