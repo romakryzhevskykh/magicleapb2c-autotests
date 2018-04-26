@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class AccountManagementStepDefs extends AbstractStepDefs {
@@ -40,7 +41,7 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
             throw new NullPointerException("No Accounts in the selected region");
         });
         threadVarsHashMap.put(TestKeyword.CHOSEN_ACCOUNT, accountName);
-        accountManagementPage.searchAccountForChosenRegion(accountName);
+        accountManagementPage.searchAccountByAccountName(accountName);
     }
 
     @And("^Click on chosen account.$")
@@ -89,23 +90,16 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
     public void allRequestsWereRemovedByUser() {
         accountManagementPage.removeRequestedAccounts(Integer.parseInt(threadVarsHashMap.getString(TestKeyword.COUNT_OF_PENDING_REQUESTS)));
     }
+
+    @And("^Search account from SO code.$")
+    public void searchAccountFromSOCode() {
+        String accountName = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NAME);
+        accountManagementPage.searchAccountByAccountName(accountName);
+    }
+
+    @Then("^Appropriate account is displayed in the table on Account Management Page.$")
+    public void appropriateAccountIsDisplayedInTheTable() {
+        String accountName = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NAME);
+        assertEquals(accountName, accountManagementPage.getFirstAccountNameInTheTable());
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

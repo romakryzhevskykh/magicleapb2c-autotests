@@ -1,5 +1,6 @@
 package com.geempower.cucumber.definition_steps;
 
+import com.geempower.storefront.page_blocks.IwantToBlock;
 import com.geempower.storefront.pages.ManageUsersPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
@@ -15,6 +16,8 @@ import static org.testng.Assert.assertTrue;
 public class ManageUsersStepDefs extends AbstractStepDefs {
     @Autowired
     private ManageUsersPage manageUsersPage;
+    @Autowired
+    private IwantToBlock iWantToBlock;
 
     @Then("^(.*) title is displayed on Manage Users page.$")
     public void checkManageUsersTitle(String manageUsersTitle) {
@@ -41,6 +44,100 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         assertEquals(email, manageUsersPage.isUserFoundByEmail());
     }
 
+    @When("^Click on the first user name in the table.$")
+    public void clickOnTheFirstUserNameInTheTable() {
+        manageUsersPage.clickOnTheFirstUserNameInTheTable();
+    }
+
+    @When("^Click on Add account button in User Detail block.$")
+    public void clickOnAddAccountButtonInUserDetailBlock() {
+        manageUsersPage.clickOnAddAccountButtonInUserDetailBlock();
+    }
+
+    @Then("^(.*) pop-up is displayed on Manage Users page.$")
+    public void addAccountPopUpIsDisplayedOnManageUsersPage(String popUpTitle) {
+        assertTrue(manageUsersPage.isAddAccountPopUpDisplayed());
+        assertEquals(popUpTitle, manageUsersPage.getAddAccPopUpTitle());
+    }
+
+    @When("^Set (.*) SO code to the Sales Office Code field in the Add Account pop-up.$")
+    public void setSoCodeToTheSalesOfficeCodeField(String code) {
+        manageUsersPage.setSoCodeToTheSalesOfficeCodeField(code);
+    }
+
+    @And("^Click on Modify button in the Add Account pop-up.$")
+    public void clickOnModifyButtonInTheAddAccountPopUp() {
+        manageUsersPage.clickOnModifyButtonInTheAddAccountPopUp();
+    }
+
+    @And("^Expand Modify an Account tab in I Want To Block.$")
+    public void expandModifyAnAccountTabInIWantToBlock() {
+        iWantToBlock.expandModifyAnAccountTabInIWantToBlock();
+    }
+
+    @And("^Select (.*) in the Region field in the Add Account pop-up.$")
+    public void selectRegionInTheAddAccountPopUp(String region) {
+        manageUsersPage.selectRegionInTheAddAccountPopUp(region);
+    }
+
+    @And("^Set (.*) SO code to the Second Sales Office Code field in the Add Account pop-up.$")
+    public void setSoCodeToTheSecondSalesOfficeCodeField(String code) {
+        manageUsersPage.setSoCodeToTheSecondSalesOfficeCodeField(code);
+    }
+
+    @And("^Click on the Search button in the Add Account pop-up.$")
+    public void clickOnTheSearchButtonInTheAddAccountPopUp() {
+        manageUsersPage.clickOnTheSearchButtonInTheAddAccountPopUp();
+    }
+
+    @Then("^Add New Accounts table is displayed in the Add Account pop-up.$")
+    public void addNewAccountsTableIsDisplayed() {
+        assertTrue(manageUsersPage.addNewAccountsTableIsDisplayed());
+        threadVarsHashMap.put(TestKeyword.MANAGE_USERS_ACCOUNT_NAME, manageUsersPage.getAccountNameFromAddAccPopUp());
+    }
+
+    @Then("^Account from SO code is displayed in the the All Accounts tab.$")
+    public void accountFromSOCodeIsDisplayedInTheTheAllAccountsTab() {
+        String accountName = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NAME);
+        assertEquals(accountName, iWantToBlock.getAccountName());
+    }
+
+    @When("^Click on Sales Office Codes tab In Modify an Account Tab.$")
+    public void clickOnSalesOfficeCodesTab() {
+        iWantToBlock.clickOnSalesOfficeCodesTab();
+    }
+
+    @Then("^(.*) Sales Office Code is displayed in the SO Codes table.$")
+    public void AppropriateSalesOfficeCodeIsDisplayedInTheTable(String code) {
+        assertEquals(code, iWantToBlock.getSoCode());
+    }
+
+    @And("^Select All Sales Office Codes checkbox in SO Codes tab.$")
+    public void selectAllSalesOfficeCodesCheckboxInSOCodesTab() {
+        iWantToBlock.selectAllSalesOfficeCodesCheckboxInSOCodesTab();
+    }
+
+    @And("^Click on SO Codes Remove button in SO Codes tab.$")
+    public void clickOnRemoveSoCodesButtoninSOCodesTab() {
+        iWantToBlock.clickOnRemoveSoCodesButtonSOCodesTab();
+    }
+
+    @Then("^(.*) pop-up is displayed on I Want To Block.$")
+    public void removeAccountPopUpTitleIsEqualToRemoveAccount(String popUpTitle) {
+        assertTrue(iWantToBlock.isRemoveAccountPopUpIsDisplayed());
+        assertEquals(popUpTitle, iWantToBlock.getRemoveAccPopUpTitle());
+    }
+
+    @And("^Click on Remove button in the Remove Account pop-up.$")
+    public void clickOnRemoveButtonInTheRemoveAccountPopUp() {
+        iWantToBlock.clickOnRemoveButtonInTheRemoveAccountPopUp();
+    }
+
+    @Then("^(.*) title is displayed in Sales Office Code table.$")
+    public void getNoDataTitle(String title) {
+        assertEquals(title, iWantToBlock.getNoDataTitle());
+    }
+  
     @And("^Sets (.*) account to the account field.$")
     public void setsAccountAccountToTheAccountField(String account) {
         manageUsersPage.setAccountToTheAccountSearchField(account);

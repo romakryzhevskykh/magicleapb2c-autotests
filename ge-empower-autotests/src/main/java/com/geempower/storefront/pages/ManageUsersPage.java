@@ -1,6 +1,8 @@
 package com.geempower.storefront.pages;
 
 import com.geempower.storefront.StorefrontBasePage;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -48,6 +50,72 @@ public class ManageUsersPage extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
         return $(USER_EMAIL_FIELD_XPATH).getText();
     }
+
+    @Step("Click on the first User Name in the table.")
+    public void clickOnTheFirstUserNameInTheTable() {
+        click(FIRST_NAME_LINK_XPATH);
+        waitUntilPageIsFullyLoaded();
+    }
+
+    @Step("Click on Add Account Button In User Detail Block.")
+    public void clickOnAddAccountButtonInUserDetailBlock() {
+        click(ADD_ACCOUNT_BUTTON_XPATH);
+    }
+
+    @Step("Get Add Account Pop Up Title.")
+    public String getAddAccPopUpTitle() {
+        waitUntilPageIsFullyLoaded();
+        return $(ADD_ACCOUNT_TITLE_XPATH).getText();
+    }
+
+    @Step("Set SO Code To The Sales Office Code Field.")
+    public void setSoCodeToTheSalesOfficeCodeField(String code) {
+        $(By.id(SALES_OFFICE_CODE_FIELD_ID)).sendKeys(code);
+    }
+
+    @Step("Click on Modify Button In The Add Account Pop-Up.")
+    public void clickOnModifyButtonInTheAddAccountPopUp() {
+        $(MODIFY_ACTIVE_BUTTON_XPATH).click();
+    }
+
+    @Step("Select Region In The Add Account Pop-Up.")
+    public void selectRegionInTheAddAccountPopUp(String region) {
+        waitUntilPageIsFullyLoaded();
+        click(By.id(SELECT_REGION_FIELD_ID));
+        $$(REGION_DROP_DOWN_LIST_ELEMENTS_XPATH).stream()
+                .filter(webElement -> webElement.getText().equals(region)).findAny().ifPresent(WebElement::click);
+    }
+
+    @Step("Set SO Code To The Second Sales Office Code Field.")
+    public void setSoCodeToTheSecondSalesOfficeCodeField(String code) {
+        waitUntilPageIsFullyLoaded();
+        $(By.id(SALES_OFFICE_CODE_SECOND_FIELD_ID)).sendKeys(code);
+    }
+
+    @Step("Click On Search Button In The Add Account Pop-Up.")
+    public void clickOnTheSearchButtonInTheAddAccountPopUp() {
+        waitUntilPageIsFullyLoaded();
+        $(SEARCH_BUTTON_XPATH).click();
+    }
+
+    @Step("Check that Add New Accounts Table Is Displayed in the Add Account Pop-Up.")
+    public boolean addNewAccountsTableIsDisplayed() {
+        waitUntilPageIsFullyLoaded();
+        return isDisplayed(By.id(ADD_NEW_ACCOUNTS_TABLE_ID));
+    }
+
+    @Step("Get Account Name from Add Account Pop-Up.")
+    public String getAccountNameFromAddAccPopUp() {
+        waitUntilPageIsFullyLoaded();
+        return $(ACCOUNT_NAME_NEW_ACC_TABLE_XPATH).getText();
+    }
+
+    @Step("Is Add Account Pop-up is displayed.")
+    public boolean isAddAccountPopUpDisplayed() {
+        waitUntilPageIsFullyLoaded();
+        return isDisplayed(ADD_ACCOUNT_POP_UP_XPATH);
+    }
+
     @Step("Set Account To The Account Search Field.")
     public void setAccountToTheAccountSearchField(String account) {
         $(ACCOUNT_DETAIL_SEARCH_INPUT_XPATH).clear();

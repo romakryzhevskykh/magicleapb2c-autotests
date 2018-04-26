@@ -1,16 +1,12 @@
 package com.geempower.storefront.pages;
 
 import com.geempower.helpers.models.Region;
-import com.geempower.helpers.models.RegionType;
 import com.geempower.storefront.StorefrontBasePage;
-import org.apache.commons.lang.text.StrTokenizer;
 import org.openqa.selenium.By;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.geempower.storefront.page_elements.AccountManagementPageElements.*;
 
@@ -46,7 +42,8 @@ public class AccountManagementPage extends StorefrontBasePage {
         $(REGION_COMBOBOX_XPATH).click();
     }
 
-    public void searchAccountForChosenRegion(String accountName) {
+    @Step("Search account by account name.")
+    public void searchAccountByAccountName(String accountName) {
         setAccountNumberToSearchField(accountName);
         clickOnSearchButton();
     }
@@ -129,5 +126,10 @@ public class AccountManagementPage extends StorefrontBasePage {
         if(!$(APPROVED_ACCOUNT_ROW_XPATH).isDisplayed()){
             getDriver().navigate().refresh();
         }
+    }
+
+    @Step("Get First Account Name In The Table")
+    public String getFirstAccountNameInTheTable() {
+        return $(ACCOUNT_NAME_VALUE_IN_TABLE_XPATH).getText();
     }
 }
