@@ -18,7 +18,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
 
     @Then("^(.*) title is displayed on Manage Users page.$")
     public void checkManageUsersTitle(String manageUsersTitle) {
-        assertEquals(manageUsersPage.getManageUsersTitle(), manageUsersTitle);
+        assertEquals(manageUsersTitle, manageUsersPage.getManageUsersTitle());
     }
 
     @When("^Admin opens Users tab.$")
@@ -38,7 +38,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
 
     @Then("^Appropriate user with appropriate (.*) email is displayed in the users list.$")
     public void appropriateUserWithAppropriateEmailEmailIsDisplayedInTheUsersList(String email) {
-        assertEquals(manageUsersPage.isUserFoundByEmail(), email);
+        assertEquals(email, manageUsersPage.isUserFoundByEmail());
     }
 
     @And("^Sets (.*) account to the account field.$")
@@ -59,7 +59,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     @Then("^User details block for chosen user with (.*) userId is opened.$")
     public void userDetailsBlockIsOpened(String userId) {
         assertTrue(manageUsersPage.isUserDetailsBlockOpened());
-        assertEquals(manageUsersPage.getUserIdFromUserDetailsBlock(), userId);
+        assertEquals(userId, manageUsersPage.getUserIdFromUserDetailsBlock());
     }
 
     @When("^Admin opens Actions list.$")
@@ -69,7 +69,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
 
     @Then("^Chosen user has (.*) user status.$")
     public void chosenUserHasAppropriateUserStatus(String status) {
-        assertEquals(manageUsersPage.getUserStatus(), status);
+        assertEquals(status, manageUsersPage.getUserStatus());
     }
 
     @And("^Chooses (.*) option from the actions list.$")
@@ -85,8 +85,8 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         String deactivationDate = subStatus[5].replace(")", "");
         String actualDate = LocalDateTime.now()
                 .format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        assertEquals(actualUserStatus, status);
+        assertEquals(status, actualUserStatus);
         assertEquals(deactivationDate, actualDate);
-        assertEquals(deactivatedBy, threadVarsHashMap.getString(TestKeyword.USER_FIRST_AND_LAST_NAME));
+        assertEquals(threadVarsHashMap.getString(TestKeyword.USER_FIRST_AND_LAST_NAME), deactivatedBy);
     }
 }
