@@ -12,4 +12,5 @@ public class IwantToBlockElements {
     public final static String REMOVE_ACCOUNT_POP_UP_TITLE_XPATH = ".//*[@id='remove-salesoffice-modal']//h4";
     public final static String REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_XPATH = ".//*[@class='btn primary-btn remove-salesoffice-btn']";
     public final static String EMPTY_SO_CODES_TABLE_XPATH = ".//*[@id='approved-salesofficecode']//*[@class='dataTables_empty']";
+    public final static String REMOVE_ACCOUNT_POP_UP_XPATH = ".//*[@id='remove-salesoffice-modal']//div[@class='modal-content']";
 }

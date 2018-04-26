@@ -8,6 +8,7 @@ import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class ManageUsersStepDefs extends AbstractStepDefs {
     @Autowired
@@ -52,6 +53,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
 
     @Then("^(.*) pop-up is displayed on Manage Users page.$")
     public void addAccountPopUpIsDisplayedOnManageUsersPage(String popUpTitle) {
+        assertTrue(manageUsersPage.isAddAccountPopUpDisplayed());
         assertEquals(manageUsersPage.getAddAccPopUpTitle(), popUpTitle);
     }
 
@@ -121,6 +123,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
 
     @Then("^(.*) pop-up is displayed on I Want To Block.$")
     public void removeAccountPopUpTitleIsEqualToRemoveAccount(String popUpTitle) {
+        assertTrue(iWantToBlock.isRemoveAccountPopUpIsDisplayed());
         assertEquals(iWantToBlock.getRemoveAccPopUpTitle(), popUpTitle);
     }
 

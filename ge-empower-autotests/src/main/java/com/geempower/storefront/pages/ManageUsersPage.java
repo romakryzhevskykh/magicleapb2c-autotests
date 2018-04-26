@@ -62,7 +62,7 @@ public class ManageUsersPage extends StorefrontBasePage {
         click(ADD_ACCOUNT_BUTTON_XPATH);
     }
 
-    @Step("Add Account Pop Up Title is Displayed On Manage Users Page.")
+    @Step("Get Add Account Pop Up Title.")
     public String getAddAccPopUpTitle() {
         waitUntilPageIsFullyLoaded();
         return $(ADD_ACCOUNT_TITLE_XPATH).getText();
@@ -109,4 +109,9 @@ public class ManageUsersPage extends StorefrontBasePage {
         return $(ACCOUNT_NAME_NEW_ACC_TABLE_XPATH).getText();
     }
 
+    @Step("Is Add Account Pop-up is displayed ")
+    public boolean isAddAccountPopUpDisplayed() {
+        waitUntilPageIsFullyLoaded();
+        return isDisplayed(ADD_ACCOUNT_POP_UP_XPATH);
+    }
 }

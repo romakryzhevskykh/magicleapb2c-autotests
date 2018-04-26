@@ -60,4 +60,10 @@ public class IwantToBlock extends UIComponent {
         waitUntilPageIsFullyLoaded();
         return $(EMPTY_SO_CODES_TABLE_XPATH).getText();
     }
+
+    @Step("Is Remove Account Pop-Up Is Displayed")
+    public boolean isRemoveAccountPopUpIsDisplayed() {
+        waitUntilPageIsFullyLoaded();
+        return isDisplayed(REMOVE_ACCOUNT_POP_UP_XPATH);
+    }
 }

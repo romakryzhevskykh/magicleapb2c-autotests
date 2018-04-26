@@ -31,6 +31,7 @@ public class ManageUsersPageElements {
 
     //Add Account pop-up
     public final static String ADD_ACCOUNT_TITLE_XPATH = ".//*[@id='add-account-modal']//h4[@class='modal-title']";
+    public final static String ADD_ACCOUNT_POP_UP_XPATH = "//*[@id='add-account-modal']//div[@class='modal-content']";
     public final static String SALES_OFFICE_CODE_FIELD_ID = "requestSalesOfficeCode";
     public final static String MODIFY_ACTIVE_BUTTON_XPATH = ".//*[@class='btn primary-btn request-account-search-btn sales-update add-sales-btn' and not(@disabled)]";
     public final static String SELECT_REGION_FIELD_ID = "select2-searchRegion-container";
