@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
+import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ public abstract class UIComponent {
         return webDriverPool.getActiveDriver();
     }
 
+    @Step("Open {0}")
     protected void open(String url) {
         getDriver().get(url);
     }

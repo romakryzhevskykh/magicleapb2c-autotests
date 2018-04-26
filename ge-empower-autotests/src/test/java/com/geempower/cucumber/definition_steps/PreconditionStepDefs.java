@@ -53,7 +53,7 @@ public class PreconditionStepDefs extends AbstractStepDefs {
     @Given("^User is logged in to Storefront.$")
     public void userIsLoggedInToStorefront() {
         if (!headerBlock.isUserLoggedIn()) {
-            loginPage.open();
+            dashboardPage.open();
             loginPage.waitHTMLTemplateLoad();
             loginPage.waitJQueryRequestsLoad();
             if (loginPage.isOpened()) {

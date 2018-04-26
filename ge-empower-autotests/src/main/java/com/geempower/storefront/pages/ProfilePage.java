@@ -6,7 +6,6 @@ import ru.yandex.qatools.allure.annotations.Step;
 
 import static com.geempower.storefront.page_elements.ProfilePageElements.*;
 
-
 @Component
 public class ProfilePage extends StorefrontBasePage {
     private final String pageUri = "my-account/profile";
@@ -21,8 +20,17 @@ public class ProfilePage extends StorefrontBasePage {
         return getCurrentUrl().equals(getPageUrl());
     }
 
-    @Step("Get Profile title")
+    @Step("Get Profile title.")
     public String getProfileTitle() {
         return $(PROFILE_TITLE_XPATH).getText();
+    }
+
+    @Step("Get user name from user's profile.")
+    public String getUserName() {
+        return $(USER_FIRST_NAME_XPATH).getText();
+    }
+    @Step("Get user last name from user's profile.")
+    public String getUserLastName() {
+        return $(USER_LAST_NAME_XPATH).getText();
     }
 }

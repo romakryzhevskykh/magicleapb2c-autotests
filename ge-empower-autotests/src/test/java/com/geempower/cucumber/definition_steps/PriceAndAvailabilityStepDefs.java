@@ -109,9 +109,9 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
         String finalNetPrice = getSelectedProducts().keySet().stream().findAny().get().getFinalNetPrice();
         String availability = getSelectedProducts().keySet().stream().findAny().get().getAvailability().replace("*", "");
 
-        assertEquals(priceAndAvailabilityPage.getDescription(), description);
-        assertEquals(priceAndAvailabilityPage.getListPrice(), listPrice);
-        assertEquals(priceAndAvailabilityPage.getFinalNetPrice(), finalNetPrice);
+        assertEquals(description, priceAndAvailabilityPage.getDescription());
+        assertEquals(listPrice, priceAndAvailabilityPage.getListPrice());
+        assertEquals(finalNetPrice, priceAndAvailabilityPage.getFinalNetPrice());
         selectedProducts.keySet().forEach(product -> assertTrue(priceAndAvailabilityPage.getAvailability(product).contains(availability)));
     }
 
@@ -120,8 +120,6 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
     @And ("^Put (.*) to the hashmap on P&A page.$")
     public void putDefaultQuantityToTheHashmap(int defaulQuantity){
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
-        selectedProducts.keySet().forEach(product -> {
-            selectedProducts.put(product, defaulQuantity);
-        });
+        selectedProducts.keySet().forEach(product -> selectedProducts.put(product, defaulQuantity));
     }
 }
