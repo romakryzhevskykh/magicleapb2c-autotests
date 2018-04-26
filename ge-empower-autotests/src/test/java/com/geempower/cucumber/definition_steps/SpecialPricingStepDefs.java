@@ -9,10 +9,10 @@ import static org.testng.Assert.assertEquals;
 
 public class SpecialPricingStepDefs extends AbstractStepDefs {
     @Autowired
-    SpecialPricingPage specialPricingPages;
+    private SpecialPricingPage specialPricingPages;
 
     @Then("^(.*) title is displayed on Special Pricing page.$")
     public void checkAllSpecialPricingTitle(String allSpecialPricingTitle) {
-        assertEquals(specialPricingPages.getSpecialPricingTitle(), allSpecialPricingTitle);
+        assertEquals(allSpecialPricingTitle, specialPricingPages.getSpecialPricingTitle());
     }
 }

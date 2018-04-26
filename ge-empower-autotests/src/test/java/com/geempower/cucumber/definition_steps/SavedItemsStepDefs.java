@@ -13,6 +13,6 @@ public class SavedItemsStepDefs {
 
     @Then("^(.*) title is displayed on Saved Items page.$")
     public void checkAllItemsTitle(String allItemsTitle) {
-        assertEquals(savedItemsPage.getAllItemsTitle(), allItemsTitle);
+        assertEquals(allItemsTitle, savedItemsPage.getAllItemsTitle());
     }
 }

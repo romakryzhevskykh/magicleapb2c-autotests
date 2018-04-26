@@ -8,10 +8,10 @@ import static org.testng.Assert.assertEquals;
 
 public class InvoiceStepDefs extends AbstractStepDefs{
     @Autowired
-    InvoicePage invoicePage;
+    private InvoicePage invoicePage;
 
     @Then("^(.*) title is displayed on Invoice page.$")
     public void checkAllInvoicesTitle(String allInvoicesTitle) {
-        assertEquals(invoicePage.getInvoicesTitle(), allInvoicesTitle);
+        assertEquals(allInvoicesTitle, invoicePage.getInvoicesTitle());
     }
 }
