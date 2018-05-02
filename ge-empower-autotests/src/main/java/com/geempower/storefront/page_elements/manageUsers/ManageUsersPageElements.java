@@ -41,10 +41,12 @@ public class ManageUsersPageElements {
     public final static String ADD_ACCOUNT_TITLE_XPATH = ".//*[@id='add-account-modal']//h4[@class='modal-title']";
     public final static String ADD_ACCOUNT_POP_UP_XPATH = "//*[@id='add-account-modal']//div[@class='modal-content']";
     public final static String SALES_OFFICE_CODE_FIELD_ID = "requestSalesOfficeCode";
+    public final static String SALES_ENGINEER_CODE_FIELD_ID = "requestSalesEngCode";
     public final static String MODIFY_ACTIVE_BUTTON_XPATH = ".//*[@class='btn primary-btn request-account-search-btn sales-update add-sales-btn' and not(@disabled)]";
     public final static String SELECT_REGION_FIELD_ID = "select2-searchRegion-container";
     public final static String REGION_DROP_DOWN_LIST_ELEMENTS_XPATH = ".//*[@id='select2-searchRegion-results']/li";
     public final static String SALES_OFFICE_CODE_SECOND_FIELD_ID = "salesOfficeCodeInput";
+    public final static String SALES_ENGINEER_CODE_SECOND_FIELD_ID = "salesEngCodeInput";
     public final static String SEARCH_BUTTON_XPATH = ".//*[@class='btn primary-btn manageuser-account-search-btn']";
     public final static String ADD_NEW_ACCOUNTS_TABLE_ID = "addNewAccountsTable";
     public final static String ACCOUNT_NAME_NEW_ACC_TABLE_XPATH = ".//*[@id='addNewAccountsTable']/tbody/tr[1]/td[3]";

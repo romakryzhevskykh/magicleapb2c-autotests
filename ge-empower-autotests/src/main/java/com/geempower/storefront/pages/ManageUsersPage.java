@@ -69,7 +69,7 @@ public class ManageUsersPage extends StorefrontBasePage {
     }
 
     @Step("Set SO Code To The Sales Office Code Field.")
-    public void setSoCodeToTheSalesOfficeCodeField(String code) {
+    public void setSoCodeToTheFirstSalesOfficeCodeField(String code) {
         $(By.id(SALES_OFFICE_CODE_FIELD_ID)).sendKeys(code);
     }
 
@@ -163,5 +163,16 @@ public class ManageUsersPage extends StorefrontBasePage {
     @Step("Getting user's sub status.")
     public String getFullUserSubStatus() {
         return $(FULL_USER_SUB_STATUS_XPATH).getText();
+    }
+
+    @Step("Set Se Code SE Code To The Second Sales Engineer Code Field In The Add Account Pop-Up.")
+    public void setSeCodeSECodeToTheSecondSalesEngineerCodeFieldInTheAddAccountPopUp(String code) {
+        waitUntilPageIsFullyLoaded();
+        $(By.id(SALES_ENGINEER_CODE_SECOND_FIELD_ID)).sendKeys(code);
+    }
+
+    @Step("Set Se Code SE Code To The First Sales Engineer Code Field In The Add Account Pop-Up.")
+    public void setSeCodeSECodeToTheFirstSalesEngineerCodeFieldInTheAddAccountPopUp(String code) {
+        $(By.id(SALES_ENGINEER_CODE_FIELD_ID)).sendKeys(code);
     }
 }

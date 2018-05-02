@@ -91,8 +91,8 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
         accountManagementPage.removeRequestedAccounts(Integer.parseInt(threadVarsHashMap.getString(TestKeyword.COUNT_OF_PENDING_REQUESTS)));
     }
 
-    @And("^Search account from SO code.$")
-    public void searchAccountFromSOCode() {
+    @And("^Search account from SO/SE code.$")
+    public void searchAccountFromSoSeCode() {
         String accountName = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NAME);
         accountManagementPage.searchAccountByAccountName(accountName);
     }

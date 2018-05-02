@@ -60,9 +60,9 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         assertEquals(popUpTitle, manageUsersPage.getAddAccPopUpTitle());
     }
 
-    @When("^Set (.*) SO code to the Sales Office Code field in the Add Account pop-up.$")
-    public void setSoCodeToTheSalesOfficeCodeField(String code) {
-        manageUsersPage.setSoCodeToTheSalesOfficeCodeField(code);
+    @When("^Set (.*) SO code to the First Sales Office Code field in the Add Account pop-up.$")
+    public void setSoCodeToFirstTheSalesOfficeCodeField(String code) {
+        manageUsersPage.setSoCodeToTheFirstSalesOfficeCodeField(code);
     }
 
     @And("^Click on Modify button in the Add Account pop-up.$")
@@ -109,7 +109,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
 
     @Then("^(.*) Sales Office Code is displayed in the SO Codes table.$")
     public void AppropriateSalesOfficeCodeIsDisplayedInTheTable(String code) {
-        assertEquals(code, iWantToBlock.getSoCode());
+        assertEquals(code, iWantToBlock.getSoCodeFromTable());
     }
 
     @And("^Select All Sales Office Codes checkbox in SO Codes tab.$")
@@ -117,15 +117,31 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         iWantToBlock.selectAllSalesOfficeCodesCheckboxInSOCodesTab();
     }
 
+    @And("^Select All Sales Engineer Codes checkbox in SE Codes tab.$")
+    public void selectAllSalesEngineerCodesCheckboxInSECodesTab() {
+        iWantToBlock.selectAllSalesEngineerCodesCheckboxInSECodesTab();
+    }
+
     @And("^Click on SO Codes Remove button in SO Codes tab.$")
     public void clickOnRemoveSoCodesButtoninSOCodesTab() {
         iWantToBlock.clickOnRemoveSoCodesButtonSOCodesTab();
     }
 
-    @Then("^(.*) pop-up is displayed on I Want To Block.$")
+    @And("^Click on SE Codes Remove button in SE Codes tab.$")
+    public void clickOnRemoveSeCodesButtonInSeCodesTab() {
+        iWantToBlock.clickOnRemoveSeCodesButtonInSeCodesTab();
+    }
+
+    @Then("^(.*) pop-up is displayed on I Want To Block in SO codes tab.$")
     public void removeAccountPopUpTitleIsEqualToRemoveAccount(String popUpTitle) {
-        assertTrue(iWantToBlock.isRemoveAccountPopUpIsDisplayed());
-        assertEquals(popUpTitle, iWantToBlock.getRemoveAccPopUpTitle());
+        assertTrue(iWantToBlock.isRemoveAccountPopUpIsDisplayedInSoCodesTab());
+        assertEquals(popUpTitle, iWantToBlock.getRemoveSoCodesAccPopUpTitle());
+    }
+
+    @Then("^(.*) pop-up is displayed on I Want To Block in SE codes tab.$")
+    public void removeAccountPopUpTitleIsEqualToRemoveAccountInSeCodesTab(String popUpTitle) {
+        assertTrue(iWantToBlock.isRemoveAccountPopUpIsDisplayedInSeCodesTab());
+        assertEquals(popUpTitle, iWantToBlock.getRemoveSeCodesAccPopUpTitle());
     }
 
     @And("^Click on Remove button in the Remove Account pop-up.$")
@@ -133,9 +149,19 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         iWantToBlock.clickOnRemoveButtonInTheRemoveAccountPopUp();
     }
 
+    @And("^Click on Remove button in the Remove Account pop-up on I Want To Block in SE codes tab.$")
+    public void clickOnRemoveButtonInTheRemoveAccountPopUpInSECodesTab() {
+        iWantToBlock.clickOnRemoveButtonInTheRemoveAccountPopUpInSECodesTab();
+    }
+
     @Then("^(.*) title is displayed in Sales Office Code table.$")
-    public void getNoDataTitle(String title) {
-        assertEquals(title, iWantToBlock.getNoDataTitle());
+    public void getNoDataTitleInSoCodesTable(String title) {
+        assertEquals(title, iWantToBlock.getNoDataTitleInSoCodesTable());
+    }
+
+    @Then("^(.*) title is displayed in Sales Engineer Code table.$")
+    public void getNoDataTitleInSeCodesTable(String title) {
+        assertEquals(title, iWantToBlock.getNoDataTitleInSeCodesTable());
     }
   
     @And("^Sets (.*) account to the account field.$")
@@ -185,5 +211,26 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         assertEquals(status, actualUserStatus);
         assertEquals(deactivationDate, actualDate);
         assertEquals(threadVarsHashMap.getString(TestKeyword.USER_FIRST_AND_LAST_NAME), deactivatedBy);
+    }
+
+    @And("^Set (.*) SE code to the Second Sales Engineer Code field in the Add Account pop-up.$")
+    public void setSeCodeSECodeToTheSecondSalesEngineerCodeFieldInTheAddAccountPopUp(String code) {
+        manageUsersPage.setSeCodeSECodeToTheSecondSalesEngineerCodeFieldInTheAddAccountPopUp(code);
+    }
+
+    @When("^Set (.*) SE code to the First Sales Engineer Code field in the Add Account pop-up.$")
+    public void setSeCodeSECodeToTheFirstSalesEngineerCodeFieldInTheAddAccountPopUp(String code) {
+        manageUsersPage.setSeCodeSECodeToTheFirstSalesEngineerCodeFieldInTheAddAccountPopUp(code);
+    }
+
+    @When("^Click on Sales Engineer Codes tab In Modify an Account Tab.$")
+    public void clickOnSalesEngineerCodesTabInModifyAnAccountTab(){
+        iWantToBlock.clickOnSalesEngineerCodesTab();
+    }
+
+    @Then("^(.*) Sales Engineer Code is displayed in the SE Codes table.$")
+    public void sEcodeSalesEngineerCodeIsDisplayedInTheSOCodesTable(String code){
+        assertEquals(code, iWantToBlock.getSeCodeFromTable());
+
     }
 }
