@@ -110,7 +110,7 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
         $(CHECKOUT_BUTTON_XPATH).click();
     }
 
-    @Step("Check that all the product are shpwn on the P&A page.")
+    @Step("Check that all the product are shown on the P&A page.")
     public boolean areAllProductsPresent(String product) {
         return getDriver().getPageSource().contains(product);
     }
