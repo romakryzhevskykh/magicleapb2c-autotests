@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
+import java.util.List;
+
 import static com.geempower.storefront.page_elements.DashboardPageElements.*;
 
 @Component
@@ -81,4 +83,5 @@ public class DashboardPage extends StorefrontBasePage {
     public void clickOnSubmitButton() {
         click(SUBMIT_SHIP_ADDRESS_BUTTON_XPATH);
     }
+
 }

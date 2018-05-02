@@ -2,12 +2,14 @@ package com.geempower.cucumber.definition_steps;
 
 import com.geempower.helpers.models.Product;
 import com.geempower.storefront.pages.PriceAndAvailabilityPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import static org.testng.Assert.assertEquals;
@@ -56,8 +58,8 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
         priceAndAvailabilityPage.clickOnMyCartIcon();
     }
 
-    @When ("^User clicks on Checkout button.$")
-    public void clickOnCheckoutButton(){
+    @When("^User clicks on Checkout button.$")
+    public void clickOnCheckoutButton() {
         priceAndAvailabilityPage.clickOnCheckoutButton();
     }
 
@@ -115,11 +117,20 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
         selectedProducts.keySet().forEach(product -> assertTrue(priceAndAvailabilityPage.getAvailability(product).contains(availability)));
     }
 
-
     @SuppressWarnings("unchecked")
-    @And ("^Put (.*) to the hashmap on P&A page.$")
-    public void putDefaultQuantityToTheHashmap(int defaulQuantity){
+    @And("^Put (.*) to the hashmap on P&A page.$")
+    public void putDefaultQuantityToTheHashmap(int defaultQuantity) {
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
-        selectedProducts.keySet().forEach(product -> selectedProducts.put(product, defaulQuantity));
+        selectedProducts.keySet().forEach(product -> selectedProducts.put(product, defaultQuantity));
+    }
+
+    @Then("^Appropriate (\\d+) error messages are displayed on the P&A page.$")
+    public void appropriateTwoErrorMessagesAreDisplayedOnThePAPage(int count) {
+        assertTrue(priceAndAvailabilityPage.getCountOfProductErrorMessages() == count);
+    }
+
+    @Then("^All the products from (.*) are displayed on the P&A page.$")
+    public void allTheProductsFromProductsAreDisplayedOnThePAPage(List<String> products) {
+        products.forEach(product -> assertTrue(priceAndAvailabilityPage.areAllProductsPresent(product)));
     }
 }

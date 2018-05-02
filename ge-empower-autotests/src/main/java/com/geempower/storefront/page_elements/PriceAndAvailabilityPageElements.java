@@ -15,4 +15,5 @@ public class PriceAndAvailabilityPageElements {
     public final static String LINE_ITEMS_VALUE_XPATH = "//p[contains(@class,'cart-total-lines')]";
     public final static String ORDER_VALUE_XPATH = ".//p[contains(@class,'cart-total-price')]";
     public final static String CHECKOUT_BUTTON_XPATH = ".//p[contains(@class,'cart-total-price')]";
+    public final static String PRODUCT_ERROR_MESSAGES_XPATH = "//div[@class='warning-message catalog-error-message mt-10 mb-10']/span[@class='warning-text']";
 }

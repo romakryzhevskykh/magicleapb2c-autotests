@@ -2,10 +2,13 @@ package com.geempower.cucumber.definition_steps;
 
 import com.geempower.storefront.page_blocks.PriceAndAvailabilityBlock;
 import com.geempower.storefront.pages.DashboardPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 import static org.testng.Assert.assertTrue;
 
@@ -100,5 +103,10 @@ public class DashboardStepDefs extends AbstractStepDefs {
     public void userIsAbleToUseGESite() {
         dashboardPage.open();
         assertTrue(dashboardPage.isOpened());
+    }
+
+    @When("^User add list of (.*) products to the Copy&Paste block.$")
+    public void userAddProductsToTheCopyPasteBlock(List<String> products) {
+        priceAndAvailabilityBlock.addItemsToTheCopyPasteBlock(products);
     }
 }
