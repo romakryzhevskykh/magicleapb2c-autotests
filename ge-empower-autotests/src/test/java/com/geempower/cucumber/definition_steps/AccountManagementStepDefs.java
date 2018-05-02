@@ -17,10 +17,9 @@ import static org.testng.Assert.assertTrue;
 
 public class AccountManagementStepDefs extends AbstractStepDefs {
     @Autowired
-    RegionsManager regionsManager;
+    private RegionsManager regionsManager;
     @Autowired
-    AccountManagementPage accountManagementPage;
-
+    private AccountManagementPage accountManagementPage;
 
     @When("^Choose (.*) region.$")
     public void chooseRegion(String regionName) {
@@ -45,8 +44,13 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
     }
 
     @And("^Click on chosen account.$")
-    public void selectChosenAccount() {
-        accountManagementPage.selectFirstAccount();
+        public void clickOnChosenAccount(){
+        accountManagementPage.selectAccountFromTheList();
+    }
+
+    @And("^Click on account with (.*) sales division.$")
+    public void clickOnAccountWithAppropriateSalesDivision(String salesDivision){
+        accountManagementPage.selectAccountWithDivisionFromTheList(salesDivision);
     }
 
     @When("^Request account popup is opened.$")

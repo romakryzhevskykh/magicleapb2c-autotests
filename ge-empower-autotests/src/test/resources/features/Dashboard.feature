@@ -67,7 +67,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
       | North_America |
       | EMEA          |
       | ASIA          |
-
+#
   Scenario Outline: Check that user is able to place order via Product Number field using P&A block in the Latin America region
     And Account management page is opened.
     When Choose Latin_America region.
@@ -120,10 +120,11 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
       | default quantity |
       | 1                |
 
-  Scenario Outline: Check that all the Global P&A error messages are shown on the P&A page
+  Scenario Outline: Check that all the Global P&A error messages are shown on the P&A page - DE86025
     And Account management page is opened.
     When Choose North_America region.
     And Select account 3758J01.
+    And Click on chosen account.
     Then Dashboard page is opened.
     When Click on Skip button.
     When Close cookies pop-up.
@@ -136,3 +137,32 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Examples:
       | products                                    |
       | 1017251, 1019603, 1021099, 1021136, 1022416 |
+
+  Scenario Outline: While doing P&A Add Item, SPA# from previous P&A result is being sent in the web service Request - DE81550
+    And Account management page is opened.
+    When Choose <region> region.
+    And Select account 3758J01.
+    And Click on account with <salesDivision> sales division.
+    Then Dashboard page is opened.
+    When Click on Skip button.
+    When Close cookies pop-up.
+    When User add list of <products> products to the Copy&Paste block.
+    And Click on P&A button.
+    Then Price&Availability page is opened.
+    When User select <spaNo> SPA No for all the product.
+    Then All the products have <spaNo> spa no in the Special Pricing field.
+    And Account management page is opened.
+    When Choose <region> region.
+    And Select account 4642301.
+    And Click on account with <salesDivision> sales division.
+    Then Dashboard page is opened.
+    When User set THQL1115AF2 to Product Number field.
+    And Click on P&A button.
+    Then Price&Availability page is opened.
+    When User Add new item TED134025WL on the P&A page.
+    Then All the products have <standardSpaNo> spa no in the Special Pricing field.
+
+    Examples:
+      | region        | products                        | spaNo    | salesDivision | standardSpaNo |
+      | North_America | THHQB1120AF2, TEY150, 9T21B9103 | 45003866 | USS1_10_10    | STANDARD      |
+

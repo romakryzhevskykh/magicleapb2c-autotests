@@ -132,4 +132,20 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
     public void allTheProductsFromProductsAreDisplayedOnThePAPage(List<String> products) {
         products.forEach(product -> assertTrue(priceAndAvailabilityPage.areAllProductsPresent(product)));
     }
+
+    @When("^User select (.*) SPA No for all the product.$")
+    public void userSelectSPANoForAllTheProduct(String spaNo) {
+        priceAndAvailabilityPage.setAppropriateSpaToAllProducts(spaNo);
+    }
+
+    @Then("^All the products have (.*) spa no in the Special Pricing field.$")
+    public void allTheProductHaveAppropriateSpaNoInTheSpecialPricingField(String spaNo) {
+        assertTrue(priceAndAvailabilityPage.getSpaNoForTheProduct()
+                .allMatch(spa -> spa.getAttribute("value").equals(spaNo)));
+    }
+
+    @When("^User Add new item (.*) on the P&A page.$")
+    public void userAddNewItemOnThePAPage(String catalogueNo) {
+        priceAndAvailabilityPage.addNewItem(catalogueNo);
+    }
 }
