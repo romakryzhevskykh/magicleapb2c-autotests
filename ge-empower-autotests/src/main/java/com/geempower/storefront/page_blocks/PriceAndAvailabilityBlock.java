@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
+import java.util.List;
+
 import static com.geempower.storefront.page_block_elements.PriceAndAvailabilityBlockElements.*;
 
 @Component
@@ -29,6 +31,11 @@ public class PriceAndAvailabilityBlock extends UIComponent {
     @Step("Enter CatalogueNo. to the product field")
     public void setCatalogueNoToProductField(String catalogueNo){
         $(By.id(FIRST_PRODUCT_ROW_ID)).sendKeys(catalogueNo);
+    }
+
+    @Step("Add the list of Items to the Copy&Paste block.")
+    public void addItemsToTheCopyPasteBlock(List<String> products) {
+        products.forEach(product -> $(By.id(COPY_AND_PASTE_FIELD_ID)).sendKeys(product + "\n"));
     }
 }
 

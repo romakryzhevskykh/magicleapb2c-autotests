@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
+import java.util.List;
+
 import static com.geempower.storefront.page_elements.MyCartPageElements.GREEN_CONFIRMATION_POP_UP_ID;
 import static com.geempower.storefront.page_elements.PriceAndAvailabilityPageElements.*;
 
@@ -106,5 +108,15 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
     @Step("Click on Checkout button")
     public void clickOnCheckoutButton() {
         $(CHECKOUT_BUTTON_XPATH).click();
+    }
+
+    @Step("Check that all the product are shown on the P&A page.")
+    public boolean areAllProductsPresent(String product) {
+        return getDriver().getPageSource().contains(product);
+    }
+
+    @Step("Get count of error message on the P&A page.")
+    public int getCountOfProductErrorMessages() {
+        return $$(PRODUCT_ERROR_MESSAGES_XPATH).size();
     }
 }

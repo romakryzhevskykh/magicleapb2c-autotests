@@ -62,11 +62,11 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then GE Order No. is correct.
     Then Total Net Price is equal to Extend Price.
 
-  Examples:
-    | region            |
-    | North_America     |
-    | EMEA              |
-    | ASIA              |
+    Examples:
+      | region        |
+      | North_America |
+      | EMEA          |
+      | ASIA          |
 
   Scenario Outline: Check that user is able to place order via Product Number field using P&A block in the Latin America region
     And Account management page is opened.
@@ -119,3 +119,20 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Examples:
       | default quantity |
       | 1                |
+
+  Scenario Outline: Check that all the Global P&A error messages are shown on the P&A page
+    And Account management page is opened.
+    When Choose North_America region.
+    And Select account 3758J01.
+    Then Dashboard page is opened.
+    When Click on Skip button.
+    When Close cookies pop-up.
+    When User add list of <products> products to the Copy&Paste block.
+    And Click on P&A button.
+    Then Price&Availability page is opened.
+    Then All the products from <products> are displayed on the P&A page.
+    Then Appropriate 2 error messages are displayed on the P&A page.
+
+    Examples:
+      | products                                    |
+      | 1017251, 1019603, 1021099, 1021136, 1022416 |
