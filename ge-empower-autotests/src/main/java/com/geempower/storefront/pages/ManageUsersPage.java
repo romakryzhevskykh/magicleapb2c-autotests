@@ -165,13 +165,13 @@ public class ManageUsersPage extends StorefrontBasePage {
         return $(FULL_USER_SUB_STATUS_XPATH).getText();
     }
 
-    @Step("Set Se Code SE Code To The Second Sales Engineer Code Field In The Add Account Pop-Up.")
-    public void setSeCodeSECodeToTheSecondSalesEngineerCodeFieldInTheAddAccountPopUp(String code) {
+    @Step("Set SE Code To The Second Sales Engineer Code Field In The Add Account Pop-Up.")
+    public void setSECodeToTheSecondSalesEngineerCodeFieldInTheAddAccountPopUp(String code) {
         waitUntilPageIsFullyLoaded();
         $(By.id(SALES_ENGINEER_CODE_SECOND_FIELD_ID)).sendKeys(code);
     }
 
-    @Step("Set Se Code SE Code To The First Sales Engineer Code Field In The Add Account Pop-Up.")
+    @Step("Set SE Code To The First Sales Engineer Code Field In The Add Account Pop-Up.")
     public void setSeCodeSECodeToTheFirstSalesEngineerCodeFieldInTheAddAccountPopUp(String code) {
         $(By.id(SALES_ENGINEER_CODE_FIELD_ID)).sendKeys(code);
     }

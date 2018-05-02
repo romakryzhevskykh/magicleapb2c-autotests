@@ -215,7 +215,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
 
     @And("^Set (.*) SE code to the Second Sales Engineer Code field in the Add Account pop-up.$")
     public void setSeCodeSECodeToTheSecondSalesEngineerCodeFieldInTheAddAccountPopUp(String code) {
-        manageUsersPage.setSeCodeSECodeToTheSecondSalesEngineerCodeFieldInTheAddAccountPopUp(code);
+        manageUsersPage.setSECodeToTheSecondSalesEngineerCodeFieldInTheAddAccountPopUp(code);
     }
 
     @When("^Set (.*) SE code to the First Sales Engineer Code field in the Add Account pop-up.$")
