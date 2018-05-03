@@ -141,7 +141,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
   Scenario Outline: While doing P&A Add Item, SPA# from previous P&A result is being sent in the web service Request - DE81550
     And Account management page is opened.
     When Choose <region> region.
-    And Select account 3758J01.
+    And Select account 1318501.
     And Click on account with <salesDivision> sales division.
     Then Dashboard page is opened.
     When Click on Skip button.
@@ -164,5 +164,5 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
 
     Examples:
       | region        | products                        | spaNo    | salesDivision | standardSpaNo |
-      | North_America | THHQB1120AF2, TEY150, 9T21B9103 | 45003866 | USS1_10_10    | STANDARD      |
+      | North_America | THHQB1120AF2, TEY150, 9T21B9103 | 45003985 | USS1_10_10    | STANDARD      |
 

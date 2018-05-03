@@ -25,5 +25,6 @@ public class PriceAndAvailabilityPageElements {
     public final static String ADD_ITEM_BUTTON_XPATH = "//button[@class='btn btn-white']";
     public final static String ADD_ITEM_POP_UP_FIRST_PRODUCT_FIELD_XPATH = "//ul[@id='addProductList']/li[1]//input[contains(@name, 'productNo')]";
     public final static String ADD_ITEM_POP_UP_ADD_PRODUCT_BUTTON_XPATH = "//button[@id='addProduct']";
-
+    public final static String UPDATE_PRICE_AND_AVAILABILITY_BUTTON_ID = "upd_pr_and_av_btn";
+    public final static String SPECIAL_PRICING_POP_UP_TITLE_XPATH = "//div[@id='special-pricing-lookup-modal']//h4[@class='modal-title']";
 }
