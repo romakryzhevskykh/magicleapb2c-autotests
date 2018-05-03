@@ -7,7 +7,7 @@
         <parameter name="headless" value="false"/>
         <classes>
             <!--<class name="com.geempower.cucumber.AccountManagementSuite"/>-->
-            <class name="com.geempower.cucumber.DashboardSuite"/>
+            <!--<class name="com.geempower.cucumber.DashboardSuite"/>-->
             <!--<class name="com.geempower.cucumber.ShipmentSuite"/>-->
             <!--<class name="com.geempower.cucumber.MyCartSuite"/>-->
             <!--<class name="com.geempower.cucumber.OrdersSuite"/>-->
@@ -15,7 +15,7 @@
             <!--<class name="com.geempower.cucumber.InvoiceSuite"/>-->
             <!--<class name="com.geempower.cucumber.ProductsSuite"/>-->
             <!--<class name="com.geempower.cucumber.ReturnsSuite"/>-->
-            <!--<class name="com.geempower.cucumber.RebatesSuite"/>-->
+            <class name="com.geempower.cucumber.RebatesSuite"/>
             <!--<class name="com.geempower.cucumber.SpecialPricingSuite"/>-->
             <!--<class name="com.geempower.cucumber.ManageUsersSuite"/>-->
             <!--<class name="com.geempower.cucumber.ProfileSuite"/>-->

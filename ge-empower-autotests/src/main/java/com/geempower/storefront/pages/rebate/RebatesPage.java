@@ -25,14 +25,19 @@ public class RebatesPage extends StorefrontBasePage {
         return $(ALL_REBATES_TITLE_XPATH).getText();
     }
 
-    @Step("Click on Create rebate button")
+    @Step("Click on Create rebate button.")
     public void clickOnCreateRebateButton() {
         waitUntilPageIsFullyLoaded();
         $(CREATE_REBATE_BUTTON_XPATH).click();
     }
 
-    @Step("Check that created rebate is displayed on the All rebates page")
+    @Step("Check that created rebate is displayed on the All rebates page.")
     public boolean isRebateDisplayed(String id) {
         return $(REBATE_BY_ID_XPATH, id).isDisplayed();
+    }
+
+    @Step("Get a number of all Rebates on the Rebates page.")
+    public int getNumberOfAllRebates() {
+        return Integer.parseInt($(ALL_REBATEST_COUNT_XPATH).getText());
     }
 }
