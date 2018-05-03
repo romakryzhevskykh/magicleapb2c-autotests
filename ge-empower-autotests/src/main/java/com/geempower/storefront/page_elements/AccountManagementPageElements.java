@@ -8,6 +8,7 @@ public class AccountManagementPageElements {
     public final static String SEARCH_FIELD_XPATH = ".//input[@id='searchAccount']";
     public final static String SEARCH_BUTTON_XPATH = ".//button[.='Search'and@class='btn primary-btn account-search-btn']";
     public final static String FIRST_ACCOUNT_FROM_LIST_OF_ACCOUNTS_XPATH = ".//div[@id='recently-viewed']//tr[@class='odd'or@class='even']/*[2]/a[1]";
+    public final static String ACCOUNT_WITH_APPROPRIATE_SALES_DIVISION_FROM_LIST_OF_ACCOUNTS_XPATH = ".//div[@id='recently-viewed']//tr[@class='odd'or@class='even']/*[2]/a[contains(@href, '%s')]";
     public final static String REQUEST_ACCOUNT_BUTTON = "//button[@class='btn btn-white request-account-btn']";
     public final static String ACCOUNT_ROW_IN_POP_UP_XPATH = "//div[@class='request-account-form-body']/div[@class='row']";
     public final static String ACCOUNT_ROW_IN_POP_UP_BY_COUNTER_XPATH = ACCOUNT_ROW_IN_POP_UP_XPATH + "[%s]";

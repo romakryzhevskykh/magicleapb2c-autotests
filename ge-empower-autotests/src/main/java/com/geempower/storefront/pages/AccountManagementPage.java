@@ -59,10 +59,16 @@ public class AccountManagementPage extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
     }
 
-    @Step("Select first account")
-    public void selectFirstAccount() {
+    @Step("Select account from the list")
+    public void selectAccountFromTheList() {
         waitUntilPageIsFullyLoaded();
         click(FIRST_ACCOUNT_FROM_LIST_OF_ACCOUNTS_XPATH);
+    }
+
+    @Step("Select account with appropriate sales division from the list")
+    public void selectAccountWithDivisionFromTheList(String salesDivision) {
+        waitUntilPageIsFullyLoaded();
+        click(ACCOUNT_WITH_APPROPRIATE_SALES_DIVISION_FROM_LIST_OF_ACCOUNTS_XPATH, salesDivision);
     }
 
     @Step("Click on Cancel Button")
@@ -122,8 +128,8 @@ public class AccountManagementPage extends StorefrontBasePage {
         }
     }
 
-    public void isAccountPageFullyLoaded(){
-        if(!$(APPROVED_ACCOUNT_ROW_XPATH).isDisplayed()){
+    public void isAccountPageFullyLoaded() {
+        if (!$(APPROVED_ACCOUNT_ROW_XPATH).isDisplayed()) {
             getDriver().navigate().refresh();
         }
     }

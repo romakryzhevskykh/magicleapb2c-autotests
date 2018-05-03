@@ -3,10 +3,11 @@ package com.geempower.storefront.pages;
 import com.geempower.helpers.models.Product;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import java.util.List;
+import java.util.stream.Stream;
 
 import static com.geempower.storefront.page_elements.MyCartPageElements.GREEN_CONFIRMATION_POP_UP_ID;
 import static com.geempower.storefront.page_elements.PriceAndAvailabilityPageElements.*;
@@ -118,5 +119,36 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
     @Step("Get count of error message on the P&A page.")
     public int getCountOfProductErrorMessages() {
         return $$(PRODUCT_ERROR_MESSAGES_XPATH).size();
+    }
+
+    @Step("Set Appropriate Spa To All Products.")
+    public void setAppropriateSpaToAllProducts(String spaNo) {
+        click(SEARCH_SPA_NO_ICON_XPATH);
+        waitUntilPageIsFullyLoaded();
+        searchAppropriateSpaViaSearchFieldOnSpecialPricingLookupPopUp(spaNo);
+        click(APPLY_TO_ALL_BUTTON_SPECIAL_PRICING_POP_UP_XPATH);
+        waitUntilPageIsFullyLoaded();
+    }
+
+    @Step("Search Appropriate Spa Via Search Field On Special Pricing Lookup Pop Up.")
+    private void searchAppropriateSpaViaSearchFieldOnSpecialPricingLookupPopUp(String spaNo) {
+        $(SEARCH_SPA_NO_INPUT_XPATH).clear();
+        $(SEARCH_SPA_NO_INPUT_XPATH).sendKeys(spaNo);
+        click(SEARCH_SPA_NO_ICON_SPECIAL_PRICING_POP_UP_XPATH);
+        waitUntilPageIsFullyLoaded();
+        click(FIRST_SPA_ON_THE_SPECIAL_PRICING_POP_UP_XPATH);
+    }
+
+    @Step("Get Spa No For The Product.")
+    public Stream<WebElement> getSpaNoForTheProduct() {
+        return $$(SPA_NO_VALUES_FOR_ALL_PRODUCTS_XPATH).stream();
+    }
+
+    @Step("Add new items.")
+    public void addNewItem(String catalogueNo) {
+        click(ADD_ITEM_BUTTON_XPATH);
+        $(ADD_ITEM_POP_UP_FIRST_PRODUCT_FIELD_XPATH).clear();
+        $(ADD_ITEM_POP_UP_FIRST_PRODUCT_FIELD_XPATH).sendKeys(catalogueNo);
+        click(ADD_ITEM_POP_UP_ADD_PRODUCT_BUTTON_XPATH);
     }
 }

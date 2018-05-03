@@ -88,6 +88,11 @@ public class DashboardStepDefs extends AbstractStepDefs {
         priceAndAvailabilityBlock.setCatalogueNoToProductField(catalogueNo);
     }
 
+    @When("^User set (.*) to Product Number field.$")
+    public void userSetCatalogueNoToProductField(String catalogueNo) {
+        priceAndAvailabilityBlock.setCatalogueNoToProductField(catalogueNo);
+    }
+
     @And("^Select address from address field.$")
     public void selectAddressFromAddressField() {
         threadVarsHashMap.put(TestKeyword.LA_SHIP_ADDRESS, dashboardPage.selectAddressFromAddressField());
