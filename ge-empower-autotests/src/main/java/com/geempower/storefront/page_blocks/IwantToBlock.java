@@ -19,7 +19,6 @@ public class IwantToBlock extends UIComponent {
         click(MODIFY_AN_ACCOUNT_TAB_XPATH);
     }
 
-
     @Step("Get Account Name.")
     public Stream<WebElement> getAccountName() {
         waitUntilPageIsFullyLoaded();
@@ -97,7 +96,6 @@ public class IwantToBlock extends UIComponent {
 
     @Step("Is Remove Account Pop-Up Is Displayed In SO Codes Tab.")
     public boolean isRemoveAccountPopUpIsDisplayedInSoCodesTab() {
-        getDriver().switchTo().window(getDriver().getWindowHandle());
         waitForElementWithAppropriateTextToAppear(By.xpath(REMOVE_ACCOUNT_POP_UP_TITLE_SO_CODES_XPATH), "Remove Account");
         return isDisplayed(REMOVE_ACCOUNT_POP_UP_SO_CODES_XPATH);
     }

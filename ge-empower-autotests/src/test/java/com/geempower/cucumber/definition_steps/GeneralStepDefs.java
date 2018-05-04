@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class GeneralStepDefs extends AbstractStepDefs {
     @Autowired
-    UserNotValidPage userNotValidPage;
+    private UserNotValidPage userNotValidPage;
 
     @And("^Focus on browser.$")
     public void focusOnBrowser() {
@@ -15,6 +15,6 @@ public class GeneralStepDefs extends AbstractStepDefs {
 
     @And("^Refresh page.$")
     public void refreshPage() {
-        userNotValidPage.refreshPage();
+        userNotValidPage.refreshCurrentPage();
     }
 }
