@@ -124,7 +124,7 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
     @Step("Set Appropriate Spa To All Products.")
     public void setAppropriateSpaToAllProducts(String spaNo) {
         click(SEARCH_SPA_NO_ICON_XPATH);
-        waitForElementWithAppropriateTextToAppear(By.xpath("SPECIAL_PRICING_POP_UP_TITLE_XPATH"), "Special Pricing Lookup");
+        waitForElementWithAppropriateTextToAppear(By.xpath(SPECIAL_PRICING_POP_UP_TITLE_XPATH), "Special Pricing Lookup");
         searchAppropriateSpaViaSearchFieldOnSpecialPricingLookupPopUp(spaNo);
         click(APPLY_TO_ALL_BUTTON_SPECIAL_PRICING_POP_UP_XPATH);
         waitUntilPageIsFullyLoaded();
@@ -134,7 +134,7 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
 
     @Step("Search Appropriate Spa Via Search Field On Special Pricing Lookup Pop Up.")
     private void searchAppropriateSpaViaSearchFieldOnSpecialPricingLookupPopUp(String spaNo) {
-        waitHTMLTemplateLoad();
+        waitUntilPageIsFullyLoaded();
         $(SEARCH_SPA_NO_INPUT_XPATH).clear();
         $(SEARCH_SPA_NO_INPUT_XPATH).sendKeys(spaNo);
         click(SEARCH_SPA_NO_ICON_SPECIAL_PRICING_POP_UP_XPATH);

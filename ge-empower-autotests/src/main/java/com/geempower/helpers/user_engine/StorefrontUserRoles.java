@@ -4,6 +4,7 @@ public enum StorefrontUserRoles implements UserRole {
     SHOPPER,
     EMPOWERADMIN,
     INTERNALUSER,
+    REGIONALVIEW,
     CUSTOMERADMIN;
 
     @Override

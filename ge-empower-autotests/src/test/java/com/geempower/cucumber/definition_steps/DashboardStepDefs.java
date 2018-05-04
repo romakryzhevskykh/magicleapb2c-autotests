@@ -81,7 +81,7 @@ public class DashboardStepDefs extends AbstractStepDefs {
         priceAndAvailabilityBlock.setCatalogueNoToTheCopyAndPasteField(catalogueNo);
     }
 
-    @When("^User set catalogNo to Product Number field.$")
+    @When("^User set chosen catalogueNo to the Product Number field.$")
     public void userSetCatalogueNoToProductField() {
         threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
@@ -89,8 +89,8 @@ public class DashboardStepDefs extends AbstractStepDefs {
     }
 
     @When("^User set (.*) to Product Number field.$")
-    public void userSetCatalogueNoToProductField(String catalogueNo) {
-        priceAndAvailabilityBlock.setCatalogueNoToProductField(catalogueNo);
+    public void userSetCatalogueNoToProductField(String catalogNo) {
+        priceAndAvailabilityBlock.setCatalogueNoToProductField(catalogNo);
     }
 
     @And("^Select address from address field.$")

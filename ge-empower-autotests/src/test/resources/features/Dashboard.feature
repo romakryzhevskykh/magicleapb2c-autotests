@@ -67,7 +67,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
       | North_America |
       | EMEA          |
       | ASIA          |
-#
+
   Scenario Outline: Check that user is able to place order via Product Number field using P&A block in the Latin America region
     And Account management page is opened.
     When Choose Latin_America region.
@@ -77,7 +77,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     When Click on Skip button.
     When Close cookies pop-up.
     Given Select test product for chosen region.
-    When User set catalogNo to Product Number field.
+    When User set chosen catalogueNo to the Product Number field.
     And Click on P&A button.
     And Select address from address field.
     And Click on Submit button.
