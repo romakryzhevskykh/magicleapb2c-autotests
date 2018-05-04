@@ -31,8 +31,4 @@ public class UserNotValidPage extends StorefrontBasePage {
         return $(HELLO_USER_MESSAGE_2).getText() + $(HELLO_USER_MESSAGE_3).getText();
     }
 
-    @Step("Refresh the page.")
-    public void refreshCurrentPage() {
-        getDriver().navigate().refresh();
-    }
 }

@@ -19,6 +19,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
       | d.sanjarevskaya@megogo.net |
 
   Scenario Outline: Check that admin is able to add SO code to the internal user
+    And Refresh page.
     When Admin opens Users tab.
     And Sets <email> email to the email field.
     And Clicks on the Search button.
@@ -33,11 +34,12 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     When Set <soCode> SO code to the First Sales Office Code field in the Add Account pop-up.
     And Click on Modify button in the Add Account pop-up.
     And Expand Modify an Account tab in I Want To Block.
-    Then Account from SO code is displayed in the the All Accounts tab.
+    Then Account from SO/SE code is displayed in the the All Accounts tab.
     When Click on Sales Office Codes tab In Modify an Account Tab.
     Then <soCode> Sales Office Code is displayed in the SO Codes table.
     Given Switch to Storefront as internalUser.
     And User is logged in to Storefront.
+    And Refresh page.
     And Account management page is opened.
     When Choose North_America region.
     And Search account from SO/SE code.
@@ -45,6 +47,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Given Switch to Storefront as admin.
     And Select All Sales Office Codes checkbox in SO Codes tab.
     And Click on SO Codes Remove button in SO Codes tab.
+    And Focus on browser.
     Then Remove Account pop-up is displayed on I Want To Block in SO codes tab.
     And Click on Remove button in the Remove Account pop-up.
     Then No data available in table title is displayed in Sales Office Code table.
@@ -53,7 +56,9 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
       | email              | soCode |
       | test123rest@ge.com | USG2   |
 
-  Scenario Outline: Check that admin is able to add SO code to the internal user
+  Scenario Outline: Check that admin is able to add SE code to the internal user
+    And Refresh page.
+    And Focus on browser.
     When Admin opens Users tab.
     And Sets <email> email to the email field.
     And Clicks on the Search button.
@@ -68,11 +73,12 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     When Set <seCode> SE code to the First Sales Engineer Code field in the Add Account pop-up.
     And Click on Modify button in the Add Account pop-up.
     And Expand Modify an Account tab in I Want To Block.
-    Then Account from SO code is displayed in the the All Accounts tab.
+    Then Account from SO/SE code is displayed in the the All Accounts tab.
     When Click on Sales Engineer Codes tab In Modify an Account Tab.
     Then <seCode> Sales Engineer Code is displayed in the SE Codes table.
     Given Switch to Storefront as internalUser.
     And User is logged in to Storefront.
+    And Refresh page.
     And Account management page is opened.
     When Choose North_America region.
     And Search account from SO/SE code.
@@ -80,6 +86,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Given Switch to Storefront as admin.
     And Select All Sales Engineer Codes checkbox in SE Codes tab.
     And Click on SE Codes Remove button in SE Codes tab.
+    And Focus on browser.
     Then Remove Account pop-up is displayed on I Want To Block in SE codes tab.
     And Click on Remove button in the Remove Account pop-up on I Want To Block in SE codes tab.
     Then No data available in table title is displayed in Sales Engineer Code table.

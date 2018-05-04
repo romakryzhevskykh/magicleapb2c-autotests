@@ -17,4 +17,9 @@ public abstract class StorefrontBasePage extends BasePageObject {
     }
 
     public abstract String getPageUrl();
+
+    public void refreshPage(){
+        getDriver().navigate().refresh();
+    }
 }
+

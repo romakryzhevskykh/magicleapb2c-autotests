@@ -2,8 +2,11 @@ package com.geempower.storefront.page_blocks;
 
 import com.geempower.helpers.UIComponent;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
+
+import java.util.stream.Stream;
 
 import static com.geempower.storefront.page_block_elements.IwantToBlockElements.*;
 
@@ -18,9 +21,9 @@ public class IwantToBlock extends UIComponent {
 
 
     @Step("Get Account Name.")
-    public String getAccountName() {
+    public Stream<WebElement> getAccountName() {
         waitUntilPageIsFullyLoaded();
-        return $(ACCOUNT_NAME_IN_ACCOUNTS_TABLE_XPATH).getText();
+        return $$(ALL_ACCOUNT_NAMES_IN_ACCOUNTS_TABLE_XPATH).stream();
     }
 
     @Step("Click On Sales Office Codes Tab.")
@@ -94,6 +97,7 @@ public class IwantToBlock extends UIComponent {
 
     @Step("Is Remove Account Pop-Up Is Displayed In SO Codes Tab.")
     public boolean isRemoveAccountPopUpIsDisplayedInSoCodesTab() {
+        getDriver().switchTo().window(getDriver().getWindowHandle());
         waitForElementWithAppropriateTextToAppear(By.xpath(REMOVE_ACCOUNT_POP_UP_TITLE_SO_CODES_XPATH), "Remove Account");
         return isDisplayed(REMOVE_ACCOUNT_POP_UP_SO_CODES_XPATH);
     }

@@ -155,8 +155,12 @@ public abstract class UIComponent {
 
     public void waitForElementWithAppropriateTextToAppear(By by, String text) {
         webDriverPool.getActiveDriverSession().setImplicitWait();
-        WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getTimeOut());
-        wait.until(ExpectedConditions.textToBe(by, text));
-
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getTimeOut());
+            wait.until(ExpectedConditions.textToBe(by, text));
+        } catch (TimeoutException ex) {
+            WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getShortTimeOut());
+            wait.until((WebDriver dr1)-> dr1.findElement(by).getAttribute("innerText").trim().equals(text));
+        }
     }
 }
