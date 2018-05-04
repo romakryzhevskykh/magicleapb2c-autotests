@@ -1,20 +1,20 @@
 package com.geempower.cucumber.definition_steps;
 
-import com.geempower.storefront.pages.UserNotValidPage;
+import com.geempower.helpers.BasePageObject;
 import cucumber.api.java.en.And;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class GeneralStepDefs extends AbstractStepDefs {
     @Autowired
-    private UserNotValidPage userNotValidPage;
+    private BasePageObject basePageObject;
 
     @And("^Focus on browser.$")
     public void focusOnBrowser() {
-        userNotValidPage.focusOnActiveBrowser();
+        basePageObject.focusOnActiveBrowser();
     }
 
     @And("^Refresh page.$")
     public void refreshPage() {
-        userNotValidPage.refreshCurrentPage();
+        basePageObject.refreshCurrentPage();
     }
 }

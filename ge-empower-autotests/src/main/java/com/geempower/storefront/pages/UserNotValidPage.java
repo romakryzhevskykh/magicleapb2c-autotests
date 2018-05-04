@@ -30,5 +30,4 @@ public class UserNotValidPage extends StorefrontBasePage {
     public String getHelloMessage() {
         return $(HELLO_USER_MESSAGE_2).getText() + $(HELLO_USER_MESSAGE_3).getText();
     }
-
 }
