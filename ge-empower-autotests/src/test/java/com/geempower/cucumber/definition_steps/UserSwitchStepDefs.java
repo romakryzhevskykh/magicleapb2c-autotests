@@ -31,7 +31,7 @@ public class UserSwitchStepDefs {
 
     @Given("Switch to Storefront as regionalView.")
     public void switchToStorefrontAsRegionalView() {
-        webDriverPool.setDriverActive(StorefrontUserRoles.EMPOWERADMIN);
+        webDriverPool.setDriverActive(StorefrontUserRoles.REGIONALVIEW);
     }
 //    @Given("Switch to Import cockpit import manager role.")
 //    public void switchToImportCockpitAsImportManager() {

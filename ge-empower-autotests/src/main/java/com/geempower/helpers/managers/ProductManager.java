@@ -26,7 +26,7 @@ public class ProductManager {
         productsList.add(new Product(catalogueNo, regionsManager.getRegionByValue(region), id));
     }
 
-    public Product getProductByRegion(Region region) {
+    private Product getProductByRegion(Region region) {
         return productsList.stream().filter(product -> product.getRegion().equals(region)).findAny().get();
     }
 
@@ -44,14 +44,20 @@ public class ProductManager {
                 });
     }
 
-    public void setAllDataFromPDP(UserSession userSession, Product product) throws IOException {
+    private void setAllDataFromPDP(UserSession userSession, Product product) throws IOException {
         GETRequest getProductDetailsByProductId = GET_PRODUCT_DETAILS_FROM_PDP.getClone();
         getProductDetailsByProductId.setValue(product.getId());
         getProductDetailsByProductId.sendGetRequest(userSession);
         Document response = getProductDetailsByProductId.getResponse().getHTMLResponseDocument();
         product.setDescription(Xsoup.select(response, DESCRIPTION_XPATH).get());
         product.setAvailability(Xsoup.select(response, AVAILABILITY_XPATH).get());
-        product.setListPrice(Xsoup.select(response, LIST_PRICE).get());
-        product.setFinalNetPrice(Xsoup.select(response, FINAL_NET_PRICE).get());
+        product.setListPrice(Xsoup.select(response, PRODUCT_DETAIL_TABLE_XPATH)
+                .getElements().stream()
+                .filter(element -> Xsoup.select(element, PRICE_CELL_XPATH).get().equals("List Price"))
+                .findAny().orElseGet(()->{throw new NullPointerException("");}).child(1).text());
+        product.setFinalNetPrice(Xsoup.select(response, PRODUCT_DETAIL_TABLE_XPATH)
+                .getElements().stream()
+                .filter(element -> Xsoup.select(element, PRICE_CELL_XPATH).get().equals("Final Net Price"))
+                .findAny().orElseGet(()->{throw new NullPointerException("");}).child(1).text());
     }
 }
