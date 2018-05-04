@@ -138,4 +138,5 @@ public class AccountManagementPage extends StorefrontBasePage {
     public String getFirstAccountNameInTheTable() {
         return $(ACCOUNT_NAME_VALUE_IN_TABLE_XPATH).getText();
     }
+
 }

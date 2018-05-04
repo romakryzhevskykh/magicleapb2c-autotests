@@ -96,10 +96,11 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.MANAGE_USERS_ACCOUNT_NAME, manageUsersPage.getAccountNameFromAddAccPopUp());
     }
 
-    @Then("^Account from SO code is displayed in the the All Accounts tab.$")
-    public void accountFromSOCodeIsDisplayedInTheTheAllAccountsTab() {
+    @Then("^Account from SO/SE code is displayed in the the All Accounts tab.$")
+    public void accountFromSoSeCodeIsDisplayedInTheTheAllAccountsTab() {
         String accountName = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NAME);
-        assertEquals(accountName, iWantToBlock.getAccountName());
+        assertTrue(iWantToBlock.getAccountName()
+        .anyMatch(account -> account.getText().equals(accountName)));
     }
 
     @When("^Click on Sales Office Codes tab In Modify an Account Tab.$")

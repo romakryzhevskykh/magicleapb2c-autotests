@@ -5,7 +5,6 @@ public class IwantToBlockElements {
     public final static String SALES_OFFICE_CODES_TAB_XPATH = ".//*[@href='#approved-salesofficecode']";
     public final static String SALES_ENGINEER_CODES_TAB_XPATH = ".//*[@href='#approved-salesengineer']";
     public final static String ALL_ACCOUNTS_TABLE_ID = "activeRequestsTableForCustomer";
-    public final static String ACCOUNT_NAME_IN_ACCOUNTS_TABLE_XPATH = ".//*[@id='activeRequestsTableForCustomer']/tbody/tr[1]/td[3]";
     public final static String ALL_ACCOUNT_NAMES_IN_ACCOUNTS_TABLE_XPATH = ".//*[@id='activeRequestsTableForCustomer']/tbody/tr/td[3]";
     public final static String SALES_OFFICE_CODE_TABLE_XPATH = ".//table[contains (@class, 'approved-sales-office-request-table')]";
     public final static String SALES_OFFICE_CODE_XPATH = ".//table[contains (@class, 'approved-sales-office-request-table')]//td[@class='account-number-col']";
