@@ -2,6 +2,7 @@ package com.template.storefront.pages;
 
 import com.template.helpers.BasePageObject;
 import com.template.storefront.models.TemplateStorefront;
+import com.template.storefront.models.UserModelBuilder;
 import com.template.storefront.page_blocks.HeaderRowPageBlock;
 
 import org.openqa.selenium.WebElement;
@@ -10,7 +11,7 @@ import ru.yandex.qatools.allure.annotations.Step;
 
 public abstract class StorefrontBasePage extends BasePageObject {
     @Autowired TemplateStorefront storefrontProject;
-
+    @Autowired UserModelBuilder userModelBuilder;
     @Autowired private HeaderRowPageBlock headerRowPageBlock;
 
     protected boolean isUserLoggedIn() {

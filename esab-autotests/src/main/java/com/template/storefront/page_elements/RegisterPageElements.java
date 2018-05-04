@@ -10,10 +10,11 @@ public class RegisterPageElements {
 			+ "//p[normalize-space(text())]";
 	private static String REGISTRATION_PAGE_SELECT_BASIC_XPATH = "//select[@id='%s']";
 	public static String COUNTRY_DROPDOWN = String.format(REGISTRATION_PAGE_SELECT_BASIC_XPATH, "address.country_del");
-	// Need to be used with specific country value. i.e. "US"
-	public static String COUNTRY_VALUE_XPATH = COUNTRY_DROPDOWN + "/option[@value='%s']";
+	//public static String COUNTRY_VALUE_XPATH = COUNTRY_DROPDOWN +"/option[@value='%s']";
+	public static String COUNTRY_VALUE_XPATH = COUNTRY_DROPDOWN +"/option[text()='%s']";
 	public static String TITLE_DROPDOWN = String.format(REGISTRATION_PAGE_SELECT_BASIC_XPATH, "register.title");
-	public static String TITLE_VALUE_XPATH = TITLE_DROPDOWN + "/option[@value='%s']";
+	//public static String TITLE_VALUE_XPATH = TITLE_DROPDOWN + "/option[@value='%s']";
+	public static String TITLE_VALUE_XPATH = TITLE_DROPDOWN + "/option[text()='%s']";
 	private static String REGISTRATION_PAGE_SECURE_PORTAL_BASIC_XPATH = "//input[@id='text.secureportal.register.%s']";
 	public static String FIRST_AND_LAST_NAME_XPATH = String.format(REGISTRATION_PAGE_SECURE_PORTAL_BASIC_XPATH,
 			"firstAndLastName");

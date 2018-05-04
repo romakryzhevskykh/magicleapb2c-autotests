@@ -50,6 +50,20 @@ public class RegisterPageStepDefs extends AbstractStepDefs {
 		registerPage.verifyRegisterPageSecondLineText();
 	}
 
+	@Given("^User model:" + "Country: '(.*)', " + "Title: '(.*)', " + "First and Last Name: '(.*)', "
+			+ "Company ID: '(.*)', " + "Company Name: '(.*)', " + "Address 1: '(.*)', " + "Address 2: '(.*)', "
+			+ "City: '(.*)', " + "Post Code: '(.*)', " + "Position: '(.*)', " + "Telephone: '(.*)', " + "Ext: '(.*)', "
+			+ "Email address: '(.*)', " + "Confir email address: '(.*)', " + "Comment: '(.*)'.$")
+	public void createUserModel(String newCountry, String newTitle, String newFirstLastName, String newCompanyId,
+			String newCompanyName, String newAddr1, String newAddr2, String newCity, String newPostCode,
+			String newPosition, String newTelephone, String newExt, String newEmailAddr, String newConfirmEmailaddr,
+			String newComment) {
+		registerPage.createUserModel(newCountry, newTitle, newFirstLastName, newCompanyId, newCompanyName, newAddr1,
+				newAddr2, newCity, newPostCode, newPosition, newTelephone, newExt, newEmailAddr, newConfirmEmailaddr,
+				newComment);
+
+	}
+
 	@Then("^Input First name and LastName: (.*) into First and Last name field.$")
 	public void inputTextIntoFirstLastName(String firstLastName) {
 		registerPage.fillInFirstLastNameInput(firstLastName);
@@ -130,9 +144,9 @@ public class RegisterPageStepDefs extends AbstractStepDefs {
 	public void inputTextIntoComment(String comment) {
 		registerPage.fillInComment(comment);
 	}
-	
-	@Then ("^Confirm registration.$")
-	public void clickOnRegisterButton(){
+
+	@Then("^Confirm registration.$")
+	public void clickOnRegisterButton() {
 		registerPage.clickOnRegisterButton();
 	}
 

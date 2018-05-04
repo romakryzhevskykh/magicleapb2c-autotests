@@ -3,7 +3,7 @@
 
 <suite name="Suite1" parallel="tests">
     <test name="LoginSuite">
-    	<parameter name="environment" value="dev"/>
+    	<parameter name="environment" value="stage"/>
         <parameter name="browserName" value="chrome" />
         <classes>
             <!--<class name="com.template.cucumber.LoginSuite"/>-->
