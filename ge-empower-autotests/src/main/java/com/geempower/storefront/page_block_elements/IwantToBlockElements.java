@@ -13,12 +13,17 @@ public class IwantToBlockElements {
     public final static String ALL_SE_CODES_CHECKBOX_XPATH = ".//div[@id='approved-salesengineer']//*[contains(@class, 'select-all-user-accounts')]/label";
     public final static String REMOVE_SO_CODES_BUTTON_XPATH = ".//*[@data-target='#remove-salesoffice-modal']";
     public final static String REMOVE_SE_CODES_BUTTON_XPATH = ".//*[@data-target='#remove-salesengineer-modal']";
+    public final static String REMOVE_ALL_ACCOUNTS_BUTTON_XPATH = ".//*[@data-target='#remove-user-modal']";
     public final static String REMOVE_ACCOUNT_POP_UP_TITLE_SO_CODES_XPATH = ".//*[@id='remove-salesoffice-modal']//h4";
     public final static String REMOVE_ACCOUNT_POP_UP_TITLE_SE_CODES_XPATH = ".//*[@id='remove-salesengineer-modal']//h4";
-    public final static String REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_XPATH = ".//*[@class='btn primary-btn remove-salesoffice-btn']";
-    public final static String REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_IN_SE_CODES_TABLE_XPATH = ".//*[@class='btn primary-btn remove-salesengineer-btn']";
+    public final static String REMOVE_ACCOUNT_POP_UP_TITLE_ALL_ACCOUNTS_XPATH = ".//*[@id='remove-user-modal']//h4";
+    public final static String REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_IN_SO_CODES_TAB_XPATH = ".//*[@class='btn primary-btn remove-salesoffice-btn']";
+    public final static String REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_IN_SE_CODES_TAB_XPATH = ".//*[@class='btn primary-btn remove-salesengineer-btn']";
+    public final static String REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_IN_ALL_ACCOUNTS_TAB_XPATH = ".//*[@class='btn primary-btn remove-user-btn']";
     public final static String EMPTY_SO_CODES_TABLE_XPATH = ".//*[@id='approved-salesofficecode']//*[@class='dataTables_empty']";
     public final static String EMPTY_SE_CODES_TABLE_XPATH = ".//*[@id='approved-salesengineer']//*[@class='dataTables_empty']";
     public final static String REMOVE_ACCOUNT_POP_UP_SO_CODES_XPATH = ".//*[@id='remove-salesoffice-modal']//div[@class='modal-content']";
     public final static String REMOVE_ACCOUNT_POP_UP_SE_CODES_XPATH = ".//*[@id='remove-salesengineer-modal']//div[@class='modal-content']";
+    public final static String REMOVE_ACCOUNT_POP_UP_ALL_ACCOUNTS_XPATH = ".//*[@id='remove-user-modal']//div[@class='modal-content']";
+    public final static String ACCOUNT_CHECKBOX_XPATH = ".//td[contains (text(),'%s')]/../td[1]/label";
 }

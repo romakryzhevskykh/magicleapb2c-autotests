@@ -50,5 +50,7 @@ public class ManageUsersPageElements {
     public final static String SEARCH_BUTTON_XPATH = ".//*[@class='btn primary-btn manageuser-account-search-btn']";
     public final static String ADD_NEW_ACCOUNTS_TABLE_ID = "addNewAccountsTable";
     public final static String ACCOUNT_NAME_NEW_ACC_TABLE_XPATH = ".//*[@id='addNewAccountsTable']/tbody/tr[1]/td[3]";
-
+    public final static String ACCOUNT_FIELD_XPATH = ".//*[contains(@class,'account-new-search')]";
+    public final static String SELECT_ALL_CHECKBOX_XPATH = ".//*[@id='add-account-modal']//li[@class='select-all-link']//ins[@class='iCheck-helper']";
+    public final static String ADD_BUTTON_ID = "addAccountBtn";
 }

@@ -175,4 +175,20 @@ public class ManageUsersPage extends StorefrontBasePage {
     public void setSeCodeSECodeToTheFirstSalesEngineerCodeFieldInTheAddAccountPopUp(String code) {
         $(By.id(SALES_ENGINEER_CODE_FIELD_ID)).sendKeys(code);
     }
+
+    @Step("Set Account To The Account Field In The Add Account Pop-Up.")
+    public void setAccountToTheAccountFieldInTheAddAccountPopUp(String account) {
+        waitUntilPageIsFullyLoaded();
+        $(ACCOUNT_FIELD_XPATH).sendKeys(account);
+    }
+
+    @Step("Click On Select All Checkbox In The Add Account Pop-Up.")
+    public void clickOnSelectAllCheckboxInTheAddAccountPopUp() {
+        click(SELECT_ALL_CHECKBOX_XPATH);
+    }
+
+    @Step("Click On Add Button In The Add Account Pop-Up.")
+    public void clickOnAddButtonInTheAddAccountPopUp() {
+        click(By.id(ADD_BUTTON_ID));
+    }
 }
