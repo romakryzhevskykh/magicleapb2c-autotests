@@ -53,4 +53,5 @@ public class ManageUsersPageElements {
     public final static String ACCOUNT_FIELD_XPATH = ".//*[contains(@class,'account-new-search')]";
     public final static String SELECT_ALL_CHECKBOX_XPATH = ".//*[@id='add-account-modal']//li[@class='select-all-link']//ins[@class='iCheck-helper']";
     public final static String ADD_BUTTON_ID = "addAccountBtn";
+    public final static String APPROPRIATE_REGION_BY_NAME_IN_ADD_ACC_POP_UP_XPATH = ".//*[@id='select2-searchRegion-results']/li[text()='%s']";
 }

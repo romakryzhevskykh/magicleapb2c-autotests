@@ -27,7 +27,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     When Click on the first user name in the table.
     When Click on Add account button in User Detail block.
     Then Add Account pop-up is displayed on Manage Users page.
-    And Select North America in the Region field in the Add Account pop-up.
+    And Select North_America in the Region field in the Add Account pop-up.
     And Set <soCode> SO code to the Second Sales Office Code field in the Add Account pop-up.
     And Click on the Search button in the Add Account pop-up.
     Then Add New Accounts table is displayed in the Add Account pop-up.
@@ -66,7 +66,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     When Click on the first user name in the table.
     When Click on Add account button in User Detail block.
     Then Add Account pop-up is displayed on Manage Users page.
-    And Select North America in the Region field in the Add Account pop-up.
+    And Select North_America in the Region field in the Add Account pop-up.
     And Set <seCode> SE code to the Second Sales Engineer Code field in the Add Account pop-up.
     And Click on the Search button in the Add Account pop-up.
     Then Add New Accounts table is displayed in the Add Account pop-up.
