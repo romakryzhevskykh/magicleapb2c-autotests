@@ -8,7 +8,7 @@ import static com.topcon.storefront.page_elements.LoginPageElements.*;
 
 @Component
 public class LoginPage extends StorefrontBasePage {
-    private final String pageUrlMethod = "powertools/en/USD/login";
+    private final String pageUrlMethod = "topcon/en/USD/login";
 
     public boolean isOpened() {
         return isCurrentURLEqualsToLoginPageURL() && isUserLoggedOut();
