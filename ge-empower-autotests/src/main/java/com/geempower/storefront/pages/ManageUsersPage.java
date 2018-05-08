@@ -1,8 +1,8 @@
 package com.geempower.storefront.pages;
 
+import com.geempower.helpers.models.Region;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -79,11 +79,16 @@ public class ManageUsersPage extends StorefrontBasePage {
     }
 
     @Step("Select Region In The Add Account Pop-Up.")
-    public void selectRegionInTheAddAccountPopUp(String region) {
+    public void selectRegionInTheAddAccountPopUp(Region region) {
         waitUntilPageIsFullyLoaded();
         click(By.id(SELECT_REGION_FIELD_ID));
-        $$(REGION_DROP_DOWN_LIST_ELEMENTS_XPATH).stream()
-                .filter(webElement -> webElement.getText().equals(region)).findAny().ifPresent(WebElement::click);
+        waitUntilPageIsFullyLoaded();
+        chooseRegion(region);
+    }
+
+    @Step("Select appropriate region by region name")
+    private void chooseRegion(Region region) {
+        click(APPROPRIATE_REGION_BY_NAME_IN_ADD_ACC_POP_UP_XPATH, region.getRegionType().getRegionName());
     }
 
     @Step("Set SO Code To The Second Sales Office Code Field.")
@@ -174,5 +179,21 @@ public class ManageUsersPage extends StorefrontBasePage {
     @Step("Set SE Code To The First Sales Engineer Code Field In The Add Account Pop-Up.")
     public void setSeCodeSECodeToTheFirstSalesEngineerCodeFieldInTheAddAccountPopUp(String code) {
         $(By.id(SALES_ENGINEER_CODE_FIELD_ID)).sendKeys(code);
+    }
+
+    @Step("Set Account To The Account Field In The Add Account Pop-Up.")
+    public void setAccountToTheAccountFieldInTheAddAccountPopUp(String account) {
+        waitUntilPageIsFullyLoaded();
+        $(ACCOUNT_FIELD_XPATH).sendKeys(account);
+    }
+
+    @Step("Click On Select All Checkbox In The Add Account Pop-Up.")
+    public void clickOnSelectAllCheckboxInTheAddAccountPopUp() {
+        click(SELECT_ALL_CHECKBOX_XPATH);
+    }
+
+    @Step("Click On Add Button In The Add Account Pop-Up.")
+    public void clickOnAddButtonInTheAddAccountPopUp() {
+        click(By.id(ADD_BUTTON_ID));
     }
 }
