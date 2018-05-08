@@ -54,12 +54,12 @@ public class IwantToBlock extends UIComponent {
 
     @Step("Click On Remove SO Codes Button.")
     public void clickOnRemoveSoCodesButtonSOCodesTab() {
-        click(REMOVE_SO_CODES_BUTTON_XPATH);
+        click(REMOVE_BUTTON_IN_SO_CODES_TAB_XPATH);
     }
 
     @Step("Click On Remove SE Codes Button.")
     public void clickOnRemoveSeCodesButtonInSeCodesTab() {
-        click(REMOVE_SE_CODES_BUTTON_XPATH);
+        click(REMOVE_BUTTON_IN_SE_CODES_TAB_XPATH);
     }
 
     @Step("Get Remove Acc SO Codes Pop-Up Title.")
@@ -134,6 +134,6 @@ public class IwantToBlock extends UIComponent {
 
     @Step("Click On Remove Button In All Accounts Tab")
     public void clickOnRemoveButtonInAllAccountsTab() {
-        click(REMOVE_ALL_ACCOUNTS_BUTTON_XPATH);
+        click(REMOVE_BUTTON_IN_ALL_ACCOUNTS_TAB_XPATH);
     }
 }

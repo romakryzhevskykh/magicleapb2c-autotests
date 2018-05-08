@@ -11,9 +11,9 @@ public class IwantToBlockElements {
     public final static String SALES_ENGINEER_CODE_XPATH = ".//table[contains (@class, 'approved-sales-engineer-request-table')]//td[@class='account-number-col']";
     public final static String ALL_SO_CODES_CHECKBOX_XPATH = ".//div[@id='approved-salesofficecode']//*[contains(@class, 'select-all-user-accounts')]/label";
     public final static String ALL_SE_CODES_CHECKBOX_XPATH = ".//div[@id='approved-salesengineer']//*[contains(@class, 'select-all-user-accounts')]/label";
-    public final static String REMOVE_SO_CODES_BUTTON_XPATH = ".//*[@data-target='#remove-salesoffice-modal']";
-    public final static String REMOVE_SE_CODES_BUTTON_XPATH = ".//*[@data-target='#remove-salesengineer-modal']";
-    public final static String REMOVE_ALL_ACCOUNTS_BUTTON_XPATH = ".//*[@data-target='#remove-user-modal']";
+    public final static String REMOVE_BUTTON_IN_SO_CODES_TAB_XPATH = ".//*[@data-target='#remove-salesoffice-modal']";
+    public final static String REMOVE_BUTTON_IN_SE_CODES_TAB_XPATH = ".//*[@data-target='#remove-salesengineer-modal']";
+    public final static String REMOVE_BUTTON_IN_ALL_ACCOUNTS_TAB_XPATH = ".//*[@data-target='#remove-user-modal']";
     public final static String REMOVE_ACCOUNT_POP_UP_TITLE_SO_CODES_XPATH = ".//*[@id='remove-salesoffice-modal']//h4";
     public final static String REMOVE_ACCOUNT_POP_UP_TITLE_SE_CODES_XPATH = ".//*[@id='remove-salesengineer-modal']//h4";
     public final static String REMOVE_ACCOUNT_POP_UP_TITLE_ALL_ACCOUNTS_XPATH = ".//*[@id='remove-user-modal']//h4";
