@@ -11,4 +11,5 @@ public enum TestKeyword {
     NEW_ADDRESS_TOWN,
     NEW_ADDRESS_POST_CODE,
     NEW_ADDRESS_PHONE,
+    OPENED_PDP_PRODUCT,
 }

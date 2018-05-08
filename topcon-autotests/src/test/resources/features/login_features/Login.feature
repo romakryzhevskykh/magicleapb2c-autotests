@@ -1,4 +1,4 @@
-Feature: Login to Demo site
+Feature: Login to Dev site
 
   Scenario:Check that shopper have possibility to log in to Storefront and first of all see home page
     Given Switch to Storefront shopper.
