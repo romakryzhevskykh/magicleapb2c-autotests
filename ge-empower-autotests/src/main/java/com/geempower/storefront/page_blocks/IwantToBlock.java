@@ -129,63 +129,63 @@ public class IwantToBlock extends UIComponent {
         click(SALES_ENGINEER_CODES_TAB_XPATH);
     }
 
-    @Step("Get Approve Pending Accounts Section Title")
+    @Step("Get Approve Pending Accounts Section Title.")
     public String getApprovePendingAccountsSectionTitle() {
         waitUntilPageIsFullyLoaded();
         return $(APPROVE_PENDING_ACCOUNTS_SECTION_TITLE_XPATH).getText();
     }
 
-    @Step("Get Total Accounts Requests")
+    @Step("Get Total Accounts Requests.")
     public int getTotalAccountRequests() {
         return Integer.parseInt($(TOTAL_ACCOUNT_REQUESTS_XPATH).getText());
     }
 
-    @Step("Expand Approve Pending Accounts Section")
+    @Step("Expand Approve Pending Accounts Section.")
     public void expandApprovePendingAccountsSection() {
         click(APPROVE_PENDING_ACCOUNTS_SECTION_EXPAND_ICON_XPATH);
     }
 
-    @Step("Get Actual Pending Accounts Table Size")
+    @Step("Get Actual Pending Accounts Table Size.")
     public int getActualPendingAccountsTableSize() {
         return $$(PENDING_ACCOUNTS_TABLE_ROWS_XPATH).size();
     }
 
-    @Step("Click On Select All Pending Accounts CheckBox")
+    @Step("Click On Select All Pending Accounts CheckBox.")
     public void clickOnSelectAllPendingAccountsCheckBox() {
         waitUntilPageIsFullyLoaded();
         click(ALL_PENDING_ACCOUNT_CHECKBOX_XPATH);
     }
 
-    @Step("Click On Accept Account Button")
+    @Step("Click On Accept Account Button.")
     public void clickOnAcceptAccountButton() {
         click(ACCEPT_ACCOUNT_BUTTON_XPATH);
         waitUntilPageIsFullyLoaded();
     }
 
-    @Step("Accept The Action On Accept Account PopUp")
+    @Step("Accept The Action On Accept Account PopUp.")
     public void acceptTheActionOnAcceptAccountPopUp() {
         click(ACCEPT_THE_ACTION_IN_ACCEPT_ACCOUNT_POP_UP_XPATH);
         waitUntilPageIsFullyLoaded();
     }
 
-    @Step("Get No Data Title In Pending Accounts Table")
+    @Step("Get No Data Title In Pending Accounts Table.")
     public String getNoDataTitleInPendingAccountsTable() {
         waitUntilPageIsFullyLoaded();
         return $(PENDING_ACCOUNTS_TABLE_NO_DATA_TITLE_XPATH).getText();
     }
 
-    @Step("Get Active Account For User In Modify An Account Section")
+    @Step("Get Active Account For User In Modify An Account Section.")
     public List<String> getActiveAccountForUserInModifyAnAccountSection() {
         waitUntilPageIsFullyLoaded();
         return $$(ACTIVE_USER_ACCOUNTS_NAME_TABLE_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
-    @Step("Click On Account Checkbox In I Want To Block In All Accounts Tab")
+    @Step("Click On Account Checkbox In I Want To Block In All Accounts Tab.")
     public void clickOnAccountCheckboxInIWantToBlockInAllAccountsTab(String account) {
         click(ACCOUNT_CHECKBOX_XPATH, account);
     }
 
-    @Step("Click On Remove Button In All Accounts Tab")
+    @Step("Click On Remove Button In All Accounts Tab.")
     public void clickOnRemoveButtonInAllAccountsTab() {
         click(REMOVE_BUTTON_IN_ALL_ACCOUNTS_TAB_XPATH);
     }

@@ -57,59 +57,59 @@ public class AccountManagementPage extends StorefrontBasePage {
         $(SEARCH_FIELD_XPATH).sendKeys(accountName);
     }
 
-    @Step("Click on Search account button")
+    @Step("Click on Search account button.")
     public void clickOnSearchButton() {
         click(SEARCH_BUTTON_XPATH);
         waitUntilPageIsFullyLoaded();
     }
 
-    @Step("Select account from the list")
+    @Step("Select account from the list.")
     public void selectAccountFromTheList() {
         waitUntilPageIsFullyLoaded();
         click(FIRST_ACCOUNT_FROM_LIST_OF_ACCOUNTS_XPATH);
     }
 
-    @Step("Select account with appropriate sales division from the list")
+    @Step("Select account with appropriate sales division from the list.")
     public void selectAccountWithDivisionFromTheList(String salesDivision) {
         waitUntilPageIsFullyLoaded();
         click(ACCOUNT_WITH_APPROPRIATE_SALES_DIVISION_FROM_LIST_OF_ACCOUNTS_XPATH, salesDivision);
     }
 
-    @Step("Click on Cancel Button")
+    @Step("Click on Cancel Button.")
     public void clickOnCancelButton() {
         $(By.xpath(CANCEL_BUTTON_XPATH)).click();
     }
 
-    @Step("Open request account pop-up")
+    @Step("Open request account pop-up.")
     public void openRequestAccountPopup() {
         waitUntilPageIsFullyLoaded();
         click(REQUEST_ACCOUNT_BUTTON);
     }
 
-    @Step("Select region from regions list in request account popup by counter")
+    @Step("Select region from regions list in request account popup by counter.")
     public void selectRegionFromRegionsListInRequestAccountPopupByCounter(Region chosenRegion, int counter) {
         click(REGIONS_DROP_DOWN_BY_COUNTER_IN_POPUP_XPATH, String.valueOf(counter));
         chooseRegion(chosenRegion);
     }
 
-    @Step("Set account number to account field in popup")
+    @Step("Set account number to account field in popup.")
     public void setAccountNumberToAccountFieldInPopup(String account, int counter) {
         $(REGIONS_ACCOUNT_FIELD_BY_COUNTER_IN_POPUP_XPATH, String.valueOf(counter)).sendKeys(account);
     }
 
-    @Step("Click on send request button in pop-up")
+    @Step("Click on send request button in pop-up.")
     public void clickOnSendRequestButtonInPopUp() {
         click(By.id(SEND_EXTERNAL_REQUEST_BUTTON_ID));
     }
 
-    @Step("Switch to pending tab")
+    @Step("Switch to pending tab.")
     public void switchToPendingTab() {
         waitForElementToDisappear(By.xpath(FULL_SCREEN_PROGRESS_INDICATOR_XPATH));
         click(PENDING_FOR_APPROVAL_TAB_XPATH);
         waitUntilPageIsFullyLoaded();
     }
 
-    @Step("Get list of requested accounts")
+    @Step("Get list of requested accounts.")
     public ArrayList<String> getListOfRequestedAccounts() {
         waitUntilPageIsFullyLoaded();
         ArrayList<String> pendingAccountsOnPendingTab = new ArrayList<>();
@@ -122,7 +122,7 @@ public class AccountManagementPage extends StorefrontBasePage {
         return pendingAccountsOnPendingTab;
     }
 
-    @Step("Remove requested accounts")
+    @Step("Remove requested accounts.")
     public void removeRequestedAccounts(int countOfRequestedAccount) {
         for (int i = 0; i < countOfRequestedAccount; i++) {
             click(MORE_ACTIONS_THREE_DOT_ICON_XPATH);
@@ -138,28 +138,28 @@ public class AccountManagementPage extends StorefrontBasePage {
         }
     }
 
-    @Step("Get First Account Name In The Table")
+    @Step("Get First Account Name In The Table.")
     public String getFirstAccountNameInTheTable() {
         return $(ACCOUNT_NAME_VALUE_IN_TABLE_XPATH).getText();
     }
 
-    @Step("Get No Data Title From Pending Accounts Table")
+    @Step("Get No Data Title From Pending Accounts Table.")
     public String getNoDataTitleFromPendingAccountsTable() {
         return $(PENDING_FOR_APPROVAL_TABLE_NO_DATA_TITLE_XPATH).getText();
     }
 
-    @Step("Switch To Approved Accounts Tab")
+    @Step("Switch To Approved Accounts Tab.")
     public void switchToApprovedAccountsTab() {
         click(APPROVED_ACCOUNTS_TAB_XPATH);
         waitUntilPageIsFullyLoaded();
     }
 
-    @Step("Get All Approved Accounts In Approved Accounts Tab")
+    @Step("Get All Approved Accounts In Approved Accounts Tab.")
     public List<String> getAllApprovedAccountsInApprovedAccountsTab() {
         return $$(APPROVED_ACCOUNTS_NAME_IN_APPROVED_ACCOUNTS_TABLE_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
-    @Step("Remove All Active Requested Accounts")
+    @Step("Remove All Active Requested Accounts.")
     public void removeAllRequestedAccounts(ArrayList<String> approvedAccounts) {
         approvedAccounts.forEach(account -> {
             $(REMOVE_ACCOUNT_ACTION_FOR_APPROPRIATE_ACCOUNT_THREE_DOT_ICON_XPATH, account).click();

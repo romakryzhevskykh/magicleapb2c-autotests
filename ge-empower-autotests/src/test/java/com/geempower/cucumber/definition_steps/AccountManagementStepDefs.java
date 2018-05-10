@@ -119,7 +119,7 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
     }
 
     @Then("^List on Pending accounts is empty.$")
-    public void listOnPendingAccountsIsEmpty() throws Throwable {
+    public void listOnPendingAccountsIsEmpty() {
         assertEquals("No data available in table", accountManagementPage.getNoDataTitleFromPendingAccountsTable());
     }
 
