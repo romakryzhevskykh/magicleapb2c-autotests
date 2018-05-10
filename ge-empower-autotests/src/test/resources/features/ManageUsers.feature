@@ -124,6 +124,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then Chosen user's status has been changed to Inactive and sub-status details are correct.
     Given Switch to Storefront as shopper.
     And User is logged in to Storefront.
+    And Refresh page.
     Then User sees User not valid page.
     Then Appropriate text is displayed on the page.
     Given Switch to Storefront as admin.
@@ -136,6 +137,41 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Examples:
       | userId      |
       | enrolltest2 |
+
+    Scenario: Check that admin is able to approve some account requests from external user
+      Given Switch to Storefront as shopper.
+      And User is logged in to Storefront.
+      And Account management page is opened.
+      When Request account popup is opened.
+      And Popup is filled by North_America, Latin_America, EMEA, ASIA accounts.
+      And User send this requests for approval.
+      When User switch to Pending for approval tab on Account management page.
+      And All requested accounts are stored to the thread vars hashmap.
+      Given Switch to Storefront as admin.
+      And User is logged in to Storefront.
+      And Manage Users page is opened.
+      And Refresh page.
+      When Admin opens Users tab.
+      And Sets enrolltest2 email to the email field.
+      And Clicks on the Search button.
+      When Clicks on the user name in the table.
+      Then Approve Pending Accounts section is displayed with appropriate count of accounts.
+      When User expand the Approve Pending Accounts section.
+      Then Appropriate count of pending requests are displayed in Pending accounts table.
+      When Admin clicks on All accounts checkbox.
+      And Click on Accept accounts button.
+      And Accept the action in Accept Account pop-up.
+      Then Pending accounts table became empty.
+      And Expand Modify an Account tab in I Want To Block.
+      Then Appropriate accounts are displayed in All approved Accounts table.
+      Given Switch to Storefront as shopper.
+      And User is logged in to Storefront.
+      And Account management page is opened.
+      When User switch to Pending for approval tab on Account management page.
+      Then List on Pending accounts is empty.
+      When User switch to Approved Accounts tab on Account management page.
+      Then All the requested accounts are displayed in the tab.
+      And User deletes all requested accounts from his profile.
 
   Scenario Outline: Check that admin is able to add/remove account to the internal user
     And Refresh page.

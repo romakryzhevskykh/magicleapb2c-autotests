@@ -1,7 +1,5 @@
 package com.geempower.helpers;
 
-import ru.yandex.qatools.allure.annotations.Step;
-
 public abstract class BasePageObject extends UIComponent {
 
     public String getCurrentUrl() {
@@ -18,13 +16,4 @@ public abstract class BasePageObject extends UIComponent {
 
     public abstract String getPageUrl();
 
-    @Step("Refresh the page.")
-    public void refreshCurrentPage() {
-        getDriver().navigate().refresh();
-    }
-
-    @Step("Focus on browser.")
-    public void focusOnActiveBrowser() {
-        getDriver().switchTo().window(getDriver().getWindowHandle());
-    }
 }

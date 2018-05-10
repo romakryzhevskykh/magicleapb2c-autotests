@@ -10,8 +10,8 @@ public class AccountManagementPageElements {
     public final static String FIRST_ACCOUNT_FROM_LIST_OF_ACCOUNTS_XPATH = ".//div[@id='recently-viewed']//tr[@class='odd'or@class='even']/*[2]/a[1]";
     public final static String ACCOUNT_WITH_APPROPRIATE_SALES_DIVISION_FROM_LIST_OF_ACCOUNTS_XPATH = ".//div[@id='recently-viewed']//tr[@class='odd'or@class='even']/*[2]/a[contains(@href, '%s')]";
     public final static String REQUEST_ACCOUNT_BUTTON = "//button[@class='btn btn-white request-account-btn']";
-    public final static String ACCOUNT_ROW_IN_POP_UP_XPATH = "//div[@class='request-account-form-body']/div[@class='row']";
-    public final static String ACCOUNT_ROW_IN_POP_UP_BY_COUNTER_XPATH = ACCOUNT_ROW_IN_POP_UP_XPATH + "[%s]";
+    private final static String ACCOUNT_ROW_IN_POP_UP_XPATH = "//div[@class='request-account-form-body']/div[@class='row']";
+    private final static String ACCOUNT_ROW_IN_POP_UP_BY_COUNTER_XPATH = ACCOUNT_ROW_IN_POP_UP_XPATH + "[%s]";
     public final static String REGIONS_DROP_DOWN_BY_COUNTER_IN_POPUP_XPATH = ACCOUNT_ROW_IN_POP_UP_BY_COUNTER_XPATH + "//span[contains(@class,'select2-container')]";
     public final static String REGIONS_ACCOUNT_FIELD_BY_COUNTER_IN_POPUP_XPATH = ACCOUNT_ROW_IN_POP_UP_BY_COUNTER_XPATH + "//input[@class='form-control account-input']";
     public final static String SEND_EXTERNAL_REQUEST_BUTTON_ID = "sendExternalRequestBtn";
@@ -24,5 +24,10 @@ public class AccountManagementPageElements {
     public final static String FULL_SCREEN_PROGRESS_INDICATOR_XPATH = "//div[@id='FullScreenProgressIndicatorModalDialog']";
     public final static String APPROVED_ACCOUNT_ROW_XPATH = "//*[@class='my-pending-accounts-wrapper']//tr[@role='row' and @class='odd' or @class='even']";
     public final static String ACCOUNT_NAME_VALUE_IN_TABLE_XPATH = ".//*[@id='activeRequestsTable']/tbody/tr[1]/td[3]";
-
+    public final static String PENDING_FOR_APPROVAL_TABLE_NO_DATA_TITLE_XPATH = "//table[@id='pendingApprovalTable']/tbody/tr/td";
+    public final static String APPROVED_ACCOUNTS_TAB_XPATH = "//a[@href='#recently-viewed']";
+    public final static String APPROVED_ACCOUNTS_NAME_IN_APPROVED_ACCOUNTS_TABLE_XPATH = "//table[@id='activeRequestsTable']/tbody/tr/td[2]";
+    public final static String REMOVE_ACCOUNT_ACTION_FOR_APPROPRIATE_ACCOUNT_THREE_DOT_ICON_XPATH  = "//td[@class=' table-visible-lg-block']/a[contains(text(), '%s')]/../..//td[@class=' table-visible-lg-block']/ul//i[@class='fa fa-ellipsis-v']";
+    public final static String THREE_DOT_ICON_REMOVE_ACCOUNT_XPATH = "//td[@class=' table-visible-lg-block']/a[contains(text(),'%s')]/../..//td[@class=' table-visible-lg-block']/ul//i[@class='fa fa-trash']";
+    public final static String CONFIRMATION_FOR_REMOVE_ACTIVE_ACCOUNT_BUTTON_XPATH = "//button[@id='removeActiveBtn']";
 }

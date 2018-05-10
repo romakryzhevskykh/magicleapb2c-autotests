@@ -44,12 +44,12 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
     }
 
     @And("^Click on chosen account.$")
-        public void clickOnChosenAccount(){
+    public void clickOnChosenAccount() {
         accountManagementPage.selectAccountFromTheList();
     }
 
     @And("^Click on account with (.*) sales division.$")
-    public void clickOnAccountWithAppropriateSalesDivision(String salesDivision){
+    public void clickOnAccountWithAppropriateSalesDivision(String salesDivision) {
         accountManagementPage.selectAccountWithDivisionFromTheList(salesDivision);
     }
 
@@ -110,5 +110,33 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
     @And("^Select account (.*).$")
     public void selectAccount(String accountName) {
         accountManagementPage.searchAccountByAccountName(accountName);
+    }
+
+    @And("^All requested accounts are stored to the thread vars hashmap.$")
+    public void allRequestedAccountsAreStoredToTheThreadVarsHashmap() {
+        ArrayList<String> pendingAccounts = accountManagementPage.getListOfRequestedAccounts();
+        threadVarsHashMap.put(TestKeyword.LIST_OF_REQUESTED_ACCOUNTS, pendingAccounts);
+    }
+
+    @Then("^List on Pending accounts is empty.$")
+    public void listOnPendingAccountsIsEmpty() {
+        assertEquals("No data available in table", accountManagementPage.getNoDataTitleFromPendingAccountsTable());
+    }
+
+    @When("^User switch to Approved Accounts tab on Account management page.$")
+    public void userSwitchToApprovedAccountsTabOnAccountManagementPage() {
+        accountManagementPage.switchToApprovedAccountsTab();
+    }
+
+    @Then("^All the requested accounts are displayed in the tab.$")
+    public void allTheRequestedAccountsAreDisplayedInTheTab() {
+        ArrayList<String> approvedAccounts = (ArrayList<String>) threadVarsHashMap.get(TestKeyword.LIST_OF_REQUESTED_ACCOUNTS);
+        assertTrue(accountManagementPage.getAllApprovedAccountsInApprovedAccountsTab().containsAll(approvedAccounts));
+    }
+
+    @And("^User deletes all requested accounts from his profile.$")
+    public void userDeletesAllRequestedAccountsFromHisProfile() {
+        ArrayList<String> approvedAccounts = (ArrayList<String>) threadVarsHashMap.get(TestKeyword.LIST_OF_REQUESTED_ACCOUNTS);
+        accountManagementPage.removeAllRequestedAccounts(approvedAccounts);
     }
 }
