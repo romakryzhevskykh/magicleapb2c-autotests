@@ -1,5 +1,6 @@
 package com.sarnova.helpers.managers;
 
+import com.sarnova.helpers.models.users.Organization;
 import com.sarnova.helpers.models.users.UserGroup;
 import com.sarnova.helpers.request_engine.API;
 import com.sarnova.helpers.request_engine.GETRequest;
@@ -34,11 +35,12 @@ public class UserGroupsManager {
     public void createUserGroup(UserSession activeUserSession) {
         String groupUID = RandomStringUtils.randomAlphabetic(10);
         String groupName = RandomStringUtils.randomAlphabetic(10);
+        Organization organization = activeUserSession.getUser().getOrganization();
         POSTRequest createUserGroup = CREATE_USER_GROUP.getClone();
         createUserGroup.addPostParameterAndValue(new API.PostParameterAndValue("originalUid", ""));
         createUserGroup.addPostParameterAndValue(new API.PostParameterAndValue("uid", groupUID));
         createUserGroup.addPostParameterAndValue(new API.PostParameterAndValue("name", groupName));
-        createUserGroup.addPostParameterAndValue(new API.PostParameterAndValue("parentUnit", "112395"));
+        createUserGroup.addPostParameterAndValue(new API.PostParameterAndValue("parentUnit", organization.getId()));
         try {
             createUserGroup.sendPostRequest(activeUserSession);
         } catch (IOException e) {
@@ -81,6 +83,7 @@ public class UserGroupsManager {
     @SuppressWarnings("unchecked")
     public void addPermissionsToUserGroup(UserSession activeUserSession, UserGroup editingUserGroup, ArrayList<Permission> permissions) {
         permissions.forEach(permission -> addPermissionToUserGroup(activeUserSession, editingUserGroup, permission));
+        editingUserGroup.getPermissions().addAll(permissions);
     }
 
     @SuppressWarnings("unchecked")
@@ -95,11 +98,12 @@ public class UserGroupsManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        editingUserGroup.getPermissions().add(permission);
+        //Add permission after api is involved
     }
 
     public void removePermissionsToUserGroup(UserSession activeUserSession, UserGroup editingUserGroup, ArrayList<Permission> permissions) {
         permissions.forEach(permission -> removePermissionToUserGroup(activeUserSession, editingUserGroup, permission));
+        editingUserGroup.getPermissions().removeAll(permissions);
     }
 
     @SuppressWarnings("unchecked")
@@ -114,7 +118,7 @@ public class UserGroupsManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        editingUserGroup.getPermissions().remove(permission);
+        //Remove permission after api is involved
     }
 
     @Step("Initiate {1} permissions.")

@@ -1,6 +1,8 @@
 package com.sarnova.helpers.user_engine;
 
+import com.sarnova.helpers.managers.OrganizationsManager;
 import com.sarnova.helpers.managers.UserGroupsManager;
+import com.sarnova.helpers.models.users.Organization;
 import com.sarnova.helpers.models.users.UserGroup;
 import com.sarnova.helpers.request_engine.API;
 import com.sarnova.helpers.request_engine.GETRequest;
@@ -14,6 +16,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
+import ru.yandex.qatools.allure.annotations.Step;
 import us.codecraft.xsoup.Xsoup;
 
 import java.io.IOException;
@@ -21,6 +24,7 @@ import java.util.ArrayList;
 
 public class UsersManager {
     @Autowired UserGroupsManager userGroupsManager;
+    @Autowired OrganizationsManager organizationsManager;
 
     POSTRequest CREATE_REQUEST = new POSTRequest("Create new test user", "boundtree/en/USD/my-company/organization-management/manage-users/create");
     POSTRequest RESET_PASSWORD = new POSTRequest("Reset password to User", "my-company/organization-management/manage-users/resetpassword?user=%s");
@@ -31,37 +35,40 @@ public class UsersManager {
 
     public void createInstance(String username, String password, Cockpit userCockpit, ArrayList<String> cockpitRoles) {
         User user = new User(username, password, userCockpit);
+        user.setOrganization(organizationsManager.getOrganization());
         this.users.add(user);
         user.getUserRoles().addAll(parseUserRoles(userCockpit, cockpitRoles));
     }
 
     public void createTestInstance(String username, String password, Cockpit userCockpit, ArrayList<? extends UserRole> userRoles) {
         User user = new User(username, password, userCockpit);
+        user.setOrganization(organizationsManager.getOrganization());
         this.users.add(user);
         user.getUserRoles().addAll(userRoles);
         user.getUserRoles().add(getTestRole(userCockpit));
     }
 
     @SuppressWarnings("unchecked")
+    @Step("Create user with random parameters.")
     public void createTestUserByApi(UserSession userSession) {
         POSTRequest createUser = CREATE_REQUEST.getClone();
         UserTitle userTitle = UserTitle.getRandom();
         String firstName = RandomStringUtils.randomAlphabetic(10);
         String lastName = RandomStringUtils.randomAlphabetic(10);
         String email = RandomStringUtils.randomAlphabetic(10) + "@" + RandomStringUtils.randomAlphabetic(5) + ".com";
-        String username = email;
+        String username = RandomStringUtils.randomAlphabetic(10);
         StorefrontUserRole role = StorefrontUserRole.TEST_USER;
+        Organization organization = userSession.getUser().getOrganization();
         ArrayList<StorefrontUserRole> userRoles = new ArrayList<StorefrontUserRole>() {{
             add(role);
         }};
         createUser.addPostParameterAndValue(new API.PostParameterAndValue("titleCode", userTitle.name().toLowerCase()));
-        createUser.addPostParameterAndValue(new API.PostParameterAndValue("uid", ""));
+        createUser.addPostParameterAndValue(new API.PostParameterAndValue("uid", username));
         createUser.addPostParameterAndValue(new API.PostParameterAndValue("firstName", firstName));
         createUser.addPostParameterAndValue(new API.PostParameterAndValue("lastName", lastName));
         createUser.addPostParameterAndValue(new API.PostParameterAndValue("email", email));
-        createUser.addPostParameterAndValue(new API.PostParameterAndValue("parentB2BUnit", "112395"));
-        userRoles.forEach(userRole -> createUser.addPostParameterAndValue(new API.PostParameterAndValue("roles", role.getRoleCode())));
-        createUser.addPostParameterAndValue(new API.PostParameterAndValue("_roles", "on"));
+        createUser.addPostParameterAndValue(new API.PostParameterAndValue("parentB2BUnit", organization.getId()));
+//        userRoles.forEach(userRole -> createUser.addPostParameterAndValue(new API.PostParameterAndValue("roles", role.getRoleCode())));
         createUser.setHeader("Upgrade-Insecure-Requests", "1");
         try {
             createUser.sendPostRequest(userSession);

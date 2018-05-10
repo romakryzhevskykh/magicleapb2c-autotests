@@ -10,10 +10,16 @@ import static com.sarnova.storefront.page_block_elements.CheckoutShippingAddress
 @Component
 public class CheckoutShippingAddressStepBlock extends UIComponent {
 
+    private String pageUrlMethod = "multi/delivery-address/add";
+
     @Step("Click on Next button on Checkout Shipping address step.")
     public void clickOnNextButton() {
         click(By.id(NEXT_BUTTON_ID));
         waitUntilPageIsFullyLoaded();
+    }
+
+    public String getPageUrlMethod() {
+        return pageUrlMethod;
     }
 
 }

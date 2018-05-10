@@ -9,6 +9,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.yandex.qatools.allure.annotations.Step;
 import us.codecraft.xsoup.Xsoup;
 
 import java.io.IOException;
@@ -27,6 +28,7 @@ public class CartManager {
     private POSTRequest ADD_UOMS_TO_CART = new POSTRequest("Add UOMs to cart", "/cart/addIndividualList");
 
     @SuppressWarnings("unchecked")
+    @Step("Empty active cart.")
     public void emptyActiveCart(UserSession userSession) {
         List<UnitOfMeasure> unitsOfMeasurementInCart = getUOMsFromCartPage(userSession);
         String csrfToken = getCartPageCsrfToken(userSession);

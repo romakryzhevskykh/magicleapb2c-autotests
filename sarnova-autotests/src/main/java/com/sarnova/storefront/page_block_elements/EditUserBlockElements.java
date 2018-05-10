@@ -6,6 +6,7 @@ public class EditUserBlockElements {
     public final static String FIRST_NAME_FIELD_ID = "user.firstName";
     public final static String LAST_NAME_FIELD_ID = "user.lastName";
     public final static String EMAIL_FIELD_ID = "user.email";
+    public final static String USERNAME_FIELD_ID = "user.username";
     public final static String ROLE_CHECKBOX_BY_CODE_XPATH = "//input[@name='roles' and @value='%s']";
     public final static String ROLE_CHECKBOXES_XPATH = "//input[@name='roles']";
 

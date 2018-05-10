@@ -48,8 +48,14 @@ public class EditUsersPageStepDefs extends AbstractStepDefs {
     public void fillEmailFieldWithARandomEmailOnEditUserPage() {
         String randomEmail = RandomStringUtils.randomAlphabetic(10) + "@" + RandomStringUtils.randomAlphabetic(5) + ".com";
         threadVarsHashMap.put(TestKeyword.EDIT_USER_EMAIL, randomEmail);
-        threadVarsHashMap.put(TestKeyword.EDIT_USER_USERNAME, randomEmail);
         editUserPage.fillEmail(randomEmail);
+    }
+
+    @And("^Fill Username field with a random email on Edit user page.$")
+    public void fillUsernameFieldWithARandomEmailOnEditUserPage() {
+        String randomUsername = RandomStringUtils.randomAlphabetic(10);
+        threadVarsHashMap.put(TestKeyword.EDIT_USER_USERNAME, randomUsername);
+        editUserPage.fillUsername(randomUsername);
     }
 
     @And("^Select any Parent unit on Edit user page.$")

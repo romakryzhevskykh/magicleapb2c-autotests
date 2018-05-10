@@ -49,6 +49,7 @@ public class CartPage extends StorefrontBasePage {
     @Step("Click on Checkout button on Cart page.")
     public void clickOnCheckoutButton() {
         click(CHECKOUT_BUTTONS_XPATH);
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Click on Add to Supply list button on Cart page.")
@@ -102,5 +103,10 @@ public class CartPage extends StorefrontBasePage {
     @Step("Is Add to Supply list button visible?")
     public boolean isAddToSupplyListButtonVisible() {
         return isDisplayed(ADD_TO_SUPPLY_LIST_BUTTONS_XPATH);
+    }
+
+    @Step("Is Checkout button visible?")
+    public boolean isCheckoutButtonVisible() {
+        return isDisplayed(CHECKOUT_BUTTONS_XPATH);
     }
 }

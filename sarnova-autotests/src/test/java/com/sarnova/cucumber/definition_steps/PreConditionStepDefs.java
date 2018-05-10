@@ -1,9 +1,9 @@
 package com.sarnova.cucumber.definition_steps;
 
-import com.sarnova.helpers.managers.CartManager;
-import com.sarnova.helpers.managers.ProductsManager;
-import com.sarnova.helpers.managers.SupplyListsManager;
-import com.sarnova.helpers.managers.UserGroupsManager;
+import com.sarnova.helpers.managers.*;
+import com.sarnova.helpers.models.categories.Category;
+import com.sarnova.helpers.models.categories.ChildCustomCategory;
+import com.sarnova.helpers.models.categories.ParentCustomCategory;
 import com.sarnova.helpers.models.products.IndividualProduct;
 import com.sarnova.helpers.models.products.Product;
 import com.sarnova.helpers.models.products.UnitOfMeasure;
@@ -33,6 +33,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     @Autowired private ProductsManager productsManager;
     @Autowired private CartManager cartManager;
     @Autowired private UsersManager usersManager;
+    @Autowired private CustomCategoriesManager customCategoriesManager;
 
     @Given("^User is logged in to Storefront.$")
     public void userIsLoggedInToStorefront() {
@@ -111,10 +112,17 @@ public class PreConditionStepDefs extends AbstractStepDefs {
         if (userSession.getUser().getUserRoles().stream().anyMatch(UserRole::isTest)) {
             if (userSession.getUser().getUserGroups().stream().noneMatch(userGroup -> userGroup.getPermissions().contains(Permission.MANAGE_SUPPLY_LISTS))) {
                 restorePermission = true;
-                restoreUserGroup = userSession.getUser().getUserGroups().stream().findAny().orElse(null);
+                restoreUserGroup = userSession.getUser().getUserGroups()
+                        .stream()
+                        .findAny()
+                        .orElseGet(() -> {
+                            throw new NullPointerException("No user groups: " + userSession.getUser().getUserGroups()
+                                    + " for user: " + userSession.getUser());
+                        });
                 userGroupsManager.addPermissionToUserGroup(userSessions.getAnyUserSessionForUser(usersManager.getUserByRole(StorefrontUserRole.ADMIN)),
                         restoreUserGroup,
                         Permission.MANAGE_SUPPLY_LISTS);
+                restoreUserGroup.getPermissions().add(Permission.MANAGE_SUPPLY_LISTS);
             }
         }
         supplyListsManager.createViaApi(userSession, newSupplyListName, productsToCreate);
@@ -122,6 +130,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
             userGroupsManager.removePermissionToUserGroup(userSessions.getAnyUserSessionForUser(usersManager.getUserByRole(StorefrontUserRole.ADMIN)),
                     restoreUserGroup,
                     Permission.MANAGE_SUPPLY_LISTS);
+            restoreUserGroup.getPermissions().remove(Permission.MANAGE_SUPPLY_LISTS);
         }
         return supplyListsManager.getSupplyListByName(newSupplyListName);
     };
@@ -341,10 +350,12 @@ public class PreConditionStepDefs extends AbstractStepDefs {
             userGroupsManager.initPermissionsToTheUserGroup(userSessions.getActiveUserSession(), testUserGroup);
         if (testUserGroup.getPermissions().isEmpty()) {
             userGroupsManager.addPermissionToUserGroup(userSessions.getActiveUserSession(), testUserGroup, testPermission);
+            testUserGroup.getPermissions().add(testPermission);
         } else if (!testUserGroup.getPermissions().stream().allMatch(permission -> permission == testPermission)) {
             if (!testUserGroup.getPermissions().contains(testPermission)) {
                 userGroupsManager.removePermissionsToUserGroup(userSessions.getActiveUserSession(), testUserGroup, testUserGroup.getPermissions());
                 userGroupsManager.addPermissionToUserGroup(userSessions.getActiveUserSession(), testUserGroup, testPermission);
+                testUserGroup.getPermissions().add(testPermission);
             } else {
                 ArrayList<Permission> permissionsToRemove = new ArrayList<>();
                 permissionsToRemove.addAll(testUserGroup.getPermissions());
@@ -360,5 +371,55 @@ public class PreConditionStepDefs extends AbstractStepDefs {
         SupplyList supplyList = supplyListsManager.getSupplyListByName(existingSupplyListName);
         User userToShareWith = usersManager.getUserByUsername(threadVarsHashMap.getString(TestKeyword.TEST_USER_USERNAME));
         supplyListsManager.shareSupplyListWithUser(userSessions.getActiveUserSession(), userToShareWith, supplyList);
+    }
+
+    @And("^Test parent Custom category is present.$")
+    public void testParentCustomCategoryIsPresent() {
+        Category category = getOrCreateParentCustomCategory();
+        threadVarsHashMap.put(TestKeyword.TEST_PARENT_CUSTOM_CATEGORY_ID, category.getId());
+    }
+
+    @And("^Test child Custom category is present.$")
+    public void testChildCustomCategoryIsPresent() {
+        ChildCustomCategory category = getOrCreateChildCustomCategory();
+        threadVarsHashMap.put(TestKeyword.TEST_PARENT_CUSTOM_CATEGORY_ID, category.getParentCustomCategory().getId());
+        threadVarsHashMap.put(TestKeyword.TEST_CHILD_CUSTOM_CATEGORY_ID, category.getId());
+    }
+
+    private ParentCustomCategory getOrCreateParentCustomCategory() {
+        return (ParentCustomCategory) customCategoriesManager.getCustomCategories().stream()
+                .filter(ParentCustomCategory.class::isInstance)
+                .filter(parentCustomCategory -> parentCustomCategory.getOrganization()
+                        .equals(userSessions.getActiveUserSession().getUser().getOrganization()))
+                .findAny().orElseGet(() -> {
+                    String ccName = RandomStringUtils.randomAlphabetic(8);
+                    return customCategoriesManager.createNewParentCustomCategoryByApi(userSessions.getActiveUserSession(), ccName);
+                });
+    }
+
+    @And("^At least (\\d+) product in child Custom category.$")
+    public void atLeastProductInChildCustomCategory(int productsInChildCC) {
+        ChildCustomCategory category = getOrCreateChildCustomCategory();
+        threadVarsHashMap.put(TestKeyword.TEST_PARENT_CUSTOM_CATEGORY_ID, category.getParentCustomCategory().getId());
+        threadVarsHashMap.put(TestKeyword.TEST_CHILD_CUSTOM_CATEGORY_ID, category.getId());
+        if (category.getProducts().size() < productsInChildCC) {
+            ArrayList<Product> productsToAdd = productsManager.getUniqueProductsByProductsQuantityAndTestTypes(productsInChildCC, new ArrayList<>());
+            customCategoriesManager.addProductsToCategoryByApi(userSessions.getActiveUserSession(), category, productsToAdd);
+        }
+    }
+
+    private ChildCustomCategory getOrCreateChildCustomCategory() {
+        return ((ParentCustomCategory) customCategoriesManager.getCustomCategories().stream()
+                .filter(ParentCustomCategory.class::isInstance)
+                .filter(parentCustomCategory -> parentCustomCategory.getOrganization()
+                        .equals(userSessions.getActiveUserSession().getUser().getOrganization()))
+                .filter(parentCategory -> !((ParentCustomCategory) parentCategory).getChildCustomCategories().isEmpty())
+                .findAny()
+                .orElseGet(() -> {
+                    ParentCustomCategory parentCategory = getOrCreateParentCustomCategory();
+                    String ccName = RandomStringUtils.randomAlphabetic(8);
+                    customCategoriesManager.createNewChildCustomCategoryByApi(userSessions.getActiveUserSession(), ccName, parentCategory);
+                    return parentCategory;
+                })).getChildCustomCategories().stream().findAny().get();
     }
 }

@@ -28,4 +28,9 @@ public abstract class BasePageObject extends UIComponent {
     }
 
     public abstract String getPageUrl();
+
+    public void refreshPage() {
+        getDriver().navigate().refresh();
+        waitUntilPageIsFullyLoaded();
+    }
 }

@@ -1,7 +1,6 @@
 package com.sarnova.cucumber.definition_steps;
 
 import com.sarnova.helpers.user_engine.User;
-import com.sarnova.helpers.user_engine.UserRole;
 import com.sarnova.helpers.user_engine.UserTitle;
 import com.sarnova.helpers.user_engine.UsersManager;
 import com.sarnova.storefront.pages.UserDetailsPage;
@@ -9,12 +8,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class UserDetailsPageStepDefs extends AbstractStepDefs {
     @Autowired UsersManager usersManager;
@@ -54,14 +48,14 @@ public class UserDetailsPageStepDefs extends AbstractStepDefs {
     public void checkThatUserEmailFieldIsEqualToSetOnUserDetailsPage() {
         assertEquals(userDetailsPage.getEmail(), threadVarsHashMap.getString(TestKeyword.EDIT_USER_EMAIL));
     }
-
-    @Then("^Check that User roles are equal to set on User details page.$")
-    public void checkThatUserRolesFieldIsEqualToSetOnUserDetailsPage() {
-        ArrayList<UserRole> setUserRole = getSelectedUserRoles();
-        List<UserRole> actualUserRole = userDetailsPage.getRoles();
-        assertEquals(setUserRole.size(), actualUserRole.size());
-        assertTrue(actualUserRole.containsAll(setUserRole));
-    }
+//
+//    @Then("^Check that User roles are equal to set on User details page.$")
+//    public void checkThatUserRolesFieldIsEqualToSetOnUserDetailsPage() {
+//        ArrayList<UserRole> setUserRole = getSelectedUserRoles();
+//        List<UserRole> actualUserRole = userDetailsPage.getRoles();
+//        assertEquals(setUserRole.size(), actualUserRole.size());
+//        assertTrue(actualUserRole.containsAll(setUserRole));
+//    }
 
     @And("Click on Reset password button on User details page.")
     public void clickOnResetPasswordButton() {

@@ -16,7 +16,7 @@ public class SupplyListProduct {
         this.isActive = isActive;
     }
 
-    public String  getSku() {
+    public String getSku() {
         return individualProduct.getSku();
     }
 
@@ -25,11 +25,11 @@ public class SupplyListProduct {
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+        this.isActive = active;
     }
 
     public IndividualProduct getIndividualProduct() {
-        return individualProduct;
+        return this.individualProduct;
     }
 
     @Override

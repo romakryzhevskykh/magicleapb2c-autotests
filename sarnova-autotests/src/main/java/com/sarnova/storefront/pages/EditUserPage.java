@@ -46,6 +46,12 @@ public class EditUserPage extends StorefrontBasePage {
         $(By.id(EMAIL_FIELD_ID)).sendKeys(email);
     }
 
+    @Step("Fill username field: {0}.")
+    public void fillUsername(String username) {
+        $(By.id(USERNAME_FIELD_ID)).clear();
+        $(By.id(USERNAME_FIELD_ID)).sendKeys(username);
+    }
+
     @Step("Select parent unit.")
     public void selectAnyParentUnit() {
         //TODO

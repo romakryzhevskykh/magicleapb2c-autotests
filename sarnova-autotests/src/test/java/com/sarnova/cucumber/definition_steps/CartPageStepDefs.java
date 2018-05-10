@@ -16,9 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class CartPageStepDefs extends AbstractStepDefs {
 
@@ -152,5 +150,10 @@ public class CartPageStepDefs extends AbstractStepDefs {
     @Then("^Check that Add to Supply list button is visible on Cart page.$")
     public void checkThatAddToSupplyListButtonIsVisibleOnCartPage() {
         assertTrue(cartPage.isAddToSupplyListButtonVisible());
+    }
+
+    @Then("^Check that Checkout button is visible on Cart page.$")
+    public void checkThatCheckoutButtonIsVisibleOnCartPage() {
+        assertTrue(cartPage.isCheckoutButtonVisible());
     }
 }

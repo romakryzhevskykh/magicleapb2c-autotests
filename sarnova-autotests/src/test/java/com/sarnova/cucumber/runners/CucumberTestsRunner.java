@@ -1,6 +1,7 @@
 package com.sarnova.cucumber.runners;
 
 import com.sarnova.helpers.SeleniumGridSettings;
+import com.sarnova.helpers.managers.CustomCategoriesManager;
 import com.sarnova.helpers.managers.SupplyListsManager;
 import com.sarnova.helpers.managers.UserGroupsManager;
 import com.sarnova.helpers.models.supply_lists.SupplyList;
@@ -27,6 +28,7 @@ public class CucumberTestsRunner extends AbstractTestNGSpringContextTests {
     @Autowired UserGroupsManager userGroupsManager;
     @Autowired UsersManager usersManager;
     @Autowired UserSessions userSessions;
+    @Autowired CustomCategoriesManager customCategoriesManager;
 
     private TestNGCucumberRunner testNGCucumberRunner;
 
@@ -69,6 +71,7 @@ public class CucumberTestsRunner extends AbstractTestNGSpringContextTests {
                 .stream()
                 .filter(SupplyList::isActive)
                 .forEach(supplyList -> supplyListsManager.deactivate(supplyList));
+        customCategoriesManager.deleteAllCustomCategories();
         userGroupsManager.deleteAllCreatedUserGroups(userSessions.getAnyUserSessionForUser(usersManager.getUsers()
                 .stream()
                 .filter(user -> user.getUserRoles().contains(StorefrontUserRole.ADMIN))

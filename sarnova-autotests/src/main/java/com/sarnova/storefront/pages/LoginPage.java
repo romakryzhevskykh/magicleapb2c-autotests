@@ -40,7 +40,7 @@ public class LoginPage extends StorefrontBasePage {
         return isDisplayed(By.id(USERNAME_FIELD_ID));
     }
 
-    @Step("Fill username field.")
+    @Step("Fill username field {0}.")
     public void fillUsernameFieldWith(String username) {
         $(By.id(USERNAME_FIELD_ID)).sendKeys(username);
     }
@@ -60,7 +60,7 @@ public class LoginPage extends StorefrontBasePage {
         return isDisplayed(By.id(PASSWORD_FIELD_ID));
     }
 
-    @Step("Fill password field.")
+    @Step("Fill password field {0}.")
     public void fillPasswordFieldWith(String password) {
         $(By.id(PASSWORD_FIELD_ID)).sendKeys(password);
     }
