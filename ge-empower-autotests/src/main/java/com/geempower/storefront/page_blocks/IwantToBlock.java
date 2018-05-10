@@ -56,12 +56,12 @@ public class IwantToBlock extends UIComponent {
 
     @Step("Click On Remove SO Codes Button.")
     public void clickOnRemoveSoCodesButtonSOCodesTab() {
-        click(REMOVE_SO_CODES_BUTTON_XPATH);
+        click(REMOVE_BUTTON_IN_SO_CODES_TAB_XPATH);
     }
 
     @Step("Click On Remove SE Codes Button.")
     public void clickOnRemoveSeCodesButtonInSeCodesTab() {
-        click(REMOVE_SE_CODES_BUTTON_XPATH);
+        click(REMOVE_BUTTON_IN_SE_CODES_TAB_XPATH);
     }
 
     @Step("Get Remove Acc SO Codes Pop-Up Title.")
@@ -74,14 +74,24 @@ public class IwantToBlock extends UIComponent {
         return $(REMOVE_ACCOUNT_POP_UP_TITLE_SE_CODES_XPATH).getText();
     }
 
-    @Step("Click On Remove Button In The Remove Account Pop-Up.")
-    public void clickOnRemoveButtonInTheRemoveAccountPopUp() {
-        click(REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_XPATH);
+    @Step("Get Remove All Accounts Pop-Up Title.")
+    public String getRemoveAllAccountsPopUpTitle() {
+        return $(REMOVE_ACCOUNT_POP_UP_TITLE_ALL_ACCOUNTS_XPATH).getText();
+    }
+
+    @Step("Click On Remove Button In The Remove Account Pop-Up In SO Codes Tab.")
+    public void clickOnRemoveButtonInTheRemoveAccountPopUpInSOCodesTab() {
+        click(REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_IN_SO_CODES_TAB_XPATH);
     }
 
     @Step("Click On Remove Button In The Remove Account Pop-Up In SE Codes Tab.")
     public void clickOnRemoveButtonInTheRemoveAccountPopUpInSECodesTab() {
-        click(REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_IN_SE_CODES_TABLE_XPATH);
+        click(REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_IN_SE_CODES_TAB_XPATH);
+    }
+
+    @Step("Click On Remove Button In The Remove Account Pop-Up In All Accounts Tab.")
+    public void clickOnRemoveButtonInTheRemoveAccountPopUpInAllAccountsTab() {
+        click(REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_IN_ALL_ACCOUNTS_TAB_XPATH);
     }
 
     @Step("Get No Data Title in SO Codes table.")
@@ -106,6 +116,12 @@ public class IwantToBlock extends UIComponent {
     public boolean isRemoveAccountPopUpIsDisplayedInSeCodesTab() {
         waitForElementWithAppropriateTextToAppear(By.xpath(REMOVE_ACCOUNT_POP_UP_TITLE_SE_CODES_XPATH), "Remove Account");
         return isDisplayed(REMOVE_ACCOUNT_POP_UP_SE_CODES_XPATH);
+    }
+
+    @Step("Is Remove Account Pop-Up Is Displayed In All Accounts Tab.")
+    public boolean isRemoveAccountPopUpIsDisplayedInAllAccountsTab() {
+        waitForElementWithAppropriateTextToAppear(By.xpath(REMOVE_ACCOUNT_POP_UP_TITLE_ALL_ACCOUNTS_XPATH), "Remove Account");
+        return isDisplayed(REMOVE_ACCOUNT_POP_UP_ALL_ACCOUNTS_XPATH);
     }
 
     @Step("Click on Sales Engineer Sales Tab.")
@@ -162,5 +178,15 @@ public class IwantToBlock extends UIComponent {
     public List<String> getActiveAccountForUserInModifyAnAccountSection() {
         waitUntilPageIsFullyLoaded();
         return $$(ACTIVE_USER_ACCOUNTS_NAME_TABLE_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    @Step("Click On Account Checkbox In I Want To Block In All Accounts Tab")
+    public void clickOnAccountCheckboxInIWantToBlockInAllAccountsTab(String account) {
+        click(ACCOUNT_CHECKBOX_XPATH, account);
+    }
+
+    @Step("Click On Remove Button In All Accounts Tab")
+    public void clickOnRemoveButtonInAllAccountsTab() {
+        click(REMOVE_BUTTON_IN_ALL_ACCOUNTS_TAB_XPATH);
     }
 }

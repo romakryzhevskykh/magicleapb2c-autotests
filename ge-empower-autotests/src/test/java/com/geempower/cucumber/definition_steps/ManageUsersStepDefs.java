@@ -1,5 +1,7 @@
 package com.geempower.cucumber.definition_steps;
 
+import com.geempower.helpers.managers.RegionsManager;
+import com.geempower.helpers.models.Region;
 import com.geempower.storefront.page_blocks.IwantToBlock;
 import com.geempower.storefront.pages.ManageUsersPage;
 import cucumber.api.java.en.And;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class ManageUsersStepDefs extends AbstractStepDefs {
@@ -20,6 +23,8 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     private ManageUsersPage manageUsersPage;
     @Autowired
     private IwantToBlock iWantToBlock;
+    @Autowired
+    private RegionsManager regionsManager;
 
     @Then("^(.*) title is displayed on Manage Users page.$")
     public void checkManageUsersTitle(String manageUsersTitle) {
@@ -79,7 +84,8 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
 
     @And("^Select (.*) in the Region field in the Add Account pop-up.$")
     public void selectRegionInTheAddAccountPopUp(String region) {
-        manageUsersPage.selectRegionInTheAddAccountPopUp(region);
+        Region chosenRegion = regionsManager.getRegionByName(region);
+        manageUsersPage.selectRegionInTheAddAccountPopUp(chosenRegion);
     }
 
     @And("^Set (.*) SO code to the Second Sales Office Code field in the Add Account pop-up.$")
@@ -98,8 +104,8 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.MANAGE_USERS_ACCOUNT_NAME, manageUsersPage.getAccountNameFromAddAccPopUp());
     }
 
-    @Then("^Account from SO/SE code is displayed in the the All Accounts tab.$")
-    public void accountFromSoSeCodeIsDisplayedInTheTheAllAccountsTab() {
+    @Then("^Account from Add Account pop-up is displayed in the the All Accounts tab.$")
+    public void previouslyAddedAccountIsDisplayedInTheTheAllAccountsTab() {
         String accountName = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NAME);
         assertTrue(iWantToBlock.getAccountName()
         .anyMatch(account -> account.getText().equals(accountName)));
@@ -147,14 +153,19 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         assertEquals(popUpTitle, iWantToBlock.getRemoveSeCodesAccPopUpTitle());
     }
 
-    @And("^Click on Remove button in the Remove Account pop-up.$")
-    public void clickOnRemoveButtonInTheRemoveAccountPopUp() {
-        iWantToBlock.clickOnRemoveButtonInTheRemoveAccountPopUp();
+    @And("^Click on Remove button in the Remove Account pop-up on I Want To Block in SO codes tab.$")
+    public void clickOnRemoveButtonInTheRemoveAccountPopUpInSOCodesTab() {
+        iWantToBlock.clickOnRemoveButtonInTheRemoveAccountPopUpInSOCodesTab();
     }
 
     @And("^Click on Remove button in the Remove Account pop-up on I Want To Block in SE codes tab.$")
     public void clickOnRemoveButtonInTheRemoveAccountPopUpInSECodesTab() {
         iWantToBlock.clickOnRemoveButtonInTheRemoveAccountPopUpInSECodesTab();
+    }
+
+    @And("^Click on Remove button in the Remove Account pop-up on I Want To Block in All Accounts tab.$")
+    public void clickOnRemoveButtonInTheRemoveAccountPopUpInAllAccountsTab() {
+        iWantToBlock.clickOnRemoveButtonInTheRemoveAccountPopUpInAllAccountsTab();
     }
 
     @Then("^(.*) title is displayed in Sales Office Code table.$")
@@ -278,5 +289,44 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     public void appropriateApprovedAccountsAreDisplayedInAllAccountsTable() {
         ArrayList<String> requestedAccounts = (ArrayList<String>) threadVarsHashMap.get(TestKeyword.LIST_OF_REQUESTED_ACCOUNTS);
         assertTrue(iWantToBlock.getActiveAccountForUserInModifyAnAccountSection().containsAll(requestedAccounts));
+    }
+
+    @And("^Set (.*) to the Account field in the Add Account pop-up.$")
+    public void setAccountToTheAccountFieldInTheAddAccountPopUp(String account) {
+        manageUsersPage.setAccountToTheAccountFieldInTheAddAccountPopUp(account);
+    }
+
+    @When("^Click on Select All checkbox in the Add Account pop-up.$")
+    public void clickOnSelectAllCheckboxInTheAddAccountPopUp()  {
+        manageUsersPage.clickOnSelectAllCheckboxInTheAddAccountPopUp();
+    }
+
+    @And("^Click on Add button in the Add Account pop-up.$")
+    public void clickOnAddButtonInTheAddAccountPopUp(){
+    manageUsersPage.clickOnAddButtonInTheAddAccountPopUp();
+
+    }
+
+    @When("^Click on (.*) checkbox in I Want To Block in All Accounts tab.$")
+    public void clickOnAccountCheckboxInIWantToBlockInAllAccountsTab(String account) {
+        iWantToBlock.clickOnAccountCheckboxInIWantToBlockInAllAccountsTab(account);
+    }
+
+    @And("^Click on Remove button in All Accounts tab.$")
+    public void clickOnRemoveButtonInAllAccountsTab(){
+        iWantToBlock.clickOnRemoveButtonInAllAccountsTab();
+    }
+
+    @Then("^(.*) pop-up is displayed on I Want To Block in All Accounts tab.$")
+    public void removeAccountPopUpTitleIsEqualToRemoveAccountInAllAccountsTab(String popUpTitle) {
+        assertTrue(iWantToBlock.isRemoveAccountPopUpIsDisplayedInAllAccountsTab());
+        assertEquals(popUpTitle, iWantToBlock.getRemoveAllAccountsPopUpTitle());
+    }
+
+    @Then("^Account from Add Account pop-up is not displayed in the the All Accounts tab.$")
+    public void previouslyAddedAccountIsNotDisplayedInTheTheAllAccountsTab() {
+        String accountName = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NAME);
+        assertFalse(iWantToBlock.getAccountName()
+                .anyMatch(account -> account.getText().equals(accountName)));
     }
 }
