@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class BackofficeBasePage extends BasePageObject {
 
     @Autowired
-    protected TopconBackoffice templateBackoffice;
+    protected TopconBackoffice topconBackoffice;
 
     @Override
     public String getPageUrl() {

@@ -20,7 +20,4 @@ public class CartPageStepDefs extends AbstractStepDefs {
         Product product = (Product) threadVarsHashMap.get(OPENED_PDP_PRODUCT);
         assertTrue(cartPage.getAllAddedProductsIds().contains(product.getId()));
     }
-
-
-
 }

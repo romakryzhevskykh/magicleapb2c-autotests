@@ -86,7 +86,7 @@ public class AddressBookPage extends StorefrontBasePage {
     }
 
     public boolean isAlertOnCreateNewAddress() {
-        return addressBookAddUpdateEntryBlock.isAlert();
+        return addressBookAddUpdateEntryBlock.isAlertDisplayed();
     }
 
     @Step("Click on Add Address button.")

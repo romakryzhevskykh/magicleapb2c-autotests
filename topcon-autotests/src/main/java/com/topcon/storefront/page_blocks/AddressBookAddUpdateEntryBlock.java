@@ -65,7 +65,7 @@ public class AddressBookAddUpdateEntryBlock extends UIComponent {
     }
 
     @Step("Is alert displayed.")
-    public boolean isAlert() {
+    public boolean isAlertDisplayed() {
         return isDisplayed(AddressBookPageElements.ALERT_ERROR_MESSAGE_XPATH);
     }
 
