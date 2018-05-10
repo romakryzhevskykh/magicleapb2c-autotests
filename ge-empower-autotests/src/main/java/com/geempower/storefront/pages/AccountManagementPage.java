@@ -3,10 +3,14 @@ package com.geempower.storefront.pages;
 import com.geempower.helpers.models.Region;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.geempower.storefront.page_elements.AccountManagementPageElements.*;
 
@@ -139,4 +143,30 @@ public class AccountManagementPage extends StorefrontBasePage {
         return $(ACCOUNT_NAME_VALUE_IN_TABLE_XPATH).getText();
     }
 
+    @Step("Get No Data Title From Pending Accounts Table")
+    public String getNoDataTitleFromPendingAccountsTable() {
+        return $(PENDING_FOR_APPROVAL_TABLE_NO_DATA_TITLE_XPATH).getText();
+    }
+
+    @Step("Switch To Approved Accounts Tab")
+    public void switchToApprovedAccountsTab() {
+        click(APPROVED_ACCOUNTS_TAB_XPATH);
+        waitUntilPageIsFullyLoaded();
+    }
+
+    @Step("Get All Approved Accounts In Approved Accounts Tab")
+    public List<String> getAllApprovedAccountsInApprovedAccountsTab() {
+        return $$(APPROVED_ACCOUNTS_NAME_IN_APPROVED_ACCOUNTS_TABLE_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    @Step("Remove All Active Requested Accounts")
+    public void removeAllRequestedAccounts(ArrayList<String> approvedAccounts) {
+        approvedAccounts.forEach(account -> {
+            $(REMOVE_ACCOUNT_ACTION_FOR_APPROPRIATE_ACCOUNT_THREE_DOT_ICON_XPATH, account).click();
+            $(THREE_DOT_ICON_REMOVE_ACCOUNT_XPATH, account).click();
+            waitUntilPageIsFullyLoaded();
+            $(CONFIRMATION_FOR_REMOVE_ACTIVE_ACCOUNT_BUTTON_XPATH).click();
+            waitUntilPageIsFullyLoaded();
+        });
+    }
 }

@@ -1,20 +1,19 @@
 package com.geempower.cucumber.definition_steps;
 
-import com.geempower.helpers.BasePageObject;
+import com.geempower.helpers.Utils;
 import cucumber.api.java.en.And;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class GeneralStepDefs extends AbstractStepDefs {
-    @Autowired
-    private BasePageObject basePageObject;
+    @Autowired private Utils utils;
 
     @And("^Focus on browser.$")
     public void focusOnBrowser() {
-        basePageObject.focusOnActiveBrowser();
+        utils.focusOnActiveBrowser();
     }
 
     @And("^Refresh page.$")
     public void refreshPage() {
-        basePageObject.refreshCurrentPage();
+        utils.refreshCurrentPage();
     }
 }

@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.geempower.storefront.page_block_elements.IwantToBlockElements.*;
@@ -109,5 +111,56 @@ public class IwantToBlock extends UIComponent {
     @Step("Click on Sales Engineer Sales Tab.")
     public void clickOnSalesEngineerCodesTab() {
         click(SALES_ENGINEER_CODES_TAB_XPATH);
+    }
+
+    @Step("Get Approve Pending Accounts Section Title")
+    public String getApprovePendingAccountsSectionTitle() {
+        waitUntilPageIsFullyLoaded();
+        return $(APPROVE_PENDING_ACCOUNTS_SECTION_TITLE_XPATH).getText();
+    }
+
+    @Step("Get Total Accounts Requests")
+    public int getTotalAccountRequests() {
+        return Integer.parseInt($(TOTAL_ACCOUNT_REQUESTS_XPATH).getText());
+    }
+
+    @Step("Expand Approve Pending Accounts Section")
+    public void expandApprovePendingAccountsSection() {
+        click(APPROVE_PENDING_ACCOUNTS_SECTION_EXPAND_ICON_XPATH);
+    }
+
+    @Step("Get Actual Pending Accounts Table Size")
+    public int getActualPendingAccountsTableSize() {
+        return $$(PENDING_ACCOUNTS_TABLE_ROWS_XPATH).size();
+    }
+
+    @Step("Click On Select All Pending Accounts CheckBox")
+    public void clickOnSelectAllPendingAccountsCheckBox() {
+        waitUntilPageIsFullyLoaded();
+        click(ALL_PENDING_ACCOUNT_CHECKBOX_XPATH);
+    }
+
+    @Step("Click On Accept Account Button")
+    public void clickOnAcceptAccountButton() {
+        click(ACCEPT_ACCOUNT_BUTTON_XPATH);
+        waitUntilPageIsFullyLoaded();
+    }
+
+    @Step("Accept The Action On Accept Account PopUp")
+    public void acceptTheActionOnAcceptAccountPopUp() {
+        click(ACCEPT_THE_ACTION_IN_ACCEPT_ACCOUNT_POP_UP_XPATH);
+        waitUntilPageIsFullyLoaded();
+    }
+
+    @Step("Get No Data Title In Pending Accounts Table")
+    public String getNoDataTitleInPendingAccountsTable() {
+        waitUntilPageIsFullyLoaded();
+        return $(PENDING_ACCOUNTS_TABLE_NO_DATA_TITLE_XPATH).getText();
+    }
+
+    @Step("Get Active Account For User In Modify An Account Section")
+    public List<String> getActiveAccountForUserInModifyAnAccountSection() {
+        waitUntilPageIsFullyLoaded();
+        return $$(ACTIVE_USER_ACCOUNTS_NAME_TABLE_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
     }
 }

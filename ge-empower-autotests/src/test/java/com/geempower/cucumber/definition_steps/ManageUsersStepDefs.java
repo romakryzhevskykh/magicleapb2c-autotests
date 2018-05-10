@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -232,6 +234,49 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     @Then("^(.*) Sales Engineer Code is displayed in the SE Codes table.$")
     public void sEcodeSalesEngineerCodeIsDisplayedInTheSOCodesTable(String code){
         assertEquals(code, iWantToBlock.getSeCodeFromTable());
+    }
 
+    @Then("^(.*) section is displayed with appropriate count of accounts.$")
+    public void approvePendingAccountsSectionIsDisplayedWithAppropriateCountOfAccounts(String sectionTitle) {
+        ArrayList<String> requestedAccounts = (ArrayList<String>) threadVarsHashMap.get(TestKeyword.LIST_OF_REQUESTED_ACCOUNTS);
+        assertEquals(sectionTitle + " (" + requestedAccounts.size() + ")", iWantToBlock.getApprovePendingAccountsSectionTitle());
+        assertTrue(requestedAccounts.size() == iWantToBlock.getTotalAccountRequests());
+    }
+
+    @When("^User expand the Approve Pending Accounts section.$")
+    public void userExpandTheApprovePendingAccountsSection() {
+        iWantToBlock.expandApprovePendingAccountsSection();
+    }
+
+    @Then("^Appropriate count of pending requests are displayed in Pending accounts table.$")
+    public void appropriateCountOfPendingRequestsAreDisplayedInPendingAccountsTable() {
+        ArrayList<String> requestedAccounts = (ArrayList<String>) threadVarsHashMap.get(TestKeyword.LIST_OF_REQUESTED_ACCOUNTS);
+        assertTrue(requestedAccounts.size() == iWantToBlock.getActualPendingAccountsTableSize());
+    }
+
+    @When("^Admin clicks on All accounts checkbox.$")
+    public void adminClicksOnAllAccountsCheckbox() {
+        iWantToBlock.clickOnSelectAllPendingAccountsCheckBox();
+    }
+
+    @And("^Click on Accept accounts button.$")
+    public void clickOnAcceptButton() {
+        iWantToBlock.clickOnAcceptAccountButton();
+    }
+
+    @And("^Accept the action in Accept Account pop-up.$")
+    public void acceptTheActionInAcceptAccountPopUp() {
+        iWantToBlock.acceptTheActionOnAcceptAccountPopUp();
+    }
+
+    @Then("^Pending accounts table became empty.$")
+    public void pendingAccountsTableBecomeEmpty() {
+        assertEquals("No data available in table", iWantToBlock.getNoDataTitleInPendingAccountsTable());
+    }
+
+    @Then("^Appropriate accounts are displayed in All approved Accounts table.$")
+    public void appropriateApprovedAccountsAreDisplayedInAllAccountsTable() {
+        ArrayList<String> requestedAccounts = (ArrayList<String>) threadVarsHashMap.get(TestKeyword.LIST_OF_REQUESTED_ACCOUNTS);
+        assertTrue(iWantToBlock.getActiveAccountForUserInModifyAnAccountSection().containsAll(requestedAccounts));
     }
 }
