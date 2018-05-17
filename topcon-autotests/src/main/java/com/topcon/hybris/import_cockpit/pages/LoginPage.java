@@ -7,6 +7,8 @@ import org.openqa.selenium.By;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
+import static com.topcon.hybris.import_cockpit.page_elements.LoginPageElements.*;
+
 @Component
 public class LoginPage extends ImportCockpitBasePage {
 
@@ -18,17 +20,17 @@ public class LoginPage extends ImportCockpitBasePage {
 
     @Step("Fill Import cockpit's username field.")
     public void fillUsernameFieldWith(String username) {
-        $(By.id(LoginPageElements.USER_ID_FIELD_ID)).sendKeys(username);
+        $(By.id(USER_ID_FIELD_ID)).sendKeys(username);
     }
 
     @Step("Fill Import cockpit's password field.")
     public void fillPasswordFieldWith(String password) {
-        $(By.id(LoginPageElements.PASSWORD_FIELD_ID)).sendKeys(password);
+        $(By.id(PASSWORD_FIELD_ID)).sendKeys(password);
     }
 
     @Step("Click on Import cockpit's Login button.")
     public void clickOnLoginButton() {
-        $(By.id(LoginPageElements.LOGIN_BUTTON_ID)).click();
+        click(LOGIN_BUTTON_ID);
     }
 
     public void loginToImporCockpit(UserSession user) {
