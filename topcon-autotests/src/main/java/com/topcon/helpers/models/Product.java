@@ -1,6 +1,6 @@
 package com.topcon.helpers.models;
 
-public class Product {
+public class  Product {
 
     private final String id;
     private final String name;

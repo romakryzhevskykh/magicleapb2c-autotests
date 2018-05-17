@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class PreConditionsStepDefs extends AbstractStepDefs {
     @Autowired
+    private
     HeaderRowPageBlock headerRowPageBlock;
     @Autowired
+    private
     LoginPage loginPage;
 
     @Given("^User is logged in to Storefront.$")

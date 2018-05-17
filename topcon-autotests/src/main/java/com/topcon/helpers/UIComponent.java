@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public abstract class UIComponent {
 
