@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class UserSwitchStepDefs extends AbstractStepDefs {
 
     @Autowired protected WebDriverSessions webDriverPool;
-    @Autowired StartPage storefrontStartPage;
+    @Autowired private StartPage storefrontStartPage;
 
     @Given("Switch to Backoffice Admin user.")
     public void switchToBackofficeAdmin() {

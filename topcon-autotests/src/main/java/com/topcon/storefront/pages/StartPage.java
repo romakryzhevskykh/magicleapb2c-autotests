@@ -8,7 +8,7 @@ import ru.yandex.qatools.allure.annotations.Step;
 @Component
 public class StartPage extends StorefrontBasePage {
 
-    @Autowired LoggedOutHeaderRowBlock loggedOutHeaderRowBlock;
+    @Autowired private LoggedOutHeaderRowBlock loggedOutHeaderRowBlock;
 
     private final String pageUrlMethod = "topcon/en/USD/login";
 

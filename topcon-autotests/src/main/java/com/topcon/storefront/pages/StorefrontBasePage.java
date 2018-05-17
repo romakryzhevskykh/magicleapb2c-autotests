@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ru.yandex.qatools.allure.annotations.Step;
 
 public abstract class StorefrontBasePage extends BasePageObject {
-    @Autowired TopconStorefront storefrontProject;
+    @Autowired private TopconStorefront storefrontProject;
     @Autowired private HeaderRowPageBlock headerRowPageBlock;
 
     protected boolean isUserLoggedIn() {

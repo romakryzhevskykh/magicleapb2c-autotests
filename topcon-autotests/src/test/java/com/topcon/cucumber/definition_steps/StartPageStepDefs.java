@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class StartPageStepDefs extends AbstractStepDefs {
 
-    @Autowired StartPage startPage;
-    @Autowired HeaderRowPageBlock headerRowPageBlock;
+    @Autowired private StartPage startPage;
+    @Autowired private HeaderRowPageBlock headerRowPageBlock;
 
     @Given("Opened Start page.")
     public void openLoginPage() {

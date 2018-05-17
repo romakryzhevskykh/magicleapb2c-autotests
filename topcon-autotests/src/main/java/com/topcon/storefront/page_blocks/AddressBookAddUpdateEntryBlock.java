@@ -68,11 +68,11 @@ public class AddressBookAddUpdateEntryBlock extends UIComponent {
 
     @Step("Is alert displayed.")
     public boolean isAlertDisplayed() {
-        return isDisplayed(AddressBookPageElements.ALERT_ERROR_MESSAGE_XPATH);
+        return isDisplayed(ALERT_ERROR_MESSAGE_XPATH);
     }
 
     @Step("Click on Save button.")
     public void clickOnSaveButton() {
-        $(AddressBookPageElements.SAVE_ADDRESS_BUTTON_XPATH).click();
+        $(SAVE_ADDRESS_BUTTON_XPATH).click();
     }
 }

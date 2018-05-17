@@ -16,8 +16,8 @@ import static com.topcon.storefront.page_elements.AddressBookPageElements.*;
 
 @Component
 public class AddressBookPage extends StorefrontBasePage {
-    @Autowired AddressBookEntriesManager addressBookEntriesManager;
-    @Autowired AddressBookAddUpdateEntryBlock addressBookAddUpdateEntryBlock;
+    @Autowired private AddressBookEntriesManager addressBookEntriesManager;
+    @Autowired private AddressBookAddUpdateEntryBlock addressBookAddUpdateEntryBlock;
 
     private final String pageUrlMethod = "powertools/en/USD/my-account/address-book";
 

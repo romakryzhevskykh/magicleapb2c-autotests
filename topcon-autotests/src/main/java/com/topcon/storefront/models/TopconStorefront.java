@@ -5,7 +5,7 @@ import com.topcon.storefront.pages.LoginPage;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class TopconStorefront extends Cockpit {
-    @Autowired LoginPage loginPage;
+    @Autowired private LoginPage loginPage;
 
     public TopconStorefront(String baseUrl) {
         this.baseUrl = baseUrl;

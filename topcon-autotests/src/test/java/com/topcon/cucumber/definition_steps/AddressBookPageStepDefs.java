@@ -21,9 +21,9 @@ public class AddressBookPageStepDefs extends AbstractStepDefs {
     @Autowired UserSessions userSessions;
     @Autowired AddressBookEntriesManager addressBookEntriesManager;
 
-    @Autowired AddressBookPage addressBookPage;
-    @Autowired LoginPage loginPage;
-    @Autowired HeaderRowPageBlock headerRowPageBlock;
+    @Autowired private AddressBookPage addressBookPage;
+    @Autowired private LoginPage loginPage;
+    @Autowired private HeaderRowPageBlock headerRowPageBlock;
 
     @Given("^Address book page opened.$")
     public void addressBookPageOpened() throws Throwable {
