@@ -1,7 +1,7 @@
 Feature: Some actions on Products page
 
   Background:
-    Given Switch to Storefront as admin.
+    Given Switch to Storefront as smAdmin.
     And User is logged in to Storefront.
 
   Scenario: Check that user able to open Products page and correct header title is displayed

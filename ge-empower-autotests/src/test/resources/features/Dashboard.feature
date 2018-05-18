@@ -1,7 +1,7 @@
 Feature: Dashboard elements and widgets checking, Order creation via the P&A block.
 
   Background:
-    Given Switch to Storefront as admin.
+    Given Switch to Storefront as smAdmin.
     And User is logged in to Storefront.
 
   Scenario: Check that user able to open Dashboard page and verify that all widgets are present

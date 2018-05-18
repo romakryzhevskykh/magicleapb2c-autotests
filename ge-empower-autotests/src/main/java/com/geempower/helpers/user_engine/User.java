@@ -30,6 +30,12 @@ public class User {
                 case "regionalview":
                     userRole = StorefrontUserRoles.REGIONALVIEW;
                     break;
+                case "smadmin":
+                    userRole = StorefrontUserRoles.SMADMIN;
+                    break;
+                case "rmadmin":
+                    userRole = StorefrontUserRoles.RMADMIN;
+                    break;
                 default:
                     userRole = null;
                     break;
