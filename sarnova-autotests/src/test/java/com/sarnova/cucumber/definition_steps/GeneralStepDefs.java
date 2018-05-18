@@ -101,11 +101,6 @@ public class GeneralStepDefs extends AbstractStepDefs {
         headerRowPageBlock.clickOnSavedCartsItemInMyAccountMenu();
     }
 
-    @Then("^Check that Saved Carts page is opened.$")
-    public void checkThatSavedCartsPageIsOpened() {
-        assertTrue(savedCartsPage.isOpened());
-    }
-
     @When("^Click on Saved Credit Cards item in My Account menu.$")
     public void clickOnSavedCreditCardsItemInMyAccountMenu() {
         headerRowPageBlock.clickOnSavedCreditCardsItemInMyAccountMenu();

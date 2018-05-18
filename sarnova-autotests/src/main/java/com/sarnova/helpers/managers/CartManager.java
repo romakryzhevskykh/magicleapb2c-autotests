@@ -44,7 +44,7 @@ public class CartManager {
         }
     }
 
-    private String getCartPageCsrfToken(UserSession userSession) {
+    public String getCartPageCsrfToken(UserSession userSession) {
         GETRequest getCartPageSource = GET_CART_PAGE_SOURCE.getClone();
         try {
             getCartPageSource.sendGetRequest(userSession);
@@ -53,6 +53,17 @@ public class CartManager {
         }
         Document htmlResponse = getCartPageSource.getResponse().getHTMLResponseDocument();
         return Xsoup.select(htmlResponse, "//input[@name=CSRFToken]/@value").list().stream().findAny().orElse(null);
+    }
+
+    public String getCurrentCartId(UserSession userSession) {
+        GETRequest getCartPageSource = GET_CART_PAGE_SOURCE.getClone();
+        try {
+            getCartPageSource.sendGetRequest(userSession);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Document htmlResponse = getCartPageSource.getResponse().getHTMLResponseDocument();
+        return Xsoup.select(htmlResponse, "//span[@class=cart__id]/text()").get();
     }
 
     private List<UnitOfMeasure> getUOMsFromCartPage(UserSession userSession) {
@@ -68,6 +79,7 @@ public class CartManager {
     }
 
     @SuppressWarnings("unchecked")
+    @Step("Add {1} to cart.")
     public void addUOMsToCartViaApi(UserSession userSession, HashMap<UnitOfMeasure, Integer> unitsOfMeasurementToAdd) {
         POSTRequest addUOMsToCart = ADD_UOMS_TO_CART.getClone();
         int counter = 0;

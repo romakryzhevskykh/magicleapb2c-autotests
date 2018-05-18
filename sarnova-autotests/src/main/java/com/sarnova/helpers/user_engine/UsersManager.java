@@ -110,15 +110,19 @@ public class UsersManager {
             e.printStackTrace();
         }
         Document htmlResponse = userDetailsPage.getResponse().getHTMLResponseDocument();
-        Elements elements = Xsoup.select(htmlResponse, "//div[@class=account-list]/div").getElements();
-        if (elements.last().className().equals("account-cards")) {
-            Xsoup.select(elements.last(), "/div/div/ul/li[1]/a/text()").getElements().forEach(element -> {
-                if (userGroupsManager.getUserGroupByUid(element.text().trim()) == null) {
-                    userGroupsManager.createInstance(element.text().trim());
-                }
-                user.getUserGroups().add(userGroupsManager.getUserGroupByUid(element.text().trim()));
-            });
-        }
+        Elements elements = Xsoup.select(htmlResponse, "//div[@class=account-list]/div[@class=account-cards]/div[@class=row]/div[contains(@class,card)]").getElements();
+        elements.stream()
+                .filter(element ->
+                        Xsoup.select(element, "div[@class=account-cards-actions]/span/a/@data-action-confirmation-modal-id")
+                                .get()
+                                .contains("removeUserGroup"))
+                .filter(element -> StorefrontUserRole.getRoleByRoleCode(Xsoup.select(element, "ul/li/a/text()").get()) == null)
+                .forEach(element -> {
+                    if (userGroupsManager.getUserGroupByUid(element.text().trim()) == null) {
+                        userGroupsManager.createInstance(element.text().trim());
+                    }
+                    user.getUserGroups().add(userGroupsManager.getUserGroupByUid(element.text().trim()));
+                });
     }
 
     public ArrayList<User> getUsers() {

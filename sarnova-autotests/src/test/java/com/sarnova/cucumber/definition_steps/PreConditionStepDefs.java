@@ -7,6 +7,7 @@ import com.sarnova.helpers.models.categories.ParentCustomCategory;
 import com.sarnova.helpers.models.products.IndividualProduct;
 import com.sarnova.helpers.models.products.Product;
 import com.sarnova.helpers.models.products.UnitOfMeasure;
+import com.sarnova.helpers.models.saved_carts.SavedCart;
 import com.sarnova.helpers.models.supply_lists.SupplyList;
 import com.sarnova.helpers.models.supply_lists.SupplyListProduct;
 import com.sarnova.helpers.models.users.UserGroup;
@@ -32,6 +33,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     @Autowired private UserGroupsManager userGroupsManager;
     @Autowired private ProductsManager productsManager;
     @Autowired private CartManager cartManager;
+    @Autowired private SavedCartsManager savedCartsManager;
     @Autowired private UsersManager usersManager;
     @Autowired private CustomCategoriesManager customCategoriesManager;
 
@@ -421,5 +423,18 @@ public class PreConditionStepDefs extends AbstractStepDefs {
                     customCategoriesManager.createNewChildCustomCategoryByApi(userSessions.getActiveUserSession(), ccName, parentCategory);
                     return parentCategory;
                 })).getChildCustomCategories().stream().findAny().get();
+    }
+
+    @And("^Saved Cart with at least (\\d+) products has been created.$")
+    public void createSavedCartWithAtLeastProduct(int qtyOfProductInCart) {
+        List<SavedCart> savedCarts = savedCartsManager.getUserSavedCarts(userSessions.getActiveUserSession().getUser());
+        if(savedCarts.isEmpty()) {
+            List<UnitOfMeasure> unitOfMeasures = productsManager.getUniqueUOMsByUOMsQuantityAndProductTestTypes(qtyOfProductInCart, new ArrayList<>());
+            unitOfMeasures.forEach(uom -> getSelectedUOMS().put(uom, 1));
+            cartManager.addUOMsToCartViaApi(userSessions.getActiveUserSession(), getSelectedUOMS());
+            savedCartsManager.createSavedCartByApi(userSessions.getActiveUserSession(), getSelectedUOMS());
+        }
+        SavedCart savedCart = savedCartsManager.getUserSavedCarts(userSessions.getActiveUserSession().getUser()).stream().findAny().orElse(null);
+        threadVarsHashMap.put(TestKeyword.SAVED_CART_ID, savedCart.getId());
     }
 }

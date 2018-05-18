@@ -48,6 +48,10 @@ public enum StorefrontUserRole implements UserRole {
         return Stream.of(getRoles()).filter(role -> role.getRoleName().equals(roleName)).findFirst().orElse(null);
     }
 
+    public static UserRole getRoleByRoleCode(String roleCode) {
+        return Stream.of(getRoles()).filter(role -> role.getRoleCode().equals(roleCode)).findFirst().orElse(null);
+    }
+
     public String getRoleCode() {
         return roleCode;
     }

@@ -1,6 +1,7 @@
 package com.sarnova.storefront.page_elements;
 
 public class CartPageElements {
+    private static final String PAGE_CONTENT_CONTAINER_XPATH = "//div[@class='page-content-container']";
 
     private static final String PRODUCTS_ROWS_BLOCK_XPATH = "//ul[@class='item__list item__list__cart']";
     public static final String PRODUCTS_ROWS_XPATH = PRODUCTS_ROWS_BLOCK_XPATH + "/table/tbody/tr/td/li[@class='item__list--item']";
@@ -10,5 +11,8 @@ public class CartPageElements {
 
     public static final String CHECKOUT_BUTTONS_XPATH = "//button[contains(@class, 'btn--continue-checkout')]";
     public static final String ADD_TO_SUPPLY_LIST_BUTTONS_XPATH = "//div[contains(@class,'cart-actions-bottom')]//button[contains(@class,'js-add-to-wishlist')]";
+
+    public static final String SAVE_CART_BUTTON_XPATH = "//a[contains(@class, 'js-save-cart-link')]";
+    public static final String SAVED_CARTS_BUTTON_XPATH = PAGE_CONTENT_CONTAINER_XPATH + "//a[@href='/boundtree/en/USD/my-account/saved-carts']";
 
 }
