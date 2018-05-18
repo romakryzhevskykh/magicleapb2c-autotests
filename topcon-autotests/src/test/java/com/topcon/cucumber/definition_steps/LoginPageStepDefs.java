@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class LoginPageStepDefs extends AbstractStepDefs {
 
-    @Autowired StartPage startPage;
-    @Autowired LoginPage loginPage;
-    @Autowired HeaderRowPageBlock headerRowPageBlock;
+    @Autowired private StartPage startPage;
+    @Autowired private LoginPage loginPage;
+    @Autowired private HeaderRowPageBlock headerRowPageBlock;
 
     @Given("Opened Login page.")
     public void openLoginPage() {

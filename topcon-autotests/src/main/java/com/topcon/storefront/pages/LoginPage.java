@@ -8,7 +8,7 @@ import static com.topcon.storefront.page_elements.LoginPageElements.*;
 
 @Component
 public class LoginPage extends StorefrontBasePage {
-    private final String pageUrlMethod = "powertools/en/USD/login";
+    private final String pageUrlMethod = "topcon/en/USD/login";
 
     public boolean isOpened() {
         return isCurrentURLEqualsToLoginPageURL() && isUserLoggedOut();
@@ -16,17 +16,19 @@ public class LoginPage extends StorefrontBasePage {
 
     @Step("Fill username field.")
     public void fillUsernameFieldWith(String username) {
+        $(USERNAME_FIELD_XPATH).clear();
         $(USERNAME_FIELD_XPATH).sendKeys(username);
     }
 
     @Step("Fill password field.")
     public void fillPasswordFieldWith(String password) {
+        $(PASSWORD_FIELD_XPATH).clear();
         $(PASSWORD_FIELD_XPATH).sendKeys(password);
     }
 
     @Step("Click on Login button.")
     public void clickOnLoginButton() {
-        $(LOG_IN_BUTTON_XPATH).click();
+        click(LOG_IN_BUTTON_XPATH);
     }
 
     public void loginToStorefront(UserSession user) {

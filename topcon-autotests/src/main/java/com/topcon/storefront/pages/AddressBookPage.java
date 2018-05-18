@@ -16,8 +16,8 @@ import static com.topcon.storefront.page_elements.AddressBookPageElements.*;
 
 @Component
 public class AddressBookPage extends StorefrontBasePage {
-    @Autowired AddressBookEntriesManager addressBookEntriesManager;
-    @Autowired AddressBookAddUpdateEntryBlock addressBookAddUpdateEntryBlock;
+    @Autowired private AddressBookEntriesManager addressBookEntriesManager;
+    @Autowired private AddressBookAddUpdateEntryBlock addressBookAddUpdateEntryBlock;
 
     private final String pageUrlMethod = "powertools/en/USD/my-account/address-book";
 
@@ -86,12 +86,12 @@ public class AddressBookPage extends StorefrontBasePage {
     }
 
     public boolean isAlertOnCreateNewAddress() {
-        return addressBookAddUpdateEntryBlock.isAlert();
+        return addressBookAddUpdateEntryBlock.isAlertDisplayed();
     }
 
     @Step("Click on Add Address button.")
     public void clickOnAddAddressButton() {
-        $(ADD_ADDRESS_BUTTON_XPATH).click();
+        click(ADD_ADDRESS_BUTTON_XPATH);
     }
 
     @Override

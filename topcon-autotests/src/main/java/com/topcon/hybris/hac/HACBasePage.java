@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class HACBasePage extends BasePageObject {
 
     @Autowired
-    protected TopconHAC templateHAC;
+    protected TopconHAC topconHAC;
 
     @Override
     public String getPageUrl() {

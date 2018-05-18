@@ -2,3 +2,12 @@ com.topcon.topcon-automatedtests.iml
 target
 .idea/
 .DS_Store
+.META-INF/*
+./TopconBackoffice.java
+./HACBasePage.java
+./ToopconHAC.java
+./BackofficeBasePage.java
+./ImportCockpitBasePage.java
+./TopconImportCockpit.java
+./
+./

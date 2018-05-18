@@ -15,9 +15,9 @@ import static org.testng.Assert.assertTrue;
 public class HomePageStepDefs extends AbstractStepDefs {
     @Autowired UserSessions userSessions;
 
-    @Autowired HomePage homePage;
-    @Autowired LoginPage loginPage;
-    @Autowired HeaderRowPageBlock headerRowPageBlock;
+    @Autowired private HomePage homePage;
+    @Autowired private LoginPage loginPage;
+    @Autowired private HeaderRowPageBlock headerRowPageBlock;
 
     @Given("Home page opened.")
     public void openHomePage() {

@@ -9,18 +9,18 @@ public abstract class BasePageObject extends UIComponent {
         return getDriver().getCurrentUrl();
     }
 
-    public String getDecodedCurrentUrl() {
-        try {
-            return URLDecoder.decode(getCurrentUrl(), "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            System.out.println(e);
-            return null;
-        }
-    }
-
     public boolean isOpened() {
         return getPageUrl().equals(getCurrentUrl());
     }
+
+//    public String getDecodedCurrentUrl() {
+//        try {
+//            return URLDecoder.decode(getCurrentUrl(), "UTF-8");
+//        } catch (UnsupportedEncodingException e) {
+//            System.out.println(e);
+//            return null;
+//        }
+//    }
 
     public void open() {
         open(getPageUrl());

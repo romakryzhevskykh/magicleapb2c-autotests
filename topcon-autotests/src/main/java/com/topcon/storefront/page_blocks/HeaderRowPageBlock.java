@@ -6,8 +6,8 @@ import ru.yandex.qatools.allure.annotations.Step;
 
 @Component
 public class HeaderRowPageBlock {
-    @Autowired LoggedInHeaderRowBlock loggedInHeaderRowBlock;
-    @Autowired LoggedOutHeaderRowBlock loggedOutHeaderRowBlock;
+    @Autowired private LoggedInHeaderRowBlock loggedInHeaderRowBlock;
+    @Autowired private LoggedOutHeaderRowBlock loggedOutHeaderRowBlock;
 
     public boolean isUserLoggedIn() {
         return loggedInHeaderRowBlock.isUserLoggedIn();
