@@ -13,7 +13,7 @@ public class AddressBookAddUpdateEntryBlock extends UIComponent {
 
     @Step("Click on Country drop-down")
     public void clickOnCountryDropDown() {
-        $(By.id(COUNTRY_DROP_DOWN_ID)).click();
+        click(COUNTRY_DROP_DOWN_ID);
     }
 
     @Step("Get any Country from Country drop-down list")
@@ -28,7 +28,7 @@ public class AddressBookAddUpdateEntryBlock extends UIComponent {
 
     @Step("Click on Title drop-down")
     public void clickOnTitleDropDown() {
-        $(By.id(TITLE_DROP_DOWN_ID)).click();
+        click(TITLE_DROP_DOWN_ID);
     }
 
     @Step("Get any Title from Title drop-down list")
@@ -73,6 +73,6 @@ public class AddressBookAddUpdateEntryBlock extends UIComponent {
 
     @Step("Click on Save button.")
     public void clickOnSaveButton() {
-        $(SAVE_ADDRESS_BUTTON_XPATH).click();
+        click(SAVE_ADDRESS_BUTTON_XPATH);
     }
 }

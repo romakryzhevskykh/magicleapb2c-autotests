@@ -91,7 +91,7 @@ public class AddressBookPage extends StorefrontBasePage {
 
     @Step("Click on Add Address button.")
     public void clickOnAddAddressButton() {
-        $(ADD_ADDRESS_BUTTON_XPATH).click();
+        click(ADD_ADDRESS_BUTTON_XPATH);
     }
 
     @Override
