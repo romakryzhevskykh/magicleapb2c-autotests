@@ -20,11 +20,13 @@ public class LoginPage extends ImportCockpitBasePage {
 
     @Step("Fill Import cockpit's username field.")
     public void fillUsernameFieldWith(String username) {
+        $(By.id(USER_ID_FIELD_ID)).clear();
         $(By.id(USER_ID_FIELD_ID)).sendKeys(username);
     }
 
     @Step("Fill Import cockpit's password field.")
     public void fillPasswordFieldWith(String password) {
+        $(By.id(PASSWORD_FIELD_ID)).clear();
         $(By.id(PASSWORD_FIELD_ID)).sendKeys(password);
     }
 

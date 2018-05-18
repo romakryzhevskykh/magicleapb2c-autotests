@@ -32,7 +32,7 @@ public class ProductDetailsPage extends StorefrontBasePage {
 
     @Override
     public String getPageUrl() {
-        return null;
+        return storefrontProject.getBaseUrl();
     }
 
     @Step("Set QTY {1}.")

@@ -16,11 +16,13 @@ public class LoginPage extends StorefrontBasePage {
 
     @Step("Fill username field.")
     public void fillUsernameFieldWith(String username) {
+        $(USERNAME_FIELD_XPATH).clear();
         $(USERNAME_FIELD_XPATH).sendKeys(username);
     }
 
     @Step("Fill password field.")
     public void fillPasswordFieldWith(String password) {
+        $(PASSWORD_FIELD_XPATH).clear();
         $(PASSWORD_FIELD_XPATH).sendKeys(password);
     }
 
