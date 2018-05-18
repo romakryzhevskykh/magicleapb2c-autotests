@@ -166,3 +166,15 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
       | region        | products                        | spaNo    | salesDivision | standardSpaNo |
       | North_America | THHQB1120AF2, TEY150, 9T21B9103 | 45003985 | USS1_10_10    | STANDARD      |
 
+  Scenario: Check that user is able to send feedback successfully
+    And Dashboard page is opened.
+    When Click on Skip button.
+    When Close cookies pop-up.
+    When Admin clicks on the feedback button.
+    Then Help Us Improve title is displayed in the feedback pop-up.
+    Then Great, ok, confusing, frustrating labels are present in the feedback pop-up.
+    Then Include screenshot checkbox is checked by default.
+    When Admin sets test text to the feedback input.
+    And Clicks on the Submit button.
+    Then Got it! Thank you for helping us improve the tool. text is displayed in successful pop-up.
+    And Admin clicks on OK button in the successful feedback pop-up.
