@@ -4,6 +4,7 @@ import com.geempower.helpers.managers.RegionsManager;
 import com.geempower.helpers.models.Region;
 import com.geempower.storefront.page_blocks.IwantToBlock;
 import com.geempower.storefront.pages.ManageUsersPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -275,9 +276,19 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         iWantToBlock.clickOnAcceptAccountButton();
     }
 
+    @And("^Click on Reject accounts button.$")
+    public void clickOnRejectButton() {
+        iWantToBlock.clickOnRejectAccountButton();
+    }
+
     @And("^Accept the action in Accept Account pop-up.$")
     public void acceptTheActionInAcceptAccountPopUp() {
         iWantToBlock.acceptTheActionOnAcceptAccountPopUp();
+    }
+
+    @And("^Accept the action in Reject Account pop-up.$")
+    public void acceptTheActionInRejectAccountPopUp() {
+        iWantToBlock.acceptTheActionOnRejectAccountPopUp();
     }
 
     @Then("^Pending accounts table became empty.$")
@@ -328,5 +339,11 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         String accountName = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NAME);
         assertFalse(iWantToBlock.getAccountName()
                 .anyMatch(account -> account.getText().equals(accountName)));
+    }
+
+    @Then("^Appropriate accounts are not displayed in All approved Accounts table.$")
+    public void appropriateAccountsAreNotDisplayedInAllApprovedAccountsTable() {
+        ArrayList<String> requestedAccounts = (ArrayList<String>) threadVarsHashMap.get(TestKeyword.LIST_OF_REQUESTED_ACCOUNTS);
+        assertFalse(iWantToBlock.getActiveAccountForUserInModifyAnAccountSection().containsAll(requestedAccounts));
     }
 }
