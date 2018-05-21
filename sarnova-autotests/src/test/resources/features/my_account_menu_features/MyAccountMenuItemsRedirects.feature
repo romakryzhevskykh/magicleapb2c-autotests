@@ -36,35 +36,3 @@ Feature: Menu items on click redirects functionality.
   Scenario: Check that Sign Out My Account menu item redirects to Start page.
     When Click on Sign Out item in My Account menu.
     Then Check that Start page is opened.
-
-#  Scenario: Check that Saved Credit Cards My Account menu item redirects to Saved Credit Cards page.
-#    When Click on Saved Credit Cards item in My Account menu.
-#    Then Check that Saved Credit Cards page is opened.
-
-#  Scenario: Check that Account Information My Account menu item redirects to Account Information page.
-#    When Click on Account Information item in My Account menu.
-#    Then Check that Account Information page is opened.
-
-#  Scenario: Check that Custom Category My Account menu item redirects to Custom Category page.
-#    When Click on Custom Category item in My Account menu.
-#    Then Check that Custom Categories page is opened.
-#
-#  Scenario: Check that Quotas and Par Levels My Account menu item redirects to Quotas and Par Levels page.
-#    When Click on Quotas and Par Levels item in My Account menu.
-#    Then Check that Quotas and Par Levels page is opened.
-#
-#  Scenario: Check that Business Info My Account menu item redirects to Business Info page.
-#    When Click on Business Info item in My Account menu.
-#    Then Check that Business Info page is opened.
-
-#  Scenario: Check that Supply Lists My Account menu item redirects to Supply Lists page.
-#    When Click on Supply Lists item in My Account menu.
-#    Then Check that Supply Lists page is opened.
-
-#  Scenario: Check that Users My Account menu item redirects to Users page.
-#    When Click on Users item in My Account menu.
-#    Then Check that Users page is opened.
-
-#  Scenario: Check that User Groups My Account menu item redirects to User Groups page.
-#    When Click on User Groups item in My Account menu.
-#    Then Check that User Groups page is opened.

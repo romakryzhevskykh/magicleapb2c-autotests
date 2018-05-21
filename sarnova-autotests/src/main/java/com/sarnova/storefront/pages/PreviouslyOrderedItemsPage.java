@@ -3,9 +3,9 @@ package com.sarnova.storefront.pages;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BusinessInfoPage extends StorefrontBasePage {
+public class PreviouslyOrderedItemsPage extends StorefrontBasePage {
 
-    private String pageUrlMethod = "boundtree/en/USD/my-company/organization-management/manage-units/";
+    private String pageUrlMethod = "boundtree/en/USD/my-account/previously-ordered-items";
 
     @Override
     public String getPageUrl() {

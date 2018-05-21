@@ -75,6 +75,16 @@ public class AccountDashboardPage extends StorefrontBasePage {
         return isDisplayed(HELP_ITEM_XPATH);
     }
 
+    @Step("Is Quotas And Par Levels item visible?")
+    public boolean isQuotasAndParLevelsItemVisible() {
+        return false;
+    }
+
+    @Step("Is Saved Credit Cards item visible?")
+    public boolean isSavedCreditCardsItemVisible() {
+        return false;
+    }
+
     @Step("Click on Order History item.")
     public void clickOnOrderHistoryItem() {
         click(ORDER_HISTORY_ITEM_XPATH);
@@ -90,7 +100,13 @@ public class AccountDashboardPage extends StorefrontBasePage {
         click(PURCHASE_REQUESTS_ITEM_XPATH);
     }
 
-    @Step("Click on Quotes item.")
+    @Step("Click on Quotas And Par Levels item.")
+    public void clickOnQuotasAndParLevelsItem() {
+        //TODO
+//        click(QUOTES_ITEM_XPATH);
+    }
+
+    @Step("Click on Quotas item.")
     public void clickOnQuotesItem() {
         click(QUOTES_ITEM_XPATH);
     }
@@ -103,6 +119,12 @@ public class AccountDashboardPage extends StorefrontBasePage {
     @Step("Click on Saved Carts item.")
     public void clickOnSavedCartsItem() {
         click(SAVED_CARTS_ITEM_XPATH);
+    }
+
+    @Step("Click on Saved Credit Cards item.")
+    public void clickOnSavedCreditCardsItem() {
+        //TODO
+//        click(SAVED_CARTS_ITEM_XPATH);
     }
 
     @Step("Click on Supply Lists item.")
