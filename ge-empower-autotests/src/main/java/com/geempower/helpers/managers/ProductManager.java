@@ -19,8 +19,8 @@ public class ProductManager {
     private GETRequest GET_PRODUCT_DETAILS_FROM_PDP = new GETRequest("Get PD By product Id.", "p/product_detail/%s");
 
     @Autowired
-    RegionsManager regionsManager;
-    ArrayList<Product> productsList = new ArrayList<>();
+    private RegionsManager regionsManager;
+    private ArrayList<Product> productsList = new ArrayList<>();
 
     public void createInstance(String catalogueNo, String region, String id) {
         productsList.add(new Product(catalogueNo, regionsManager.getRegionByValue(region), id));
