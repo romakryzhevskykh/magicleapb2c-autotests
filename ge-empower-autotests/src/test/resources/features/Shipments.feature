@@ -1,7 +1,7 @@
 Feature: Some actions on Shipments page
 
   Background:
-    Given Switch to Storefront as admin.
+    Given Switch to Storefront as rmAdmin.
     And User is logged in to Storefront.
     And Shipments page is opened.
 

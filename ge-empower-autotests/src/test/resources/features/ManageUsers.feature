@@ -15,8 +15,8 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then Appropriate user with appropriate <email> email is displayed in the users list.
 
     Examples:
-      | email                      |
-      | d.sanjarevskaya@megogo.net |
+      | email                       |
+      | externaluser1@zaelab.com    |
 
   Scenario Outline: Check that admin is able to add/remove SO code to the internal user
     And Refresh page.
@@ -122,7 +122,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     When Admin opens Actions list.
     And Chooses Deactivate User option from the actions list.
     Then Chosen user's status has been changed to Inactive and sub-status details are correct.
-    Given Switch to Storefront as shopper.
+    Given Switch to Storefront as externalUser1.
     And User is logged in to Storefront.
     And Refresh page.
     Then User sees User not valid page.
@@ -131,15 +131,15 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     When Admin opens Actions list.
     And Chooses Reactivate User option from the actions list.
     Then Chosen user has Active user status.
-    Given Switch to Storefront as shopper.
+    Given Switch to Storefront as externalUser1.
     Then User is able to use GE site.
 
     Examples:
-      | userId      |
-      | enrolltest2 |
+      | userId          |
+      | externaluser01  |
 
     Scenario: Check that admin is able to approve some account requests from external user
-      Given Switch to Storefront as shopper.
+      Given Switch to Storefront as externalUser1.
       And User is logged in to Storefront.
       And Account management page is opened.
       When Request account popup is opened.
@@ -152,7 +152,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
       And Manage Users page is opened.
       And Refresh page.
       When Admin opens Users tab.
-      And Sets enrolltest2 email to the email field.
+      And Sets externaluser1 email to the email field.
       And Clicks on the Search button.
       When Clicks on the user name in the table.
       Then Approve Pending Accounts section is displayed with appropriate count of accounts.
@@ -164,7 +164,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
       Then Pending accounts table became empty.
       And Expand Modify an Account tab in I Want To Block.
       Then Appropriate accounts are displayed in All approved Accounts table.
-      Given Switch to Storefront as shopper.
+      Given Switch to Storefront as externalUser1.
       And User is logged in to Storefront.
       And Account management page is opened.
       When User switch to Pending for approval tab on Account management page.

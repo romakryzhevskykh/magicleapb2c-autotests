@@ -1,7 +1,7 @@
 Feature: Some actions on Orders page
 
   Background:
-    Given Switch to Storefront as admin.
+    Given Switch to Storefront as rmAdmin.
     And User is logged in to Storefront.
     And Orders page is opened.
 

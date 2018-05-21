@@ -128,15 +128,22 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
         accountManagementPage.switchToApprovedAccountsTab();
     }
 
+    @SuppressWarnings("unchecked")
     @Then("^All the requested accounts are displayed in the tab.$")
     public void allTheRequestedAccountsAreDisplayedInTheTab() {
         ArrayList<String> approvedAccounts = (ArrayList<String>) threadVarsHashMap.get(TestKeyword.LIST_OF_REQUESTED_ACCOUNTS);
         assertTrue(accountManagementPage.getAllApprovedAccountsInApprovedAccountsTab().containsAll(approvedAccounts));
     }
 
+    @SuppressWarnings("unchecked")
     @And("^User deletes all requested accounts from his profile.$")
     public void userDeletesAllRequestedAccountsFromHisProfile() {
         ArrayList<String> approvedAccounts = (ArrayList<String>) threadVarsHashMap.get(TestKeyword.LIST_OF_REQUESTED_ACCOUNTS);
         accountManagementPage.removeAllRequestedAccounts(approvedAccounts);
+    }
+
+    @Then("^Favorites tab is displayed by Default on Account Management page.$")
+    public void favoritesTabIsDisplayedByDefaultOnAccountManagementPage(){
+        assertTrue(accountManagementPage.activeFavoriteTabIsDisplayed());
     }
 }

@@ -1,11 +1,12 @@
 package com.geempower.helpers.user_engine;
 
 public enum StorefrontUserRoles implements UserRole {
-    SHOPPER,
+    EXTERNALUSER1,
     EMPOWERADMIN,
     INTERNALUSER,
     REGIONALVIEW,
-    CUSTOMERADMIN;
+    SMADMIN,
+    RMADMIN;
 
     @Override
     public String toString() {
