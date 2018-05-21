@@ -1,7 +1,9 @@
 package com.geempower.cucumber.definition_steps;
 
+import com.geempower.storefront.page_blocks.OrderStatusWidget;
 import com.geempower.storefront.page_blocks.PriceAndAvailabilityBlock;
 import com.geempower.storefront.pages.DashboardPage;
+import com.geempower.storefront.pages.order.OrdersPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -17,6 +19,10 @@ public class DashboardStepDefs extends AbstractStepDefs {
     private DashboardPage dashboardPage;
     @Autowired
     private PriceAndAvailabilityBlock priceAndAvailabilityBlock;
+    @Autowired
+    private OrderStatusWidget orderStatusWidget;
+    @Autowired
+    private OrdersPage ordersPage;
 
     @And("^Order Status widget is displayed.$")
     public void orderStatusWidgetIsDisplayed() {
@@ -154,5 +160,60 @@ public class DashboardStepDefs extends AbstractStepDefs {
     @And("^Admin clicks on OK button in the successful feedback pop-up.$")
     public void adminClicksOnOKButtonInTheSuccessfulFeedbackPopUp() {
         dashboardPage.clickOkOnTheFeedbackPopUp();
+    }
+
+    @Then("^(.*) title is displayed in the Order status widget.$")
+    public void orderStatusTitleIsDisplayedInTheOrderStatusWidget(String title) {
+        assertEquals(title, orderStatusWidget.getWidgetTitle());
+    }
+
+    @Then("^(.*) is displayed on the Order status widget.$")
+    public void lastOrdersIsDisplayedOnTheOrderStatusWidget(String lastOrdersTitle) {
+        assertEquals(lastOrdersTitle, orderStatusWidget.getLastCountOfOrdersTitle());
+    }
+
+    @Then("^(.*) has some orders.$")
+    public void totalOrdersHasOrders(String totalOrdersStatus) {
+        assertEquals(totalOrdersStatus, orderStatusWidget.getTotalOrdersStatus());
+        assertTrue(orderStatusWidget.getCountOfTotalOrders() > 1);
+    }
+
+    @Then("^(.*) statuses are displayed in appropriates order wrappers.$")
+    public void openShippedOnHoldCancelledStatusesAreDisplayedInAppropriatesOrderWrappers(List<String> statuses) {
+        assertTrue(statuses.containsAll(orderStatusWidget.getOrderStatusesFromWrappers()));
+    }
+
+    @Then("^Total orders count equals to all count of orders in the different statuses.$")
+    public void totalOrdersCountEqualsToAllCountOfOrdersInTheDifferentStatuses() {
+        threadVarsHashMap.put(TestKeyword.OPENED_ORDERS_IN_ACCOUNT, orderStatusWidget.getOpenedOrdersCount());
+        threadVarsHashMap.put(TestKeyword.SHIPPED_ORDERS_IN_ACCOUNT, orderStatusWidget.getShippedOrdersCount());
+        threadVarsHashMap.put(TestKeyword.ON_HOLD_ORDERS_IN_ACCOUNT, orderStatusWidget.getOnHoldOrdersCount());
+        threadVarsHashMap.put(TestKeyword.CANCELLED_ORDERS_IN_ACCOUNT, orderStatusWidget.getCancelledOrdersCount());
+        assertTrue(orderStatusWidget.getCountOfTotalOrders() == orderStatusWidget.getSumOfAllOrdersInDifferentStatuses());
+    }
+
+    @When("^Admin clicks on (.*) orders.$")
+    public void adminClicksOnAppropriateOrdersByStatus(String orderStatus) {
+        orderStatusWidget.openAppropriateListOfOrdersByStatus(orderStatus);
+    }
+
+    @Then("^Appropriate count of Opened orders are displayed on the All orders page.$")
+    public void appropriateCountOfOpenedOrdersAreDisplayedOnTheAllOrdersPage() {
+        assertTrue((int) threadVarsHashMap.get(TestKeyword.OPENED_ORDERS_IN_ACCOUNT) == ordersPage.getActualCountOfOrders());
+    }
+
+    @Then("^Appropriate count of Shipped orders are displayed on the All orders page.$")
+    public void appropriateCountOfShippedOrdersAreDisplayedOnTheAllOrdersPage() {
+        assertTrue((int) threadVarsHashMap.get(TestKeyword.SHIPPED_ORDERS_IN_ACCOUNT) == ordersPage.getActualCountOfOrders());
+    }
+
+    @Then("^Appropriate count of On Hold orders are displayed on the All orders page.$")
+    public void appropriateCountOfOnHoldOrdersAreDisplayedOnTheAllOrdersPage() {
+        assertTrue((int) threadVarsHashMap.get(TestKeyword.ON_HOLD_ORDERS_IN_ACCOUNT) == ordersPage.getActualCountOfOrders());
+    }
+
+    @Then("^Appropriate count of Cancelled orders are displayed on the All orders page.$")
+    public void appropriateCountOfCancelledOrdersAreDisplayedOnTheAllOrdersPage() {
+        assertTrue((int) threadVarsHashMap.get(TestKeyword.CANCELLED_ORDERS_IN_ACCOUNT) == ordersPage.getActualCountOfOrders());
     }
 }

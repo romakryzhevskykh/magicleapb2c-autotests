@@ -178,3 +178,24 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     And Clicks on the Submit button.
     Then Got it! Thank you for helping us improve the tool. text is displayed in successful pop-up.
     And Admin clicks on OK button in the successful feedback pop-up.
+
+  Scenario: Check that order status widget works properly
+    And Dashboard page is opened.
+    When Click on Skip button.
+    When Close cookies pop-up.
+    Then Order Status title is displayed in the Order status widget.
+    Then Last 150 orders is displayed on the Order status widget.
+    Then Total Orders has some orders.
+    Then Open, Shipped, On Hold, Cancelled statuses are displayed in appropriates order wrappers.
+    Then Total orders count equals to all count of orders in the different statuses.
+    When Admin clicks on Opened orders.
+    Then Appropriate count of Opened orders are displayed on the All orders page.
+    And Dashboard page is opened.
+    When Admin clicks on Shipped orders.
+    Then Appropriate count of Shipped orders are displayed on the All orders page.
+    And Dashboard page is opened.
+    When Admin clicks on On Hold orders.
+    Then Appropriate count of On Hold orders are displayed on the All orders page.
+    And Dashboard page is opened.
+    When Admin clicks on Cancelled orders.
+    Then Appropriate count of Cancelled orders are displayed on the All orders page.
