@@ -6,6 +6,7 @@ Feature: Some actions on Account Management page as external user
     And Account management page is opened.
 
     Scenario: Check that user is able to request an account
+      Then Favourites tab is displayed by Default on Account Management page.
       When Request account popup is opened.
       And Popup is filled by North_America, Latin_America, EMEA, ASIA accounts.
       And User send this requests for approval.

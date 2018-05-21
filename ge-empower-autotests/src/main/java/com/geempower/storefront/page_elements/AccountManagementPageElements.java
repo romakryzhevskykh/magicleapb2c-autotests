@@ -30,4 +30,5 @@ public class AccountManagementPageElements {
     public final static String REMOVE_ACCOUNT_ACTION_FOR_APPROPRIATE_ACCOUNT_THREE_DOT_ICON_XPATH  = "//td[@class=' table-visible-lg-block']/a[contains(text(), '%s')]/../..//td[@class=' table-visible-lg-block']/ul//i[@class='fa fa-ellipsis-v']";
     public final static String THREE_DOT_ICON_REMOVE_ACCOUNT_XPATH = "//td[@class=' table-visible-lg-block']/a[contains(text(),'%s')]/../..//td[@class=' table-visible-lg-block']/ul//i[@class='fa fa-trash']";
     public final static String CONFIRMATION_FOR_REMOVE_ACTIVE_ACCOUNT_BUTTON_XPATH = "//button[@id='removeActiveBtn']";
+    public final static String FAVOURITES_ACTIVE_TAB_XPATH = "//li[contains(@class,'active dynamic-tab') and contains(@tab-id ,'1')]";
 }

@@ -169,4 +169,9 @@ public class AccountManagementPage extends StorefrontBasePage {
             waitUntilPageIsFullyLoaded();
         });
     }
+
+    @Step("Active Favourite Tab Is Displayed.")
+    public boolean activeFavouriteTabIsDisplayed() {
+        return isDisplayed(FAVOURITES_ACTIVE_TAB_XPATH);
+    }
 }
