@@ -18,8 +18,8 @@ public class User {
         this.userCockpit = userCockpit;
         if (userCockpit instanceof EmpowerStorefront) {
             switch (cockpitRole) {
-                case "shopper":
-                    userRole = StorefrontUserRoles.SHOPPER;
+                case "externaluser1":
+                    userRole = StorefrontUserRoles.EXTERNALUSER1;
                     break;
                 case "empoweradmin":
                     userRole = StorefrontUserRoles.EMPOWERADMIN;

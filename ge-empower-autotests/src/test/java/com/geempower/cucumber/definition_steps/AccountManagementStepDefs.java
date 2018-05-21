@@ -142,8 +142,8 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
         accountManagementPage.removeAllRequestedAccounts(approvedAccounts);
     }
 
-    @Then("^Favourites tab is displayed by Default on Account Management page.$")
-    public void favouritesTabIsDisplayedByDefaultOnAccountManagementPage(){
-        assertTrue(accountManagementPage.activeFavouriteTabIsDisplayed());
+    @Then("^Favorites tab is displayed by Default on Account Management page.$")
+    public void favoritesTabIsDisplayedByDefaultOnAccountManagementPage(){
+        assertTrue(accountManagementPage.activeFavoriteTabIsDisplayed());
     }
 }

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -170,8 +169,9 @@ public class AccountManagementPage extends StorefrontBasePage {
         });
     }
 
-    @Step("Active Favourite Tab Is Displayed.")
-    public boolean activeFavouriteTabIsDisplayed() {
-        return isDisplayed(FAVOURITES_ACTIVE_TAB_XPATH);
+    @Step("Active Favorite Tab Is Displayed.")
+    public boolean activeFavoriteTabIsDisplayed() {
+        waitUntilPageIsFullyLoaded();
+        return isDisplayed(FAVORITES_ACTIVE_TAB_XPATH);
     }
 }

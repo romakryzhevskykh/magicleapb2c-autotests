@@ -121,16 +121,11 @@
             <artifactId>lombok</artifactId>
             <version>1.16.16</version>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.16.16</version>
-        </dependency>
         <!--In test mode JSON builder-->
         <!--<dependency>-->
-            <!--<groupId>net.minidev</groupId>-->
-            <!--<artifactId>json-smart</artifactId>-->
-            <!--<version>1.0.9</version>-->
+        <!--<groupId>net.minidev</groupId>-->
+        <!--<artifactId>json-smart</artifactId>-->
+        <!--<version>1.0.9</version>-->
         <!--</dependency>-->
     </dependencies>
 
@@ -166,7 +161,7 @@
                     <argLine>
                         -Dspring.profiles.active=${testEnv}
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectjweaver}/aspectjweaver-${aspectjweaver}.jar"
-                          -Dcucumber.options="--plugin ru.yandex.qatools.allure.cucumberjvm.AllureReporter"
+                        -Dcucumber.options="--plugin ru.yandex.qatools.allure.cucumberjvm.AllureReporter"
                         -Dorg.eclipse.jetty.annotations.maxWait=120
                     </argLine>
                 </configuration>
