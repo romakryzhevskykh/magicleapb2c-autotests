@@ -6,11 +6,13 @@ import com.geempower.storefront.pages.AccountManagementPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -143,7 +145,13 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
     }
 
     @Then("^Favorites tab is displayed by Default on Account Management page.$")
-    public void favoritesTabIsDisplayedByDefaultOnAccountManagementPage(){
+    public void favoritesTabIsDisplayedByDefaultOnAccountManagementPage() {
         assertTrue(accountManagementPage.activeFavoriteTabIsDisplayed());
+    }
+
+    @Then("^Appropriate reject messages for each account are displayed.$")
+    public void appropriateInfoMessageIsDisplayed() {
+        Stream<WebElement> rejectedMessages = accountManagementPage.getRejectedRequestListMessages();
+        rejectedMessages.forEach( message -> assertTrue(message.getText().startsWith("Your request for Account No. ") && message.getText().endsWith("has been rejected.")));
     }
 }

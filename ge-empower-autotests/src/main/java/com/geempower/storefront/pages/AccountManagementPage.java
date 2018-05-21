@@ -10,6 +10,7 @@ import ru.yandex.qatools.allure.annotations.Step;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.geempower.storefront.page_elements.AccountManagementPageElements.*;
 
@@ -173,5 +174,10 @@ public class AccountManagementPage extends StorefrontBasePage {
     public boolean activeFavoriteTabIsDisplayed() {
         waitUntilPageIsFullyLoaded();
         return isDisplayed(FAVORITES_ACTIVE_TAB_XPATH);
+    }
+
+    @Step("Get Gejected request list messages")
+    public Stream<WebElement> getRejectedRequestListMessages() {
+        return $$(LIST_OF_REJECTED_INFO_MESSAGES_XPATH).stream();
     }
 }

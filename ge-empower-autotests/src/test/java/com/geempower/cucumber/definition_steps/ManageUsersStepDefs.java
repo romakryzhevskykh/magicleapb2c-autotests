@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
@@ -275,9 +274,19 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         iWantToBlock.clickOnAcceptAccountButton();
     }
 
+    @And("^Click on Reject accounts button.$")
+    public void clickOnRejectButton() {
+        iWantToBlock.clickOnRejectAccountButton();
+    }
+
     @And("^Accept the action in Accept Account pop-up.$")
     public void acceptTheActionInAcceptAccountPopUp() {
         iWantToBlock.acceptTheActionOnAcceptAccountPopUp();
+    }
+
+    @And("^Accept the action in Reject Account pop-up.$")
+    public void acceptTheActionInRejectAccountPopUp() {
+        iWantToBlock.acceptTheActionOnRejectAccountPopUp();
     }
 
     @Then("^Pending accounts table became empty.$")
@@ -328,5 +337,11 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         String accountName = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NAME);
         assertFalse(iWantToBlock.getAccountName()
                 .anyMatch(account -> account.getText().equals(accountName)));
+    }
+
+    @Then("^Appropriate accounts are not displayed in All approved Accounts table.$")
+    public void appropriateAccountsAreNotDisplayedInAllApprovedAccountsTable() {
+        ArrayList<String> requestedAccounts = (ArrayList<String>) threadVarsHashMap.get(TestKeyword.LIST_OF_REQUESTED_ACCOUNTS);
+        assertFalse(iWantToBlock.getActiveAccountForUserInModifyAnAccountSection().containsAll(requestedAccounts));
     }
 }

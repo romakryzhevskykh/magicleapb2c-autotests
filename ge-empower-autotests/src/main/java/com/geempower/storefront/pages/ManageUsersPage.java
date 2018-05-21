@@ -35,6 +35,7 @@ public class ManageUsersPage extends StorefrontBasePage {
 
     @Step("Set email to the search field.")
     public void setEmailToTheSearchField(String email) {
+        waitUntilPageIsFullyLoaded();
         $(USER_TERM_INPUT_XPATH).clear();
         $(USER_TERM_INPUT_XPATH).sendKeys(email);
     }

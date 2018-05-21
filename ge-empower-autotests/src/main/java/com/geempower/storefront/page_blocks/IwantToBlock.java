@@ -189,4 +189,16 @@ public class IwantToBlock extends UIComponent {
     public void clickOnRemoveButtonInAllAccountsTab() {
         click(REMOVE_BUTTON_IN_ALL_ACCOUNTS_TAB_XPATH);
     }
+
+    @Step("Click On Reject Account Button.")
+    public void clickOnRejectAccountButton() {
+        click(REJECT_ACCOUNT_BUTTON_XPATH);
+        waitUntilPageIsFullyLoaded();
+    }
+
+    @Step("Accept The Action On Reject Account PopUp.")
+    public void acceptTheActionOnRejectAccountPopUp() {
+        click(ACCEPT_THE_ACTION_IN_REJECT_ACCOUNT_POP_UP_XPATH);
+        waitUntilPageIsFullyLoaded();
+    }
 }
