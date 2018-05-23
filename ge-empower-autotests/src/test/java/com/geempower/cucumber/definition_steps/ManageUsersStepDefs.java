@@ -253,7 +253,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     @Then("^(.*) Sales Office Code is displayed in the Approved SO Codes table.$")
     public void appropriateSalesOfficeCodeIsDisplayedInTheTable(String salesOfficeCode) {
         assertTrue(iWantToBlock.getAllSoCodesFromApprovedSoCodesTable()
-                .anyMatch((code -> code.getText().trim().equals(salesOfficeCode))));
+                .anyMatch(code -> code.getText().trim().equals(salesOfficeCode)));
     }
 
     @SuppressWarnings("unchecked")
