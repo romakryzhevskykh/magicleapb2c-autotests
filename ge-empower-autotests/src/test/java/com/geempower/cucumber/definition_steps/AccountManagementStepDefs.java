@@ -58,6 +58,11 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
         accountManagementPage.openRequestAccountPopup();
     }
 
+    @When("^Set (.*) SO code to the First Sales Office Code field in the Request Account pop-up.$")
+    public void setSOCodeToTheFirstSOCodeFieldInTheRequestAccPopUp(String code) {
+        accountManagementPage.setSOCodeToTheFirstSOCodeFieldInTheRequestAccPopUp(code);
+    }
+
     @And("^Popup is filled by (.*) accounts.$")
     public void popupIsFilledByAccountsForNorth_AmericaLatin_AmericaEMEAAndASIARegions(List<String> regions) {
         List<Region> selectedRegions = regions.stream()
@@ -143,7 +148,12 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
     }
 
     @Then("^Favorites tab is displayed by Default on Account Management page.$")
-    public void favoritesTabIsDisplayedByDefaultOnAccountManagementPage(){
+    public void favoritesTabIsDisplayedByDefaultOnAccountManagementPage() {
         assertTrue(accountManagementPage.activeFavoriteTabIsDisplayed());
+    }
+
+    @And("^Click on Modify button in the Request Account pop-up.$")
+    public void clickOnModifyButtonInTheRequestAccountPopUp() {
+        accountManagementPage.clickOnModifyButtonInTheRequestAccountPopUp();
     }
 }

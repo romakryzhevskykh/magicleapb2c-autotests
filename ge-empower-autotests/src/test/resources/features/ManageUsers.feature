@@ -15,8 +15,8 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then Appropriate user with appropriate <email> email is displayed in the users list.
 
     Examples:
-      | email                       |
-      | externaluser1@zaelab.com    |
+      | email                    |
+      | externaluser1@zaelab.com |
 
   Scenario Outline: Check that admin is able to add/remove SO code to the internal user
     And Refresh page.
@@ -24,7 +24,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     And Sets <email> email to the email field.
     And Clicks on the Search button.
     Then Appropriate user with appropriate <email> email is displayed in the users list.
-    When Click on the first user name in the table.
+    When Clicks on the user name in the table.
     When Click on Add account button in User Detail block.
     Then Add Account pop-up is displayed on Manage Users page.
     And Select North_America in the Region field in the Add Account pop-up.
@@ -36,7 +36,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     And Expand Modify an Account tab in I Want To Block.
     Then Account from Add Account pop-up is displayed in the the All Accounts tab.
     When Click on Sales Office Codes tab In Modify an Account Tab.
-    Then <soCode> Sales Office Code is displayed in the SO Codes table.
+    Then <soCode> Sales Office Code is displayed in the Approved SO Codes table.
     Given Switch to Storefront as internalUser.
     And User is logged in to Storefront.
     And Refresh page.
@@ -63,7 +63,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     And Sets <email> email to the email field.
     And Clicks on the Search button.
     Then Appropriate user with appropriate <email> email is displayed in the users list.
-    When Click on the first user name in the table.
+    When Clicks on the user name in the table.
     When Click on Add account button in User Detail block.
     Then Add Account pop-up is displayed on Manage Users page.
     And Select North_America in the Region field in the Add Account pop-up.
@@ -75,7 +75,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     And Expand Modify an Account tab in I Want To Block.
     Then Account from Add Account pop-up is displayed in the the All Accounts tab.
     When Click on Sales Engineer Codes tab In Modify an Account Tab.
-    Then <seCode> Sales Engineer Code is displayed in the SE Codes table.
+    Then <seCode> Sales Engineer Code is displayed in the Approved SE Codes table.
     Given Switch to Storefront as internalUser.
     And User is logged in to Storefront.
     And Refresh page.
@@ -135,43 +135,44 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then User is able to use GE site.
 
     Examples:
-      | userId          |
-      | externaluser01  |
+      | userId         |
+      | externaluser01 |
 
-    Scenario: Check that admin is able to approve some account requests from external user
-      Given Switch to Storefront as externalUser1.
-      And User is logged in to Storefront.
-      And Account management page is opened.
-      When Request account popup is opened.
-      And Popup is filled by North_America, Latin_America, EMEA, ASIA accounts.
-      And User send this requests for approval.
-      When User switch to Pending for approval tab on Account management page.
-      And All requested accounts are stored to the thread vars hashmap.
-      Given Switch to Storefront as admin.
-      And User is logged in to Storefront.
-      And Manage Users page is opened.
-      And Refresh page.
-      When Admin opens Users tab.
-      And Sets externaluser1 email to the email field.
-      And Clicks on the Search button.
-      When Clicks on the user name in the table.
-      Then Approve Pending Accounts section is displayed with appropriate count of accounts.
-      When User expand the Approve Pending Accounts section.
-      Then Appropriate count of pending requests are displayed in Pending accounts table.
-      When Admin clicks on All accounts checkbox.
-      And Click on Accept accounts button.
-      And Accept the action in Accept Account pop-up.
-      Then Pending accounts table became empty.
-      And Expand Modify an Account tab in I Want To Block.
-      Then Appropriate accounts are displayed in All approved Accounts table.
-      Given Switch to Storefront as externalUser1.
-      And User is logged in to Storefront.
-      And Account management page is opened.
-      When User switch to Pending for approval tab on Account management page.
-      Then List on Pending accounts is empty.
-      When User switch to Approved Accounts tab on Account management page.
-      Then All the requested accounts are displayed in the tab.
-      And User deletes all requested accounts from his profile.
+  Scenario: Check that admin is able to approve some account requests from external user
+    Given Switch to Storefront as externalUser1.
+    And User is logged in to Storefront.
+    And Account management page is opened.
+    When Request account popup is opened.
+    And Popup is filled by North_America, Latin_America, EMEA, ASIA accounts.
+    And User send this requests for approval.
+    When User switch to Pending for approval tab on Account management page.
+    And All requested accounts are stored to the thread vars hashmap.
+    Given Switch to Storefront as admin.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    And Refresh page.
+    And Focus on browser.
+    When Admin opens Users tab.
+    And Sets externaluser1 email to the email field.
+    And Clicks on the Search button.
+    When Clicks on the user name in the table.
+    Then Approve Pending Accounts section is displayed with appropriate count of accounts.
+    When User expand the Approve Pending Accounts section.
+    Then Appropriate count of pending requests are displayed in Pending accounts table.
+    When Admin clicks on All accounts checkbox.
+    And Click on Accept accounts button.
+    And Accept the action in Accept Account pop-up.
+    Then Pending accounts table became empty.
+    And Expand Modify an Account tab in I Want To Block.
+    Then Appropriate accounts are displayed in All approved Accounts table.
+    Given Switch to Storefront as externalUser1.
+    And User is logged in to Storefront.
+    And Account management page is opened.
+    When User switch to Pending for approval tab on Account management page.
+    Then List on Pending accounts is empty.
+    When User switch to Approved Accounts tab on Account management page.
+    Then All the requested accounts are displayed in the tab.
+    And User deletes all requested accounts from his profile.
 
   Scenario Outline: Check that admin is able to add/remove account to the internal user
     And Refresh page.
@@ -180,7 +181,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     And Sets <email> email to the email field.
     And Clicks on the Search button.
     Then Appropriate user with appropriate <email> email is displayed in the users list.
-    When Click on the first user name in the table.
+    When Clicks on the user name in the table.
     When Click on Add account button in User Detail block.
     Then Add Account pop-up is displayed on Manage Users page.
     And Select EMEA in the Region field in the Add Account pop-up.
@@ -200,12 +201,52 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then Appropriate account is displayed in the table on Account Management Page.
     Given Switch to Storefront as admin.
     When Click on <account> checkbox in I Want To Block in All Accounts tab.
-    And Click on Remove button in All Accounts tab.
     And Focus on browser.
+    And Click on Remove button in All Accounts tab.
     Then Remove Account pop-up is displayed on I Want To Block in All Accounts tab.
     And Click on Remove button in the Remove Account pop-up on I Want To Block in All Accounts tab.
     Then Account from Add Account pop-up is not displayed in the the All Accounts tab.
 
     Examples:
-      | email              | account   |
-      | test123rest@ge.com |  1000827  |
+      | email              | account |
+      | test123rest@ge.com | 1000827 |
+
+  Scenario Outline: Check that admin is able to accept SO codes to the internal user
+    And Refresh page.
+    And Focus on browser.
+    Given Switch to Storefront as internalUser.
+    And User is logged in to Storefront.
+    And Refresh page.
+    And Account management page is opened.
+    When Request account popup is opened.
+    When Set <soCode> SO code to the First Sales Office Code field in the Request Account pop-up.
+    And Click on Modify button in the Request Account pop-up.
+    Given Switch to Storefront as admin.
+    And Manage Users page is opened.
+    And Focus on browser.
+    When Admin opens Users tab.
+    And Sets <email> email to the email field.
+    And Clicks on the Search button.
+    Then Appropriate user with appropriate <email> email is displayed in the users list.
+    When Clicks on the user name in the table.
+    When User expand the Approve Pending Accounts section.
+    When Click on Pending Sales Office Codes tab In Approve Pending Accounts Tab.
+    Then <soCode> SO code is displayed in the Pending SO codes table.
+    When Admin clicks on All Sales Office Codes checkbox in Pending SO Codes tab.
+    And Click on Accept SO codes button.
+    Then Accept Account pop-up is displayed on I Want To Block in Pending SO Codes tab.
+    And Click on Accept button in the Accept Account pop-up on I Want To Block in Pending SO Codes tab.
+    Then No data available in table title is displayed in Pending Sales Office Code table.
+    And Expand Modify an Account tab in I Want To Block.
+    When Click on Sales Office Codes tab In Modify an Account Tab.
+    Then <soCode> Sales Office Code is displayed in the Approved SO Codes table.
+    And Select All Sales Office Codes checkbox in SO Codes tab.
+    And Click on SO Codes Remove button in SO Codes tab.
+    And Focus on browser.
+    Then Remove Account pop-up is displayed on I Want To Block in SO codes tab.
+    And Click on Remove button in the Remove Account pop-up on I Want To Block in SO codes tab.
+    Then No data available in table title is displayed in Sales Office Code table.
+
+    Examples:
+      | email              | soCode |
+      | test123rest@ge.com | USG4   |

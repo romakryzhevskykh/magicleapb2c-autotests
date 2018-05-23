@@ -21,47 +21,47 @@ public class IwantToBlock extends UIComponent {
         click(MODIFY_AN_ACCOUNT_TAB_XPATH);
     }
 
-    @Step("Get Account Name.")
-    public Stream<WebElement> getAccountName() {
+    @Step("Get All Account Names.")
+    public Stream<WebElement> getAllAccountNames() {
         waitUntilPageIsFullyLoaded();
         return $$(ALL_ACCOUNT_NAMES_IN_ACCOUNTS_TABLE_XPATH).stream();
     }
 
     @Step("Click On Sales Office Codes Tab.")
     public void clickOnSalesOfficeCodesTab() {
-        click(SALES_OFFICE_CODES_TAB_XPATH);
+        click(SALES_OFFICE_CODES_TAB_IN_MODIFY_ACC_TAB_XPATH);
     }
 
-    @Step("Get SO Code from table.")
-    public String getSoCodeFromTable() {
+    @Step("Get All SO Codes from table from approved SO Codes Table.")
+    public Stream<WebElement> getAllSoCodesFromApprovedSoCodesTable() {
         waitUntilPageIsFullyLoaded();
-        return $(SALES_OFFICE_CODE_XPATH).getText().trim();
+        return $$(ALL_APPROVED_SALES_OFFICE_CODE_XPATH).stream();
     }
 
-    @Step("Get SE Code from table.")
-    public String getSeCodeFromTable() {
+    @Step("Get All SE Codes from approved SE Codes table.")
+    public Stream<WebElement> getAllSeCodesFromTable() {
         waitUntilPageIsFullyLoaded();
-        return $(SALES_ENGINEER_CODE_XPATH).getText().trim();
+        return $$(ALL_APPROVED_SALES_ENGINEER_CODES_XPATH).stream();
     }
 
     @Step("Select All Sales Office Codes Checkbox In SO Code tab.")
     public void selectAllSalesOfficeCodesCheckboxInSOCodesTab() {
-        click(ALL_SO_CODES_CHECKBOX_XPATH);
+        click(ALL_SO_CODES_CHECKBOX_IN_MODIFY_AN_ACC_TAB_XPATH);
     }
 
     @Step("Select All Sales Engineer Codes Checkbox In SE Code tab.")
     public void selectAllSalesEngineerCodesCheckboxInSECodesTab() {
-        click(ALL_SE_CODES_CHECKBOX_XPATH);
+        click(ALL_SE_CODES_CHECKBOX_IN_MODIFY_AN_ACC_TAB_XPATH);
     }
 
     @Step("Click On Remove SO Codes Button.")
     public void clickOnRemoveSoCodesButtonSOCodesTab() {
-        click(REMOVE_BUTTON_IN_SO_CODES_TAB_XPATH);
+        click(REMOVE_BUTTON_IN_SO_CODES_TAB_IN_MODIFY_AN_ACC_TAB_XPATH);
     }
 
     @Step("Click On Remove SE Codes Button.")
     public void clickOnRemoveSeCodesButtonInSeCodesTab() {
-        click(REMOVE_BUTTON_IN_SE_CODES_TAB_XPATH);
+        click(REMOVE_BUTTON_IN_SE_CODES_TAB_IN_MODIFY_AN_ACC_TAB_XPATH);
     }
 
     @Step("Get Remove Acc SO Codes Pop-Up Title.")
@@ -76,7 +76,14 @@ public class IwantToBlock extends UIComponent {
 
     @Step("Get Remove All Accounts Pop-Up Title.")
     public String getRemoveAllAccountsPopUpTitle() {
+        waitUntilPageIsFullyLoaded();
         return $(REMOVE_ACCOUNT_POP_UP_TITLE_ALL_ACCOUNTS_XPATH).getText();
+    }
+
+    @Step("Get Accept All Accounts Pop-Up Title.")
+    public String getAcceptAllAccountsPopUpTitle() {
+        waitUntilPageIsFullyLoaded();
+        return $(ACCEPT_ACCOUNT_POP_UP_TITLE_SO_CODES_IN_PENDING_SALES_OFFICE_TAB_XPATH).getText();
     }
 
     @Step("Click On Remove Button In The Remove Account Pop-Up In SO Codes Tab.")
@@ -94,10 +101,21 @@ public class IwantToBlock extends UIComponent {
         click(REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_IN_ALL_ACCOUNTS_TAB_XPATH);
     }
 
+    @Step("Click On Accept Button In The Accept Account Pop-Up In Pending SO Codes Tab.")
+    public void clickOnAcceptButtonInTheAcceptAccountPopUpInPendingSOCodesTab() {
+        click(ACCEPT_BUTTON_IN_ACCEPT_ACC_POP_UP_IN_PENDING_S0_CODES_TAB_XPATH);
+    }
+
     @Step("Get No Data Title in SO Codes table.")
     public String getNoDataTitleInSoCodesTable() {
         waitUntilPageIsFullyLoaded();
         return $(EMPTY_SO_CODES_TABLE_XPATH).getText();
+    }
+
+    @Step("Get No Data Title in Pending SO Codes table.")
+    public String getNoDataTitleInPendingSoCodesTable() {
+        waitUntilPageIsFullyLoaded();
+        return $(EMPTY_SO_CODES_TABLE_IN_PENDING_SO_CODES_XPATH).getText();
     }
 
     @Step("Get No Data Title in SE Codes table.")
@@ -126,7 +144,7 @@ public class IwantToBlock extends UIComponent {
 
     @Step("Click on Sales Engineer Sales Tab.")
     public void clickOnSalesEngineerCodesTab() {
-        click(SALES_ENGINEER_CODES_TAB_XPATH);
+        click(SALES_ENGINEER_CODES_TAB_IN_MODIFY_ACC_TAB_XPATH);
     }
 
     @Step("Get Approve Pending Accounts Section Title.")
@@ -162,6 +180,12 @@ public class IwantToBlock extends UIComponent {
         waitUntilPageIsFullyLoaded();
     }
 
+    @Step("Click On Accept SO Codes Button.")
+    public void clickOnAcceptSOCodesButton() {
+        click(ACCEPT_SO_CODES_BUTTON_XPATH);
+        waitUntilPageIsFullyLoaded();
+    }
+
     @Step("Accept The Action On Accept Account PopUp.")
     public void acceptTheActionOnAcceptAccountPopUp() {
         click(ACCEPT_THE_ACTION_IN_ACCEPT_ACCOUNT_POP_UP_XPATH);
@@ -188,5 +212,20 @@ public class IwantToBlock extends UIComponent {
     @Step("Click On Remove Button In All Accounts Tab.")
     public void clickOnRemoveButtonInAllAccountsTab() {
         click(REMOVE_BUTTON_IN_ALL_ACCOUNTS_TAB_XPATH);
+    }
+
+    @Step("Click on Pending Sales Office Codes tab In Approve Pending Accounts Tab.")
+    public void clickOnPendingSalesOfficeCodesTab() {
+        click(PENDING_SALES_OFFICE_CODES_TAB_APPROVED_PENDING_ACC_TAB_XPATH);
+    }
+
+    @Step("^Admin clicks on All Sales Office Codes checkbox in Pending SO Codes tab.$")
+    public void adminClicksOnAllSalesOfficeCodesCheckboxInPendingSOCodesTab() {
+        click(ALL_CHECKBOX_SALES_OFFICE_CODES_IN_PENDING_SALES_OFFICE_TAB_XPATH);
+    }
+
+    public Stream<WebElement> getAllSOCodesFromPendingSOCodesTable() {
+        waitUntilPageIsFullyLoaded();
+        return $$(ALL_SO_CODES_IN_PENDING_SO_CODES_TABLE_XPATH).stream();
     }
 }
