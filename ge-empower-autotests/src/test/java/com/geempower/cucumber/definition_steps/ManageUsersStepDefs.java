@@ -293,7 +293,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
 
     @And("^Click on Accept SO codes button.$")
     public void clickOnAcceptSOCodesButton() {
-
+        iWantToBlock.clickOnAcceptSOCodesButton();
     }
 
     @And("^Click on Reject accounts button.$")
