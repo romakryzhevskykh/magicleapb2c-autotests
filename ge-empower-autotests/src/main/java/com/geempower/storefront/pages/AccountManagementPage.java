@@ -4,6 +4,7 @@ import com.geempower.helpers.models.Region;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -145,6 +146,7 @@ public class AccountManagementPage extends StorefrontBasePage {
 
     @Step("Get No Data Title From Pending Accounts Table.")
     public String getNoDataTitleFromPendingAccountsTable() {
+        waitUntilPageIsFullyLoaded();
         return $(PENDING_FOR_APPROVAL_TABLE_NO_DATA_TITLE_XPATH).getText();
     }
 
@@ -176,8 +178,21 @@ public class AccountManagementPage extends StorefrontBasePage {
         return isDisplayed(FAVORITES_ACTIVE_TAB_XPATH);
     }
 
+    @Step("Set SO Code To The First SO Code Field In The Request Acc Pop Up.")
+    public void setSOCodeToTheFirstSOCodeFieldInTheRequestAccPopUp(String code) {
+        $(By.id(SALES_OFFICE_CODE_FIELD_ID)).sendKeys(code);
+    }
+
+    @Step("Click on Modify button in the Request Account pop-up.$")
+    public void clickOnModifyButtonInTheRequestAccountPopUp() {
+        waitUntilPageIsFullyLoaded();
+        Actions action = new Actions(getDriver());
+        action.moveToElement($(MODIFY_ACTIVE_BUTTON_XPATH)).click().build().perform();
+    }
+
     @Step("Get Gejected request list messages")
     public Stream<WebElement> getRejectedRequestListMessages() {
         return $$(LIST_OF_REJECTED_INFO_MESSAGES_XPATH).stream();
     }
 }
+

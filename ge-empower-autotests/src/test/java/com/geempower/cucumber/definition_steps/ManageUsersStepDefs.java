@@ -13,9 +13,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class ManageUsersStepDefs extends AbstractStepDefs {
     @Autowired
@@ -48,11 +46,6 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     @Then("^Appropriate user with appropriate (.*) email is displayed in the users list.$")
     public void appropriateUserWithAppropriateEmailEmailIsDisplayedInTheUsersList(String email) {
         assertEquals(email, manageUsersPage.isUserFoundByEmail());
-    }
-
-    @When("^Click on the first user name in the table.$")
-    public void clickOnTheFirstUserNameInTheTable() {
-        manageUsersPage.clickOnTheFirstUserNameInTheTable();
     }
 
     @When("^Click on Add account button in User Detail block.$")
@@ -106,8 +99,8 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     @Then("^Account from Add Account pop-up is displayed in the the All Accounts tab.$")
     public void previouslyAddedAccountIsDisplayedInTheTheAllAccountsTab() {
         String accountName = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NAME);
-        assertTrue(iWantToBlock.getAccountName()
-        .anyMatch(account -> account.getText().equals(accountName)));
+        assertTrue(iWantToBlock.getAllAccountNames()
+                .anyMatch(account -> account.getText().equals(accountName)));
     }
 
     @When("^Click on Sales Office Codes tab In Modify an Account Tab.$")
@@ -115,9 +108,9 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         iWantToBlock.clickOnSalesOfficeCodesTab();
     }
 
-    @Then("^(.*) Sales Office Code is displayed in the SO Codes table.$")
-    public void AppropriateSalesOfficeCodeIsDisplayedInTheTable(String code) {
-        assertEquals(code, iWantToBlock.getSoCodeFromTable());
+    @When("^Click on Pending Sales Office Codes tab In Approve Pending Accounts Tab.$")
+    public void clickOnPendingSalesOfficeCodesTab() {
+        iWantToBlock.clickOnPendingSalesOfficeCodesTab();
     }
 
     @And("^Select All Sales Office Codes checkbox in SO Codes tab.$")
@@ -167,6 +160,11 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         iWantToBlock.clickOnRemoveButtonInTheRemoveAccountPopUpInAllAccountsTab();
     }
 
+    @And("^Click on Accept button in the Accept Account pop-up on I Want To Block in Pending SO Codes tab.$")
+    public void clickOnAcceptButtonInTheAcceptAccountPopUpInPendingSOCodesTab() {
+        iWantToBlock.clickOnAcceptButtonInTheAcceptAccountPopUpInPendingSOCodesTab();
+    }
+
     @Then("^(.*) title is displayed in Sales Office Code table.$")
     public void getNoDataTitleInSoCodesTable(String title) {
         assertEquals(title, iWantToBlock.getNoDataTitleInSoCodesTable());
@@ -176,7 +174,12 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     public void getNoDataTitleInSeCodesTable(String title) {
         assertEquals(title, iWantToBlock.getNoDataTitleInSeCodesTable());
     }
-  
+
+    @Then("^(.*) title is displayed in Pending Sales Office Code table.$")
+    public void getNoDataTitleInPendingSoCodesTable(String title) {
+        assertEquals(title, iWantToBlock.getNoDataTitleInPendingSoCodesTable());
+    }
+
     @And("^Sets (.*) account to the account field.$")
     public void setsAccountAccountToTheAccountField(String account) {
         manageUsersPage.setAccountToTheAccountSearchField(account);
@@ -188,7 +191,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     }
 
     @When("^Clicks on the user name in the table.$")
-    public void clickOnTheUserNameInTheTable(){
+    public void clickOnTheUserNameInTheTable() {
         manageUsersPage.clickOnTheUserNameInTheTable();
     }
 
@@ -215,9 +218,9 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
 
     @Then("^Chosen user's status has been changed to (.*) and sub-status details are correct.$")
     public void chosenUserStatusHasBeenChangedToInactive(String status) {
-        String [] subStatus = manageUsersPage.getFullUserSubStatus().split(" ");
+        String[] subStatus = manageUsersPage.getFullUserSubStatus().split(" ");
         String actualUserStatus = subStatus[0];
-        String deactivatedBy = (subStatus[3] + " ").concat(subStatus[4].replace(",",""));
+        String deactivatedBy = (subStatus[3] + " ").concat(subStatus[4].replace(",", ""));
         String deactivationDate = subStatus[5].replace(")", "");
         String actualDate = LocalDateTime.now()
                 .format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -237,15 +240,23 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     }
 
     @When("^Click on Sales Engineer Codes tab In Modify an Account Tab.$")
-    public void clickOnSalesEngineerCodesTabInModifyAnAccountTab(){
+    public void clickOnSalesEngineerCodesTabInModifyAnAccountTab() {
         iWantToBlock.clickOnSalesEngineerCodesTab();
     }
 
-    @Then("^(.*) Sales Engineer Code is displayed in the SE Codes table.$")
-    public void sEcodeSalesEngineerCodeIsDisplayedInTheSOCodesTable(String code){
-        assertEquals(code, iWantToBlock.getSeCodeFromTable());
+    @Then("^(.*) Sales Engineer Code is displayed in the Approved SE Codes table.$")
+    public void appropriateSeCodeCodeIsDisplayedInTheSECodesTable(String selesEngCode) {
+        assertTrue(iWantToBlock.getAllSeCodesFromTable()
+                .anyMatch(code -> code.getText().trim().equals(selesEngCode)));
     }
 
+    @Then("^(.*) Sales Office Code is displayed in the Approved SO Codes table.$")
+    public void appropriateSalesOfficeCodeIsDisplayedInTheTable(String salesOfficeCode) {
+        assertTrue(iWantToBlock.getAllSoCodesFromApprovedSoCodesTable()
+                .anyMatch(code -> code.getText().trim().equals(salesOfficeCode)));
+    }
+
+    @SuppressWarnings("unchecked")
     @Then("^(.*) section is displayed with appropriate count of accounts.$")
     public void approvePendingAccountsSectionIsDisplayedWithAppropriateCountOfAccounts(String sectionTitle) {
         ArrayList<String> requestedAccounts = (ArrayList<String>) threadVarsHashMap.get(TestKeyword.LIST_OF_REQUESTED_ACCOUNTS);
@@ -258,6 +269,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         iWantToBlock.expandApprovePendingAccountsSection();
     }
 
+    @SuppressWarnings("unchecked")
     @Then("^Appropriate count of pending requests are displayed in Pending accounts table.$")
     public void appropriateCountOfPendingRequestsAreDisplayedInPendingAccountsTable() {
         ArrayList<String> requestedAccounts = (ArrayList<String>) threadVarsHashMap.get(TestKeyword.LIST_OF_REQUESTED_ACCOUNTS);
@@ -269,9 +281,19 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         iWantToBlock.clickOnSelectAllPendingAccountsCheckBox();
     }
 
+    @When("^Admin clicks on All Sales Office Codes checkbox in Pending SO Codes tab.$")
+    public void adminClicksOnAllSalesOfficeCodesCheckboxInPendingSOCodesTab() {
+        iWantToBlock.adminClicksOnAllSalesOfficeCodesCheckboxInPendingSOCodesTab();
+    }
+
     @And("^Click on Accept accounts button.$")
     public void clickOnAcceptButton() {
         iWantToBlock.clickOnAcceptAccountButton();
+    }
+
+    @And("^Click on Accept SO codes button.$")
+    public void clickOnAcceptSOCodesButton() {
+        iWantToBlock.clickOnAcceptSOCodesButton();
     }
 
     @And("^Click on Reject accounts button.$")
@@ -294,6 +316,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         assertEquals("No data available in table", iWantToBlock.getNoDataTitleInPendingAccountsTable());
     }
 
+    @SuppressWarnings("unchecked")
     @Then("^Appropriate accounts are displayed in All approved Accounts table.$")
     public void appropriateApprovedAccountsAreDisplayedInAllAccountsTable() {
         ArrayList<String> requestedAccounts = (ArrayList<String>) threadVarsHashMap.get(TestKeyword.LIST_OF_REQUESTED_ACCOUNTS);
@@ -306,13 +329,13 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     }
 
     @When("^Click on Select All checkbox in the Add Account pop-up.$")
-    public void clickOnSelectAllCheckboxInTheAddAccountPopUp()  {
+    public void clickOnSelectAllCheckboxInTheAddAccountPopUp() {
         manageUsersPage.clickOnSelectAllCheckboxInTheAddAccountPopUp();
     }
 
     @And("^Click on Add button in the Add Account pop-up.$")
-    public void clickOnAddButtonInTheAddAccountPopUp(){
-    manageUsersPage.clickOnAddButtonInTheAddAccountPopUp();
+    public void clickOnAddButtonInTheAddAccountPopUp() {
+        manageUsersPage.clickOnAddButtonInTheAddAccountPopUp();
 
     }
 
@@ -322,7 +345,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     }
 
     @And("^Click on Remove button in All Accounts tab.$")
-    public void clickOnRemoveButtonInAllAccountsTab(){
+    public void clickOnRemoveButtonInAllAccountsTab() {
         iWantToBlock.clickOnRemoveButtonInAllAccountsTab();
     }
 
@@ -332,16 +355,29 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         assertEquals(popUpTitle, iWantToBlock.getRemoveAllAccountsPopUpTitle());
     }
 
+    @Then("^(.*) pop-up is displayed on I Want To Block in Pending SO Codes tab.$")
+    public void acceptPopUpIsDisplayedOnIWantToBlockInPendingSOCodestab(String popUpTitle) {
+        assertEquals(popUpTitle, iWantToBlock.getAcceptAllAccountsPopUpTitle());
+    }
+
     @Then("^Account from Add Account pop-up is not displayed in the the All Accounts tab.$")
     public void previouslyAddedAccountIsNotDisplayedInTheTheAllAccountsTab() {
         String accountName = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NAME);
-        assertFalse(iWantToBlock.getAccountName()
+        assertFalse(iWantToBlock.getAllAccountNames()
                 .anyMatch(account -> account.getText().equals(accountName)));
     }
 
+    @Then("^(.*) SO code is displayed in the Pending SO codes table.$")
+    public void soCodeIsDisplayedInThePendingSOCodesTable(String salesCode) {
+        assertTrue(iWantToBlock.getAllSOCodesFromPendingSOCodesTable()
+                .anyMatch(code -> code.getText().trim().equals(salesCode)));
+    }
+
+    @SuppressWarnings("unchecked")
     @Then("^Appropriate accounts are not displayed in All approved Accounts table.$")
     public void appropriateAccountsAreNotDisplayedInAllApprovedAccountsTable() {
         ArrayList<String> requestedAccounts = (ArrayList<String>) threadVarsHashMap.get(TestKeyword.LIST_OF_REQUESTED_ACCOUNTS);
         assertFalse(iWantToBlock.getActiveAccountForUserInModifyAnAccountSection().containsAll(requestedAccounts));
+
     }
 }

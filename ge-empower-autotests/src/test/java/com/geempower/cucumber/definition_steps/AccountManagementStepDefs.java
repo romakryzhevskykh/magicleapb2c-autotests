@@ -60,6 +60,11 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
         accountManagementPage.openRequestAccountPopup();
     }
 
+    @When("^Set (.*) SO code to the First Sales Office Code field in the Request Account pop-up.$")
+    public void setSOCodeToTheFirstSOCodeFieldInTheRequestAccPopUp(String code) {
+        accountManagementPage.setSOCodeToTheFirstSOCodeFieldInTheRequestAccPopUp(code);
+    }
+
     @And("^Popup is filled by (.*) accounts.$")
     public void popupIsFilledByAccountsForNorth_AmericaLatin_AmericaEMEAAndASIARegions(List<String> regions) {
         List<Region> selectedRegions = regions.stream()
@@ -149,9 +154,14 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
         assertTrue(accountManagementPage.activeFavoriteTabIsDisplayed());
     }
 
+    @And("^Click on Modify button in the Request Account pop-up.$")
+    public void clickOnModifyButtonInTheRequestAccountPopUp() {
+        accountManagementPage.clickOnModifyButtonInTheRequestAccountPopUp();
+    }
+
     @Then("^Appropriate reject messages for each account are displayed.$")
     public void appropriateInfoMessageIsDisplayed() {
         Stream<WebElement> rejectedMessages = accountManagementPage.getRejectedRequestListMessages();
-        rejectedMessages.forEach( message -> assertTrue(message.getText().startsWith("Your request for Account No. ") && message.getText().endsWith("has been rejected.")));
+        rejectedMessages.forEach(message -> assertTrue(message.getText().startsWith("Your request for Account No. ") && message.getText().endsWith("has been rejected.")));
     }
 }

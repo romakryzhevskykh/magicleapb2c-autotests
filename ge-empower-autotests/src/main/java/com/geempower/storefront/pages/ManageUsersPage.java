@@ -52,12 +52,6 @@ public class ManageUsersPage extends StorefrontBasePage {
         return $(USER_EMAIL_FIELD_XPATH).getText();
     }
 
-    @Step("Click on the first User Name in the table.")
-    public void clickOnTheFirstUserNameInTheTable() {
-        click(FIRST_NAME_LINK_XPATH);
-        waitUntilPageIsFullyLoaded();
-    }
-
     @Step("Click on Add Account Button In User Detail Block.")
     public void clickOnAddAccountButtonInUserDetailBlock() {
         click(ADD_ACCOUNT_BUTTON_XPATH);
@@ -76,7 +70,7 @@ public class ManageUsersPage extends StorefrontBasePage {
 
     @Step("Click on Modify Button In The Add Account Pop-Up.")
     public void clickOnModifyButtonInTheAddAccountPopUp() {
-        $(MODIFY_ACTIVE_BUTTON_XPATH).click();
+        click(MODIFY_ACTIVE_BUTTON_XPATH);
     }
 
     @Step("Select Region In The Add Account Pop-Up.")

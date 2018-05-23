@@ -31,5 +31,10 @@ public class AccountManagementPageElements {
     public final static String THREE_DOT_ICON_REMOVE_ACCOUNT_XPATH = "//td[@class=' table-visible-lg-block']/a[contains(text(),'%s')]/../..//td[@class=' table-visible-lg-block']/ul//i[@class='fa fa-trash']";
     public final static String CONFIRMATION_FOR_REMOVE_ACTIVE_ACCOUNT_BUTTON_XPATH = "//button[@id='removeActiveBtn']";
     public final static String FAVORITES_ACTIVE_TAB_XPATH = "//li[contains(@class,'active') and contains(@tab-id ,'1')]";
+
+    //Request Account pop-up
+    public final static String SALES_OFFICE_CODE_FIELD_ID = "requestSalesOfficeCode";
+    public final static String SALES_ENGINEER_CODE_FIELD_ID = "requestSalesEngCode";
+    public final static String MODIFY_ACTIVE_BUTTON_XPATH = ".//*[@class='btn primary-btn request-account-search-btn sales-update request-sales-btn' and not(@disabled)]";
     public final static String LIST_OF_REJECTED_INFO_MESSAGES_XPATH = "//ul[@class='rejected-request-list']/li/p";
 }
