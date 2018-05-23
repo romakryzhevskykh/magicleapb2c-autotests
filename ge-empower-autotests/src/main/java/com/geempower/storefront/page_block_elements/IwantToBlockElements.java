@@ -39,11 +39,14 @@ public class IwantToBlockElements {
     public final static String ALL_PENDING_ACCOUNT_CHECKBOX_XPATH = "//th[@class='checkbox-col pending-select-all-user-accounts no-sort table-visible-lg-block sorting_disabled']/label";
     public final static String TOTAL_ACCOUNT_REQUESTS_XPATH = "//span[@id='totalRequests']";
     public final static String ACCEPT_ACCOUNT_BUTTON_XPATH = "//button[@data-target='#accept-selected-account-modal']";
+
     public final static String ACCEPT_SO_CODES_BUTTON_XPATH = "//button[@data-target='#accept-selected-salesoffice-modal']";
     public final static String REJECT_SO_CODES_BUTTON_XPATH = "//button[@data-target='#reject-selected-salesoffice-modal']";
     public final static String ACCEPT_ACCOUNT_POP_UP_TITLE_SO_CODES_IN_PENDING_SALES_OFFICE_TAB_XPATH = ".//*[@id='accept-selected-salesoffice-modal']//h4";
     public final static String ACCEPT_BUTTON_IN_ACCEPT_ACC_POP_UP_IN_PENDING_S0_CODES_TAB_XPATH = ".//*[@class='btn primary-btn accept-request-salesoffice-btn']";
+    public final static String REJECT_ACCOUNT_BUTTON_XPATH = "//button[@data-target='#reject-selected-account-modal']";
     public final static String ACCEPT_THE_ACTION_IN_ACCEPT_ACCOUNT_POP_UP_XPATH = "//button[@class='btn primary-btn accept-request-account-btn']";
+    public final static String ACCEPT_THE_ACTION_IN_REJECT_ACCOUNT_POP_UP_XPATH = "//button[@class='btn primary-btn reject-request-account-btn']";
     public final static String PENDING_ACCOUNTS_TABLE_NO_DATA_TITLE_XPATH = PENDING_ACCOUNTS_TABLE_ROWS_XPATH + "/td";
     public final static String ACTIVE_USER_ACCOUNTS_NAME_TABLE_XPATH = "//table[@id='activeRequestsTableForCustomer']/tbody/tr/td[2]";
     public final static String REMOVE_ACCOUNT_POP_UP_ALL_ACCOUNTS_XPATH = ".//*[@id='remove-user-modal']//div[@class='modal-content']";

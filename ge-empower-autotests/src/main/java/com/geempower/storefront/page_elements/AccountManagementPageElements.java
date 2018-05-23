@@ -36,4 +36,5 @@ public class AccountManagementPageElements {
     public final static String SALES_OFFICE_CODE_FIELD_ID = "requestSalesOfficeCode";
     public final static String SALES_ENGINEER_CODE_FIELD_ID = "requestSalesEngCode";
     public final static String MODIFY_ACTIVE_BUTTON_XPATH = ".//*[@class='btn primary-btn request-account-search-btn sales-update request-sales-btn' and not(@disabled)]";
+    public final static String LIST_OF_REJECTED_INFO_MESSAGES_XPATH = "//ul[@class='rejected-request-list']/li/p";
 }

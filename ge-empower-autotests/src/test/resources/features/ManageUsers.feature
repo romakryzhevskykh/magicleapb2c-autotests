@@ -174,6 +174,38 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then All the requested accounts are displayed in the tab.
     And User deletes all requested accounts from his profile.
 
+  Scenario: Check that admin is able to reject some requested accounts from external user
+    Given Switch to Storefront as externalUser1.
+    And User is logged in to Storefront.
+    And Account management page is opened.
+    When Request account popup is opened.
+    And Popup is filled by North_America, Latin_America, EMEA, ASIA accounts.
+    And User send this requests for approval.
+    When User switch to Pending for approval tab on Account management page.
+    And All requested accounts are stored to the thread vars hashmap.
+    Given Switch to Storefront as admin.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    And Refresh page.
+    When Admin opens Users tab.
+    And Sets externaluser1 email to the email field.
+    And Clicks on the Search button.
+    When Clicks on the user name in the table.
+    Then Approve Pending Accounts section is displayed with appropriate count of accounts.
+    When User expand the Approve Pending Accounts section.
+    When Admin clicks on All accounts checkbox.
+    And Click on Reject accounts button.
+    And Accept the action in Reject Account pop-up.
+    Then Pending accounts table became empty.
+    And Expand Modify an Account tab in I Want To Block.
+    Then Appropriate accounts are not displayed in All approved Accounts table.
+    Given Switch to Storefront as externalUser1.
+    And User is logged in to Storefront.
+    And Account management page is opened.
+    When User switch to Pending for approval tab on Account management page.
+    Then List on Pending accounts is empty.
+    Then Appropriate reject messages for each account are displayed.
+
   Scenario Outline: Check that admin is able to add/remove account to the internal user
     And Refresh page.
     And Focus on browser.

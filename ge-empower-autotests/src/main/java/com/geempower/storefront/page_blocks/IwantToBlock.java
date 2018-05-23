@@ -228,4 +228,17 @@ public class IwantToBlock extends UIComponent {
         waitUntilPageIsFullyLoaded();
         return $$(ALL_SO_CODES_IN_PENDING_SO_CODES_TABLE_XPATH).stream();
     }
+
+    @Step("Click On Reject Account Button.")
+    public void clickOnRejectAccountButton() {
+        click(REJECT_ACCOUNT_BUTTON_XPATH);
+        waitUntilPageIsFullyLoaded();
+    }
+
+    @Step("Accept The Action On Reject Account PopUp.")
+    public void acceptTheActionOnRejectAccountPopUp() {
+        click(ACCEPT_THE_ACTION_IN_REJECT_ACCOUNT_POP_UP_XPATH);
+        waitUntilPageIsFullyLoaded();
+
+    }
 }

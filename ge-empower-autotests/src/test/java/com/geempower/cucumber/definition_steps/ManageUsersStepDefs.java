@@ -247,7 +247,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     @Then("^(.*) Sales Engineer Code is displayed in the Approved SE Codes table.$")
     public void appropriateSeCodeCodeIsDisplayedInTheSECodesTable(String selesEngCode) {
         assertTrue(iWantToBlock.getAllSeCodesFromTable()
-        .anyMatch(code ->code.getText().trim().equals(selesEngCode)));
+                .anyMatch(code -> code.getText().trim().equals(selesEngCode)));
     }
 
     @Then("^(.*) Sales Office Code is displayed in the Approved SO Codes table.$")
@@ -293,12 +293,22 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
 
     @And("^Click on Accept SO codes button.$")
     public void clickOnAcceptSOCodesButton() {
-        iWantToBlock.clickOnAcceptSOCodesButton();
+
+    }
+
+    @And("^Click on Reject accounts button.$")
+    public void clickOnRejectButton() {
+        iWantToBlock.clickOnRejectAccountButton();
     }
 
     @And("^Accept the action in Accept Account pop-up.$")
     public void acceptTheActionInAcceptAccountPopUp() {
         iWantToBlock.acceptTheActionOnAcceptAccountPopUp();
+    }
+
+    @And("^Accept the action in Reject Account pop-up.$")
+    public void acceptTheActionInRejectAccountPopUp() {
+        iWantToBlock.acceptTheActionOnRejectAccountPopUp();
     }
 
     @Then("^Pending accounts table became empty.$")
@@ -361,5 +371,13 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     public void soCodeIsDisplayedInThePendingSOCodesTable(String salesCode) {
         assertTrue(iWantToBlock.getAllSOCodesFromPendingSOCodesTable()
                 .anyMatch(code -> code.getText().trim().equals(salesCode)));
+    }
+
+    @SuppressWarnings("unchecked")
+    @Then("^Appropriate accounts are not displayed in All approved Accounts table.$")
+    public void appropriateAccountsAreNotDisplayedInAllApprovedAccountsTable() {
+        ArrayList<String> requestedAccounts = (ArrayList<String>) threadVarsHashMap.get(TestKeyword.LIST_OF_REQUESTED_ACCOUNTS);
+        assertFalse(iWantToBlock.getActiveAccountForUserInModifyAnAccountSection().containsAll(requestedAccounts));
+
     }
 }
