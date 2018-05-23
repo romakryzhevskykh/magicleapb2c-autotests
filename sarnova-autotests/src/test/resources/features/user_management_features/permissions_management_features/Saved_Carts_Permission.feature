@@ -11,14 +11,20 @@ Feature: Check user restrictions with SAVED CARTS and without it.
   Scenario: Check that user with only SAVED CARTS PERMISSION has access to Saved Carts item in My account menu.
     Given Switch to Storefront cockpit test user.
     And User is logged in to Storefront.
+    And Open Home page.
     When My Account menu is opened.
     Then Check that Saved Carts item is present in My Account menu.
+
+  Scenario: Check that user with only SAVED CARTS PERMISSION has access to Saved Carts item on Account Dashboard page.
+    Given Switch to Storefront cockpit test user.
+    And User is logged in to Storefront.
+    When Account Dashboard page is opened.
+    Then Check that Saved Carts item is visible on Account Dashboard page.
 
   Scenario: Check that user with only SAVED CARTS PERMISSION has access to Saved Carts page.
     Given Switch to Storefront cockpit test user.
     And User is logged in to Storefront.
-    When My Account menu is opened.
-    And Click on Saved Carts item in My Account menu.
+    When Open Saved Carts page.
     Then Check that Saved Carts page is opened.
     And Check that Saved Carts header title is present on Saved Carts page.
 

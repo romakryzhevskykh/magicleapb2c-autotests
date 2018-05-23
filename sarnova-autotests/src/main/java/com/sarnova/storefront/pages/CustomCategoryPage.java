@@ -23,12 +23,12 @@ public class CustomCategoryPage extends StorefrontBasePage {
 
     @Step("Is new Custom category name field visible?")
     public boolean isNewCustomCategoryNameFieldVisible() {
-        return isDisplayed(By.id(NEW_CUSTOM_CATEGORY_NAME_FIELD_ID));
+        return isDisplayed(NEW_CUSTOM_CATEGORY_NAME_FIELD_XPATH);
     }
 
     @Step("Is Add new Custom category button visible?")
     public boolean isAddNewCustomCategoryButtonVisible() {
-        return isDisplayed(By.id(ADD_NEW_CUSTOM_CATEGORY_BUTTON_ID));
+        return isDisplayed(ADD_NEW_CUSTOM_CATEGORY_BUTTON_XPATH);
     }
 
     @Step("Is parent category {0} visible?")
@@ -43,7 +43,7 @@ public class CustomCategoryPage extends StorefrontBasePage {
 
     @Step("Expand parent category {0} in the tree.")
     public void expandParentCCItemInTheTree(Category category) {
-        click(PARENT_CATEGORY_ITEM_BY_ID_XPATH, category.getId());
+        click(EXPAND_PARENT_CATEGORY_ARROW_XPATH, category.getId());
     }
 
     @Step("Show child category {0}.")
@@ -65,33 +65,33 @@ public class CustomCategoryPage extends StorefrontBasePage {
     @Step("Get displayed product's SKUs on the page.")
     public ArrayList<String> getDisplayedProductSKUs() {
         return $$(PRODUCTS_ROWS_XPATH).stream()
-                .map(webElement -> webElement.getAttribute("id"))
+                .map(webElement -> webElement.getAttribute("data-product-code"))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
     @Step("Is remove parent Custom category {0} button visible?")
     public boolean isRemoveParentCustomCategoryButtonVisible(Category category) {
-        return isDisplayed(By.id(String.format(REMOVE_PARENT_CATEGORY_BUTTON_BY_ID_ID, category.getId())));
+        return isDisplayed(REMOVE_PARENT_CATEGORY_BUTTON_BY_ID_XPATH, category.getId());
     }
 
     @Step("Is Add child to parent Custom category {0} button visible?")
     public boolean isAddChildCustomCategoryButtonVisible(Category category) {
-        return isDisplayed(By.id(String.format(ADD_CHILD_TO_PARENT_CATEGORY_BUTTON_BY_ID_ID, category.getId())));
+        return isDisplayed(ADD_CHILD_TO_PARENT_CATEGORY_BUTTON_BY_ID_XPATH, category.getId());
     }
 
     @Step("Is Add child to parent Custom category {0} text field visible?")
     public boolean isAddChildCustomCategoryTextFieldVisible(Category category) {
-        return isDisplayed(By.id(String.format(ADD_CHILD_TO_PARENT_CATEGORY_TEXT_FIELD_BY_ID_ID, category.getId())));
+        return isDisplayed(ADD_CHILD_TO_PARENT_CATEGORY_TEXT_FIELD_BY_ID_XPATH, category.getId());
     }
 
     @Step("Is remove child Custom category {0} button visible?")
     public boolean isRemoveChildCustomCategoryButtonVisible(Category category) {
-        return isDisplayed(By.id(String.format(REMOVE_CHILD_CATEGORY_BUTTON_BY_ID_ID, category.getId())));
+        return isDisplayed(REMOVE_CHILD_CATEGORY_BUTTON_BY_ID_XPATH, category.getId());
     }
 
-    @Step("Is add items button visible?")
-    public boolean isAddItemsButtonVisible() {
-        return isDisplayed(By.id(ADD_ITEMS_BUTTON_ID));
+    @Step("Is Quick Add block visible?")
+    public boolean isQuickAddVisible() {
+        return isDisplayed(QUICK_ADD_BLOCK_XPATH);
     }
 
     @Step("Are remove category {0} products buttons visible?")
@@ -103,8 +103,7 @@ public class CustomCategoryPage extends StorefrontBasePage {
     }
 
     @Step("Click on Add items button.")
-    public void clickOnAddItemsButton() {
-        click(By.id(ADD_ITEMS_BUTTON_ID));
-        waitUntilPageIsFullyLoaded();
+    public void clickOnQuickAdd() {
+        click(By.id(TOGGLE_QUICK_ADD_CHECKBOX_ID));
     }
 }

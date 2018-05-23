@@ -44,7 +44,7 @@ public class CartPage extends StorefrontBasePage {
         return Integer.valueOf(
                 $(UOM_QTY_BY_SKU_AND_UOM_TYPE_XPATH,
                         productsManager.getProductByUOM(unitOfMeasure).getSku(),
-                        unitOfMeasure.getUomType().name()
+                        unitOfMeasure.getUomType().getFullName()
                 ).getAttribute("value"));
     }
 
@@ -63,7 +63,7 @@ public class CartPage extends StorefrontBasePage {
     public void clickOnAddToSupplyListButtonForUOM(UnitOfMeasure unitOfMeasure) {
         click(ADD_UOM_TO_SUPPLY_LIST_BUTTON_BY_SKU_AND_UOM_TYPE_XPATH,
                 productsManager.getProductByUOM(unitOfMeasure).getSku(),
-                unitOfMeasure.getUomType().name());
+                unitOfMeasure.getUomType().getFullName());
     }
 
     @Step("Is Saved Carts button visible?")

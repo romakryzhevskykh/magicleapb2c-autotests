@@ -19,22 +19,22 @@ public class CheckoutPaymentMethodStepBlock extends UIComponent {
 
     @Step("Select Card payment type on Checkout Payment method step.")
     public void selectCardPaymentType() {
-        click(By.id(CARD_PAYMENT_CHECKBOX_ID));
+        click(CARD_PAYMENT_CHECKBOX_XPATH);
     }
 
     @Step("Is Card payment type checkbox visible?")
     public boolean isCardPaymentTypeVisible() {
-        return isDisplayed(By.id(CARD_PAYMENT_CHECKBOX_ID));
+        return isDisplayed(CARD_PAYMENT_CHECKBOX_XPATH);
     }
 
     @Step("Select Invoice payment type on Checkout Payment method step.")
     public void selectInvoicePaymentType() {
-        click(By.id(INVOICE_PAYMENT_CHECKBOX_ID));
+        click(INVOICE_PAYMENT_CHECKBOX_XPATH);
     }
 
     @Step("Is Invoice payment type checkbox visible?")
     public boolean isInvoicePaymentTypeVisible() {
-        return isDisplayed(By.id(INVOICE_PAYMENT_CHECKBOX_ID));
+        return isDisplayed(INVOICE_PAYMENT_CHECKBOX_XPATH);
     }
 
     @Step("Is Card number text field visible?")

@@ -142,11 +142,11 @@ public class ProductsManager {
     public List<UnitOfMeasure> parseUnitsOfMeasurementFromCartPageHTML(List<? extends Element> unitsOfMeasurementRows) {
         return unitsOfMeasurementRows.stream()
                 .flatMap(unitOfMeasureRow -> (getProductBySku(
-                        Xsoup.select(unitOfMeasureRow, "//div[@class=item__info]/div[@class=item__code]/text()")
+                        Xsoup.select(unitOfMeasureRow, "//div[@class=item__info]/div[@class*=item__code]/text()")
                                 .get().trim().replaceFirst("Item #: ", "")))
                         .getUnitsOfMeasurement()
                         .stream()
-                        .filter(unitOfMeasure -> unitOfMeasure.getUomType().equalsByAbbreviation(
+                        .filter(unitOfMeasure -> unitOfMeasure.getUomType().equalsByFullName(
                                 Xsoup.select(unitOfMeasureRow, "//div[@class=item__unit]/span[2]/text()").get().trim())
                         )
                 ).collect(Collectors.toList());

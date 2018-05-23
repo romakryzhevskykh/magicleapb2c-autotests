@@ -130,7 +130,7 @@ public abstract class UIComponent {
     protected boolean isDisplayed(String xpath, String... args) {
         webDriverPool.getActiveDriverSession().setShortImplicitWait();
         try {
-            return $(xpath, args).isDisplayed();
+            return $(xpath, args).isDisplayed() || $(xpath, args).isEnabled();
         } catch (NoSuchElementException | NullPointerException ex) {
             return false;
         } finally {
@@ -210,7 +210,7 @@ public abstract class UIComponent {
     public void waitJQueryRequestsLoad() {
         WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getTimeOut());
         try {
-            Thread.sleep((long) (1000 * webDriverPool.getActiveDriverSession().getShortTimeOut() / 20));
+            Thread.sleep((long) (1000 * webDriverPool.getActiveDriverSession().getShortTimeOut() / 10));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -231,7 +231,7 @@ public abstract class UIComponent {
             System.out.println("[WARNING] Timeout exception after " + webDriverPool.getActiveDriverSession().getTimeOut() + " Seconds. Possible problem - browser hovered(not responding)!");
         }
         try {
-            Thread.sleep((long) (1000 * webDriverPool.getActiveDriverSession().getShortTimeOut() / 20));
+            Thread.sleep((long) (1000 * webDriverPool.getActiveDriverSession().getShortTimeOut() / 10));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

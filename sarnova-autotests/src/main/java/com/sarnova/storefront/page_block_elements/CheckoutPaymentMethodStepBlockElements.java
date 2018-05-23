@@ -3,8 +3,8 @@ package com.sarnova.storefront.page_block_elements;
 public class CheckoutPaymentMethodStepBlockElements {
     public static final String NEXT_BUTTON_ID = "cardDetailsSubmitButton";
 
-    public static final String CARD_PAYMENT_CHECKBOX_ID = "PaymentTypeSelection_CARD";
-    public static final String INVOICE_PAYMENT_CHECKBOX_ID = "PaymentTypeSelection_INVOICE";
+    public static final String CARD_PAYMENT_CHECKBOX_XPATH = "//label[@for='PaymentTypeSelection_CARD']/div/div";
+    public static final String INVOICE_PAYMENT_CHECKBOX_XPATH = "//label[@for='PaymentTypeSelection_INVOICE']/div/div";
     public static final String PURCHASE_ORDER_NUMBER_FIELD_ID = "PurchaseOrderNumber";
     public static final String COMMENT_FIELD_ID = "comment";
     public static final String CARD_ACCOUNT_NUMBER_FIELD_ID = "card_accountNumber";

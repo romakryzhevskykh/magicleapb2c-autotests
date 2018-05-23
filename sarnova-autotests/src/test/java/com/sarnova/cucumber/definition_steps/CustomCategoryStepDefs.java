@@ -112,9 +112,9 @@ public class CustomCategoryStepDefs extends AbstractStepDefs {
         assertTrue(customCategoryPage.isRemoveChildCustomCategoryButtonVisible(category));
     }
 
-    @Then("^Check that Add items button is visible on Custom categories page.$")
+    @Then("^Check that Quick Add block is visible on Custom categories page.$")
     public void checkThatAddItemsButtonIsVisibleOnCustomCategoriesPage() {
-        assertTrue(customCategoryPage.isAddItemsButtonVisible());
+        assertTrue(customCategoryPage.isQuickAddVisible());
     }
 
     @And("^Check that Remove product buttons are visible on Custom categories page.$")
@@ -124,8 +124,8 @@ public class CustomCategoryStepDefs extends AbstractStepDefs {
         assertTrue(customCategoryPage.areRemoveProductsFromCCButtonsVisible(category));
     }
 
-    @And("^Click on Add items button on Custom categories page.$")
+    @And("^Click on Quick Add checkbox on Custom categories page.$")
     public void clickOnAddItemsButtonOnCustomCategoriesPage() {
-        customCategoryPage.clickOnAddItemsButton();
+        customCategoryPage.clickOnQuickAdd();
     }
 }

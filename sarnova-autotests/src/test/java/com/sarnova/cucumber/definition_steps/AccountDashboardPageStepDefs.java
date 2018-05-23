@@ -12,10 +12,15 @@ public class AccountDashboardPageStepDefs extends AbstractStepDefs {
     @Autowired AccountDashboardPage accountDashboardPage;
 
     @Given("^Account Dashboard page is opened.$")
-    public void openAccountDashboardOpen() {
+    public void accountDashboardPageIsOpened() {
         if (!accountDashboardPage.isOpened()) {
             accountDashboardPage.open();
         }
+    }
+
+    @When("^Open Account Dashboard page.$")
+    public void openAccountDashboard() {
+        accountDashboardPage.open();
     }
 
     @Then("^Check that Account Dashboard page is opened.$")

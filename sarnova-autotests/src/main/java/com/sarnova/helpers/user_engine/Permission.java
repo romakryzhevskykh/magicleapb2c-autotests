@@ -9,7 +9,7 @@ public enum Permission {
     BYPASS_QUOTA("b2bBypassQuotaPermission"),
     CHECKOUT("b2bCheckoutPermission"),
     EDIT_PERSONAL_INFORMATION("b2bEditPersonalInformationPermission"),
-    MANAGE_CUSTOM_CATEGORIES("b2bManageCustomCategoriesPermission"),
+    MANAGE_CUSTOM_CATALOG("b2bManageCustomCategoriesPermission"),
     MANAGE_PURCHASE_REQUESTS("b2bManagePurchaseRequestsPermission"),
     MANAGE_SUPPLY_LISTS("b2bManageSupplyListsPermission"),
     ORDER_HISTORY("b2bOrderHistoryPermission"),

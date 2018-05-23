@@ -27,20 +27,25 @@ public class CartManager {
     private GETRequest GET_CART_PAGE_SOURCE = new GETRequest("Get cart page source", "/boundtree/en/USD/cart");
     private POSTRequest ADD_UOMS_TO_CART = new POSTRequest("Add UOMs to cart", "/cart/addIndividualList");
 
-    @SuppressWarnings("unchecked")
     @Step("Empty active cart.")
     public void emptyActiveCart(UserSession userSession) {
         List<UnitOfMeasure> unitsOfMeasurementInCart = getUOMsFromCartPage(userSession);
         String csrfToken = getCartPageCsrfToken(userSession);
         for (int i = 0; i < unitsOfMeasurementInCart.size(); i++) {
-            try {
-                POSTRequest removeEntryFromCart = REMOVE_ENTRY_FROM_CART.getClone();
-                removeEntryFromCart.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", csrfToken));
-                removeEntryFromCart.addPostParameterAndValue(new API.PostParameterAndValue("entryNumbers", "0"));
-                removeEntryFromCart.sendPostRequest(userSession);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            removeUOMFromCart(userSession, csrfToken);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    @Step("Remove UOM from cart.")
+    public void removeUOMFromCart(UserSession userSession, String csrfToken) {
+        try {
+            POSTRequest removeEntryFromCart = REMOVE_ENTRY_FROM_CART.getClone();
+            removeEntryFromCart.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", csrfToken));
+            removeEntryFromCart.addPostParameterAndValue(new API.PostParameterAndValue("entryNumbers", "0"));
+            removeEntryFromCart.sendPostRequest(userSession);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -55,6 +60,7 @@ public class CartManager {
         return Xsoup.select(htmlResponse, "//input[@name=CSRFToken]/@value").list().stream().findAny().orElse(null);
     }
 
+    @Step("Get current cart ID.")
     public String getCurrentCartId(UserSession userSession) {
         GETRequest getCartPageSource = GET_CART_PAGE_SOURCE.getClone();
         try {
@@ -66,6 +72,7 @@ public class CartManager {
         return Xsoup.select(htmlResponse, "//span[@class=cart__id]/text()").get();
     }
 
+    @Step("Get UOMs from active cart.")
     private List<UnitOfMeasure> getUOMsFromCartPage(UserSession userSession) {
         GETRequest getCartPageSource = GET_CART_PAGE_SOURCE.getClone();
         try {
