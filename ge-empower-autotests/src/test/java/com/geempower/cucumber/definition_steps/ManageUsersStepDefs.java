@@ -165,6 +165,11 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         iWantToBlock.clickOnAcceptButtonInTheAcceptAccountPopUpInPendingSOCodesTab();
     }
 
+    @And("^Click on Reject button in the Reject Account pop-up on I Want To Block in Pending SO Codes tab.$")
+    public void clickOnRejectButtonInTheRejectAccountPopUpInPendingSOCodesTab() {
+        iWantToBlock.clickOnRejectButtonInTheRejectAccountPopUpInPendingSOCodesTab();
+    }
+
     @Then("^(.*) title is displayed in Sales Office Code table.$")
     public void getNoDataTitleInSoCodesTable(String title) {
         assertEquals(title, iWantToBlock.getNoDataTitleInSoCodesTable());
@@ -291,14 +296,19 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         iWantToBlock.clickOnAcceptAccountButton();
     }
 
+    @And("^Click on Reject accounts button.$")
+    public void clickOnRejectButton() {
+        iWantToBlock.clickOnRejectAccountButton();
+    }
+
     @And("^Click on Accept SO codes button.$")
     public void clickOnAcceptSOCodesButton() {
         iWantToBlock.clickOnAcceptSOCodesButton();
     }
 
-    @And("^Click on Reject accounts button.$")
-    public void clickOnRejectButton() {
-        iWantToBlock.clickOnRejectAccountButton();
+    @And("^Click on Reject SO codes button.$")
+    public void clickOnRejectSOCodesButton() {
+        iWantToBlock.clickOnRejectSOCodesButton();
     }
 
     @And("^Accept the action in Accept Account pop-up.$")

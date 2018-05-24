@@ -54,7 +54,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
 
     Examples:
       | email              | soCode |
-      | test123rest@ge.com | USG2   |
+      | test123test@ge.com | USG2   |
 
   Scenario Outline: Check that admin is able to add/remove SE code to the internal user
     And Refresh page.
@@ -93,7 +93,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
 
     Examples:
       | email              | seCode    |
-      | test123rest@ge.com | 220028351 |
+      | test123test@ge.com | 220028351 |
 
   Scenario Outline: Check that admin is able to find user by some account from each region
     And Refresh page.
@@ -241,7 +241,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
 
     Examples:
       | email              | account |
-      | test123rest@ge.com | 1000827 |
+      | test123test@ge.com | 1000827 |
 
   Scenario Outline: Check that admin is able to accept SO codes to the internal user
     And Refresh page.
@@ -281,4 +281,34 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
 
     Examples:
       | email              | soCode |
-      | test123rest@ge.com | USG4   |
+      | test123test@ge.com | USG4   |
+
+  Scenario Outline: Check that admin is able to reject SO codes to the internal user
+    And Refresh page.
+    And Focus on browser.
+    Given Switch to Storefront as internalUser.
+    And User is logged in to Storefront.
+    And Refresh page.
+    And Account management page is opened.
+    When Request account popup is opened.
+    When Set <soCode> SO code to the First Sales Office Code field in the Request Account pop-up.
+    And Click on Modify button in the Request Account pop-up.
+    Given Switch to Storefront as admin.
+    And Manage Users page is opened.
+    And Focus on browser.
+    When Admin opens Users tab.
+    And Sets <email> email to the email field.
+    And Clicks on the Search button.
+    Then Appropriate user with appropriate <email> email is displayed in the users list.
+    When Clicks on the user name in the table.
+    When User expand the Approve Pending Accounts section.
+    When Click on Pending Sales Office Codes tab In Approve Pending Accounts Tab.
+    Then <soCode> SO code is displayed in the Pending SO codes table.
+    When Admin clicks on All Sales Office Codes checkbox in Pending SO Codes tab.
+    And Click on Reject SO codes button.
+    And Click on Reject button in the Reject Account pop-up on I Want To Block in Pending SO Codes tab.
+    Then No data available in table title is displayed in Pending Sales Office Code table.
+
+    Examples:
+      | email              | soCode |
+      | test123test@ge.com | USG5   |

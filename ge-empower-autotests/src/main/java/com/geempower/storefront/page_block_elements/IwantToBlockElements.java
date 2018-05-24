@@ -43,7 +43,9 @@ public class IwantToBlockElements {
     public final static String ACCEPT_SO_CODES_BUTTON_XPATH = "//button[@data-target='#accept-selected-salesoffice-modal']";
     public final static String REJECT_SO_CODES_BUTTON_XPATH = "//button[@data-target='#reject-selected-salesoffice-modal']";
     public final static String ACCEPT_ACCOUNT_POP_UP_TITLE_SO_CODES_IN_PENDING_SALES_OFFICE_TAB_XPATH = ".//*[@id='accept-selected-salesoffice-modal']//h4";
+    public final static String REJECT_ACCOUNT_POP_UP_TITLE_SO_CODES_IN_PENDING_SALES_OFFICE_TAB_XPATH = ".//*[@id='reject-selected-salesoffice-modal']//h4";
     public final static String ACCEPT_BUTTON_IN_ACCEPT_ACC_POP_UP_IN_PENDING_S0_CODES_TAB_XPATH = ".//*[@class='btn primary-btn accept-request-salesoffice-btn']";
+    public final static String REJECT_BUTTON_IN_REJECT_ACC_POP_UP_IN_PENDING_S0_CODES_TAB_XPATH = ".//*[@class='btn primary-btn reject-request-salesoffice-btn']";
     public final static String REJECT_ACCOUNT_BUTTON_XPATH = "//button[@data-target='#reject-selected-account-modal']";
     public final static String ACCEPT_THE_ACTION_IN_ACCEPT_ACCOUNT_POP_UP_XPATH = "//button[@class='btn primary-btn accept-request-account-btn']";
     public final static String ACCEPT_THE_ACTION_IN_REJECT_ACCOUNT_POP_UP_XPATH = "//button[@class='btn primary-btn reject-request-account-btn']";
