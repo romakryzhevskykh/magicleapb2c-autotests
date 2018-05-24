@@ -106,6 +106,11 @@ public class IwantToBlock extends UIComponent {
         click(ACCEPT_BUTTON_IN_ACCEPT_ACC_POP_UP_IN_PENDING_S0_CODES_TAB_XPATH);
     }
 
+    @Step("Click On Reject Button In The Reject Account Pop-Up In Pending SO Codes Tab.")
+    public void clickOnRejectButtonInTheRejectAccountPopUpInPendingSOCodesTab() {
+        click(REJECT_BUTTON_IN_REJECT_ACC_POP_UP_IN_PENDING_S0_CODES_TAB_XPATH);
+    }
+
     @Step("Get No Data Title in SO Codes table.")
     public String getNoDataTitleInSoCodesTable() {
         waitUntilPageIsFullyLoaded();
@@ -183,6 +188,12 @@ public class IwantToBlock extends UIComponent {
     @Step("Click On Accept SO Codes Button.")
     public void clickOnAcceptSOCodesButton() {
         click(ACCEPT_SO_CODES_BUTTON_XPATH);
+        waitUntilPageIsFullyLoaded();
+    }
+
+    @Step("Click On Reject SO Codes Button.")
+    public void clickOnRejectSOCodesButton() {
+        click(REJECT_SO_CODES_BUTTON_XPATH);
         waitUntilPageIsFullyLoaded();
     }
 
