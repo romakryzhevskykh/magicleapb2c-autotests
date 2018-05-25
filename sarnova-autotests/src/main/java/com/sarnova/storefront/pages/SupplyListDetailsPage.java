@@ -175,6 +175,11 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
         return isDisplayed(ACTIVE_PRODUCT_DEACTIVATE_BUTTON_BY_SKU_XPATH, supplyListProduct.getSku());
     }
 
+    @Step("Is Show inactive entries checkbox selected?")
+    public boolean isShowInactiveEntiesCheckboxActive() {
+        return $(By.id(SHOW_INACTIVE_ENTRIES_BUTTON_ID)).isSelected();
+    }
+
     @Step("Click on Show inactive entries checkbox.")
     public void clickOnShowInactiveEntriesCheckbox() {
         click(By.id(SHOW_INACTIVE_ENTRIES_BUTTON_ID));
@@ -183,14 +188,14 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
 
     @Step("Show inactive Supply products.")
     public void showInactiveSupplyProducts() {
-        if (!areInactiveSupplyListsBlockVisible()) {
+        if (!isShowInactiveEntiesCheckboxActive()) {
             clickOnShowInactiveEntriesCheckbox();
         }
     }
 
     @Step("Hide inactive Supply products.")
     public void hideInactiveSupplyProducts() {
-        if (areInactiveSupplyListsBlockVisible()) {
+        if (isShowInactiveEntiesCheckboxActive()) {
             clickOnShowInactiveEntriesCheckbox();
         }
     }
@@ -262,16 +267,21 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
 
     @Step("Open Quick add block.")
     public void openQuickAddBlockOnSupplyListDetailsPage() {
-        if (!isQuickAddBlockOpened()) {
+        if (!isQuickAddCheckboxSelected()) {
             clickOnQuickAddCheckbox();
         }
     }
 
     @Step("Close Quick add block.")
     public void closeQuickAddBlockOnSupplyListDetailsPage() {
-        if (!isQuickAddBlockOpened()) {
+        if (!isQuickAddCheckboxSelected()) {
             clickOnQuickAddCheckbox();
         }
+    }
+
+    @Step("Is Quick Add checkbox selected?")
+    public boolean isQuickAddCheckboxSelected() {
+        return $(By.id(QUICK_ADD_CHECKBOX_ID)).isSelected();
     }
 
     @Step("Is Quick add block opened.")

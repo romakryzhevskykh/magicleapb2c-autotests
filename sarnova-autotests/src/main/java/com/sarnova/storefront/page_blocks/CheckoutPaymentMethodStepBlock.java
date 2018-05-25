@@ -15,6 +15,7 @@ public class CheckoutPaymentMethodStepBlock extends UIComponent {
     @Step("Click on Next button on Checkout Payment method step.")
     public void clickOnNextButton() {
         click(By.id(NEXT_BUTTON_ID));
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Select Card payment type on Checkout Payment method step.")

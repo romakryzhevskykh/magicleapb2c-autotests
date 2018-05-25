@@ -20,6 +20,7 @@ public class CheckoutShippingMethodStepBlock extends UIComponent {
     @Step("Click on Next button on Checkout Shipping method step.")
     public void clickOnNextButton() {
         click(By.id(NEXT_BUTTON_ID));
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Is Check product license pop-up opened.")

@@ -10,6 +10,12 @@ public class AccountDashboardPage extends StorefrontBasePage {
 
     private String pageUrlMethod = "boundtree/en/USD/my-account/account-dashboard";
 
+    @Override
+    public void open() {
+        super.open();
+        waitUntilElementIsVisible(MENU_ITEMS_XPATH);
+    }
+
     @Step("Is Order History item visible?")
     public boolean isOrderHistoryItemVisible() {
         return isDisplayed(ORDER_HISTORY_ITEM_XPATH);

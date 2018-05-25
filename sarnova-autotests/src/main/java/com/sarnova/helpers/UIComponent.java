@@ -23,18 +23,6 @@ public abstract class UIComponent {
         getDriver().switchTo().alert().accept();
     }
 
-
-    @Step("Open page {0}.")
-    protected void open(String url) {
-        try {
-            getDriver().get(url);
-        } catch (UnhandledAlertException ex) {
-            System.out.println("WARNING: Unexpected alert: " + ex);
-            alertHandling();
-            open(url);
-        }
-    }
-
     protected WebElement $(String xpath, String... args) {
         try {
             return getDriver().findElement(By.xpath(String.format(xpath, args)));
@@ -111,7 +99,6 @@ public abstract class UIComponent {
             ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", webElement);
             try {
                 webElement.click();
-
             } catch (UnhandledAlertException exception) {
                 System.out.println("WARNING: Unexpected alert!");
                 alertHandling();
@@ -130,18 +117,18 @@ public abstract class UIComponent {
     protected boolean isDisplayed(String xpath, String... args) {
         webDriverPool.getActiveDriverSession().setShortImplicitWait();
         try {
-            return $(xpath, args).isDisplayed() || $(xpath, args).isEnabled();
+            return $(xpath, args).isDisplayed();
         } catch (NoSuchElementException | NullPointerException ex) {
             return false;
         } finally {
             webDriverPool.getActiveDriverSession().restoreDefaultImplicitWait();
         }
     }
-
-    public void waitUntilVisible(By locator) {
-        WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getTimeOut());
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-    }
+//
+//    public void waitUntilVisible(By locator) {
+//        WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getTimeOut());
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+//    }
 
     protected boolean isDisplayed(By by) {
         webDriverPool.getActiveDriverSession().setShortImplicitWait();
@@ -166,6 +153,14 @@ public abstract class UIComponent {
 
     public void waitHTMLTemplateLoad() {
         waitUntil(driver1 -> ((JavascriptExecutor) driver1).executeScript("return document.readyState").toString().equals("complete"));
+    }
+
+    public void waitUntilElementIsVisible(String xpath, String... args) {
+        waitUntil(driver1 -> isDisplayed(xpath, args));
+    }
+
+    public void waitUntilElementIsVisible(By by) {
+        waitUntil(driver1 -> isDisplayed(by));
     }
 
     public void waitUntil(ExpectedCondition<Boolean> expectedCondition) {

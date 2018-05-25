@@ -95,6 +95,7 @@ public class CustomCategoryStepDefs extends AbstractStepDefs {
     public void checkThatAddChildCategoryToParentButtonIsVisibleOnCustomCategoriesPage() {
         String ccId = threadVarsHashMap.getString(TestKeyword.TEST_PARENT_CUSTOM_CATEGORY_ID);
         Category category = customCategoriesManager.getCustomCategoryById(ccId);
+        System.out.println(category);
         assertTrue(customCategoryPage.isAddChildCustomCategoryButtonVisible(category));
     }
 
@@ -127,5 +128,15 @@ public class CustomCategoryStepDefs extends AbstractStepDefs {
     @And("^Click on Quick Add checkbox on Custom categories page.$")
     public void clickOnAddItemsButtonOnCustomCategoriesPage() {
         customCategoryPage.clickOnQuickAdd();
+    }
+
+    @Then("^Check that Manage Existing Products item is visible on Custom Category page.$")
+    public void checkThatManageExistingProductsItemIsVisibleOnCustomCategoryPage() {
+        assertTrue(customCategoryPage.isManageExistingProductsItemVisible());
+    }
+
+    @Then("^Click on Manage Existing Products item on Custom Category page.$")
+    public void clickOnManageExistingProductsItemOnCustomCategoryPage() {
+        customCategoryPage.clickOnManageExistingProductsItem();
     }
 }

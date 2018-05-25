@@ -36,7 +36,7 @@ public class LoggedInHeaderRowBlock extends UIComponent {
 
     @Step("Is My account menu opened?")
     public boolean isMyAccountMenuOpened() {
-        return isDisplayed(MY_ACCOUNT_DROP_DOWN_CONTENT_XPATH);
+        return !$(MY_ACCOUNT_DROP_DOWN_XPATH).getAttribute("class").contains("collapsed");
     }
 
     @Step("Click on My account drop-down button.")

@@ -1,6 +1,9 @@
 package com.sarnova.storefront.page_elements;
 
 public class AccountDashboardPageElements {
+    public static final String LEFT_BAR_MENU_XPATH = "//div[@class='side-content col-md-3']";
+    public static final String MENU_ITEMS_XPATH = LEFT_BAR_MENU_XPATH + "//li[@class='menu-item']";
+
     private static final String ACCOUNT_DASHBOARD_ITEMS_XPATH = "//div[@class='dashboard-menu-body']/ul[@class='menu-body-list-container']";
     public static final String ORDER_HISTORY_ITEM_XPATH = ACCOUNT_DASHBOARD_ITEMS_XPATH + "/li//a[@title='Order History']";
     public static final String PREVIOUSLY_ORDERED_ITEMS_ITEM_XPATH = ACCOUNT_DASHBOARD_ITEMS_XPATH + "/li//a[@title='Previously Ordered Items']";

@@ -44,6 +44,7 @@ public class CustomCategoryPage extends StorefrontBasePage {
     @Step("Expand parent category {0} in the tree.")
     public void expandParentCCItemInTheTree(Category category) {
         click(EXPAND_PARENT_CATEGORY_ARROW_XPATH, category.getId());
+        waitUntilElementIsVisible(ADD_CHILD_BLOCK_BY_PARENT_ID_XPATH, category.getId());
     }
 
     @Step("Show child category {0}.")
@@ -105,5 +106,16 @@ public class CustomCategoryPage extends StorefrontBasePage {
     @Step("Click on Add items button.")
     public void clickOnQuickAdd() {
         click(By.id(TOGGLE_QUICK_ADD_CHECKBOX_ID));
+    }
+
+    @Step("Is Manage Existing Products item visible?")
+    public boolean isManageExistingProductsItemVisible() {
+        return isDisplayed(MANAGE_EXISTING_PRODUCTS_ITEM_XPATH);
+    }
+
+    @Step("Click on Manage Existing Products item.")
+    public void clickOnManageExistingProductsItem() {
+        click(OPEN_MANAGE_EXISTING_PRODUCTS_BLOCK_XPATH);
+        waitUntilPageIsFullyLoaded();
     }
 }

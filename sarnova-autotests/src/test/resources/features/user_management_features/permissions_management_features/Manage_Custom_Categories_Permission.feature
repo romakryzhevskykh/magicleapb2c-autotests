@@ -8,7 +8,7 @@ Feature: Check user restrictions with MANAGE CUSTOM CATALOG PERMISSION and witho
     And Test user group has only MANAGE_CUSTOM_CATALOG permission.
     And Test user has only test user group assigned.
 
-  Scenario: Check that user with only MANAGE CUSTOM CATALOG PERMISSION has access to Custom Category item in My Account drop-down in header.
+  Scenario: Check that user with only MANAGE CUSTOM CATALOG PERMISSION has access to Custom Category item on Account Dashboard page.
     Given Switch to Storefront cockpit test user.
     And User is logged in to Storefront.
     And Open Account Dashboard page.
@@ -97,3 +97,18 @@ Feature: Check user restrictions with MANAGE CUSTOM CATALOG PERMISSION and witho
     And Expand parent Custom category on Custom categories page.
     And Open child Custom category on Custom categories page.
     And Click on Quick Add checkbox on Custom categories page.
+
+  Scenario: Check that user with only MANAGE CUSTOM CATALOG PERMISSION has access to Manage Existing Products item on Custom Category page.
+    Given Switch to Storefront cockpit test user.
+    And User is logged in to Storefront.
+    When Open Custom category page.
+    Then Check that Manage Existing Products item is visible on Custom Category page.
+
+  Scenario: Check that user with only MANAGE CUSTOM CATALOG PERMISSION has access to Manage Existing Products item on Custom Category page.
+    Given Switch to Storefront cockpit test user.
+    And User is logged in to Storefront.
+    And Test child Custom category is present.
+    And At least 1 product in child Custom category.
+    When Open Custom category page.
+    And Click on Manage Existing Products item on Custom Category page.
+    Then Check that products are displayed on Custom categories page.
