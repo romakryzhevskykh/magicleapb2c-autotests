@@ -53,8 +53,8 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then No data available in table title is displayed in Sales Office Code table.
 
     Examples:
-      | email              | soCode |
-      | test123test@ge.com | USG2   |
+      | email                     | soCode |
+      | roman.kryzhevskykh@ge.com | USG2   |
 
   Scenario Outline: Check that admin is able to add/remove SE code to the internal user
     And Refresh page.
@@ -92,8 +92,8 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then No data available in table title is displayed in Sales Engineer Code table.
 
     Examples:
-      | email              | seCode    |
-      | test123test@ge.com | 220028351 |
+      | email                      | seCode    |
+      | roman.kryzhevskykh@ge.com  | 220028351 |
 
   Scenario Outline: Check that admin is able to find user by some account from each region
     And Refresh page.
@@ -240,8 +240,8 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then Account from Add Account pop-up is not displayed in the the All Accounts tab.
 
     Examples:
-      | email              | account |
-      | test123test@ge.com | 1000827 |
+      | email                     | account |
+      | roman.kryzhevskykh@ge.com | 1000827 |
 
   Scenario Outline: Check that admin is able to accept SO codes to the internal user
     And Refresh page.
@@ -280,8 +280,8 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then No data available in table title is displayed in Sales Office Code table.
 
     Examples:
-      | email              | soCode |
-      | test123test@ge.com | USG4   |
+      | email                     | soCode |
+      | roman.kryzhevskykh@ge.com | USG4   |
 
   Scenario Outline: Check that admin is able to reject SO codes to the internal user
     And Refresh page.
@@ -310,5 +310,5 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then No data available in table title is displayed in Pending Sales Office Code table.
 
     Examples:
-      | email              | soCode |
-      | test123test@ge.com | USG5   |
+      | email                     | soCode |
+      | roman.kryzhevskykh@ge.com | USG5   |
