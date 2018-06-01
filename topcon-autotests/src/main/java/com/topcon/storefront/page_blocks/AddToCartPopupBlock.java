@@ -7,7 +7,7 @@ import static com.topcon.storefront.page_block_elements.AddToCartPopUpBlockEleme
 
 public class AddToCartPopupBlock extends UIComponent {
 
-    @Step("Click on Checkout in Add to cart pop-up.")
+    @Step("Click on checkout in Add to cart pop-up.")
     public void clickOnCheckoutButtonInAddToCartPopup() {
         click(CHECKOUT_BUTTON_XPATH);
     }

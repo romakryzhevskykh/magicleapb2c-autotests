@@ -25,6 +25,7 @@ public class UserSession {
         return user.getUsername();
     }
 
+
     public String getPassword() {
         return user.getPassword();
     }
