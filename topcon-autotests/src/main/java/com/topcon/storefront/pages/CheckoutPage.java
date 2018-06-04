@@ -31,14 +31,11 @@ public class CheckoutPage extends StorefrontBasePage {
     }
 
     @Step("Set the P.O number.")
-    public void fillPONumberFieldWith(String poNumber) {
+    public void fillPONumberField(String poNumber) {
         $(By.id(PO_FIELD_ID)).clear();
         $(By.id(PO_FIELD_ID)).sendKeys(poNumber);
     }
 
-    public void fillPONumberField(String poNumber) {
-        fillPONumberFieldWith(poNumber);
-    }
 
     @Step("Click the Next button")
     public void clickTheNextButton() {
