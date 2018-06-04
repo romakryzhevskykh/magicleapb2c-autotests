@@ -8,12 +8,12 @@
             <class name="com.topcon.cucumber.LoginSuite"/>
         </classes>
     </test>
-    <!--&lt;!&ndash;<test name="AddressBookSuite">&ndash;&gt;-->
-        <!--&lt;!&ndash;<parameter name="browserName" value="chrome" />&ndash;&gt;-->
-        <!--&lt;!&ndash;<classes>&ndash;&gt;-->
-            <!--&lt;!&ndash;<class name="com.topcon.cucumber.AddressBookSuite"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;</classes>&ndash;&gt;-->
-    <!--&lt;!&ndash;</test>&ndash;&gt;-->
+    <!--<test name="AddressBookSuite">-->
+        <!--<parameter name="browserName" value="chrome" />-->
+        <!--<classes>-->
+            <!--<class name="com.topcon.cucumber.AddressBookSuite"/>-->
+        <!--</classes>-->
+    <!--</test>-->
     <test name="PDPSuite">
         <parameter name="browserName" value="chrome" />
         <classes>

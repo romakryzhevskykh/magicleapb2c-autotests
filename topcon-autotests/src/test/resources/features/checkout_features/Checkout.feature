@@ -4,7 +4,7 @@ Feature: Checkout flow via Account Payment
     Given Switch to Storefront shopper.
     And User is logged in to Storefront.
 
-  Scenario: Check that shopper can add product with QTY 1 to cart.
+  Scenario: Check that order has been placed successfully.
     Given PDP for any product.
     When Set QTY values for products to 2 on PDP.
     And Click on Add to cart button on PDP.
