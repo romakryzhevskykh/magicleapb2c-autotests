@@ -75,6 +75,6 @@ public class CheckoutPageStepDefs extends AbstractStepDefs {
     @Then("^Check that order has been placed successfully.$")
     public void checkThatOrderHasBeenPlacedSuccessfully() {
         Product product = (Product) threadVarsHashMap.get(OPENED_PDP_PRODUCT);
-        assertTrue(checkoutPage.getAllAddedProductsIds().contains(product.getId()));
+        assertTrue(checkoutPage.getAllAddedProductsIds().contains(product.getId()) && checkoutPage.successMessageAppeared());
     }
 }
