@@ -1,11 +1,8 @@
 package com.topcon.cucumber.definition_steps;
 
-import com.topcon.helpers.managers.ProductsManager;
 import com.topcon.helpers.models.Product;
 import com.topcon.storefront.pages.CartPage;
-import com.topcon.storefront.pages.ProductDetailsPage;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
+
 import cucumber.api.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
 

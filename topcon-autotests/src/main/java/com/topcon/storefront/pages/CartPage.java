@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.topcon.storefront.page_elements.CartPageElements.CHECKOUT_BUTTON_XPATH;
 import static com.topcon.storefront.page_elements.CartPageElements.PRODUCTS_IDS_XPATH;
 
 @Component
@@ -16,6 +17,11 @@ public class CartPage extends StorefrontBasePage {
 
     public List<String> getAllAddedProductsIds() {
         return $$(PRODUCTS_IDS_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    public void clickOnCheckoutButton() {
+        click(CHECKOUT_BUTTON_XPATH);
+        waitUntilPageIsFullyLoaded();
     }
 
     @Override

@@ -20,4 +20,10 @@
             <class name="com.topcon.cucumber.PDPSuite"/>
         </classes>
     </test>
+    <test name="CheckoutSuite">
+        <parameter name="browserName" value="chrome" />
+        <classes>
+            <class name="com.topcon.cucumber.CheckoutSuit"/>
+        </classes>
+    </test>
 </suite>
