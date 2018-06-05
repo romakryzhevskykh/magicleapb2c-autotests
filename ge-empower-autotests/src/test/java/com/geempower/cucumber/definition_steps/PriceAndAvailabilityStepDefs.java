@@ -2,6 +2,7 @@ package com.geempower.cucumber.definition_steps;
 
 import com.geempower.helpers.models.Product;
 import com.geempower.storefront.pages.PriceAndAvailabilityPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -147,5 +148,15 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
     @When("^User Add new item (.*) on the P&A page.$")
     public void userAddNewItemOnThePAPage(String catalogueNo) {
         priceAndAvailabilityPage.addNewItem(catalogueNo);
+    }
+
+    @Then("^(.*) message is displayed.$")
+    public void priceDisplayedIsNetAfterRebateOrderWillBillAtStandardClaimbackOnlyMessageIsDisplayed(String text){
+        assertEquals(text, priceAndAvailabilityPage.getClaimbackMessage());
+    }
+
+    @When("^Click on (.*) link.$")
+    public void clickOnProductsLink(List<String> products) {
+        priceAndAvailabilityPage.clickOnProductLink(products);
     }
 }

@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 import static com.geempower.storefront.page_elements.MyCartPageElements.GREEN_CONFIRMATION_POP_UP_ID;
@@ -153,5 +154,15 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
         $(ADD_ITEM_POP_UP_FIRST_PRODUCT_FIELD_XPATH).clear();
         $(ADD_ITEM_POP_UP_FIRST_PRODUCT_FIELD_XPATH).sendKeys(catalogueNo);
         click(ADD_ITEM_POP_UP_ADD_PRODUCT_BUTTON_XPATH);
+    }
+
+    @Step("Get claimback message text.")
+    public String getClaimbackMessage() {
+        return $(CLAIMBACK_MESSAGE_XPATH).getText();
+    }
+
+    public void clickOnProductLink(List<String> products) {
+        waitUntilPageIsFullyLoaded();
+        click(PRODUCT_LINK, String.valueOf(products));
     }
 }
