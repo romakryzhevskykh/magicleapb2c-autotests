@@ -9,7 +9,6 @@ import ru.yandex.qatools.allure.annotations.Step;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.topcon.storefront.page_elements.CheckoutPageElements.PRODUCTS_IDS_XPATH;
 import static com.topcon.storefront.page_elements.CheckoutPageElements.*;
 
 @Component
