@@ -1,12 +1,8 @@
 package com.topcon.cucumber.definition_steps;
 
-import com.topcon.helpers.managers.ProductsManager;
 import com.topcon.helpers.models.Product;
-import com.topcon.helpers.user_engine.UserSession;
 import com.topcon.storefront.pages.CartPage;
 import com.topcon.storefront.pages.CheckoutPage;
-import com.topcon.storefront.pages.ProductDetailsPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.apache.commons.lang3.RandomStringUtils;
