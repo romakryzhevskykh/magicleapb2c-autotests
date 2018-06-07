@@ -1,6 +1,6 @@
 package com.geempower.storefront.page_block_elements;
 
-public class FullProductDetailsPopUpElements {
+public class FullProductDetailsPopUpBlockElements {
 
     public final static String PRODUCT_DETAILS_POP_UP_XPATH = ".//*[@id='search-product-detail-popup']//div[@class='modal-content']";
     public final static String PRODUCT_DETAILS_TAB_IN_DETAILED_POP_XPATH = ".//a[@href='#product-details']";

@@ -3,7 +3,7 @@ package com.geempower.storefront.page_blocks;
 import com.geempower.helpers.UIComponent;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import static com.geempower.storefront.page_block_elements.FullProductDetailsPopUpElements.*;
+import static com.geempower.storefront.page_block_elements.FullProductDetailsPopUpBlockElements.*;
 
 
 public class FullProductDetailsPopUpBlock extends UIComponent {
