@@ -93,7 +93,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
 #    Then Correct Order Value is displayed in the Checkout pop-up.
 #    When User clicks on Checkout button.
 #    Then My Cart page is opened.
-    When User clicks on the Next top button on the My Cart page.
+#    When User clicks on the Next top button on the My Cart page.
 #    Then Payer and Shipment Addresses are correct at the OE 2 page.
 #    When User fills PO no. to the PO no. field at the OE 2 page.
 #    When User selects Carrier from drop-down at the OE 2 page.
@@ -138,33 +138,33 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
 #      | products                                    |
 #      | 1017251, 1019603, 1021099, 1021136, 1022416 |
 
-  Scenario Outline: While doing P&A Add Item, Agreement No from previous P&A result is being sent in the web service Request - DE81550
-    And Account management page is opened.
-    When Choose <region> region.
-    And Select account 1318501.
-    And Click on account with <salesDivision> sales division.
-    Then Dashboard page is opened.
-    When Click on Skip button.
-    When Close cookies pop-up.
-    When User add list of <products> products to the Copy&Paste block.
-    And Click on P&A button.
-    Then Price&Availability page is opened.
-    When User select <agreementNo> Agreement No for all the product.
-    Then All the products have <agreementNo> agreement no in the Agreement No field.
-    And Account management page is opened.
-    When Choose <region> region.
-    And Select account 4642301.
-    And Click on account with <salesDivision> sales division.
-    Then Dashboard page is opened.
-    When User set THQL1115AF2 to Product Number field.
-    And Click on P&A button.
-    Then Price&Availability page is opened.
-    When User Add new item TED134025WL on the P&A page.
-    Then All the products have <standardAgreementNo> agreement no in the Agreement No field.
-
-    Examples:
-      | region        | products                        | agreementNo    | salesDivision | standardAgreementNo |
-      | North_America | THHQB1120AF2, TEY150, 9T21B9103 | 45003985       | USS1_10_10    | STANDARD            |
+#  Scenario Outline: While doing P&A Add Item, Agreement No from previous P&A result is being sent in the web service Request - DE81550
+#    And Account management page is opened.
+#    When Choose <region> region.
+#    And Select account 1318501.
+#    And Click on account with <salesDivision> sales division.
+#    Then Dashboard page is opened.
+#    When Click on Skip button.
+#    When Close cookies pop-up.
+#    When User add list of <products> products to the Copy&Paste block.
+#    And Click on P&A button.
+#    Then Price&Availability page is opened.
+#    When User select <agreementNo> Agreement No for all the product.
+#    Then All the products have <agreementNo> agreement no in the Agreement No field.
+#    And Account management page is opened.
+#    When Choose <region> region.
+#    And Select account 4642301.
+#    And Click on account with <salesDivision> sales division.
+#    Then Dashboard page is opened.
+#    When User set THQL1115AF2 to Product Number field.
+#    And Click on P&A button.
+#    Then Price&Availability page is opened.
+#    When User Add new item TED134025WL on the P&A page.
+#    Then All the products have <standardAgreementNo> agreement no in the Agreement No field.
+#
+#    Examples:
+#      | region        | products                        | agreementNo    | salesDivision | standardAgreementNo |
+#      | North_America | THHQB1120AF2, TEY150, 9T21B9103 | 45003985       | USS1_10_10    | STANDARD            |
 
   Scenario Outline: Check that Claimback icon and message are displayed on P&A and Order Entry pages - US294329
     And Account management page is opened.
@@ -174,15 +174,15 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then Dashboard page is opened.
     When Click on Skip button.
     When Close cookies pop-up.
-    When User add list of <products> products to the Copy&Paste block.
+    When User add list of <product> products to the Copy&Paste block.
     And Click on P&A button.
     Then Price&Availability page is opened.
     When User select <agreementNo> Agreement No for all the product.
     Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Agreement No field displayed on P&A page.
-    When Click on <products> link on P&A page.
-    Then Product Details pop-up on Price and Availability page is displayed.
+    When Click on <product> link on P&A page.
+    Then Is Product Details pop-up on Price and Availability page displayed.
     When Click on Product Details tab.
-    Then Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Pricing Details title is displayed on Product Details pop-up.
+    Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Pricing Details title displayed on Product Details pop-up.
     When Close Product Details pop-up.
     And All products are selected on P&A page.
     When User clicks on Add to Cart button.
@@ -190,11 +190,19 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     When User clicks on My Cart icon.
     When User clicks on Checkout button.
     Then My Cart page is opened.
-    Then Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below SPA No field is displayed on My Cart page.
-    When Click on <products> link on My Cart page.
+    Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Agreement No field displayed on My Cart page.
+    When Click on <product> link on My Cart page.
+    Then Is Product Details pop-up on Price and Availability page displayed.
+    When Click on Product Details tab.
+    Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Pricing Details title displayed on Product Details pop-up.
+    When Close Product Details pop-up.
+    When User clicks on the Next top button on the My Cart page.
+    When User fills PO no. to the PO no. field at the OE 2 page.
+    And Select Shipment Address from the existing addresses at the OE 2 page.
+    Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) block message displayed at the OE 2 page.
 
     Examples:
-      | region        |products   | agreementNo    | salesDivision |
+      | region        |product    | agreementNo    | salesDivision |
       | North_America | TEY150    | 45003866       | USS1_10_10    |
 
 

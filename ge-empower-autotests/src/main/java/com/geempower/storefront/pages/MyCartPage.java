@@ -126,13 +126,13 @@ public class MyCartPage extends StorefrontBasePage {
 
     }
 
-    @Step("Get Claimback Message Below Spa No Field On My Cart Page.")
-    public String getClaimbackMessageBelowSpaNoFieldOnMyCartPage() {
-        return $(CLAIMBACK_MESSAGE_BELOW_SPA_NO_FIELD_ON_MY_CART_PAGE_XPATH).getText();
+    @Step("Get Claimback Message Below Agreement No Field On My Cart Page.")
+    public String getClaimbackMessageBelowAgreementNoFieldOnMyCartPage() {
+        return $(CLAIMBACK_MESSAGE_BELOW_AGREEMENT_NO_FIELD_ON_MY_CART_PAGE_XPATH).getText();
     }
 
     @Step("Click On Product Link On My Cart Page.")
-    public void clickOnProductLinkOnMyCartPage(List<String> products) {
-//        click();
+    public void clickOnProductLinkOnMyCartPage(String products) {
+        click(PRODUCT_LINK_ON_MY_CART_PAGE_XPATH, products);
     }
 }

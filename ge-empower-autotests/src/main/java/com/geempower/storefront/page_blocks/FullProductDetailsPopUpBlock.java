@@ -1,15 +1,16 @@
 package com.geempower.storefront.page_blocks;
 
 import com.geempower.helpers.UIComponent;
+import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import static com.geempower.storefront.page_block_elements.FullProductDetailsPopUpBlockElements.*;
 
-
+@Component
 public class FullProductDetailsPopUpBlock extends UIComponent {
 
-    @Step("Product Details pop-up on Price and Availability page is displayed.")
-    public boolean productDetailPopUpOnPApageIsDisplayed() {
+    @Step("is Product Details pop-up on Price and Availability page displayed.")
+    public boolean isProductDetailPopUpOnPApageDisplayed() {
         waitUntilPageIsFullyLoaded();
         return isDisplayed(PRODUCT_DETAILS_POP_UP_XPATH);
     }

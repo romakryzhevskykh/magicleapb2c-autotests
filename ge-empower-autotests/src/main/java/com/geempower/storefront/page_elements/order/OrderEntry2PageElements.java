@@ -51,4 +51,5 @@ public class OrderEntry2PageElements {
     public final static String CONTINUE_NA_BUTTON_XPATH = "//div[@id='minimum-shipment-charges-modal']//button[@data-target='#order-summary']";
     public final static String CONTINUE_EMEA_BUTTON_XPATH = "//div[@id='minimum-shipment-charges-emea-modal']//button[@data-target='#order-summary']";
     public final static String ADD_MORE_ITEMS_BUTTON_XPATH = "//div[@id='minimum-shipment-charges-mexico-modal']//button[@data-target='#build-order']";
+    public final static String CLAIMBACK_MESSAGE_IN_BLUE_BLOCK_XPATH = "//*[@id='shipping-billing-info']//div[contains(@class,'alert-info-spa')]";
 }

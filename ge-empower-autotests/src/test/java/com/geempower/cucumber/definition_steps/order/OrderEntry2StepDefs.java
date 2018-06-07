@@ -110,5 +110,10 @@ public class OrderEntry2StepDefs extends AbstractStepDefs {
     public void clickOnAddMoreItemsButtonInTheMinimumShipmentChargesPopUpAtTheOEPage(){
         orderEntry2Page.clickOnAddMoreItemsButton();
     }
+
+    @Then("^Is (.*) block message displayed at the OE 2 page.$")
+    public void isBlueBlockMessageDisplayedAtTheOE2Page(String text) {
+        assertEquals(text, orderEntry2Page.getClaimbackMessageInBlueBlock());
+    }
 }
 

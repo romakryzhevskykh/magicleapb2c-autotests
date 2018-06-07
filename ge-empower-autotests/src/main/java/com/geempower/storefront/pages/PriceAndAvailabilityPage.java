@@ -162,8 +162,8 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
     }
 
     @Step("Click on product link on P&A Page.")
-    public void clickOnProductLinkOnPaPage(List<String> products) {
+    public void clickOnProductLinkOnPaPage(String products) {
         waitUntilPageIsFullyLoaded();
-        click(PRODUCT_LINK_ON_PA_PAGE_XPATH, String.valueOf(products));
+        click(PRODUCT_LINK_ON_PA_PAGE_XPATH, products);
     }
 }

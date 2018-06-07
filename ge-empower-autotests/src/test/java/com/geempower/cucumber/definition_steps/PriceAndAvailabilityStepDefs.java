@@ -157,19 +157,19 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
         assertEquals(text, priceAndAvailabilityPage.getClaimbackMessageBelowSpaNoField());
     }
 
-    @Then("^(.*) message below Pricing Details title is displayed on Product Details pop-up.$")
-    public void claimbackMessageBelowPricingDetailsIsDisplayed(String text) {
+    @Then("^Is (.*) message below Pricing Details title displayed on Product Details pop-up.$")
+    public void isClaimbackMessageBelowPricingDetailsDisplayed(String text) {
         assertEquals(text, fullProductDetailsPopUpBlock.getClaimbackMessageBelowPricingDetailsTitleField());
     }
 
     @When("^Click on (.*) link on P&A page.$")
-    public void clickOnProductsLinkOnPaPage(List<String> products) {
+    public void clickOnProductsLinkOnPaPage(String products) {
         priceAndAvailabilityPage.clickOnProductLinkOnPaPage(products);
     }
 
-    @Then("^Product Details pop-up on Price and Availability page is displayed.$")
-    public void detailProductPopUpOnPApageIsDisplayed() {
-        assertTrue(fullProductDetailsPopUpBlock.productDetailPopUpOnPApageIsDisplayed());
+    @Then("^Is Product Details pop-up on Price and Availability page displayed.$")
+    public void isDetailProductPopUpOnPApageDisplayed() {
+        assertTrue(fullProductDetailsPopUpBlock.isProductDetailPopUpOnPApageDisplayed());
     }
 
     @When("^Click on Product Details tab.$")

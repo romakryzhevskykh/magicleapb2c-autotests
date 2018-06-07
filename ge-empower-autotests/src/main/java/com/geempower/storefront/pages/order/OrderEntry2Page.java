@@ -180,12 +180,19 @@ public class OrderEntry2Page extends StorefrontBasePage {
         click(CARRIER_FIRST_DROP_DOWN_ITEM_XPATH);
     }
 
+    @Step("Fill Carrier Accont No.")
     public void fillCarrierAccountNo() {
         String uniqueCarrierAccountNo = Long.toString(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().getEpochSecond());
         $(By.id(CARRIER_ACCOUNT_NO_FIELD_ID)).sendKeys(uniqueCarrierAccountNo);
     }
 
+    @Step("Click on Add More Items Button.")
     public void clickOnAddMoreItemsButton() {
         click(ADD_MORE_ITEMS_BUTTON_XPATH);
+    }
+
+    @Step("Get Claimback Message In Blue Block.")
+    public String getClaimbackMessageInBlueBlock() {
+        return $(CLAIMBACK_MESSAGE_IN_BLUE_BLOCK_XPATH).getText();
     }
 }

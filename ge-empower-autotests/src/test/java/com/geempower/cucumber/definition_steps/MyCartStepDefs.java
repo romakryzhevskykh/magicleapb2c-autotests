@@ -90,14 +90,13 @@ public class MyCartStepDefs extends AbstractStepDefs {
         });
     }
 
-    @Then("^(.*) message below SPA No field is displayed on My Cart page.$")
-    public void claimbackMessageBelowSpaNoFieldOnMyCartPageIsDisplayed(String text) {
-        assertEquals(text, myCartPage.getClaimbackMessageBelowSpaNoFieldOnMyCartPage());
+    @Then("^Is (.*) message below Agreement No field displayed on My Cart page.$")
+    public void isClaimbackMessageBelowSpaNoFieldOnMyCartPageDisplayed(String text) {
+        assertEquals(text, myCartPage.getClaimbackMessageBelowAgreementNoFieldOnMyCartPage());
     }
 
     @When("^Click on (.*) link on My Cart page.$")
-    public void clickOnProductLinkOnMyCartPage(List<String> products) {
+    public void clickOnProductLinkOnMyCartPage(String products) {
         myCartPage.clickOnProductLinkOnMyCartPage(products);
-
     }
 }
