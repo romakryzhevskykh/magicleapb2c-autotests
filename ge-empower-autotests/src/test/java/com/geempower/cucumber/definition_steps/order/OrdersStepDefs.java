@@ -14,7 +14,7 @@ public class OrdersStepDefs extends AbstractStepDefs {
 
     @Then("(.*) title is displayed on Orders page.")
     public void checkMyCartTitle(String ordersTitle) {
-        assertEquals(ordersPage.getOrdersTitle(), ordersTitle);
+        assertEquals(ordersTitle, ordersPage.getOrdersTitle());
     }
 
     @When("^Admin opens order with status (.*).$")

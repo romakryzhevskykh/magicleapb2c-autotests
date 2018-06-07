@@ -2,35 +2,35 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Suite1" parallel="tests">
-    <!--<test name="Suite1">-->
-        <!--<parameter name="browserName" value="chrome"/>-->
-        <!--<parameter name="headless" value="true"/>-->
-        <!--<classes>-->
-            <!--<class name="com.geempower.cucumber.AccountManagementSuite"/>-->
-            <!--<class name="com.geempower.cucumber.ManageUsersSuite"/>-->
-            <!--<class name="com.geempower.cucumber.ReturnsSuite"/>-->
-            <!--<class name="com.geempower.cucumber.RebatesSuite"/>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="Suite1">
+        <parameter name="browserName" value="chrome"/>
+        <parameter name="headless" value="true"/>
+        <classes>
+            <class name="com.geempower.cucumber.AccountManagementSuite"/>
+            <class name="com.geempower.cucumber.ManageUsersSuite"/>
+            <class name="com.geempower.cucumber.ReturnsSuite"/>
+            <class name="com.geempower.cucumber.RebatesSuite"/>
+        </classes>
+    </test>
     <test name="Suite2">
         <parameter name="browserName" value="chrome"/>
         <parameter name="headless" value="false"/>
         <classes>
-            <!--<class name="com.geempower.cucumber.ShipmentSuite"/>-->
+            <class name="com.geempower.cucumber.ShipmentSuite"/>
             <class name="com.geempower.cucumber.OrdersSuite"/>
-            <!--<class name="com.geempower.cucumber.SavedItemsSuite"/>-->
-            <!--<class name="com.geempower.cucumber.InvoiceSuite"/>-->
-            <!--<class name="com.geempower.cucumber.SpecialPricingSuite"/>-->
-            <!--<class name="com.geempower.cucumber.ProfileSuite"/>-->
-            <!--<class name="com.geempower.cucumber.MyCartSuite"/>-->
+            <class name="com.geempower.cucumber.SavedItemsSuite"/>
+            <class name="com.geempower.cucumber.InvoiceSuite"/>
+            <class name="com.geempower.cucumber.SpecialPricingSuite"/>
+            <class name="com.geempower.cucumber.ProfileSuite"/>
+            <class name="com.geempower.cucumber.MyCartSuite"/>
         </classes>
     </test>
-    <!--<test name="Suite3">-->
-        <!--<parameter name="browserName" value="chrome"/>-->
-        <!--<parameter name="headless" value="true"/>-->
-        <!--<classes>-->
-            <!--<class name="com.geempower.cucumber.DashboardSuite"/>-->
-            <!--<class name="com.geempower.cucumber.ProductsSuite"/>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="Suite3">
+        <parameter name="browserName" value="chrome"/>
+        <parameter name="headless" value="true"/>
+        <classes>
+            <class name="com.geempower.cucumber.DashboardSuite"/>
+            <class name="com.geempower.cucumber.ProductsSuite"/>
+        </classes>
+    </test>
 </suite>

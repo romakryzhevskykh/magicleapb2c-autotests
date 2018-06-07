@@ -49,7 +49,7 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     @Then("^(.*) pop-up is appear with correct text and header.$")
     public void invoiceDetailsPopUpIsAppearWithCorrectTextAndHeader(String popUpHeader) {
         assertTrue(orderDetailsPage.isPopUpAppears());
-        assertEquals(orderDetailsPage.getInvoiceDetailsPopUpHeader(), popUpHeader);
+        assertEquals(popUpHeader, orderDetailsPage.getInvoiceDetailsPopUpHeader());
         assertTrue(orderDetailsPage.getPopUpBodyText().contains("For Invoice copy, please take it from") && orderDetailsPage.getPopUpBodyText().contains("logging in with your credentials. In case of any questions, please contact Customer Service"));
     }
 
