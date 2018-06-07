@@ -155,6 +155,11 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     When Admin opens Users tab.
     And Sets externaluser1 email to the email field.
     And Clicks on the Search button.
+    And Clicks on the Search button.
+    And Clicks on the Search button.
+    And Clicks on the Search button.
+    And Clicks on the Search button.
+    And Clicks on the Search button.
     When Clicks on the user name in the table.
     Then Approve Pending Accounts section is displayed with appropriate count of accounts.
     When User expand the Approve Pending Accounts section.

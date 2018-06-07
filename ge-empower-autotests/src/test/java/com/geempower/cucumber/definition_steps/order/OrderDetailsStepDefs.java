@@ -5,6 +5,7 @@ import com.geempower.cucumber.definition_steps.TestKeyword;
 import com.geempower.helpers.managers.OrderManager;
 import com.geempower.helpers.models.Order;
 import com.geempower.storefront.pages.order.OrderDetailsPage;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -35,4 +36,25 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
         assertEquals(order.getFinalOrderPrice(), Double.parseDouble(orderDetailsPage.getTotalNetPrice()), delta);
     }
 
+    @And("^Expands the order details area.$")
+    public void expandsTheOrderDetailsArea() {
+        orderDetailsPage.clickOnExpandOrderDetailsIcon();
+    }
+
+    @And("^Clicks on Invoice hyperlink.$")
+    public void clicksOnInvoiceHyperlink() {
+        orderDetailsPage.clickOnInvoiceHyperlink();
+    }
+
+    @Then("^(.*) pop-up is appear with correct text and header.$")
+    public void invoiceDetailsPopUpIsAppearWithCorrectTextAndHeader(String popUpHeader) {
+        assertTrue(orderDetailsPage.isPopUpAppears());
+        assertEquals(orderDetailsPage.getInvoiceDetailsPopUpHeader(), popUpHeader);
+        assertTrue(orderDetailsPage.getPopUpBodyText().contains("For Invoice copy, please take it from") && orderDetailsPage.getPopUpBodyText().contains("logging in with your credentials. In case of any questions, please contact Customer Service"));
+    }
+
+    @And("^Admin closes the pop-up.$")
+    public void adminClosesThePopUp() {
+        orderDetailsPage.closeInvoiceDetailsPopUp();
+    }
 }
