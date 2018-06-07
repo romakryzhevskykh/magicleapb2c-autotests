@@ -1,8 +1,8 @@
 package com.geempower.cucumber.definition_steps;
 
 import com.geempower.helpers.models.Product;
+import com.geempower.storefront.page_blocks.FullProductDetailsPopUpBlock;
 import com.geempower.storefront.pages.PriceAndAvailabilityPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -18,6 +18,8 @@ import static org.testng.Assert.assertTrue;
 public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
     @Autowired
     private PriceAndAvailabilityPage priceAndAvailabilityPage;
+
+    @Autowired private FullProductDetailsPopUpBlock fullProductDetailsPopUpBlock;
 
     private final double delta = 0.000001;
 
@@ -134,15 +136,15 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
         products.forEach(product -> assertTrue(priceAndAvailabilityPage.areAllProductsPresent(product)));
     }
 
-    @When("^User select (.*) SPA No for all the product.$")
-    public void userSelectSPANoForAllTheProduct(String spaNo) {
-        priceAndAvailabilityPage.setAppropriateSpaToAllProducts(spaNo);
+    @When("^User select (.*) Agreement No for all the product.$")
+    public void userSelectAgreementNoForAllTheProduct(String agreementNo) {
+        priceAndAvailabilityPage.userSelectAgreementNoForAllTheProduct(agreementNo);
     }
 
-    @Then("^All the products have (.*) spa no in the Special Pricing field.$")
-    public void allTheProductHaveAppropriateSpaNoInTheSpecialPricingField(String spaNo) {
-        assertTrue(priceAndAvailabilityPage.getSpaNoForTheProduct()
-                .allMatch(spa -> spa.getAttribute("value").equals(spaNo)));
+    @Then("^All the products have (.*) agreement no in the Agreement No field.$")
+    public void allTheProductHaveAppropriateAgreementNoInTheSpecialPricingField(String agreementNo) {
+        assertTrue(priceAndAvailabilityPage.getAgreementNoForTheProduct()
+                .allMatch(agreement -> agreement.getAttribute("value").equals(agreementNo)));
     }
 
     @When("^User Add new item (.*) on the P&A page.$")
@@ -150,13 +152,33 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
         priceAndAvailabilityPage.addNewItem(catalogueNo);
     }
 
-    @Then("^(.*) message is displayed.$")
-    public void priceDisplayedIsNetAfterRebateOrderWillBillAtStandardClaimbackOnlyMessageIsDisplayed(String text){
-        assertEquals(text, priceAndAvailabilityPage.getClaimbackMessage());
+    @Then("^Is (.*) message below Agreement No field displayed on P&A page.$")
+    public void isClaimbackMessageBelowSpaNoFieldDisplayed(String text) {
+        assertEquals(text, priceAndAvailabilityPage.getClaimbackMessageBelowSpaNoField());
     }
 
-    @When("^Click on (.*) link.$")
-    public void clickOnProductsLink(List<String> products) {
-        priceAndAvailabilityPage.clickOnProductLink(products);
+    @Then("^(.*) message below Pricing Details title is displayed on Product Details pop-up.$")
+    public void claimbackMessageBelowPricingDetailsIsDisplayed(String text) {
+        assertEquals(text, fullProductDetailsPopUpBlock.getClaimbackMessageBelowPricingDetailsTitleField());
+    }
+
+    @When("^Click on (.*) link on P&A page.$")
+    public void clickOnProductsLinkOnPaPage(List<String> products) {
+        priceAndAvailabilityPage.clickOnProductLinkOnPaPage(products);
+    }
+
+    @Then("^Product Details pop-up on Price and Availability page is displayed.$")
+    public void detailProductPopUpOnPApageIsDisplayed() {
+        assertTrue(fullProductDetailsPopUpBlock.productDetailPopUpOnPApageIsDisplayed());
+    }
+
+    @When("^Click on Product Details tab.$")
+    public void clickOnProductDetailsTab() {
+        fullProductDetailsPopUpBlock.clickOnProductDetailsTab();
+    }
+
+    @When("^Close Product Details pop-up.$")
+    public void closeProductDetailsPopUp() {
+        fullProductDetailsPopUpBlock.closeProductsDetailPopUp();
     }
 }

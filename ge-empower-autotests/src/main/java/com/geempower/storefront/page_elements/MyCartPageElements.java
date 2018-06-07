@@ -20,5 +20,6 @@ public class MyCartPageElements {
     public final static String GREEN_CONFIRMATION_POP_UP_ID = "toast-container";
     public final static String QTY_VALUE_INPUT_XPATH = "//tr[contains(@class, 'price-item') and td/a[@data-product = '%s']]/td[contains(@class,'qty-input')]/input";
     public final static String ALL_CHECKBOXES_XPATH = ".//label[contains(@class,'myCheckbox select-all-desk-js')]";
+    public final static String CLAIMBACK_MESSAGE_BELOW_SPA_NO_FIELD_ON_MY_CART_PAGE_XPATH = ".//p[@class=visible error-text-spa error-spa text-blue']";
 
 }

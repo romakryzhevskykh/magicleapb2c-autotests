@@ -5,6 +5,8 @@ import com.geempower.storefront.StorefrontBasePage;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
+import java.util.List;
+
 import static com.geempower.storefront.page_elements.MyCartPageElements.*;
 
 @Component
@@ -122,5 +124,15 @@ public class MyCartPage extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
         return $(EXTENDED_PRICE_ON_MY_CART_XPATH, product.getCatalogueNo().toUpperCase()).getText();
 
+    }
+
+    @Step("Get Claimback Message Below Spa No Field On My Cart Page.")
+    public String getClaimbackMessageBelowSpaNoFieldOnMyCartPage() {
+        return $(CLAIMBACK_MESSAGE_BELOW_SPA_NO_FIELD_ON_MY_CART_PAGE_XPATH).getText();
+    }
+
+    @Step("Click On Product Link On My Cart Page.")
+    public void clickOnProductLinkOnMyCartPage(List<String> products) {
+//        click();
     }
 }

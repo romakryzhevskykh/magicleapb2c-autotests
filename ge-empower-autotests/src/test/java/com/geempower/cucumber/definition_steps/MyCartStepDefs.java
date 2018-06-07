@@ -8,6 +8,7 @@ import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import static org.testng.Assert.assertEquals;
@@ -87,5 +88,16 @@ public class MyCartStepDefs extends AbstractStepDefs {
             double finalActualPrice = finalNetPrice * quantityOfEachProduct;
             assertEquals(finalActualPrice, Double.parseDouble(myCartPage.getNewExtendPrice(product)), delta);
         });
+    }
+
+    @Then("^(.*) message below SPA No field is displayed on My Cart page.$")
+    public void claimbackMessageBelowSpaNoFieldOnMyCartPageIsDisplayed(String text) {
+        assertEquals(text, myCartPage.getClaimbackMessageBelowSpaNoFieldOnMyCartPage());
+    }
+
+    @When("^Click on (.*) link on My Cart page.$")
+    public void clickOnProductLinkOnMyCartPage(List<String> products) {
+        myCartPage.clickOnProductLinkOnMyCartPage(products);
+
     }
 }
