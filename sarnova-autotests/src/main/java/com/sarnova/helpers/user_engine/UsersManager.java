@@ -11,6 +11,7 @@ import com.sarnova.hybris.Cockpit;
 import com.sarnova.hybris.backoffice.models.SarnovaBackoffice;
 import com.sarnova.hybris.hac.models.SarnovaHAC;
 import com.sarnova.hybris.import_cockpit.models.SarnovaImportCockpit;
+import com.sarnova.pay_fabric.models.PayFabric;
 import com.sarnova.storefront.models.SarnovaStorefront;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.jsoup.nodes.Document;
@@ -190,6 +191,14 @@ public class UsersManager {
                         break;
                     case "importmanager":
                         userRole = ImportCockpitUserRoles.IMPORT_MANAGER;
+                        break;
+                    default:
+                        break;
+                }
+            } else if (userCockpit instanceof PayFabric) {
+                switch (userRoleName) {
+                    case "agent":
+                        userRole = PayFabricUserRoles.AGENT;
                         break;
                     default:
                         break;

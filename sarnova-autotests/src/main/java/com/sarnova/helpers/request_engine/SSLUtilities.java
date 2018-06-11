@@ -108,6 +108,8 @@ public final class SSLUtilities {
      * otherwise.
      */
     private static boolean isDeprecatedSSLProtocol() {
+        System.out.println("Protocol: " + System.
+                getProperty("java.protocol.handler.pkgs"));
         return ("com.sun.net.ssl.internal.www.protocol".equals(System.
                 getProperty("java.protocol.handler.pkgs")));
     } // isDeprecatedSSLProtocol
@@ -171,11 +173,11 @@ public final class SSLUtilities {
      */
     public static void trustAllHostnames() {
         // Is the deprecated protocol setted?
-        if (isDeprecatedSSLProtocol()) {
+//        if (isDeprecatedSSLProtocol()) {
             __trustAllHostnames();
-        } else {
+//        } else {
             _trustAllHostnames();
-        } // else
+//        } // else
     } // trustAllHostnames
 
     /**
@@ -183,21 +185,21 @@ public final class SSLUtilities {
      * trust all certificates, even the self-signed ones.
      */
     public static void trustAllHttpsCertificates() {
-        // Is the deprecated protocol setted?
-        if (isDeprecatedSSLProtocol()) {
+        // Is the deprecated protocol set?
+//        if (isDeprecatedSSLProtocol()) {
             __trustAllHttpsCertificates();
-        } else {
+//        } else {
             _trustAllHttpsCertificates();
-        } // else
+//        } // else
     } // trustAllHttpsCertificates
 
     public static void trustAllTLSHttpsCertificates() {
-        // Is the deprecated protocol setted?
-        if (isDeprecatedSSLProtocol()) {
+        // Is the deprecated protocol set?
+//        if (isDeprecatedSSLProtocol()) {
             __trustAllTLSHttpsCertificates();
-        } else {
+//        } else {
             _trustAllTLSHttpsCertificates();
-        } // else
+//        } // else
     } // trustAllHttpsCertificates
 
 

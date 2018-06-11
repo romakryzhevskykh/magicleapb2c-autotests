@@ -11,7 +11,7 @@ public class UserSession {
     private User user;
     private boolean isLoggedIn = false;
     private boolean isActive = false;
-    private List<String> cookies;
+    private List<String> cookies = new ArrayList<>();
 
     public UserSession(User user) {
         this.user = user;
@@ -56,12 +56,10 @@ public class UserSession {
     public void setCookies(List<String> cookies) {
         this.cookies = cookies;
     }
+
     public void setCookies(Set<Cookie> cookies) {
-        if (this.cookies == null) {
-            this.cookies = new ArrayList<>();
-            this.cookies.addAll(cookies.stream().map(Cookie::toString).collect(Collectors.toList()));
-        } else
-            this.cookies.addAll(cookies.stream().map(Cookie::toString).collect(Collectors.toList()));
+        this.cookies.clear();
+        this.cookies.addAll(cookies.stream().map(Cookie::toString).collect(Collectors.toList()));
     }
 
     public List<String> getCookies() {

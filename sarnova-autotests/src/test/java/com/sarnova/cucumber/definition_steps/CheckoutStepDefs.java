@@ -1,16 +1,21 @@
 package com.sarnova.cucumber.definition_steps;
 
+import com.sarnova.helpers.RandomUtils;
 import com.sarnova.helpers.managers.ProductsManager;
+import com.sarnova.helpers.models.credit_cards.CreditCard;
 import com.sarnova.helpers.models.products.IndividualProduct;
 import com.sarnova.helpers.models.products.UnitOfMeasure;
+import com.sarnova.helpers.models.shipping_addresses.ShippingAddress;
+import com.sarnova.helpers.user_engine.UserTitle;
 import com.sarnova.storefront.pages.CheckoutPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.stream.Collectors;
@@ -21,6 +26,7 @@ public class CheckoutStepDefs extends AbstractStepDefs {
     @Autowired CheckoutPage checkoutPage;
 
     @Autowired private ProductsManager productsManager;
+    @Autowired private RandomUtils randomUtils;
 
     @When("^Click on Next button on Checkout Shipping address step.$")
     public void clickOnNextButtonOnShippingAddressStep() {
@@ -157,17 +163,24 @@ public class CheckoutStepDefs extends AbstractStepDefs {
     @And("^Click on Next button on Checkout Payment method step.$")
     public void clickOnNextButtonOnCheckoutPaymentMethodStep() {
         checkoutPage.clickOnNextButtonOnPaymentMethodStep();
+        threadVarsHashMap.put(TestKeyword.LOCAT_DATE_TIME_OF_ACTION, LocalDateTime.now(ZoneId.of("America/New_York")));
     }
 
     @And("^Set any Purchase order number on Checkout Payment method step.$")
     public void setAnyPurchaseOrderNumberOnCheckoutPaymentMethodStep() {
         String randomPON = RandomStringUtils.randomNumeric(9);
         checkoutPage.fillPurchaseOrderNumberWithText(randomPON);
+        threadVarsHashMap.put(TestKeyword.PURCHASE_ORDER_NUMBER, randomPON);
     }
 
     @And("^Check that Place order button is visible on Checkout Final Review step.$")
     public void checkThatPlaceOrderButtonVisible() {
         assertTrue(checkoutPage.isPlaceOrderButtonVisible());
+    }
+
+    @And("^Check that Place order button is unable on Checkout Final Review step.$")
+    public void checkThatPlaceOrderButtonIsUnable() {
+        assertFalse(checkoutPage.isPlaceOrderButtonEnabled());
     }
 
     @And("^Check that accept Terms and Conditions checkbox is visible on Checkout Final Review step.$")
@@ -183,5 +196,199 @@ public class CheckoutStepDefs extends AbstractStepDefs {
     @And("^Click on Place order on Checkout Final Review step.$")
     public void clickOnPlaceOrderOnCheckoutFinalReviewStep() {
         checkoutPage.clickOnPlaceOrder();
+    }
+
+    @And("^Click on Create new address button on Checkout Shipping address step.$")
+    public void clickOnCreateNewAddressButtonOnCheckoutShippingAddressStep() {
+        checkoutPage.selectCreateNewShippingAddress();
+    }
+
+    @And("^Select Country in drop-down on Checkout Shipping address step.$")
+    public void selectCountryInDropDownOnCheckoutShippingAddressStep() {
+        String randomCountry = checkoutPage.getAnyShippingCountryFromDropDown();
+        checkoutPage.selectShippingCountryFromDropDown(randomCountry);
+    }
+
+    @And("^Click on Countries drop-down on Checkout Shipping address step.$")
+    public void clickOnCountriesDropDownOnCheckoutShippingAddressStep() {
+        checkoutPage.openShippingCountriesDropDown();
+    }
+
+    @And("^Click on Titles drop-down on Checkout Shipping address step.$")
+    public void clickOnTitlesDropDownOnCheckoutShippingAddressStep() {
+        checkoutPage.openShippingTitlesDropDown();
+    }
+
+    @And("^Select Title in drop-down on Checkout Shipping address step.$")
+    public void selectTitleInDropDownOnCheckoutShippingAddressStep() {
+        String titleValue = UserTitle.getRandom().name().toLowerCase();
+        checkoutPage.selectTitleFromTitlesDropDown(titleValue);
+    }
+
+    @And("^Fill First name field on Checkout Shipping address step.$")
+    public void fillFirstNameFieldOnCheckoutShippingAddressStep() {
+        String name = randomUtils.randomName();
+        checkoutPage.fillFirstName(name);
+    }
+
+    @And("^Fill Last name field on Checkout Shipping address step.$")
+    public void fillLastNameFieldOnCheckoutShippingAddressStep() {
+        String name = randomUtils.randomName();
+        checkoutPage.fillLastName(name);
+    }
+
+    @And("^Fill Address line 1 field on Checkout Shipping address step.$")
+    public void fillAddressLine1FieldOnCheckoutShippingAddressStep() {
+        ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_SHIPPING_ADDRESS);
+        checkoutPage.fillAddressLine1(shippingAddress.getAddressLine1());
+    }
+
+    @And("^Fill Address line 2 field on Checkout Shipping address step.$")
+    public void fillAddressLine2FieldOnCheckoutShippingAddressStep() {
+        ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_SHIPPING_ADDRESS);
+        checkoutPage.fillAddressLine2(shippingAddress.getAddressLine2());
+    }
+
+    @And("^Fill Town field on Checkout Shipping address step.$")
+    public void fillTownFieldOnCheckoutShippingAddressStep() {
+        ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_SHIPPING_ADDRESS);
+        checkoutPage.fillTown(shippingAddress.getTown());
+    }
+
+    @And("^Click on States drop-down on Checkout Shipping address step.$")
+    public void clickOnStatesDropDownOnCheckoutShippingAddressStep() {
+        checkoutPage.openStatesDropDown();
+    }
+
+    @And("^Select State in drop-down on Checkout Shipping address step.$")
+    public void selectStateInDropDownOnCheckoutShippingAddressStep() {
+        ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_SHIPPING_ADDRESS);
+        checkoutPage.selectStateFromTitlesDropDown(shippingAddress.getState());
+    }
+
+    @And("^Fill Zip code field on Checkout Shipping address step.$")
+    public void fillZipCodeFieldOnCheckoutShippingAddressStep() {
+        ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_SHIPPING_ADDRESS);
+        checkoutPage.fillZipCode(shippingAddress.getPostcode());
+    }
+
+    @And("^Fill Phone number field on Checkout Shipping address step.$")
+    public void fillPhoneNumberFieldOnCheckoutShippingAddressStep() {
+        ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_SHIPPING_ADDRESS);
+        checkoutPage.fillPhoneNumber(shippingAddress.getPhoneNumber());
+    }
+
+    @And("^Select 2-DAY shipping method on Checkout Shipping method step.$")
+    public void select2DayShippingMethodOnCheckoutShippingMethodStep() {
+        checkoutPage.select2DayShippingMethod();
+    }
+
+    @And("^Select GROUND shipping method on Checkout Shipping method step.$")
+    public void selectGroundShippingMethodOnCheckoutShippingMethodStep() {
+        checkoutPage.selectGroundShippingMethod();
+    }
+
+    @And("^Select OVERNIGHT shipping method on Checkout Shipping method step.$")
+    public void selectOvernightShippingMethodOnCheckoutShippingMethodStep() {
+        checkoutPage.selectOvernightShippingMethod();
+    }
+
+    @And("^Fill Card Number field on Checkout Payment method step.$")
+    public void fillCardNumberFieldOnCheckoutPaymentMethodStep() {
+        CreditCard creditCard = (CreditCard) threadVarsHashMap.get(TestKeyword.CREDIT_CARD);
+        checkoutPage.fillCardNumberField(creditCard.getCardNumber());
+    }
+
+    @And("^Fill Expiry Date\\(Month\\) drop-down on Checkout Payment method step.$")
+    public void fillExpiryDateMonthDropDownOnCheckoutPaymentMethodStep() {
+        CreditCard creditCard = (CreditCard) threadVarsHashMap.get(TestKeyword.CREDIT_CARD);
+        checkoutPage.fillExpiryDateMonth(creditCard.getExpiryMonth());
+    }
+
+    @And("^Fill Expiry Year drop-down on Checkout Payment method step.$")
+    public void fillExpiryYearDropDownOnCheckoutPaymentMethodStep() {
+        CreditCard creditCard = (CreditCard) threadVarsHashMap.get(TestKeyword.CREDIT_CARD);
+        checkoutPage.fillExpiryYear(creditCard.getExpiryYear());
+    }
+
+    @And("^Fill Name on card field on Checkout Payment method step.$")
+    public void fillNameOnCardFieldOnCheckoutPaymentMethodStep(){
+        CreditCard creditCard = (CreditCard) threadVarsHashMap.get(TestKeyword.CREDIT_CARD);
+        checkoutPage.fillNameOnCard(creditCard.getNameOnCard());
+    }
+
+    @And("^Fill Card Verification Number field on Checkout Payment method step.$")
+    public void fillCardVerificationNumberFieldOnCheckoutPaymentMethodStep() {
+        CreditCard creditCard = (CreditCard) threadVarsHashMap.get(TestKeyword.CREDIT_CARD);
+        checkoutPage.fillCVV(creditCard.getCvv());
+    }
+
+    @And("^Select Billing Country in drop-down on Checkout Payment method step.$")
+    public void selectCountryInDropDownOnCheckoutPaymentMethodStep() {
+        String randomCountry = checkoutPage.getAnyBillingCountryFromDropDown();
+        checkoutPage.selectBillingCountryFromDropDown(randomCountry);
+    }
+
+    @And("^Click on Billing Countries drop-down on Checkout Payment method step.$")
+    public void clickOnCountriesDropDownOnCheckoutPaymentMethodStep() {
+        checkoutPage.openBillingCountriesDropDown();
+    }
+
+    @And("^Fill Billing First name field on Checkout Payment method step.$")
+    public void fillFirstNameFieldOnCheckoutPaymentMethodStep() {
+        String name = randomUtils.randomName();
+        checkoutPage.fillBillingFirstName(name);
+    }
+
+    @And("^Fill Billing Last name field on Checkout Payment method step.$")
+    public void fillLastNameFieldOnCheckoutPaymentMethodStep() {
+        String name = randomUtils.randomName();
+        checkoutPage.fillBillingLastName(name);
+    }
+
+    @And("^Fill Billing Address line 1 field on Checkout Payment method step.$")
+    public void fillAddressLine1FieldOnCheckoutPaymentMethodStep() {
+        ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_BILLING_ADDRESS);
+        checkoutPage.fillBillingAddressLine1(shippingAddress.getAddressLine1());
+    }
+
+    @And("^Fill Billing Address line 2 field on Checkout Payment method step.$")
+    public void fillAddressLine2FieldOnCheckoutPaymentMethodStep() {
+        ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_BILLING_ADDRESS);
+        checkoutPage.fillBillingAddressLine2(shippingAddress.getAddressLine2());
+    }
+
+    @And("^Fill Billing Town field on Checkout Payment method step.$")
+    public void fillTownFieldOnCheckoutPaymentMethodStep() {
+        ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_BILLING_ADDRESS);
+        checkoutPage.fillBillingTown(shippingAddress.getTown());
+    }
+
+    @And("^Click on Billing States drop-down on Checkout Payment method step.$")
+    public void clickOnStatesDropDownOnCheckoutPaymentMethodStep() {
+        checkoutPage.openBillingStatesDropDown();
+    }
+
+    @And("^Select Billing State in drop-down on Checkout Payment method step.$")
+    public void selectStateInDropDownOnCheckoutPaymentMethodStep() {
+        ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_BILLING_ADDRESS);
+        checkoutPage.selectBillingStateFromTitlesDropDown(shippingAddress.getState());
+    }
+
+    @And("^Fill Billing Zip code field on Checkout Payment method step.$")
+    public void fillZipCodeFieldOnCheckoutPaymentMethodStep() {
+        ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_BILLING_ADDRESS);
+        checkoutPage.fillBillingZipCode(shippingAddress.getPostcode());
+    }
+
+    @And("^Fill Billing Phone number field on Checkout Payment method step.$")
+    public void fillPhoneNumberFieldOnCheckoutPaymentMethodStep() {
+        ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_BILLING_ADDRESS);
+        checkoutPage.fillBillingPhoneNumber(shippingAddress.getPhoneNumber());
+    }
+
+    @And("^Click on Change Billing address on Checkout Payment method step.$")
+    public void clickOnChangeBillingAddressOnCheckoutPaymentMethodStep() {
+        checkoutPage.clickOnChangeBillingAddress();
     }
 }

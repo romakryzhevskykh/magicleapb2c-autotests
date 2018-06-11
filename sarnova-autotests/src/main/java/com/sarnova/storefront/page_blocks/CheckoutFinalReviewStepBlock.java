@@ -43,4 +43,8 @@ public class CheckoutFinalReviewStepBlock extends UIComponent {
     public void placeOrder() {
         click(By.id(PLACE_ORDER_BUTTON_ID));
     }
+
+    public boolean isPlaceOrderButtonEnabled() {
+        return $(By.id(PLACE_ORDER_BUTTON_ID)).isEnabled();
+    }
 }

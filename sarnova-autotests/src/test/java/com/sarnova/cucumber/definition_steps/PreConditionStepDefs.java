@@ -1,17 +1,21 @@
 package com.sarnova.cucumber.definition_steps;
 
+import com.sarnova.helpers.RandomUtils;
 import com.sarnova.helpers.managers.*;
 import com.sarnova.helpers.models.categories.Category;
 import com.sarnova.helpers.models.categories.ChildCustomCategory;
 import com.sarnova.helpers.models.categories.ParentCustomCategory;
+import com.sarnova.helpers.models.credit_cards.CreditCard;
 import com.sarnova.helpers.models.products.IndividualProduct;
 import com.sarnova.helpers.models.products.Product;
 import com.sarnova.helpers.models.products.UnitOfMeasure;
 import com.sarnova.helpers.models.saved_carts.SavedCart;
+import com.sarnova.helpers.models.shipping_addresses.ShippingAddress;
 import com.sarnova.helpers.models.supply_lists.SupplyList;
 import com.sarnova.helpers.models.supply_lists.SupplyListProduct;
 import com.sarnova.helpers.models.users.UserGroup;
 import com.sarnova.helpers.user_engine.*;
+import com.sarnova.pay_fabric.page_blocks.LeftBarBlock;
 import com.sarnova.storefront.page_blocks.HeaderRowPageBlock;
 import com.sarnova.storefront.pages.HomePage;
 import com.sarnova.storefront.pages.LoginPage;
@@ -27,6 +31,7 @@ import java.util.stream.Collectors;
 public class PreConditionStepDefs extends AbstractStepDefs {
     @Autowired HeaderRowPageBlock headerRowPageBlock;
     @Autowired LoginPage loginPage;
+    @Autowired com.sarnova.pay_fabric.pages.LoginPage payFabricLoginPage;
     @Autowired HomePage homePage;
 
     @Autowired private SupplyListsManager supplyListsManager;
@@ -36,6 +41,8 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     @Autowired private SavedCartsManager savedCartsManager;
     @Autowired private UsersManager usersManager;
     @Autowired private CustomCategoriesManager customCategoriesManager;
+    @Autowired private RandomUtils randomUtils;
+    @Autowired private LeftBarBlock leftBarBlock;
 
     @Given("^User is logged in to Storefront.$")
     public void userIsLoggedInToStorefront() {
@@ -48,6 +55,14 @@ public class PreConditionStepDefs extends AbstractStepDefs {
                 loginPage.open();
                 loginPage.loginToStorefront(userSessions.getActiveUserSession());
             }
+        }
+    }
+
+    @Given("^User is logged in to Pay Fabric.$")
+    public void userIsLoggedInToPayFabric() {
+        if (!leftBarBlock.isVisible()) {
+            payFabricLoginPage.open();
+            payFabricLoginPage.loginToPayFabric(userSessions.getActiveUserSession());
         }
     }
 
@@ -436,5 +451,23 @@ public class PreConditionStepDefs extends AbstractStepDefs {
         }
         SavedCart savedCart = savedCartsManager.getUserSavedCarts(userSessions.getActiveUserSession().getUser()).stream().findAny().orElse(null);
         threadVarsHashMap.put(TestKeyword.SAVED_CART_ID, savedCart.getId());
+    }
+
+    @And("^Find any random valid Shipping address.$")
+    public void findAnyRandomValidShippingAddress() {
+        ShippingAddress shippingAddress = randomUtils.getRandomValidShippingAddressWithOnlyMandatoryFields();
+        threadVarsHashMap.put(TestKeyword.TEST_SHIPPING_ADDRESS, shippingAddress);
+    }
+
+    @And("^Find any random valid Billing address.$")
+    public void findAnyRandomValidBillingAddress() {
+        ShippingAddress shippingAddress = randomUtils.getRandomValidShippingAddressWithOnlyMandatoryFields();
+        threadVarsHashMap.put(TestKeyword.TEST_BILLING_ADDRESS, shippingAddress);
+    }
+
+    @And("^Find any random valid Credit card.$")
+    public void findAnyRandomValidCreditCard() {
+        CreditCard creditCard = randomUtils.getRandomCreditCard();
+        threadVarsHashMap.put(TestKeyword.CREDIT_CARD, creditCard);
     }
 }

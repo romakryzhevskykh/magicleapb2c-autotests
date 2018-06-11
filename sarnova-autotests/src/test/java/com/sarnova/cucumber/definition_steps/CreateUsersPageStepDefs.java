@@ -1,16 +1,18 @@
 package com.sarnova.cucumber.definition_steps;
 
+import com.sarnova.helpers.RandomUtils;
 import com.sarnova.helpers.user_engine.*;
 import com.sarnova.storefront.pages.CreateUserPage;
 import cucumber.api.java.en.And;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 
+
 public class CreateUsersPageStepDefs extends AbstractStepDefs {
     @Autowired CreateUserPage createUserPage;
     @Autowired UsersManager usersManager;
+    @Autowired RandomUtils randomUtils;
 
     @And("^Select any title on Create user page.$")
     public void selectAnyTitleOnEditUserPage() {
@@ -22,28 +24,28 @@ public class CreateUsersPageStepDefs extends AbstractStepDefs {
 
     @And("^Fill First name field with a random text on Create user page.$")
     public void fillFirstNameFieldWithARandomTextOnEditUserPage() {
-        String randomName = RandomStringUtils.randomAlphabetic(10);
+        String randomName = randomUtils.randomName();
         threadVarsHashMap.put(TestKeyword.EDIT_USER_FIRST_NAME, randomName);
         createUserPage.fillFirstName(randomName);
     }
 
     @And("^Fill Last name field with a random text on Create user page.$")
     public void fillLastNameFieldWithARandomTextOnEditUserPage() {
-        String randomName = RandomStringUtils.randomAlphabetic(10);
+        String randomName = randomUtils.randomName();
         threadVarsHashMap.put(TestKeyword.EDIT_USER_LAST_NAME, randomName);
         createUserPage.fillLastName(randomName);
     }
 
     @And("^Fill Email field with a random email on Create user page.$")
     public void fillEmailFieldWithARandomEmailOnEditUserPage() {
-        String randomEmail = RandomStringUtils.randomAlphabetic(10) + "@" + RandomStringUtils.randomAlphabetic(5) + ".com";
+        String randomEmail = randomUtils.randomEmail();
         threadVarsHashMap.put(TestKeyword.EDIT_USER_EMAIL, randomEmail);
         createUserPage.fillEmail(randomEmail);
     }
 
     @And("^Fill Username field with a random email on Create user page.$")
     public void fillUsernameFieldWithARandomEmailOnEditUserPage() {
-        String randomUsername = RandomStringUtils.randomAlphabetic(10);
+        String randomUsername = randomUtils.randomName();
         threadVarsHashMap.put(TestKeyword.EDIT_USER_USERNAME, randomUsername);
         createUserPage.fillUsername(randomUsername);
     }

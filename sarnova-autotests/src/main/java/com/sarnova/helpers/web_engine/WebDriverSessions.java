@@ -63,6 +63,7 @@ public class WebDriverSessions {
             tlDriversMap.get().get(userRole).setActive(true);
             userSessions.setActiveUserSession(userRole);
         }
+        userSessions.getActiveUserSession().setCookies(tlDriversMap.get().get(userRole).getWebDriver().manage().getCookies());
     }
 
     public synchronized WebDriver getActiveDriver() {

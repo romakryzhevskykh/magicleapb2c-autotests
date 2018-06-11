@@ -87,4 +87,114 @@ public class CheckoutPaymentMethodStepBlock extends UIComponent {
     public String getPageUrlMethod() {
         return pageUrlMethod;
     }
+
+    @Step("Enter text to Card number field: {0}.")
+    public void fillCardNumberField(String cardNumber) {
+        $(By.id(CARD_ACCOUNT_NUMBER_FIELD_ID)).clear();
+        $(By.id(CARD_ACCOUNT_NUMBER_FIELD_ID)).sendKeys(cardNumber);
+    }
+
+    @Step("Open Expiry month drop-down.")
+    public void clickOnExpiryMonthDropDown() {
+        click(By.id(CARD_EXPIRY_MONTH_DROP_DOWN_ID));
+    }
+
+    @Step("Select Expiry month in Expiry month drop-down: {0}.")
+    public void selectExpiryMonth(String expiryMonth) {
+        click(CARD_EXPIRY_MONTH_ITEM_BY_VALUE_XPATH, expiryMonth);
+    }
+
+    @Step("Open Expiry year drop-down.")
+    public void clickOnExpiryYearDropDown() {
+        click(By.id(CARD_EXPIRY_YEAR_DROP_DOWN_ID));
+    }
+
+    @Step("Select Expiry yesr in Expiry year drop-down: {0}.")
+    public void selectExpiryYear(String expiryYear) {
+        click(CARD_EXPIRY_YEAR_ITEM_BY_VALUE_XPATH, expiryYear.substring(2));
+    }
+
+    @Step("Enter text to Name on card field: {0}.")
+    public void fillNameOnCard(String nameOnCard) {
+        $(By.id(CARD_NAME_ON_CARD_FIELD_ID)).clear();
+        $(By.id(CARD_NAME_ON_CARD_FIELD_ID)).sendKeys(nameOnCard);
+    }
+
+    @Step("Enter text to CVV field: {0}.")
+    public void fillCVV(String cvv) {
+        $(By.id(CARD_CVV_CODE_FIELD_ID)).clear();
+        $(By.id(CARD_CVV_CODE_FIELD_ID)).sendKeys(cvv);
+    }
+
+    @Step("Click on CHANGE BILLING ADDRESS FOR THIS ORDER ONLY checkbox.")
+    public void clickOnChangeBillingAddress() {
+        click(CHANGE_BILLING_ADDRESS_CHECKBOX_XPATH);
+    }
+
+    @Step("Get any Billing address country from drop-down.")
+    public String getAnyCountryFromBillingAddressCountiesDropDown() {
+        return $$(ITEMS_IN_BILLING_ADDRESS_COUNTRY_DROP_DOWN_XPATH).stream().findAny().get().getAttribute("value");
+    }
+
+    @Step("Select {0} in Billing address country drop-down.")
+    public void selectBillingAddressCountryFromCountiesDropDown(String country) {
+        click(ITEM_IN_BILLING_ADDRESS_COUNTRY_DROP_DOWN_BY_VALUE_XPATH, country);
+    }
+
+    @Step("Open Billing address countries drop-down.")
+    public void openBillingAddressCountriesDropDown() {
+        click(By.id(SELECT_BILLING_ADDRESS_COUNTRY_DROP_DOWN_ID));
+    }
+
+    @Step("Open Billing address states drop-down.")
+    public void openBillingAddressStatesDropDown() {
+        click(By.id(BILLING_ADDRESS_STATE_DROP_DOWN_ID));
+    }
+
+    @Step("Select {0} in Billing address state drop-down.")
+    public void selectBillingAddressStateFromTitlesDropDown(String state) {
+        click(ITEM_IN_BILLING_ADDRESS_STATE_DROP_DOWN_BY_VALUE_XPATH, state);
+    }
+
+    @Step("Enter Billing address First name: {0}.")
+    public void fillBillingAddressFirstName(String firstName) {
+        $(By.id(BILLING_ADDRESS_FIRST_NAME_FIELD_ID)).clear();
+        $(By.id(BILLING_ADDRESS_FIRST_NAME_FIELD_ID)).sendKeys(firstName);
+    }
+
+    @Step("Enter Billing address Last name: {0}.")
+    public void fillBillingAddressLastName(String lastName) {
+        $(By.id(BILLING_ADDRESS_LAST_NAME_FIELD_ID)).clear();
+        $(By.id(BILLING_ADDRESS_LAST_NAME_FIELD_ID)).sendKeys(lastName);
+    }
+
+    @Step("Enter Billing address Address line 1: {0}.")
+    public void fillBillingAddressAddressLine1(String addressLine1) {
+        $(By.id(BILLING_ADDRESS_ADDRESS_LINE_1_FIELD_ID)).clear();
+        $(By.id(BILLING_ADDRESS_ADDRESS_LINE_1_FIELD_ID)).sendKeys(addressLine1);
+    }
+
+    @Step("Enter Billing address Address line 2: {0}.")
+    public void fillBillingAddressAddressLine2(String addressLine2) {
+        $(By.id(BILLING_ADDRESS_ADDRESS_LINE_2_FIELD_ID)).clear();
+        $(By.id(BILLING_ADDRESS_ADDRESS_LINE_2_FIELD_ID)).sendKeys(addressLine2);
+    }
+
+    @Step("Enter Billing address Town: {0}.")
+    public void fillBillingAddressTown(String town) {
+        $(By.id(BILLING_ADDRESS_TOWN_CITY_FIELD_ID)).clear();
+        $(By.id(BILLING_ADDRESS_TOWN_CITY_FIELD_ID)).sendKeys(town);
+    }
+
+    @Step("Enter Billing address Zip code: {0}.")
+    public void fillBillingAddressZipCode(String zipCode) {
+        $(By.id(BILLING_ADDRESS_POSTCODE_FIELD_ID)).clear();
+        $(By.id(BILLING_ADDRESS_POSTCODE_FIELD_ID)).sendKeys(zipCode);
+    }
+
+    @Step("Enter Billing address Phone number: {0}.")
+    public void fillBillingAddressPhoneNumber(String phoneNUmber) {
+        $(By.id(BILLING_ADDRESS_PHONE_FIELD_ID)).clear();
+        $(By.id(BILLING_ADDRESS_PHONE_FIELD_ID)).sendKeys(phoneNUmber);
+    }
 }

@@ -4,6 +4,7 @@ import com.sarnova.helpers.user_engine.BackofficeUserRoles;
 import com.sarnova.helpers.user_engine.ImportCockpitUserRoles;
 import com.sarnova.helpers.user_engine.StorefrontUserRole;
 import com.sarnova.helpers.web_engine.WebDriverSessions;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -39,5 +40,11 @@ public class UserSwitchStepDefs extends AbstractStepDefs {
     @Given("Switch to Storefront cockpit test user.")
     public void switchToStorefrontCockpitAsTestUser() {
         webDriverPool.setDriverActive(StorefrontUserRole.TEST_USER);
+    }
+
+    @And("^Switch to PayFabric agent.$")
+    public void switchToPayFabricAgent() {
+        webDriverPool.setDriverActive(ImportCockpitUserRoles.IMPORT_MANAGER);
+
     }
 }

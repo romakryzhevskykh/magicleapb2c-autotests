@@ -8,8 +8,7 @@ import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.ArrayList;
 
-import static com.sarnova.storefront.page_block_elements.CheckoutShippingMethodStepBlockElements.CHECK_PRODUCT_LICENSE_POP_UP_XPATH;
-import static com.sarnova.storefront.page_block_elements.CheckoutShippingMethodStepBlockElements.NEXT_BUTTON_ID;
+import static com.sarnova.storefront.page_block_elements.CheckoutShippingMethodStepBlockElements.*;
 
 @Component
 public class CheckoutShippingMethodStepBlock extends UIComponent {
@@ -42,5 +41,38 @@ public class CheckoutShippingMethodStepBlock extends UIComponent {
 
     public String getPageUrlMethod() {
         return pageUrlMethod;
+    }
+
+    @Step("Select OVERNIGHT shipping method.")
+    public void selectOvernightShippingMethod() {
+        if (!isOvernightSelected())
+            click(OVERNIGHT_SHIPPING_METHOD_SELECTOR_XPATH);
+    }
+
+    @Step("Is OVERNIGHT shipping method selected?")
+    public boolean isOvernightSelected() {
+        return $(OVERNIGHT_SHIPPING_METHOD_SELECTOR_XPATH).isSelected();
+    }
+
+    @Step("Select GROUND shipping method.")
+    public void selectGroundShippingMethod() {
+        if (!isGroundSelected())
+            click(GROUND_SHIPPING_METHOD_SELECTOR_XPATH);
+    }
+
+    @Step("Is GROUND shipping method selected?")
+    public boolean isGroundSelected() {
+        return $(GROUND_SHIPPING_METHOD_SELECTOR_XPATH).isSelected();
+    }
+
+    @Step("Select 2-DAY shipping method.")
+    public void select2DayShippingMethod() {
+        if (!is2DaySelected())
+            click(DAY_2_SHIPPING_METHOD_SELECTOR_XPATH);
+    }
+
+    @Step("Is 2-DAY shipping method selected?")
+    public boolean is2DaySelected() {
+        return $(DAY_2_SHIPPING_METHOD_SELECTOR_XPATH).isSelected();
     }
 }
