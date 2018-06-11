@@ -27,6 +27,10 @@ public class CreditCard {
         return expiryYear;
     }
 
+    public String getShortExpiryYear() {
+        return getExpiryYear().substring(2);
+    }
+
     public String getNameOnCard() {
         return nameOnCard;
     }

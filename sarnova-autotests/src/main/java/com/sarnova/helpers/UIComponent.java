@@ -51,8 +51,34 @@ public abstract class UIComponent {
         return getDriver().findElements(By.xpath(String.format(xpath, args)));
     }
 
+    protected List<WebElement> getElementsInFrame(String frameName, String xpath, String... args) {
+        getDriver().switchTo().frame(frameName);
+        List<WebElement> webElements = $$(xpath, args);
+        getDriver().switchTo().defaultContent();
+        return webElements;
+    }
+
     protected List<WebElement> $$(By by) {
         return getDriver().findElements(by);
+    }
+
+    protected void clickInFrame(String frameName, String xpath, String... args) {
+        getDriver().switchTo().frame(frameName);
+        click(xpath, args);
+        getDriver().switchTo().defaultContent();
+    }
+
+    protected void clickInFrame(String frameName, By by) {
+        getDriver().switchTo().frame(frameName);
+        click(by);
+        getDriver().switchTo().defaultContent();
+    }
+
+    protected boolean isSelectedInFrame(String frameName, String xpath, String... args) {
+        getDriver().switchTo().frame(frameName);
+        boolean result = $(xpath, args).isSelected();
+        getDriver().switchTo().defaultContent();
+        return result;
     }
 
     protected void click(String xpath, String... args) {
@@ -112,6 +138,21 @@ public abstract class UIComponent {
     protected void blurElement(WebElement webElement) {
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("arguments[0].focus(); arguments[0].blur(); return true", webElement);
+    }
+
+    protected boolean isDisplayedInFrame(String frameName, String xpath, String... args) {
+        webDriverPool.getActiveDriverSession().setShortImplicitWait();
+        try {
+            getDriver().switchTo().frame(frameName);
+        } catch (NoSuchFrameException ex) {
+            System.out.println(ex);
+            return false;
+        } finally {
+            webDriverPool.getActiveDriverSession().restoreDefaultImplicitWait();
+        }
+        boolean result = isDisplayed(xpath, args);
+        getDriver().switchTo().defaultContent();
+        return result;
     }
 
     protected boolean isDisplayed(String xpath, String... args) {

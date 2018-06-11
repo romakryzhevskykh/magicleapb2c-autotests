@@ -20,9 +20,8 @@ public class PayFabricWalletsPageStepDefs extends AbstractStepDefs {
         CreditCard creditCard = (CreditCard) threadVarsHashMap.get(TestKeyword.CREDIT_CARD);
         CustomerWallet customerWallet = customerWalletsPage.getLastWalletInTheList();
         LocalDateTime timeOfAction = (LocalDateTime) threadVarsHashMap.get(TestKeyword.LOCAT_DATE_TIME_OF_ACTION);
-        System.out.println("TIME OF ACTION: " + timeOfAction + " PAY FABRIC: " + customerWallet.getTransactionDateTime());
         assertEquals(creditCard.getNameOnCard(), customerWallet.getFirstName() + " " + customerWallet.getLastName());
-        assertEquals(creditCard.getCardNumber().substring(11), customerWallet.getAccount().substring(11));
-        assertTrue(ChronoUnit.SECONDS.between(timeOfAction, customerWallet.getTransactionDateTime()) < 20);
+        assertEquals(creditCard.getCardNumber().substring(12), customerWallet.getAccount().substring(12));
+        assertTrue(Math.abs(ChronoUnit.SECONDS.between(timeOfAction, customerWallet.getTransactionDateTime())) < 10);
     }
 }

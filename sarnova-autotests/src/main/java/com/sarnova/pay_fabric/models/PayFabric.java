@@ -1,12 +1,12 @@
 package com.sarnova.pay_fabric.models;
 
 import com.sarnova.hybris.Cockpit;
-import com.sarnova.pay_fabric.pages.LoginPage;
+import com.sarnova.pay_fabric.pages.PayFabricLoginPage;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class PayFabric extends Cockpit {
 
-    @Autowired LoginPage loginPage;
+    @Autowired PayFabricLoginPage payFabricLoginPage;
 
     public PayFabric(String baseUrl) {
         this.baseUrl = baseUrl;
@@ -14,6 +14,6 @@ public class PayFabric extends Cockpit {
 
     @Override
     public String getLoginUrl() {
-        return loginPage.getPageUrl();
+        return payFabricLoginPage.getPageUrl();
     }
 }

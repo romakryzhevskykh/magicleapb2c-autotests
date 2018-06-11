@@ -8,7 +8,7 @@ import ru.yandex.qatools.allure.annotations.Step;
 import static com.sarnova.pay_fabric.page_elements.LoginPageElements.*;
 
 @Component
-public class LoginPage extends PayFabricBasePage {
+public class PayFabricLoginPage extends PayFabricBasePage {
     private final String pageUrlMethod = "Portal/Account";
 
     @Override

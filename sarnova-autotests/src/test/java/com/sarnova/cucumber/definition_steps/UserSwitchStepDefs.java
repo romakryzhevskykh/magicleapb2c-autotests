@@ -2,6 +2,7 @@ package com.sarnova.cucumber.definition_steps;
 
 import com.sarnova.helpers.user_engine.BackofficeUserRoles;
 import com.sarnova.helpers.user_engine.ImportCockpitUserRoles;
+import com.sarnova.helpers.user_engine.PayFabricUserRoles;
 import com.sarnova.helpers.user_engine.StorefrontUserRole;
 import com.sarnova.helpers.web_engine.WebDriverSessions;
 import cucumber.api.java.en.And;
@@ -44,7 +45,6 @@ public class UserSwitchStepDefs extends AbstractStepDefs {
 
     @And("^Switch to PayFabric agent.$")
     public void switchToPayFabricAgent() {
-        webDriverPool.setDriverActive(ImportCockpitUserRoles.IMPORT_MANAGER);
-
+        webDriverPool.setDriverActive(PayFabricUserRoles.AGENT);
     }
 }

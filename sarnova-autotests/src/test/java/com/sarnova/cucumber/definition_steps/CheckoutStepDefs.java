@@ -162,8 +162,8 @@ public class CheckoutStepDefs extends AbstractStepDefs {
 
     @And("^Click on Next button on Checkout Payment method step.$")
     public void clickOnNextButtonOnCheckoutPaymentMethodStep() {
+        threadVarsHashMap.put(TestKeyword.LOCAT_DATE_TIME_OF_ACTION, LocalDateTime.now(ZoneId.of("America/Los_Angeles")));
         checkoutPage.clickOnNextButtonOnPaymentMethodStep();
-        threadVarsHashMap.put(TestKeyword.LOCAT_DATE_TIME_OF_ACTION, LocalDateTime.now(ZoneId.of("America/New_York")));
     }
 
     @And("^Set any Purchase order number on Checkout Payment method step.$")
@@ -195,6 +195,7 @@ public class CheckoutStepDefs extends AbstractStepDefs {
 
     @And("^Click on Place order on Checkout Final Review step.$")
     public void clickOnPlaceOrderOnCheckoutFinalReviewStep() {
+        threadVarsHashMap.put(TestKeyword.LOCAT_DATE_TIME_OF_ACTION, LocalDateTime.now(ZoneId.of("America/Los_Angeles")));
         checkoutPage.clickOnPlaceOrder();
     }
 
@@ -308,7 +309,7 @@ public class CheckoutStepDefs extends AbstractStepDefs {
     @And("^Fill Expiry Year drop-down on Checkout Payment method step.$")
     public void fillExpiryYearDropDownOnCheckoutPaymentMethodStep() {
         CreditCard creditCard = (CreditCard) threadVarsHashMap.get(TestKeyword.CREDIT_CARD);
-        checkoutPage.fillExpiryYear(creditCard.getExpiryYear());
+        checkoutPage.fillExpiryYear(creditCard.getShortExpiryYear());
     }
 
     @And("^Fill Name on card field on Checkout Payment method step.$")

@@ -111,7 +111,7 @@ public class CheckoutPaymentMethodStepBlock extends UIComponent {
 
     @Step("Select Expiry yesr in Expiry year drop-down: {0}.")
     public void selectExpiryYear(String expiryYear) {
-        click(CARD_EXPIRY_YEAR_ITEM_BY_VALUE_XPATH, expiryYear.substring(2));
+        click(CARD_EXPIRY_YEAR_ITEM_BY_VALUE_XPATH, expiryYear);
     }
 
     @Step("Enter text to Name on card field: {0}.")

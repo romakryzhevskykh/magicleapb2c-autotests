@@ -1,14 +1,19 @@
 package com.sarnova.cucumber.definition_steps;
 
-import com.sarnova.pay_fabric.page_blocks.LeftBarBlock;
+import com.sarnova.pay_fabric.page_blocks.PayFabricLeftBarBlock;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class PayFabricGeneralStepDefs extends AbstractStepDefs {
-    @Autowired LeftBarBlock leftBarBlock;
+    @Autowired PayFabricLeftBarBlock payFabricLeftBarBlock;
 
     @When("^Open Customer Wallets page in Pay Fabric.$")
     public void openCustomerWallets() {
-        leftBarBlock.clickOnCustomerWalletsItem();
+        payFabricLeftBarBlock.clickOnCustomerWalletsItem();
+    }
+
+    @When("^Open Daily Activity page in Pay Fabric.$")
+    public void openDailyActivity() {
+        payFabricLeftBarBlock.clickOnDailyActivityItem();
     }
 }

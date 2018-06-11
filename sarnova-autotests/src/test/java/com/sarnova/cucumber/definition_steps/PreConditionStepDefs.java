@@ -15,7 +15,8 @@ import com.sarnova.helpers.models.supply_lists.SupplyList;
 import com.sarnova.helpers.models.supply_lists.SupplyListProduct;
 import com.sarnova.helpers.models.users.UserGroup;
 import com.sarnova.helpers.user_engine.*;
-import com.sarnova.pay_fabric.page_blocks.LeftBarBlock;
+import com.sarnova.pay_fabric.page_blocks.PayFabricLeftBarBlock;
+import com.sarnova.pay_fabric.pages.PayFabricLoginPage;
 import com.sarnova.storefront.page_blocks.HeaderRowPageBlock;
 import com.sarnova.storefront.pages.HomePage;
 import com.sarnova.storefront.pages.LoginPage;
@@ -31,7 +32,7 @@ import java.util.stream.Collectors;
 public class PreConditionStepDefs extends AbstractStepDefs {
     @Autowired HeaderRowPageBlock headerRowPageBlock;
     @Autowired LoginPage loginPage;
-    @Autowired com.sarnova.pay_fabric.pages.LoginPage payFabricLoginPage;
+    @Autowired PayFabricLoginPage payFabricLoginPage;
     @Autowired HomePage homePage;
 
     @Autowired private SupplyListsManager supplyListsManager;
@@ -42,7 +43,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     @Autowired private UsersManager usersManager;
     @Autowired private CustomCategoriesManager customCategoriesManager;
     @Autowired private RandomUtils randomUtils;
-    @Autowired private LeftBarBlock leftBarBlock;
+    @Autowired private PayFabricLeftBarBlock payFabricLeftBarBlock;
 
     @Given("^User is logged in to Storefront.$")
     public void userIsLoggedInToStorefront() {
@@ -60,7 +61,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
 
     @Given("^User is logged in to Pay Fabric.$")
     public void userIsLoggedInToPayFabric() {
-        if (!leftBarBlock.isVisible()) {
+        if (!payFabricLeftBarBlock.isVisible()) {
             payFabricLoginPage.open();
             payFabricLoginPage.loginToPayFabric(userSessions.getActiveUserSession());
         }
