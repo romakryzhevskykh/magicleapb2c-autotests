@@ -13,7 +13,6 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
@@ -23,6 +22,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
@@ -251,27 +251,6 @@ public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
         currentSupplyList.setFavorite(false);
     }
 
-    @Then("^Click on Supply lists drop-down in Header on Supply list details page.$")
-    public void clickOnSupplyListsDropDownInHeader() {
-        supplyListDetailsPage.clickOnFavoriteSupplyListsDropDown();
-    }
-
-    @And("^Check that current Supply list is displayed in favorite Supply lists drop-down on Supply list details page.$")
-    public void checkThatCurrentSupplyListIsDisplayedInFavoriteSupplyListsDropDownOnSupplyListDetailsPage() {
-        List<String> favoriteSupplyListNames = supplyListDetailsPage.getSupplyListNamesFromFavoriteSupplyListsDropDown();
-        String testSupplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
-        assertTrue(favoriteSupplyListNames.stream()
-                .anyMatch(supplyListName -> supplyListName.equals(StringUtils.capitalize(testSupplyListName))));
-    }
-
-    @And("^Check that current Supply list is not displayed in favorite Supply lists drop-down on Supply list details page.$")
-    public void checkThatCurrentSupplyListIsNotDisplayedInFavoriteSupplyListsDropDownOnSupplyListDetailsPage() {
-        List<String> favoriteSupplyListNames = supplyListDetailsPage.getSupplyListNamesFromFavoriteSupplyListsDropDown();
-        String testSupplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
-        assertTrue(favoriteSupplyListNames.stream()
-                .noneMatch(supplyListName -> supplyListName.equals(StringUtils.capitalize(testSupplyListName))));
-    }
-
     @Given("^Open Quick add block on Supply list details page.$")
     public void openQuickAddBlockOnSupplyListDetailsPage() {
         supplyListDetailsPage.openQuickAddBlockOnSupplyListDetailsPage();
@@ -350,5 +329,60 @@ public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
             throw new AssertionError(ex);
         }
         assertEquals(rowErrorMessage, expectedErrorMessage);
+    }
+
+    @And("^Check that Supply list header is visible on Supply list details page.$")
+    public void checkThatSupplyListHeaderIsVisibleOnSupplyListDetailsPage() {
+        assertTrue(supplyListDetailsPage.isHeaderVisible());
+    }
+
+    @Then("^Check that Supply list favorite checkbox is visible on Supply list details page.$")
+    public void checkThatSupplyListFavoriteCheckboxIsVisibleOnSupplyListDetailsPage() {
+        assertTrue(supplyListDetailsPage.isSupplyListFavoriteCheckboxVisible());
+    }
+
+    @Then("^Check that Add to cart button is visible on Supply list details page.$")
+    public void checkThatAddToCartButtonIsVisibleOnSupplyListDetailsPage() {
+        assertTrue(supplyListDetailsPage.isAddToCartButtonVisible());
+    }
+
+    @Then("^Check that product Quantity field is visible on Supply details page.$")
+    public void checkThatProductQuantityFieldIsVisibleOnSupplyDetailsPage() {
+        SupplyList supplyList = supplyListsManager.getSupplyListByName(threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME));
+        assertTrue(supplyListDetailsPage.isQuantityFieldVisibleForProduct(supplyList.getSupplyProductsInList().stream()
+                .filter(SupplyListProduct::isActive)
+                .findAny().orElse(null)));
+    }
+
+    @Then("^Check that Remove button is visible on Supply list details page.$")
+    public void checkThatRemoveButtonIsVisibleOnSupplyListDetailsPage() {
+        SupplyList supplyList = supplyListsManager.getSupplyListByName(threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME));
+        SupplyListProduct supplyListProduct = supplyList.getSupplyProductsInList().stream().findAny().orElse(null);
+        assertTrue(supplyListDetailsPage.isDeactivateProductButtonVisible(supplyListProduct));
+    }
+
+    @Then("^Check that Quick add functionality is visible on Supply list details page.$")
+    public void checkThatQuickAddFunctionalityIsVisibleOnSupplyListDetailsPage() {
+        assertTrue(supplyListDetailsPage.isQuickAddCheckboxVisible());
+    }
+
+    @Then("^Check that Edit button is visible on Supply list details page.$")
+    public void checkThatEditButtonIsVisibleOnSupplyListDetailsPage() {
+        assertTrue(supplyListDetailsPage.isEditButtonVisible());
+    }
+
+    @Then("^Check that change Supply lit status button is visible on Supply list details page.$")
+    public void checkThatChangeSupplyLitStatusButtonIsVisibleOnSupplyListDetailsPage() {
+        assertTrue(supplyListDetailsPage.isChangeStatusButtonVisible());
+    }
+
+    @Then("^Check that Share Supply list functionality is not visible on Supply list details page.$")
+    public void checkThatShareSupplyListFunctionalityIsNotVisibleOnSupplyListDetailsPage() {
+        assertFalse(supplyListDetailsPage.isShareCheckboxVisible());
+    }
+
+    @Then("^Check that Share Supply list functionality is visible on Supply list details page.$")
+    public void checkThatShareSupplyListFunctionalityIsVisibleOnSupplyListDetailsPage() {
+        assertTrue(supplyListDetailsPage.isShareCheckboxVisible());
     }
 }

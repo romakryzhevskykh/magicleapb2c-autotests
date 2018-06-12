@@ -19,6 +19,11 @@ public class LoggedInHeaderRowBlock extends UIComponent {
         return isDisplayed(MY_ACCOUNT_DROP_DOWN_XPATH);
     }
 
+    @Step("Is favorite Supply lists drop-down present.")
+    public boolean isFavoriteSupplyListsDropDownPresent() {
+        return isDisplayed(SUPPLY_LISTS_DROP_DOWN_XPATH);
+    }
+
     @Step("Click on favorite Supply lists drop-down.")
     public void clickOnFavoriteSupplyListsDropDown() {
         click(SUPPLY_LISTS_DROP_DOWN_XPATH);
@@ -31,7 +36,7 @@ public class LoggedInHeaderRowBlock extends UIComponent {
 
     @Step("Is My account menu opened?")
     public boolean isMyAccountMenuOpened() {
-        return isDisplayed(MY_ACCOUNT_DROP_DOWN_CONTENT_XPATH);
+        return !$(MY_ACCOUNT_DROP_DOWN_XPATH).getAttribute("class").contains("collapsed");
     }
 
     @Step("Click on My account drop-down button.")
@@ -58,7 +63,8 @@ public class LoggedInHeaderRowBlock extends UIComponent {
                 .filter(webElement -> webElement.getText().contains(menuItemName))
                 .findFirst()
                 .orElseGet(() -> {
-                    throw new NullPointerException("Row is absent: " + menuItemName);
+                    throw new NullPointerException("Row is absent: " + menuItemName
+                            + " in the list: " + myAccountItems.stream().map(WebElement::getText).collect(Collectors.toList()));
                 });
         return myAccountItems.indexOf(searchedItem) + 1;
     }
@@ -118,5 +124,30 @@ public class LoggedInHeaderRowBlock extends UIComponent {
         click(SIGN_OUT_ITEM_XPATH);
         userSession.setLoggedIn(false);
         userSession.setCookies(getDriver().manage().getCookies());
+    }
+
+    @Step("Click on Purchase Requests item in My account menu.")
+    public void clickOnPurchaseRequestsItemInMyAccountMenu() {
+        click(PURCHASE_REQUESTS_ITEM_XPATH);
+    }
+
+    @Step("Click on Quotas And Par Levels item in My account menu.")
+    public void clickOnQuotasAndParLevelsItemInMyAccountMenu() {
+        click(QUOTAS_AND_PAR_LEVELS_ITEM_XPATH);
+    }
+
+    @Step("Click on Business Info item in My account menu.")
+    public void clickOnBusinessInfoItemInMyAccountMenu() {
+        click(BUSINESS_INFO_ITEM_XPATH);
+    }
+
+    @Step("Click on Users item in My account menu.")
+    public void clickOnUsersItemInMyAccountMenu() {
+        click(USERS_ITEM_XPATH);
+    }
+
+    @Step("Click on User Groups item in My account menu.")
+    public void clickOnUserGroupsItemInMyAccountMenu() {
+        click(USER_GROUPS_ITEM_XPATH);
     }
 }

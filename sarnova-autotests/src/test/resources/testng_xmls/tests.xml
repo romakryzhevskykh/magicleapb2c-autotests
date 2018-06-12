@@ -12,18 +12,16 @@
         <parameter name="browserName" value="chrome"/>
         <classes>
             <class name="com.sarnova.cucumber.MyAccountMenuSuit"/>
+            <class name="com.sarnova.cucumber.AccountDashboardSuit"/>
         </classes>
     </test>
-    <test name="Supply lists functionality">
+    <test name="Supply lists, user management, add to cart and checkout functionality">
         <parameter name="browserName" value="chrome"/>
         <classes>
+            <class name="com.sarnova.cucumber.UserManagementSuite"/>
+            <class name="com.sarnova.cucumber.PermissionsSuite"/>
             <class name="com.sarnova.cucumber.AddToSupplyListSuite"/>
             <class name="com.sarnova.cucumber.SupplyListsFunctionalitySuit"/>
-        </classes>
-    </test>
-    <test name="Cart functionality and checkout suite">
-        <parameter name="browserName" value="chrome"/>
-        <classes>
             <class name="com.sarnova.cucumber.AddToCartSuite"/>
             <class name="com.sarnova.cucumber.CheckoutSuite"/>
             <class name="com.sarnova.cucumber.AddToSupplyListFromCartSuit"/>

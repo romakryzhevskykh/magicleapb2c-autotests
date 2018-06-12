@@ -12,13 +12,18 @@ public class LoggedInHeaderRowBlockElements {
     public static final String ACCOUNT_DASHBOARD_ITEM_XPATH = MY_ACCOUNT_MENU_ITEMS_XPATH + "/a[@title = 'Account Dashboard']";
     public static final String ORDER_HISTORY_ITEM_XPATH = MY_ACCOUNT_MENU_ITEMS_XPATH + "/a[@title = 'Order History']";
     public static final String SUPPLY_LISTS_ITEM_XPATH = MY_ACCOUNT_MENU_ITEMS_XPATH + "/a[@title = 'Supply Lists']";
+    public static final String PURCHASE_REQUESTS_ITEM_XPATH = MY_ACCOUNT_MENU_ITEMS_XPATH + "/a[@title = 'Purchase Requests']";
     public static final String SAVED_CARTS_ITEM_XPATH = MY_ACCOUNT_MENU_ITEMS_XPATH + "/a[@title = 'Saved Carts']";
     public static final String SAVED_CREDIT_CARDS_ITEM_XPATH = MY_ACCOUNT_MENU_ITEMS_XPATH + "/a[@title = 'Saved Credit Cards']";
     public static final String QUOTES_ITEM_XPATH = MY_ACCOUNT_MENU_ITEMS_XPATH + "/a[@title = 'Quotes']";
     public static final String REPORTS_ITEM_XPATH = MY_ACCOUNT_MENU_ITEMS_XPATH + "/a[@title = 'Reports']";
     public static final String ACCOUNT_INFORMATION_ITEM_XPATH = MY_ACCOUNT_MENU_ITEMS_XPATH + "/a[@title = 'Account Information']";
     public static final String CUSTOM_CATEGORY_ITEM_XPATH = MY_ACCOUNT_MENU_ITEMS_XPATH + "/a[@title = 'Custom Category']";
+    public static final String QUOTAS_AND_PAR_LEVELS_ITEM_XPATH = MY_ACCOUNT_MENU_ITEMS_XPATH + "/a[@title = 'Quotas and Par Levels']";
+    public static final String BUSINESS_INFO_ITEM_XPATH = MY_ACCOUNT_MENU_ITEMS_XPATH + "/a[@title = 'Business Info']";
     public static final String HELP_NEW_TO_BOUNDTREE_ITEM_XPATH = MY_ACCOUNT_MENU_ITEMS_XPATH + "/a[@title = 'Help/New to Boundtree?']";
+    public static final String USERS_ITEM_XPATH = MY_ACCOUNT_MENU_ITEMS_XPATH + "/a[@title = 'Users']";
+    public static final String USER_GROUPS_ITEM_XPATH = MY_ACCOUNT_MENU_ITEMS_XPATH + "/a[@title = 'User Groups']";
     public static final String SIGN_OUT_ITEM_XPATH = MY_ACCOUNT_MENU_ITEMS_XPATH + "/a[contains(@title, 'Sign Out')]";
 
     private static final String RIGHT_BOTTOM_NAVIGATION_BAR_XPATH = "//div[@class='yCmsContentSlot order-navigation-bar pull-right']";

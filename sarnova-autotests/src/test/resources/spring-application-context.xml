@@ -11,6 +11,8 @@
     <context:component-scan base-package="com.sarnova.hybris.backoffice.pages"/>
     <context:component-scan base-package="com.sarnova.hybris.hac.pages"/>
     <context:component-scan base-package="com.sarnova.hybris.import_cockpit.pages"/>
+    <context:component-scan base-package="com.sarnova.pay_fabric.pages"/>
+    <context:component-scan base-package="com.sarnova.pay_fabric.page_blocks"/>
     <context:component-scan base-package="com.sarnova.storefront.pages"/>
     <context:component-scan base-package="com.sarnova.storefront.page_blocks"/>
     <context:component-scan base-package="com.sarnova.helpers"/>

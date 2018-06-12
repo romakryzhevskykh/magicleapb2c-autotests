@@ -53,9 +53,19 @@ public class SupplyListsPage extends StorefrontBasePage {
         return $$(INACTIVE_SUPPLY_LISTS_NAMES_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
+    @Step("Is active supply lists block visible?")
+    public boolean isActiveSupplyListsVisible() {
+        return isDisplayed(ACTIVE_SUPPLY_LISTS_BLOCK_XPATH);
+    }
+
     @Step("Get active Supply lists.")
     public List<String> getActiveSupplyLists() {
         return $$(ACTIVE_SUPPLY_LISTS_NAMES_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    @Step("Is favorite checkbox present for {0}.")
+    public boolean isFavoriteCheckboxPresentForSupplylist(SupplyList supplyList) {
+        return isDisplayed(IS_FAVORITE_SUPPLY_LIST_CHECKBOX_BY_ID_XPATH, supplyList.getId());
     }
 
     @Step("Mark {0} as favorite.")
@@ -91,6 +101,11 @@ public class SupplyListsPage extends StorefrontBasePage {
         clickOnDeactivateButtonInDeleteSLPopUp();
         supplyList.setActive(false);
         waitUntilPageIsFullyLoaded();
+    }
+
+    @Step("Is Deactivate button for {0} visible?")
+    public boolean isDeactivateButtonVisibleForSupplyList(SupplyList supplyList) {
+        return isDisplayed(DEACTIVATE_SUPPLY_LIST_BUTTON_BY_ID_XPATH, supplyList.getId());
     }
 
     @Step("Click on Activate {0}.")

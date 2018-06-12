@@ -6,6 +6,7 @@ import com.sarnova.storefront.pages.*;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -15,18 +16,8 @@ import static org.testng.Assert.assertTrue;
 
 public class GeneralStepDefs extends AbstractStepDefs {
     @Autowired private GeneralPageActivities generalPageActivities;
-    @Autowired HeaderRowPageBlock headerRowPageBlock;
-    @Autowired StartPage startPage;
-    @Autowired AccountDashboardPage accountDashboardPage;
-    @Autowired OrderHistoryPage orderHistoryPage;
-    @Autowired SupplyListsPage supplyListsPage;
-    @Autowired SavedCartsPage savedCartsPage;
-    @Autowired SavedCreditCardsPage savedCreditCardsPage;
-    @Autowired QuotesPage quotesPage;
-    @Autowired ReportsPage reportsPage;
-    @Autowired AccountInformationPage accountInformationPage;
-    @Autowired CustomCategoryPage customCategoryPage;
-    @Autowired HelpNewToBoundtreePage helpNewToBoundtreePage;
+    @Autowired private HeaderRowPageBlock headerRowPageBlock;
+    @Autowired private StartPage startPage;
 
     @And("^Refresh page.$")
     public void refreshPage() throws Throwable {
@@ -60,19 +51,9 @@ public class GeneralStepDefs extends AbstractStepDefs {
         headerRowPageBlock.clickOnAccountDashboardItemInMyAccountMenu();
     }
 
-    @Then("^Check that Account Dashboard page is opened.$")
-    public void checkThatAccountDashboardPageIsOpened() {
-        assertTrue(accountDashboardPage.isOpened());
-    }
-
     @When("^Click on Order History item in My Account menu.$")
     public void clickOnOrderHistoryItemInMyAccountMenu() {
         headerRowPageBlock.clickOnOrderHistoryItemInMyAccountMenu();
-    }
-
-    @Then("^Check that Order History page is opened.$")
-    public void checkThatOrderHistoryPageIsOpened() {
-        assertTrue(orderHistoryPage.isOpened());
     }
 
     @When("^Click on Supply Lists item in My Account menu.$")
@@ -80,9 +61,9 @@ public class GeneralStepDefs extends AbstractStepDefs {
         headerRowPageBlock.clickOnSupplyListsItemInMyAccountMenu();
     }
 
-    @Then("^Check that Supply Lists page is opened.$")
-    public void checkThatSupplyListsPageIsOpened() {
-        assertTrue(supplyListsPage.isOpened());
+    @When("^Click on Purchase Requests item in My Account menu.$")
+    public void clickOnPurchaseRequestsItemInMyAccountMenu() {
+        headerRowPageBlock.clickOnPurchaseRequestsItemInMyAccountMenu();
     }
 
     @When("^Click on Saved Carts item in My Account menu.$")
@@ -90,19 +71,9 @@ public class GeneralStepDefs extends AbstractStepDefs {
         headerRowPageBlock.clickOnSavedCartsItemInMyAccountMenu();
     }
 
-    @Then("^Check that Saved Carts page is opened.$")
-    public void checkThatSavedCartsPageIsOpened() {
-        assertTrue(savedCartsPage.isOpened());
-    }
-
     @When("^Click on Saved Credit Cards item in My Account menu.$")
     public void clickOnSavedCreditCardsItemInMyAccountMenu() {
         headerRowPageBlock.clickOnSavedCreditCardsItemInMyAccountMenu();
-    }
-
-    @Then("^Check that Saved Credit Cards page is opened.$")
-    public void checkThatSavedCreditCardsPageIsOpened() {
-        assertTrue(savedCreditCardsPage.isOpened());
     }
 
     @When("^Click on Quotes item in My Account menu.$")
@@ -110,19 +81,9 @@ public class GeneralStepDefs extends AbstractStepDefs {
         headerRowPageBlock.clickOnQuotesItemInMyAccountMenu();
     }
 
-    @Then("^Check that Quotes page is opened.$")
-    public void checkThatQuotesPageIsOpened() {
-        assertTrue(quotesPage.isOpened());
-    }
-
     @When("^Click on Reports item in My Account menu.$")
     public void clickOnReportsItemInMyAccountMenu() {
         headerRowPageBlock.clickOnReportsItemInMyAccountMenu();
-    }
-
-    @And("^Check that Reports page is opened.$")
-    public void checkThatReportsPageIsOpened() {
-        assertTrue(reportsPage.isOpened());
     }
 
     @When("^Click on Account Information item in My Account menu.$")
@@ -130,19 +91,19 @@ public class GeneralStepDefs extends AbstractStepDefs {
         headerRowPageBlock.clickOnAccountInformationItemInMyAccountMenu();
     }
 
-    @Then("^Check that Account Information page is opened.$")
-    public void checkThatAccountInformationPageIsOpened() {
-        assertTrue(accountInformationPage.isOpened());
-    }
-
     @When("^Click on Custom Category item in My Account menu.$")
     public void clickOnCustomCategoryItemInMyAccountMenu() {
         headerRowPageBlock.clickOnCustomCategoryItemInMyAccountMenu();
     }
 
-    @Then("^Check that Custom Category page is opened.$")
-    public void checkThatCustomCategoryPageIsOpened() {
-        assertTrue(customCategoryPage.isOpened());
+    @When("^Click on Quotas and Par Levels item in My Account menu.$")
+    public void clickOnQuotasAndParLevelsItemInMyAccountMenu() {
+        headerRowPageBlock.clickOnQuotasAndParLevelsItemInMyAccountMenu();
+    }
+
+    @When("^Click on Business Info item in My Account menu.$")
+    public void clickOnBusinessInfoItemInMyAccountMenu() {
+        headerRowPageBlock.clickOnBusinessInfoItemInMyAccountMenu();
     }
 
     @When("^Click on Help/New To Boundtree\\? item in My Account menu.$")
@@ -150,9 +111,14 @@ public class GeneralStepDefs extends AbstractStepDefs {
         headerRowPageBlock.clickOnHelpNewToBoundtreeItemInMyAccountMenu();
     }
 
-    @Then("^Check that Help/New To Boundtree\\? page is opened.$")
-    public void checkThatHelpNewToBoundtreePageIsOpened() {
-        assertTrue(helpNewToBoundtreePage.isOpened());
+    @When("^Click on Users item in My Account menu.$")
+    public void clickOnUsersItemInMyAccountMenu() {
+        headerRowPageBlock.clickOnUsersItemInMyAccountMenu();
+    }
+
+    @When("^Click on User Groups item in My Account menu.$")
+    public void clickOnUserGroupsItemInMyAccountMenu() {
+        headerRowPageBlock.clickOnUserGroupsItemInMyAccountMenu();
     }
 
     @When("^Click on Sign Out item in My Account menu.$")
@@ -160,8 +126,29 @@ public class GeneralStepDefs extends AbstractStepDefs {
         headerRowPageBlock.clickOnSignOutItemInMyAccountMenu(userSessions.getActiveUserSession());
     }
 
-    @Then("^Check that Start page is opened.$")
-    public void checkThatStartPageIsOpened() {
-        assertTrue(startPage.isOpened());
+    @And("^Check that current Supply list is displayed in favorite Supply lists drop-down in page header.$")
+    public void checkThatCurrentSupplyListIsDisplayedInFavoriteSupplyListsDropDownOnSupplyListDetailsPage() {
+        List<String> favoriteSupplyListNames = headerRowPageBlock.getSupplyListNamesFromFavoriteSupplyListsDropDown();
+        String testSupplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
+        assertTrue(favoriteSupplyListNames.stream()
+                .anyMatch(supplyListName -> supplyListName.equals(StringUtils.capitalize(testSupplyListName))));
+    }
+
+    @And("^Check that current Supply list is not displayed in favorite Supply lists drop-down in page header.$")
+    public void checkThatCurrentSupplyListIsNotDisplayedInFavoriteSupplyListsDropDownOnSupplyListDetailsPage() {
+        List<String> favoriteSupplyListNames = headerRowPageBlock.getSupplyListNamesFromFavoriteSupplyListsDropDown();
+        String testSupplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
+        assertTrue(favoriteSupplyListNames.stream()
+                .noneMatch(supplyListName -> supplyListName.equals(StringUtils.capitalize(testSupplyListName))));
+    }
+
+    @Then("^Click on Supply lists drop-down in Header.$")
+    public void clickOnSupplyListsDropDownInHeader() {
+        headerRowPageBlock.clickOnFavoriteSupplyListsDropDown();
+    }
+
+    @Then("^Check that Supply lists drop-down is present in Header.$")
+    public void checkThatSupplyListsDropDownIsPresentInHeader() {
+        assertTrue(headerRowPageBlock.isFavoriteSupplyListsDropDownPresent());
     }
 }

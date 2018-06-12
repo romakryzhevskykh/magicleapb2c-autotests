@@ -82,7 +82,12 @@ public class APIResponse implements API {
     public void setResponseBody() {
         StringBuilder responseBody = null;
         try {
-            BufferedReader rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            BufferedReader rd;
+            if (connection.getResponseCode() >= 400) {
+                rd = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+            } else {
+                rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            }
             responseBody = new StringBuilder();
             String inputLine;
             while ((inputLine = rd.readLine()) != null) {

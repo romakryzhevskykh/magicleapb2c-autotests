@@ -27,6 +27,18 @@ public class HeaderRowPageBlock extends UIComponent {
         loggedInHeaderRowBlock.clickOnSignOutItemInMyAccountMenu(userSession);
     }
 
+    public List<String> getSupplyListNamesFromFavoriteSupplyListsDropDown() {
+        return loggedInHeaderRowBlock.getFavoriteSupplyListsFromSupplyListsDropDown();
+    }
+
+    public void clickOnFavoriteSupplyListsDropDown() {
+        loggedInHeaderRowBlock.clickOnFavoriteSupplyListsDropDown();
+    }
+
+    public boolean isFavoriteSupplyListsDropDownPresent() {
+        return loggedInHeaderRowBlock.isFavoriteSupplyListsDropDownPresent();
+    }
+
     public void openMyAccountMenu() {
         loggedInHeaderRowBlock.openMyAccountMenu();
     }
@@ -81,5 +93,25 @@ public class HeaderRowPageBlock extends UIComponent {
 
     public void clickOnSignOutItemInMyAccountMenu(UserSession userSession) {
         loggedInHeaderRowBlock.clickOnSignOutItemInMyAccountMenu(userSession);
+    }
+
+    public void clickOnPurchaseRequestsItemInMyAccountMenu() {
+        loggedInHeaderRowBlock.clickOnPurchaseRequestsItemInMyAccountMenu();
+    }
+
+    public void clickOnQuotasAndParLevelsItemInMyAccountMenu() {
+        loggedInHeaderRowBlock.clickOnQuotasAndParLevelsItemInMyAccountMenu();
+    }
+
+    public void clickOnBusinessInfoItemInMyAccountMenu() {
+        loggedInHeaderRowBlock.clickOnBusinessInfoItemInMyAccountMenu();
+    }
+
+    public void clickOnUsersItemInMyAccountMenu() {
+        loggedInHeaderRowBlock.clickOnUsersItemInMyAccountMenu();
+    }
+
+    public void clickOnUserGroupsItemInMyAccountMenu() {
+        loggedInHeaderRowBlock.clickOnUserGroupsItemInMyAccountMenu();
     }
 }

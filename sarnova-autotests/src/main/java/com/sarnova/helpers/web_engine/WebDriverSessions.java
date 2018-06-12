@@ -2,6 +2,7 @@ package com.sarnova.helpers.web_engine;
 
 import com.sarnova.helpers.user_engine.UserRole;
 import com.sarnova.helpers.user_engine.UserSessions;
+import com.sarnova.helpers.user_engine.UsersManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -17,6 +18,7 @@ import java.util.HashMap;
 public class WebDriverSessions {
     @Autowired UserSessions userSessions;
     @Autowired WebDriverThreadTestSetups webDriverThreadTestSetups;
+    @Autowired UsersManager usersManager;
 
     private InheritableThreadLocal<HashMap<UserRole, WebDriverSession>> tlDriversMap = new InheritableThreadLocal<>();
 
@@ -33,9 +35,9 @@ public class WebDriverSessions {
         } else
             webDriver = tlWebDriverPool.get().getDriver(hubUrl, capabilities);
         tlDriversMap.get().put(userRole, new WebDriverSession(webDriver));
-        webDriver.get(userSessions.getUsersList()
+        webDriver.get(usersManager.getUsers()
                 .stream()
-                .filter(user -> user.getUserRole().equals(userRole))
+                .filter(user -> user.getUserRoles().contains(userRole))
                 .findFirst()
                 .orElseGet(() -> {
                     throw new NullPointerException("No created users with this role: " + userRole.toString());
@@ -51,7 +53,8 @@ public class WebDriverSessions {
                     userRole);
             tlDriversMap.get().get(userRole).setActive(true);
             userSessions.setActiveUserSession(userRole);
-        } else if (!userSessions.getActiveUserSession().getUserRole().equals(userRole)) {
+        } else if (!userSessions.getActiveUserSession().getUserRoles().contains(userRole)
+                || (!userRole.isTest() && userSessions.getActiveUserSession().getUserRoles().stream().anyMatch(UserRole::isTest))) {
             tlDriversMap.get().forEach((userRole1, webDriverSession) -> webDriverSession.setActive(false));
             if (tlDriversMap.get().get(userRole) == null)
                 setDriver(webDriverThreadTestSetups.getWebDriverSetups().getHubUrl(),
@@ -60,6 +63,7 @@ public class WebDriverSessions {
             tlDriversMap.get().get(userRole).setActive(true);
             userSessions.setActiveUserSession(userRole);
         }
+        userSessions.getActiveUserSession().setCookies(tlDriversMap.get().get(userRole).getWebDriver().manage().getCookies());
     }
 
     public synchronized WebDriver getActiveDriver() {

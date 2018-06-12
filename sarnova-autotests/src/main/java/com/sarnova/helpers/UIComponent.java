@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
+import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.List;
 
@@ -17,27 +18,18 @@ public abstract class UIComponent {
         return webDriverPool.getActiveDriver();
     }
 
+    @Step("Accept alert.")
     protected void alertHandling() {
         getDriver().switchTo().alert().accept();
-    }
-
-    protected void open(String url) {
-        try {
-            getDriver().get(url);
-        } catch (UnhandledAlertException ex) {
-            System.out.println("WARNING: Unexpected alert!");
-            alertHandling();
-            getDriver().get(url);
-        }
     }
 
     protected WebElement $(String xpath, String... args) {
         try {
             return getDriver().findElement(By.xpath(String.format(xpath, args)));
         } catch (UnhandledAlertException ex) {
-            System.out.println("WARNING: Unexpected alert!");
+            System.out.println("WARNING: Unexpected alert: " + ex);
             alertHandling();
-            return getDriver().findElement(By.xpath(String.format(xpath, args)));
+            return $(xpath, args);
         } catch (NoSuchElementException ex) {
             return null;
         }
@@ -49,7 +41,7 @@ public abstract class UIComponent {
         } catch (UnhandledAlertException ex) {
             System.out.println("WARNING: Unexpected alert!");
             alertHandling();
-            return getDriver().findElement(by);
+            return $(by);
         } catch (NoSuchElementException ex) {
             return null;
         }
@@ -59,8 +51,34 @@ public abstract class UIComponent {
         return getDriver().findElements(By.xpath(String.format(xpath, args)));
     }
 
+    protected List<WebElement> getElementsInFrame(String frameName, String xpath, String... args) {
+        getDriver().switchTo().frame(frameName);
+        List<WebElement> webElements = $$(xpath, args);
+        getDriver().switchTo().defaultContent();
+        return webElements;
+    }
+
     protected List<WebElement> $$(By by) {
         return getDriver().findElements(by);
+    }
+
+    protected void clickInFrame(String frameName, String xpath, String... args) {
+        getDriver().switchTo().frame(frameName);
+        click(xpath, args);
+        getDriver().switchTo().defaultContent();
+    }
+
+    protected void clickInFrame(String frameName, By by) {
+        getDriver().switchTo().frame(frameName);
+        click(by);
+        getDriver().switchTo().defaultContent();
+    }
+
+    protected boolean isSelectedInFrame(String frameName, String xpath, String... args) {
+        getDriver().switchTo().frame(frameName);
+        boolean result = $(xpath, args).isSelected();
+        getDriver().switchTo().defaultContent();
+        return result;
     }
 
     protected void click(String xpath, String... args) {
@@ -71,7 +89,6 @@ public abstract class UIComponent {
             wait.until(ExpectedConditions.elementToBeClickable(webElement));
             try {
                 webElement.click();
-
             } catch (UnhandledAlertException ex) {
                 System.out.println("WARNING: Unexpected alert!");
                 alertHandling();
@@ -108,7 +125,6 @@ public abstract class UIComponent {
             ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", webElement);
             try {
                 webElement.click();
-
             } catch (UnhandledAlertException exception) {
                 System.out.println("WARNING: Unexpected alert!");
                 alertHandling();
@@ -124,6 +140,21 @@ public abstract class UIComponent {
         js.executeScript("arguments[0].focus(); arguments[0].blur(); return true", webElement);
     }
 
+    protected boolean isDisplayedInFrame(String frameName, String xpath, String... args) {
+        webDriverPool.getActiveDriverSession().setShortImplicitWait();
+        try {
+            getDriver().switchTo().frame(frameName);
+        } catch (NoSuchFrameException ex) {
+            System.out.println(ex);
+            return false;
+        } finally {
+            webDriverPool.getActiveDriverSession().restoreDefaultImplicitWait();
+        }
+        boolean result = isDisplayed(xpath, args);
+        getDriver().switchTo().defaultContent();
+        return result;
+    }
+
     protected boolean isDisplayed(String xpath, String... args) {
         webDriverPool.getActiveDriverSession().setShortImplicitWait();
         try {
@@ -134,11 +165,11 @@ public abstract class UIComponent {
             webDriverPool.getActiveDriverSession().restoreDefaultImplicitWait();
         }
     }
-
-    public void waitUntilVisible(By locator) {
-        WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getTimeOut());
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-    }
+//
+//    public void waitUntilVisible(By locator) {
+//        WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getTimeOut());
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+//    }
 
     protected boolean isDisplayed(By by) {
         webDriverPool.getActiveDriverSession().setShortImplicitWait();
@@ -151,6 +182,7 @@ public abstract class UIComponent {
         }
     }
 
+    @Step("Wait until page is fully loaded.")
     protected void waitUntilPageIsFullyLoaded() {
         waitHTMLTemplateLoad();
         waitJQueryRequestsLoad();
@@ -164,9 +196,21 @@ public abstract class UIComponent {
         waitUntil(driver1 -> ((JavascriptExecutor) driver1).executeScript("return document.readyState").toString().equals("complete"));
     }
 
+    public void waitUntilElementIsVisible(String xpath, String... args) {
+        waitUntil(driver1 -> isDisplayed(xpath, args));
+    }
+
+    public void waitUntilElementIsVisible(By by) {
+        waitUntil(driver1 -> isDisplayed(by));
+    }
+
     public void waitUntil(ExpectedCondition<Boolean> expectedCondition) {
         WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getTimeOut());
-        wait.until(expectedCondition);
+        try {
+            wait.until(expectedCondition);
+        } catch (UnhandledAlertException ex) {
+            System.out.println("[ERROR]: " + ex);
+        }
     }
 
     public void waitForAngularLoad() {
@@ -202,7 +246,7 @@ public abstract class UIComponent {
     public void waitJQueryRequestsLoad() {
         WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getTimeOut());
         try {
-            Thread.sleep((long) (1000 * webDriverPool.getActiveDriverSession().getShortTimeOut() / 20));
+            Thread.sleep((long) (1000 * webDriverPool.getActiveDriverSession().getShortTimeOut() / 10));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -223,7 +267,7 @@ public abstract class UIComponent {
             System.out.println("[WARNING] Timeout exception after " + webDriverPool.getActiveDriverSession().getTimeOut() + " Seconds. Possible problem - browser hovered(not responding)!");
         }
         try {
-            Thread.sleep((long) (1000 * webDriverPool.getActiveDriverSession().getShortTimeOut() / 20));
+            Thread.sleep((long) (1000 * webDriverPool.getActiveDriverSession().getShortTimeOut() / 10));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

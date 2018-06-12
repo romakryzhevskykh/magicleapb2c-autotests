@@ -1,7 +1,7 @@
 Feature: Quick add products to Supply list from SLDP.
 
   Background:
-    Given Switch to Storefront shopper.
+    Given Switch to Storefront owner.
     And User is logged in to Storefront.
     And Active Supply list exists.
     And Opened Supply list details page.

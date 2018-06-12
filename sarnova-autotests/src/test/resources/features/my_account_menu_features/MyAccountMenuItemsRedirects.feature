@@ -1,7 +1,7 @@
 Feature: Menu items on click redirects functionality.
 
   Background:
-    Given Switch to Storefront shopper.
+    Given Switch to Storefront owner.
     And User is logged in to Storefront.
     And My Account menu is opened.
 
@@ -13,17 +13,13 @@ Feature: Menu items on click redirects functionality.
     When Click on Order History item in My Account menu.
     Then Check that Order History page is opened.
 
-  Scenario: Check that Supply Lists My Account menu item redirects to Supply Lists page.
-    When Click on Supply Lists item in My Account menu.
-    Then Check that Supply Lists page is opened.
+  Scenario: Check that Purchase Requests My Account menu item redirects to Purchase Requests page.
+    When Click on Purchase Requests item in My Account menu.
+    Then Check that Purchase Requests page is opened.
 
   Scenario: Check that Saved Carts My Account menu item redirects to Saved Carts page.
     When Click on Saved Carts item in My Account menu.
     Then Check that Saved Carts page is opened.
-
-  Scenario: Check that Saved Credit Cards My Account menu item redirects to Saved Credit Cards page.
-    When Click on Saved Credit Cards item in My Account menu.
-    Then Check that Saved Credit Cards page is opened.
 
   Scenario: Check that Quotes My Account menu item redirects to Quotes page.
     When Click on Quotes item in My Account menu.
@@ -32,14 +28,6 @@ Feature: Menu items on click redirects functionality.
   Scenario: Check that Reports My Account menu item redirects to Reports page.
     When Click on Reports item in My Account menu.
     Then Check that Reports page is opened.
-
-  Scenario: Check that Account Information My Account menu item redirects to Account Information page.
-    When Click on Account Information item in My Account menu.
-    Then Check that Account Information page is opened.
-
-  Scenario: Check that Custom Category My Account menu item redirects to Custom Category page.
-    When Click on Custom Category item in My Account menu.
-    Then Check that Custom Category page is opened.
 
   Scenario: Check that Help/New To Boundtree? My Account menu item redirects to Help/New To Boundtree? page.
     When Click on Help/New To Boundtree? item in My Account menu.

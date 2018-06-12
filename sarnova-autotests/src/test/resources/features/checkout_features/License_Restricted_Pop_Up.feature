@@ -1,7 +1,7 @@
 Feature: Checkout page license restricted page functionality
 
   Background:
-    Given Switch to Storefront shopper.
+    Given Switch to Storefront owner.
     And User is logged in to Storefront.
     And Empty Cart.
 

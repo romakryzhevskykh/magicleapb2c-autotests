@@ -4,6 +4,7 @@ import com.sarnova.helpers.managers.SupplyListsManager;
 import com.sarnova.helpers.models.supply_lists.SupplyList;
 import com.sarnova.storefront.pages.SupplyListsPage;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,6 +13,17 @@ import static org.testng.Assert.assertTrue;
 public class SupplyListsPageStepDefs extends AbstractStepDefs {
     @Autowired SupplyListsPage supplyListsPage;
     @Autowired SupplyListsManager supplyListsManager;
+
+
+    @Then("^Check that Supply Lists page is opened.$")
+    public void checkThatSupplyListsPageIsOpened() {
+        assertTrue(supplyListsPage.isOpened());
+    }
+
+    @Then("^Check that active Supply Lists block is visible on Supply lists page.$")
+    public void checkThatActiveSupplyListsBlockIsVisible() {
+        assertTrue(supplyListsPage.isActiveSupplyListsVisible());
+    }
 
     @When("^Open Supply lists page.$")
     public void openSupplyListsPage() {
@@ -61,5 +73,19 @@ public class SupplyListsPageStepDefs extends AbstractStepDefs {
         String supplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
         SupplyList testSupplyList = supplyListsManager.getSupplyListByName(supplyListName);
         supplyListsPage.activateSupplyList(testSupplyList);
+    }
+
+    @Then("^Check that Supply list favorite checkbox is visible on Supply lists page.$")
+    public void checkThatSupplyListFavoriteCheckboxIsVisibleOnSupplyListsPage() {
+        String supplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
+        SupplyList testSupplyList = supplyListsManager.getSupplyListByName(supplyListName);
+        supplyListsPage.isFavoriteCheckboxPresentForSupplylist(testSupplyList);
+    }
+
+    @Then("^Check that deactivate Supply list button is visible on Supply lists page.$")
+    public void checkThatDeactivateSupplyListButtonIsVisibleOnSupplyListsPage() {
+        String supplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
+        SupplyList testSupplyList = supplyListsManager.getSupplyListByName(supplyListName);
+        supplyListsPage.isDeactivateButtonVisibleForSupplyList(testSupplyList);
     }
 }

@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class ProductDetailsPageStepDefs extends AbstractStepDefs {
 
@@ -176,5 +178,15 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
     @And("^Click on Checkout button in Add to cart pop-up on PDP.$")
     public void clickOnCheckoutButtonInAddToCartPopUpOnPDP() {
         productDetailsPage.clickOnCheckoutButtonInAddToCartPopUp();
+    }
+
+    @Then("^Check that Add to Supply list button is not visible on PDP.$")
+    public void checkThatAddToSupplyListButtonIsNotVisibleOnPDP() {
+        assertFalse(productDetailsPage.isAddToSupplyListButtonVisible());
+    }
+
+    @Then("^Check that Add to Supply list button is visible on PDP.$")
+    public void checkThatAddToSupplyListButtonIsVisibleOnPDP() {
+        assertTrue(productDetailsPage.isAddToSupplyListButtonVisible());
     }
 }

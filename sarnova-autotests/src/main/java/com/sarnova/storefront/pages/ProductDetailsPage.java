@@ -111,6 +111,11 @@ public class ProductDetailsPage extends StorefrontBasePage {
     public void clickOnAddToCartButton() {
         click(ADD_TO_CART_BUTTONS_XPATH);
         waitUntilPageIsFullyLoaded();
-        waitUntilVisible(By.id(POP_UP_ID));
+        waitUntilElementIsVisible(By.id(POP_UP_ID));
+    }
+
+    @Step("Is Add to Supply list button visible?")
+    public boolean isAddToSupplyListButtonVisible() {
+        return isDisplayed(ADD_TO_SUPPLY_LIST_BUTTONS_XPATH);
     }
 }
