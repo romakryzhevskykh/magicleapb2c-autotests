@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
+import static com.geempower.storefront.page_block_elements.IwantToBlockElements.APPROVE_PENDING_ACCOUNTS_SECTION_TITLE_XPATH;
+import static com.geempower.storefront.page_block_elements.IwantToBlockElements.TOTAL_ACCOUNT_REQUESTS_XPATH;
 import static com.geempower.storefront.page_elements.manageUsers.ManageUsersPageElements.*;
 
 @Component
@@ -121,6 +123,7 @@ public class ManageUsersPage extends StorefrontBasePage {
         $(ACCOUNT_DETAIL_SEARCH_INPUT_XPATH).clear();
         $(ACCOUNT_DETAIL_SEARCH_INPUT_XPATH).sendKeys(account);
     }
+
     @Step("Check than users list is not empty.")
     public boolean isUsersListNotEmpty() {
         waitUntilPageIsFullyLoaded();
@@ -128,9 +131,20 @@ public class ManageUsersPage extends StorefrontBasePage {
     }
 
     @Step("Click on User Name in the table")
-    public void clickOnTheUserNameInTheTable() {
-        click(FIRST_NAME_LINK_XPATH);
+    public void clickOnTheUserNameInTheTable(int countOfAccount) {
+        int counter = 0;
+        do {
+            click(FIRST_NAME_LINK_XPATH);
+            waitUntilPageIsFullyLoaded();
+            counter++;
+        }
+        while (!isUserDetailFullyLoaded(countOfAccount) && counter < 10);
         waitUntilPageIsFullyLoaded();
+    }
+
+    private boolean isUserDetailFullyLoaded(int countOfAccount) {
+        return isDisplayed(APPROVE_PENDING_ACCOUNTS_SECTION_TITLE_XPATH)
+                && Integer.parseInt($(TOTAL_ACCOUNT_REQUESTS_XPATH).getText()) == countOfAccount;
     }
 
     @Step("Check that user details block is opened.")

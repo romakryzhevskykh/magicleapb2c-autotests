@@ -34,7 +34,7 @@ public class IwantToBlockElements {
     private final static String APPROVE_PENDING_ACCOUNTS_SECTION_XPATH = "//div[@class='account-detail-desc-wrapper manageuser-accordion']//a[@href='#pending-panel']";
     public final static String APPROVE_PENDING_ACCOUNTS_SECTION_TITLE_XPATH = APPROVE_PENDING_ACCOUNTS_SECTION_XPATH + "/span";
     public final static String APPROVE_PENDING_ACCOUNTS_SECTION_EXPAND_ICON_XPATH = APPROVE_PENDING_ACCOUNTS_SECTION_XPATH + "/i";
-    public final static String PENDING_ACCOUNTS_TABLE_ROWS_XPATH = "//table[@id='DataTables_Table_0']/tbody/tr";
+    public final static String PENDING_ACCOUNTS_TABLE_ROWS_XPATH = "//table[contains(@id,'DataTables_Table_')]/tbody/tr[contains(@class, 'item-account')]";
     public final static String PENDING_ACCOUNTS_TABLE_ROWS_BY_INDEX_XPATH = PENDING_ACCOUNTS_TABLE_ROWS_XPATH + "[%s]";
     public final static String ALL_PENDING_ACCOUNT_CHECKBOX_XPATH = "//th[@class='checkbox-col pending-select-all-user-accounts no-sort table-visible-lg-block sorting_disabled']/label";
     public final static String TOTAL_ACCOUNT_REQUESTS_XPATH = "//span[@id='totalRequests']";
@@ -49,7 +49,7 @@ public class IwantToBlockElements {
     public final static String REJECT_ACCOUNT_BUTTON_XPATH = "//button[@data-target='#reject-selected-account-modal']";
     public final static String ACCEPT_THE_ACTION_IN_ACCEPT_ACCOUNT_POP_UP_XPATH = "//button[@class='btn primary-btn accept-request-account-btn']";
     public final static String ACCEPT_THE_ACTION_IN_REJECT_ACCOUNT_POP_UP_XPATH = "//button[@class='btn primary-btn reject-request-account-btn']";
-    public final static String PENDING_ACCOUNTS_TABLE_NO_DATA_TITLE_XPATH = PENDING_ACCOUNTS_TABLE_ROWS_XPATH + "/td";
+    public final static String PENDING_ACCOUNTS_TABLE_NO_DATA_TITLE_XPATH = "//table[contains(@id,'DataTables_Table_')]/tbody/tr/td[@colspan='8']";
     public final static String ACTIVE_USER_ACCOUNTS_NAME_TABLE_XPATH = "//table[@id='activeRequestsTableForCustomer']/tbody/tr/td[2]";
     public final static String REMOVE_ACCOUNT_POP_UP_ALL_ACCOUNTS_XPATH = ".//*[@id='remove-user-modal']//div[@class='modal-content']";
     public final static String ACCOUNT_CHECKBOX_XPATH = ".//td[contains (text(),'%s')]/../td[1]/label";

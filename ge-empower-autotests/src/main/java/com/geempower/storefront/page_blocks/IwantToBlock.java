@@ -170,6 +170,7 @@ public class IwantToBlock extends UIComponent {
 
     @Step("Get Actual Pending Accounts Table Size.")
     public int getActualPendingAccountsTableSize() {
+        waitUntilPageIsFullyLoaded();
         return $$(PENDING_ACCOUNTS_TABLE_ROWS_XPATH).size();
     }
 

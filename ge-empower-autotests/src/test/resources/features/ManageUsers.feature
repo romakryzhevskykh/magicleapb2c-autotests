@@ -155,11 +155,6 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     When Admin opens Users tab.
     And Sets externaluser1 email to the email field.
     And Clicks on the Search button.
-    And Clicks on the Search button.
-    And Clicks on the Search button.
-    And Clicks on the Search button.
-    And Clicks on the Search button.
-    And Clicks on the Search button.
     When Clicks on the user name in the table.
     Then Approve Pending Accounts section is displayed with appropriate count of accounts.
     When User expand the Approve Pending Accounts section.
@@ -173,6 +168,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Given Switch to Storefront as externalUser1.
     And User is logged in to Storefront.
     And Account management page is opened.
+    And Refresh page.
     When User switch to Pending for approval tab on Account management page.
     Then List on Pending accounts is empty.
     When User switch to Approved Accounts tab on Account management page.

@@ -197,7 +197,8 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
 
     @When("^Clicks on the user name in the table.$")
     public void clickOnTheUserNameInTheTable() {
-        manageUsersPage.clickOnTheUserNameInTheTable();
+        ArrayList<String> requestedAccounts = (ArrayList<String>) threadVarsHashMap.get(TestKeyword.LIST_OF_REQUESTED_ACCOUNTS);
+        manageUsersPage.clickOnTheUserNameInTheTable(requestedAccounts.size());
     }
 
     @Then("^User details block for chosen user with (.*) userId is opened.$")
