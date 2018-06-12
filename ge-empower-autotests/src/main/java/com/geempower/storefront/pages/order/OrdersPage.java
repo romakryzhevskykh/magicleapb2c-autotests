@@ -1,6 +1,7 @@
 package com.geempower.storefront.pages.order;
 
 import com.geempower.storefront.StorefrontBasePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
@@ -43,7 +44,7 @@ public class OrdersPage extends StorefrontBasePage {
         }
     }
 
-    @Step("Get actual count of orders with appropriate status")
+    @Step("Get actual count of orders with appropriate status.")
     public int getActualCountOfOrders() {
         int ordersCount = 0;
         int actualCountOfOrderPages = getCountOfPagesWithOrders();
@@ -57,5 +58,23 @@ public class OrdersPage extends StorefrontBasePage {
             }
         }
         return ordersCount;
+    }
+
+    @Step("Open Appropriate Order By Status.")
+    public void openAppropriateOrderByStatus(String orderStatus) {
+        waitUntilPageIsFullyLoaded();
+        try {
+            click(FIRST_ORDER_IN_APPROPRIATE_STATUS_XPATH, orderStatus);
+        } catch (NullPointerException ex) {
+            System.err.println("There is no order in " + orderStatus + " status" + ex);
+        }
+    }
+
+    @Step("Sort Orders Table By Status.")
+    public void sortOrdersTableByStatus() {
+        waitUntilPageIsFullyLoaded();
+        for (int i = 0; i < 2; i++) {
+            click(By.id(SORTING_ORDERS_TABLE_ICON_BY_STATUS_ID));
+        }
     }
 }

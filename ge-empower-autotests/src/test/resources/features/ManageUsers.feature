@@ -168,6 +168,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Given Switch to Storefront as externalUser1.
     And User is logged in to Storefront.
     And Account management page is opened.
+    And Refresh page.
     When User switch to Pending for approval tab on Account management page.
     Then List on Pending accounts is empty.
     When User switch to Approved Accounts tab on Account management page.

@@ -7,3 +7,7 @@ Feature: Some actions on Saved Items page
 
   Scenario: Check that user able to open Saved Items page and correct header title is displayed
     Then All Items title is displayed on Saved Items page.
+#    Then Active Cart title for appropriate section is displayed.
+#    Then Active Cart table is displayed with correct columns.
+#    Then Saved Lists title for appropriate table is displayed.
+#    Then Saved Lists table is displayed with correct columns.
