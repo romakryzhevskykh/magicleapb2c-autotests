@@ -10,7 +10,8 @@
     <name>ESAB Autotests</name>
 
     <properties>
-        <testEnv>stage</testEnv>
+    	<!--Determines which profile will be used for tests-->
+        <testEnv>dev</testEnv>
         <selenium.version>3.6.0</selenium.version>
         <testng.version>6.11</testng.version>
         <cucumber.java.version>1.2.5</cucumber.java.version>

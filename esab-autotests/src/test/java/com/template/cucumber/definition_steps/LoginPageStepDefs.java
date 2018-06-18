@@ -4,6 +4,8 @@ import com.template.helpers.user_engine.UserSessions;
 import com.template.storefront.page_blocks.HeaderRowPageBlock;
 import com.template.storefront.pages.LoginPage;
 import com.template.storefront.pages.StartPage;
+
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +42,10 @@ public class LoginPageStepDefs extends AbstractStepDefs {
 	@When("Click on Register button.")
 	public void clickOnRegisterButton() {
 		loginPage.clickOnRegisterButton();
+	}
+	
+	@And ("Verify Customer registration confiramtion message.")
+	public void verifyRegistrationMesasge(){
+		loginPage.verifyRegistrationConfirmationMessage();
 	}
 }

@@ -26,8 +26,8 @@ public class RegisterPage extends StorefrontBasePage {
 	private String pageUrlMethod = "/esab/en/register";
 	private List<String> verificationListOfLabelsEn = new ArrayList<>(Arrays.asList("Country  *", "Title  *",
 			"First and Last Name  *", "Company ID  *", "Company Name  *", "Address Line 1  *",
-			"Address Line 2 (optional)", "City  *", "Post Code  *", "Your Position  *", "Telephone  *",
-			"Ext. (optional)", "Email Address  *", "Confirm Email Address", "Comment (optional)"));
+			"Address Line 2 (optional)", "Town/City  *", "Postcode  *", "Your Position  *", "Telephone  *",
+			"Ext. (optional)", "Email Address  *", "Confirm Email Address  *", "Comment (optional)"));
 	private List<String> verificationHeadlineText = new ArrayList<>(Arrays.asList("New Customer Registration"));
 	private List<String> verificationSecondlineText = new ArrayList<>(Arrays.asList("Submit your registration below"));
 	private Map<String, String> customerData = new HashMap<String, String>();
@@ -87,82 +87,82 @@ public class RegisterPage extends StorefrontBasePage {
 	}
 
 	@Step("Fill in First and Last name.")
-	public void fillInFirstLastNameInput(String firstNameLastName) {
-		fillInTextInput(firstNameLastName, FIRST_AND_LAST_NAME_XPATH);
+	public void fillInFirstLastNameInput() {
+		fillInTextInput(userModel.getFirstLastName(), FIRST_AND_LAST_NAME_XPATH);
 	}
 
 	@Step("Select specific Country.")
-	public void selectCountry(String countryCode) {
-		String country = getWebElement(String.format(COUNTRY_VALUE_XPATH, countryCode)).getText().trim();
-		click(String.format(COUNTRY_VALUE_XPATH, countryCode));
+	public void selectCountry() {
+		String country = getWebElement(String.format(COUNTRY_VALUE_XPATH, userModel.getCountry())).getText().trim();
+		click(String.format(COUNTRY_VALUE_XPATH, userModel.getCountry()));
 		logger.error("Country value: " + country);
 		customerData.put("Country", country);
+		logger.info("Country field value entered: " + getCustomerData().get("Country"));
 	}
 
 	@Step("Select specific title")
-	public void selectTitle(String title) {
-		click(String.format(TITLE_VALUE_XPATH, title));
+	public void selectTitle() {
+		click(String.format(TITLE_VALUE_XPATH, userModel.getTitle()));
 	}
 
 	@Step("Fill in CompanyID.")
-	public void fillInCompanyId(String companyID) {
-		fillInTextInput(companyID, COMPANY_ID_XPATH);
+	public void fillInCompanyId() {
+		fillInTextInput(userModel.getCompanyId(), COMPANY_ID_XPATH);
 	}
 
 	@Step("Fill in Company Name.")
-	public void fillInCompanyName(String companyName) {
-		fillInTextInput(companyName, COMPANY_NAME_XPATH);
+	public void fillInCompanyName() {
+		fillInTextInput(userModel.getCompanyName(), COMPANY_NAME_XPATH);
 	}
 
 	@Step("Fill in Address Line 1.")
-	public void fillInAddrLine1(String addrLine1) {
-		fillInTextInput(addrLine1, ADDRESS_LINE_1_XPATH);
+	public void fillInAddrLine1() {
+		fillInTextInput(userModel.getAddr1(), ADDRESS_LINE_1_XPATH);
 	}
 
 	@Step("Fill in Address Line 2.")
-	public void fillInAddrLine2(String addrLine2) {
-		fillInTextInput(addrLine2, ADDRESS_LINE_2_XPATH);
+	public void fillInAddrLine2() {
+		fillInTextInput(userModel.getAddr2(), ADDRESS_LINE_2_XPATH);
 	}
 
 	@Step("Fill in City.")
-	public void fillInCity(String city) {
-		fillInTextInput(city, ADDRESS_CITY_XPATH);
+	public void fillInCity() {
+		fillInTextInput(userModel.getCity(), ADDRESS_CITY_XPATH);
 	}
 
 	@Step("Fill in Post Code.")
-	public void fillInPostCode(String postCode) {
-		fillInTextInput(postCode, ADDRESS_POST_CODE_XPATH);
+	public void fillInPostCode() {
+		fillInTextInput(userModel.getPostCode(), ADDRESS_POST_CODE_XPATH);
 	}
 
 	@Step("Fill in Your Position.")
-	public void fillInYourPosition(String position) {
-		fillInTextInput(position, YOUR_POSIRION_XPATH);
+	public void fillInYourPosition() {
+		fillInTextInput(userModel.getPosition(), YOUR_POSIRION_XPATH);
 	}
 
 	@Step("Fill in Telephone.")
-	public void fillInTelephone(String telephone) {
-		fillInTextInput(telephone, TELEPHONE_XPATH);
+	public void fillInTelephone() {
+		fillInTextInput(userModel.getTelephone(), TELEPHONE_XPATH);
 	}
 
 	@Step("Fill in Ext.")
-	public void fillInExt(String ext) {
-		fillInTextInput(ext, EXT_XPATH);
+	public void fillInExt() {
+		fillInTextInput(userModel.getExt(), EXT_XPATH);
 	}
 
 	@Step("Fill in EmailAddr.")
-	public void fillInEmailAddr(String emailAddr) {
-		fillInTextInput(emailAddr, EMAIL_ADDRESS_XPATH);
+	public void fillInEmailAddr() {
+		fillInTextInput(userModel.getEmailAddr().trim(), EMAIL_ADDRESS_XPATH);
 	}
 
-	@Step("Fill in EmailAddr.")
-	public void fillInConfirmEmailAddr(String emailConfirmAddr) {
-		fillInTextInput(emailConfirmAddr, CONFIRM_EMAIL_XPATH);
+	@Step("Re enter EmailAddr.")
+	public void fillInConfirmEmailAddr() {
+		fillInTextInput(userModel.getConfirmEmailaddr().trim(), CONFIRM_EMAIL_XPATH);
 	}
 
 	@Step("Fill in Comment.")
-	public void fillInComment(String comment) {
-		fillInTextInput(comment, COMMENT_XPATH);
-		logger.error("Country field value entered: " + getCustomerData().get("Country"));
+	public void fillInComment() {
+		fillInTextInput(userModel.getComment(), COMMENT_XPATH);
 	}
 
 	@Step("Press on Register button.")

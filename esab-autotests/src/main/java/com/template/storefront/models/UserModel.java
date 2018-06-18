@@ -49,4 +49,64 @@ public class UserModel {
 		this.comment = comment;
 
 	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public String getFirstLastName() {
+		return firstLastName;
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public String getAddr1() {
+		return addr1;
+	}
+
+	public String getAddr2() {
+		return addr2;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public String getPostCode() {
+		return postCode;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public String getExt() {
+		return ext;
+	}
+
+	public String getEmailAddr() {
+		return emailAddr;
+	}
+
+	public String getConfirmEmailaddr() {
+		return confirmEmailaddr;
+	}
+
+	public String getComment() {
+		return comment;
+	}
 }
