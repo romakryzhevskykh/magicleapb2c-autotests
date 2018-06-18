@@ -13,6 +13,6 @@ public class CheckoutPageElements {
     public static final String PRODUCTS_IDS_XPATH = "//div[@class='item__code']";
     public static final String SUCCESS_ORDER_MESSAGE_XPATH = "/html/body/main/div[3]/div[2]/div/div[1]/div[1]/div/div";
     public static final String SHIP_TO_ACCOUNTS_BUTTON_XPATH = "//button[@class='btn btn-default btn-block js-shippingTo-address-book']";
-    public static final String FIRST_USE_THIS_ADDRESS_BUTTON_XPATH = "//button[@class='btn btn-primary btn-block']";
+    public static final String FIRST_USE_THIS_ADDRESS_BUTTON_XPATH = "//*[@id=\"shipToAddressBook\"]/div[1]/form/button";
 
 }

@@ -24,9 +24,5 @@ public abstract class StorefrontBasePage extends BasePageObject {
         return getPageUrl().equals(getCurrentUrl());
     }
 
-    public void open() {
-        open(getPageUrl());
-    }
-
     public abstract String getPageUrl();
 }

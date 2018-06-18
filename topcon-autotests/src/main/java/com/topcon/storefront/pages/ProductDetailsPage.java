@@ -13,7 +13,7 @@ public class ProductDetailsPage extends StorefrontBasePage {
     private final String pageUrlMethod = "topcon/en/USD/p/%s";
 
     public void open(Product product) {
-        getDriver().get(getPageUrl(product));
+        open(getPageUrl(product));
     }
 
     public String getPageUrl(Product product) {

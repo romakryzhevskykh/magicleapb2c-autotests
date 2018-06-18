@@ -31,6 +31,7 @@ public abstract class UIComponent {
             alertHandling();
             getDriver().get(url);
         }
+        waitUntilPageIsFullyLoaded();
     }
 
     protected WebElement $(String xpath, String... args) {

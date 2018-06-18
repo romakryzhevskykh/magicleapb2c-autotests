@@ -14,15 +14,10 @@
             <!--<class name="com.topcon.cucumber.AddressBookSuite"/>-->
         <!--</classes>-->
     <!--</test>-->
-    <test name="PDPSuite">
+    <test name="PDPSuiteCheckoutSuite">
         <parameter name="browserName" value="chrome" />
         <classes>
             <class name="com.topcon.cucumber.PDPSuite"/>
-        </classes>
-    </test>
-    <test name="CheckoutSuite">
-        <parameter name="browserName" value="chrome" />
-        <classes>
             <class name="com.topcon.cucumber.CheckoutSuit"/>
         </classes>
     </test>
