@@ -1,6 +1,7 @@
 package com.sarnova.storefront.pages;
 
 import com.sarnova.helpers.managers.ProductsManager;
+import com.sarnova.helpers.models.delivery_methods.DeliveryMethod;
 import com.sarnova.helpers.models.products.IndividualProduct;
 import com.sarnova.storefront.page_blocks.CheckoutFinalReviewStepBlock;
 import com.sarnova.storefront.page_blocks.CheckoutPaymentMethodStepBlock;
@@ -216,17 +217,10 @@ public class CheckoutPage extends StorefrontBasePage {
         shippingAddressStepBlock.fillPhoneNumber(phoneNumber);
     }
 
-    public void selectOvernightShippingMethod() {
-        shippingMethodStepBlock.selectOvernightShippingMethod();
+    public void selectShippingMethod(DeliveryMethod deliveryMethod) {
+        shippingMethodStepBlock.selectShippingMethod(deliveryMethod);
     }
 
-    public void selectGroundShippingMethod() {
-        shippingMethodStepBlock.selectGroundShippingMethod();
-    }
-
-    public void select2DayShippingMethod() {
-        shippingMethodStepBlock.select2DayShippingMethod();
-    }
 
     public void fillCardNumberField(String cardNumber) {
         paymentMethodStepBlock.fillCardNumberField(cardNumber);

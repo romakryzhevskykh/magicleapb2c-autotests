@@ -3,15 +3,15 @@ package com.sarnova.helpers;
 import com.sarnova.helpers.managers.CreditCardsManager;
 import com.sarnova.helpers.managers.ShippingAddressesManager;
 import com.sarnova.helpers.models.credit_cards.CreditCard;
+import com.sarnova.helpers.models.shipping_addresses.Country;
 import com.sarnova.helpers.models.shipping_addresses.ShippingAddress;
+import com.sarnova.helpers.models.shipping_addresses.State;
+import com.sarnova.helpers.models.shipping_addresses.Town;
 import com.sarnova.helpers.request_engine.GETRequest;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.io.IOException;
 
 @Component
 public class RandomUtils {
@@ -28,20 +28,23 @@ public class RandomUtils {
     }
 
     public ShippingAddress getRandomValidShippingAddressWithOnlyMandatoryFields() {
-        GETRequest getRandomAddresses = GET_RANDOM_ZIP_AND_CITY_ADDRESSES.getClone();
-        try {
-            getRandomAddresses.sendGetRequest();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        JSONObject response = new JSONObject(getRandomAddresses.getResponse().getResponseBodyText());
-        JSONObject randomTown = response.getJSONArray("data").getJSONObject(getRandomIntInRange(1, 100));
-        String zip = randomTown.getString("name");
-        String townState = randomTown.getString("detail");
-        String town = townState.split(",")[0].trim();
-        String state = "US-" + townState.split(",")[1].trim();
+//        GETRequest getRandomAddresses = GET_RANDOM_ZIP_AND_CITY_ADDRESSES.getClone();
+//        try {
+//            getRandomAddresses.sendGetRequest();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        JSONObject response = new JSONObject(getRandomAddresses.getResponse().getResponseBodyText());
+//        JSONObject randomTown = response.getJSONArray("data").getJSONObject(getRandomIntInRange(1, 100));
+        String firstName = randomName();
+        String lastName = randomName();
+        Town town = Town.getAnyTown();
+        String zip = town.getZipCodes().stream().findAny().orElse(null);
+        State state = town.getState();
+        Country country = state.getCountry();
         String addressLine1 = getRandomAddressLine1();
-        return shippingAddressesManager.createInstance(addressLine1, town, state, zip);
+
+        return shippingAddressesManager.createInstance(firstName, lastName, addressLine1, town, state, country, zip);
     }
 
     public ShippingAddress getRandomValidShippingAddressWithAllPossibleFields() {

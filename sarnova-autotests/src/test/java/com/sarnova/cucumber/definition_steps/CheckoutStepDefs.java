@@ -3,6 +3,7 @@ package com.sarnova.cucumber.definition_steps;
 import com.sarnova.helpers.RandomUtils;
 import com.sarnova.helpers.managers.ProductsManager;
 import com.sarnova.helpers.models.credit_cards.CreditCard;
+import com.sarnova.helpers.models.delivery_methods.DeliveryMethod;
 import com.sarnova.helpers.models.products.IndividualProduct;
 import com.sarnova.helpers.models.products.UnitOfMeasure;
 import com.sarnova.helpers.models.shipping_addresses.ShippingAddress;
@@ -162,7 +163,7 @@ public class CheckoutStepDefs extends AbstractStepDefs {
 
     @And("^Click on Next button on Checkout Payment method step.$")
     public void clickOnNextButtonOnCheckoutPaymentMethodStep() {
-        threadVarsHashMap.put(TestKeyword.LOCAT_DATE_TIME_OF_ACTION, LocalDateTime.now(ZoneId.of("America/Los_Angeles")));
+        threadVarsHashMap.put(TestKeyword.LOCAL_DATE_TIME_OF_ACTION, LocalDateTime.now(ZoneId.of("America/Los_Angeles")));
         checkoutPage.clickOnNextButtonOnPaymentMethodStep();
     }
 
@@ -195,7 +196,7 @@ public class CheckoutStepDefs extends AbstractStepDefs {
 
     @And("^Click on Place order on Checkout Final Review step.$")
     public void clickOnPlaceOrderOnCheckoutFinalReviewStep() {
-        threadVarsHashMap.put(TestKeyword.LOCAT_DATE_TIME_OF_ACTION, LocalDateTime.now(ZoneId.of("America/Los_Angeles")));
+        threadVarsHashMap.put(TestKeyword.LOCAL_DATE_TIME_OF_ACTION, LocalDateTime.now(ZoneId.of("America/Los_Angeles")));
         checkoutPage.clickOnPlaceOrder();
     }
 
@@ -206,8 +207,9 @@ public class CheckoutStepDefs extends AbstractStepDefs {
 
     @And("^Select Country in drop-down on Checkout Shipping address step.$")
     public void selectCountryInDropDownOnCheckoutShippingAddressStep() {
-        String randomCountry = checkoutPage.getAnyShippingCountryFromDropDown();
-        checkoutPage.selectShippingCountryFromDropDown(randomCountry);
+//        String randomCountry = checkoutPage.getAnyShippingCountryFromDropDown();
+        ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_SHIPPING_ADDRESS);
+        checkoutPage.selectShippingCountryFromDropDown(shippingAddress.getCountry().getAbbreviation());
     }
 
     @And("^Click on Countries drop-down on Checkout Shipping address step.$")
@@ -228,14 +230,14 @@ public class CheckoutStepDefs extends AbstractStepDefs {
 
     @And("^Fill First name field on Checkout Shipping address step.$")
     public void fillFirstNameFieldOnCheckoutShippingAddressStep() {
-        String name = randomUtils.randomName();
-        checkoutPage.fillFirstName(name);
+        ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_SHIPPING_ADDRESS);
+        checkoutPage.fillFirstName(shippingAddress.getFirstName());
     }
 
     @And("^Fill Last name field on Checkout Shipping address step.$")
     public void fillLastNameFieldOnCheckoutShippingAddressStep() {
-        String name = randomUtils.randomName();
-        checkoutPage.fillLastName(name);
+        ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_SHIPPING_ADDRESS);
+        checkoutPage.fillLastName(shippingAddress.getLastName());
     }
 
     @And("^Fill Address line 1 field on Checkout Shipping address step.$")
@@ -253,7 +255,7 @@ public class CheckoutStepDefs extends AbstractStepDefs {
     @And("^Fill Town field on Checkout Shipping address step.$")
     public void fillTownFieldOnCheckoutShippingAddressStep() {
         ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_SHIPPING_ADDRESS);
-        checkoutPage.fillTown(shippingAddress.getTown());
+        checkoutPage.fillTown(shippingAddress.getTown().getFullName());
     }
 
     @And("^Click on States drop-down on Checkout Shipping address step.$")
@@ -264,7 +266,7 @@ public class CheckoutStepDefs extends AbstractStepDefs {
     @And("^Select State in drop-down on Checkout Shipping address step.$")
     public void selectStateInDropDownOnCheckoutShippingAddressStep() {
         ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_SHIPPING_ADDRESS);
-        checkoutPage.selectStateFromTitlesDropDown(shippingAddress.getState());
+        checkoutPage.selectStateFromTitlesDropDown(shippingAddress.getState().getWithCountryAbbreviation());
     }
 
     @And("^Fill Zip code field on Checkout Shipping address step.$")
@@ -279,19 +281,11 @@ public class CheckoutStepDefs extends AbstractStepDefs {
         checkoutPage.fillPhoneNumber(shippingAddress.getPhoneNumber());
     }
 
-    @And("^Select 2-DAY shipping method on Checkout Shipping method step.$")
-    public void select2DayShippingMethodOnCheckoutShippingMethodStep() {
-        checkoutPage.select2DayShippingMethod();
-    }
-
-    @And("^Select GROUND shipping method on Checkout Shipping method step.$")
-    public void selectGroundShippingMethodOnCheckoutShippingMethodStep() {
-        checkoutPage.selectGroundShippingMethod();
-    }
-
-    @And("^Select OVERNIGHT shipping method on Checkout Shipping method step.$")
-    public void selectOvernightShippingMethodOnCheckoutShippingMethodStep() {
-        checkoutPage.selectOvernightShippingMethod();
+    @And("^Select (.*) shipping method on Checkout Shipping method step.$")
+    public void select2DayShippingMethodOnCheckoutShippingMethodStep(String deliveryMethodName) {
+        DeliveryMethod deliveryMethod = DeliveryMethod.valueOf(deliveryMethodName);
+        threadVarsHashMap.put(TestKeyword.DELIVERY_METHOD, deliveryMethod);
+        checkoutPage.selectShippingMethod(deliveryMethod);
     }
 
     @And("^Fill Card Number field on Checkout Payment method step.$")
@@ -326,8 +320,9 @@ public class CheckoutStepDefs extends AbstractStepDefs {
 
     @And("^Select Billing Country in drop-down on Checkout Payment method step.$")
     public void selectCountryInDropDownOnCheckoutPaymentMethodStep() {
-        String randomCountry = checkoutPage.getAnyBillingCountryFromDropDown();
-        checkoutPage.selectBillingCountryFromDropDown(randomCountry);
+//        String randomCountry = checkoutPage.getAnyBillingCountryFromDropDown();
+        ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_BILLING_ADDRESS);
+        checkoutPage.selectBillingCountryFromDropDown(shippingAddress.getCountry().getAbbreviation());
     }
 
     @And("^Click on Billing Countries drop-down on Checkout Payment method step.$")
@@ -337,14 +332,14 @@ public class CheckoutStepDefs extends AbstractStepDefs {
 
     @And("^Fill Billing First name field on Checkout Payment method step.$")
     public void fillFirstNameFieldOnCheckoutPaymentMethodStep() {
-        String name = randomUtils.randomName();
-        checkoutPage.fillBillingFirstName(name);
+        ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_BILLING_ADDRESS);
+        checkoutPage.fillBillingFirstName(shippingAddress.getFirstName());
     }
 
     @And("^Fill Billing Last name field on Checkout Payment method step.$")
     public void fillLastNameFieldOnCheckoutPaymentMethodStep() {
-        String name = randomUtils.randomName();
-        checkoutPage.fillBillingLastName(name);
+        ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_BILLING_ADDRESS);
+        checkoutPage.fillBillingLastName(shippingAddress.getLastName());
     }
 
     @And("^Fill Billing Address line 1 field on Checkout Payment method step.$")
@@ -362,7 +357,7 @@ public class CheckoutStepDefs extends AbstractStepDefs {
     @And("^Fill Billing Town field on Checkout Payment method step.$")
     public void fillTownFieldOnCheckoutPaymentMethodStep() {
         ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_BILLING_ADDRESS);
-        checkoutPage.fillBillingTown(shippingAddress.getTown());
+        checkoutPage.fillBillingTown(shippingAddress.getTown().getFullName());
     }
 
     @And("^Click on Billing States drop-down on Checkout Payment method step.$")
@@ -373,7 +368,7 @@ public class CheckoutStepDefs extends AbstractStepDefs {
     @And("^Select Billing State in drop-down on Checkout Payment method step.$")
     public void selectStateInDropDownOnCheckoutPaymentMethodStep() {
         ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_BILLING_ADDRESS);
-        checkoutPage.selectBillingStateFromTitlesDropDown(shippingAddress.getState());
+        checkoutPage.selectBillingStateFromTitlesDropDown(shippingAddress.getState().getWithCountryAbbreviation());
     }
 
     @And("^Fill Billing Zip code field on Checkout Payment method step.$")

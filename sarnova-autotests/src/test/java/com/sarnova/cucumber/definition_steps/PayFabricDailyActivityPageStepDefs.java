@@ -23,7 +23,7 @@ public class PayFabricDailyActivityPageStepDefs extends AbstractStepDefs {
 
     @Then("^Check that transaction is displayed on Pay Fabric Daily activity page.$")
     public void checkThatTransactionIsDisplayedOnPayFabricDailyActivityPage() {
-        LocalDateTime timeOfAction = (LocalDateTime) threadVarsHashMap.get(TestKeyword.LOCAT_DATE_TIME_OF_ACTION);
+        LocalDateTime timeOfAction = (LocalDateTime) threadVarsHashMap.get(TestKeyword.LOCAL_DATE_TIME_OF_ACTION);
         CreditCard creditCard = (CreditCard) threadVarsHashMap.get(TestKeyword.CREDIT_CARD);
         Transaction transaction = dailyActivityPage.getLastTransactionInTheList();
 

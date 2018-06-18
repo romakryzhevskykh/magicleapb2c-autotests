@@ -16,9 +16,9 @@ Feature: Logged in user checkout functionality
     And Open cart page.
     When Click on Checkout button on Cart page.
     And Click on Create new address button on Checkout Shipping address step.
+    And Find any random valid Shipping address.
     And Click on Countries drop-down on Checkout Shipping address step.
     And Select Country in drop-down on Checkout Shipping address step.
-    And Find any random valid Shipping address.
     And Fill First name field on Checkout Shipping address step.
     And Fill Last name field on Checkout Shipping address step.
     And Fill Address line 1 field on Checkout Shipping address step.
@@ -51,9 +51,9 @@ Feature: Logged in user checkout functionality
     And Open cart page.
     When Click on Checkout button on Cart page.
     And Click on Create new address button on Checkout Shipping address step.
+    And Find any random valid Shipping address.
     And Click on Countries drop-down on Checkout Shipping address step.
     And Select Country in drop-down on Checkout Shipping address step.
-    And Find any random valid Shipping address.
     And Fill First name field on Checkout Shipping address step.
     And Fill Last name field on Checkout Shipping address step.
     And Fill Address line 1 field on Checkout Shipping address step.
@@ -71,14 +71,14 @@ Feature: Logged in user checkout functionality
     And Confirm Terms and Conditions on Checkout Final Review step.
     And Click on Place order on Checkout Final Review step.
     Then Check that Order confirmation page is opened.
-#    Check Shipping address on Confirmation page
+    And Check that Shipping Address is correct on Order confirmation page.
 
   Scenario: Check that User can place order with 2-DAY Shipping method.
     Given Add to cart INDIVIDUAL, VALID product with quantity 1.
     And Open cart page.
     When Click on Checkout button on Cart page.
     And Click on Next button on Checkout Shipping address step.
-    And Select 2-DAY shipping method on Checkout Shipping method step.
+    And Select DAY_2ND shipping method on Checkout Shipping method step.
     And Click on Next button on Checkout Shipping method step.
     And Select Invoice payment type on Checkout Payment method step.
     And Set any Purchase order number on Checkout Payment method step.
@@ -86,7 +86,7 @@ Feature: Logged in user checkout functionality
     And Confirm Terms and Conditions on Checkout Final Review step.
     And Click on Place order on Checkout Final Review step.
     Then Check that Order confirmation page is opened.
-#    Check delivery method on Confirmation page
+    And Check that delivery method is correct on Order confirmation page.
 
   Scenario: Check that User can place order with GROUND Shipping method.
     Given Add to cart INDIVIDUAL, VALID product with quantity 1.
@@ -101,7 +101,7 @@ Feature: Logged in user checkout functionality
     And Confirm Terms and Conditions on Checkout Final Review step.
     And Click on Place order on Checkout Final Review step.
     Then Check that Order confirmation page is opened.
-#    Check delivery method on Confirmation page
+    And Check that delivery method is correct on Order confirmation page.
 
   Scenario: Check that User can place order with OVERNIGHT Shipping method.
     Given Add to cart INDIVIDUAL, VALID product with quantity 1.
@@ -116,7 +116,7 @@ Feature: Logged in user checkout functionality
     And Confirm Terms and Conditions on Checkout Final Review step.
     And Click on Place order on Checkout Final Review step.
     Then Check that Order confirmation page is opened.
-#    Check delivery method on Confirmation page
+    And Check that delivery method is correct on Order confirmation page.
 
   Scenario: Check that User can place order with Credit card payment.
     Given Add to cart INDIVIDUAL, VALID product with quantity 1.
@@ -135,7 +135,7 @@ Feature: Logged in user checkout functionality
     And Confirm Terms and Conditions on Checkout Final Review step.
     And Click on Place order on Checkout Final Review step.
     Then Check that Order confirmation page is opened.
-#    Check credit card on Confirmation page
+    And Check that credit card data is correct on Order confirmation page.
 
   Scenario: Check that User can place order with Invoice payment.
     Given Add to cart INDIVIDUAL, VALID product with quantity 1.
@@ -181,7 +181,7 @@ Feature: Logged in user checkout functionality
     And Confirm Terms and Conditions on Checkout Final Review step.
     And Click on Place order on Checkout Final Review step.
     Then Check that Order confirmation page is opened.
-#  Billing address
+    Then Check that Billing Address is correct on Order confirmation page.
 
   Scenario: Check that Place order button is unable if Terms checkbox is not selected.
     Given Add to cart INDIVIDUAL, VALID product with quantity 1.

@@ -136,15 +136,17 @@ public abstract class UIComponent {
     }
 
     protected void enterText(String text, By by) {
-        waitUntil(driver -> $(by).isEnabled());
+        waitUntilElementIsVisible(by);
         $(by).clear();
         $(by).sendKeys(text);
+        blurElement($(by));
     }
 
     protected void enterText(String text, String xpath, String... args) {
-        waitUntil(driver -> $(xpath, args).isEnabled());
+        waitUntilElementIsVisible(xpath, args);
         $(xpath, args).clear();
         $(xpath, args).sendKeys(text);
+        blurElement($(xpath, args));
     }
 
     protected void blurElement(WebElement webElement) {

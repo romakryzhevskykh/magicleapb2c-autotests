@@ -19,7 +19,7 @@ public class PayFabricWalletsPageStepDefs extends AbstractStepDefs {
     public void checkThatCreditCardIsDisplayed() {
         CreditCard creditCard = (CreditCard) threadVarsHashMap.get(TestKeyword.CREDIT_CARD);
         CustomerWallet customerWallet = customerWalletsPage.getLastWalletInTheList();
-        LocalDateTime timeOfAction = (LocalDateTime) threadVarsHashMap.get(TestKeyword.LOCAT_DATE_TIME_OF_ACTION);
+        LocalDateTime timeOfAction = (LocalDateTime) threadVarsHashMap.get(TestKeyword.LOCAL_DATE_TIME_OF_ACTION);
         assertEquals(creditCard.getNameOnCard(), customerWallet.getFirstName() + " " + customerWallet.getLastName());
         assertEquals(creditCard.getCardNumber().substring(12), customerWallet.getAccount().substring(12));
         assertTrue(Math.abs(ChronoUnit.SECONDS.between(timeOfAction, customerWallet.getTransactionDateTime())) < 10);

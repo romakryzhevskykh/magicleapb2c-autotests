@@ -25,9 +25,9 @@ Feature: Guest checkout functionality
     And Click on Checkout button on Cart page.
     And Login as guest for checkout on Guest checkout login page.
     And Click on Create new address button on Checkout Shipping address step.
+    And Find any random valid Shipping address.
     And Click on Countries drop-down on Checkout Shipping address step.
     And Select Country in drop-down on Checkout Shipping address step.
-    And Find any random valid Shipping address.
     And Fill First name field on Checkout Shipping address step.
     And Fill Last name field on Checkout Shipping address step.
     And Fill Address line 1 field on Checkout Shipping address step.
@@ -46,9 +46,9 @@ Feature: Guest checkout functionality
     And Click on Checkout button on Cart page.
     And Login as guest for checkout on Guest checkout login page.
     And Click on Create new address button on Checkout Shipping address step.
+    And Find any random valid Shipping address.
     And Click on Countries drop-down on Checkout Shipping address step.
     And Select Country in drop-down on Checkout Shipping address step.
-    And Find any random valid Shipping address.
     And Fill First name field on Checkout Shipping address step.
     And Fill Last name field on Checkout Shipping address step.
     And Fill Address line 1 field on Checkout Shipping address step.
@@ -59,7 +59,7 @@ Feature: Guest checkout functionality
     And Fill Zip code field on Checkout Shipping address step.
     And Fill Phone number field on Checkout Shipping address step.
     And Click on Next button on Checkout Shipping address step.
-    And Select 2-DAY shipping method on Checkout Shipping method step.
+    And Select DAY_2ND shipping method on Checkout Shipping method step.
     And Click on Next button on Checkout Shipping method step.
     Then Check that Checkout Payment method step is opened.
     And Check that Card number text field is visible on Checkout Payment method step.
@@ -70,9 +70,9 @@ Feature: Guest checkout functionality
     And Click on Checkout button on Cart page.
     And Login as guest for checkout on Guest checkout login page.
     And Click on Create new address button on Checkout Shipping address step.
+    And Find any random valid Shipping address.
     And Click on Countries drop-down on Checkout Shipping address step.
     And Select Country in drop-down on Checkout Shipping address step.
-    And Find any random valid Shipping address.
     And Fill First name field on Checkout Shipping address step.
     And Fill Last name field on Checkout Shipping address step.
     And Fill Address line 1 field on Checkout Shipping address step.
@@ -94,9 +94,9 @@ Feature: Guest checkout functionality
     And Click on Checkout button on Cart page.
     And Login as guest for checkout on Guest checkout login page.
     And Click on Create new address button on Checkout Shipping address step.
+    And Find any random valid Shipping address.
     And Click on Countries drop-down on Checkout Shipping address step.
     And Select Country in drop-down on Checkout Shipping address step.
-    And Find any random valid Shipping address.
     And Fill First name field on Checkout Shipping address step.
     And Fill Last name field on Checkout Shipping address step.
     And Fill Address line 1 field on Checkout Shipping address step.
@@ -118,9 +118,9 @@ Feature: Guest checkout functionality
     And Click on Checkout button on Cart page.
     And Login as guest for checkout on Guest checkout login page.
     And Click on Create new address button on Checkout Shipping address step.
+    And Find any random valid Shipping address.
     And Click on Countries drop-down on Checkout Shipping address step.
     And Select Country in drop-down on Checkout Shipping address step.
-    And Find any random valid Shipping address.
     And Fill First name field on Checkout Shipping address step.
     And Fill Last name field on Checkout Shipping address step.
     And Fill Address line 1 field on Checkout Shipping address step.
@@ -147,9 +147,9 @@ Feature: Guest checkout functionality
     And Click on Checkout button on Cart page.
     And Login as guest for checkout on Guest checkout login page.
     And Click on Create new address button on Checkout Shipping address step.
+    And Find any random valid Shipping address.
     And Click on Countries drop-down on Checkout Shipping address step.
     And Select Country in drop-down on Checkout Shipping address step.
-    And Find any random valid Shipping address.
     And Fill First name field on Checkout Shipping address step.
     And Fill Last name field on Checkout Shipping address step.
     And Fill Address line 1 field on Checkout Shipping address step.
@@ -177,9 +177,9 @@ Feature: Guest checkout functionality
     And Click on Checkout button on Cart page.
     And Login as guest for checkout on Guest checkout login page.
     And Click on Create new address button on Checkout Shipping address step.
+    And Find any random valid Shipping address.
     And Click on Countries drop-down on Checkout Shipping address step.
     And Select Country in drop-down on Checkout Shipping address step.
-    And Find any random valid Shipping address.
     And Fill First name field on Checkout Shipping address step.
     And Fill Last name field on Checkout Shipping address step.
     And Fill Address line 1 field on Checkout Shipping address step.
@@ -202,6 +202,7 @@ Feature: Guest checkout functionality
     And Confirm Terms and Conditions on Checkout Final Review step.
     And Click on Place order on Checkout Final Review step.
     Then Check that Order confirmation page is opened.
+    And Check that Shipping Address is correct on Order confirmation page.
 
   Scenario: Check that Guest can place order with changing Billing address.
     When Add to cart VALID product with quantity 1.
@@ -209,9 +210,9 @@ Feature: Guest checkout functionality
     And Click on Checkout button on Cart page.
     And Login as guest for checkout on Guest checkout login page.
     And Click on Create new address button on Checkout Shipping address step.
+    And Find any random valid Shipping address.
     And Click on Countries drop-down on Checkout Shipping address step.
     And Select Country in drop-down on Checkout Shipping address step.
-    And Find any random valid Shipping address.
     And Fill First name field on Checkout Shipping address step.
     And Fill Last name field on Checkout Shipping address step.
     And Fill Address line 1 field on Checkout Shipping address step.
@@ -247,6 +248,10 @@ Feature: Guest checkout functionality
     And Confirm Terms and Conditions on Checkout Final Review step.
     And Click on Place order on Checkout Final Review step.
     Then Check that Order confirmation page is opened.
+    And Check that Shipping Address is correct on Order confirmation page.
+    And Check that Billing Address is correct on Order confirmation page.
+    And Check that credit card data is correct on Order confirmation page.
+    And Check that delivery method is correct on Order confirmation page.
 
   Scenario: Check Credit card is present in PayFabric after adding card on Checkout Payment method step.
     When Add to cart VALID product with quantity 1.
@@ -254,9 +259,9 @@ Feature: Guest checkout functionality
     And Click on Checkout button on Cart page.
     And Login as guest for checkout on Guest checkout login page.
     And Click on Create new address button on Checkout Shipping address step.
+    And Find any random valid Shipping address.
     And Click on Countries drop-down on Checkout Shipping address step.
     And Select Country in drop-down on Checkout Shipping address step.
-    And Find any random valid Shipping address.
     And Fill First name field on Checkout Shipping address step.
     And Fill Last name field on Checkout Shipping address step.
     And Fill Address line 1 field on Checkout Shipping address step.
@@ -287,9 +292,9 @@ Feature: Guest checkout functionality
     And Click on Checkout button on Cart page.
     And Login as guest for checkout on Guest checkout login page.
     And Click on Create new address button on Checkout Shipping address step.
+    And Find any random valid Shipping address.
     And Click on Countries drop-down on Checkout Shipping address step.
     And Select Country in drop-down on Checkout Shipping address step.
-    And Find any random valid Shipping address.
     And Fill First name field on Checkout Shipping address step.
     And Fill Last name field on Checkout Shipping address step.
     And Fill Address line 1 field on Checkout Shipping address step.

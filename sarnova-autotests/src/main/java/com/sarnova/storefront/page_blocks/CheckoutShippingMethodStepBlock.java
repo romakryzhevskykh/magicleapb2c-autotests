@@ -1,6 +1,7 @@
 package com.sarnova.storefront.page_blocks;
 
 import com.sarnova.helpers.UIComponent;
+import com.sarnova.helpers.models.delivery_methods.DeliveryMethod;
 import org.openqa.selenium.By;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -43,36 +44,14 @@ public class CheckoutShippingMethodStepBlock extends UIComponent {
         return pageUrlMethod;
     }
 
-    @Step("Select OVERNIGHT shipping method.")
-    public void selectOvernightShippingMethod() {
-        if (!isOvernightSelected())
-            click(OVERNIGHT_SHIPPING_METHOD_SELECTOR_XPATH);
+    @Step("Select {0} shipping method.")
+    public void selectShippingMethod(DeliveryMethod deliveryMethod) {
+        if (!isDeliveryMethodSelected(deliveryMethod))
+            click(SHIPPING_METHOD_BY_NAME_SELECTOR_XPATH, deliveryMethod.getNameInCheckoutHTML());
     }
 
-    @Step("Is OVERNIGHT shipping method selected?")
-    public boolean isOvernightSelected() {
-        return $(OVERNIGHT_SHIPPING_METHOD_SELECTOR_XPATH).isSelected();
-    }
-
-    @Step("Select GROUND shipping method.")
-    public void selectGroundShippingMethod() {
-        if (!isGroundSelected())
-            click(GROUND_SHIPPING_METHOD_SELECTOR_XPATH);
-    }
-
-    @Step("Is GROUND shipping method selected?")
-    public boolean isGroundSelected() {
-        return $(GROUND_SHIPPING_METHOD_SELECTOR_XPATH).isSelected();
-    }
-
-    @Step("Select 2-DAY shipping method.")
-    public void select2DayShippingMethod() {
-        if (!is2DaySelected())
-            click(DAY_2_SHIPPING_METHOD_SELECTOR_XPATH);
-    }
-
-    @Step("Is 2-DAY shipping method selected?")
-    public boolean is2DaySelected() {
-        return $(DAY_2_SHIPPING_METHOD_SELECTOR_XPATH).isSelected();
+    @Step("Is {0} shipping method selected?")
+    public boolean isDeliveryMethodSelected(DeliveryMethod deliveryMethod) {
+        return $(SHIPPING_METHOD_BY_NAME_SELECTOR_XPATH, deliveryMethod.getNameInCheckoutHTML()).isSelected();
     }
 }

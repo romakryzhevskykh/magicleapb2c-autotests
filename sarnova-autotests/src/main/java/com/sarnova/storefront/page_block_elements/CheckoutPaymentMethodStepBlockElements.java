@@ -7,7 +7,7 @@ public class CheckoutPaymentMethodStepBlockElements {
     public static final String INVOICE_PAYMENT_CHECKBOX_XPATH = "//label[@for='PaymentTypeSelection_INVOICE']/div/div";
     public static final String PURCHASE_ORDER_NUMBER_FIELD_ID = "PurchaseOrderNumber";
     public static final String COMMENT_FIELD_ID = "comment";
-    public static final String CARD_ACCOUNT_NUMBER_FIELD_ID = "card_accountNumber";
+    public static final String CARD_ACCOUNT_NUMBER_FIELD_ID = "card_accountNumber";//"//div[@id='creditCardDetails']/div[@class='form-group']/div[@class='form-group']/input[@id='card_accountNumber']";
     public static final String CARD_EXPIRY_MONTH_DROP_DOWN_ID = "ExpiryMonth";
     public static final String CARD_EXPIRY_MONTH_ITEM_BY_VALUE_XPATH = "//select[@id='ExpiryMonth']/option[@value='%s']";
     public static final String CARD_EXPIRY_YEAR_DROP_DOWN_ID = "ExpiryYear";

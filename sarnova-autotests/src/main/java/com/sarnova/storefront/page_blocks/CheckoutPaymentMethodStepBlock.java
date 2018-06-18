@@ -21,6 +21,7 @@ public class CheckoutPaymentMethodStepBlock extends UIComponent {
     @Step("Select Card payment type on Checkout Payment method step.")
     public void selectCardPaymentType() {
         click(CARD_PAYMENT_CHECKBOX_XPATH);
+        waitUntilElementIsVisible(By.id(CARD_ACCOUNT_NUMBER_FIELD_ID));
     }
 
     @Step("Is Card payment type checkbox visible?")
