@@ -1,4 +1,4 @@
-Feature: Menu items visibility and ordering.
+Feature: My Account menu items visibility and ordering.
 
   Background:
     Given Switch to Storefront owner.
@@ -14,11 +14,11 @@ Feature: Menu items visibility and ordering.
   Scenario: Check that Account Dashboard item is on 1 in My Account menu.
     Then Check that Account Dashboard item index item is 1.
 
-  Scenario: Check that Order History item is present in My Account menu.
-    Then Check that Order History item is present in My Account menu.
+  Scenario: Check that Previously Ordered Items item is present in My Account menu.
+    Then Check that Previously Ordered Items item is present in My Account menu.
 
-  Scenario: Check that Order History item is 2 in My Account menu.
-    Then Check that Order History item index item is 2.
+  Scenario: Check that Previously Ordered Items item is 2 in My Account menu.
+    Then Check that Previously Ordered Items item index item is 2.
 
   Scenario: Check that Purchase Requests item is present in My Account menu.
     Then Check that Purchase Requests item is present in My Account menu.

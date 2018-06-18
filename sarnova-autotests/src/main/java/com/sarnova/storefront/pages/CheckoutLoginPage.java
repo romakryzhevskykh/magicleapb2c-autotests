@@ -12,14 +12,12 @@ public class CheckoutLoginPage extends StorefrontBasePage {
 
     @Step("Fill guest email: {0}.")
     public void fillGuestEmail(String email) {
-        $(By.id(GUEST_EMAIL_ID)).clear();
-        $(By.id(GUEST_EMAIL_ID)).sendKeys(email);
+        enterText(email, By.id(GUEST_EMAIL_ID));
     }
 
     @Step("Fill confirm guest email: {0}.")
     public void fillConfirmGuestEmail(String email) {
-        $(By.id(GUEST_CONFIRM_EMAIL_ID)).clear();
-        $(By.id(GUEST_CONFIRM_EMAIL_ID)).sendKeys(email);
+        enterText(email, By.id(GUEST_CONFIRM_EMAIL_ID));
     }
 
     @Step("Click on confirm login button.")

@@ -64,43 +64,36 @@ public class CheckoutShippingAddressStepBlock extends UIComponent {
 
     @Step("Enter First name: {0}.")
     public void fillFirstName(String firstName) {
-        $(By.id(FIRST_NAME_FIELD_ID)).clear();
-        $(By.id(FIRST_NAME_FIELD_ID)).sendKeys(firstName);
+        enterText(firstName, By.id(FIRST_NAME_FIELD_ID));
     }
 
     @Step("Enter Last name: {0}.")
     public void fillLastName(String lastName) {
-        $(By.id(LAST_NAME_FIELD_ID)).clear();
-        $(By.id(LAST_NAME_FIELD_ID)).sendKeys(lastName);
+        enterText(lastName, By.id(LAST_NAME_FIELD_ID));
     }
 
     @Step("Enter Address line 1: {0}.")
     public void fillAddressLine1(String addressLine1) {
-        $(By.id(ADDRESS_LINE_1_FIELD_ID)).clear();
-        $(By.id(ADDRESS_LINE_1_FIELD_ID)).sendKeys(addressLine1);
+        enterText(addressLine1, By.id(ADDRESS_LINE_1_FIELD_ID));
     }
 
     @Step("Enter Address line 2: {0}.")
     public void fillAddressLine2(String addressLine2) {
-        $(By.id(ADDRESS_LINE_2_FIELD_ID)).clear();
-        $(By.id(ADDRESS_LINE_2_FIELD_ID)).sendKeys(addressLine2);
+        enterText(addressLine2, By.id(ADDRESS_LINE_2_FIELD_ID));
     }
 
     @Step("Enter Town: {0}.")
     public void fillTown(String town) {
-        $(By.id(TOWN_CITY_FIELD_ID)).clear();
-        $(By.id(TOWN_CITY_FIELD_ID)).sendKeys(town);
+        enterText(town, By.id(TOWN_CITY_FIELD_ID));
     }
 
     @Step("Enter Zip code: {0}.")
     public void fillZipCode(String zipCode) {
-        $(By.id(POSTCODE_FIELD_ID)).clear();
-        $(By.id(POSTCODE_FIELD_ID)).sendKeys(zipCode);
+        enterText(zipCode, By.id(POSTCODE_FIELD_ID));
     }
 
     @Step("Enter Phone number: {0}.")
     public void fillPhoneNumber(String phoneNUmber) {
-        $(By.id(PHONE_FIELD_ID)).clear();
-        $(By.id(PHONE_FIELD_ID)).sendKeys(phoneNUmber);
+        enterText(phoneNUmber, By.id(PHONE_FIELD_ID));
     }
 }

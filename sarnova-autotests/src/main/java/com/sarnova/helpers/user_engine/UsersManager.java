@@ -53,17 +53,18 @@ public class UsersManager {
     @Step("Create user with random parameters.")
     public void createTestUserByApi(UserSession userSession) {
         POSTRequest createUser = CREATE_REQUEST.getClone();
-        UserTitle userTitle = UserTitle.getRandom();
+//        UserTitle userTitle = UserTitle.getRandom();
         String firstName = RandomStringUtils.randomAlphabetic(10);
         String lastName = RandomStringUtils.randomAlphabetic(10);
         String email = RandomStringUtils.randomAlphabetic(10) + "@" + RandomStringUtils.randomAlphabetic(5) + ".com";
         String username = RandomStringUtils.randomAlphabetic(10);
-        StorefrontUserRole role = StorefrontUserRole.TEST_USER;
+//        StorefrontUserRole role = StorefrontUserRole.TEST_USER;
         Organization organization = userSession.getUser().getOrganization();
-        ArrayList<StorefrontUserRole> userRoles = new ArrayList<StorefrontUserRole>() {{
-            add(role);
-        }};
-        createUser.addPostParameterAndValue(new API.PostParameterAndValue("titleCode", userTitle.name().toLowerCase()));
+        ArrayList<StorefrontUserRole> userRoles = new ArrayList<>();
+//        {{
+//            add(role);
+//        }};
+//        createUser.addPostParameterAndValue(new API.PostParameterAndValue("titleCode", userTitle.name().toLowerCase()));
         createUser.addPostParameterAndValue(new API.PostParameterAndValue("uid", username));
         createUser.addPostParameterAndValue(new API.PostParameterAndValue("firstName", firstName));
         createUser.addPostParameterAndValue(new API.PostParameterAndValue("lastName", lastName));
@@ -81,7 +82,7 @@ public class UsersManager {
         user.setEmail(email);
         user.setFirstName(firstName);
         user.setLastName(lastName);
-        user.setUserTitle(userTitle);
+//        user.setUserTitle(userTitle);
     }
 
     @SuppressWarnings("unchecked")
@@ -119,11 +120,13 @@ public class UsersManager {
                                 .contains("removeUserGroup"))
                 .filter(element -> StorefrontUserRole.getRoleByRoleCode(Xsoup.select(element, "ul/li/a/text()").get()) == null)
                 .forEach(element -> {
-                    if (userGroupsManager.getUserGroupByUid(element.text().trim()) == null) {
-                        userGroupsManager.createInstance(element.text().trim());
+                    String groupName = Xsoup.select(element, "ul/li/a/text()").getElements().get(0).text().trim();
+                    if (userGroupsManager.getUserGroupByUid(groupName) == null) {
+                        userGroupsManager.createInstance(groupName);
                     }
-                    user.getUserGroups().add(userGroupsManager.getUserGroupByUid(element.text().trim()));
+                    user.getUserGroups().add(userGroupsManager.getUserGroupByUid(groupName));
                 });
+        user.setInitialized(true);
     }
 
     public ArrayList<User> getUsers() {
@@ -209,6 +212,7 @@ public class UsersManager {
         return userRoles;
     }
 
+    @Step("Remove all user {1} user groups.")
     @SuppressWarnings("unchecked")
     public void removeAllUserGroupsForUser(UserSession activeUserSession, User user) {
         user.getUserGroups().forEach(userGroup -> {
@@ -226,6 +230,7 @@ public class UsersManager {
         user.getUserGroups().clear();
     }
 
+    @Step("Set user group {2} to user {1}.")
     @SuppressWarnings("unchecked")
     public void setUserGroupForUser(UserSession activeUserSession, User user, UserGroup userGroup) {
         POSTRequest addGroup = ADD_GROUP_TO_USER.getClone();

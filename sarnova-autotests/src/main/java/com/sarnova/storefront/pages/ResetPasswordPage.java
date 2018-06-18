@@ -27,11 +27,11 @@ public class ResetPasswordPage extends StorefrontBasePage {
 
     @Step("Fill New password field with text: {0}.")
     public void fillTextToNewPasswordField(String newPassword) {
-        $(By.id(NEW_PASSWORD_FIELD_ID)).sendKeys(newPassword);
+        enterText(newPassword, By.id(NEW_PASSWORD_FIELD_ID));
     }
 
     @Step("Fill Confirm password field with text: {0}.")
     public void fillTextToConfirmPasswordField(String newPassword) {
-        $(By.id(CONFIRM_PASSWORD_FIELD_ID)).sendKeys(newPassword);
+        enterText(newPassword, By.id(CONFIRM_PASSWORD_FIELD_ID));
     }
 }

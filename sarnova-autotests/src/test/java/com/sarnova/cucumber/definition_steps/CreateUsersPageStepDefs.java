@@ -75,7 +75,7 @@ public class CreateUsersPageStepDefs extends AbstractStepDefs {
                     getSelectedUserRoles());
             User user = usersManager.getUserByUsername(threadVarsHashMap.getString(TestKeyword.EDIT_USER_USERNAME));
             user.setEmail(threadVarsHashMap.getString(TestKeyword.EDIT_USER_EMAIL));
-            user.setUserTitle((UserTitle) threadVarsHashMap.get(TestKeyword.EDIT_USER_TITLE));
+//            user.setUserTitle((UserTitle) threadVarsHashMap.get(TestKeyword.EDIT_USER_TITLE));
             user.setFirstName(threadVarsHashMap.getString(TestKeyword.EDIT_USER_FIRST_NAME));
             user.setLastName(threadVarsHashMap.getString(TestKeyword.EDIT_USER_LAST_NAME));
 

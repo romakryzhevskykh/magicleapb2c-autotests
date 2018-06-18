@@ -24,7 +24,7 @@ public class UserDetailsPageStepDefs extends AbstractStepDefs {
     @Then("Check that Test user details page is opened.")
     public void checkThatUserDetailsPageIsOpened() {
         User user = usersManager.getUserByUsername(threadVarsHashMap.getString(TestKeyword.TEST_USER_USERNAME));
-        assertFalse(user == null);
+        assertNotNull(user);
         assertTrue(userDetailsPage.isOpened(user));
     }
 

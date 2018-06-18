@@ -30,7 +30,7 @@ public class AddToSupplyListPopUpBlock extends UIComponent {
 
     @Step("Enter new Supply list name: {0} in Add to Supply list pop-up.")
     public void enterNewSupplyListNameText(String newSupplyListName) {
-        $(By.id(ADD_TO_SUPPLY_LIST_POP_UP_NEW_SUPPLY_LIST_NAME_FIELD_ID)).sendKeys(newSupplyListName);
+        enterText(newSupplyListName, By.id(ADD_TO_SUPPLY_LIST_POP_UP_NEW_SUPPLY_LIST_NAME_FIELD_ID));
     }
 
     @Step("Click on Add to Supply list button in Add to Supply list pop-up.")

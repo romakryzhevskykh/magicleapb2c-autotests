@@ -2,7 +2,7 @@ package com.sarnova.cucumber.definition_steps;
 
 import com.sarnova.helpers.GeneralPageActivities;
 import com.sarnova.storefront.page_blocks.HeaderRowPageBlock;
-import com.sarnova.storefront.pages.*;
+import com.sarnova.storefront.pages.StartPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -74,6 +74,11 @@ public class GeneralStepDefs extends AbstractStepDefs {
     @When("^Click on Saved Credit Cards item in My Account menu.$")
     public void clickOnSavedCreditCardsItemInMyAccountMenu() {
         headerRowPageBlock.clickOnSavedCreditCardsItemInMyAccountMenu();
+    }
+
+    @When("^Click on Previously Ordered Items item in My Account menu.$")
+    public void clickOnPreviouslyOrderedItemsItemInMyAccountMenu() {
+        headerRowPageBlock.clickOnPreviouslyOrderedItemsItemInMyAccountMenu();
     }
 
     @When("^Click on Quotes item in My Account menu.$")

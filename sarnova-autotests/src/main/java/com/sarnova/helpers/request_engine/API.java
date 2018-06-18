@@ -83,5 +83,10 @@ public interface API {
         public boolean containsDelimiter(DELIMITER delimiter) {
             return this.delimiter.equals(delimiter);
         }
+
+        @Override
+        public String toString() {
+            return "parameter: " + this.parameter + ", value: " + this.value;
+        }
     }
 }

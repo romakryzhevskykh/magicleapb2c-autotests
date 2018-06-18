@@ -150,4 +150,9 @@ public class LoggedInHeaderRowBlock extends UIComponent {
     public void clickOnUserGroupsItemInMyAccountMenu() {
         click(USER_GROUPS_ITEM_XPATH);
     }
+
+    @Step("Click on Previously Ordered Items item in My account menu.")
+    public void clickOnPreviouslyOrderedItemsItemInMyAccountMenu() {
+        click(PREVIOUSLY_ORDERED_ITEMS_ITEM_XPATH);
+    }
 }

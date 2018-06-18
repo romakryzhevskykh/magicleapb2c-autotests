@@ -1,4 +1,4 @@
-Feature: Menu items on click redirects functionality.
+Feature: My Account menu items on click redirects functionality.
 
   Background:
     Given Switch to Storefront owner.
@@ -9,9 +9,9 @@ Feature: Menu items on click redirects functionality.
     When Click on Account Dashboard item in My Account menu.
     Then Check that Account Dashboard page is opened.
 
-  Scenario: Check that Order History My Account menu item redirects to Order History page.
-    When Click on Order History item in My Account menu.
-    Then Check that Order History page is opened.
+  Scenario: Check that Previously Ordered My Account menu item redirects to Order History page.
+    When Click on Previously Ordered Items item in My Account menu.
+    Then Check that Previously Ordered Items page is opened.
 
   Scenario: Check that Purchase Requests My Account menu item redirects to Purchase Requests page.
     When Click on Purchase Requests item in My Account menu.

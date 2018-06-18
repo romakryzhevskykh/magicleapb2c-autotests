@@ -135,6 +135,18 @@ public abstract class UIComponent {
         }
     }
 
+    protected void enterText(String text, By by) {
+        waitUntil(driver -> $(by).isEnabled());
+        $(by).clear();
+        $(by).sendKeys(text);
+    }
+
+    protected void enterText(String text, String xpath, String... args) {
+        waitUntil(driver -> $(xpath, args).isEnabled());
+        $(xpath, args).clear();
+        $(xpath, args).sendKeys(text);
+    }
+
     protected void blurElement(WebElement webElement) {
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("arguments[0].focus(); arguments[0].blur(); return true", webElement);
@@ -165,11 +177,6 @@ public abstract class UIComponent {
             webDriverPool.getActiveDriverSession().restoreDefaultImplicitWait();
         }
     }
-//
-//    public void waitUntilVisible(By locator) {
-//        WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getTimeOut());
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-//    }
 
     protected boolean isDisplayed(By by) {
         webDriverPool.getActiveDriverSession().setShortImplicitWait();
@@ -192,14 +199,17 @@ public abstract class UIComponent {
         waitUntil(driver1 -> (!$(xpath).getAttribute(attributeName).isEmpty()));
     }
 
+    @Step("Wait until HTML template is fully loaded.")
     public void waitHTMLTemplateLoad() {
         waitUntil(driver1 -> ((JavascriptExecutor) driver1).executeScript("return document.readyState").toString().equals("complete"));
     }
 
+    @Step("Wait until element is visible {0}.")
     public void waitUntilElementIsVisible(String xpath, String... args) {
         waitUntil(driver1 -> isDisplayed(xpath, args));
     }
 
+    @Step("Wait until element is visible {0}.")
     public void waitUntilElementIsVisible(By by) {
         waitUntil(driver1 -> isDisplayed(by));
     }
@@ -243,6 +253,7 @@ public abstract class UIComponent {
         }
     }
 
+    @Step("Wait until JQuery is fully loaded.")
     public void waitJQueryRequestsLoad() {
         WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getTimeOut());
         try {

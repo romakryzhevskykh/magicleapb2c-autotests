@@ -7,7 +7,6 @@ Feature: Check that owner role can create user.
 
   Scenario: Check user creation from Storefront.
     When Click on Add new user on Users page.
-    And Select any title on Create user page.
     And Fill First name field with a random text on Create user page.
     And Fill Last name field with a random text on Create user page.
     And Fill Email field with a random email on Create user page.
@@ -15,7 +14,6 @@ Feature: Check that owner role can create user.
     And Select any Parent unit on Create user page.
     And Click on Save button on Create user page.
     Then Check that Test user details page is opened.
-    And Check that User title field is equal to set on User details page.
     And Check that User first name field is equal to set on User details page.
     And Check that User last name field is equal to set on User details page.
     And Check that User email field is equal to set on User details page.

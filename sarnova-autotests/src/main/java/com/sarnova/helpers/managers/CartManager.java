@@ -91,10 +91,13 @@ public class CartManager {
         POSTRequest addUOMsToCart = ADD_UOMS_TO_CART.getClone();
         int counter = 0;
         for(Map.Entry<UnitOfMeasure, Integer> unitOfMeasure : unitsOfMeasurementToAdd.entrySet()) {
+            System.out.println("UOM1 :"  + unitOfMeasure.getKey().getUomType().name());
             addUOMsToCart.addPostParameterAndValue(new API.PostParameterAndValue("productList[" + counter + "].unit",
                     unitOfMeasure.getKey().getUomType().name()));
+            System.out.println("UOM2 :"  + unitOfMeasure.getValue());
             addUOMsToCart.addPostParameterAndValue(new API.PostParameterAndValue("productList[" + counter + "].qty",
                     unitOfMeasure.getValue()));
+            System.out.println("UOM3 :"  + productsManager.getProductByUOM(unitOfMeasure.getKey()).getSku());
             addUOMsToCart.addPostParameterAndValue(new API.PostParameterAndValue("productList[" + counter + "].productCode",
                     productsManager.getProductByUOM(unitOfMeasure.getKey()).getSku()));
         }
@@ -102,6 +105,7 @@ public class CartManager {
                 .stream()
                 .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
                 .collect(Collectors.toList()));
+        System.out.println("UOM CSRF :"  + csrfToken);
         addUOMsToCart.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", csrfToken));
         try {
             addUOMsToCart.sendPostRequest(userSession);

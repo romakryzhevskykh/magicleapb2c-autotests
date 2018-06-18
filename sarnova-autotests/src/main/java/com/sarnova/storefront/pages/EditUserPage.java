@@ -30,26 +30,22 @@ public class EditUserPage extends StorefrontBasePage {
 
     @Step("Fill first name field: {0}.")
     public void fillFirstName(String firstName) {
-        $(By.id(FIRST_NAME_FIELD_ID)).clear();
-        $(By.id(FIRST_NAME_FIELD_ID)).sendKeys(firstName);
+        enterText(firstName, By.id(FIRST_NAME_FIELD_ID));
     }
 
     @Step("Fill last name field: {0}.")
     public void fillLastName(String lastName) {
-        $(By.id(LAST_NAME_FIELD_ID)).clear();
-        $(By.id(LAST_NAME_FIELD_ID)).sendKeys(lastName);
+        enterText(lastName, By.id(LAST_NAME_FIELD_ID));
     }
 
     @Step("Fill email field: {0}.")
     public void fillEmail(String email) {
-        $(By.id(EMAIL_FIELD_ID)).clear();
-        $(By.id(EMAIL_FIELD_ID)).sendKeys(email);
+        enterText(email, By.id(EMAIL_FIELD_ID));
     }
 
     @Step("Fill username field: {0}.")
     public void fillUsername(String username) {
-        $(By.id(USERNAME_FIELD_ID)).clear();
-        $(By.id(USERNAME_FIELD_ID)).sendKeys(username);
+        enterText(username, By.id(USERNAME_FIELD_ID));
     }
 
     @Step("Select parent unit.")

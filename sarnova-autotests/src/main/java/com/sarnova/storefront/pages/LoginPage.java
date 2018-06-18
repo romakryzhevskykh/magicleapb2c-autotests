@@ -42,7 +42,7 @@ public class LoginPage extends StorefrontBasePage {
 
     @Step("Fill username field {0}.")
     public void fillUsernameFieldWith(String username) {
-        $(By.id(USERNAME_FIELD_ID)).sendKeys(username);
+        enterText(username, By.id(USERNAME_FIELD_ID));
     }
 
     @Step("Check that Password label is present.")
@@ -62,7 +62,7 @@ public class LoginPage extends StorefrontBasePage {
 
     @Step("Fill password field {0}.")
     public void fillPasswordFieldWith(String password) {
-        $(By.id(PASSWORD_FIELD_ID)).sendKeys(password);
+        enterText(password, By.id(PASSWORD_FIELD_ID));
     }
 
 
