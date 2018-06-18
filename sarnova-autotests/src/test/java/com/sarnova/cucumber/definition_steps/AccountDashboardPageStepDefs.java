@@ -48,9 +48,9 @@ public class AccountDashboardPageStepDefs extends AbstractStepDefs {
         assertTrue(accountDashboardPage.isQuotesItemVisible());
     }
 
-    @Then("^Check that Reports item is visible on Account Dashboard page.$")
-    public void checkThatReportsItemIsVisible() {
-        assertTrue(accountDashboardPage.isReportsItemVisible());
+    @Then("^Check that Purchase Summary item is visible on Account Dashboard page.$")
+    public void checkThatPurchaseSummaryItemIsVisible() {
+        assertTrue(accountDashboardPage.isPurchaseSummaryItemVisible());
     }
 
     @Then("^Check that Saved Carts item is visible on Account Dashboard page.$")
@@ -63,9 +63,9 @@ public class AccountDashboardPageStepDefs extends AbstractStepDefs {
         assertTrue(accountDashboardPage.isSupplyListsItemVisible());
     }
 
-    @Then("^Check that Business info item is visible on Account Dashboard page.$")
-    public void checkThatBusinessInfoItemIsVisible() {
-        assertTrue(accountDashboardPage.isBusinessInfoItemVisible());
+    @Then("^Check that Purchases Per Month item is visible on Account Dashboard page.$")
+    public void checkThatPurchasesPerMonthItemIsVisible() {
+        assertTrue(accountDashboardPage.isPurchasesPerMonthItemVisible());
     }
 
     @Then("^Check that Users item is visible on Account Dashboard page.$")
@@ -83,9 +83,9 @@ public class AccountDashboardPageStepDefs extends AbstractStepDefs {
         assertTrue(accountDashboardPage.isUserGroupsItemVisible());
     }
 
-    @Then("^Check that Account Information item is visible on Account Dashboard page.$")
-    public void checkThatAccountInformationItemIsVisible() {
-        assertTrue(accountDashboardPage.isAccountInformationItemVisible());
+    @Then("^Check that Account Settings item is visible on Account Dashboard page.$")
+    public void checkThatAccountSettingsItemIsVisible() {
+        assertTrue(accountDashboardPage.isAccountSettingsItemVisible());
     }
 
     @Then("^Check that Help/New To Boundtree\\? item is visible on Account Dashboard page.$")
@@ -103,72 +103,97 @@ public class AccountDashboardPageStepDefs extends AbstractStepDefs {
         assertTrue(accountDashboardPage.isQuotasAndParLevelsItemVisible());
     }
 
-    @Then("^Click on Order History item on Account Dashboard page.$")
+    @Then("^Check that Replenishment Orders item is visible on Account Dashboard page.$")
+    public void checkThatReplenishmentOrdersItemIsVisibleOnAccountDashboardPage() {
+        assertTrue(accountDashboardPage.isReplenishmentOrdersItemVisible());
+    }
+
+    @Then("^Check that Backordered Items item is visible on Account Dashboard page.$")
+    public void checkThatBackorderedItemsItemIsVisibleOnAccountDashboardPage() {
+        assertTrue(accountDashboardPage.isBackorderedItemsItemVisible());
+    }
+
+    @Then("^Check that Discontinued Items item is visible on Account Dashboard page.$")
+    public void checkThatDiscontinuedItemsItemIsVisibleOnAccountDashboardPage() {
+        assertTrue(accountDashboardPage.isDiscontinuedItemsItemVisible());
+    }
+
+    @Then("^Check that DSCSA Transactions item is visible on Account Dashboard page.$")
+    public void checkThatDSCSATransactionsItemIsVisibleOnAccountDashboardPage() {
+        assertTrue(accountDashboardPage.isDSCSATransactionsItemVisible());
+    }
+
+    @Then("^Check that Pharmaceutical Backorder item is visible on Account Dashboard page.$")
+    public void checkThatPharmaceuticalBackorderItemIsVisibleOnAccountDashboardPage() {
+        assertTrue(accountDashboardPage.isPharmaceuticalBackorderItemVisible());
+    }
+
+    @When("^Click on Order History item on Account Dashboard page.$")
     public void clickOnOrderHistoryItem() {
         accountDashboardPage.clickOnOrderHistoryItem();
     }
 
-    @Then("^Click on Previously Ordered Items item on Account Dashboard page.$")
+    @When("^Click on Previously Ordered Items item on Account Dashboard page.$")
     public void clickOnPreviouslyOrderedItemsItem() {
         accountDashboardPage.clickOnPreviouslyOrderedItemsItem();
     }
 
-    @Then("^Click on Purchase Requests item on Account Dashboard page.$")
+    @When("^Click on Purchase Requests item on Account Dashboard page.$")
     public void clickOnPurchaseRequestsItem() {
         accountDashboardPage.clickOnPurchaseRequestsItem();
     }
 
-    @Then("^Click on Quotes item on Account Dashboard page.$")
+    @When("^Click on Quotes item on Account Dashboard page.$")
     public void clickOnQuotesItem() {
         accountDashboardPage.clickOnQuotesItem();
     }
 
-    @Then("^Click on Reports item on Account Dashboard page.$")
-    public void clickOnReportsItem() {
-        accountDashboardPage.clickOnReportsItem();
+    @When("^Click on Purchase Summary item on Account Dashboard page.$")
+    public void clickOnPurchaseSummaryItem() {
+        accountDashboardPage.clickOnPurchaseSummaryItem();
     }
 
-    @Then("^Click on Saved Carts item on Account Dashboard page.$")
+    @When("^Click on Saved Carts item on Account Dashboard page.$")
     public void clickOnSavedCartsItem() {
         accountDashboardPage.clickOnSavedCartsItem();
     }
 
-    @Then("^Click on Supply Lists item on Account Dashboard page.$")
+    @When("^Click on Supply Lists item on Account Dashboard page.$")
     public void clickOnSupplyListsItem() {
         accountDashboardPage.clickOnSupplyListsItem();
     }
 
-    @Then("^Click on Business info item on Account Dashboard page.$")
-    public void clickOnBusinessInfoItem() {
-        accountDashboardPage.clickOnBusinessInfoItem();
+    @When("^Click on Purchases Per Month item on Account Dashboard page.$")
+    public void clickOnPurchasesPerMonthItem() {
+        accountDashboardPage.clickOnPurchasesPerMonthItem();
     }
 
-    @Then("^Click on Users item on Account Dashboard page.$")
+    @When("^Click on Users item on Account Dashboard page.$")
     public void ClickOnUsersItem() {
         accountDashboardPage.clickOnUsersItem();
     }
 
-    @Then("^Click on Custom Category item on Account Dashboard page.$")
+    @When("^Click on Custom Category item on Account Dashboard page.$")
     public void clickOnCustomCategoryItem() {
         accountDashboardPage.clickOnCustomCategoryItem();
     }
 
-    @Then("^Click on User Groups item on Account Dashboard page.$")
+    @When("^Click on User Groups item on Account Dashboard page.$")
     public void clickOnUserGroupsItem() {
         accountDashboardPage.clickOnUserGroupsItem();
     }
 
-    @Then("^Click on Account Information item on Account Dashboard page.$")
-    public void clickOnAccountInformationItem() {
-        accountDashboardPage.clickOnAccountInformationItem();
+    @When("^Click on Account Settings item on Account Dashboard page.$")
+    public void clickOnAccountSettingsItem() {
+        accountDashboardPage.clickOnAccountSettingsItem();
     }
 
-    @Then("^Click on Help/New To Boundtree\\? item on Account Dashboard page.$")
+    @When("^Click on Help/New To Boundtree\\? item on Account Dashboard page.$")
     public void clickOnHelpItem() {
         accountDashboardPage.clickOnHelpItem();
     }
 
-    @Then("^Click on Saved Credit Cards item on Account Dashboard page.$")
+    @When("^Click on Saved Credit Cards item on Account Dashboard page.$")
     public void clickOnSavedCreditCardsItem() {
         accountDashboardPage.clickOnSavedCreditCardsItem();
     }
@@ -176,5 +201,30 @@ public class AccountDashboardPageStepDefs extends AbstractStepDefs {
     @When("^Click on Quotas And Par Levels item on Account Dashboard page.$")
     public void clickOnQuotasAndParLevelsItem() {
         accountDashboardPage.clickOnQuotasAndParLevelsItem();
+    }
+
+    @When("^Click on Replenishment Orders item on Account Dashboard page.$")
+    public void clickOnReplenishmentOrdersItemOnAccountDashboardPage() {
+        accountDashboardPage.clickOnReplenishmentOrdersItem();
+    }
+
+    @When("^Click on Backordered Items item on Account Dashboard page.$")
+    public void clickOnBackorderedItemsItemOnAccountDashboardPage() {
+        accountDashboardPage.clickOnBackorderedItemsItem();
+    }
+
+    @When("^Click on Discontinued Products item on Account Dashboard page.$")
+    public void clickOnDiscontinuedProductsItemOnAccountDashboardPage() {
+        accountDashboardPage.clickOnDiscontinuedProductsItem();
+    }
+
+    @When("^Click on DSCSA Transactions item on Account Dashboard page.$")
+    public void clickOnDSCSATransactionsItemOnAccountDashboardPage() {
+        accountDashboardPage.clickOnDSCSATransactionsItem();
+    }
+
+    @When("^Click on Pharmaceutical Backorder Report item on Account Dashboard page.$")
+    public void clickOnPharmaceuticalBackorderReportItemOnAccountDashboardPage() {
+        accountDashboardPage.clickOnPharmaceuticalBackorderReportItem();
     }
 }

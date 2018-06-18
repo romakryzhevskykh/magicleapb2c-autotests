@@ -7,7 +7,6 @@ Feature: Check that owner role can edit user.
   Scenario: Check user editing from Storefront.
     When Test user is present.
     And Open Test user edit page.
-    And Select any title on Edit user page.
     And Fill First name field with a random text on Edit user page.
     And Fill Last name field with a random text on Edit user page.
     And Fill Email field with a random email on Edit user page.
@@ -15,7 +14,6 @@ Feature: Check that owner role can edit user.
     And Select any Parent unit on Edit user page.
     And Click on Save button on Edit user page.
     Then Check that Test user details page is opened.
-    And Check that User title field is equal to set on User details page.
     And Check that User first name field is equal to set on User details page.
     And Check that User last name field is equal to set on User details page.
     And Check that User email field is equal to set on User details page.

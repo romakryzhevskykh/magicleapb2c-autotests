@@ -25,14 +25,12 @@ public class PayFabricLoginPage extends PayFabricBasePage {
 
     @Step("Fill username: {0}")
     public void fillUsername(String username) {
-        $(By.id(USERNAME_FIELD_ID)).clear();
-        $(By.id(USERNAME_FIELD_ID)).sendKeys(username);
+        enterText(username, By.id(USERNAME_FIELD_ID));
     }
 
     @Step("Fill password: {0}")
     public void fillPassword(String password) {
-        $(By.id(PASSWORD_FIELD_ID)).clear();
-        $(By.id(PASSWORD_FIELD_ID)).sendKeys(password);
+        enterText(password, By.id(PASSWORD_FIELD_ID));
     }
 
     @Step("Click on Sign in button.")

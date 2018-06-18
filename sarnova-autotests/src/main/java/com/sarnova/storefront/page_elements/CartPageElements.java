@@ -3,8 +3,8 @@ package com.sarnova.storefront.page_elements;
 public class CartPageElements {
     private static final String PAGE_CONTENT_CONTAINER_XPATH = "//div[@class='page-content-container']";
 
-    private static final String PRODUCTS_ROWS_BLOCK_XPATH = "//ul[@class='item__list item__list__cart']";
-    public static final String PRODUCTS_ROWS_XPATH = PRODUCTS_ROWS_BLOCK_XPATH + "/table/tbody/tr/td/li[@class='item__list--item']";
+    private static final String PRODUCTS_ROWS_BLOCK_XPATH = "//ul[@class='item__list item__list__cart table-sorting']";
+    public static final String PRODUCTS_ROWS_XPATH = PRODUCTS_ROWS_BLOCK_XPATH + "//table/tbody/tr/td/li[@class='item__list--item']";
     public static final String UOM_ROW_BY_SKU_AND_UOM_TYPE_XPATH = PRODUCTS_ROWS_XPATH + "[div[@class='item__info']/div[@class='item__code product-article'][.='Item #: %s'] and div[@class= 'item__unit'][contains(., '%s')]]";
     public static final String UOM_QTY_BY_SKU_AND_UOM_TYPE_XPATH = UOM_ROW_BY_SKU_AND_UOM_TYPE_XPATH + "//input[@name = 'initialQuantity']";
     public static final String ADD_UOM_TO_SUPPLY_LIST_BUTTON_BY_SKU_AND_UOM_TYPE_XPATH = UOM_ROW_BY_SKU_AND_UOM_TYPE_XPATH + "//button[contains(@class,'js-add-to-wishlist')]";

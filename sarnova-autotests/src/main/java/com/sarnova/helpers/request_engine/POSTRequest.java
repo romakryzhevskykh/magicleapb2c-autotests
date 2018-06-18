@@ -40,6 +40,7 @@ public class POSTRequest extends APIRequest {
         if (postParametersAndValues != null) {
             this.postParametersAndValues = postParametersAndValues;
             for (PostParameterAndValue parameterAndValue : postParametersAndValues) {
+                System.out.println("Parametr: " + parameterAndValue);
 //                try {
 //                    this.stringOfPostParameters.append(parameterAndValue.parameter).append("=")
 //                            .append(URLEncoder.encode(parameterAndValue.getValue(), "UTF-8"));
@@ -111,6 +112,7 @@ public class POSTRequest extends APIRequest {
         if (connection.getRequestProperty("Content-Type").contains("json")) {
             setPayloadPostParametersAndValues(postParametersAndValues);
         } else {
+            System.out.println("PARAMS: " + postParametersAndValues);
             setFormDataPostParametersAndValues(postParametersAndValues);
         }
         //Send request

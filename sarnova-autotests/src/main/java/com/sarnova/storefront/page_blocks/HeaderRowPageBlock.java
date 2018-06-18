@@ -114,4 +114,8 @@ public class HeaderRowPageBlock extends UIComponent {
     public void clickOnUserGroupsItemInMyAccountMenu() {
         loggedInHeaderRowBlock.clickOnUserGroupsItemInMyAccountMenu();
     }
+
+    public void clickOnPreviouslyOrderedItemsItemInMyAccountMenu() {
+        loggedInHeaderRowBlock.clickOnPreviouslyOrderedItemsItemInMyAccountMenu();
+    }
 }

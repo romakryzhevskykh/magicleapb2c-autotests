@@ -9,6 +9,8 @@ import java.util.Set;
 
 public class User {
 
+    private boolean isInitialized = false;
+
     private UserTitle userTitle;
     private String firstName;
     private String lastName;
@@ -107,5 +109,13 @@ public class User {
 
     public void setOrganization(Organization organization) {
         this.organization = organization;
+    }
+
+    public boolean isInitialized() {
+        return isInitialized;
+    }
+
+    public void setInitialized(boolean initialized) {
+        isInitialized = initialized;
     }
 }

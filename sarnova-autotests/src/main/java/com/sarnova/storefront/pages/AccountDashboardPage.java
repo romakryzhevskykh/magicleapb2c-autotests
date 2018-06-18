@@ -36,9 +36,9 @@ public class AccountDashboardPage extends StorefrontBasePage {
         return isDisplayed(QUOTES_ITEM_XPATH);
     }
 
-    @Step("Is Reports item visible?")
-    public boolean isReportsItemVisible() {
-        return isDisplayed(REPORTS_ITEM_XPATH);
+    @Step("Is Purchase Summary item visible?")
+    public boolean isPurchaseSummaryItemVisible() {
+        return isDisplayed(PURCHASE_SUMMARY_ITEM_XPATH);
     }
 
     @Step("Is Saved Carts item visible?")
@@ -51,9 +51,9 @@ public class AccountDashboardPage extends StorefrontBasePage {
         return isDisplayed(SUPPLY_LISTS_ITEM_XPATH);
     }
 
-    @Step("Is Business Info item visible?")
-    public boolean isBusinessInfoItemVisible() {
-        return isDisplayed(BUSINESS_INFO_ITEM_XPATH);
+    @Step("Is Purchases Per Month item visible?")
+    public boolean isPurchasesPerMonthItemVisible() {
+        return isDisplayed(PURCHASES_PER_MONTH_ITEM_XPATH);
     }
 
     @Step("Is Custom Category item visible?")
@@ -71,9 +71,9 @@ public class AccountDashboardPage extends StorefrontBasePage {
         return isDisplayed(USER_GROUPS_ITEM_XPATH);
     }
 
-    @Step("Is Account Information item visible?")
-    public boolean isAccountInformationItemVisible() {
-        return isDisplayed(ACCOUNT_INFORMATION_ITEM_XPATH);
+    @Step("Is Account Settings item visible?")
+    public boolean isAccountSettingsItemVisible() {
+        return isDisplayed(ACCOUNT_SETTINGS_ITEM_XPATH);
     }
 
     @Step("Is Help/New To Boundtree? item visible?")
@@ -83,7 +83,32 @@ public class AccountDashboardPage extends StorefrontBasePage {
 
     @Step("Is Quotas And Par Levels item visible?")
     public boolean isQuotasAndParLevelsItemVisible() {
-        return false;
+        return isDisplayed(QUOTAS_AND_PAR_LEVELS_ITEM_XPATH);
+    }
+
+    @Step("Is Replenishment Orders item visible?")
+    public boolean isReplenishmentOrdersItemVisible() {
+        return isDisplayed(REPLENISHMENT_ORDERS_ITEM_XPATH);
+    }
+
+    @Step("Is Backordered Items item visible?")
+    public boolean isBackorderedItemsItemVisible() {
+        return isDisplayed(BACKORDERED_ITEMS_ITEM_XPATH);
+    }
+
+    @Step("Is Discontinued Items item visible?")
+    public boolean isDiscontinuedItemsItemVisible() {
+        return isDisplayed(DISCONTINUED_PRODUCTS_ITEM_XPATH);
+    }
+
+    @Step("Is DSCSA Transactions item visible?")
+    public boolean isDSCSATransactionsItemVisible() {
+        return isDisplayed(DSCSA_TRANSACTIONS_ITEM_XPATH);
+    }
+
+    @Step("Is Pharmaceutical Backorder item visible?")
+    public boolean isPharmaceuticalBackorderItemVisible() {
+        return isDisplayed(PHARMACEUTICAL_BACKORDER_REPORT_ITEM_XPATH);
     }
 
     @Step("Is Saved Credit Cards item visible?")
@@ -108,8 +133,7 @@ public class AccountDashboardPage extends StorefrontBasePage {
 
     @Step("Click on Quotas And Par Levels item.")
     public void clickOnQuotasAndParLevelsItem() {
-        //TODO
-//        click(QUOTES_ITEM_XPATH);
+        click(QUOTAS_AND_PAR_LEVELS_ITEM_XPATH);
     }
 
     @Step("Click on Quotas item.")
@@ -118,8 +142,8 @@ public class AccountDashboardPage extends StorefrontBasePage {
     }
 
     @Step("Click on Reports item.")
-    public void clickOnReportsItem() {
-        click(REPORTS_ITEM_XPATH);
+    public void clickOnPurchaseSummaryItem() {
+        click(PURCHASE_SUMMARY_ITEM_XPATH);
     }
 
     @Step("Click on Saved Carts item.")
@@ -138,9 +162,9 @@ public class AccountDashboardPage extends StorefrontBasePage {
         click(SUPPLY_LISTS_ITEM_XPATH);
     }
 
-    @Step("Click on Business Info item.")
-    public void clickOnBusinessInfoItem() {
-        click(BUSINESS_INFO_ITEM_XPATH);
+    @Step("Click on Purchases Per Month item.")
+    public void clickOnPurchasesPerMonthItem() {
+        click(PURCHASES_PER_MONTH_ITEM_XPATH);
     }
 
     @Step("Click on Custom Category item.")
@@ -158,9 +182,9 @@ public class AccountDashboardPage extends StorefrontBasePage {
         click(USER_GROUPS_ITEM_XPATH);
     }
 
-    @Step("Click on Account Information item.")
-    public void clickOnAccountInformationItem() {
-        click(ACCOUNT_INFORMATION_ITEM_XPATH);
+    @Step("Click on Account Settings item.")
+    public void clickOnAccountSettingsItem() {
+        click(ACCOUNT_SETTINGS_ITEM_XPATH);
     }
 
     @Step("Click on Help/New To Boundtree? item.")
@@ -171,5 +195,30 @@ public class AccountDashboardPage extends StorefrontBasePage {
     @Override
     public String getPageUrl() {
         return storefrontProject.getBaseUrl() + pageUrlMethod;
+    }
+
+    @Step("Click on Replenishment Orders item.")
+    public void clickOnReplenishmentOrdersItem() {
+        click(REPLENISHMENT_ORDERS_ITEM_XPATH);
+    }
+
+    @Step("Click on Backordered Items item.")
+    public void clickOnBackorderedItemsItem() {
+        click(BACKORDERED_ITEMS_ITEM_XPATH);
+    }
+
+    @Step("Click on Discontinued Products item.")
+    public void clickOnDiscontinuedProductsItem() {
+        click(DISCONTINUED_PRODUCTS_ITEM_XPATH);
+    }
+
+    @Step("Click on DSCSA Transactions item.")
+    public void clickOnDSCSATransactionsItem() {
+        click(DSCSA_TRANSACTIONS_ITEM_XPATH);
+    }
+
+    @Step("Click on Pharmaceutical Backorder Report item.")
+    public void clickOnPharmaceuticalBackorderReportItem() {
+        click(PHARMACEUTICAL_BACKORDER_REPORT_ITEM_XPATH);
     }
 }

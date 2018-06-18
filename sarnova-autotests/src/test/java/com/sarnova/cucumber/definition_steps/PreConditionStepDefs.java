@@ -314,6 +314,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     @And("^Test user is present.$")
     public void testUserIsPresent() {
         User testUser = usersManager.getTestUser();
+        System.out.println(usersManager.getTestUser());
         if (testUser == null) {
             usersManager.createTestUserByApi(userSessions.getActiveUserSession());
             testUser = usersManager.getTestUser();
@@ -346,7 +347,8 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     public void testUserHasOnlyTestUserGroupAssigned() {
         UserGroup testUserGroup = userGroupsManager.getUserGroupByUid(threadVarsHashMap.getString(TestKeyword.TEST_USER_GROUP_UID));
         User testUser = usersManager.getUserByUsername(threadVarsHashMap.getString(TestKeyword.TEST_USER_USERNAME));
-        usersManager.initUserGroups(userSessions.getActiveUserSession(), testUser);
+        if (!testUser.isInitialized())
+            usersManager.initUserGroups(userSessions.getActiveUserSession(), testUser);
         if (testUser.getUserGroups().isEmpty() || !testUser.getUserGroups().stream().allMatch(userGroup -> userGroup == testUserGroup)) {
             usersManager.removeAllUserGroupsForUser(userSessions.getActiveUserSession(), testUser);
             usersManager.setUserGroupForUser(userSessions.getActiveUserSession(), testUser, testUserGroup);
@@ -444,7 +446,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     @And("^Saved Cart with at least (\\d+) products has been created.$")
     public void createSavedCartWithAtLeastProduct(int qtyOfProductInCart) {
         List<SavedCart> savedCarts = savedCartsManager.getUserSavedCarts(userSessions.getActiveUserSession().getUser());
-        if(savedCarts.isEmpty()) {
+        if (savedCarts.isEmpty()) {
             List<UnitOfMeasure> unitOfMeasures = productsManager.getUniqueUOMsByUOMsQuantityAndProductTestTypes(qtyOfProductInCart, new ArrayList<>());
             unitOfMeasures.forEach(uom -> getSelectedUOMS().put(uom, 1));
             cartManager.addUOMsToCartViaApi(userSessions.getActiveUserSession(), getSelectedUOMS());

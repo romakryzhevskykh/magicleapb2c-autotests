@@ -80,8 +80,7 @@ public class CheckoutPaymentMethodStepBlock extends UIComponent {
 
     @Step("Fill Purchase order number text field with text {0}.")
     public void fillPONWithText(String randomPON) {
-        $(By.id(PURCHASE_ORDER_NUMBER_FIELD_ID)).clear();
-        $(By.id(PURCHASE_ORDER_NUMBER_FIELD_ID)).sendKeys(randomPON);
+        enterText(randomPON, By.id(PURCHASE_ORDER_NUMBER_FIELD_ID));
     }
 
     public String getPageUrlMethod() {
@@ -90,8 +89,7 @@ public class CheckoutPaymentMethodStepBlock extends UIComponent {
 
     @Step("Enter text to Card number field: {0}.")
     public void fillCardNumberField(String cardNumber) {
-        $(By.id(CARD_ACCOUNT_NUMBER_FIELD_ID)).clear();
-        $(By.id(CARD_ACCOUNT_NUMBER_FIELD_ID)).sendKeys(cardNumber);
+        enterText(cardNumber, By.id(CARD_ACCOUNT_NUMBER_FIELD_ID));
     }
 
     @Step("Open Expiry month drop-down.")
@@ -116,14 +114,12 @@ public class CheckoutPaymentMethodStepBlock extends UIComponent {
 
     @Step("Enter text to Name on card field: {0}.")
     public void fillNameOnCard(String nameOnCard) {
-        $(By.id(CARD_NAME_ON_CARD_FIELD_ID)).clear();
-        $(By.id(CARD_NAME_ON_CARD_FIELD_ID)).sendKeys(nameOnCard);
+        enterText(nameOnCard, By.id(CARD_NAME_ON_CARD_FIELD_ID));
     }
 
     @Step("Enter text to CVV field: {0}.")
     public void fillCVV(String cvv) {
-        $(By.id(CARD_CVV_CODE_FIELD_ID)).clear();
-        $(By.id(CARD_CVV_CODE_FIELD_ID)).sendKeys(cvv);
+        enterText(cvv, By.id(CARD_CVV_CODE_FIELD_ID));
     }
 
     @Step("Click on CHANGE BILLING ADDRESS FOR THIS ORDER ONLY checkbox.")
@@ -158,43 +154,36 @@ public class CheckoutPaymentMethodStepBlock extends UIComponent {
 
     @Step("Enter Billing address First name: {0}.")
     public void fillBillingAddressFirstName(String firstName) {
-        $(By.id(BILLING_ADDRESS_FIRST_NAME_FIELD_ID)).clear();
-        $(By.id(BILLING_ADDRESS_FIRST_NAME_FIELD_ID)).sendKeys(firstName);
+        enterText(firstName, By.id(BILLING_ADDRESS_FIRST_NAME_FIELD_ID));
     }
 
     @Step("Enter Billing address Last name: {0}.")
     public void fillBillingAddressLastName(String lastName) {
-        $(By.id(BILLING_ADDRESS_LAST_NAME_FIELD_ID)).clear();
-        $(By.id(BILLING_ADDRESS_LAST_NAME_FIELD_ID)).sendKeys(lastName);
+        enterText(lastName, By.id(BILLING_ADDRESS_LAST_NAME_FIELD_ID));
     }
 
     @Step("Enter Billing address Address line 1: {0}.")
     public void fillBillingAddressAddressLine1(String addressLine1) {
-        $(By.id(BILLING_ADDRESS_ADDRESS_LINE_1_FIELD_ID)).clear();
-        $(By.id(BILLING_ADDRESS_ADDRESS_LINE_1_FIELD_ID)).sendKeys(addressLine1);
+        enterText(addressLine1, By.id(BILLING_ADDRESS_ADDRESS_LINE_1_FIELD_ID));
     }
 
     @Step("Enter Billing address Address line 2: {0}.")
     public void fillBillingAddressAddressLine2(String addressLine2) {
-        $(By.id(BILLING_ADDRESS_ADDRESS_LINE_2_FIELD_ID)).clear();
-        $(By.id(BILLING_ADDRESS_ADDRESS_LINE_2_FIELD_ID)).sendKeys(addressLine2);
+        enterText(addressLine2, By.id(BILLING_ADDRESS_ADDRESS_LINE_2_FIELD_ID));
     }
 
     @Step("Enter Billing address Town: {0}.")
     public void fillBillingAddressTown(String town) {
-        $(By.id(BILLING_ADDRESS_TOWN_CITY_FIELD_ID)).clear();
-        $(By.id(BILLING_ADDRESS_TOWN_CITY_FIELD_ID)).sendKeys(town);
+        enterText(town, By.id(BILLING_ADDRESS_TOWN_CITY_FIELD_ID));
     }
 
     @Step("Enter Billing address Zip code: {0}.")
     public void fillBillingAddressZipCode(String zipCode) {
-        $(By.id(BILLING_ADDRESS_POSTCODE_FIELD_ID)).clear();
-        $(By.id(BILLING_ADDRESS_POSTCODE_FIELD_ID)).sendKeys(zipCode);
+        enterText(zipCode, By.id(BILLING_ADDRESS_POSTCODE_FIELD_ID));
     }
 
     @Step("Enter Billing address Phone number: {0}.")
-    public void fillBillingAddressPhoneNumber(String phoneNUmber) {
-        $(By.id(BILLING_ADDRESS_PHONE_FIELD_ID)).clear();
-        $(By.id(BILLING_ADDRESS_PHONE_FIELD_ID)).sendKeys(phoneNUmber);
+    public void fillBillingAddressPhoneNumber(String phoneNumber) {
+        enterText(phoneNumber, By.id(BILLING_ADDRESS_PHONE_FIELD_ID));
     }
 }
