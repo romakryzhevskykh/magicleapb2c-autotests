@@ -8,3 +8,4 @@ Scenario: Check Shopping Cart Layout
 	Then Check that user is logged in ESAB.
 	Then Navigate to Shopping Cart by icon in the header.
 	Then Verify current page is Shopping Cart page.
+	And Verify h2 headers on Shopping cart.

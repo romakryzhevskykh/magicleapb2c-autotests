@@ -6,8 +6,8 @@
 		<parameter name="environment" value="dev" />
 		<parameter name="browserName" value="chrome" />
 		<classes>
-			<class name="com.template.cucumber.RegistrationSuite" />
-			<class name="com.template.cucumber.LoginSuite" />
+			<!-- <class name="com.template.cucumber.RegistrationSuite" /> -->
+			<!-- <class name="com.template.cucumber.LoginSuite" /> -->
 			<class name="com.template.cucumber.ShoppingCartSuite" />
 
 		</classes>
