@@ -1,10 +1,7 @@
 package com.template.storefront.page_blocks;
 
 //import static com.template.storefront.page_elements.LoggedInHeaderRowBlockElements.CUSTOMER_NAME;
-import static com.template.storefront.page_elements.LoggedInHeaderRowBlockElements.MY_ACCOUNT_ADDRESS_BOOK_XPATH;
-import static com.template.storefront.page_elements.LoggedInHeaderRowBlockElements.MY_ACCOUNT_DROP_DOWM_XPATH;
-import static com.template.storefront.page_elements.LoggedInHeaderRowBlockElements.SIGN_OUT_BUTTON_XPATH;
-import static com.template.storefront.page_elements.LoggedInHeaderRowBlockElements.WELCOME_TO_DASHBOARD_NAME;
+import static com.template.storefront.page_elements.LoggedInHeaderRowBlockElements.*;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +46,9 @@ public class LoggedInHeaderRowBlock extends BasePageObject {
     @Step("Click on Address Book item in My Account drop-down.")
     public void clickOnAddressBookItemInMyAccount() {
         $(MY_ACCOUNT_ADDRESS_BOOK_XPATH).click();
+    }
+    
+    public void navigateToShoppingCartByIcon(){
+    	click(CART_ICON_XPATH);
     }
 }

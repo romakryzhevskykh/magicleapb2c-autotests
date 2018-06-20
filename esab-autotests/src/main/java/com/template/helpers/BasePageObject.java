@@ -254,4 +254,12 @@ public abstract class BasePageObject {
 			webElement.sendKeys(textForInput);
 		}
 	}
+	
+	protected void isCurrentUrlExpectedURL(String validationURL){
+		String actualUrl = getCurrentUrl();
+		String expectedUrl = validationURL;
+		assertEquals(actualUrl, expectedUrl,
+				"Actual URL: " + actualUrl + " is not equals to expected URL: " + expectedUrl);
+		logger.info("Page URL is CORRECT: " + actualUrl);
+	}
 }

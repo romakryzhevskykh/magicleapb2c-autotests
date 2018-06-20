@@ -22,14 +22,13 @@ public class RegisterPageStepDefs extends AbstractStepDefs {
 	final static Logger logger = Logger.getLogger(HomePageStepDefs.class);
 
 	@Autowired
-	UserSessions userSessions;
+	public UserSessions userSessions;
 	@Autowired
-	RegisterPage registerPage;
+	public RegisterPage registerPage;
 
 	@Then("Verify current page is Register page.")
 	public void verifyRegisterPageOpened() {
-		logger.info("Verify register page is Opened");
-		assertTrue(registerPage.isCurrentUrlIsRegisterPageUrl(), "Current page is not registratin page");
+		registerPage.isCurrentUrlIsRegisterPageUrl();
 	}
 
 	@And("Verify field label names on Register page.")

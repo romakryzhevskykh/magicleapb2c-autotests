@@ -51,10 +51,20 @@ public class HomePageStepDefs extends AbstractStepDefs {
         assertTrue(homePage.pageIsOpened(), "Home page is not opened");
     }
     
+    @Then("Verify current page is Home page.")
+    public void isCurrentURLDashboardURL(){
+    	homePage.isCurrentURLDashboardPageURL();
+    }
+    
     @Then("Check that user is logged in ESAB.")
     public void checkThatUserIsLOggedIn() {
     	logger.info("Check User is logged in");
         assertTrue(homePage.userIsLoggedIn(), "User is not logged in");
+    }
+    
+    @Then ("^Navigate to Shopping Cart by icon in the header.$")
+    public void navigateToShoppingCartByIcon(){
+    	homePage.navigateToShoppingCartByIcon();
     }
     
 }

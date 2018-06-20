@@ -9,5 +9,6 @@ public class LoggedInHeaderRowBlockElements {
     public static final String MY_ACCOUNT_ADDRESS_BOOK_XPATH = MY_ACCOUNT_DROP_DOWN_ITEMS_XPATH + "//a[@title = 'Address Book']";
     public static final String WELCOME_TO_DASHBOARD_NAME = "//div[@class='top-info']//h2[normalize-space(text())]";
     public static final String CUSTOMER_NAME = "Customer";
+    public static final String CART_ICON_XPATH="//a[@href='/esab/en/cart']";
 
 }

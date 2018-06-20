@@ -2,21 +2,15 @@ package com.template.storefront.pages;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 
 import com.template.storefront.models.UserModel;
-import com.template.storefront.models.UserModelBuilder;
-
 import static com.template.storefront.page_elements.RegisterPageElements.*;
-import static org.testng.Assert.assertEquals;
-
 import ru.yandex.qatools.allure.annotations.Step;
 
 @Component
@@ -44,9 +38,10 @@ public class RegisterPage extends StorefrontBasePage {
 		return registerPageUrl;
 	}
 
-	public void createUserModel(String newCountry, String newTitle, String newFirstLastName, String newCompanyId, String newCompanyName,
-			String newAddr1, String newAddr2, String newCity, String newPostCode, String newPosition, String newTelephone, String newExt,
-			String newEmailAddr, String newConfirmEmailaddr, String newComment) {
+	public void createUserModel(String newCountry, String newTitle, String newFirstLastName, String newCompanyId,
+			String newCompanyName, String newAddr1, String newAddr2, String newCity, String newPostCode,
+			String newPosition, String newTelephone, String newExt, String newEmailAddr, String newConfirmEmailaddr,
+			String newComment) {
 		userModelBuilder.setNewCountry(newCountry);
 		userModelBuilder.setNewTitle(newTitle);
 		userModelBuilder.setNewFirstLastName(newFirstLastName);
@@ -67,8 +62,9 @@ public class RegisterPage extends StorefrontBasePage {
 	}
 
 	@Step("Verify current page is Register page.")
-	public boolean isCurrentUrlIsRegisterPageUrl() {
-		return getPageUrl().equals(getCurrentUrl());
+	public void isCurrentUrlIsRegisterPageUrl() {
+		String expectedUrl = getPageUrl();
+		isCurrentUrlExpectedURL(expectedUrl);
 	}
 
 	@Step("Verify field label names on Register page.")

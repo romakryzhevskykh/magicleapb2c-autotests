@@ -33,4 +33,9 @@ public class HeaderRowPageBlock {
     public void clickOnAddressBookItemInMyAccount() {
         loggedInHeaderRowBlock.clickOnAddressBookItemInMyAccount();
     }
+    
+    @Step ("Navigate to Shopping cart by icon.")
+    public void navigateToShoppingCartByIcon(){
+    	loggedInHeaderRowBlock.navigateToShoppingCartByIcon();
+    }
 }
