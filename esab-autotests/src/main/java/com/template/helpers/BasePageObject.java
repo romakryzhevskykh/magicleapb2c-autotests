@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class BasePageObject {
 
@@ -123,11 +124,21 @@ public abstract class BasePageObject {
 	public List<String> getWebElementsTextValues(String xpath, String... args) {
 		List<WebElement> webElements = getWebElements(xpath, args);
 		List<String> webElementsValues = new ArrayList<String>();
-		logger.info("Add web elemnts values to the list");
-		for (WebElement webElement : webElements) {
-			String webElementValue = webElement.getText().trim();
-			logger.info("Add value to the list: " + webElementValue);
-			webElementsValues.add(webElementValue);
+		/*List<String> webElementsValues1 = webElements.stream()
+				.map(this::toText)
+				.collect(Collectors.toList());
+		List<String> webElementsValues = new ArrayList<String>();
+		logger.info("Add web elemnts values to the list");*/
+		/*webElements.parallelStream()
+		.map(WebElement.class::isInstance)
+		.map(WebElement.class::cast)
+		.collect(Collectors.toList());*/
+		if (webElements!= null){
+			for (WebElement webElement : webElements) {
+				String webElementValue = webElement.getText().trim();
+				logger.info("Add value to the list: " + webElementValue);
+				webElementsValues.add(webElementValue);
+			}
 		}
 		if (webElementsValues.size() > 0) {
 			logger.info("Sort list of String values. Return list of values.");
@@ -136,6 +147,12 @@ public abstract class BasePageObject {
 		}
 		logger.error("List of values is empty. Return NULL.");
 		return null;
+	}
+	
+	protected String toText(WebElement webElement) {
+		String webElementValue = webElement.getText().trim();
+		logger.info("Add value to the list: " + webElementValue);
+		return webElementValue;
 	}
 
 	protected void open(String url) {
