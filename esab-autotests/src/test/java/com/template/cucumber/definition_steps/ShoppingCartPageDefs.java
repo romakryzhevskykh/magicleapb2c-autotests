@@ -21,9 +21,30 @@ public class ShoppingCartPageDefs extends AbstractStepDefs {
 	public void verifyShoppingCartPageURL() {
 		shoppingCartPage.isCurrentPageUrlShoppingCartUrl();
 	}
-	@And ("^Verify h2 headers on Shopping cart.$")
-	public void verifyH2Headers(){
-		shoppingCartPage.verifyShoppingCartHeaders();
+
+	@And("^Verify h2 header1 on Shopping cart.$")
+	public void verifyH2Header1() {
+		shoppingCartPage.verifyShoppingCartHeader1();
+	}
+
+	@And("^Verify h2 header2 on Shopping cart.$")
+	public void verifyH2Header2() {
+		shoppingCartPage.verifyShoppingCartHeader2();
+	}
+
+	@And("^Verify Header2 subtitle on Shopping Cart.$")
+	public void verifyHeader2Subtitle() {
+		shoppingCartPage.verifyH2Header2Subtitle();
+	}
+	
+	@And ("^Verify Ship-To address value on Shopping Cart.$")
+	public void VerifyShipToAddr(){
+		shoppingCartPage.verifyShipToValue();
+	}
+	
+	@And ("^Select Ship To address on Shopping Cart.$")
+	public void selectShipToAddr(){
+		shoppingCartPage.selectShipToAddress();
 	}
 
 }

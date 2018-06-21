@@ -10,7 +10,7 @@
     <name>ESAB Autotests</name>
 
     <properties>
-    	<!--Determines which profile will be used for tests-->
+    	<!--Determines which profile will be used for tests dev or stage-->
         <testEnv>dev</testEnv>
         <selenium.version>3.6.0</selenium.version>
         <testng.version>6.11</testng.version>

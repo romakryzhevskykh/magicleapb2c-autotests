@@ -124,16 +124,7 @@ public abstract class BasePageObject {
 	public List<String> getWebElementsTextValues(String xpath, String... args) {
 		List<WebElement> webElements = getWebElements(xpath, args);
 		List<String> webElementsValues = new ArrayList<String>();
-		/*List<String> webElementsValues1 = webElements.stream()
-				.map(this::toText)
-				.collect(Collectors.toList());
-		List<String> webElementsValues = new ArrayList<String>();
-		logger.info("Add web elemnts values to the list");*/
-		/*webElements.parallelStream()
-		.map(WebElement.class::isInstance)
-		.map(WebElement.class::cast)
-		.collect(Collectors.toList());*/
-		if (webElements!= null){
+		if (webElements != null) {
 			for (WebElement webElement : webElements) {
 				String webElementValue = webElement.getText().trim();
 				logger.info("Add value to the list: " + webElementValue);
@@ -148,7 +139,7 @@ public abstract class BasePageObject {
 		logger.error("List of values is empty. Return NULL.");
 		return null;
 	}
-	
+
 	protected String toText(WebElement webElement) {
 		String webElementValue = webElement.getText().trim();
 		logger.info("Add value to the list: " + webElementValue);
@@ -271,8 +262,8 @@ public abstract class BasePageObject {
 			webElement.sendKeys(textForInput);
 		}
 	}
-	
-	protected void isCurrentUrlExpectedURL(String validationURL){
+
+	protected void isCurrentUrlExpectedURL(String validationURL) {
 		String actualUrl = getCurrentUrl();
 		String expectedUrl = validationURL;
 		assertEquals(actualUrl, expectedUrl,
