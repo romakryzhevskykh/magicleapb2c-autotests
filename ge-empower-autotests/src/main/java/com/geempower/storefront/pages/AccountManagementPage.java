@@ -189,10 +189,12 @@ public class AccountManagementPage extends StorefrontBasePage {
         return $$(LIST_OF_REJECTED_INFO_MESSAGES_XPATH).stream();
     }
 
+    @Step("Get List of rejected accounts.")
     public List<WebElement> getListOfApprovedAccounts() {
         return $$(By.xpath(APPROVED_ACCOUNTS_LIST_XPATH));
     }
 
+    @Step("Remove account by account number.")
     public void removeAccountByAccountNo(String account){
         waitUntilPageIsFullyLoaded();
         $(REMOVE_ACCOUNT_ACTION_FOR_APPROPRIATE_ACCOUNT_THREE_DOT_ICON_XPATH, account).click();
