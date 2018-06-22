@@ -26,8 +26,8 @@ public class FullProductDetailsPopUpBlock extends UIComponent {
         return $(CLAIMBACK_MESSAGE_BELOW_PRICING_DETAILS_TITLE_XPATH).getText();
     }
 
-    @Step("Close Product Details pop-up.")
-    public void closeProductsDetailPopUp() {
+    @Step("Close Full Product Details pop-up.")
+    public void closeFullProductsDetailPopUp() {
         click(CLOSE_BUTTON_IN_PRODUCT_DETAILS_TAB_XPATH);
     }
 }

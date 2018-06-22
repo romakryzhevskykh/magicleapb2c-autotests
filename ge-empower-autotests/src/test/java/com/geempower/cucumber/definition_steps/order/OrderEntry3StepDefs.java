@@ -111,4 +111,19 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
         assertEquals(shipmentAddress, orderEntry3Page.getPayerAddress());
         assertEquals(shipmentAddress, orderEntry3Page.getShipmentAddress());
     }
+
+    @Then("^Is (.*) blue block message displayed on the OE 3 page.$")
+    public void isBlueBlockMessageDisplayedOnTheOE3Page(String text) {
+        assertEquals(text, orderEntry3Page.getClaimbackMessageInBlueBlockOnOE3Page());
+    }
+
+    @Then("^Is Claimback icon displayed in Extended Price cell on the OE 3 page.$")
+    public void isClaimbackIconDisplayedInExtendedPriceCellOnThe3OEPage() {
+        assertTrue(orderEntry3Page.isClaimbackIconInExtndPriceCellOE3PageDisplayed());
+    }
+
+    @When("^Click on (.*) link on the OE 3 page.$")
+    public void clickOnProductLinkOnThe3OEPage(String products) {
+        orderEntry3Page.clickOnProductLinkOnOE3Page(products);
+    }
 }

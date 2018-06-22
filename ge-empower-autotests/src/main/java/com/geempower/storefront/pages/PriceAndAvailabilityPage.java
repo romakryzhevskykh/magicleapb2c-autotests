@@ -158,6 +158,7 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
 
     @Step("Get Claimback message below SPA No field.")
     public String getClaimbackMessageBelowSpaNoField() {
+        waitUntilPageIsFullyLoaded();
         return $(CLAIMBACK_MESSAGE_BELOW_AGREEMENT_NO_FIELD_XPATH).getText();
     }
 

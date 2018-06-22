@@ -4,6 +4,7 @@ import com.geempower.cucumber.definition_steps.AbstractStepDefs;
 import com.geempower.cucumber.definition_steps.TestKeyword;
 import com.geempower.helpers.models.Product;
 import com.geempower.helpers.models.Region;
+import com.geempower.storefront.page_blocks.ShortProductDetailsPopUpBlock;
 import com.geempower.storefront.pages.order.OrderEntry2Page;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
@@ -19,15 +20,18 @@ public class OrderEntry2StepDefs extends AbstractStepDefs {
     @Autowired
     private OrderEntry2Page orderEntry2Page;
 
+    @Autowired
+    private ShortProductDetailsPopUpBlock shortProductDetailsPopUpBlock;
+
     private final double delta = 0.0001;
 
-    @When("^User fills PO no. to the PO no. field at the OE 2 page.$")
-    public void userFillsPONoAtOE2Page() {
+    @When("^User fills PO no. to the PO no. field on the OE 2 page.$")
+    public void userFillsPONoOnOE2Page() {
         threadVarsHashMap.put(TestKeyword.PO_NO, orderEntry2Page.fillUniquePoNo());
     }
 
-    @And("^Select Shipment Address from the existing addresses at the OE 2 page.$")
-    public void selectShipmentAddressAtOE2Page() {
+    @And("^Select Shipment Address from the existing addresses on the OE 2 page.$")
+    public void selectShipmentAddressOnOE2Page() {
         threadVarsHashMap.put(TestKeyword.SHIPPING_ADDRESS, orderEntry2Page.chooseAppropriateAddressFromTheShippingAddressList());
     }
 
@@ -36,7 +40,7 @@ public class OrderEntry2StepDefs extends AbstractStepDefs {
         assertEquals(threadVarsHashMap.get(TestKeyword.SHIPPING_ADDRESS), orderEntry2Page.getShipToValue());
     }
 
-    @When("^User clicks on the Bottom Next button at the OE 2 page.$")
+    @When("^User clicks on the Bottom Next button on the OE 2 page.$")
     public void userClicksOnTheBottomNextButtonAtOE2Page() {
         orderEntry2Page.clickOnTheNextBottomButton();
     }
@@ -91,7 +95,7 @@ public class OrderEntry2StepDefs extends AbstractStepDefs {
     }
 
     @Then("^Payer and Shipment Addresses are correct at the OE 2 page.$")
-    public void payerAndShipmentAddressesAreCorrectAtTheOE2Page(){
+    public void payerAndShipmentAddressesAreCorrectAtTheOE2Page() {
         String shipmentAddress = (String) threadVarsHashMap.get(TestKeyword.LA_SHIP_ADDRESS);
         assertEquals(shipmentAddress, orderEntry2Page.getPayerAddress());
         assertEquals(shipmentAddress, orderEntry2Page.getShipmentAddress());
@@ -101,19 +105,46 @@ public class OrderEntry2StepDefs extends AbstractStepDefs {
     public void userSelectsCarrierAtTheOEPage() {
         orderEntry2Page.selectCarrierFromDropDown();
     }
+
     @When("^User fill Carrier Account No. field at the OE 2 page.$")
     public void userFillCarrierAccountNo() {
         orderEntry2Page.fillCarrierAccountNo();
     }
 
-    @And("^Click on Add More Items button in the Minimum Shipment Charges pop-up at the OE 2 page.$")
-    public void clickOnAddMoreItemsButtonInTheMinimumShipmentChargesPopUpAtTheOEPage(){
+    @And("^Click on Add More Items button in the Minimum Shipment Charges pop-up on the OE 2 page.$")
+    public void clickOnAddMoreItemsButtonInTheMinimumShipmentChargesPopUpAtTheOEPage() {
         orderEntry2Page.clickOnAddMoreItemsButton();
     }
 
-    @Then("^Is (.*) block message displayed at the OE 2 page.$")
-    public void isBlueBlockMessageDisplayedAtTheOE2Page(String text) {
-        assertEquals(text, orderEntry2Page.getClaimbackMessageInBlueBlock());
+    @Then("^Is (.*) blue block message displayed on the OE 2 page.$")
+    public void isBlueBlockMessageDisplayedOnTheOE2Page(String text) {
+        assertEquals(text, orderEntry2Page.getClaimbackMessageInBlueBlockOn2OEPage());
     }
+
+    @Then("^Is Claimback icon displayed in Extended Price cell on the OE 2 page.$")
+    public void isClaimbackIconDisplayedInExtendedPriceCell() {
+        assertTrue(orderEntry2Page.isClaimbackIconInExtndPriceCellOE2PageDisplayed());
+    }
+
+    @When("^Click on (.*) link on the OE 2 page.$")
+    public void clickOnProductLinkOnThe2OEPage(String products) {
+        orderEntry2Page.clickOnProductLinkOnOE2Page(products);
+    }
+
+    @Then("^Is (.*) message below Pricing Details title displayed in Short Product Details pop-up.$")
+    public void isClaimbackMessageInShortProductDetailsPopUpDisplayed(String text) {
+        assertEquals(text, shortProductDetailsPopUpBlock.getClaimbackMessageBelowPricingDetailsTitleField());
+    }
+
+    @Then("^Is Short Product Details pop-up on the displayed.$")
+    public void isShortProductDetailsPopUpDisplayed() {
+        assertTrue(shortProductDetailsPopUpBlock.isShortProductDetailPopUpDisplayed());
+    }
+
+    @When("^Close Short Product Details pop-up.$")
+    public void closeShortProductDetailsPopUp() {
+        shortProductDetailsPopUpBlock.closeShortProductsDetailPopUp();
+    }
+
 }
 

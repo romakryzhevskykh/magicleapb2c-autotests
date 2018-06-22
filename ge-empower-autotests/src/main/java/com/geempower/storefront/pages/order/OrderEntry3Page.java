@@ -183,4 +183,21 @@ public class OrderEntry3Page extends StorefrontBasePage {
     public String getShipmentAddress() {
         return $(SHIPPING_ADDRESS_BLOCK_VALUE_XPATH).getText();
     }
+
+    @Step("Get Claimback Message In Blue Block on 3 OE page.")
+    public String getClaimbackMessageInBlueBlockOnOE3Page() {
+        return $(CLAIMBACK_MESSAGE_IN_BLUE_BLOCK_XPATH).getText();
+    }
+
+    @Step("Is Claimback Icon In Extnd Price Cell OE 3 page Displayed.")
+    public boolean isClaimbackIconInExtndPriceCellOE3PageDisplayed() {
+        return isDisplayed(CLAIMBACK_ICON_IN_EXTND_PRICE_CELL_3_OE_PAGE_XPATH);
+    }
+
+    @Step("Click on Product Link on OE 3 Page.")
+    public void clickOnProductLinkOnOE3Page(String products) {
+        waitUntilPageIsFullyLoaded();
+        click(PRODUCT_LINK_3_OE_PAGE_XPATH, products);
+    }
+
 }

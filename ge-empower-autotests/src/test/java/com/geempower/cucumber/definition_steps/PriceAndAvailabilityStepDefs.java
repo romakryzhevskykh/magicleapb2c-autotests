@@ -157,7 +157,7 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
         assertEquals(text, priceAndAvailabilityPage.getClaimbackMessageBelowSpaNoField());
     }
 
-    @Then("^Is (.*) message below Pricing Details title displayed on Product Details pop-up.$")
+    @Then("^Is (.*) message below Pricing Details title displayed in Full Product Details pop-up.$")
     public void isClaimbackMessageBelowPricingDetailsDisplayed(String text) {
         assertEquals(text, fullProductDetailsPopUpBlock.getClaimbackMessageBelowPricingDetailsTitleField());
     }
@@ -177,8 +177,8 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
         fullProductDetailsPopUpBlock.clickOnProductDetailsTab();
     }
 
-    @When("^Close Product Details pop-up.$")
-    public void closeProductDetailsPopUp() {
-        fullProductDetailsPopUpBlock.closeProductsDetailPopUp();
+    @When("^Close Full Product Details pop-up.$")
+    public void closeFullProductDetailsPopUp() {
+        fullProductDetailsPopUpBlock.closeFullProductsDetailPopUp();
     }
 }

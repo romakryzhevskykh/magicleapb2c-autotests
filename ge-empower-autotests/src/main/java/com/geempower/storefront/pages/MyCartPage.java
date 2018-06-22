@@ -133,6 +133,7 @@ public class MyCartPage extends StorefrontBasePage {
 
     @Step("Click On Product Link On My Cart Page.")
     public void clickOnProductLinkOnMyCartPage(String products) {
+        waitUntilPageIsFullyLoaded();
         click(PRODUCT_LINK_ON_MY_CART_PAGE_XPATH, products);
     }
 }

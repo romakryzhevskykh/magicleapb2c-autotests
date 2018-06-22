@@ -23,6 +23,7 @@ public class OrderEntry2Page extends StorefrontBasePage {
 
     @Step("Click on the bottom Next button on the second OE 2 page.")
     public void clickOnTheNextBottomButton() {
+        waitUntilPageIsFullyLoaded();
         $(SHIPPING_BILLING_BOTTOM_NEXT_BUTTON_XPATH).click();
         waitUntilPageIsFullyLoaded();
         if (isDisplayed(MINIMUM_SHIPMENT_CHARGES_EMEA_MODAL_XPATH)) {
@@ -174,6 +175,7 @@ public class OrderEntry2Page extends StorefrontBasePage {
     public String getShipmentAddress() {
         return $(SHIPPING_ADDRESS_BLOCK_VALUE_XPATH).getText();
     }
+
     @Step("Selects Carrier from drop-down at the OE 2 page.")
     public void selectCarrierFromDropDown() {
         click(CARRIER_FIELD_XPATH);
@@ -191,8 +193,19 @@ public class OrderEntry2Page extends StorefrontBasePage {
         click(ADD_MORE_ITEMS_BUTTON_XPATH);
     }
 
-    @Step("Get Claimback Message In Blue Block.")
-    public String getClaimbackMessageInBlueBlock() {
+    @Step("Get Claimback Message In Blue Block on 2 OE page.")
+    public String getClaimbackMessageInBlueBlockOn2OEPage() {
         return $(CLAIMBACK_MESSAGE_IN_BLUE_BLOCK_XPATH).getText();
+    }
+
+    @Step("Is Claimback Icon In Extnd Price Cell OE 2 Page Displayed.")
+    public boolean isClaimbackIconInExtndPriceCellOE2PageDisplayed() {
+        return isDisplayed(CLAIMBACK_ICON_IN_EXTND_PRICE_CELL_2_OE_PAGE_XPATH);
+    }
+
+    @Step("Click on Product Link on OE 2 Page.")
+    public void clickOnProductLinkOnOE2Page(String products) {
+        waitUntilPageIsFullyLoaded();
+        click(PRODUCT_LINK_2_OE_PAGE_XPATH, products);
     }
 }
