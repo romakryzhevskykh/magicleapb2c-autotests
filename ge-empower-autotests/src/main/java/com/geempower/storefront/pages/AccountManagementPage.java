@@ -163,13 +163,7 @@ public class AccountManagementPage extends StorefrontBasePage {
 
     @Step("Remove All Active Requested Accounts.")
     public void removeAllRequestedAccounts(ArrayList<String> approvedAccounts) {
-        approvedAccounts.forEach(account -> {
-            $(REMOVE_ACCOUNT_ACTION_FOR_APPROPRIATE_ACCOUNT_THREE_DOT_ICON_XPATH, account).click();
-            $(THREE_DOT_ICON_REMOVE_ACCOUNT_XPATH, account).click();
-            waitUntilPageIsFullyLoaded();
-            $(CONFIRMATION_FOR_REMOVE_ACTIVE_ACCOUNT_BUTTON_XPATH).click();
-            waitUntilPageIsFullyLoaded();
-        });
+        approvedAccounts.forEach(this::removeAccountByAccountNo);
     }
 
     @Step("Active Favorite Tab Is Displayed.")
@@ -190,9 +184,22 @@ public class AccountManagementPage extends StorefrontBasePage {
         action.moveToElement($(MODIFY_ACTIVE_BUTTON_XPATH)).click().build().perform();
     }
 
-    @Step("Get Gejected request list messages")
+    @Step("Get Rejected request list messages")
     public Stream<WebElement> getRejectedRequestListMessages() {
         return $$(LIST_OF_REJECTED_INFO_MESSAGES_XPATH).stream();
+    }
+
+    public List<WebElement> getListOfApprovedAccounts() {
+        return $$(By.xpath(APPROVED_ACCOUNTS_LIST_XPATH));
+    }
+
+    public void removeAccountByAccountNo(String account){
+        waitUntilPageIsFullyLoaded();
+        $(REMOVE_ACCOUNT_ACTION_FOR_APPROPRIATE_ACCOUNT_THREE_DOT_ICON_XPATH, account).click();
+        $(THREE_DOT_ICON_REMOVE_ACCOUNT_XPATH, account).click();
+        waitUntilPageIsFullyLoaded();
+        $(CONFIRMATION_FOR_REMOVE_ACTIVE_ACCOUNT_BUTTON_XPATH).click();
+        waitUntilPageIsFullyLoaded();
     }
 }
 
