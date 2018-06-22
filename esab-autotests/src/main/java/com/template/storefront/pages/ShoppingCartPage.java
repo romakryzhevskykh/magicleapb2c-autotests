@@ -23,13 +23,18 @@ public class ShoppingCartPage extends StorefrontBasePage {
 	private List<String> validationHeader2Subtitle = new ArrayList<>(Arrays
 			.asList("Fill out the form below to add products to your order or click here to upload an order instead."));
 	private String validationHeaderTitle1 = "Shopping Cart";
-	/*private List<String> validationShipToAddr = new ArrayList<>(
-			Arrays.asList("999 South Wacker Drive, Chicago, 60606"));*/
+	private List<String> validationAddToCartButtonLabel = new ArrayList<>(
+			Arrays.asList("Add these products to shopping cart"));
+	/*
+	 * private List<String> validationShipToAddr = new ArrayList<>(
+	 * Arrays.asList("999 South Wacker Drive, Chicago, 60606"));
+	 */
 	private List<String> validationShipToAddr = new ArrayList<>(
 			Arrays.asList("999 South Wacker Drive, Chicago, 60606"));
 	private String shipToAddress = "999 South Wacker Drive, Chicago, 60606";
-	
-	//private String shipToAddress = "StreetName, StreetNumber, Town, PostalCode";
+
+	// private String shipToAddress = "StreetName, StreetNumber, Town,
+	// PostalCode";
 
 	@Override
 	public String getPageUrl() {
@@ -71,8 +76,7 @@ public class ShoppingCartPage extends StorefrontBasePage {
 
 	@Step("Verify Ship-To address value")
 	public void verifyShipToValue() {
-		verifyWebElementsTextValuesEqual(validationShipToAddr,
-				String.format(SHIP_TO_VALUE, shipToAddress));
+		verifyWebElementsTextValuesEqual(validationShipToAddr, String.format(SHIP_TO_VALUE, shipToAddress));
 		logger.info("Ship to Address is CORRECT: " + validationShipToAddr);
 	}
 
@@ -81,4 +85,30 @@ public class ShoppingCartPage extends StorefrontBasePage {
 		click(String.format(SHIP_TO_VALUE, shipToAddress));
 	}
 
+	@Step("Verify SKU Input count")
+	public void verifySkuInputsCount(int validationSKUCount) {
+		waitJSExecution();
+		int actualSkuInputCount = getWebElements(SKU_INPUT_XPATH).size();
+		logger.info("Actual SKU Inputs count is: " + actualSkuInputCount);
+		assertEquals(actualSkuInputCount, validationSKUCount, "Actual SKU Input Count is: " + actualSkuInputCount
+				+ " but expected SKU Count is: " + validationSKUCount);
+	}
+
+	@Step("Press on Add more products link")
+	public void clickMoreProducts() {
+		click(ADD_MORE_PRODUCTS_XPATH);
+	}
+
+	@Step("Verify add to cart button lavbel")
+	public void verifyAddToCartButtonLabel() {
+		verifyWebElementsTextValuesEqual(validationAddToCartButtonLabel, ADD_TO_CART_BUTTON_XPATH);
+		logger.info("Add to Cart button label is CORRECT: " + validationAddToCartButtonLabel);
+	}
+	
+	@Step ("Click on Add to products to shopping cart button")
+	public void clickAddProductsButton(){
+		click(ADD_TO_CART_BUTTON_XPATH);
+	}
+
+	
 }

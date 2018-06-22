@@ -2,22 +2,18 @@ package com.template.helpers;
 
 import com.template.helpers.web_engine.WebDriverSessions;
 
-import javafx.collections.transformation.SortedList;
-
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static com.template.storefront.page_elements.RegisterPageElements.REGISTRATION_PAGE_LABELS_XPATH;
 import static org.testng.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public abstract class BasePageObject {
 
@@ -77,6 +73,39 @@ public abstract class BasePageObject {
 		}
 		setDefaultImplicitWait();
 		return null;
+	}
+
+	public void waitJSExecution() {
+		setImplicitWaitShort();
+		ExpectedCondition<Boolean> jQueryLoaded = new ExpectedCondition<Boolean>() {
+			@Override
+			public Boolean apply(WebDriver driver) {
+				try {
+
+					boolean isJQueryLoaded = ((Long) ((JavascriptExecutor) getDriver())
+							.executeScript("return jQuery.active")) == 0;
+					logger.info("isJQueryLoaded value: " + isJQueryLoaded);
+					return isJQueryLoaded;
+				} catch (Exception e) {
+					return true;
+				}
+			}
+		};
+
+		ExpectedCondition<Boolean> jsLoad = new ExpectedCondition<Boolean>() {
+			@Override
+			public Boolean apply(WebDriver driver) {
+
+				Boolean isJsLoaded = ((JavascriptExecutor) getDriver()).executeScript("return document.readyState")
+						.toString().equals("complete");
+				logger.info("isJsLoaded value: " + isJsLoaded);
+				return isJsLoaded;
+			}
+		};
+		logger.info("wait JSExecution method has triggered");
+		initWebDriverWait().until(jQueryLoaded);
+		initWebDriverWait().until(jsLoad);
+		setDefaultImplicitWait();
 	}
 
 	public WebElement getWebElement(By by) {

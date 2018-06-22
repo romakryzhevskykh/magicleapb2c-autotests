@@ -12,3 +12,10 @@ Scenario: Check Shopping Cart Layout
 	And Verify Header2 subtitle on Shopping Cart.
 	And Verify Ship-To address value on Shopping Cart.
 	And Select Ship To address on Shopping Cart.
+	And Verify SKU Inputs count on Shopping Cart is: "2" .
+	And Click on Add more products link on Shopping Cart.
+	And Verify SKU Inputs count on Shopping Cart is: "4" .
+	And Verify add to cart button label on Shopping Cart.
+	And Click on Add these products to shopping cart button.
+	And Verify SKU Inputs count on Shopping Cart is: "2" .
+	

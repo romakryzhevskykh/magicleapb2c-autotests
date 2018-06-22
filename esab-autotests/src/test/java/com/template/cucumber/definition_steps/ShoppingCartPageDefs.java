@@ -46,5 +46,25 @@ public class ShoppingCartPageDefs extends AbstractStepDefs {
 	public void selectShipToAddr(){
 		shoppingCartPage.selectShipToAddress();
 	}
+	
+	@And ("^Verify SKU Inputs count on Shopping Cart is: \"(.*)\" .$")
+	public void verifySkuCount(int validationSKUCount){
+		shoppingCartPage.verifySkuInputsCount(validationSKUCount);
+	}
+	
+	@And ("^Click on Add more products link on Shopping Cart.$")
+	public void clickMoreProducts(){
+		shoppingCartPage.clickMoreProducts();
+	}
+	
+	@And ("^Verify add to cart button label on Shopping Cart.$")
+	public void verifyAddToCartButtonLAbel(){
+		shoppingCartPage.verifyAddToCartButtonLabel();
+	}
+	
+	@And ("^Click on Add these products to shopping cart button.$")
+	public void clickOnAddProductsButton(){
+		shoppingCartPage.clickAddProductsButton();
+	}
 
 }
