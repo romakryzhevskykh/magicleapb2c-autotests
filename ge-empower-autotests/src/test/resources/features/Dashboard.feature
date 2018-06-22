@@ -96,17 +96,17 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then My Cart page is opened.
     When User clicks on the Next top button on the My Cart page.
     Then Payer and Shipment Addresses are correct at the OE 2 page.
-    When User fills PO no. to the PO no. field at the OE 2 page.
+    When User fills PO no. to the PO no. field on the OE 2 page.
     When User selects Carrier from drop-down at the OE 2 page.
     When User fill Carrier Account No. field at the OE 2 page.
-    When User clicks on the Bottom Next button at the OE 2 page.
+    When User clicks on the Bottom Next button on the OE 2 page.
     And Click on Add More Items button in the Minimum Shipment Charges pop-up on the OE 2 page.
     When Quantity is changed to random quantity of items for each product on the My Cart page.
     And All products are selected on the My Cart page.
     And Update Price & Availability button is clicked on the My Cart page.
     Then Extend Price is changed to correct value on the My Cart page.
     When User clicks on the Next top button on the My Cart page.
-    When User clicks on the Bottom Next button at the OE 2 page.
+    When User clicks on the Bottom Next button on the OE 2 page.
     Then Order Summary step is opened.
     Then Payer and Shipment Addresses are correct at the OE 3 page.
     When User clicks on Place Order button at the OE 3 page.

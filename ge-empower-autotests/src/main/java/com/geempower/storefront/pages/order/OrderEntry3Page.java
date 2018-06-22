@@ -186,11 +186,12 @@ public class OrderEntry3Page extends StorefrontBasePage {
 
     @Step("Get Claimback Message In Blue Block on 3 OE page.")
     public String getClaimbackMessageInBlueBlockOnOE3Page() {
-        return $(CLAIMBACK_MESSAGE_IN_BLUE_BLOCK_XPATH).getText();
+        return $(CLAIMBACK_MESSAGE_IN_BLUE_BLOCK__3_OE_PAGE_XPATH).getText();
     }
 
     @Step("Is Claimback Icon In Extnd Price Cell OE 3 page Displayed.")
     public boolean isClaimbackIconInExtndPriceCellOE3PageDisplayed() {
+        waitUntilPageIsFullyLoaded();
         return isDisplayed(CLAIMBACK_ICON_IN_EXTND_PRICE_CELL_3_OE_PAGE_XPATH);
     }
 

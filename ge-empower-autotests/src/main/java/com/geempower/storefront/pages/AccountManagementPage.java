@@ -134,7 +134,7 @@ public class AccountManagementPage extends StorefrontBasePage {
     }
 
     public void isAccountPageFullyLoaded() {
-        if (!$(APPROVED_ACCOUNT_ROW_XPATH).isDisplayed()) {
+        if (!isDisplayed(APPROVED_ACCOUNT_ROW_XPATH)) {
             getDriver().navigate().refresh();
         }
     }

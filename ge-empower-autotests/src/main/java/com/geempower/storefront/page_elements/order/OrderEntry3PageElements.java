@@ -44,8 +44,7 @@ public class OrderEntry3PageElements {
 
     public final static String PAYER_BLOCK_VALUE_XPATH = "//p[@class='billToSummary']";
     public final static String SHIPPING_ADDRESS_BLOCK_VALUE_XPATH = "//p[@class='shipmentAddressSummary']";
-    public final static String CLAIMBACK_MESSAGE_IN_BLUE_BLOCK_XPATH = "//*[@id='shipping-billing-info']//div[contains(@class,'alert-info-spa')]";
-    public final static String CLAIMBACK_ICON_IN_EXTND_PRICE_CELL_3_OE_PAGE_XPATH = "//*[@id='DataTables_Table_0']//i[@class = 'fa fa-exclamation-triangle text-blue pull-left ml-5']";
-    public final static String PRODUCT_LINK_3_OE_PAGE_XPATH = "//a[contains(@href,'#product-details-1') and contains(text(),'%s')]";
-
+    public final static String CLAIMBACK_MESSAGE_IN_BLUE_BLOCK__3_OE_PAGE_XPATH = "//*[@id='order-summary']//div[contains(@class,'alert-info-spa')]";
+    public final static String CLAIMBACK_ICON_IN_EXTND_PRICE_CELL_3_OE_PAGE_XPATH = "//*[@id='DataTables_Table_1']//i[@class = 'fa fa-exclamation-triangle text-blue pull-left ml-5']";
+    public final static String PRODUCT_LINK_3_OE_PAGE_XPATH = "//*[@id='DataTables_Table_1']//a[contains(@href,'#product-details-1') and contains(text(),'%s')]";
 }
