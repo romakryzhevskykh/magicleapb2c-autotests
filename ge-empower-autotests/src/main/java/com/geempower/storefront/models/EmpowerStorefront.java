@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class EmpowerStorefront extends Cockpit {
     private final String ssoLoginUrl;
-    @Autowired LoginPage loginPage;
+    @Autowired
+    private LoginPage loginPage;
 
     public EmpowerStorefront(String baseUrl, String ssoLoginUrl) {
         this.baseUrl = baseUrl;

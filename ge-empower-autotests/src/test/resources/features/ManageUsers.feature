@@ -142,6 +142,8 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Given Switch to Storefront as externalUser1.
     And User is logged in to Storefront.
     And Account management page is opened.
+    When User switch to Approved Accounts tab on Account management page.
+    And User deletes all unnecessary accounts from his profile except 9012306.
     When Request account popup is opened.
     And Popup is filled by North_America, Latin_America, EMEA, ASIA accounts.
     And User send this requests for approval.
@@ -155,7 +157,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     When Admin opens Users tab.
     And Sets externaluser1 email to the email field.
     And Clicks on the Search button.
-    When Clicks on the user name in the table.
+    When Clicks on the user name in the table with pending accounts.
     Then Approve Pending Accounts section is displayed with appropriate count of accounts.
     When User expand the Approve Pending Accounts section.
     Then Appropriate count of pending requests are displayed in Pending accounts table.
@@ -168,8 +170,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Given Switch to Storefront as externalUser1.
     And User is logged in to Storefront.
     And Account management page is opened.
-    When User switch to Pending for approval tab on Account management page.
-    Then List on Pending accounts is empty.
+    And Refresh page.
     When User switch to Approved Accounts tab on Account management page.
     Then All the requested accounts are displayed in the tab.
     And User deletes all requested accounts from his profile.
@@ -178,6 +179,8 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Given Switch to Storefront as externalUser1.
     And User is logged in to Storefront.
     And Account management page is opened.
+    When User switch to Approved Accounts tab on Account management page.
+    And User deletes all unnecessary accounts from his profile except 9012306.
     When Request account popup is opened.
     And Popup is filled by North_America, Latin_America, EMEA, ASIA accounts.
     And User send this requests for approval.
@@ -190,7 +193,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     When Admin opens Users tab.
     And Sets externaluser1 email to the email field.
     And Clicks on the Search button.
-    When Clicks on the user name in the table.
+    When Clicks on the user name in the table with pending accounts.
     Then Approve Pending Accounts section is displayed with appropriate count of accounts.
     When User expand the Approve Pending Accounts section.
     When Admin clicks on All accounts checkbox.

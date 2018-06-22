@@ -70,6 +70,7 @@ public class OrderStatusWidget extends UIComponent {
 
     @Step("Open Appropriate List Of Orders By Status.")
     public void openAppropriateListOfOrdersByStatus(String orderStatus) {
+        waitUntilPageIsFullyLoaded();
         switch (orderStatus) {
             case "Opened":
                 waitUntilPageIsFullyLoaded();

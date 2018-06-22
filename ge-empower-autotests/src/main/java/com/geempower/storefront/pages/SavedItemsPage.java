@@ -25,4 +25,8 @@ public class SavedItemsPage extends StorefrontBasePage {
     public String getAllItemsTitle() {
         return $(ALL_ITEMS_TITLE_XPATH).getText();
     }
+
+//    public String getActiveCartTableTitle() {
+//
+//    }
 }
