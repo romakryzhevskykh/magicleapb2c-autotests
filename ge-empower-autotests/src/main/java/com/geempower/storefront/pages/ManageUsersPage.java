@@ -26,6 +26,7 @@ public class ManageUsersPage extends StorefrontBasePage {
 
     @Step("Get Manage Users title.")
     public String getManageUsersTitle() {
+        waitUntilPageIsFullyLoaded();
         return $(MANAGE_USERS_TITLE_XPATH).getText();
     }
 
@@ -131,7 +132,8 @@ public class ManageUsersPage extends StorefrontBasePage {
     }
 
     @Step("Click on User Name in the table")
-    public void clickOnTheUserNameInTheTable(int countOfAccount) {
+    public void clickOnTheUserNameInTheTableWithPendingRequests(int countOfAccount) {
+        waitUntilPageIsFullyLoaded();
         int counter = 0;
         do {
             click(FIRST_NAME_LINK_XPATH);
@@ -139,6 +141,13 @@ public class ManageUsersPage extends StorefrontBasePage {
             counter++;
         }
         while (!isUserDetailFullyLoaded(countOfAccount) && counter < 10);
+        waitUntilPageIsFullyLoaded();
+    }
+
+    @Step("Click on User Name in the table")
+    public void clickOnTheUserNameInTheTable() {
+        waitUntilPageIsFullyLoaded();
+        click(FIRST_NAME_LINK_XPATH);
         waitUntilPageIsFullyLoaded();
     }
 
