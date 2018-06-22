@@ -16,9 +16,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
-    @Autowired
-    private PriceAndAvailabilityPage priceAndAvailabilityPage;
-
+    @Autowired private PriceAndAvailabilityPage priceAndAvailabilityPage;
     @Autowired private FullProductDetailsPopUpBlock fullProductDetailsPopUpBlock;
 
     private final double delta = 0.000001;
@@ -153,8 +151,8 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
     }
 
     @Then("^Is (.*) message below Agreement No field displayed on P&A page.$")
-    public void isClaimbackMessageBelowSpaNoFieldDisplayed(String text) {
-        assertEquals(text, priceAndAvailabilityPage.getClaimbackMessageBelowSpaNoField());
+    public void isClaimbackMessageBelowAgreementNoFieldDisplayed(String text) {
+        assertEquals(text, priceAndAvailabilityPage.getClaimbackMessageBelowAgreementNoField());
     }
 
     @Then("^Is (.*) message below Pricing Details title displayed in Full Product Details pop-up.$")
@@ -163,8 +161,8 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
     }
 
     @When("^Click on (.*) link on P&A page.$")
-    public void clickOnProductsLinkOnPaPage(String products) {
-        priceAndAvailabilityPage.clickOnProductLinkOnPaPage(products);
+    public void clickOnProductsLinkOnPaPage(String product) {
+        priceAndAvailabilityPage.clickOnProductLinkOnPaPage(product);
     }
 
     @Then("^Is Product Details pop-up on Price and Availability page displayed.$")

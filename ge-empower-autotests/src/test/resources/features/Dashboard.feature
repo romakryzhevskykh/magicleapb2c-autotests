@@ -142,7 +142,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
   Scenario Outline: While doing P&A Add Item, Agreement No from previous P&A result is being sent in the web service Request - DE81550
     And Account management page is opened.
     When Choose <region> region.
-    And Select account 1318501.
+    And Select account <account>.
     And Click on account with <salesDivision> sales division.
     Then Dashboard page is opened.
     When Click on Skip button.
@@ -164,13 +164,13 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then All the products have <standardAgreementNo> agreement no in the Agreement No field.
 
     Examples:
-      | region        | products                        | agreementNo    | salesDivision | standardAgreementNo |
-      | North_America | THHQB1120AF2, TEY150, 9T21B9103 | 45003985       | USS1_10_10    | STANDARD            |
+      | region        | products                        | agreementNo    | salesDivision | standardAgreementNo | account |
+      | North_America | THHQB1120AF2, TEY150, 9T21B9103 | 45003985       | USS1_10_10    | STANDARD            | 1318501 |
 
   Scenario Outline: Check that Claimback icon and message are displayed on P&A and Order Entry pages - US294329
     And Account management page is opened.
     When Choose <region> region.
-    And Select account 3394020.
+    And Select account <account>.
     And Click on account with <salesDivision> sales division.
     Then Dashboard page is opened.
     When Click on Skip button.
@@ -214,9 +214,8 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     When Close Short Product Details pop-up.
 
     Examples:
-      | region        |product    | agreementNo    | salesDivision |
-      | North_America | TEY150    | 45003866       | USS1_10_10    |
-
+      | region        |product    | agreementNo    | salesDivision | account  |
+      | North_America | TEY150    | 45003866       | USS1_10_10    | 3394020  |
 
   Scenario: Check that user is able to send feedback successfully
     And Dashboard page is opened.

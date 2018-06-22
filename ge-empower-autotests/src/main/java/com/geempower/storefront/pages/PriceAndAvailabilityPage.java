@@ -155,15 +155,15 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
         click(ADD_ITEM_POP_UP_ADD_PRODUCT_BUTTON_XPATH);
     }
 
-    @Step("Get Claimback message below SPA No field.")
-    public String getClaimbackMessageBelowSpaNoField() {
+    @Step("Get Claimback message below Agreement No field.")
+    public String getClaimbackMessageBelowAgreementNoField() {
         waitUntilPageIsFullyLoaded();
         return $(CLAIMBACK_MESSAGE_BELOW_AGREEMENT_NO_FIELD_XPATH).getText();
     }
 
     @Step("Click on product link on P&A Page.")
-    public void clickOnProductLinkOnPaPage(String products) {
+    public void clickOnProductLinkOnPaPage(String product) {
         waitUntilPageIsFullyLoaded();
-        click(PRODUCT_LINK_ON_PA_PAGE_XPATH, products);
+        click(PRODUCT_LINK_ON_PA_PAGE_XPATH, product);
     }
 }
