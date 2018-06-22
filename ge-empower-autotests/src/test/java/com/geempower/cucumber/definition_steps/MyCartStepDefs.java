@@ -8,7 +8,6 @@ import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Random;
 
 import static org.testng.Assert.assertEquals;

@@ -4,7 +4,6 @@ import com.geempower.storefront.pages.SpecialPricingPage;
 import cucumber.api.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 import static org.testng.Assert.assertEquals;
 
 

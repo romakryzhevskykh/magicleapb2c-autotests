@@ -5,8 +5,6 @@ import com.geempower.storefront.StorefrontBasePage;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import java.util.List;
-
 import static com.geempower.storefront.page_elements.MyCartPageElements.*;
 
 @Component

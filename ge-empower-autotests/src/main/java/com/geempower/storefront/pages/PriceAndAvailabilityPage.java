@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import java.util.List;
 import java.util.stream.Stream;
 
 import static com.geempower.storefront.page_elements.MyCartPageElements.GREEN_CONFIRMATION_POP_UP_ID;
