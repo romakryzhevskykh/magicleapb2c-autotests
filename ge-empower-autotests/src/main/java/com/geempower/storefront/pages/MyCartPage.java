@@ -123,4 +123,15 @@ public class MyCartPage extends StorefrontBasePage {
         return $(EXTENDED_PRICE_ON_MY_CART_XPATH, product.getCatalogueNo().toUpperCase()).getText();
 
     }
+
+    @Step("Get Claimback Message Below Agreement No Field On My Cart Page.")
+    public String getClaimbackMessageBelowAgreementNoFieldOnMyCartPage() {
+        return $(CLAIMBACK_MESSAGE_BELOW_AGREEMENT_NO_FIELD_ON_MY_CART_PAGE_XPATH).getText();
+    }
+
+    @Step("Click On Product Link On My Cart Page.")
+    public void clickOnProductLinkOnMyCartPage(String products) {
+        waitUntilPageIsFullyLoaded();
+        click(PRODUCT_LINK_ON_MY_CART_PAGE_XPATH, products);
+    }
 }

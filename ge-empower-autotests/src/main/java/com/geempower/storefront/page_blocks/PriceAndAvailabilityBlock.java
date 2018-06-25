@@ -2,7 +2,6 @@ package com.geempower.storefront.page_blocks;
 
 import com.geempower.helpers.UIComponent;
 import com.geempower.helpers.managers.ProductManager;
-import com.geempower.helpers.models.Product;
 import org.openqa.selenium.By;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

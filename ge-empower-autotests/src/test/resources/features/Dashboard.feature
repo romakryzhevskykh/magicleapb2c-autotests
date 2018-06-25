@@ -44,10 +44,10 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then All necessary elements are displayed on the Address Details block at OE 2 page.
     Then All necessary elements are displayed on the Shipment Details block at OE 2 page.
     Then All necessary elements are displayed on the Product Details block at the OE 2 page.
-    When User fills PO no. to the PO no. field at the OE 2 page.
-    And Select Shipment Address from the existing addresses at the OE 2 page.
+    When User fills PO no. to the PO no. field on the OE 2 page.
+    And Select Shipment Address from the existing addresses on the OE 2 page.
     Then Selected Shipment address is equal to Ship to field value.
-    When User clicks on the Bottom Next button at the OE 2 page.
+    When User clicks on the Bottom Next button on the OE 2 page.
     Then Order Summary step is opened.
     Then All necessary elements are displayed on the Order Summary block on at OE 3 page.
     Then All necessary elements are displayed on the Address Details block at OE 3 page.
@@ -96,17 +96,17 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then My Cart page is opened.
     When User clicks on the Next top button on the My Cart page.
     Then Payer and Shipment Addresses are correct at the OE 2 page.
-    When User fills PO no. to the PO no. field at the OE 2 page.
+    When User fills PO no. to the PO no. field on the OE 2 page.
     When User selects Carrier from drop-down at the OE 2 page.
     When User fill Carrier Account No. field at the OE 2 page.
-    When User clicks on the Bottom Next button at the OE 2 page.
-    And Click on Add More Items button in the Minimum Shipment Charges pop-up at the OE 2 page.
+    When User clicks on the Bottom Next button on the OE 2 page.
+    And Click on Add More Items button in the Minimum Shipment Charges pop-up on the OE 2 page.
     When Quantity is changed to random quantity of items for each product on the My Cart page.
     And All products are selected on the My Cart page.
     And Update Price & Availability button is clicked on the My Cart page.
     Then Extend Price is changed to correct value on the My Cart page.
     When User clicks on the Next top button on the My Cart page.
-    When User clicks on the Bottom Next button at the OE 2 page.
+    When User clicks on the Bottom Next button on the OE 2 page.
     Then Order Summary step is opened.
     Then Payer and Shipment Addresses are correct at the OE 3 page.
     When User clicks on Place Order button at the OE 3 page.
@@ -139,10 +139,10 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
       | products                                    |
       | 1017251, 1019603, 1021099, 1021136, 1022416 |
 
-  Scenario Outline: While doing P&A Add Item, SPA# from previous P&A result is being sent in the web service Request - DE81550
+  Scenario Outline: While doing P&A Add Item, Agreement No from previous P&A result is being sent in the web service Request - DE81550
     And Account management page is opened.
     When Choose <region> region.
-    And Select account 1318501.
+    And Select account <account>.
     And Click on account with <salesDivision> sales division.
     Then Dashboard page is opened.
     When Click on Skip button.
@@ -150,8 +150,8 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     When User add list of <products> products to the Copy&Paste block.
     And Click on P&A button.
     Then Price&Availability page is opened.
-    When User select <spaNo> SPA No for all the product.
-    Then All the products have <spaNo> spa no in the Special Pricing field.
+    When User select <agreementNo> Agreement No for all the product.
+    Then All the products have <agreementNo> agreement no in the Agreement No field.
     And Account management page is opened.
     When Choose <region> region.
     And Select account 4642301.
@@ -161,11 +161,61 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     And Click on P&A button.
     Then Price&Availability page is opened.
     When User Add new item TED134025WL on the P&A page.
-    Then All the products have <standardSpaNo> spa no in the Special Pricing field.
+    Then All the products have <standardAgreementNo> agreement no in the Agreement No field.
 
     Examples:
-      | region        | products                        | spaNo    | salesDivision | standardSpaNo |
-      | North_America | THHQB1120AF2, TEY150, 9T21B9103 | 45003985 | USS1_10_10    | STANDARD      |
+      | region        | products                        | agreementNo    | salesDivision | standardAgreementNo | account |
+      | North_America | THHQB1120AF2, TEY150, 9T21B9103 | 45003985       | USS1_10_10    | STANDARD            | 1318501 |
+
+  Scenario Outline: Check that Claimback icon and message are displayed on P&A and Order Entry pages - US294329
+    And Account management page is opened.
+    When Choose <region> region.
+    And Select account <account>.
+    And Click on account with <salesDivision> sales division.
+    Then Dashboard page is opened.
+    When Click on Skip button.
+    When Close cookies pop-up.
+    When User add list of <product> products to the Copy&Paste block.
+    And Click on P&A button.
+    Then Price&Availability page is opened.
+    When User select <agreementNo> Agreement No for all the product.
+    Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Agreement No field displayed on P&A page.
+    When Click on <product> link on P&A page.
+    Then Is Product Details pop-up on Price and Availability page displayed.
+    When Click on Product Details tab.
+    Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Pricing Details title displayed in Full Product Details pop-up.
+    When Close Full Product Details pop-up.
+    And All products are selected on P&A page.
+    When User clicks on Add to Cart button.
+    Then Check that count of added items is displayed on My Cart icon.
+    When User clicks on My Cart icon.
+    When User clicks on Checkout button.
+    Then My Cart page is opened.
+    Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Agreement No field displayed on My Cart page.
+    When Click on <product> link on My Cart page.
+    Then Is Product Details pop-up on Price and Availability page displayed.
+    When Click on Product Details tab.
+    Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Pricing Details title displayed in Full Product Details pop-up.
+    When Close Full Product Details pop-up.
+    When User clicks on the Next top button on the My Cart page.
+    When User fills PO no. to the PO no. field on the OE 2 page.
+    And Select Shipment Address from the existing addresses on the OE 2 page.
+    Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) blue block message displayed on the OE 2 page.
+    Then Is Claimback icon displayed in Extended Price cell on the OE 2 page.
+    When Click on <product> link on the OE 2 page.
+    Then Is Short Product Details pop-up on the displayed.
+    Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Pricing Details title displayed in Short Product Details pop-up.
+    When Close Short Product Details pop-up.
+    When User clicks on the Bottom Next button on the OE 2 page.
+    Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) blue block message displayed on the OE 3 page.
+    Then Is Claimback icon displayed in Extended Price cell on the OE 3 page.
+    When Click on <product> link on the OE 3 page.
+    Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Pricing Details title displayed in Short Product Details pop-up.
+    When Close Short Product Details pop-up.
+
+    Examples:
+      | region        |product    | agreementNo    | salesDivision | account  |
+      | North_America | TEY150    | 45003866       | USS1_10_10    | 3394020  |
 
   Scenario: Check that user is able to send feedback successfully
     And Dashboard page is opened.

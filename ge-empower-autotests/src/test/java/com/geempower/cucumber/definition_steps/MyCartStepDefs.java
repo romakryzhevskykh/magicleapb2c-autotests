@@ -88,4 +88,14 @@ public class MyCartStepDefs extends AbstractStepDefs {
             assertEquals(finalActualPrice, Double.parseDouble(myCartPage.getNewExtendPrice(product)), delta);
         });
     }
+
+    @Then("^Is (.*) message below Agreement No field displayed on My Cart page.$")
+    public void isClaimbackMessageBelowSpaNoFieldOnMyCartPageDisplayed(String text) {
+        assertEquals(text, myCartPage.getClaimbackMessageBelowAgreementNoFieldOnMyCartPage());
+    }
+
+    @When("^Click on (.*) link on My Cart page.$")
+    public void clickOnProductLinkOnMyCartPage(String products) {
+        myCartPage.clickOnProductLinkOnMyCartPage(products);
+    }
 }

@@ -121,30 +121,30 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
         return $$(PRODUCT_ERROR_MESSAGES_XPATH).size();
     }
 
-    @Step("Set Appropriate Spa To All Products.")
-    public void setAppropriateSpaToAllProducts(String spaNo) {
-        click(SEARCH_SPA_NO_ICON_XPATH);
+    @Step("Set Appropriate agreement No To All Products.")
+    public void userSelectAgreementNoForAllTheProduct(String agreementNo) {
+        click(SEARCH_AGREEMENT_NO_ICON_XPATH);
         waitForElementWithAppropriateTextToAppear(By.xpath(SPECIAL_PRICING_POP_UP_TITLE_XPATH), "Special Pricing Lookup");
-        searchAppropriateSpaViaSearchFieldOnSpecialPricingLookupPopUp(spaNo);
+        searchAppropriateAgreementNoViaSearchFieldOnSpecialPricingLookupPopUp(agreementNo);
         click(APPLY_TO_ALL_BUTTON_SPECIAL_PRICING_POP_UP_XPATH);
         waitUntilPageIsFullyLoaded();
         click(By.id(UPDATE_PRICE_AND_AVAILABILITY_BUTTON_ID));
         waitUntilPageIsFullyLoaded();
     }
 
-    @Step("Search Appropriate Spa Via Search Field On Special Pricing Lookup Pop Up.")
-    private void searchAppropriateSpaViaSearchFieldOnSpecialPricingLookupPopUp(String spaNo) {
+    @Step("Search Appropriate Agreement Via Search Field On Special Pricing Lookup Pop Up.")
+    private void searchAppropriateAgreementNoViaSearchFieldOnSpecialPricingLookupPopUp(String agreementNo) {
         waitUntilPageIsFullyLoaded();
-        $(SEARCH_SPA_NO_INPUT_XPATH).clear();
-        $(SEARCH_SPA_NO_INPUT_XPATH).sendKeys(spaNo);
-        click(SEARCH_SPA_NO_ICON_SPECIAL_PRICING_POP_UP_XPATH);
+        $(SEARCH_AGREEMENT_NO_INPUT_XPATH).clear();
+        $(SEARCH_AGREEMENT_NO_INPUT_XPATH).sendKeys(agreementNo);
+        click(SEARCH_AGREEMENT_NO_ICON_SPECIAL_PRICING_POP_UP_XPATH);
         waitUntilPageIsFullyLoaded();
-        click(FIRST_SPA_ON_THE_SPECIAL_PRICING_POP_UP_XPATH);
+        click(FIRST_AGREEMENT_ON_THE_SPECIAL_PRICING_POP_UP_XPATH);
     }
 
-    @Step("Get Spa No For The Product.")
-    public Stream<WebElement> getSpaNoForTheProduct() {
-        return $$(SPA_NO_VALUES_FOR_ALL_PRODUCTS_XPATH).stream();
+    @Step("Get Agreement No For The Product.")
+    public Stream<WebElement> getAgreementNoForTheProduct() {
+        return $$(AGREEMENT_NO_VALUES_FOR_ALL_PRODUCTS_XPATH).stream();
     }
 
     @Step("Add new items.")
@@ -153,5 +153,17 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
         $(ADD_ITEM_POP_UP_FIRST_PRODUCT_FIELD_XPATH).clear();
         $(ADD_ITEM_POP_UP_FIRST_PRODUCT_FIELD_XPATH).sendKeys(catalogueNo);
         click(ADD_ITEM_POP_UP_ADD_PRODUCT_BUTTON_XPATH);
+    }
+
+    @Step("Get Claimback message below Agreement No field.")
+    public String getClaimbackMessageBelowAgreementNoField() {
+        waitUntilPageIsFullyLoaded();
+        return $(CLAIMBACK_MESSAGE_BELOW_AGREEMENT_NO_FIELD_XPATH).getText();
+    }
+
+    @Step("Click on product link on P&A Page.")
+    public void clickOnProductLinkOnPaPage(String product) {
+        waitUntilPageIsFullyLoaded();
+        click(PRODUCT_LINK_ON_PA_PAGE_XPATH, product);
     }
 }
