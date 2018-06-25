@@ -170,12 +170,12 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
         assertTrue(fullProductDetailsPopUpBlock.isProductDetailPopUpOnPApageDisplayed());
     }
 
-    @When("^Click on Product Details tab.$")
+    @When("^Click on Product Details tab in Full Product Details pop-up.$")
     public void clickOnProductDetailsTab() {
         fullProductDetailsPopUpBlock.clickOnProductDetailsTab();
     }
 
-    @When("^Click on Availability Details tab.$")
+    @When("^Click on Availability Details tab in Full Product Details pop-up.$")
     public void clickOnAvailabilityDetailsTab() {
         fullProductDetailsPopUpBlock.clickOnAvailabilityDetailsTab();
     }

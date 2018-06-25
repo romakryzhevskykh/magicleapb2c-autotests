@@ -164,8 +164,8 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then All the products have <standardAgreementNo> agreement no in the Agreement No field.
 
     Examples:
-      | region        | products                        | agreementNo    | salesDivision | standardAgreementNo | account |
-      | North_America | THHQB1120AF2, TEY150, 9T21B9103 | 45003985       | USS1_10_10    | STANDARD            | 1318501 |
+      | region        | products                        | agreementNo | salesDivision | standardAgreementNo | account |
+      | North_America | THHQB1120AF2, TEY150, 9T21B9103 | 45003985    | USS1_10_10    | STANDARD            | 1318501 |
 
   Scenario Outline: Check that Claimback icon and message are displayed on P&A and Order Entry pages - US294329
     And Account management page is opened.
@@ -182,7 +182,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Agreement No field displayed on P&A page.
     When Click on <product> link on P&A page.
     Then Is Full Product Details pop-up on Price and Availability page displayed.
-    When Click on Product Details tab.
+    When Click on Product Details tab in Full Product Details pop-up.
     Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Pricing Details title displayed in Full Product Details pop-up.
     When Close Full Product Details pop-up.
     And All products are selected on P&A page.
@@ -194,7 +194,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Agreement No field displayed on My Cart page.
     When Click on <product> link on My Cart page.
     Then Is Full Product Details pop-up on Price and Availability page displayed.
-    When Click on Product Details tab.
+    When Click on Product Details tab in Full Product Details pop-up.
     Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Pricing Details title displayed in Full Product Details pop-up.
     When Close Full Product Details pop-up.
     When User clicks on the Next top button on the My Cart page.
@@ -214,8 +214,8 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     When Close Short Product Details pop-up.
 
     Examples:
-      | region        |product    | agreementNo    | salesDivision | account  |
-      | North_America | TEY150    | 45003866       | USS1_10_10    | 3394020  |
+      | region        | product | agreementNo | salesDivision | account |
+      | North_America | TEY150  | 45003866    | USS1_10_10    | 3394020 |
 
   Scenario: Check that user is able to send feedback successfully
     And Dashboard page is opened.
@@ -261,19 +261,42 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     When Close cookies pop-up.
     And Search <product> in the search product field.
     Then Search product page is displayed.
-    Then Search Result for '<product>' title is displayed.
-    Then Alternate Cat. No. tab is displayed and not displayed for appropriate region.
-    When Click on <product> link on the Search Result page.
+    Then Search Result for '<product>' title is displayed on Product Search page.
+    Then Alternate Cat. No. tab is displayed and not displayed for appropriate region on Product Search page.
+    When Click on <product> link on Product Search page.
     Then Is Full Product Details pop-up on Price and Availability page displayed.
-    Then Is Active Specification tab selected.
-    When Click on Product Details tab.
-    Then Is Active Product Details tab selected.
-    When Click on Availability Details tab.
-    Then Is Active Availability Details tab selected.
-    When Close Full Product Details pop-up.
+    Then Is Active Specification tab selected in Full Product Details pop-up.
+    When Click on Product Details tab in Full Product Details pop-up.
+    Then Is Active Product Details tab selected in Full Product Details pop-up.
+    When Click on Availability Details tab in Full Product Details pop-up.
+    Then Is Active Availability Details tab selected in Full Product Details pop-up.
+    When Close Full Product Details pop-up in Full Product Details pop-up.
 
 
-  Examples:
-  | region        |  product     |
-  | North_America | THQL1115AF2  |
-  | EMEA          | 600540       |
+    Examples:
+      | region        | product     |
+      | North_America | THQL1115AF2 |
+      | EMEA          | 600540      |
+
+  Scenario Outline: Check that product can be saved to list
+    And Account management page is opened.
+    When Choose <region> region.
+    And Search random account for chosen region.
+    And Click on chosen account.
+    And Dashboard page is opened.
+    When Click on Skip button.
+    When Close cookies pop-up.
+    And Search <product> in the search product field.
+    Then Search product page is displayed.
+    When Click on All product checkbox on Product Search page.
+    And Click on Save to List button on Product Search page.
+    Then Is Save to list pop-up displayed.
+    When Set List name to the New List Field.
+    And Click on Save button in the Save to list pop-up.
+
+
+    Examples:
+      | region        | product |
+      | Latin_America | AFP3EYD |
+
+

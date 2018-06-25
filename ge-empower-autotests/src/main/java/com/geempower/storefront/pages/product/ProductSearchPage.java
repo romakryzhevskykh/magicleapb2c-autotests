@@ -35,4 +35,19 @@ public class ProductSearchPage extends StorefrontBasePage {
     public void clickOnProductLinkOnTheSearchResultPage(String product) {
         click(PRODUCT_LINK_ON_PRODUCT_SEARCH_PAGE_XPATH, product);
     }
+
+    @Step("Click On All Product Checkbox On Product Search Page.")
+    public void clickOnAllProductCheckboxOnProductSearchPage() {
+        click(ALL_PRODUCTS_CHECKBOX_ON_PRODUCT_SEARCH_PAGE_XPATH);
+    }
+
+    @Step("Click On Save To List Button On Product Search Page.")
+    public void clickOnSaveToListButtonOnProductSearchPage() {
+        click(SAVE_TO_LIST_BUTTON_ON_PRODUCT_SEARCH_PAGE_XPATH);
+    }
+
+    @Step("Is Save To List Pop Up Displayed.")
+    public boolean isSaveToListPopUpDisplayed() {
+        return isDisplayed(SAVE_TO_LIST_POP_UP_ON_PRODUCT_SEARCH_PAGE_XPATH);
+    }
 }
