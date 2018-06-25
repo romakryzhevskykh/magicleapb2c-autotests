@@ -14,10 +14,11 @@ public class ProductSearchStepDefs extends AbstractStepDefs {
 
     @Autowired
     private ProductSearchPage productSearchPage;
-    @Autowired private FullProductDetailsPopUpBlock fullProductDetailsPopUpBlock;
+    @Autowired
+    private FullProductDetailsPopUpBlock fullProductDetailsPopUpBlock;
 
-    @Then("^Search product page is displayed.$")
-    public void isProductSearchPageOpen(){
+    @Then("^Search product page is opened.$")
+    public void ProductSearchPageIsOpened() {
         assertTrue(productSearchPage.isOpened());
     }
 
@@ -28,9 +29,9 @@ public class ProductSearchStepDefs extends AbstractStepDefs {
 
     @SuppressWarnings("unchecked")
     @Then("^Alternate Cat. No. tab is displayed and not displayed for appropriate region.$")
-    public void alternateCatNoTabIsDisplayedAndNotDisplayedForAppropriateRegion(){
+    public void alternateCatNoTabIsDisplayedAndNotDisplayedForAppropriateRegion() {
         Region chosenRegion = (Region) threadVarsHashMap.get(TestKeyword.CHOSEN_REGION);
-        if(!chosenRegion.getRegionType().getRegionName().equals("North America")){
+        if (chosenRegion.getRegionType().getRegionName().equals("EMEA")) {
             assertTrue(productSearchPage.verifyAlternateColumn());
         } else {
             assertFalse(productSearchPage.verifyAlternateColumn());

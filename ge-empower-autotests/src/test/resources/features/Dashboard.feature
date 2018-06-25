@@ -260,7 +260,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     When Click on Skip button.
     When Close cookies pop-up.
     And Search <product> in the search product field.
-    Then Search product page is displayed.
+    Then Search product page is opened.
     Then Search Result for '<product>' title is displayed.
     Then Alternate Cat. No. tab is displayed and not displayed for appropriate region.
     When Click on <product> link on the Search Result page.
@@ -271,7 +271,6 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     When Click on Availability Details tab.
     Then Is Active Availability Details tab selected.
     When Close Full Product Details pop-up.
-
 
   Examples:
   | region        |  product     |
