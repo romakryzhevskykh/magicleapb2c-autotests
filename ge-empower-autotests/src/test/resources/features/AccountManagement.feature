@@ -6,7 +6,7 @@ Feature: Some actions on Account Management page as admin
     And Account management page is opened.
 
     Scenario: Check that user able to choose appropriate account
-      Then Favorites tab is displayed by Default on Account Management page.
+      Then Is Favorites tab displayed by Default on Account Management page.
       When Choose North_America region.
       And Search random account for chosen region.
       And Click on chosen account.

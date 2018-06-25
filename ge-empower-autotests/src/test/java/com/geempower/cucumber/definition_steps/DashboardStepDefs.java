@@ -216,4 +216,10 @@ public class DashboardStepDefs extends AbstractStepDefs {
     public void appropriateCountOfCancelledOrdersAreDisplayedOnTheAllOrdersPage() {
         assertTrue((int) threadVarsHashMap.get(TestKeyword.CANCELLED_ORDERS_IN_ACCOUNT) == ordersPage.getActualCountOfOrders());
     }
+
+    @And("^Search (.*) in the search product field.$")
+    public void searchProductInTheSearchProductField(String product) {
+        dashboardPage.setProductToTheSearchProductField(product);
+        dashboardPage.clickOnSearchProductIcon();
+    }
 }

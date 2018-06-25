@@ -22,5 +22,6 @@ public class DashboardPageElements {
     public final static String SUBMIT_FEEDBACK_ID = "feedback-submit";
     public final static String SUCCESSFUL_TEXT_FEEDBACK_POP_UP_XPATH = "//div[@id='feedback-submit-success']//p";
     public final static String OK_BUTTON_FEDBACK_POP_UP_ID = "message-ok";
-
+    public final static String PRODUCT_SEARCH_FIELD_XPATH = ".//input[@name = 'product']";
+    public final static String PRODUCT_SEARCH_ICON_ID = "searchProductBut";
 }
