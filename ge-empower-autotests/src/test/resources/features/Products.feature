@@ -31,10 +31,10 @@ Feature: Some actions on Products page
     And Update Price & Availability button is clicked on the My Cart page.
     Then Extend Price is changed to correct value on the My Cart page.
     When User clicks on the Next top button on the My Cart page.
-    When User fills PO no. to the PO no. field at the OE 2 page.
-    And Select Shipment Address from the existing addresses at the OE 2 page.
+    When User fills PO no. to the PO no. field on the OE 2 page.
+    And Select Shipment Address from the existing addresses on the OE 2 page.
     Then Selected Shipment address is equal to Ship to field value.
-    When User clicks on the Bottom Next button at the OE 2 page.
+    When User clicks on the Bottom Next button on the OE 2 page.
     Then Order Summary step is opened.
     Then PO no. is correct at the OE 3 page.
     When User clicks on Place Order button at the OE 3 page.
