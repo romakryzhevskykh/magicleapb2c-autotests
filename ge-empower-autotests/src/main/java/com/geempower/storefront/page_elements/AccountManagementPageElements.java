@@ -32,6 +32,7 @@ public class AccountManagementPageElements {
     public final static String CONFIRMATION_FOR_REMOVE_ACTIVE_ACCOUNT_BUTTON_XPATH = "//button[@id='removeActiveBtn']";
     public final static String FAVORITES_ACTIVE_TAB_XPATH = "//li[contains(@class,'active') and contains(@tab-id ,'1')]";
     public final static String APPROVED_ACCOUNTS_LIST_XPATH = "//table[@id='activeRequestsTable']/tbody/tr/td[2]/a";
+    public final static String FAVORITES_ACCOUNTS_TABLE_ID = "favoritesTable";
     //Request Account pop-up
     public final static String SALES_OFFICE_CODE_FIELD_ID = "requestSalesOfficeCode";
     public final static String SALES_ENGINEER_CODE_FIELD_ID = "requestSalesEngCode";
