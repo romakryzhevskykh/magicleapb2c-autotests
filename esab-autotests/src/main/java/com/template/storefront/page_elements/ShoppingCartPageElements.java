@@ -11,5 +11,6 @@ public class ShoppingCartPageElements {
 	public static final String SKU_INPUT_XPATH="//input[@type='search']";
 	public static final String ADD_MORE_PRODUCTS_XPATH = "//div[@class='add-more-products-btn']//a";
 	public static final String ADD_TO_CART_BUTTON_XPATH = "//button[@data-esab-ui='add-to-cart']";
+	public static final String QTY_FIELDS_XPATH = "//input[@class='js-quick-order-qty']";
 
 }

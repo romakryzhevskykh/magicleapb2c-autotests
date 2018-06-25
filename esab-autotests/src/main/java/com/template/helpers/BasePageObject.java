@@ -21,6 +21,8 @@ public abstract class BasePageObject {
 	protected WebDriverSessions webDriverPool;
 	@Autowired
 	protected ThreadVarsHashMap threadVarsHashMap;
+	@Autowired
+	protected ProductController productController;
 	final static Logger logger = Logger.getLogger(BasePageObject.class);
 	private WebDriverWait wait;
 	private long shortTimeout;
@@ -299,4 +301,21 @@ public abstract class BasePageObject {
 				"Actual URL: " + actualUrl + " is not equals to expected URL: " + expectedUrl);
 		logger.info("Page URL is CORRECT: " + actualUrl);
 	}
+
+	protected void fillInSeveralFields(List<String> textsForInput, String xpath) {
+		List<WebElement> fields = getWebElements(xpath);
+		int i = 0;
+		if ((fields != null) && (textsForInput != null) && (fields.size() == textsForInput.size())) {
+			for (WebElement field : fields) {
+				String fieldValue = textsForInput.get(i);
+				logger.info("Value to be entered: " + fieldValue);
+				field.sendKeys(fieldValue);
+				i++;
+			}
+		} else {
+			logger.info("Field web elements or validation values is null"
+					+ " or fields number is different to validation values number  ");
+		}
+	}
+
 }

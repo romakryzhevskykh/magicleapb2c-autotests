@@ -12,6 +12,8 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 
+import com.template.storefront.models.ProductModel;
+
 import ru.yandex.qatools.allure.annotations.Step;
 import static com.template.storefront.page_elements.ShoppingCartPageElements.*;
 
@@ -25,6 +27,7 @@ public class ShoppingCartPage extends StorefrontBasePage {
 	private String validationHeaderTitle1 = "Shopping Cart";
 	private List<String> validationAddToCartButtonLabel = new ArrayList<>(
 			Arrays.asList("Add these products to shopping cart"));
+	private List<String> dataForQtyFields = new ArrayList<>(Arrays.asList("11", "22"));
 	/*
 	 * private List<String> validationShipToAddr = new ArrayList<>(
 	 * Arrays.asList("999 South Wacker Drive, Chicago, 60606"));
@@ -104,11 +107,45 @@ public class ShoppingCartPage extends StorefrontBasePage {
 		verifyWebElementsTextValuesEqual(validationAddToCartButtonLabel, ADD_TO_CART_BUTTON_XPATH);
 		logger.info("Add to Cart button label is CORRECT: " + validationAddToCartButtonLabel);
 	}
-	
-	@Step ("Click on Add to products to shopping cart button")
-	public void clickAddProductsButton(){
+
+	@Step("Click on Add to products to shopping cart button")
+	public void clickAddProductsButton() {
 		click(ADD_TO_CART_BUTTON_XPATH);
 	}
 
-	
+	@Step("Fill in Qty fields")
+	public void fillInQtyFields() {
+		fillInSeveralFields(dataForQtyFields, QTY_FIELDS_XPATH);
+	}
+
+	public void addProductToTheList(String newScu, String newQty, String newPrice) {
+		productController.addProductToCollection(newScu, newQty, newPrice);
+	}
+
+	public List<ProductModel> getListOfProducts() {
+		return productController.getListOfProducts();
+	}
+
+	public void fillInFieldFromObjectModel() {
+		List<ProductModel> products = productController.getListOfProducts();
+		List<String> qtys = new ArrayList<String>();
+		List<String> scus = new ArrayList<String>();
+		String productQty = null;
+		String productScu = null;
+		if (products != null) {
+			for (ProductModel product : products) {
+				productQty = product.getQty();
+				productScu = product.getScu();
+				logger.info("Product Qty: "+ productQty);
+				logger.info("Product SCU: "+ productScu);
+				qtys.add(productQty);
+				scus.add(productScu);
+			}
+		}
+		logger.info("Product Qtys: "+ qtys);
+		logger.info("Product Scus: "+ scus);
+		fillInSeveralFields(scus, SKU_INPUT_XPATH);
+		fillInSeveralFields(qtys, QTY_FIELDS_XPATH);
+	}
+
 }

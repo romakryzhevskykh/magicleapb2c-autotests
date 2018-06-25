@@ -2,6 +2,9 @@ Feature: Shopping Cart feature
 Scenario: Check Shopping Cart Layout
 	Given Switch to Storefront shopper. 
 	Given Opened Start page. 
+	Given Add Product model: SCU: "1111", Qty: "1", Price: "111.1".
+	Given Add Product model: SCU: "2222", Qty: "2", Price: "222.2".
+	And Get list of Products.
 	And Login to Storefront. 
 	Then Verify current page is Home page.
 	Then Check that user is logged in ESAB.
@@ -18,4 +21,9 @@ Scenario: Check Shopping Cart Layout
 	And Verify add to cart button label on Shopping Cart.
 	And Click on Add these products to shopping cart button.
 	And Verify SKU Inputs count on Shopping Cart is: "2" .
+	#Then Fill in Qty fields on Shopping Cart.
+	Then Fill in SCU and Qty from Product Model.
+	And Click on Add these products to shopping cart button.
+	And Verify SKU Inputs count on Shopping Cart is: "2" .
+	
 	
