@@ -88,12 +88,6 @@ public class ShoppingCartPageDefs extends AbstractStepDefs {
 	@And("^Fill in SCU and Qty from Product Model.$")
 	public void fiilInQtyFromProductModel() {
 		shoppingCartPage.fillInFieldFromObjectModel();
-		try {
-			TimeUnit.SECONDS.sleep(15);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 }
