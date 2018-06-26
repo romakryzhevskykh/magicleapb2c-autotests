@@ -4,19 +4,24 @@ public class ProductModel {
 	private String scu;
 	private String qty;
 	private String price;
+	private String productName;
+	private String inStock;
 
 	@Override
 	public String toString() {
-		return "ProductModel [SCU=" + scu + ", Qty=" + qty + ", price=" + price + "]";
+		return "ProductModel [scu=" + scu + ", qty=" + qty + ", price=" + price + ", productName=" + productName
+				+ ", inStock=" + inStock + "]";
 	}
-	
-	public ProductModel(){
+
+	public ProductModel() {
 	}
-	
-	public ProductModel(String scu, String qty, String price){
+
+	public ProductModel(String scu, String qty, String price, String productName, String inStock) {
 		this.scu = scu;
 		this.qty = qty;
-		this.price = price;	
+		this.price = price;
+		this.productName = productName;
+		this.inStock = inStock;
 	}
 
 	public String getScu() {
@@ -30,6 +35,13 @@ public class ProductModel {
 	public String getPrice() {
 		return price;
 	}
-	
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public String getInStock() {
+		return inStock;
+	}
 
 }

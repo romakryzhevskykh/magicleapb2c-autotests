@@ -28,6 +28,7 @@ public class ShoppingCartPageDefs extends AbstractStepDefs {
 	@And("^Verify h2 header1 on Shopping cart.$")
 	public void verifyH2Header1() {
 		shoppingCartPage.verifyShoppingCartHeader1();
+		shoppingCartPage.getShoppingCartID();
 	}
 
 	@And("^Verify h2 header2 on Shopping cart.$")
@@ -75,9 +76,9 @@ public class ShoppingCartPageDefs extends AbstractStepDefs {
 		shoppingCartPage.fillInQtyFields();
 	}
 
-	@Given("^Add Product model: SCU: \"(.*)\", Qty: \"(.*)\", Price: \"(.*)\".$")
-	public void addProductToList(String newScu, String newQty, String newPrice) {
-		shoppingCartPage.addProductToTheList(newScu, newQty, newPrice);
+	@Given("^Add Product model: SCU: \"(.*)\", Qty: \"(.*)\", Price: \"(.*)\", Product name: \"(.*)\", In Stock: \"(.*)\".$")
+	public void addProductToList(String newScu, String newQty, String newPrice, String newProductName, String newInStock) {
+		shoppingCartPage.addProductToTheList(newScu, newQty, newPrice, newProductName, newInStock);
 	}
 
 	@And("^Get list of Products.$")
@@ -88,6 +89,31 @@ public class ShoppingCartPageDefs extends AbstractStepDefs {
 	@And("^Fill in SCU and Qty from Product Model.$")
 	public void fiilInQtyFromProductModel() {
 		shoppingCartPage.fillInFieldFromObjectModel();
+	}
+	
+	@And("^Verify product names on Shopping Cart.$")
+	public void verifyProductName(){
+		shoppingCartPage.verifyProductNameInCart();
+	}
+	
+	@And("^Verify product SCU on Shopping Cart.$")
+	public void verifySCU(){
+		shoppingCartPage.verifyScuInCart();
+	}
+	
+	@And ("^Verify In Stock value on Shopping Cart.$")
+	public void verifyInStock(){
+		shoppingCartPage.verifyInStock();
+	}
+	
+	@And ("^Verify Product Price on Shopping Cart.$")
+	public void verifyProductPriceByScu(){
+		shoppingCartPage.verifyPriceBySCU();
+	}
+	
+	@And ("^Verify Total Price on Shopping Cart.$")
+	public void verifyTotalPrice(){
+		shoppingCartPage.verifyTotalPriceInList();
 	}
 
 }

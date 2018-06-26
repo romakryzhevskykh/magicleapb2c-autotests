@@ -7,6 +7,8 @@ public class ProductModelBuilder {
 	private String newScu;
 	private String newQty;
 	private String newPrice;
+	private String newProductName;
+	private String newInStock;
 
 	public ProductModelBuilder() {
 	}
@@ -26,7 +28,17 @@ public class ProductModelBuilder {
 		return this;
 	}
 	
+	public ProductModelBuilder setNewProductName(String newProductName){
+		this.newProductName = newProductName;
+		return this;
+	}
+	
+	public ProductModelBuilder setNewInStock(String newInStock){
+		this.newInStock = newInStock;
+		return this;
+	}
+	
 	public ProductModel createProductModel(){
-		return new ProductModel(newScu, newQty, newPrice);
+		return new ProductModel(newScu, newQty, newPrice, newProductName, newInStock);
 	}
 }

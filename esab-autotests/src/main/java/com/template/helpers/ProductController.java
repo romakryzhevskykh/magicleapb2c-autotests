@@ -22,19 +22,23 @@ public class ProductController {
 	public ProductController() {
 	}
 
-	public void createProductModel(String newScu, String newQty, String newPrice) {
+	public void createProductModel(String newScu, String newQty, String newPrice, String newProductName,
+			String newInStock) {
 		productModelBuilder.setNewScu(newScu);
 		productModelBuilder.setNewQty(newQty);
 		productModelBuilder.setNewPrice(newPrice);
+		productModelBuilder.setNewProductName(newProductName);
+		productModelBuilder.setNewInStock(newInStock);
 		productModel = productModelBuilder.createProductModel();
 	}
-	
-	public void addProductToCollection(String newScu, String newQty, String newPrice){
-		createProductModel(newScu, newQty, newPrice);
+
+	public void addProductToCollection(String newScu, String newQty, String newPrice, String newProductName,
+			String newInStock) {
+		createProductModel(newScu, newQty, newPrice, newProductName, newInStock);
 		listOfProducts.add(productModel);
 	}
-	
-	public List<ProductModel> getListOfProducts(){
+
+	public List<ProductModel> getListOfProducts() {
 		logger.info(listOfProducts);
 		return listOfProducts;
 	}

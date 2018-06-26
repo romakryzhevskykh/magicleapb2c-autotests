@@ -2,8 +2,8 @@ Feature: Shopping Cart feature
 Scenario: Check Shopping Cart Layout
 	Given Switch to Storefront shopper. 
 	Given Opened Start page. 
-	Given Add Product model: SCU: "1111", Qty: "1", Price: "111.1".
-	Given Add Product model: SCU: "2222", Qty: "2", Price: "222.2".
+	Given Add Product model: SCU: "1111", Qty: "1", Price: "111.00", Product name: "Product pr11", In Stock: "In Stock".
+	Given Add Product model: SCU: "2222", Qty: "2", Price: "222.00", Product name: "Product pr22", In Stock: "In Stock".
 	And Get list of Products.
 	And Login to Storefront. 
 	Then Verify current page is Home page.
@@ -24,6 +24,11 @@ Scenario: Check Shopping Cart Layout
 	#Then Fill in Qty fields on Shopping Cart.
 	Then Fill in SCU and Qty from Product Model.
 	And Click on Add these products to shopping cart button.
+	And Verify product names on Shopping Cart.
+	And Verify product SCU on Shopping Cart.
+	And Verify In Stock value on Shopping Cart.
+	And Verify Product Price on Shopping Cart.
+	And Verify Total Price on Shopping Cart.
 	And Verify SKU Inputs count on Shopping Cart is: "2" .
 	
 	

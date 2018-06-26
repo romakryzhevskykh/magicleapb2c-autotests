@@ -102,7 +102,7 @@ public class ShoppingCartPage extends StorefrontBasePage {
 		click(ADD_MORE_PRODUCTS_XPATH);
 	}
 
-	@Step("Verify add to cart button lavbel")
+	@Step("Verify add to cart button label")
 	public void verifyAddToCartButtonLabel() {
 		verifyWebElementsTextValuesEqual(validationAddToCartButtonLabel, ADD_TO_CART_BUTTON_XPATH);
 		logger.info("Add to Cart button label is CORRECT: " + validationAddToCartButtonLabel);
@@ -118,8 +118,9 @@ public class ShoppingCartPage extends StorefrontBasePage {
 		fillInSeveralFields(dataForQtyFields, QTY_FIELDS_XPATH);
 	}
 
-	public void addProductToTheList(String newScu, String newQty, String newPrice) {
-		productController.addProductToCollection(newScu, newQty, newPrice);
+	public void addProductToTheList(String newScu, String newQty, String newPrice, String newProductName,
+			String newInStock) {
+		productController.addProductToCollection(newScu, newQty, newPrice, newProductName, newInStock);
 	}
 
 	public List<ProductModel> getListOfProducts() {
@@ -136,16 +137,117 @@ public class ShoppingCartPage extends StorefrontBasePage {
 			for (ProductModel product : products) {
 				productQty = product.getQty();
 				productScu = product.getScu();
-				logger.info("Product Qty: "+ productQty);
-				logger.info("Product SCU: "+ productScu);
+				logger.info("Product Qty: " + productQty);
+				logger.info("Product SCU: " + productScu);
 				qtys.add(productQty);
 				scus.add(productScu);
 			}
 		}
-		logger.info("Product Qtys: "+ qtys);
-		logger.info("Product Scus: "+ scus);
+		logger.info("Product Qtys: " + qtys);
+		logger.info("Product Scus: " + scus);
 		fillInSeveralFields(scus, SKU_INPUT_XPATH);
 		fillInSeveralFields(qtys, QTY_FIELDS_XPATH);
+	}
+
+	@Step("Verify product name ")
+	public void verifyProductNameInCart() {
+		List<ProductModel> products = productController.getListOfProducts();
+		waitJSExecution();
+		if (products != null) {
+			for (ProductModel product : products) {
+				verifyWebElementTextValue(product.getProductName(),
+						String.format(PRODUCT_NAME_XPATH, product.getProductName()));
+			}
+		}
+	}
+
+	@Step("Verify product SCU ")
+	public void verifyScuInCart() {
+		List<ProductModel> products = productController.getListOfProducts();
+		waitJSExecution();
+		if (products != null) {
+			for (ProductModel product : products) {
+				verifyWebElementTextValue(product.getScu(), String.format(PRODUCT_SCU_XPATH, product.getScu()));
+			}
+		}
+	}
+
+	@Step("Verify In Stock value")
+	public void verifyInStock() {
+		List<ProductModel> products = productController.getListOfProducts();
+		waitJSExecution();
+		if (products != null) {
+			for (ProductModel product : products) {
+				verifyWebElementTextValue(product.getInStock(),
+						String.format(PRODUCT_INSTOCK_XPATH, product.getInStock()));
+			}
+		}
+	}
+
+	public void getShoppingCartID() {
+		String actualHeader1 = getShoppingCartHeaderValue(H2_SHOPPING_CART_TITLE);
+		int indexOfDelimeter = actualHeader1.indexOf(':');
+		String shoppingCartID = (String) actualHeader1.subSequence(indexOfDelimeter + 1, actualHeader1.length());
+		logger.info("Shopping Cart ID is: " + shoppingCartID);
+	}
+
+	@Step("Verify price by SCU")
+	public void verifyPriceBySCU() {
+		List<ProductModel> products = productController.getListOfProducts();
+		String actualPriceRaw = null;
+		String actualPrice = null;
+		waitJSExecution();
+		if (products != null) {
+			for (ProductModel product : products) {
+				actualPriceRaw = getWebElement(String.format(PRODUCT_PRICE_XPATH, product.getScu())).getText().trim();
+				if (actualPriceRaw != null) {
+					actualPrice = (String) actualPriceRaw.subSequence(1, actualPriceRaw.length());
+					logger.info("Actual Price is: " + actualPrice);
+					String expectedPrice = product.getPrice();
+					assertEquals(actualPrice, expectedPrice,
+							"Expected price is: " + expectedPrice + " but actual is: " + actualPrice);
+				}
+			}
+		}
+
+	}
+
+	@Step("Verify QTY of Product in the list")
+	public void verifyTotalPriceInList() {
+		List<ProductModel> products = productController.getListOfProducts();
+		String actualPriceRaw = null;
+		String actualPrice = null;
+		String actualQty = null;
+		String actualTotalPrice = null;
+		String actualTotalPriceRaw = null;
+		float actualPriceNumber = 0;
+		float actualQtyNumber = 0;
+		float totalPriceNumber = 0;
+		waitJSExecution();
+		if (products != null) {
+			for (ProductModel product : products) {
+				String productScu = product.getScu();
+				actualPriceRaw = getWebElement(String.format(PRODUCT_PRICE_XPATH, productScu)).getText().trim();
+				actualQty = getWebElement(String.format(PRODUCT_QTY_XPATH, productScu)).getAttribute("value").trim();
+				logger.info("Qty = " + actualQty);
+				actualTotalPriceRaw = getWebElement(String.format(PRODUCT_TOTAL_PRICE, productScu)).getText().trim();
+				if ((actualPriceRaw != null) && (actualQty != null)) {
+					actualPrice = (String) actualPriceRaw.subSequence(1, actualPriceRaw.length());
+					actualTotalPrice = (String) actualTotalPriceRaw.subSequence(1, actualPriceRaw.length());
+					logger.info("Actual Price is: " + actualPrice);
+					actualPriceNumber = Float.valueOf(actualPrice);
+					logger.info("Actual price float value: " + actualPriceNumber);
+					actualQtyNumber = Float.valueOf(actualQty);
+					logger.info("Actual Qty float value: " + actualQtyNumber);
+					totalPriceNumber = Float.valueOf(actualTotalPrice);
+					float expectedTotalPrice = actualPriceNumber * actualQtyNumber;
+					logger.info("Actual Total price float value: " + totalPriceNumber);
+					assertTrue((totalPriceNumber == expectedTotalPrice),
+							"Actual total price is: " + totalPriceNumber + "but expected is: " + expectedTotalPrice);
+
+				}
+			}
+		}
 	}
 
 }

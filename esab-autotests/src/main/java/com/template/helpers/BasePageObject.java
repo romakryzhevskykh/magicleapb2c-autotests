@@ -65,13 +65,13 @@ public abstract class BasePageObject {
 		WebElement element = initWebDriverWait()
 				.until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(xpath, args))));
 		if (element != null) {
-			logger.info("Waiting untill Web element is Clicable (Displayed and Enabled)");
+			logger.info("Waiting untill Web element" + element + " is Clicable (Displayed and Enabled)");
 			initWebDriverWait().until(ExpectedConditions.elementToBeClickable(element));
-			logger.info("Web element is present and Clicable (Displayed and Enabled)");
+			logger.info("Web element " + element + " is present and Clicable (Displayed and Enabled)");
 			setDefaultImplicitWait();
 			return element;
 		} else {
-			logger.info("Web element is not fount");
+			logger.info("Web element" + element + " is not fount");
 		}
 		setDefaultImplicitWait();
 		return null;
@@ -283,6 +283,16 @@ public abstract class BasePageObject {
 			logger.info("All texts are present and correct");
 		} else {
 			logger.error("List of texts is null");
+		}
+	}
+
+	protected void verifyWebElementTextValue(String validationText, String xpath) {
+		String webElementText = getWebElement(xpath).getText().trim();
+		logger.info("Web element actual value: " + webElementText);
+		logger.info("Web element expected value: " + validationText);
+		if (webElementText != null) {
+			assertEquals(webElementText, validationText,
+					"Actual text value is: " + webElementText + " but expected value is: " + validationText);
 		}
 	}
 

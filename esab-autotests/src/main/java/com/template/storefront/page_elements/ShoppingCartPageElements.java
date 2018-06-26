@@ -8,9 +8,24 @@ public class ShoppingCartPageElements {
 	public static final String ELEMENTS_IN_ADD_PRODUCT_BOX = "//div[@class='box esab-ui-cart-box']//div[normalize-space()]";
 	public static final String SHIP_TO_DROPDOWN = "//select[@id='addressId']";
 	public static final String SHIP_TO_VALUE = SHIP_TO_DROPDOWN + "//option[text()='%s']";
-	public static final String SKU_INPUT_XPATH="//input[@type='search']";
+	public static final String SKU_INPUT_XPATH = "//input[@type='search']";
 	public static final String ADD_MORE_PRODUCTS_XPATH = "//div[@class='add-more-products-btn']//a";
 	public static final String ADD_TO_CART_BUTTON_XPATH = "//button[@data-esab-ui='add-to-cart']";
 	public static final String QTY_FIELDS_XPATH = "//input[@class='js-quick-order-qty']";
+	// Product name value should be taken from ProductModel.
+	public static final String PRODUCT_NAME_XPATH = "//li[@class='esab-ui-cart__product-item']"
+			+ "//span[@class='item__name' and text()='%s']";
+	// SCU value should be taken from ProductModel.
+	public static final String PRODUCT_SCU_XPATH = "//li[@class='esab-ui-cart__product-item']"
+			+ "//div[@class='item__code' and text()='%s']";
+	public static final String PRODUCT_INSTOCK_XPATH = "//li[@class='esab-ui-cart__product-item']"
+			+ "//div[@class='item__stock']//span[@class='stock' and text()='%s']";
+	public static final String PRODUCT_PRICE_XPATH = "//li[@class='esab-ui-cart__product-item']"
+			+ "//div[@class='item__code' and text()='%s']//parent::div/parent::li//div[@class='item__price']";
+	public static final String PRODUCT_QTY_XPATH = "//li[@class='esab-ui-cart__product-item']"
+			+ "//div[@class='item__code' and text()='%s']//parent::div/parent::li//input[@name='quantity']";
+	public static final String PRODUCT_TOTAL_PRICE = "//li[@class='esab-ui-cart__product-item']"
+			+ "//div[@class='item__code' and text()='%s']//parent::div/parent::li"
+			+ "//div[@class='item__total js-item-total hidden-xs hidden-sm']";
 
 }
