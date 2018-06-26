@@ -295,7 +295,13 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     When Set List name to the New List Field.
     And Click on Save button in the Save to list pop-up.
     And Saved Items page is opened.
-    #TODO Continue test with new steps on Saved List page.
+    And Table was sorted by Created On value DESC.
+    Then List with appropriate name appeared in Saved Lists table.
+    Then No. of items is equal to 1.
+    When User deletes the saved list.
+    And Refresh page.
+    And Table was sorted by Created On value DESC.
+    Then List with appropriate name disappeared in Saved Lists table.
 
     Examples:
       | region        |

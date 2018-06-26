@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 import static com.geempower.storefront.page_elements.product.ProductsSearchPageElements.*;
 
@@ -56,10 +56,18 @@ public class ProductSearchPage extends StorefrontBasePage {
     }
 
     @Step("Set List Name To The New List Field.")
-    public void setListNameToTheNewListField() {
-        String uniquePoNo = Long.toString(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().getEpochSecond());
+    public String setListNameToTheNewListField() {
+        waitUntilPageIsFullyLoaded();
+        String listName = getLocalDateTimeStamp();
         $(NEW_LIST_FIELD_IN_SAVE_LIST_POP_UP_XPATH).clear();
-        $(NEW_LIST_FIELD_IN_SAVE_LIST_POP_UP_XPATH).sendKeys(uniquePoNo);
+        $(NEW_LIST_FIELD_IN_SAVE_LIST_POP_UP_XPATH).sendKeys(listName);
+        return listName;
+    }
+
+    private String getLocalDateTimeStamp() {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        return now.format(formatter);
     }
 
     @Step("Click On Save Button In The Save To List PopUp.")
@@ -76,4 +84,5 @@ public class ProductSearchPage extends StorefrontBasePage {
     public void clickOnAddToCartButtonOnProductSearchPage() {
         click(ADD_TO_CART_BUTTON_ON_PRODUCT_SEARCH_PAGE_XPATH);
     }
+
 }

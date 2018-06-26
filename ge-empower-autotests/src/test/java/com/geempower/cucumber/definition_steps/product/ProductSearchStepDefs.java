@@ -82,7 +82,7 @@ public class ProductSearchStepDefs extends AbstractStepDefs {
 
     @When("^Set List name to the New List Field.$")
     public void setListNameToTheNewListField() {
-        productSearchPage.setListNameToTheNewListField();
+        threadVarsHashMap.put(TestKeyword.NEW_SAVED_LIST_NAME, productSearchPage.setListNameToTheNewListField());
     }
 
     @And("^Click on Save button in the Save to list pop-up.$")
