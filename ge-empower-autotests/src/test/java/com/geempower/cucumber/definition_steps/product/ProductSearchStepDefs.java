@@ -71,8 +71,18 @@ public class ProductSearchStepDefs extends AbstractStepDefs {
         productSearchPage.clickOnSaveToListButtonOnProductSearchPage();
     }
 
-    @Then("^Is Save to list pop-up displayed.$")
+    @Then("^Is Save To List pop-up displayed.$")
     public void isSaveToListPopUpDisplayed(){
         assertTrue(productSearchPage.isSaveToListPopUpDisplayed());
+    }
+
+    @When("^Set List name to the New List Field.$")
+    public void setListNameToTheNewListField() {
+       productSearchPage.setListNameToTheNewListField();
+    }
+
+    @And("^Click on Save button in the Save to list pop-up.$")
+    public void clickOnSaveButtonInTheSaveToListPopUp(){
+        productSearchPage.clickOnSaveButtonInTheSaveToListPopUp();
     }
 }

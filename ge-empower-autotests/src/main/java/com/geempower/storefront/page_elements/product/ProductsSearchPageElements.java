@@ -8,4 +8,8 @@ public class ProductsSearchPageElements {
     public final static String SAVE_TO_LIST_BUTTON_ON_PRODUCT_SEARCH_PAGE_XPATH = ".//button[@data-target='#product-save-list-modal']";
     public final static String SAVE_TO_LIST_POP_UP_ON_PRODUCT_SEARCH_PAGE_XPATH = ".//div[@id='product-save-list-modal']//div[@class ='modal-content']";
 
+    public final static String NEW_LIST_FIELD_IN_SAVE_LIST_POP_UP_XPATH = ".//input[@class='form-control new-list-input']";
+    public final static String SAVE_NEW_LIST_BUTTON_IN_SAVE_LIST_POP_UP_XPATH = ".//button[@class='btn primary-btn save-list-btn']";
+
+
 }
