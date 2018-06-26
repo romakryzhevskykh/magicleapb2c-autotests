@@ -5,9 +5,7 @@ import com.geempower.cucumber.definition_steps.TestKeyword;
 import com.geempower.helpers.models.Region;
 import com.geempower.storefront.page_blocks.FullProductDetailsPopUpBlock;
 import com.geempower.storefront.pages.product.ProductSearchPage;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.api.java.en.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.testng.Assert.*;
@@ -24,8 +22,11 @@ public class ProductSearchStepDefs extends AbstractStepDefs {
         assertTrue(productSearchPage.isOpened());
     }
 
-    @Then("^(.*) title is displayed on Product Search page.$")
-    public void searchResultForProductTitleIsDisplayed(String title) {
+    @Then("^Search Result title for appropriate product is displayed on Product Search page.$")
+    public void searchResultForProductTitleIsDisplayed() {
+        threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
+        String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
+        String title = "Search Result for '" + catalogueNo + "'";
         assertEquals(title, productSearchPage.getSearchResultTitle());
     }
 
@@ -40,9 +41,11 @@ public class ProductSearchStepDefs extends AbstractStepDefs {
         }
     }
 
-    @When("^Click on (.*) link on Product Search page.$")
-    public void clickOnProductLinkOnTheSearchResultPage(String product) {
-        productSearchPage.clickOnProductLinkOnTheSearchResultPage(product);
+    @When("^Click on catalogueNo link on Product Search page.$")
+    public void clickOnProductLinkOnTheSearchResultPage() {
+        threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
+        String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
+        productSearchPage.clickOnProductLinkOnTheSearchResultPage(catalogueNo);
     }
 
     @Then("^Is Active Specification tab selected in Full Product Details pop-up.$")
@@ -60,9 +63,11 @@ public class ProductSearchStepDefs extends AbstractStepDefs {
         assertTrue(fullProductDetailsPopUpBlock.isActiveAvailabilityDetailsTabSelected());
     }
 
-    @When("^Click on All product checkbox on Product Search page.$")
-    public void clickOnAllProductCheckboxOnProductSearchPage() {
-        productSearchPage.clickOnAllProductCheckboxOnProductSearchPage();
+    @When("^Click on appropriate product checkbox on Product Search page.$")
+    public void clickOnAppropriateProductCheckboxOnProductSearchPage() {
+        threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
+        String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
+        productSearchPage.clickOnAppropriateProductCheckboxOnProductSearchPage(catalogueNo);
     }
 
     @And("^Click on Save to List button on Product Search page.$")
@@ -83,5 +88,15 @@ public class ProductSearchStepDefs extends AbstractStepDefs {
     @And("^Click on Save button in the Save to list pop-up.$")
     public void clickOnSaveButtonInTheSaveToListPopUp() {
         productSearchPage.clickOnSaveButtonInTheSaveToListPopUp();
+    }
+
+    @And("^Click on Get P&A button on Product Search page.$")
+    public void clickOnGetPAButtonOnProductSearchPage() {
+        productSearchPage.clickOnGetPriceAndAvailabilityButton();
+    }
+
+    @And("^User clicks on Add to Cart button on Product Search page.$")
+    public void userClicksOnAddToCartButtonOnProductSearchPage(){
+        productSearchPage.clickOnAddToCartButtonOnProductSearchPage();
     }
 }

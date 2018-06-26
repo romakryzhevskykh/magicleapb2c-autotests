@@ -1,18 +1,16 @@
 package com.geempower.cucumber.definition_steps;
 
+import com.geempower.storefront.page_blocks.HeaderBlock;
 import com.geempower.storefront.page_blocks.OrderStatusWidget;
 import com.geempower.storefront.page_blocks.PriceAndAvailabilityBlock;
 import com.geempower.storefront.pages.DashboardPage;
 import com.geempower.storefront.pages.order.OrdersPage;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.api.java.en.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class DashboardStepDefs extends AbstractStepDefs {
     @Autowired
@@ -23,6 +21,8 @@ public class DashboardStepDefs extends AbstractStepDefs {
     private OrderStatusWidget orderStatusWidget;
     @Autowired
     private OrdersPage ordersPage;
+    @Autowired
+    private HeaderBlock headerBlock;
 
     @And("^Order Status widget is displayed.$")
     public void orderStatusWidgetIsDisplayed() {
@@ -134,7 +134,6 @@ public class DashboardStepDefs extends AbstractStepDefs {
     @Then("^(.*) labels are present in the feedback pop-up.$")
     public void greatOkConfusingFrustratingLabelsArePresentInTheFeedbackPopUp(List<String> emojies) {
         emojies.forEach(emoji -> assertTrue(dashboardPage.isEmojiDisplayedInTheFeedbackPopUp(emoji)));
-
     }
 
     @Then("^Include screenshot checkbox is checked by default.$")
@@ -217,9 +216,11 @@ public class DashboardStepDefs extends AbstractStepDefs {
         assertTrue((int) threadVarsHashMap.get(TestKeyword.CANCELLED_ORDERS_IN_ACCOUNT) == ordersPage.getActualCountOfOrders());
     }
 
-    @And("^Search (.*) in the search product field.$")
-    public void searchProductInTheSearchProductField(String product) {
-        dashboardPage.setProductToTheSearchProductField(product);
-        dashboardPage.clickOnSearchProductIcon();
+    @And("^Search catalogueNo in the search product field.$")
+    public void searchProductInTheSearchProductField() {
+        threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
+        String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
+        headerBlock.setProductToTheSearchProductField(catalogueNo);
+        headerBlock.clickOnSearchProductIcon();
     }
 }

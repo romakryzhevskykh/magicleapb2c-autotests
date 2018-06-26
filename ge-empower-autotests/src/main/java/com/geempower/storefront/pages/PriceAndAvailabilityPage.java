@@ -9,7 +9,6 @@ import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.stream.Stream;
 
-import static com.geempower.storefront.page_elements.MyCartPageElements.GREEN_CONFIRMATION_POP_UP_ID;
 import static com.geempower.storefront.page_elements.PriceAndAvailabilityPageElements.*;
 
 @Component
@@ -63,11 +62,6 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
         return $(AVAILABILITY_FIELD_XPATH, product.getCatalogueNo().toUpperCase()).getText();
     }
 
-    @Step("Get Line Items value")
-    public int getLineItemsValue() {
-        return Integer.parseInt($(LINE_ITEMS_VALUE_XPATH).getText());
-    }
-
     @Step("Set quantity to quantity field")
     public void setQuantityForProduct(Product product, int quantity) {
         $(QUANTITY_INPUT_XPATH, product.getCatalogueNo().toUpperCase()).clear();
@@ -84,31 +78,6 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
     public String getNewExtendPrice(Product product) {
         waitUntilPageIsFullyLoaded();
         return $(EXTENDED_PRICE_XPATH, product.getCatalogueNo().toUpperCase()).getText();
-    }
-
-    @Step("Get order Value from checkout pop-up")
-    public String getOrderValueFromCheckoutPopUp() {
-        waitUntilPageIsFullyLoaded();
-        String orderValue = $(ORDER_VALUE_XPATH).getText();
-        return orderValue.substring(0, orderValue.length() - 4);
-    }
-
-    @Step("Check that cart count icon is displayed")
-    public boolean counterIconIsDisplayed() {
-        waitUntilPageIsFullyLoaded();
-        return isDisplayed(CART_COUNT_ICON_XPATH);
-    }
-
-    @Step("Click on My Cart button")
-    public void clickOnMyCartIcon() {
-        waitForElementToDisappear(By.id(GREEN_CONFIRMATION_POP_UP_ID));
-        $(CART_ICON_XPATH).click();
-        waitUntilPageIsFullyLoaded();
-    }
-
-    @Step("Click on Checkout button")
-    public void clickOnCheckoutButton() {
-        $(CHECKOUT_BUTTON_XPATH).click();
     }
 
     @Step("Check that all the product are shown on the P&A page.")

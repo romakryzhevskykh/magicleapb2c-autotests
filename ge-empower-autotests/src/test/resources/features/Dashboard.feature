@@ -32,11 +32,11 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then Extend Price is changed to correct value.
     And All products are selected on P&A page.
     When User clicks on Add to Cart button.
-    Then Check that count of added items is displayed on My Cart icon.
-    When User clicks on My Cart icon.
-    Then Correct Line Items is displayed in the Checkout pop-up.
+    Then Check that count of added items is displayed on My Cart icon in Header block.
+    When User clicks on My Cart icon in Header block.
+    Then Correct Line Items is displayed in the Checkout pop-up in Header block.
     Then Correct Order Value is displayed in the Checkout pop-up.
-    When User clicks on Checkout button.
+    When User clicks on Checkout button in Header block.
     Then My Cart page is opened.
     Then All necessary elements are displayed on the My Cart page.
     When User clicks on the Next top button on the My Cart page.
@@ -88,11 +88,11 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     And Put <default quantity> to the hashmap on P&A page.
     And All products are selected on P&A page.
     When User clicks on Add to Cart button.
-    Then Check that count of added items is displayed on My Cart icon.
-    When User clicks on My Cart icon.
-    Then Correct Line Items is displayed in the Checkout pop-up.
+    Then Check that count of added items is displayed on My Cart icon in Header block.
+    When User clicks on My Cart icon in Header block.
+    Then Correct Line Items is displayed in the Checkout pop-up in Header block.
     Then Correct Order Value is displayed in the Checkout pop-up.
-    When User clicks on Checkout button.
+    When User clicks on Checkout button in Header block.
     Then My Cart page is opened.
     When User clicks on the Next top button on the My Cart page.
     Then Payer and Shipment Addresses are correct at the OE 2 page.
@@ -187,9 +187,9 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     When Close Full Product Details pop-up.
     And All products are selected on P&A page.
     When User clicks on Add to Cart button.
-    Then Check that count of added items is displayed on My Cart icon.
-    When User clicks on My Cart icon.
-    When User clicks on Checkout button.
+    Then Check that count of added items is displayed on My Cart icon in Header block.
+    When User clicks on My Cart icon in Header block.
+    When User clicks on Checkout button in Header block.
     Then My Cart page is opened.
     Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Agreement No field displayed on My Cart page.
     When Click on <product> link on My Cart page.
@@ -251,7 +251,8 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     When Admin clicks on Cancelled orders.
     Then Appropriate count of Cancelled orders are displayed on the All orders page.
 
-  Scenario Outline: Check that user can open Product details pop-up and switches between tabs
+  Scenario Outline: Check that user can search product via Search Product field,
+  open Product details pop-up and switches between all tabs on Product Search page
     And Account management page is opened.
     When Choose <region> region.
     And Search random account for chosen region.
@@ -259,11 +260,12 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     And Dashboard page is opened.
     When Click on Skip button.
     When Close cookies pop-up.
-    And Search <product> in the search product field.
+    Given Select test product for chosen region.
+    And Search catalogueNo in the search product field.
     Then Search product page is opened.
-    Then Search Result for '<product>' title is displayed on Product Search page.
+    Then Search Result title for appropriate product is displayed on Product Search page.
     Then Alternate Cat. No. tab is displayed and not displayed for appropriate region on Product Search page.
-    When Click on <product> link on Product Search page.
+    When Click on catalogueNo link on Product Search page.
     Then Is Full Product Details pop-up on Price and Availability page displayed.
     Then Is Active Specification tab selected in Full Product Details pop-up.
     When Click on Product Details tab in Full Product Details pop-up.
@@ -272,13 +274,12 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then Is Active Availability Details tab selected in Full Product Details pop-up.
     When Close Full Product Details pop-up.
 
-
     Examples:
-      | region        | product     |
-      | North_America | THQL1115AF2 |
-      | EMEA          | 600540      |
+      | region        |
+      | North_America |
+      | EMEA          |
 
-  Scenario Outline: Check that product can be saved to list
+  Scenario Outline: Check that product can be saved to list on Product Search page
     And Account management page is opened.
     When Choose <region> region.
     And Search random account for chosen region.
@@ -286,15 +287,59 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     And Dashboard page is opened.
     When Click on Skip button.
     When Close cookies pop-up.
-    And Search <product> in the search product field.
-    Then Search product page is opened.
-    When Click on All product checkbox on Product Search page.
+    Given Select test product for chosen region.
+    And Search catalogueNo in the search product field.
+    When Click on appropriate product checkbox on Product Search page.
     And Click on Save to List button on Product Search page.
     Then Is Save To List pop-up displayed.
     When Set List name to the New List Field.
     And Click on Save button in the Save to list pop-up.
     And Saved Items page is opened.
+    #TODO Continue test with new steps on Saved List page.
 
     Examples:
-      | region        | product |
-      | Latin_America | AFP3EYD |
+      | region        |
+      | Latin_America |
+
+  Scenario Outline: Check that user can Get Price & Availability for product on Product Search page
+    And Account management page is opened.
+    When Choose <region> region.
+    And Search random account for chosen region.
+    And Click on chosen account.
+    And Dashboard page is opened.
+    When Click on Skip button.
+    When Close cookies pop-up.
+    Given Select test product for chosen region.
+    And Search catalogueNo in the search product field.
+    Then Search product page is opened.
+    When Click on appropriate product checkbox on Product Search page.
+    And Click on Get P&A button on Product Search page.
+    Then Price&Availability page is opened.
+    Then Check that default quantity is equals to 1 on the Price&Availability page.
+
+    Examples:
+      | region |
+      | ASIA   |
+
+  Scenario Outline: Check that user can add product to the Cart on Product Search page
+    And Account management page is opened.
+    When Choose <region> region.
+    And Search random account for chosen region.
+    And Click on chosen account.
+    And Dashboard page is opened.
+    When Click on Skip button.
+    When Close cookies pop-up.
+    Given Select test product for chosen region.
+    And Search catalogueNo in the search product field.
+    Then Search product page is opened.
+    When Click on appropriate product checkbox on Product Search page.
+    And User clicks on Add to Cart button on Product Search page.
+    Then Check that count of added items is displayed on My Cart icon in Header block.
+    When User clicks on My Cart icon in Header block.
+    When User clicks on Checkout button in Header block.
+    Then My Cart page is opened.
+    Then Correct Catalog No. is displayed on My Cart page.
+
+    Examples:
+      | region |
+      | ASIA   |

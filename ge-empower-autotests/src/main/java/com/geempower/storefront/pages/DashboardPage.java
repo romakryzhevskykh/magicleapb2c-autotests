@@ -77,6 +77,7 @@ public class DashboardPage extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
         return $(By.id(SELECT_SHIP_ADDRESS_FIELD_ID)).getText();
     }
+
     @Step("Click on Submit button.")
     public void clickOnSubmitButton() {
         click(SUBMIT_SHIP_ADDRESS_BUTTON_XPATH);
@@ -123,16 +124,5 @@ public class DashboardPage extends StorefrontBasePage {
     @Step("Click on the OK button.")
     public void clickOkOnTheFeedbackPopUp() {
         click(By.id(OK_BUTTON_FEDBACK_POP_UP_ID));
-    }
-
-    @Step("Set Product To The Search Product Field.")
-    public void setProductToTheSearchProductField(String product) {
-        $(PRODUCT_SEARCH_FIELD_XPATH).clear();
-        $(PRODUCT_SEARCH_FIELD_XPATH).sendKeys(product);
-    }
-
-    @Step
-    public void clickOnSearchProductIcon() {
-        click(By.id(PRODUCT_SEARCH_ICON_ID));
     }
 }

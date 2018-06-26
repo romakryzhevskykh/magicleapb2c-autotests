@@ -17,9 +17,9 @@ public class MyCartPageElements {
     public final static String EXTENDED_PRICE_ON_MY_CART_XPATH = "//tr[contains(@class, 'price-item') and td/a[@data-product = '%s']]/td[contains(@class,'col extendedPrice')]";
     public final static String MAIN_ORDER_DATA_TOP_RIGHT_XPATH = "//div[@id='build-order']/div[@class='row']/div[contains(@class,'return-order-title')]";
     public final static String DISCARD_ORDER_BUTTON_XPATH = "//button[@class='btn primary-btn cancel-cart-btn']";
-    public final static String GREEN_CONFIRMATION_POP_UP_ID = "toast-container";
     public final static String QTY_VALUE_INPUT_XPATH = "//tr[contains(@class, 'price-item') and td/a[@data-product = '%s']]/td[contains(@class,'qty-input')]/input";
     public final static String ALL_CHECKBOXES_XPATH = ".//label[contains(@class,'myCheckbox select-all-desk-js')]";
     public final static String CLAIMBACK_MESSAGE_BELOW_AGREEMENT_NO_FIELD_ON_MY_CART_PAGE_XPATH = ".//p[@class='visible error-text-spa error-spa text-blue']";
     public final static String PRODUCT_LINK_ON_MY_CART_PAGE_XPATH = "//div[@id='priceTable_wrapper']//*[contains(@class,'catalog-name-input modal-toggle product-popup') and contains(text(),'%s')]";
+    public final static String CATALOG_NO_ON_MY_CART_PAGE_XPATH = ".//table[@id='priceTable']//a[@class='catalog-name-input modal-toggle product-popup']";
 }

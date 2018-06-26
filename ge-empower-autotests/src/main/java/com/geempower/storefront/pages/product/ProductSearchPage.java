@@ -35,13 +35,13 @@ public class ProductSearchPage extends StorefrontBasePage {
     }
 
     @Step("Click On Product Link On The Search Result Page.")
-    public void clickOnProductLinkOnTheSearchResultPage(String product) {
-        click(PRODUCT_LINK_ON_PRODUCT_SEARCH_PAGE_XPATH, product);
+    public void clickOnProductLinkOnTheSearchResultPage(String catalogueNo) {
+        click(PRODUCT_LINK_ON_PRODUCT_SEARCH_PAGE_XPATH, catalogueNo);
     }
 
-    @Step("Click On All Product Checkbox On Product Search Page.")
-    public void clickOnAllProductCheckboxOnProductSearchPage() {
-        click(ALL_PRODUCTS_CHECKBOX_ON_PRODUCT_SEARCH_PAGE_XPATH);
+    @Step("Click On Appropriate Product Checkbox On Product Search Page.")
+    public void clickOnAppropriateProductCheckboxOnProductSearchPage(String catalogueNo) {
+        click(APPROPRIATE_PRODUCT_CHECKBOX_ON_PRODUCT_SEARCH_PAGE_XPATH, catalogueNo);
     }
 
     @Step("Click On Save To List Button On Product Search Page.")
@@ -65,5 +65,15 @@ public class ProductSearchPage extends StorefrontBasePage {
     @Step("Click On Save Button In The Save To List PopUp.")
     public void clickOnSaveButtonInTheSaveToListPopUp() {
         $(SAVE_NEW_LIST_BUTTON_IN_SAVE_LIST_POP_UP_XPATH).click();
+    }
+
+    @Step("Click On Get Price And Availability Button On Product Search Page.")
+    public void clickOnGetPriceAndAvailabilityButton() {
+        click(GET_P_A_BUTTON_ON_PRODUCT_SEARCH_PAGE_XPATH);
+    }
+
+    @Step("Click On Add To Cart Button On Product Search Page.")
+    public void clickOnAddToCartButtonOnProductSearchPage() {
+        click(ADD_TO_CART_BUTTON_ON_PRODUCT_SEARCH_PAGE_XPATH);
     }
 }

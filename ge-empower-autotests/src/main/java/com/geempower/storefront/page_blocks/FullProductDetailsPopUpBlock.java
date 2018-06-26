@@ -17,11 +17,13 @@ public class FullProductDetailsPopUpBlock extends UIComponent {
 
     @Step("Click on product details tab.")
     public void clickOnProductDetailsTab() {
+        waitUntilPageIsFullyLoaded();
         click(PRODUCT_DETAILS_TAB_IN_DETAILED_POP_UP_XPATH);
     }
 
     @Step("Click on availability details tab.")
     public void clickOnAvailabilityDetailsTab() {
+        waitUntilPageIsFullyLoaded();
         click(AVAILABILITY_DETAILS_TAB_IN_DETAILED_POP_UP_XPATH);
     }
 
@@ -43,11 +45,13 @@ public class FullProductDetailsPopUpBlock extends UIComponent {
 
     @Step("Is Active Product Details Tab Selected.")
     public boolean isActiveProductDetailsTabSelected() {
+        waitUntilPageIsFullyLoaded();
         return isDisplayed(ACTIVE_PRODUCT_DETAILS_TAB_XPATH);
     }
 
     @Step("Is Active Availability Details Tab Selected.")
     public boolean isActiveAvailabilityDetailsTabSelected() {
+        waitUntilPageIsFullyLoaded();
         return isDisplayed(ACTIVE_AVAILABILITY_PRODUCT_DETAILS_TAB_XPATH);
     }
 }
