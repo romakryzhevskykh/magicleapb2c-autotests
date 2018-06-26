@@ -243,7 +243,7 @@ public class ShoppingCartPage extends StorefrontBasePage {
 					float expectedTotalPrice = actualPriceNumber * actualQtyNumber;
 					logger.info("Actual Total price float value: " + totalPriceNumber);
 					assertTrue((totalPriceNumber == expectedTotalPrice),
-							"Actual total price is: " + totalPriceNumber + "but expected is: " + expectedTotalPrice);
+							"Actual total price is: " + totalPriceNumber + " but expected is: " + expectedTotalPrice);
 
 				}
 			}
