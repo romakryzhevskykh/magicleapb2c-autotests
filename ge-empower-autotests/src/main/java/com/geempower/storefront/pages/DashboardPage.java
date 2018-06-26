@@ -127,11 +127,12 @@ public class DashboardPage extends StorefrontBasePage {
 
     @Step("Set Product To The Search Product Field.")
     public void setProductToTheSearchProductField(String product) {
+        $(PRODUCT_SEARCH_FIELD_XPATH).clear();
         $(PRODUCT_SEARCH_FIELD_XPATH).sendKeys(product);
     }
 
     @Step
     public void clickOnSearchProductIcon() {
-        $(By.id(PRODUCT_SEARCH_ICON_ID)).click();
+        click(By.id(PRODUCT_SEARCH_ICON_ID));
     }
 }
