@@ -2,6 +2,7 @@ package com.geempower.cucumber.definition_steps;
 
 import com.geempower.helpers.models.Product;
 import com.geempower.storefront.page_blocks.FullProductDetailsPopUpBlock;
+import com.geempower.storefront.page_blocks.HeaderBlock;
 import com.geempower.storefront.pages.PriceAndAvailabilityPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
@@ -18,6 +19,7 @@ import static org.testng.Assert.assertTrue;
 public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
     @Autowired private PriceAndAvailabilityPage priceAndAvailabilityPage;
     @Autowired private FullProductDetailsPopUpBlock fullProductDetailsPopUpBlock;
+    @Autowired private HeaderBlock headerBlock;
 
     private final double delta = 0.000001;
 
@@ -48,26 +50,26 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
         priceAndAvailabilityPage.clickOnAddToCartButton();
     }
 
-    @Then("^Check that count of added items is displayed on My Cart icon.$")
+    @Then("^Check that count of added items is displayed on My Cart icon in Header block.$")
     public void counterIconIsDisplayed() {
-        assertTrue(priceAndAvailabilityPage.counterIconIsDisplayed());
+        assertTrue(headerBlock.counterIconIsDisplayed());
     }
 
-    @When("^User clicks on My Cart icon.$")
+    @When("^User clicks on My Cart icon in Header block.$")
     public void clickOnMyCartIcon() {
-        priceAndAvailabilityPage.clickOnMyCartIcon();
+        headerBlock.clickOnMyCartIcon();
     }
 
-    @When("^User clicks on Checkout button.$")
+    @When("^User clicks on Checkout button in Header block.$")
     public void clickOnCheckoutButton() {
-        priceAndAvailabilityPage.clickOnCheckoutButton();
+        headerBlock.clickOnCheckoutButton();
     }
 
     @SuppressWarnings("unchecked")
-    @Then("^Correct Line Items is displayed in the Checkout pop-up.$")
+    @Then("^Correct Line Items is displayed in the Checkout pop-up in Header block.$")
     public void checkoutLineItemValueIsCorrect() {
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
-        assertTrue(priceAndAvailabilityPage.getLineItemsValue() == selectedProducts.keySet().size());
+        assertTrue(headerBlock.getLineItemsValue() == selectedProducts.keySet().size());
     }
 
     @SuppressWarnings("unchecked")
@@ -78,7 +80,7 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
             double finalNetPrice = Double.parseDouble(product.getFinalNetPrice());
             double quantityOfEachProduct = (double) selectedProducts.get(product);
             double finalActualPrice = finalNetPrice * quantityOfEachProduct;
-            assertEquals(finalActualPrice, Double.parseDouble(priceAndAvailabilityPage.getOrderValueFromCheckoutPopUp()), delta);
+            assertEquals(finalActualPrice, Double.parseDouble(headerBlock.getOrderValueFromCheckoutPopUp()), delta);
         });
     }
 
@@ -170,12 +172,12 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
         assertTrue(fullProductDetailsPopUpBlock.isProductDetailPopUpOnPApageDisplayed());
     }
 
-    @When("^Click on Product Details tab.$")
+    @When("^Click on Product Details tab in Full Product Details pop-up.$")
     public void clickOnProductDetailsTab() {
         fullProductDetailsPopUpBlock.clickOnProductDetailsTab();
     }
 
-    @When("^Click on Availability Details tab.$")
+    @When("^Click on Availability Details tab in Full Product Details pop-up.$")
     public void clickOnAvailabilityDetailsTab() {
         fullProductDetailsPopUpBlock.clickOnAvailabilityDetailsTab();
     }

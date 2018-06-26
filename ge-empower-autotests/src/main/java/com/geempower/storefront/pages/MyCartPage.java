@@ -22,60 +22,60 @@ public class MyCartPage extends StorefrontBasePage {
         return getCurrentUrl().equals(getPageUrl());
     }
 
-    @Step("Get My Cart title")
+    @Step("Get My Cart title.")
     public String getMyCartTitle() {
         return $(MY_CART_TITLE_XPATH).getText();
     }
 
-    @Step("Are order step icons displayed")
+    @Step("Are order step icons displayed.")
     public boolean areOrderStepIconsDisplayed() {
         return $(BUILD_ORDER_STEP_ICON_XPATH).isDisplayed() &&
                 $(SHIPPING_BILLING_INFO_STEP_ICON_XPATH).isDisplayed() &&
                 $(ORDER_SUMMARY_STEP_ICON_XPATH).isDisplayed();
     }
 
-    @Step("Is build order Information input present")
+    @Step("Is build order Information input present.")
     public boolean isBuildOrderInformationInputPresent() {
         return $(BUILD_ORDER_FORM_WRAPPER_XPATH).isDisplayed() &&
                 $(BUILD_ORDER_INFORMATION_INPUT_XPATH).isDisplayed();
     }
 
-    @Step("Is add item button present")
+    @Step("Is add item button present.")
     public boolean isAddItemButtonPresent() {
         return $(ADD_ITEM_BUTTON_XPATH).isDisplayed();
     }
 
-    @Step("Is delete button present")
+    @Step("Is delete button present.")
     public boolean isDeleteItemButtonPresent() {
         return $(DELETE_ITEM_BUTTON_XPATH).isDisplayed();
     }
 
-    @Step("Is Update P&A button displayed")
+    @Step("Is Update P&A button displayed.")
     public boolean isUpdatePriceAndAvailabilityButtonPresent() {
         return $(UPDATE_PRICE_AND_AVAILABILITY_BUTTON_XPATH).isDisplayed();
     }
 
-    @Step("Is Next bottom button displayed")
+    @Step("Is Next bottom button displayed.")
     public boolean isNextBottomButtonPresent() {
         return $(BUILD_ORDER_BOTTOM_NEXT_BUTTON_XPATH).isDisplayed();
     }
 
-    @Step("Is Next top button displayed")
+    @Step("Is Next top button displayed.")
     public boolean isNextTopButtonPresent() {
         return $(BUILD_ORDER_TOP_NEXT_BUTTON_XPATH).isDisplayed();
     }
 
-    @Step("Is main order data displayed on the top right")
+    @Step("Is main order data displayed on the top right.")
     public boolean isMainOrderDataDisplayedOnTheTopRight() {
         return $(MAIN_ORDER_DATA_TOP_RIGHT_XPATH).isDisplayed();
     }
 
-    @Step("Is Save item button displayed")
+    @Step("Is Save item button displayed.")
     public boolean isSaveItemsButtonPresent() {
         return $(SAVE_ITEMS_BUTTON_XPATH).isDisplayed();
     }
 
-    @Step("Is Cancel button displayed")
+    @Step("Is Cancel button displayed.")
     public boolean isCancelButtonPresent() {
         return $(CANCEL_BUTTON_XPATH).isDisplayed();
     }
@@ -84,40 +84,40 @@ public class MyCartPage extends StorefrontBasePage {
     public void clickOnCancelButton() {
         $(CANCEL_BUTTON_XPATH).click();
         waitUntilPageIsFullyLoaded();
-        $(DISCARD_ORDER_BUTTON_XPATH).click();
+        click(DISCARD_ORDER_BUTTON_XPATH);
     }
 
-    @Step("Click on the Top Next button on the My Cart page")
+    @Step("Click on the Top Next button on the My Cart page.")
     public void clickOnTheNextTopButton() {
         waitUntilPageIsFullyLoaded();
-        $(BUILD_ORDER_TOP_NEXT_BUTTON_XPATH).click();
+        click(BUILD_ORDER_TOP_NEXT_BUTTON_XPATH);
         waitUntilPageIsFullyLoaded();
     }
 
-    @Step("Get Qty value")
+    @Step("Get Qty value.")
     public String getQtyValue(Product product) {
         return $(QTY_VALUE_INPUT_XPATH, product.getCatalogueNo().toUpperCase()).getAttribute("value");
     }
 
-    @Step("Set Quantity value to qty. field for each product")
+    @Step("Set Quantity value to qty. field for each product.")
     public void setQuantityForProduct(Product product, int randomQuantity) {
         waitUntilPageIsFullyLoaded();
         $(QTY_VALUE_INPUT_XPATH, product.getCatalogueNo().toUpperCase()).clear();
         $(QTY_VALUE_INPUT_XPATH, product.getCatalogueNo().toUpperCase()).sendKeys(Integer.toString(randomQuantity));
     }
 
-    @Step("Select all products by clicking on All checkbox")
+    @Step("Select all products by clicking on All checkbox.")
     public void clickOnSelectAllCheckbox() {
         waitUntilPageIsFullyLoaded();
-        $(ALL_CHECKBOXES_XPATH).click();
+        click(ALL_CHECKBOXES_XPATH);
     }
 
-    @Step("Clicking on P&A button")
+    @Step("Clicking on P&A button.")
     public void clickOnUpdatePAButton() {
         $(UPDATE_PRICE_AND_AVAILABILITY_BUTTON_XPATH).click();
     }
 
-    @Step("Getting the updated Extended price")
+    @Step("Getting the updated Extended price.")
     public String getNewExtendPrice(Product product) {
         waitUntilPageIsFullyLoaded();
         return $(EXTENDED_PRICE_ON_MY_CART_XPATH, product.getCatalogueNo().toUpperCase()).getText();
@@ -133,5 +133,10 @@ public class MyCartPage extends StorefrontBasePage {
     public void clickOnProductLinkOnMyCartPage(String products) {
         waitUntilPageIsFullyLoaded();
         click(PRODUCT_LINK_ON_MY_CART_PAGE_XPATH, products);
+    }
+
+    @Step("Correct Catalog No Is Displayed On My Cart Page.")
+    public String correctCatalogNoIsDisplayedOnMyCartPage() {
+        return $(CATALOG_NO_ON_MY_CART_PAGE_XPATH).getText();
     }
 }

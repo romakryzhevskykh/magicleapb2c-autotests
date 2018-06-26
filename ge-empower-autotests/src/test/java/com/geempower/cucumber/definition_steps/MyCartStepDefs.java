@@ -2,16 +2,13 @@ package com.geempower.cucumber.definition_steps;
 
 import com.geempower.helpers.models.Product;
 import com.geempower.storefront.pages.MyCartPage;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.api.java.en.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
 import java.util.Random;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class MyCartStepDefs extends AbstractStepDefs {
     @Autowired
@@ -97,5 +94,12 @@ public class MyCartStepDefs extends AbstractStepDefs {
     @When("^Click on (.*) link on My Cart page.$")
     public void clickOnProductLinkOnMyCartPage(String products) {
         myCartPage.clickOnProductLinkOnMyCartPage(products);
+    }
+
+    @Then("^Correct Catalog No. is displayed on My Cart page.$")
+    public void correctCatalogNoIsDisplayedOnMyCartPage() {
+        threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
+        String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
+        assertEquals(catalogueNo, myCartPage.correctCatalogNoIsDisplayedOnMyCartPage());
     }
 }

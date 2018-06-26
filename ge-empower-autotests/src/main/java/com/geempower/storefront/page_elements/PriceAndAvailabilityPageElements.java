@@ -10,11 +10,6 @@ public class PriceAndAvailabilityPageElements {
     public final static String QUANTITY_INPUT_XPATH = "//table[contains(@class, 'price-availability-table')]//tr[contains(@class, 'price-item') and td/a[@data-product = '%s']]/td[contains(@class,'qty-input')]/input";
     public final static String EXTENDED_PRICE_XPATH = "//table[contains(@class, 'price-availability-table')]//tr[contains(@class, 'price-item') and td/a[@data-product = '%s']]/td[contains(@class,'col extendedPrice')]";
     public final static String UPDATE_PRICE_AND_AVAILABILITY_BUTTON_XPATH = "//button[@id='upd_pr_and_av_btn']";
-    public final static String CART_COUNT_ICON_XPATH = ".//span[@class='badge cart-count']";
-    public final static String CART_ICON_XPATH = "//span[@class='badge cart-count']";
-    public final static String LINE_ITEMS_VALUE_XPATH = "//p[contains(@class,'cart-total-lines')]";
-    public final static String ORDER_VALUE_XPATH = ".//p[contains(@class,'cart-total-price')]";
-    public final static String CHECKOUT_BUTTON_XPATH = ".//p[contains(@class,'cart-total-price')]";
     public final static String PRODUCT_ERROR_MESSAGES_XPATH = "//div[@class='warning-message catalog-error-message mt-10 mb-10']/span[@class='warning-text']";
     public final static String CLAIMBACK_MESSAGE_BELOW_AGREEMENT_NO_FIELD_XPATH = "//*[@class = 'error-text-spa error-spa  visible text-blue']";
     public final static String SEARCH_AGREEMENT_NO_ICON_XPATH = "//table[@id='priceTable']//tr[1]//td[@class='special-pricing-input-col']//i[@class='fa fa-search']";

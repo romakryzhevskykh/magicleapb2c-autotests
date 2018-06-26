@@ -7,9 +7,7 @@ import com.geempower.helpers.managers.RegionsManager;
 import com.geempower.helpers.models.Product;
 import com.geempower.helpers.models.Region;
 import com.geempower.storefront.pages.product.ProductsPage;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.api.java.en.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;

@@ -19,11 +19,11 @@ Feature: Some actions on Products page
     Then Product sub-detail page is opened.
     When User select the product by Catalog No. from the products list on the Product Sub-Detail page.
     And Add all the chosen products to the My Cart.
-    Then Check that count of added items is displayed on My Cart icon.
-    When User clicks on My Cart icon.
+    Then Check that count of added items is displayed on My Cart icon in Header block.
+    When User clicks on My Cart icon in Header block.
     Then Correct Line Items is displayed in the Checkout pop-up on the Product Sub-Detail page.
     Then Correct Order Value is displayed in the Checkout pop-up on the Product Sub-Detail page.
-    When User clicks on Checkout button.
+    When User clicks on Checkout button in Header block.
     Then My Cart page is opened.
     Then Check that default quantity is equals to 1 on the My Cart page.
     When Quantity is changed to random quantity of items for each product on the My Cart page.
