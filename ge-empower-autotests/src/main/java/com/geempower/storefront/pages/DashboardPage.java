@@ -133,6 +133,6 @@ public class DashboardPage extends StorefrontBasePage {
 
     @Step
     public void clickOnSearchProductIcon() {
-        click($(By.id(PRODUCT_SEARCH_ICON_ID)));
+        click(By.id(PRODUCT_SEARCH_ICON_ID));
     }
 }
