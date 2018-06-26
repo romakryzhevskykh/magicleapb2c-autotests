@@ -84,13 +84,13 @@ public class MyCartPage extends StorefrontBasePage {
     public void clickOnCancelButton() {
         $(CANCEL_BUTTON_XPATH).click();
         waitUntilPageIsFullyLoaded();
-        $(DISCARD_ORDER_BUTTON_XPATH).click();
+        click(DISCARD_ORDER_BUTTON_XPATH);
     }
 
     @Step("Click on the Top Next button on the My Cart page.")
     public void clickOnTheNextTopButton() {
         waitUntilPageIsFullyLoaded();
-        $(BUILD_ORDER_TOP_NEXT_BUTTON_XPATH).click();
+        click(BUILD_ORDER_TOP_NEXT_BUTTON_XPATH);
         waitUntilPageIsFullyLoaded();
     }
 
@@ -109,7 +109,7 @@ public class MyCartPage extends StorefrontBasePage {
     @Step("Select all products by clicking on All checkbox.")
     public void clickOnSelectAllCheckbox() {
         waitUntilPageIsFullyLoaded();
-        $(ALL_CHECKBOXES_XPATH).click();
+        click(ALL_CHECKBOXES_XPATH);
     }
 
     @Step("Clicking on P&A button.")

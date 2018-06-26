@@ -77,7 +77,7 @@ public class ProductSearchPage extends StorefrontBasePage {
 
     @Step("Click On Get Price And Availability Button On Product Search Page.")
     public void clickOnGetPriceAndAvailabilityButton() {
-        click(GET_P_A_BUTTON_ON_PRODUCT_SEARCH_PAGE_XPATH);
+        click(GET_P_AND_A_BUTTON_ON_PRODUCT_SEARCH_PAGE_XPATH);
     }
 
     @Step("Click On Add To Cart Button On Product Search Page.")

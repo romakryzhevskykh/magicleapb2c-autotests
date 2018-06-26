@@ -91,7 +91,7 @@ public class ProductSearchStepDefs extends AbstractStepDefs {
     }
 
     @And("^Click on Get P&A button on Product Search page.$")
-    public void clickOnGetPAButtonOnProductSearchPage() {
+    public void clickOnGetPriceAndAvailabilityButton() {
         productSearchPage.clickOnGetPriceAndAvailabilityButton();
     }
 

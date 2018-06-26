@@ -14,34 +14,34 @@ public class HeaderBlock extends UIComponent {
         return isDisplayed(PROFILE_DROPDOWN_XPATH);
     }
 
-    @Step("Check that cart count icon is displayed")
+    @Step("Check that cart count icon is displayed.")
     public boolean counterIconIsDisplayed() {
         waitUntilPageIsFullyLoaded();
         return isDisplayed(CART_COUNT_ICON_XPATH);
     }
 
-    @Step("Click on My Cart button")
+    @Step("Click on My Cart button.")
     public void clickOnMyCartIcon() {
         waitForElementToDisappear(By.id(GREEN_CONFIRMATION_POP_UP_ID));
-        $(CART_ICON_XPATH).click();
+        click(CART_ICON_XPATH);
         waitUntilPageIsFullyLoaded();
     }
 
-    @Step("Get Line Items value")
+    @Step("Get Line Items value.")
     public int getLineItemsValue() {
         return Integer.parseInt($(LINE_ITEMS_VALUE_XPATH).getText());
     }
 
-    @Step("Get order Value from checkout pop-up")
+    @Step("Get order Value from checkout pop-up.")
     public String getOrderValueFromCheckoutPopUp() {
         waitUntilPageIsFullyLoaded();
         String orderValue = $(ORDER_VALUE_XPATH).getText();
         return orderValue.substring(0, orderValue.length() - 4);
     }
 
-    @Step("Click on Checkout button")
+    @Step("Click on Checkout button.")
     public void clickOnCheckoutButton() {
-        $(CHECKOUT_BUTTON_XPATH).click();
+        click(CHECKOUT_BUTTON_XPATH);
     }
 
     @Step("Set Product To The Search Product Field.")
