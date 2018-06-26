@@ -123,7 +123,7 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
     }
 
     @When("^Click on (.*) link on the OE 3 page.$")
-    public void clickOnProductLinkOnThe3OEPage(String products) {
-        orderEntry3Page.clickOnProductLinkOnOE3Page(products);
+    public void clickOnProductLinkOnThe3OEPage(String product) {
+        orderEntry3Page.clickOnProductLinkOnOE3Page(product);
     }
 }

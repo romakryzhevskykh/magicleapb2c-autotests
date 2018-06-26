@@ -17,7 +17,12 @@ public class FullProductDetailsPopUpBlock extends UIComponent {
 
     @Step("Click on product details tab.")
     public void clickOnProductDetailsTab() {
-        click(PRODUCT_DETAILS_TAB_IN_DETAILED_POP_XPATH);
+        click(PRODUCT_DETAILS_TAB_IN_DETAILED_POP_UP_XPATH);
+    }
+
+    @Step("Click on availability details tab.")
+    public void clickOnAvailabilityDetailsTab() {
+        click(AVAILABILITY_DETAILS_TAB_IN_DETAILED_POP_UP_XPATH);
     }
 
     @Step("Get Claimback message below Pricing Details title field.")
@@ -29,5 +34,20 @@ public class FullProductDetailsPopUpBlock extends UIComponent {
     @Step("Close Full Product Details pop-up.")
     public void closeFullProductsDetailPopUp() {
         click(CLOSE_BUTTON_IN_PRODUCT_DETAILS_TAB_XPATH);
+    }
+
+    @Step("Is Active Specification Tab Selected.")
+    public boolean isActiveSpecificationTabSelected() {
+        return isDisplayed(ACTIVE_SPECIFICATION_TAB_XPATH);
+    }
+
+    @Step("Is Active Product Details Tab Selected.")
+    public boolean isActiveProductDetailsTabSelected() {
+        return isDisplayed(ACTIVE_PRODUCT_DETAILS_TAB_XPATH);
+    }
+
+    @Step("Is Active Availability Details Tab Selected.")
+    public boolean isActiveAvailabilityDetailsTabSelected() {
+        return isDisplayed(ACTIVE_AVAILABILITY_PRODUCT_DETAILS_TAB_XPATH);
     }
 }

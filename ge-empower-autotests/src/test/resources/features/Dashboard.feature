@@ -181,7 +181,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     When User select <agreementNo> Agreement No for all the product.
     Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Agreement No field displayed on P&A page.
     When Click on <product> link on P&A page.
-    Then Is Product Details pop-up on Price and Availability page displayed.
+    Then Is Full Product Details pop-up on Price and Availability page displayed.
     When Click on Product Details tab.
     Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Pricing Details title displayed in Full Product Details pop-up.
     When Close Full Product Details pop-up.
@@ -193,7 +193,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then My Cart page is opened.
     Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Agreement No field displayed on My Cart page.
     When Click on <product> link on My Cart page.
-    Then Is Product Details pop-up on Price and Availability page displayed.
+    Then Is Full Product Details pop-up on Price and Availability page displayed.
     When Click on Product Details tab.
     Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Pricing Details title displayed in Full Product Details pop-up.
     When Close Full Product Details pop-up.
@@ -250,3 +250,29 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     And Dashboard page is opened.
     When Admin clicks on Cancelled orders.
     Then Appropriate count of Cancelled orders are displayed on the All orders page.
+
+  Scenario Outline: Check that user can open Product details pop-up and switches between tabs
+    And Account management page is opened.
+    When Choose <region> region.
+    And Search random account for chosen region.
+    And Click on chosen account.
+    And Dashboard page is opened.
+    When Click on Skip button.
+    When Close cookies pop-up.
+    And Search <product> in the search product field.
+    Then Search product page is opened.
+    Then Search Result for '<product>' title is displayed.
+    Then Alternate Cat. No. tab is displayed and not displayed for appropriate region.
+    When Click on <product> link on the Search Result page.
+    Then Is Full Product Details pop-up on Price and Availability page displayed.
+    Then Is Active Specification tab selected.
+    When Click on Product Details tab.
+    Then Is Active Product Details tab selected.
+    When Click on Availability Details tab.
+    Then Is Active Availability Details tab selected.
+    When Close Full Product Details pop-up.
+
+  Examples:
+  | region        |  product     |
+  | North_America | THQL1115AF2  |
+  | EMEA          | 600540       |

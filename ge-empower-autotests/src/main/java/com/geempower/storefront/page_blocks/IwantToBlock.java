@@ -29,6 +29,7 @@ public class IwantToBlock extends UIComponent {
 
     @Step("Click On Sales Office Codes Tab.")
     public void clickOnSalesOfficeCodesTab() {
+        waitUntilPageIsFullyLoaded();
         click(SALES_OFFICE_CODES_TAB_IN_MODIFY_ACC_TAB_XPATH);
     }
 

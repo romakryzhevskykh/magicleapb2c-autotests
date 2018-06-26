@@ -196,9 +196,9 @@ public class OrderEntry3Page extends StorefrontBasePage {
     }
 
     @Step("Click on Product Link on OE 3 Page.")
-    public void clickOnProductLinkOnOE3Page(String products) {
+    public void clickOnProductLinkOnOE3Page(String product) {
         waitUntilPageIsFullyLoaded();
-        click(PRODUCT_LINK_3_OE_PAGE_XPATH, products);
+        click(PRODUCT_LINK_3_OE_PAGE_XPATH, product);
     }
 
 }

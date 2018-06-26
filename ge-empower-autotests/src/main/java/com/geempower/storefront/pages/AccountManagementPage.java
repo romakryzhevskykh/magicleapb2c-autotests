@@ -166,8 +166,8 @@ public class AccountManagementPage extends StorefrontBasePage {
         approvedAccounts.forEach(this::removeAccountByAccountNo);
     }
 
-    @Step("Active Favorite Tab Is Displayed.")
-    public boolean activeFavoriteTabIsDisplayed() {
+    @Step("Is Active Favorite Tab Displayed.")
+    public boolean isActiveFavoriteTabDisplayed() {
         waitUntilPageIsFullyLoaded();
         return isDisplayed(FAVORITES_ACTIVE_TAB_XPATH);
     }
