@@ -27,5 +27,12 @@ public class ShoppingCartPageElements {
 	public static final String PRODUCT_TOTAL_PRICE = "//li[@class='esab-ui-cart__product-item']"
 			+ "//div[@class='item__code' and text()='%s']//parent::div/parent::li"
 			+ "//div[@class='item__total js-item-total hidden-xs hidden-sm']";
+	public static final String PRODUCT_DETAILS_BUTTON_XPATH = "//li[@class='esab-ui-cart__product-item']"
+			+ "//div[@class='item__code' and text()='%s']//parent::div/parent::li"
+			+ "//span[@class='glyphicon glyphicon-option-vertical']";
+	public static final String PRODUCT_REMOVE_BUTTON_XPATH = "//li[@class='js-execute-entry-action-button'"
+			+ " and @data-entry-product-code='%s' and @data-entry-action='REMOVE']";
+	public static final String SUBTOTAL_XPATH = "//div[@class='js-cart-totals row']"
+			+ "//div[@class='col-xs-6 cart-totals-right text-right']";
 
 }

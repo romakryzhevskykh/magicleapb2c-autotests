@@ -194,59 +194,103 @@ public class ShoppingCartPage extends StorefrontBasePage {
 	@Step("Verify price by SCU")
 	public void verifyPriceBySCU() {
 		List<ProductModel> products = productController.getListOfProducts();
-		String actualPriceRaw = null;
-		String actualPrice = null;
 		waitJSExecution();
 		if (products != null) {
 			for (ProductModel product : products) {
-				actualPriceRaw = getWebElement(String.format(PRODUCT_PRICE_XPATH, product.getScu())).getText().trim();
+				String actualPriceRaw = getWebElement(String.format(PRODUCT_PRICE_XPATH, product.getScu())).getText()
+						.trim();
 				if (actualPriceRaw != null) {
-					actualPrice = (String) actualPriceRaw.subSequence(1, actualPriceRaw.length());
-					logger.info("Actual Price is: " + actualPrice);
+					String actualPrice = getPriceWithoutDollarChar(actualPriceRaw);
 					String expectedPrice = product.getPrice();
 					assertEquals(actualPrice, expectedPrice,
 							"Expected price is: " + expectedPrice + " but actual is: " + actualPrice);
 				}
 			}
 		}
-
 	}
 
-	@Step("Verify QTY of Product in the list")
+	private String getPriceWithoutDollarChar(String sourceString) {
+		String resultString = null;
+		if ((sourceString != null) && (sourceString.length() > 0)) {
+			resultString = (String) sourceString.subSequence(1, sourceString.length());
+			logger.info("String without dollar char is: " + resultString);
+		} else {
+			logger.error("Source string equals 0 or null. Source string = " + sourceString);
+		}
+		return resultString;
+	}
+
+	private void calculateAndCompareTotlaPrice(float actualQty, float actualPrice, float actualTotalPrice) {
+		if ((actualPrice > 0) && (actualQty > 0)) {
+			float expectedTotalPrice = actualPrice * actualQty;
+			logger.info("Actual Total price float value: " + actualPrice);
+			assertTrue((actualTotalPrice == expectedTotalPrice),
+					"Actual total price is: " + actualTotalPrice + " but expected is: " + expectedTotalPrice);
+		} else {
+			logger.error("Actual price or Qty equals 0. Actual price = " + actualPrice + " Qty = " + actualQty);
+		}
+	}
+
+	@Step("Verify Total price of Product in the list")
 	public void verifyTotalPriceInList() {
 		List<ProductModel> products = productController.getListOfProducts();
-		String actualPriceRaw = null;
-		String actualPrice = null;
-		String actualQty = null;
-		String actualTotalPrice = null;
-		String actualTotalPriceRaw = null;
-		float actualPriceNumber = 0;
-		float actualQtyNumber = 0;
-		float totalPriceNumber = 0;
 		waitJSExecution();
 		if (products != null) {
 			for (ProductModel product : products) {
 				String productScu = product.getScu();
-				actualPriceRaw = getWebElement(String.format(PRODUCT_PRICE_XPATH, productScu)).getText().trim();
-				actualQty = getWebElement(String.format(PRODUCT_QTY_XPATH, productScu)).getAttribute("value").trim();
-				logger.info("Qty = " + actualQty);
-				actualTotalPriceRaw = getWebElement(String.format(PRODUCT_TOTAL_PRICE, productScu)).getText().trim();
-				if ((actualPriceRaw != null) && (actualQty != null)) {
-					actualPrice = (String) actualPriceRaw.subSequence(1, actualPriceRaw.length());
-					actualTotalPrice = (String) actualTotalPriceRaw.subSequence(1, actualPriceRaw.length());
-					logger.info("Actual Price is: " + actualPrice);
-					actualPriceNumber = Float.valueOf(actualPrice);
-					logger.info("Actual price float value: " + actualPriceNumber);
-					actualQtyNumber = Float.valueOf(actualQty);
-					logger.info("Actual Qty float value: " + actualQtyNumber);
-					totalPriceNumber = Float.valueOf(actualTotalPrice);
-					float expectedTotalPrice = actualPriceNumber * actualQtyNumber;
-					logger.info("Actual Total price float value: " + totalPriceNumber);
-					assertTrue((totalPriceNumber == expectedTotalPrice),
-							"Actual total price is: " + totalPriceNumber + " but expected is: " + expectedTotalPrice);
-
-				}
+				String actualPriceRaw = getWebElement(String.format(PRODUCT_PRICE_XPATH, productScu)).getText().trim();
+				logger.info("Raw Price = " + actualPriceRaw);
+				String actualQty = getWebElement(String.format(PRODUCT_QTY_XPATH, productScu)).getAttribute("value")
+						.trim();
+				logger.info("Raw Qty = " + actualQty);
+				String actualTotalPriceRaw = getWebElement(String.format(PRODUCT_TOTAL_PRICE, productScu)).getText()
+						.trim();
+				logger.info("Raw total price = " + actualTotalPriceRaw);
+				String actualPrice = getPriceWithoutDollarChar(actualPriceRaw);
+				String actualTotalPrice = getPriceWithoutDollarChar(actualTotalPriceRaw);
+				float actualPriceNumber = castStringToFloat(actualPrice);
+				float actualQtyNumber = castStringToFloat(actualQty);
+				float totalPriceNumber = castStringToFloat(actualTotalPrice);
+				calculateAndCompareTotlaPrice(actualQtyNumber, actualPriceNumber, totalPriceNumber);
 			}
+		}
+	}
+
+	@Step("Remove all products by scu")
+	public void clickOnRemoveProduct() {
+		List<ProductModel> products = productController.getListOfProducts();
+		waitJSExecution();
+		if (products != null) {
+			for (ProductModel product : products) {
+				String productSCU = product.getScu();
+				logger.info("Delete product by SCU: " + productSCU);
+				click(String.format(PRODUCT_DETAILS_BUTTON_XPATH, productSCU));
+				click(String.format(PRODUCT_REMOVE_BUTTON_XPATH, productSCU));
+			}
+		}
+	}
+
+	@Step("Verify subtotal")
+	public void verifySubtotal() {
+		float expectedSubtotal = 0;
+		List<ProductModel> products = productController.getListOfProducts();
+		waitJSExecution();
+		String actualSubTotalRaw = getWebElement(SUBTOTAL_XPATH).getText().trim();
+		logger.info("Subtotal price = " + actualSubTotalRaw);
+		String actualSubtotal = getPriceWithoutDollarChar(actualSubTotalRaw);
+		float actualSubtotalNumber = castStringToFloat(actualSubtotal);
+		if (products != null) {
+			for (ProductModel product : products) {
+				String productScu = product.getScu();
+				String actualTotalPriceRaw = getWebElement(String.format(PRODUCT_TOTAL_PRICE, productScu)).getText()
+						.trim();
+				logger.info("Raw total price = " + actualTotalPriceRaw);
+				String actualTotalPrice = getPriceWithoutDollarChar(actualTotalPriceRaw);
+				float totalPriceNumber = castStringToFloat(actualTotalPrice);
+				expectedSubtotal += totalPriceNumber;
+			}
+			assertTrue((actualSubtotalNumber == expectedSubtotal),
+					"Actual total price is: " + actualSubtotalNumber + " but expected is: " + expectedSubtotal);
 		}
 	}
 

@@ -115,5 +115,14 @@ public class ShoppingCartPageDefs extends AbstractStepDefs {
 	public void verifyTotalPrice(){
 		shoppingCartPage.verifyTotalPriceInList();
 	}
-
+	
+	@And ("^Remove all products.$")
+	public void removeAllProducts(){
+		shoppingCartPage.clickOnRemoveProduct();
+	}
+	
+	@And ("^Verify Subtotal price on Shopping Cart.$")
+	public void verifySubtotal(){
+		shoppingCartPage.verifySubtotal();
+	}
 }
