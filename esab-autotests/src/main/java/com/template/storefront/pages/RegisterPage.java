@@ -89,11 +89,11 @@ public class RegisterPage extends StorefrontBasePage {
 
 	@Step("Select specific Country.")
 	public void selectCountry() {
-		String country = getWebElement(String.format(COUNTRY_VALUE_XPATH, userModel.getCountry())).getText().trim();
+		//String country = getWebElement(String.format(COUNTRY_VALUE_XPATH, userModel.getCountry())).getText().trim();
 		click(String.format(COUNTRY_VALUE_XPATH, userModel.getCountry()));
-		logger.error("Country value: " + country);
+		/*logger.error("Country value: " + country);
 		customerData.put("Country", country);
-		logger.info("Country field value entered: " + getCustomerData().get("Country"));
+		logger.info("Country field value entered: " + getCustomerData().get("Country"));*/
 	}
 
 	@Step("Select specific title")
