@@ -34,5 +34,7 @@ public class ShoppingCartPageElements {
 			+ " and @data-entry-product-code='%s' and @data-entry-action='REMOVE']";
 	public static final String SUBTOTAL_XPATH = "//div[@class='js-cart-totals row']"
 			+ "//div[@class='col-xs-6 cart-totals-right text-right']";
+	public static final String SAVE_CART_BUTTON_XPATH = "//button[@class='btn btn-default save__cart--link cart__head--link js-save-cart-link']";
+	public static final String CHECKOUT_BUTTON_XPATH = "//button[@class='btn btn-primary btn--continue-checkout js-continue-checkout-button']";
 
 }

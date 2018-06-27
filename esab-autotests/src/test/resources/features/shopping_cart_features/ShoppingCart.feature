@@ -29,8 +29,12 @@ Scenario: Check Shopping Cart Layout
 	And Verify In Stock value on Shopping Cart. 
 	And Verify Product Price on Shopping Cart. 
 	And Verify Total Price on Shopping Cart. 
-	And Verify Subtotal price on Shopping Cart. 
-	And Remove all products. 
-	And Verify SKU Inputs count on Shopping Cart is: "2" . 
+	And Verify Subtotal price on Shopping Cart.
+	And Verify Save Cart button label.
+	And Verify Check Out button label.
+	And Click on Check Out button.
+	#And Click on Save shopping cart button. 
+	#And Remove all products. 
+	#And Verify SKU Inputs count on Shopping Cart is: "2" . 
 	
 	

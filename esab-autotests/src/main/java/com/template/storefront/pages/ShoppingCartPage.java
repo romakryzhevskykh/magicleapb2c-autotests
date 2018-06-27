@@ -21,23 +21,15 @@ import static com.template.storefront.page_elements.ShoppingCartPageElements.*;
 public class ShoppingCartPage extends StorefrontBasePage {
 	final static Logger logger = Logger.getLogger(RegisterPage.class);
 	private String pageUrlMethod = "/esab/en/cart";
-	private List<String> validationHeaderTitle2 = new ArrayList<>(Arrays.asList("Add new item"));
-	private List<String> validationHeader2Subtitle = new ArrayList<>(Arrays
-			.asList("Fill out the form below to add products to your order or click here to upload an order instead."));
-	private String validationHeaderTitle1 = "Shopping Cart";
-	private List<String> validationAddToCartButtonLabel = new ArrayList<>(
-			Arrays.asList("Add these products to shopping cart"));
-	private List<String> dataForQtyFields = new ArrayList<>(Arrays.asList("11", "22"));
-	/*
-	 * private List<String> validationShipToAddr = new ArrayList<>(
-	 * Arrays.asList("999 South Wacker Drive, Chicago, 60606"));
-	 */
-	private List<String> validationShipToAddr = new ArrayList<>(
-			Arrays.asList("999 South Wacker Drive, Chicago, 60606"));
-	private String shipToAddress = "999 South Wacker Drive, Chicago, 60606";
 
-	// private String shipToAddress = "StreetName, StreetNumber, Town,
-	// PostalCode";
+	private String validationHeaderTitle2 = "Add new item";
+	private String validationHeader2Subtitle = "Fill out the form below to add products to your order or click here to upload an order instead.";
+	private String validationHeaderTitle1 = "Shopping Cart";
+	private String validationAddToCartButtonLabel = "Add these products to shopping cart";
+	private List<String> dataForQtyFields = new ArrayList<>(Arrays.asList("11", "22"));
+	private String saveCartBauutonLabel = "SAVE CART";
+	private String validationShipToAddr = "999 South Wacker Drive, Chicago, 60606";
+	private String checkOutButtonLabel = "Check Out";
 
 	@Override
 	public String getPageUrl() {
@@ -67,25 +59,22 @@ public class ShoppingCartPage extends StorefrontBasePage {
 
 	@Step("Verify Shopping cart header_2 h2")
 	public void verifyShoppingCartHeader2() {
-		verifyWebElementsTextValuesEqual(validationHeaderTitle2, H2_SHOPPING_CART_TITLE2);
-		logger.info("Header title 2 is CORRECT: " + validationHeaderTitle2);
+		verifyWebElementTextValue(validationHeaderTitle2, H2_SHOPPING_CART_TITLE2);
 	}
 
 	@Step("Verify Shopping Cart Header2 subtitle")
 	public void verifyH2Header2Subtitle() {
-		verifyWebElementsTextValuesEqual(validationHeader2Subtitle, HEADER2_SUBTITLE);
-		logger.info("Header2 subtitle is CORRECT: " + validationHeader2Subtitle);
+		verifyWebElementTextValue(validationHeader2Subtitle, HEADER2_SUBTITLE);
 	}
 
 	@Step("Verify Ship-To address value")
 	public void verifyShipToValue() {
-		verifyWebElementsTextValuesEqual(validationShipToAddr, String.format(SHIP_TO_VALUE, shipToAddress));
-		logger.info("Ship to Address is CORRECT: " + validationShipToAddr);
+		verifyWebElementTextValue(validationShipToAddr, String.format(SHIP_TO_VALUE, validationShipToAddr));
 	}
 
 	@Step("Select Ship to Addr Value")
 	public void selectShipToAddress() {
-		click(String.format(SHIP_TO_VALUE, shipToAddress));
+		click(String.format(SHIP_TO_VALUE, validationShipToAddr));
 	}
 
 	@Step("Verify SKU Input count")
@@ -104,8 +93,7 @@ public class ShoppingCartPage extends StorefrontBasePage {
 
 	@Step("Verify add to cart button label")
 	public void verifyAddToCartButtonLabel() {
-		verifyWebElementsTextValuesEqual(validationAddToCartButtonLabel, ADD_TO_CART_BUTTON_XPATH);
-		logger.info("Add to Cart button label is CORRECT: " + validationAddToCartButtonLabel);
+		verifyWebElementTextValue(validationAddToCartButtonLabel, ADD_TO_CART_BUTTON_XPATH);
 	}
 
 	@Step("Click on Add to products to shopping cart button")
@@ -289,9 +277,31 @@ public class ShoppingCartPage extends StorefrontBasePage {
 				float totalPriceNumber = castStringToFloat(actualTotalPrice);
 				expectedSubtotal += totalPriceNumber;
 			}
+			logger.info("Expected Subtotal is: " + expectedSubtotal + "\n");
 			assertTrue((actualSubtotalNumber == expectedSubtotal),
 					"Actual total price is: " + actualSubtotalNumber + " but expected is: " + expectedSubtotal);
 		}
 	}
 
+	@Step("Verify Save Cart button label")
+	public void verifySaveCartButtonLabel() {
+		verifyWebElementTextValue(saveCartBauutonLabel, SAVE_CART_BUTTON_XPATH);
+	}
+
+	@Step("Click on Save Cart button")
+	public void clickOnSaveCartButton() {
+		waitJSExecution();
+		click(SAVE_CART_BUTTON_XPATH);
+	}
+
+	@Step("Verify Check Out button label")
+	public void verifyCheckoutButtonLabel() {
+		verifyWebElementTextValue(checkOutButtonLabel, CHECKOUT_BUTTON_XPATH);
+	}
+
+	@Step("Clic on Check Out button")
+	public void clickOnCheckOutButton() {
+		waitJSExecution();
+		click(CHECKOUT_BUTTON_XPATH);
+	}
 }

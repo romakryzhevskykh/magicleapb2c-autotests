@@ -125,4 +125,24 @@ public class ShoppingCartPageDefs extends AbstractStepDefs {
 	public void verifySubtotal(){
 		shoppingCartPage.verifySubtotal();
 	}
+	
+	@And ("^Verify Save Cart button label.$")
+	public void verifySaveCartButtonLbel(){
+		shoppingCartPage.verifySaveCartButtonLabel();
+	}
+	
+	@And ("^Click on Save shopping cart button.$")
+	public void clickSaveShoppingCartButton(){
+		shoppingCartPage.clickOnSaveCartButton();
+	}
+	
+	@And ("^Verify Check Out button label.$")
+	public void verifyCheckOutButtonLabel(){
+		shoppingCartPage.verifyCheckoutButtonLabel();
+	}
+	
+	@And ("^Click on Check Out button.$")
+	public void clickOnCheckOutButton(){
+		shoppingCartPage.clickOnCheckOutButton();
+	}
 }

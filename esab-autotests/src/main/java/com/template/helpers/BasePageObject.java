@@ -293,6 +293,7 @@ public abstract class BasePageObject {
 		if (webElementText != null) {
 			assertEquals(webElementText, validationText,
 					"Actual text value is: " + webElementText + " but expected value is: " + validationText);
+			logger.info("Element label is CORRECT: " + webElementText);
 		}
 	}
 
