@@ -36,6 +36,9 @@ public class User {
                 case "rmadmin":
                     userRole = StorefrontUserRoles.RMADMIN;
                     break;
+                case "testroleuser":
+                    userRole = StorefrontUserRoles.TESTROLEUSER;
+                    break;
                 default:
                     userRole = null;
                     break;

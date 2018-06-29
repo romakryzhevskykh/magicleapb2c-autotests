@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import static com.geempower.helpers.models.RegionType.getRegionTypes;
 import static org.testng.Assert.*;
 
 public class ManageUsersStepDefs extends AbstractStepDefs {
@@ -395,5 +397,33 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         ArrayList<String> requestedAccounts = (ArrayList<String>) threadVarsHashMap.get(TestKeyword.LIST_OF_REQUESTED_ACCOUNTS);
         assertFalse(iWantToBlock.getActiveAccountForUserInModifyAnAccountSection().containsAll(requestedAccounts));
 
+    }
+
+    @And("^Expand Change an empower Privilege/Role in I want to block.$")
+    public void expandChangeAnEmpowerPrivilegeRoleInIWantToBlock() {
+        iWantToBlock.expandChangeEmpPrivilegeBlock();
+    }
+
+    @Then("^User has (.*) role in each region.$")
+    public void userHasRoleInEachRegion(String role) {
+        HashMap<String, String> userRolesInEachRegion = iWantToBlock.getAllRolesForEachRegion();
+        userRolesInEachRegion.values().forEach(roleForRegion ->
+            assertTrue(roleForRegion.equals(role)));
+    }
+
+    @When("^Admin Set (.*) role for each region to the user.$")
+    public void adminSetNewRoleForEachRegionToTheUser(String newRole) {
+        new ArrayList<>(getRegionTypes()).forEach(region -> iWantToBlock.setNewRoleToUserForEachRegion(region.getRegionName(), newRole));
+    }
+
+    @And("^Clicks on Assign button.$")
+    public void clicksOnAssignButton() {
+        iWantToBlock.clickOnAssignRolesButton();
+    }
+
+    @And("^All new set roles are stored to threadVarsHashMap.$")
+    public void allNewSetRolesAreStoredToThreadVarsHashMap() {
+        HashMap<String, String> userRolesInEachRegion = iWantToBlock.getAllRolesForEachRegion();
+        threadVarsHashMap.put(TestKeyword.USER_ROLES_IN_EACH_REGION, userRolesInEachRegion);
     }
 }

@@ -1,5 +1,9 @@
 package com.geempower.helpers.models;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum RegionType {
     NORTH_AMERICA("North America"),
     LATIN_AMERICA("Latin America"),
@@ -15,5 +19,7 @@ public enum RegionType {
         return regionName;
     }
 
-
+    public static List<RegionType> getRegionTypes() {
+        return Arrays.stream(values()).collect(Collectors.toList());
+    }
 }
