@@ -184,6 +184,8 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then Is Full Product Details pop-up on Price and Availability page displayed.
     When Click on Product Details tab in Full Product Details pop-up.
     Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Pricing Details title displayed in Full Product Details pop-up.
+    When Click on Availability Details tab in Full Product Details pop-up.
+    Then Is Active Availability Details tab selected in Full Product Details pop-up.
     When Close Full Product Details pop-up.
     And All products are selected on P&A page.
     When User clicks on Add to Cart button.
@@ -196,6 +198,8 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then Is Full Product Details pop-up on Price and Availability page displayed.
     When Click on Product Details tab in Full Product Details pop-up.
     Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Pricing Details title displayed in Full Product Details pop-up.
+    When Click on Availability Details tab in Full Product Details pop-up.
+    Then Is Active Availability Details tab selected in Full Product Details pop-up.
     When Close Full Product Details pop-up.
     When User clicks on the Next top button on the My Cart page.
     When User fills PO no. to the PO no. field on the OE 2 page.
@@ -216,6 +220,44 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Examples:
       | region        | product | agreementNo | salesDivision | account |
       | North_America | TEY150  | 45003866    | USS1_10_10    | 3394020 |
+
+  Scenario Outline: Check that user can place order in CELA account
+    And Account management page is opened.
+    When Choose <region> region.
+    And Select account <account>.
+    And Click on account with <salesDivision> sales division.
+    Then Dashboard page is opened.
+    When Click on Skip button.
+    When Close cookies pop-up.
+    When User add list of <productNo> products to the Copy&Paste block.
+    When User create product with <productNo>, <productId>, <quantity>.
+    And Click on P&A button.
+    Then Price&Availability page is opened.
+    Then Is Country of Origin sort column header displayed.
+    When Select Country of origin on Price&Availability page.
+    And All products are selected on P&A page.
+    When User clicks on Add to Cart button.
+    Then Check that count of added items is displayed on My Cart icon in Header block.
+    When User clicks on My Cart icon in Header block.
+    When User clicks on Checkout button in Header block.
+    Then My Cart page is opened.
+    Then Is Correct Country of Origin value is displayed on My Cart Page.
+    When User clicks on the Next top button on the My Cart page.
+    When User fills PO no. to the PO no. field on the OE 2 page.
+    And Select Shipment Address from the existing addresses on the OE 2 page.
+    When User clicks on the Bottom Next button on the OE 2 page.
+    Then Is Correct Country of Origin value is displayed on the OE 3 page.
+    When User clicks on Place Order button at the OE 3 page.
+    And Terms and Conditions pop-up is confirmed.
+    Then Order Successful pop-up appears at the OE 3 page.
+    When User closes the pop-up.
+    Then Orders Details page is opened.
+    Then GE Order No. is correct.
+
+
+    Examples:
+      | region        | productNo | salesDivision | account | productId     | quantity |
+      | North_America | THQL1130  | USS1_10_10    | 8192306 | 9328719331329 | 1        |
 
   Scenario: Check that user is able to send feedback successfully
     And Dashboard page is opened.

@@ -8,7 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.HashMap;
 import java.util.Random;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class MyCartStepDefs extends AbstractStepDefs {
     @Autowired
@@ -101,5 +102,11 @@ public class MyCartStepDefs extends AbstractStepDefs {
         threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
         assertEquals(catalogueNo, myCartPage.correctCatalogNoIsDisplayedOnMyCartPage());
+    }
+
+    @Then("^Is Correct Country of Origin value is displayed on My Cart Page.$")
+    public void isCorrectCountryOfOriginValueIsDisplayedOnMyCartPage() {
+        String countryHashmap = String.valueOf(threadVarsHashMap.get(TestKeyword.COUNTRY_OF_ORIGIN_CELA_PRODUCT));
+        assertEquals(countryHashmap, myCartPage.getCountryOfOriginValueOnMyCartPage());
     }
 }

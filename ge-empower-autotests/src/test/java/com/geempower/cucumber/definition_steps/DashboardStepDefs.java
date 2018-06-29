@@ -1,5 +1,7 @@
 package com.geempower.cucumber.definition_steps;
 
+import com.geempower.helpers.models.Product;
+import com.geempower.helpers.models.Region;
 import com.geempower.storefront.page_blocks.HeaderBlock;
 import com.geempower.storefront.page_blocks.OrderStatusWidget;
 import com.geempower.storefront.page_blocks.PriceAndAvailabilityBlock;
@@ -8,6 +10,7 @@ import com.geempower.storefront.pages.order.OrdersPage;
 import cucumber.api.java.en.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashMap;
 import java.util.List;
 
 import static org.testng.Assert.*;
@@ -222,5 +225,12 @@ public class DashboardStepDefs extends AbstractStepDefs {
         String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
         headerBlock.setProductToTheSearchProductField(catalogueNo);
         headerBlock.clickOnSearchProductIcon();
+    }
+
+    @When("^User create product with (.*),(.*), (.*).$")
+    public void userCreateProductWithProductRegionProductIdQuantity(String productNo, String id, int quantity){
+        HashMap<Product, Integer> selectedProducts = getSelectedProducts();
+        Product product = new Product(productNo,(Region) threadVarsHashMap.get(TestKeyword.CHOSEN_REGION), id);
+        selectedProducts.put(product,quantity);
     }
 }
