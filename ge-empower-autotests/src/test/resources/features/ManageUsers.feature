@@ -345,13 +345,3 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
       | testRoleUser | emp RM (empower Reg. Mgr.) | CS (Customer Ser.)         |
       | testRoleUser | CS (Customer Ser.)         | HD (Help Desk)             |
       | testRoleUser | HD (Help Desk)             | User                       |
-
-
-
-
-
-
-
-
-
-
