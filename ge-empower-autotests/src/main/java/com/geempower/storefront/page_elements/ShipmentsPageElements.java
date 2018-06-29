@@ -8,10 +8,6 @@ public class ShipmentsPageElements {
     public final static String DOWNLOAD_BUTTON_XPATH = ".//i[@class='fa fa-download']";
     public final static String COLOR_BOXES_XPATH = ".//div[@class='color-blocks clearfix']";
     public final static String SHIPMENTS_TABLE_FILTERS_XPATH = ".//*[@id='shipment-table']/thead/tr";
-
-    public final static String HELP_BUTTON_XPATH = ".//*[@id='help_button']";
-    public final static String FEEDBACK_BUTTON_XPATH = ".//button[@class='feedback-btn feedback-btn-blue']";
-
     public final static String EXCEL_BUTTON_ID = "exportShipmentsToEXCEL";
 
 }
