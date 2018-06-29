@@ -1,6 +1,5 @@
 package com.geempower.cucumber.definition_steps;
 
-import com.geempower.helpers.managers.ProductManager;
 import com.geempower.storefront.page_blocks.HeaderBlock;
 import com.geempower.storefront.pages.*;
 import com.geempower.storefront.pages.order.OrdersPage;
@@ -44,8 +43,6 @@ public class PreconditionStepDefs extends AbstractStepDefs {
     private ManageUsersPage manageUsersPage;
     @Autowired
     private ProfilePage profilePage;
-    @Autowired
-    private ProductManager productManager;
     @Autowired
     private PriceAndAvailabilityPage priceAndAvailabilityPage;
 

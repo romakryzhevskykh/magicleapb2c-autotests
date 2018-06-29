@@ -82,47 +82,4 @@ public class DashboardPage extends StorefrontBasePage {
     public void clickOnSubmitButton() {
         click(SUBMIT_SHIP_ADDRESS_BUTTON_XPATH);
     }
-
-    @Step("Click on the Feedback button.")
-    public void clickOnTheFeedbackButton() {
-        click(FEEDBACK_BUTTON_XPATH);
-    }
-
-    @Step("Get feedback pop-up title.")
-    public String getFeedbackPopUpTitle() {
-        waitUntilPageIsFullyLoaded();
-        return $(FEEDBACK_POP_UP_TITLE_XPATH).getText();
-    }
-
-    @Step("Check If Emoji Displayed.")
-    public boolean isEmojiDisplayedInTheFeedbackPopUp(String emoji) {
-        return isDisplayed(EMOJI_LABEL_XPATH, emoji.toLowerCase());
-    }
-
-    @Step("Is checkbox selected by default.")
-    public boolean isCheckboxIncludeScreenshotSelected() {
-        return $(By.id(CHECKBOX_INCLUDE_SCREENSHOT_ID)).isSelected();
-    }
-
-    @Step("Set some text to the feedback input.")
-    public void setTextToTheFeedbackInput(String text) {
-        $(By.id(FEEDBACK_INPUT_ID)).clear();
-        $(By.id(FEEDBACK_INPUT_ID)).sendKeys(text);
-    }
-
-    @Step("Submit feedback.")
-    public void submitFeedback() {
-        click(By.id(SUBMIT_FEEDBACK_ID));
-    }
-
-    @Step("Get result text from the Feedback pop-up.")
-    public String getResultTextFromFeedbackPopUp() {
-        waitUntilPageIsFullyLoaded();
-        return $(SUCCESSFUL_TEXT_FEEDBACK_POP_UP_XPATH).getText();
-    }
-
-    @Step("Click on the OK button.")
-    public void clickOkOnTheFeedbackPopUp() {
-        click(By.id(OK_BUTTON_FEDBACK_POP_UP_ID));
-    }
 }

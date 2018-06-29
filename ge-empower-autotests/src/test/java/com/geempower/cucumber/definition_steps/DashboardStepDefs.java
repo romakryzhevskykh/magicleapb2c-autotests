@@ -7,13 +7,16 @@ import com.geempower.storefront.page_blocks.OrderStatusWidget;
 import com.geempower.storefront.page_blocks.PriceAndAvailabilityBlock;
 import com.geempower.storefront.pages.DashboardPage;
 import com.geempower.storefront.pages.order.OrdersPage;
-import cucumber.api.java.en.*;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
 import java.util.List;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class DashboardStepDefs extends AbstractStepDefs {
     @Autowired
@@ -122,46 +125,6 @@ public class DashboardStepDefs extends AbstractStepDefs {
     @When("^User add list of (.*) products to the Copy&Paste block.$")
     public void userAddProductsToTheCopyPasteBlock(List<String> products) {
         priceAndAvailabilityBlock.addItemsToTheCopyPasteBlock(products);
-    }
-
-    @When("^Admin clicks on the feedback button.$")
-    public void adminClicksOnTheFeedbackButton() {
-        dashboardPage.clickOnTheFeedbackButton();
-    }
-
-    @Then("^(.*) title is displayed in the feedback pop-up.$")
-    public void helpUsImproveTitleIsDisplayedInTheFeedbackPopUp(String feedbackTitle) {
-        assertEquals(feedbackTitle, dashboardPage.getFeedbackPopUpTitle());
-    }
-
-    @Then("^(.*) labels are present in the feedback pop-up.$")
-    public void greatOkConfusingFrustratingLabelsArePresentInTheFeedbackPopUp(List<String> emojies) {
-        emojies.forEach(emoji -> assertTrue(dashboardPage.isEmojiDisplayedInTheFeedbackPopUp(emoji)));
-    }
-
-    @Then("^Include screenshot checkbox is checked by default.$")
-    public void includeScreenshotCheckboxIsCheckedByDefault() {
-        assertTrue(dashboardPage.isCheckboxIncludeScreenshotSelected());
-    }
-
-    @When("^Admin sets (.*) to the feedback input.$")
-    public void adminSetsTestTextToTheFeedbackInput(String text) {
-        dashboardPage.setTextToTheFeedbackInput(text);
-    }
-
-    @And("^Clicks on the Submit button.$")
-    public void clicksOnTheSubmitButton() {
-        dashboardPage.submitFeedback();
-    }
-
-    @Then("^(.*) text is displayed in successful pop-up.$")
-    public void isCorrectTextIsDisplayedInSuccessfulPopUp(String successfulFeedbackText) {
-        assertEquals(successfulFeedbackText, dashboardPage.getResultTextFromFeedbackPopUp());
-    }
-
-    @And("^Admin clicks on OK button in the successful feedback pop-up.$")
-    public void adminClicksOnOKButtonInTheSuccessfulFeedbackPopUp() {
-        dashboardPage.clickOkOnTheFeedbackPopUp();
     }
 
     @Then("^(.*) title is displayed in the Order status widget.$")

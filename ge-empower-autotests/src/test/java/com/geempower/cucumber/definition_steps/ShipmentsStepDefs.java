@@ -2,7 +2,6 @@ package com.geempower.cucumber.definition_steps;
 
 import com.geempower.storefront.pages.ShipmentsPage;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -26,16 +25,6 @@ public class ShipmentsStepDefs extends AbstractStepDefs {
     @And("^Shipment table header is displayed on Shipments page.$")
     public void shipmentsTableHeaderIsDisplayed() {
         assertTrue(shipmentsPage.shipmentsTableHeaderIsDisplayed());
-    }
-
-    @And("^Help button is displayed on Shipments page.$")
-    public void helpButtonIsDisplayed() {
-        assertTrue(shipmentsPage.helpButtonIsDisplayed());
-    }
-
-    @Then("^Feedback button is displayed on Shipments page.$")
-    public void feedbackButtonIsDisplayed() {
-        assertTrue(shipmentsPage.feedbackButtonIsDisplayed());
     }
 
     @When("^Click on Download button on Shipments page.$")

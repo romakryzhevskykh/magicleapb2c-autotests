@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
 @Component
-public class Utils {
+public class Utils extends UIComponent {
     @Autowired
     private WebDriverSessions webDriverPool;
 
@@ -19,5 +19,4 @@ public class Utils {
     public void focusOnActiveBrowser() {
         webDriverPool.getActiveDriver().switchTo().window(webDriverPool.getActiveDriver().getWindowHandle());
     }
-
 }
