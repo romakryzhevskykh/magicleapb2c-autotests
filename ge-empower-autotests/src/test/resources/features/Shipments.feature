@@ -9,8 +9,8 @@ Feature: Some actions on Shipments page
     When Shipments title is displayed on Shipments page.
     And Color boxes are displayed on Shipments page.
     And Shipment table header is displayed on Shipments page.
-    And Help button is displayed on Shipments page.
-    Then Feedback button is displayed on Shipments page.
+    And Help button is displayed.
+    Then Feedback button is displayed.
 
 # @todo Continue from this place
 #  Scenario: Check that download pop-up can be opened and basic elements are present

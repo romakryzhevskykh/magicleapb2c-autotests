@@ -12,6 +12,11 @@ public class SavedItemsStepDefs extends AbstractStepDefs {
     @Autowired
     private SavedItemsPage savedItemsPage;
 
+    @Then("^Check that Saved Items page is opened.$")
+    public void isSavedItemsPageOpened(){
+        assertTrue(savedItemsPage.isOpened());
+    }
+
     @Then("^(.*) title is displayed on Saved Items page.$")
     public void checkAllItemsTitle(String allItemsTitle) {
         assertEquals(allItemsTitle, savedItemsPage.getAllItemsTitle());

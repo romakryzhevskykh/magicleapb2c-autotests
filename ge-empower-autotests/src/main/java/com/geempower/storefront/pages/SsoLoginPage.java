@@ -1,6 +1,5 @@
 package com.geempower.storefront.pages;
 
-import com.geempower.helpers.user_engine.User;
 import com.geempower.helpers.user_engine.UserSession;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;

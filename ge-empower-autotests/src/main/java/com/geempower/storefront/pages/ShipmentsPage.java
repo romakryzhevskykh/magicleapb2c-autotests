@@ -36,16 +36,6 @@ public class ShipmentsPage extends StorefrontBasePage {
         return isDisplayed(SHIPMENTS_TABLE_FILTERS_XPATH);
     }
 
-    @Step("Help button is displayed")
-    public boolean helpButtonIsDisplayed() {
-        return isDisplayed(HELP_BUTTON_XPATH);
-    }
-
-    @Step("Feedback button is displayed")
-    public boolean feedbackButtonIsDisplayed() {
-        return isDisplayed(FEEDBACK_BUTTON_XPATH);
-    }
-
     @Step("Click on Download button")
     public void clickOnDownloadButton() {
         click(DOWNLOAD_BUTTON_XPATH);
