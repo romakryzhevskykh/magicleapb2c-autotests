@@ -139,4 +139,15 @@ public class MyCartPage extends StorefrontBasePage {
     public String correctCatalogNoIsDisplayedOnMyCartPage() {
         return $(CATALOG_NO_ON_MY_CART_PAGE_XPATH).getText();
     }
+
+    @Step("Get Country Of Origin Value On My Cart Page.")
+    public String getCountryOfOriginValueOnMyCartPage() {
+        String contryOriginMyCartPage = "";
+        if (isDisplayed(COUNTRY_OF_ORIGIN_DROP_DOWN_FIELD_ON_MY_CART_PAGE_XPATH)) {
+            contryOriginMyCartPage = $(COUNTRY_OF_ORIGIN_DROP_DOWN_FIELD_ON_MY_CART_PAGE_XPATH).getText();
+        } else if (isDisplayed(COUNTRY_OF_ORIGIN_SINGLE_SOURCE_VALUE_ON_MY_CART_PAGE_XPATH)) {
+            contryOriginMyCartPage = $(COUNTRY_OF_ORIGIN_SINGLE_SOURCE_VALUE_ON_MY_CART_PAGE_XPATH).getText();
+        }
+        return contryOriginMyCartPage;
+    }
 }

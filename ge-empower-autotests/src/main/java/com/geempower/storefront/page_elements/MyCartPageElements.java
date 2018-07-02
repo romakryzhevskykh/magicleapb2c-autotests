@@ -22,4 +22,6 @@ public class MyCartPageElements {
     public final static String CLAIMBACK_MESSAGE_BELOW_AGREEMENT_NO_FIELD_ON_MY_CART_PAGE_XPATH = ".//p[@class='visible error-text-spa error-spa text-blue']";
     public final static String PRODUCT_LINK_ON_MY_CART_PAGE_XPATH = "//div[@id='priceTable_wrapper']//*[contains(@class,'catalog-name-input modal-toggle product-popup') and contains(text(),'%s')]";
     public final static String CATALOG_NO_ON_MY_CART_PAGE_XPATH = ".//table[@id='priceTable']//a[@class='catalog-name-input modal-toggle product-popup']";
+    public final static String COUNTRY_OF_ORIGIN_DROP_DOWN_FIELD_ON_MY_CART_PAGE_XPATH = "//td[@class='data-table-value-col celaCust']//span[contains(@class,'rendered')]";
+    public final static String COUNTRY_OF_ORIGIN_SINGLE_SOURCE_VALUE_ON_MY_CART_PAGE_XPATH = "//td[@class='data-table-value-col celaCust']";
 }

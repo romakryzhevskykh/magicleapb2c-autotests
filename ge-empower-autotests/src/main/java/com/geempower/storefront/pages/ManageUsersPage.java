@@ -6,8 +6,7 @@ import org.openqa.selenium.By;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import static com.geempower.storefront.page_block_elements.IwantToBlockElements.APPROVE_PENDING_ACCOUNTS_SECTION_TITLE_XPATH;
-import static com.geempower.storefront.page_block_elements.IwantToBlockElements.TOTAL_ACCOUNT_REQUESTS_XPATH;
+import static com.geempower.storefront.page_block_elements.IwantToBlockElements.*;
 import static com.geempower.storefront.page_elements.manageUsers.ManageUsersPageElements.*;
 
 @Component

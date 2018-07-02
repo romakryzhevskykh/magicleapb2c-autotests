@@ -6,9 +6,7 @@ import com.geempower.helpers.managers.OrderManager;
 import com.geempower.helpers.models.Product;
 import com.geempower.helpers.models.Region;
 import com.geempower.storefront.pages.order.OrderEntry3Page;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.api.java.en.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
@@ -47,10 +45,9 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
     @Then("^(.*) pop-up appears at the OE 3 page.$")
     public void orderSuccessfulPopUpAppears(String title) {
         String orderNo = orderEntry3Page.getGEOrderNoFromOrderSuccessPopUp(title);
-        HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
+        HashMap<Product, Integer> selectedProducts = getSelectedProducts();
         orderManager.createOrderInstance(Long.parseLong(orderNo), selectedProducts);
         threadVarsHashMap.put(TestKeyword.GE_ORDER_NO, orderNo);
-
     }
 
     @When("^User closes the pop-up.$")
@@ -125,5 +122,11 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
     @When("^Click on (.*) link on the OE 3 page.$")
     public void clickOnProductLinkOnThe3OEPage(String product) {
         orderEntry3Page.clickOnProductLinkOnOE3Page(product);
+    }
+
+    @Then("^Is Correct Country of Origin value is displayed on the OE 3 page.$")
+    public void isCorrectCountryOfOriginValueIsDisplayedOnTheOEPage() {
+        String countryHashmap = String.valueOf(threadVarsHashMap.get(TestKeyword.COUNTRY_OF_ORIGIN_CELA_PRODUCT));
+        assertEquals(countryHashmap, orderEntry3Page.getCountryOfOriginValueOnOE3Page());
     }
 }

@@ -135,4 +135,27 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
         click(PRODUCT_LINK_ON_PA_PAGE_XPATH, product);
     }
+
+    @Step("Click On Country Of Origin Drop Down Field.")
+    public String clickOnCountryOfOriginDropDownField() {
+        String countryOrigin = "";
+        if (isDisplayed(COUNTRY_OF_ORIGIN_DROP_DOWN_ARROW_XPATH)) {
+            click(COUNTRY_OF_ORIGIN_DROP_DOWN_ARROW_XPATH);
+            WebElement actualCountyOrigin = $$(COUNTRY_OF_ORIGIN_ALL_DROP_DOWN_ITEMS_XPATH).stream()
+                    .findAny()
+                    .orElseGet(() -> {
+                        throw new NullPointerException("No such country of origin");
+                    });
+            countryOrigin = actualCountyOrigin.getText();
+            click(actualCountyOrigin);
+        } else if (isDisplayed(COUNTRY_OF_ORIGIN_SINGLE_SOURCE_VALUE_XPATH)) {
+            countryOrigin = $(COUNTRY_OF_ORIGIN_SINGLE_SOURCE_VALUE_XPATH).getText();
+        }
+        return countryOrigin;
+    }
+
+    @Step("is Country Of Origin Sort Column Header Displayed.")
+    public boolean isCountryOfOriginSortColumnHeaderDisplayed() {
+        return isDisplayed(COUNTRY_OF_ORIGIN_SORT_COLUMN_HEADER_XPATH);
+    }
 }
