@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserSwitchStepDefs {
 
-    @Autowired protected WebDriverSessions webDriverPool;
+    @Autowired
+    protected WebDriverSessions webDriverPool;
 
 //    @Given("Switch to Backoffice Admin user.")
 //    public void switchToBackofficeAdmin() {
@@ -43,8 +44,15 @@ public class UserSwitchStepDefs {
     public void switchToStorefrontAsRegionalView() {
         webDriverPool.setDriverActive(StorefrontUserRoles.REGIONALVIEW);
     }
-//    @Given("Switch to Import cockpit import manager role.")
+
+    //    @Given("Switch to Import cockpit import manager role.")
 //    public void switchToImportCockpitAsImportManager() {
 //        webDriverPool.setDriverActive(ImportCockpitUserRoles.IMPORT_MANAGER);
 //    }
+
+    @Given("Switch to Storefront as testRoleUser.")
+    public void switchToStorefrontAsTestRoleUser() {
+        webDriverPool.setDriverActive(StorefrontUserRoles.TESTROLEUSER);
+    }
+
 }

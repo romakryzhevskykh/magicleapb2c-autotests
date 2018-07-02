@@ -1,15 +1,18 @@
 package com.geempower.storefront.page_blocks;
 
 import com.geempower.helpers.UIComponent;
+import com.geempower.helpers.models.RegionType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static com.geempower.helpers.models.RegionType.getRegionTypes;
 import static com.geempower.storefront.page_block_elements.IwantToBlockElements.*;
 
 @Component
@@ -252,6 +255,40 @@ public class IwantToBlock extends UIComponent {
     public void acceptTheActionOnRejectAccountPopUp() {
         click(ACCEPT_THE_ACTION_IN_REJECT_ACCOUNT_POP_UP_XPATH);
         waitUntilPageIsFullyLoaded();
+    }
 
+    @Step("Expand Change EmpPrivilege Block")
+    public void expandChangeEmpPrivilegeBlock() {
+        waitUntilPageIsFullyLoaded();
+        click(EXPAND_CHANGE_EMPOWER_PRIVILEGES_ROLES_ICON_XPATH);
+    }
+
+    @Step("Get All User Roles For Each Region")
+    public HashMap<String, String> getAllRolesForEachRegion() {
+        waitUntilPageIsFullyLoaded();
+        HashMap<String, String> rolesForRegions = new HashMap<>();
+        rolesForRegions.putAll(getRegionTypes().stream()
+                .collect(Collectors.toMap(RegionType::getRegionName,
+                        region -> $(ROLE_FOR_APPROPRIATE_REGION_XPATH, region.getRegionName()).getText().trim())));
+        return rolesForRegions;
+    }
+
+    @Step("Set New Role To User For Each Region")
+    public void setNewRoleToUserForEachRegion(String region, String newRole) {
+        waitUntilPageIsFullyLoaded();
+        click(OPEN_ROLES_LIST_FOR_APPROPRIATE_REGION_ICON_XPATH, region);
+        waitUntilPageIsFullyLoaded();
+        click(getAllRolesFromRolesDropdown().filter(role -> role.getText().trim().equals(newRole)).findAny().orElse(null));
+    }
+
+    private Stream<WebElement> getAllRolesFromRolesDropdown(){
+        waitUntilPageIsFullyLoaded();
+        return $$(ALL_ROLES_IN_ROLES_DROPDOWN_XPATH).stream();
+    }
+
+    @Step("Click On Assign Roles Button")
+    public void clickOnAssignRolesButton() {
+        waitUntilPageIsFullyLoaded();
+        click(By.id(ASSIGN_ROLES_OR_PRIVILEGES_BUTTON_ID));
     }
 }

@@ -6,7 +6,8 @@ public enum StorefrontUserRoles implements UserRole {
     INTERNALUSER,
     REGIONALVIEW,
     SMADMIN,
-    RMADMIN;
+    RMADMIN,
+    TESTROLEUSER;
 
     @Override
     public String toString() {

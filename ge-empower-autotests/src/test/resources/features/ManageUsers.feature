@@ -92,8 +92,8 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then No data available in table title is displayed in Sales Engineer Code table.
 
     Examples:
-      | email                      | seCode    |
-      | roman.kryzhevskykh@ge.com  | 220028351 |
+      | email                     | seCode    |
+      | roman.kryzhevskykh@ge.com | 220028351 |
 
   Scenario Outline: Check that admin is able to find user by some account from each region
     And Refresh page.
@@ -315,3 +315,33 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Examples:
       | email                     | soCode |
       | roman.kryzhevskykh@ge.com | USG5   |
+
+  Scenario Outline: Check that admin is able to change admin privileges for external user and the user
+  will see appropriate role in his profile and appropriate permissions will be available
+    And Refresh page.
+    And Focus on browser.
+    When Admin opens Users tab.
+    And Sets <sso> email to the email field.
+    And Clicks on the Search button.
+    When Clicks on the user name in the table.
+    And Expand Change an empower Privilege/Role in I want to block.
+    Then User has <role> role in each region.
+    When Admin Set <newRole> role for each region to the user.
+    And All new set roles are stored to threadVarsHashMap.
+    And Clicks on Assign button.
+    Given Switch to Storefront as testRoleUser.
+    And Focus on browser.
+    And User is logged in to Storefront.
+    And Profile page is opened.
+    And Refresh page.
+    Then Admin Privileges are equal to roles which were set by Admin in each region.
+
+    Examples:
+      | sso          | role                       | newRole                    |
+      | testRoleUser | User                       | CA (Customer Admin)        |
+      | testRoleUser | CA (Customer Admin)        | SM/ SE (Sales Mgr.)        |
+      | testRoleUser | SM/ SE (Sales Mgr.)        | RM/ RE (Sales Reg. Mgr.)   |
+      | testRoleUser | RM/ RE (Sales Reg. Mgr.)   | emp RM (empower Reg. Mgr.) |
+      | testRoleUser | emp RM (empower Reg. Mgr.) | CS (Customer Ser.)         |
+      | testRoleUser | CS (Customer Ser.)         | HD (Help Desk)             |
+      | testRoleUser | HD (Help Desk)             | User                       |

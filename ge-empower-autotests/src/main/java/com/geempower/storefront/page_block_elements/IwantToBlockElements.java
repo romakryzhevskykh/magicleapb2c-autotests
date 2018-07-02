@@ -54,4 +54,11 @@ public class IwantToBlockElements {
     public final static String REMOVE_ACCOUNT_POP_UP_ALL_ACCOUNTS_XPATH = ".//*[@id='remove-user-modal']//div[@class='modal-content']";
     public final static String ACCOUNT_CHECKBOX_XPATH = ".//td[contains (text(),'%s')]/../td[1]/label";
     public final static String EMPTY_SO_CODES_TABLE_IN_PENDING_SO_CODES_XPATH = ".//*[@id='pending-salesoffice']//*[@class='dataTables_empty']";
+
+    public final static String EXPAND_CHANGE_EMPOWER_PRIVILEGES_ROLES_ICON_XPATH = "//a[@href='#additem1']/i";
+    public final static String ROLE_FOR_APPROPRIATE_REGION_XPATH = "//label[contains(text(),'%s')]//..//span[contains(@aria-labelledby, 'select2-regionuserrole')]/span[@id]";
+    public final static String OPEN_ROLES_LIST_FOR_APPROPRIATE_REGION_ICON_XPATH = ROLE_FOR_APPROPRIATE_REGION_XPATH + "/..//b";
+    public final static String ALL_ROLES_IN_ROLES_DROPDOWN_XPATH = "//ul[@class='select2-results__options']/li";
+    public final static String ROLE_BY_TEXT_IN_DROPDOWN_ROLES_XPATH = ".//ul[@class='select2-results__options']/li[normalize-space()='%s']";
+    public final static String ASSIGN_ROLES_OR_PRIVILEGES_BUTTON_ID = "assignUserRoles-new";
 }
