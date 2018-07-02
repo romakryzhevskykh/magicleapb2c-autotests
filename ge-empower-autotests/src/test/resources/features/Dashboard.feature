@@ -230,7 +230,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     When Click on Skip button.
     When Close cookies pop-up.
     When User add list of <productNo> products to the Copy&Paste block.
-    When User create product with <productNo>, <productId>, <quantity>.
+    When User create product with: product number <productNo>, product id <productId> and quantity <quantity>.
     And Click on P&A button.
     Then Price&Availability page is opened.
     Then Is Country of Origin sort column header displayed.
