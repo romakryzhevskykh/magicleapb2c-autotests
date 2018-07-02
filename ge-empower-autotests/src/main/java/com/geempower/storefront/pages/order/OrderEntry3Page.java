@@ -201,4 +201,8 @@ public class OrderEntry3Page extends StorefrontBasePage {
         click(PRODUCT_LINK_3_OE_PAGE_XPATH, product);
     }
 
+    @Step("Get Country Of Origin Value On OE 3 Page.")
+    public String getCountryOfOriginValueOnOE3Page() {
+        return $(COUNTRY_OF_ORIGIN_VALUE_3_OE_PAGE_XPATH).getText();
+    }
 }

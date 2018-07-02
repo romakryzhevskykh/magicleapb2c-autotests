@@ -2,13 +2,16 @@ package com.geempower.cucumber.definition_steps;
 
 import com.geempower.helpers.models.Product;
 import com.geempower.storefront.pages.MyCartPage;
-import cucumber.api.java.en.*;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
 import java.util.Random;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class MyCartStepDefs extends AbstractStepDefs {
     @Autowired
@@ -101,5 +104,11 @@ public class MyCartStepDefs extends AbstractStepDefs {
         threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
         assertEquals(catalogueNo, myCartPage.correctCatalogNoIsDisplayedOnMyCartPage());
+    }
+
+    @Then("^Is Correct Country of Origin value is displayed on My Cart Page.$")
+    public void isCorrectCountryOfOriginValueIsDisplayedOnMyCartPage() {
+        String countryHashmap = threadVarsHashMap.getString(TestKeyword.COUNTRY_OF_ORIGIN_CELA_PRODUCT);
+        assertEquals(countryHashmap, myCartPage.getCountryOfOriginValueOnMyCartPage());
     }
 }

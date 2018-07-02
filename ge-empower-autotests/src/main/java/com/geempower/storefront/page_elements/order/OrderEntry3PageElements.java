@@ -47,4 +47,5 @@ public class OrderEntry3PageElements {
     public final static String CLAIMBACK_MESSAGE_IN_BLUE_BLOCK_3_OE_PAGE_XPATH = "//*[@id='order-summary']//div[contains(@class,'alert-info-spa')]";
     public final static String CLAIMBACK_ICON_IN_EXTND_PRICE_CELL_3_OE_PAGE_XPATH = "//*[@id='DataTables_Table_1']//i[@class = 'fa fa-exclamation-triangle text-blue pull-left ml-5']";
     public final static String PRODUCT_LINK_3_OE_PAGE_XPATH = "//*[@id='DataTables_Table_1']//a[contains(@href,'#product-details-1') and contains(text(),'%s')]";
+    public final static String COUNTRY_OF_ORIGIN_VALUE_3_OE_PAGE_XPATH = "//span[@class='countryOrigin-span']";
 }

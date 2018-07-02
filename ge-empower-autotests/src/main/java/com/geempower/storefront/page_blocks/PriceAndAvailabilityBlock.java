@@ -23,12 +23,12 @@ public class PriceAndAvailabilityBlock extends UIComponent {
     }
 
     @Step("Send CatalogueNo. to the Copy&Paste field")
-    public void setCatalogueNoToTheCopyAndPasteField(String catalogueNo){
+    public void setCatalogueNoToTheCopyAndPasteField(String catalogueNo) {
         $(By.id(COPY_AND_PASTE_FIELD_ID)).sendKeys(catalogueNo);
     }
 
     @Step("Enter CatalogueNo. to the product field")
-    public void setCatalogueNoToProductField(String catalogueNo){
+    public void setCatalogueNoToProductField(String catalogueNo) {
         $(By.id(FIRST_PRODUCT_ROW_ID)).sendKeys(catalogueNo);
     }
 
@@ -37,4 +37,3 @@ public class PriceAndAvailabilityBlock extends UIComponent {
         products.forEach(product -> $(By.id(COPY_AND_PASTE_FIELD_ID)).sendKeys(product + "\n"));
     }
 }
-

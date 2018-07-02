@@ -24,5 +24,8 @@ public class PriceAndAvailabilityPageElements {
     public final static String ADD_ITEM_POP_UP_ADD_PRODUCT_BUTTON_XPATH = "//button[@id='addProduct']";
     public final static String UPDATE_PRICE_AND_AVAILABILITY_BUTTON_ID = "upd_pr_and_av_btn";
     public final static String SPECIAL_PRICING_POP_UP_TITLE_XPATH = "//div[@id='special-pricing-lookup-modal']//h4[@class='modal-title']";
-
+    public final static String COUNTRY_OF_ORIGIN_DROP_DOWN_ARROW_XPATH = ".//span[@class='select2-selection__arrow']";
+    public final static String COUNTRY_OF_ORIGIN_ALL_DROP_DOWN_ITEMS_XPATH = "//li[contains(@id,'select2-celaCustDetail-result')]";
+    public final static String COUNTRY_OF_ORIGIN_SINGLE_SOURCE_VALUE_XPATH = "//td[@class='data-table-value-col celaCust']";
+    public final static String COUNTRY_OF_ORIGIN_SORT_COLUMN_HEADER_XPATH = "//th[@class='cela-col sorting']";
 }
