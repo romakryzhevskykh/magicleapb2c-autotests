@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 public class WebDriverSession {
     private WebDriver webDriver;
     private final int timeOut = 35;
-    private final int shortTimeOut = 5;
+    private final int shortTimeOut = 7;
     private boolean isActive = false;
 
     public WebDriverSession(WebDriver webDriver) {
