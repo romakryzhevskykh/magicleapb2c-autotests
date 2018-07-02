@@ -134,6 +134,7 @@ public class SavedItemsPage extends StorefrontBasePage {
 
     @Step("Delete Saved List")
     public void deleteSavedList() {
+        waitUntilPageIsFullyLoaded();
         click(THREE_DOT_ICON_XPATH);
         waitUntilPageIsFullyLoaded();
         click(THREE_DOT_ICON_DELETE_OPTION_XPATH);
