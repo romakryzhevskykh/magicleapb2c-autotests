@@ -340,5 +340,12 @@ public abstract class BasePageObject {
 		}
 		return resultFloatValue;
 	}
+	
+	protected boolean isElementEnabled(String xpath){
+		boolean isEnabled = false;
+		isEnabled = getDriver().findElement(By.xpath(xpath)).isEnabled();
+		logger.info("Is Element enabled is: " + isEnabled);
+		return isEnabled;
+	}
 
 }

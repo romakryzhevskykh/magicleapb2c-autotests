@@ -16,7 +16,7 @@ import java.util.List;
 @Component
 public class LoginPage extends StorefrontBasePage {
 	// private final String pageUrlMethod = "powertools/en/USD/login";
-	final static Logger logger = Logger.getLogger(BasePageObject.class);
+	final static Logger logger = Logger.getLogger(LoginPage.class);
 	private final String pageUrlMethod = "/esab/en/login";
 	private final String validationRegistrationConfirmationMesage = "User registered with success.";
 

@@ -6,10 +6,8 @@ import static org.testng.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
-import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 
 import com.template.storefront.models.ProductModel;
@@ -19,9 +17,9 @@ import static com.template.storefront.page_elements.ShoppingCartPageElements.*;
 
 @Component
 public class ShoppingCartPage extends StorefrontBasePage {
-	final static Logger logger = Logger.getLogger(RegisterPage.class);
-	private String pageUrlMethod = "/esab/en/cart";
 
+	final static Logger logger = Logger.getLogger(ShoppingCartPage.class);
+	private String pageUrlMethod = "/esab/en/cart";
 	private String validationHeaderTitle2 = "Add new item";
 	private String validationHeader2Subtitle = "Fill out the form below to add products to your order or click here to upload an order instead.";
 	private String validationHeaderTitle1 = "Shopping Cart";

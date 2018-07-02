@@ -2,13 +2,14 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Suite1" parallel="tests">
-	<test name="LoginSuite">
+	<test name="ESAB_AutoTest">
 		<parameter name="environment" value="dev" />
 		<parameter name="browserName" value="chrome" />
 		<classes>
 			<!-- <class name="com.template.cucumber.RegistrationSuite" /> -->
 			<!-- <class name="com.template.cucumber.LoginSuite" /> -->
-			<class name="com.template.cucumber.ShoppingCartSuite" />
+			<!-- <class name="com.template.cucumber.ShoppingCartSuite" />  -->
+			<class name="com.template.cucumber.CheckOutSuite" />
 
 		</classes>
 	</test>
