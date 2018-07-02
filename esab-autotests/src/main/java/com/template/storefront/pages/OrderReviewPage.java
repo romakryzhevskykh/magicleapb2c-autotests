@@ -43,6 +43,7 @@ public class OrderReviewPage extends StorefrontBasePage {
 	public void isPlaceOrderDisabled(){
 		waitJSExecution();
 		assertFalse(isElementEnabled(XPATH_PLACE_ORDER_BUTTON), "Place order button Enabled, butshould be Disabled");
+		logger.info("Place Order button is Disabled");
 	}
 	
 	
