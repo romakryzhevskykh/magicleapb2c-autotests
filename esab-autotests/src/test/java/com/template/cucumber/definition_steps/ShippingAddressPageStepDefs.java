@@ -7,6 +7,7 @@ import com.template.helpers.user_engine.UserSessions;
 import com.template.storefront.pages.ShippingAddressPage;
 
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 
 public class ShippingAddressPageStepDefs extends AbstractStepDefs {
 
@@ -16,6 +17,11 @@ public class ShippingAddressPageStepDefs extends AbstractStepDefs {
 	public UserSessions userSessions;
 	@Autowired
 	public ShippingAddressPage shippingAddressPage;
+	
+	@Given ("^Checkout data model: Ship To Address: \"(.*)\", Requested Delivery Date: \"(.*)\", Partial Delivery Allowed: \"(.*)\", Account: \"(.*)\", Packaging Instructions: \"(.*)\", Shipping Instructions: \"(.*)\", Purchase Order Number: \"(.*)\".$")
+	public void createCheckoutDataModel(String newShipAddress, String newRequestedDeliveryDate, String newPartialDeliveryAllowed, String newAccount, String newPackagingInstructions, String newShippingInstructions, String newPurchaseOrderNumber){
+		shippingAddressPage.createCheckoutDataModel(newShipAddress, newRequestedDeliveryDate, newPartialDeliveryAllowed, newAccount, newPackagingInstructions, newShippingInstructions, newPurchaseOrderNumber);
+	}
 
 	@And("^Verify is Current page Shipping Address page.$")
 	public void isCurrentPageShippingPage() {

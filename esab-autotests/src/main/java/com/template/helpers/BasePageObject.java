@@ -1,6 +1,7 @@
 package com.template.helpers;
 
 import com.template.helpers.web_engine.WebDriverSessions;
+import com.template.storefront.models.CheckoutModelBuilder;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
@@ -23,6 +24,9 @@ public abstract class BasePageObject {
 	protected ThreadVarsHashMap threadVarsHashMap;
 	@Autowired
 	protected ProductController productController;
+	@Autowired
+	protected CheckoutModelBuilder checkoutModelBuilder;
+
 	final static Logger logger = Logger.getLogger(BasePageObject.class);
 	private WebDriverWait wait;
 	private long shortTimeout;
