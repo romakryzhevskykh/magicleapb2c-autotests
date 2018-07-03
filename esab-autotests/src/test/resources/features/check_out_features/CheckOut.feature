@@ -13,14 +13,19 @@ Scenario:
 	And Click on Add these products to shopping cart button. 
 	And Verify Check Out button label. 
 	And Click on Check Out button. 
-	Given Verify is Current page Shipping Address page.
+	Given Verify is Current page Shipping Address page. 
+	And Clear Shipping Instructions field on Shipping Information page. 
+	And Click on Next Button on Shipping Address page. 
+	And Verify Shipping Instructions validation message on Shipping Address page. 
+	#And Verify is Current page Shipping Address page.
+	And Verify is Current page Shipping Address page after validation error. 
 	And Fill in Shipping Instructions on Shipping Address page. 
-	And Click on Next Button on Shipping Address page.
-	Given Verify Payment Type page opened.
+	And Click on Next Button on Shipping Address page. 
+	Given Verify Payment Type page opened. 
 	And Fill in Purchase Order Number on Payment Type page. 
-	And Click on Next on Payment Type page.
-	And Verify current page is Order Review page.
-	And Verify Place Order button is Disabled on Order Review page.
-	And Click on confirmation Checkbox on Order review page.
+	And Click on Next on Payment Type page. 
+	And Verify current page is Order Review page. 
+	And Verify Place Order button is Disabled on Order Review page. 
+	And Click on confirmation Checkbox on Order review page. 
 	#And Verify Place Order button is Disabled on Order Review page.
 	And Click on Place Order button on Order Review page.

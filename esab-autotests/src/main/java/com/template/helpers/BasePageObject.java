@@ -220,6 +220,13 @@ public abstract class BasePageObject {
 		}
 	}
 
+	protected void clear(String xpath) {
+		WebElement webElement = getWebElement(xpath);
+		setImplicitWaitShort();
+		webElement.clear();
+		setDefaultImplicitWait();
+	}
+
 	protected void click(By by) {
 		WebElement webElement = $(by);
 		setImplicitWaitShort();
@@ -306,6 +313,7 @@ public abstract class BasePageObject {
 	}
 
 	protected void isCurrentUrlExpectedURL(String validationURL) {
+		waitJSExecution();
 		String actualUrl = getCurrentUrl();
 		String expectedUrl = validationURL;
 		assertEquals(actualUrl, expectedUrl,
@@ -328,20 +336,20 @@ public abstract class BasePageObject {
 					+ " or fields number is different to validation values number  ");
 		}
 	}
-	
-	protected float castStringToFloat(String sourceString){
+
+	protected float castStringToFloat(String sourceString) {
 		logger.info("Invoke cast String to Float method");
 		float resultFloatValue = 0;
-		if ((sourceString != null) && (sourceString.length() > 0)){
+		if ((sourceString != null) && (sourceString.length() > 0)) {
 			resultFloatValue = Float.valueOf(sourceString);
 			logger.info("Float value of source string is: " + resultFloatValue);
-		}else{
+		} else {
 			logger.error("Source string equals 0 or null. Source string = " + sourceString);
 		}
 		return resultFloatValue;
 	}
-	
-	protected boolean isElementEnabled(String xpath){
+
+	protected boolean isElementEnabled(String xpath) {
 		boolean isEnabled = false;
 		isEnabled = getDriver().findElement(By.xpath(xpath)).isEnabled();
 		logger.info("Is Element enabled is: " + isEnabled);

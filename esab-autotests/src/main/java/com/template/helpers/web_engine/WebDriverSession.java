@@ -29,7 +29,7 @@ public class WebDriverSession {
         return webDriver;
     }
 
-    public void restoreDefaultImplicitWait() {
+	public void restoreDefaultImplicitWait() {
         changeImplicitWait(timeOut, TimeUnit.SECONDS);
     }
 
