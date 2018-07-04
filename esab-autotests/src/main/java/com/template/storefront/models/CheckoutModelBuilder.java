@@ -4,7 +4,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CheckoutModelBuilder {
-	private String newShipAddress;
+	private String newStreetName;
+	private String newStreetNumber;
+	private String newPostalCode;
+	private String newTown;
+	private String newCountry;
 	private String newRequestedDeliveryDate;
 	private String newPartialDeliveryAllowed;
 	private String newAccount;
@@ -16,8 +20,28 @@ public class CheckoutModelBuilder {
 
 	}
 
-	public CheckoutModelBuilder setNewShipAddress(String newShipAddress) {
-		this.newShipAddress = newShipAddress;
+	public CheckoutModelBuilder setNewStreetName(String newStreetName) {
+		this.newStreetName = newStreetName;
+		return this;
+	}
+
+	public CheckoutModelBuilder setNewStreetNumber(String newStreetNumber) {
+		this.newStreetNumber = newStreetNumber;
+		return this;
+	}
+
+	public CheckoutModelBuilder setNewPostalCode(String newPostalCode) {
+		this.newPostalCode = newPostalCode;
+		return this;
+	}
+
+	public CheckoutModelBuilder setNewTown(String newTown) {
+		this.newTown = newTown;
+		return this;
+	}
+
+	public CheckoutModelBuilder setNewCountry(String newCountry) {
+		this.newCountry = newCountry;
 		return this;
 	}
 
@@ -52,8 +76,9 @@ public class CheckoutModelBuilder {
 	}
 
 	public CheckoutDataModel createCheckoutDataModel() {
-		return new CheckoutDataModel(newShipAddress, newRequestedDeliveryDate, newPartialDeliveryAllowed, newAccount,
-				newPackagingInstructions, newShippingInstructions, newPurchaseOrderNumber);
+		return new CheckoutDataModel(newStreetName, newStreetNumber, newPostalCode, newTown, newCountry,
+				newRequestedDeliveryDate, newPartialDeliveryAllowed, newAccount, newPackagingInstructions,
+				newShippingInstructions, newPurchaseOrderNumber);
 	}
 
 }

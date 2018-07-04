@@ -10,6 +10,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
+import com.template.storefront.models.CheckoutDataModel;
 import com.template.storefront.models.ProductModel;
 
 import ru.yandex.qatools.allure.annotations.Step;
@@ -26,8 +27,9 @@ public class ShoppingCartPage extends StorefrontBasePage {
 	private String validationAddToCartButtonLabel = "Add these products to shopping cart";
 	private List<String> dataForQtyFields = new ArrayList<>(Arrays.asList("11", "22"));
 	private String saveCartBauutonLabel = "SAVE CART";
-	private String validationShipToAddr = "999 South Wacker Drive, Chicago, 60606";
+	private String validationShipToAddr;
 	private String checkOutButtonLabel = "Check Out";
+	private CheckoutDataModel checkoutDataModel;
 
 	@Override
 	public String getPageUrl() {
@@ -65,13 +67,22 @@ public class ShoppingCartPage extends StorefrontBasePage {
 		verifyWebElementTextValue(validationHeader2Subtitle, HEADER2_SUBTITLE);
 	}
 
+	private void createShipToAddrFromDataModel() {
+		checkoutDataModel = checkoutDataController.getCheckoutDataModel();
+		validationShipToAddr = String.format("%s, %s, %s", checkoutDataModel.getStreetName(),
+				checkoutDataModel.getTown(), checkoutDataModel.getPostalCode());
+		logger.info("Generated Ship To Address: " + validationShipToAddr);
+	}
+
 	@Step("Verify Ship-To address value")
 	public void verifyShipToValue() {
+		createShipToAddrFromDataModel();
 		verifyWebElementTextValue(validationShipToAddr, String.format(SHIP_TO_VALUE, validationShipToAddr));
 	}
 
 	@Step("Select Ship to Addr Value")
 	public void selectShipToAddress() {
+		createShipToAddrFromDataModel();
 		click(String.format(SHIP_TO_VALUE, validationShipToAddr));
 	}
 

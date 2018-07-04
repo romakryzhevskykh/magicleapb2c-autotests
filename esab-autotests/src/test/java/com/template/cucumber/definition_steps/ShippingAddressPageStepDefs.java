@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.template.helpers.user_engine.UserSessions;
+import com.template.storefront.models.CheckoutDataModel;
 import com.template.storefront.pages.ShippingAddressPage;
 
 import cucumber.api.java.en.And;
@@ -18,12 +19,18 @@ public class ShippingAddressPageStepDefs extends AbstractStepDefs {
 	@Autowired
 	public ShippingAddressPage shippingAddressPage;
 
-	@Given("^Checkout data model: Ship To Address: \"(.*)\", Requested Delivery Date: \"(.*)\", Partial Delivery Allowed: \"(.*)\", Account: \"(.*)\", Packaging Instructions: \"(.*)\", Shipping Instructions: \"(.*)\", Purchase Order Number: \"(.*)\".$")
-	public void createCheckoutDataModel(String newShipAddress, String newRequestedDeliveryDate,
-			String newPartialDeliveryAllowed, String newAccount, String newPackagingInstructions,
-			String newShippingInstructions, String newPurchaseOrderNumber) {
-		shippingAddressPage.createCheckoutDataModel(newShipAddress, newRequestedDeliveryDate, newPartialDeliveryAllowed,
-				newAccount, newPackagingInstructions, newShippingInstructions, newPurchaseOrderNumber);
+	@Given("^Checkout data model: Ship To Address_StreetName: \"(.*)\", Ship To Address_StreetNumber: \"(.*)\","
+			+ " Ship To Address_PostalCode: \"(.*)\", Ship To Address_Town: \"(.*)\","
+			+ " Ship To Address_Country: \"(.*)\", Requested Delivery Date: \"(.*)\","
+			+ " Partial Delivery Allowed: \"(.*)\", Account: \"(.*)\", Packaging Instructions: \"(.*)\","
+			+ " Shipping Instructions: \"(.*)\", Purchase Order Number: \"(.*)\".$")
+	public void createCheckoutDataModel(String newStreetName, String newStreetNumber, String newPostalCode,
+			String newTown, String newCountry, String newRequestedDeliveryDate, String newPartialDeliveryAllowed,
+			String newAccount, String newPackagingInstructions, String newShippingInstructions,
+			String newPurchaseOrderNumber) {
+		shippingAddressPage.createCheckoutDataModel(newStreetName, newStreetNumber, newPostalCode, newTown, newCountry,
+				newRequestedDeliveryDate, newPartialDeliveryAllowed, newAccount, newPackagingInstructions,
+				newShippingInstructions, newPurchaseOrderNumber);
 	}
 
 	@And("^Verify is Current page Shipping Address page.$")
@@ -85,14 +92,14 @@ public class ShippingAddressPageStepDefs extends AbstractStepDefs {
 	public void clearPackagingInstruction() {
 		shippingAddressPage.clearPackagingInstructions();
 	}
-	
-	@And ("^Clear Requested Delivery Date on Shipping Address page.$")
-	public void clearRequestedDElivery(){
+
+	@And("^Clear Requested Delivery Date on Shipping Address page.$")
+	public void clearRequestedDElivery() {
 		shippingAddressPage.clearRequestedDelivery();
 	}
-	
-	@And ("^Click on Modify Address button on Shipping Address page.$")
-	public void clickOnModifyAddrButton (){
+
+	@And("^Click on Modify Address button on Shipping Address page.$")
+	public void clickOnModifyAddrButton() {
 		shippingAddressPage.clickOnModifyAddressButton();
 	}
 }

@@ -76,8 +76,10 @@ public class ShoppingCartPageDefs extends AbstractStepDefs {
 		shoppingCartPage.fillInQtyFields();
 	}
 
-	@Given("^Add Product model: SCU: \"(.*)\", Qty: \"(.*)\", Price: \"(.*)\", Product name: \"(.*)\", In Stock: \"(.*)\".$")
-	public void addProductToList(String newScu, String newQty, String newPrice, String newProductName, String newInStock) {
+	@Given("^Add Product model: SCU: \"(.*)\", Qty: \"(.*)\", Price: \"(.*)\","
+			+ " Product name: \"(.*)\", In Stock: \"(.*)\".$")
+	public void addProductToList(String newScu, String newQty, String newPrice, String newProductName,
+			String newInStock) {
 		shoppingCartPage.addProductToTheList(newScu, newQty, newPrice, newProductName, newInStock);
 	}
 
@@ -90,59 +92,59 @@ public class ShoppingCartPageDefs extends AbstractStepDefs {
 	public void fiilInQtyFromProductModel() {
 		shoppingCartPage.fillInFieldFromObjectModel();
 	}
-	
+
 	@And("^Verify product names on Shopping Cart.$")
-	public void verifyProductName(){
+	public void verifyProductName() {
 		shoppingCartPage.verifyProductNameInCart();
 	}
-	
+
 	@And("^Verify product SCU on Shopping Cart.$")
-	public void verifySCU(){
+	public void verifySCU() {
 		shoppingCartPage.verifyScuInCart();
 	}
-	
-	@And ("^Verify In Stock value on Shopping Cart.$")
-	public void verifyInStock(){
+
+	@And("^Verify In Stock value on Shopping Cart.$")
+	public void verifyInStock() {
 		shoppingCartPage.verifyInStock();
 	}
-	
-	@And ("^Verify Product Price on Shopping Cart.$")
-	public void verifyProductPriceByScu(){
+
+	@And("^Verify Product Price on Shopping Cart.$")
+	public void verifyProductPriceByScu() {
 		shoppingCartPage.verifyPriceBySCU();
 	}
-	
-	@And ("^Verify Total Price on Shopping Cart.$")
-	public void verifyTotalPrice(){
+
+	@And("^Verify Total Price on Shopping Cart.$")
+	public void verifyTotalPrice() {
 		shoppingCartPage.verifyTotalPriceInList();
 	}
-	
-	@And ("^Remove all products.$")
-	public void removeAllProducts(){
+
+	@And("^Remove all products.$")
+	public void removeAllProducts() {
 		shoppingCartPage.clickOnRemoveProduct();
 	}
-	
-	@And ("^Verify Subtotal price on Shopping Cart.$")
-	public void verifySubtotal(){
+
+	@And("^Verify Subtotal price on Shopping Cart.$")
+	public void verifySubtotal() {
 		shoppingCartPage.verifySubtotal();
 	}
-	
-	@And ("^Verify Save Cart button label.$")
-	public void verifySaveCartButtonLbel(){
+
+	@And("^Verify Save Cart button label.$")
+	public void verifySaveCartButtonLbel() {
 		shoppingCartPage.verifySaveCartButtonLabel();
 	}
-	
-	@And ("^Click on Save shopping cart button.$")
-	public void clickSaveShoppingCartButton(){
+
+	@And("^Click on Save shopping cart button.$")
+	public void clickSaveShoppingCartButton() {
 		shoppingCartPage.clickOnSaveCartButton();
 	}
-	
-	@And ("^Verify Check Out button label.$")
-	public void verifyCheckOutButtonLabel(){
+
+	@And("^Verify Check Out button label.$")
+	public void verifyCheckOutButtonLabel() {
 		shoppingCartPage.verifyCheckoutButtonLabel();
 	}
-	
-	@And ("^Click on Check Out button.$")
-	public void clickOnCheckOutButton(){
+
+	@And("^Click on Check Out button.$")
+	public void clickOnCheckOutButton() {
 		shoppingCartPage.clickOnCheckOutButton();
 	}
 }

@@ -24,18 +24,14 @@ public class ShippingAddressPage extends StorefrontBasePage {
 		return getPageUrlParametrick(pageUrlMethod);
 	}
 
-	public void createCheckoutDataModel(String newShipAddress, String newRequestedDeliveryDate,
-			String newPartialDeliveryAllowed, String newAccount, String newPackagingInstructions,
-			String newShippingInstructions, String newPurchaseOrderNumber) {
-		checkoutModelBuilder.setNewShipAddress(newShipAddress);
-		checkoutModelBuilder.setNewRequestedDeliveryDate(newRequestedDeliveryDate);
-		checkoutModelBuilder.setNewPartialDeliveryAllowed(newPartialDeliveryAllowed);
-		checkoutModelBuilder.setNewAccount(newAccount);
-		checkoutModelBuilder.setNewPackagingInstructions(newPackagingInstructions);
-		checkoutModelBuilder.setNewShippingInstructions(newShippingInstructions);
-		checkoutModelBuilder.setNewPurchaseOrderNumber(newPurchaseOrderNumber);
-		checkoutDataModel = checkoutModelBuilder.createCheckoutDataModel();
-		logger.info("CheckoutDataModel: " + checkoutDataModel);
+	public void createCheckoutDataModel(String newStreetName, String newStreetNumber, String newPostalCode,
+			String newTown, String newCountry, String newRequestedDeliveryDate, String newPartialDeliveryAllowed,
+			String newAccount, String newPackagingInstructions, String newShippingInstructions,
+			String newPurchaseOrderNumber) {
+		checkoutDataController.createCheckoutDataModel(newStreetName, newStreetNumber, newPostalCode, newTown,
+				newCountry, newRequestedDeliveryDate, newPartialDeliveryAllowed, newAccount, newPackagingInstructions,
+				newShippingInstructions, newPurchaseOrderNumber);
+		checkoutDataModel = checkoutDataController.getCheckoutDataModel();
 	}
 
 	private String getPageUrlParametrick(String pageUrlMethod) {
@@ -46,11 +42,11 @@ public class ShippingAddressPage extends StorefrontBasePage {
 
 	@Step("Fill in Shipping Instructions")
 	public void fillInShippingInstructions() {
-		fillInTextInput(checkoutDataModel.getShippingInstructions(), XPATH_SHIPPING_INSTRUCTIONS_INPUT);
+		fillInTextInput(checkoutDataController.getCheckoutDataModel().getShippingInstructions(), XPATH_SHIPPING_INSTRUCTIONS_INPUT);
 	}
-	
-	@Step ("Fill in Packcaging Instructions")
-	public void fillInPackagingInstructions(){
+
+	@Step("Fill in Packcaging Instructions")
+	public void fillInPackagingInstructions() {
 		fillInTextInput(checkoutDataModel.getPackagingInstructions(), XPATH_PACKAGING_INSTRUCTIONS_TEXTAREA);
 	}
 
@@ -70,9 +66,9 @@ public class ShippingAddressPage extends StorefrontBasePage {
 	public void clearShippingInstructions() {
 		clear(XPATH_SHIPPING_INSTRUCTIONS_INPUT);
 	}
-	
-	@Step ("Clear Packaging Instructions textarea")
-	public void clearPackagingInstructions(){
+
+	@Step("Clear Packaging Instructions textarea")
+	public void clearPackagingInstructions() {
 		clear(XPATH_PACKAGING_INSTRUCTIONS_TEXTAREA);
 	}
 
@@ -94,32 +90,30 @@ public class ShippingAddressPage extends StorefrontBasePage {
 	private void clickOnPartialDeliveryRadioButton(String selection) {
 		click(String.format(XPATH_PARTIAL_DELIVERY_RADIO_BUTTON, selection));
 	}
-	
-	@Step ("Click on partial delivery button according to data model")
-	public void clickOnRadioButtonAccordingToDataModel(){
+
+	@Step("Click on partial delivery button according to data model")
+	public void clickOnRadioButtonAccordingToDataModel() {
 		clickOnPartialDeliveryRadioButton(checkoutDataModel.getPartialDeliveryAllowed());
 	}
-	
-	@Step ("Click on Yes radio button")
-	public void clickOnYesButon(){
+
+	@Step("Click on Yes radio button")
+	public void clickOnYesButon() {
 		clickOnPartialDeliveryRadioButton("Yes");
 	}
-	
-	@Step ("Click on No radio button")
-	public void clickOnNoButton(){
+
+	@Step("Click on No radio button")
+	public void clickOnNoButton() {
 		clickOnPartialDeliveryRadioButton("No");
 	}
-	
-	@Step ("Clear Requested Delivery date")
-	public void clearRequestedDelivery(){
+
+	@Step("Clear Requested Delivery date")
+	public void clearRequestedDelivery() {
 		clear(XPATH_REQUESTED_DELIVERY_DATE);
 	}
-	
-	@Step ("Click on Modify Address button")
-	public void clickOnModifyAddressButton(){
+
+	@Step("Click on Modify Address button")
+	public void clickOnModifyAddressButton() {
 		click(XPATH_MODIFY_ADDRESS_BUTTON);
 	}
-	
-	
 
 }
