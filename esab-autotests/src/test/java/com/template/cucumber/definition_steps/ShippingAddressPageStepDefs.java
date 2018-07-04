@@ -17,10 +17,13 @@ public class ShippingAddressPageStepDefs extends AbstractStepDefs {
 	public UserSessions userSessions;
 	@Autowired
 	public ShippingAddressPage shippingAddressPage;
-	
-	@Given ("^Checkout data model: Ship To Address: \"(.*)\", Requested Delivery Date: \"(.*)\", Partial Delivery Allowed: \"(.*)\", Account: \"(.*)\", Packaging Instructions: \"(.*)\", Shipping Instructions: \"(.*)\", Purchase Order Number: \"(.*)\".$")
-	public void createCheckoutDataModel(String newShipAddress, String newRequestedDeliveryDate, String newPartialDeliveryAllowed, String newAccount, String newPackagingInstructions, String newShippingInstructions, String newPurchaseOrderNumber){
-		shippingAddressPage.createCheckoutDataModel(newShipAddress, newRequestedDeliveryDate, newPartialDeliveryAllowed, newAccount, newPackagingInstructions, newShippingInstructions, newPurchaseOrderNumber);
+
+	@Given("^Checkout data model: Ship To Address: \"(.*)\", Requested Delivery Date: \"(.*)\", Partial Delivery Allowed: \"(.*)\", Account: \"(.*)\", Packaging Instructions: \"(.*)\", Shipping Instructions: \"(.*)\", Purchase Order Number: \"(.*)\".$")
+	public void createCheckoutDataModel(String newShipAddress, String newRequestedDeliveryDate,
+			String newPartialDeliveryAllowed, String newAccount, String newPackagingInstructions,
+			String newShippingInstructions, String newPurchaseOrderNumber) {
+		shippingAddressPage.createCheckoutDataModel(newShipAddress, newRequestedDeliveryDate, newPartialDeliveryAllowed,
+				newAccount, newPackagingInstructions, newShippingInstructions, newPurchaseOrderNumber);
 	}
 
 	@And("^Verify is Current page Shipping Address page.$")
@@ -48,6 +51,11 @@ public class ShippingAddressPageStepDefs extends AbstractStepDefs {
 		shippingAddressPage.fillInRequestedDate();
 	}
 
+	@And("^Fill in Packaging Instructions on Shipping Address page.$")
+	public void fillInPAckagingInstructions() {
+		shippingAddressPage.fillInPackagingInstructions();
+	}
+
 	@And("^Verify Shipping Instructions validation message on Shipping Address page.$")
 	public void verifyShippingInstructionsValidationMessage() {
 		shippingAddressPage.verifyShippingInstructionValidationMessage();
@@ -55,6 +63,36 @@ public class ShippingAddressPageStepDefs extends AbstractStepDefs {
 
 	@And("^Clear Shipping Instructions field on Shipping Information page.$")
 	public void clearShippingInstructions() {
-		shippingAddressPage.clearSippingInstructions();
+		shippingAddressPage.clearShippingInstructions();
+	}
+
+	@And("^Click on Partial Delivery Radio Button YES on Shipping Address page.$")
+	public void clickOnYesButton() {
+		shippingAddressPage.clickOnYesButon();
+	}
+
+	@And("^Click on Partial Delivery Radio Button NO on Shipping Address page.$")
+	public void clickOnNoButton() {
+		shippingAddressPage.clickOnNoButton();
+	}
+
+	@And("^Click on Partial Delivery Radio Button According to Checkout Data Model on Shipping Address page.$")
+	public void clickOnRadioButtonAccordingToDataModel() {
+		shippingAddressPage.clickOnRadioButtonAccordingToDataModel();
+	}
+
+	@And("^Clear Packaging Instructions input on Shipping Address page.$")
+	public void clearPackagingInstruction() {
+		shippingAddressPage.clearPackagingInstructions();
+	}
+	
+	@And ("^Clear Requested Delivery Date on Shipping Address page.$")
+	public void clearRequestedDElivery(){
+		shippingAddressPage.clearRequestedDelivery();
+	}
+	
+	@And ("^Click on Modify Address button on Shipping Address page.$")
+	public void clickOnModifyAddrButton (){
+		shippingAddressPage.clickOnModifyAddressButton();
 	}
 }

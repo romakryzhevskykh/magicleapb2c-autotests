@@ -38,7 +38,7 @@ public class ShippingAddressPage extends StorefrontBasePage {
 		logger.info("CheckoutDataModel: " + checkoutDataModel);
 	}
 
-	public String getPageUrlParametrick(String pageUrlMethod) {
+	private String getPageUrlParametrick(String pageUrlMethod) {
 		String shippingAddressPageURL = storefrontProject.getBaseUrl() + pageUrlMethod;
 		logger.info("Shipping Address URL: " + shippingAddressPageURL);
 		return shippingAddressPageURL;
@@ -47,6 +47,11 @@ public class ShippingAddressPage extends StorefrontBasePage {
 	@Step("Fill in Shipping Instructions")
 	public void fillInShippingInstructions() {
 		fillInTextInput(checkoutDataModel.getShippingInstructions(), XPATH_SHIPPING_INSTRUCTIONS_INPUT);
+	}
+	
+	@Step ("Fill in Packcaging Instructions")
+	public void fillInPackagingInstructions(){
+		fillInTextInput(checkoutDataModel.getPackagingInstructions(), XPATH_PACKAGING_INSTRUCTIONS_TEXTAREA);
 	}
 
 	@Step("Verify current page is Shipping Addr page")
@@ -62,8 +67,13 @@ public class ShippingAddressPage extends StorefrontBasePage {
 	}
 
 	@Step("Clear Shipping Instructions")
-	public void clearSippingInstructions() {
+	public void clearShippingInstructions() {
 		clear(XPATH_SHIPPING_INSTRUCTIONS_INPUT);
+	}
+	
+	@Step ("Clear Packaging Instructions textarea")
+	public void clearPackagingInstructions(){
+		clear(XPATH_PACKAGING_INSTRUCTIONS_TEXTAREA);
 	}
 
 	@Step("Click on Next button")
@@ -80,5 +90,36 @@ public class ShippingAddressPage extends StorefrontBasePage {
 	public void verifyShippingInstructionValidationMessage() {
 		verifyWebElementTextValue(shippingInstructionsValidationMessage, XPATH_VALIDATION_ERROR);
 	}
+
+	private void clickOnPartialDeliveryRadioButton(String selection) {
+		click(String.format(XPATH_PARTIAL_DELIVERY_RADIO_BUTTON, selection));
+	}
+	
+	@Step ("Click on partial delivery button according to data model")
+	public void clickOnRadioButtonAccordingToDataModel(){
+		clickOnPartialDeliveryRadioButton(checkoutDataModel.getPartialDeliveryAllowed());
+	}
+	
+	@Step ("Click on Yes radio button")
+	public void clickOnYesButon(){
+		clickOnPartialDeliveryRadioButton("Yes");
+	}
+	
+	@Step ("Click on No radio button")
+	public void clickOnNoButton(){
+		clickOnPartialDeliveryRadioButton("No");
+	}
+	
+	@Step ("Clear Requested Delivery date")
+	public void clearRequestedDelivery(){
+		clear(XPATH_REQUESTED_DELIVERY_DATE);
+	}
+	
+	@Step ("Click on Modify Address button")
+	public void clickOnModifyAddressButton(){
+		click(XPATH_MODIFY_ADDRESS_BUTTON);
+	}
+	
+	
 
 }

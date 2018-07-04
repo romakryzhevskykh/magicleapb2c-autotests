@@ -15,13 +15,17 @@ Scenario:
 	And Verify Check Out button label. 
 	And Click on Check Out button. 
 	Given Verify is Current page Shipping Address page. 
-	And Clear Shipping Instructions field on Shipping Information page. 
+	And Clear Shipping Instructions field on Shipping Information page.
+	And Clear Packaging Instructions input on Shipping Address page. 
+	And Clear Requested Delivery Date on Shipping Address page.
 	And Click on Next Button on Shipping Address page. 
 	And Verify Shipping Instructions validation message on Shipping Address page. 
 	#And Verify is Current page Shipping Address page.
 	And Verify is Current page Shipping Address page after validation error. 
 	And Fill in Shipping Instructions on Shipping Address page.
-	And Fill in Requested Deliver Date on Shipping Address page. 
+	And Fill in Packaging Instructions on Shipping Address page.
+	And Fill in Requested Deliver Date on Shipping Address page.
+	And Click on Partial Delivery Radio Button According to Checkout Data Model on Shipping Address page. 
 	And Click on Next Button on Shipping Address page. 
 	Given Verify Payment Type page opened. 
 	And Fill in Purchase Order Number on Payment Type page. 
