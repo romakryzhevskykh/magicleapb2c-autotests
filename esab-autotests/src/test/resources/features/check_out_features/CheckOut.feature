@@ -17,7 +17,9 @@ Scenario:
 	And Click on Add these products to shopping cart button. 
 	And Verify Check Out button label. 
 	And Click on Check Out button. 
-	Given Verify is Current page Shipping Address page. 
+	Given Verify is Current page Shipping Address page.
+	And Click on Modify Address button on Shipping Address page.
+	And Click on Close Modify Address button on Shipping Address page. 
 	And Clear Shipping Instructions field on Shipping Information page. 
 	And Clear Packaging Instructions input on Shipping Address page. 
 	And Clear Requested Delivery Date on Shipping Address page. 

@@ -102,4 +102,9 @@ public class ShippingAddressPageStepDefs extends AbstractStepDefs {
 	public void clickOnModifyAddrButton() {
 		shippingAddressPage.clickOnModifyAddressButton();
 	}
+	
+	@And ("^Click on Close Modify Address button on Shipping Address page.$")
+	public void clickOnCloseInModifyAddr(){
+		shippingAddressPage.closeModifyAddrPopup();
+	}
 }

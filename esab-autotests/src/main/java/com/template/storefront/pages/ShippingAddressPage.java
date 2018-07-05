@@ -115,5 +115,10 @@ public class ShippingAddressPage extends StorefrontBasePage {
 	public void clickOnModifyAddressButton() {
 		click(XPATH_MODIFY_ADDRESS_BUTTON);
 	}
+	
+	@Step ("Close modify Address Popup")
+	public void closeModifyAddrPopup(){
+		click(XPATH_CLOSE_MODIFY_ADDR_POPUP);
+	}
 
 }
