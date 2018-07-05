@@ -69,8 +69,15 @@ public class ShoppingCartPage extends StorefrontBasePage {
 
 	private void createShipToAddrFromDataModel() {
 		checkoutDataModel = checkoutDataController.getCheckoutDataModel();
-		validationShipToAddr = String.format("%s, %s, %s", checkoutDataModel.getStreetName(),
-				checkoutDataModel.getTown(), checkoutDataModel.getPostalCode());
+		if (!checkoutDataModel.getStreetNumber().equals("")) {
+			validationShipToAddr = String.format("%s, %s, %s, %s", checkoutDataModel.getStreetName(),
+					checkoutDataModel.getStreetNumber(), checkoutDataModel.getTown(),
+					checkoutDataModel.getPostalCode());
+		} else {
+			validationShipToAddr = String.format("%s, %s, %s", checkoutDataModel.getStreetName(),
+					checkoutDataModel.getTown(), checkoutDataModel.getPostalCode());	
+		}
+		
 		logger.info("Generated Ship To Address: " + validationShipToAddr);
 	}
 
