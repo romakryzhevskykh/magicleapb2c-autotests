@@ -3,6 +3,7 @@ package com.template.storefront.pages;
 import static com.template.storefront.page_elements.ShippingAddressPageElements.*;
 
 import org.apache.log4j.Logger;
+import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 
 import com.template.storefront.models.CheckoutDataModel;
@@ -42,7 +43,8 @@ public class ShippingAddressPage extends StorefrontBasePage {
 
 	@Step("Fill in Shipping Instructions")
 	public void fillInShippingInstructions() {
-		fillInTextInput(checkoutDataController.getCheckoutDataModel().getShippingInstructions(), XPATH_SHIPPING_INSTRUCTIONS_INPUT);
+		fillInTextInput(checkoutDataController.getCheckoutDataModel().getShippingInstructions(),
+				XPATH_SHIPPING_INSTRUCTIONS_INPUT);
 	}
 
 	@Step("Fill in Packcaging Instructions")
@@ -115,10 +117,28 @@ public class ShippingAddressPage extends StorefrontBasePage {
 	public void clickOnModifyAddressButton() {
 		click(XPATH_MODIFY_ADDRESS_BUTTON);
 	}
-	
-	@Step ("Close modify Address Popup")
-	public void closeModifyAddrPopup(){
+
+	@Step("Close modify Address Popup")
+	public void closeModifyAddrPopup() {
 		click(XPATH_CLOSE_MODIFY_ADDR_POPUP);
+	}
+
+	public void verifyAddressData() {
+		String text = getWebElement(String.format(XPATH_LOCATE_ADRESS_IN_MODIFY, checkoutDataModel.getStreetName(),
+				checkoutDataModel.getTown())).getText();
+		String validationText = String.format("%s\n%s\n%s %s", checkoutDataModel.getStreetName(),
+				checkoutDataModel.getTown(), checkoutDataModel.getCountry(), checkoutDataModel.getPostalCode());
+		logger.info(validationText);
+		isStringContainsText(String.format(XPATH_LOCATE_ADRESS_IN_MODIFY, checkoutDataModel.getStreetName(),
+				checkoutDataModel.getTown()), validationText);
+		logger.info("Element text: " + text);
+
+	}
+
+	@Step("Click on Address in Saved Addresses popup")
+	public void clickOnAddress() {
+		click(String.format(XPATH_USE_THIS_ADDR_FOR_SPECIFIC_ADDR, checkoutDataModel.getStreetName(),
+				checkoutDataModel.getTown()));
 	}
 
 }

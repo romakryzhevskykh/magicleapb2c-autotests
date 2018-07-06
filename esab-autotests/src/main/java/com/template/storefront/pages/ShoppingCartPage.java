@@ -83,6 +83,7 @@ public class ShoppingCartPage extends StorefrontBasePage {
 
 	@Step("Verify Ship-To address value")
 	public void verifyShipToValue() {
+		waitJSExecution();
 		createShipToAddrFromDataModel();
 		verifyWebElementTextValue(validationShipToAddr, String.format(SHIP_TO_VALUE, validationShipToAddr));
 	}

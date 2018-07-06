@@ -107,4 +107,14 @@ public class ShippingAddressPageStepDefs extends AbstractStepDefs {
 	public void clickOnCloseInModifyAddr(){
 		shippingAddressPage.closeModifyAddrPopup();
 	}
+	
+	@And ("^Verify Shipping address text in Modify address popup on Shipping Address page.$")
+	public void getShippingAddr(){
+		shippingAddressPage.verifyAddressData();
+	}
+	
+	@And("^Click on Address in Popup on Shipping Address page.$")
+	public void clickOnAddress(){
+		shippingAddressPage.clickOnAddress();
+	}
 }

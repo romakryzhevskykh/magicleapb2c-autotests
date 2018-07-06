@@ -10,5 +10,8 @@ public class ShippingAddressPageElements {
 	public static final String XPATH_PACKAGING_INSTRUCTIONS_TEXTAREA = "//div//textarea[@id='PackagingInstructions']";
 	public static final String XPATH_MODIFY_ADDRESS_BUTTON = "//button[@class='btn btn-default btn-block js-address-book']";
 	public static final String XPATH_CLOSE_MODIFY_ADDR_POPUP = "//button[@id='cboxClose']";
-	public static final String XPATH_LOCATE_ADRESS_IN_MODIFY = "//div[@class = 'addressEntry']//p[contains(.,'%s')]//parent::form";
+	public static final String XPATH_LOCATE_ADRESS_IN_MODIFY = "//div[@class = 'addressEntry']"
+			+ "//p[contains(.,'%s') and contains(.,'%s')]//parent::form";
+	public static final String XPATH_USE_THIS_ADDR_FOR_SPECIFIC_ADDR = "//div[@class = 'addressEntry']"
+			+ "//p[contains(.,'%s') and contains(.,'%s')]//parent::form//button[@type='submit']";
 }

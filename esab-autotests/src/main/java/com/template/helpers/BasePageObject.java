@@ -212,6 +212,7 @@ public abstract class BasePageObject {
 	protected void click(String xpath, String... args) {
 		WebElement webElement = getWebElement(xpath, args);
 		setImplicitWaitShort();
+		waitJSExecution();
 		try {
 			logger.info("Click on web element" + webElement);
 			webElement.click();
