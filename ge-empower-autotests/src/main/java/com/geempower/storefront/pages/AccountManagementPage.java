@@ -152,6 +152,7 @@ public class AccountManagementPage extends StorefrontBasePage {
 
     @Step("Switch To Approved Accounts Tab.")
     public void switchToApprovedAccountsTab() {
+        waitUntilPageIsFullyLoaded();
         click(APPROVED_ACCOUNTS_TAB_XPATH);
         waitUntilPageIsFullyLoaded();
     }
@@ -163,6 +164,7 @@ public class AccountManagementPage extends StorefrontBasePage {
 
     @Step("Remove All Active Requested Accounts.")
     public void removeAllRequestedAccounts(ArrayList<String> approvedAccounts) {
+        waitUntilPageIsFullyLoaded();
         approvedAccounts.forEach(this::removeAccountByAccountNo);
     }
 

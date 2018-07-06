@@ -24,7 +24,7 @@ public class AccountManagementPageElements {
     public final static String FULL_SCREEN_PROGRESS_INDICATOR_XPATH = "//div[@id='FullScreenProgressIndicatorModalDialog']";
     public final static String APPROVED_ACCOUNT_ROW_XPATH = "//*[@class='my-pending-accounts-wrapper']//tr[@role='row' and @class='odd' or @class='even']";
     public final static String ACCOUNT_NAME_VALUE_IN_TABLE_XPATH = ".//*[@id='activeRequestsTable']/tbody/tr[1]/td[3]";
-    public final static String PENDING_FOR_APPROVAL_TABLE_NO_DATA_TITLE_XPATH = "//table[@id='pendingApprovalTable']/tbody/tr/td";
+    public final static String PENDING_FOR_APPROVAL_TABLE_NO_DATA_TITLE_XPATH = "//*[@id='pendingApprovalTable']//td";
     public final static String APPROVED_ACCOUNTS_TAB_XPATH = "//a[@href='#recently-viewed']";
     public final static String APPROVED_ACCOUNTS_NAME_IN_APPROVED_ACCOUNTS_TABLE_XPATH = "//table[@id='activeRequestsTable']/tbody/tr/td[2]";
     public final static String REMOVE_ACCOUNT_ACTION_FOR_APPROPRIATE_ACCOUNT_THREE_DOT_ICON_XPATH  = "//td[@class=' table-visible-lg-block']/a[contains(text(), '%s')]/../..//td[@class=' table-visible-lg-block']/ul//i[@class='fa fa-ellipsis-v']";

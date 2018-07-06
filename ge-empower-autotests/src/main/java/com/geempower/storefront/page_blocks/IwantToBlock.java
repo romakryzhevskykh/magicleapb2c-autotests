@@ -169,6 +169,7 @@ public class IwantToBlock extends UIComponent {
 
     @Step("Expand Approve Pending Accounts Section.")
     public void expandApprovePendingAccountsSection() {
+        waitUntilPageIsFullyLoaded();
         click(APPROVE_PENDING_ACCOUNTS_SECTION_EXPAND_ICON_XPATH);
     }
 
