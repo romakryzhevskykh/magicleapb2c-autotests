@@ -3,7 +3,6 @@ package com.template.storefront.pages;
 import static com.template.storefront.page_elements.ShippingAddressPageElements.*;
 
 import org.apache.log4j.Logger;
-import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 
 import com.template.storefront.models.CheckoutDataModel;
@@ -16,7 +15,6 @@ public class ShippingAddressPage extends StorefrontBasePage {
 	private String pageUrlMethod = "/esab/en/checkout/multi/delivery-address/add";
 	private String pageUrlMethodAfterValidationError = "/esab/en/checkout/multi/delivery-address/shipInfo";
 	final static Logger logger = Logger.getLogger(ShippingAddressPage.class);
-	private String shippingInstructions = "Shipping Instructions";
 	private String shippingInstructionsValidationMessage = "Please provide shipping instructions for your order";
 	private CheckoutDataModel checkoutDataModel;
 
@@ -123,22 +121,42 @@ public class ShippingAddressPage extends StorefrontBasePage {
 		click(XPATH_CLOSE_MODIFY_ADDR_POPUP);
 	}
 
+	@Step("Verify Address Data in popup")
 	public void verifyAddressData() {
-		String text = getWebElement(String.format(XPATH_LOCATE_ADRESS_IN_MODIFY, checkoutDataModel.getStreetName(),
-				checkoutDataModel.getTown())).getText();
-		String validationText = String.format("%s\n%s\n%s %s", checkoutDataModel.getStreetName(),
-				checkoutDataModel.getTown(), checkoutDataModel.getCountry(), checkoutDataModel.getPostalCode());
+		String validationText = "";
+		if (checkoutDataModel.getStreetNumber().equals("")) {
+			validationText = String.format("%s\n%s\n%s %s", checkoutDataModel.getStreetName(),
+					checkoutDataModel.getTown(), checkoutDataModel.getCountry(), checkoutDataModel.getPostalCode());
+		} else {
+			validationText = String.format("%s %s\n%s\n%s %s", checkoutDataModel.getStreetName(),
+					checkoutDataModel.getStreetNumber(), checkoutDataModel.getTown(), checkoutDataModel.getCountry(),
+					checkoutDataModel.getPostalCode());
+		}
 		logger.info(validationText);
 		isStringContainsText(String.format(XPATH_LOCATE_ADRESS_IN_MODIFY, checkoutDataModel.getStreetName(),
 				checkoutDataModel.getTown()), validationText);
-		logger.info("Element text: " + text);
-
 	}
 
 	@Step("Click on Address in Saved Addresses popup")
 	public void clickOnAddress() {
 		click(String.format(XPATH_USE_THIS_ADDR_FOR_SPECIFIC_ADDR, checkoutDataModel.getStreetName(),
 				checkoutDataModel.getTown()));
+	}
+
+	@Step("Verify Ship to address on Shipping Address page")
+	public void verifyShippingAddress() {
+		String validationText = "";
+		if (checkoutDataModel.getStreetNumber().equals("")) {
+			validationText = String.format("%s,  %s,  %s,  %s", checkoutDataModel.getStreetName(),
+					checkoutDataModel.getTown(), checkoutDataModel.getPostalCode(), checkoutDataModel.getCountry());
+		} else {
+			validationText = String.format("%s,  %s,  %s,  %s,  %s", checkoutDataModel.getStreetName(),
+					checkoutDataModel.getStreetNumber(), checkoutDataModel.getTown(), checkoutDataModel.getPostalCode(),
+					checkoutDataModel.getCountry());
+		}
+		isStringContainsText(
+				String.format(XPATH_SHIPPING_ADDRESS, checkoutDataModel.getStreetName(), checkoutDataModel.getTown()),
+				validationText);
 	}
 
 }

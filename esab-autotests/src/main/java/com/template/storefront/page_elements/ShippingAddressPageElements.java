@@ -14,4 +14,6 @@ public class ShippingAddressPageElements {
 			+ "//p[contains(.,'%s') and contains(.,'%s')]//parent::form";
 	public static final String XPATH_USE_THIS_ADDR_FOR_SPECIFIC_ADDR = "//div[@class = 'addressEntry']"
 			+ "//p[contains(.,'%s') and contains(.,'%s')]//parent::form//button[@type='submit']";
+	public static final String XPATH_SHIPPING_ADDRESS = "//form[@id='addressForm']"
+			+ "//p[contains(.,'%s') and contains(.,'%s')]";
 }

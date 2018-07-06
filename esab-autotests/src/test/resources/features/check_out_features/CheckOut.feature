@@ -18,12 +18,14 @@ Scenario:
 	And Verify Check Out button label. 
 	And Click on Check Out button. 
 	Given Verify is Current page Shipping Address page.
+	And Verify Ship To Address on Shipping Address page.
 	Given Checkout data model: Ship To Address_StreetName: "999 South Wacker Drive", Ship To Address_StreetNumber: "", Ship To Address_PostalCode: "60606", Ship To Address_Town: "Chicago", Ship To Address_Country: "USA", Requested Delivery Date: "09/05/2018", Partial Delivery Allowed: "Yes", Account: "12345", Packaging Instructions: "Packaging Instruction", Shipping Instructions: "Shipping Instruction", Purchase Order Number: "987".
 	And Click on Modify Address button on Shipping Address page.
 	And Verify Shipping address text in Modify address popup on Shipping Address page.
 	And Click on Address in Popup on Shipping Address page.
 	And Verify Ship-To address value on Shopping Cart.
 	And Click on Check Out button.
+	And Verify Ship To Address on Shipping Address page.
 	And Click on Modify Address button on Shipping Address page. 
 	And Click on Close Modify Address button on Shipping Address page. 
 	And Clear Shipping Instructions field on Shipping Information page. 

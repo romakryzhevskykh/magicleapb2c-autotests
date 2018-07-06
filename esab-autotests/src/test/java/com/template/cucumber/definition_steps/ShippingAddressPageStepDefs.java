@@ -39,7 +39,7 @@ public class ShippingAddressPageStepDefs extends AbstractStepDefs {
 	}
 
 	@And("^Verify is Current page Shipping Address page after validation error.$")
-	public void isCurrentPAgeShippingAddrPAgeAfterValidationError() {
+	public void isCurrentPageShippingAddrPAgeAfterValidationError() {
 		shippingAddressPage.isCurrentPageShippingPageAfterError();
 	}
 
@@ -116,5 +116,10 @@ public class ShippingAddressPageStepDefs extends AbstractStepDefs {
 	@And("^Click on Address in Popup on Shipping Address page.$")
 	public void clickOnAddress(){
 		shippingAddressPage.clickOnAddress();
+	}
+	
+	@And ("^Verify Ship To Address on Shipping Address page.$")
+	public void verifyShipToAddr(){
+		shippingAddressPage.verifyShippingAddress();
 	}
 }

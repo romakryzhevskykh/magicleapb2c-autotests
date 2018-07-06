@@ -277,7 +277,7 @@ public abstract class BasePageObject {
 		setImplicitWaitShort();
 		boolean IsTextPresent = false;
 		if ($(xpath) != null) {
-			logger.info("Dashboard welcome text: " + $(xpath).getText());
+			logger.info("Web element text value is: " + $(xpath).getText());
 			IsTextPresent = $(xpath).getText().contains(text);
 		} else {
 			logger.error("There is no desired webelement");
