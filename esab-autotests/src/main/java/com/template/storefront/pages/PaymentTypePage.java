@@ -8,10 +8,11 @@ import ru.yandex.qatools.allure.annotations.Step;
 
 @Component
 public class PaymentTypePage extends StorefrontBasePage {
-	
+
 	final static Logger logger = Logger.getLogger(PaymentTypePage.class);
 	private String pageUrlMethod = "/esab/en/checkout/multi/payment-type/choose";
 	private String orderNumber = "Purchase Order Number";
+	private String validationErrorText = "Errors were found with the purchase order number you provided";
 
 	@Override
 	public String getPageUrl() {
@@ -19,21 +20,31 @@ public class PaymentTypePage extends StorefrontBasePage {
 		logger.info("Register page URL: " + paymentTypePageUrl);
 		return paymentTypePageUrl;
 	}
-	
+
 	@Step("Verify current page is Payment Type page")
 	public void isCurrentPagePaymentTypePage() {
 		String expectedUrl = getPageUrl();
 		isCurrentUrlExpectedURL(expectedUrl);
 	}
-	
-	@Step ("Fill in Purchase Order Number")
-	public void fillInOrderNumber(){
+
+	@Step("Fill in Purchase Order Number")
+	public void fillInOrderNumber() {
 		fillInTextInput(orderNumber, XPATH_ORDER_NUMBER);
 	}
-	
+
 	@Step("Click On Next Button")
-	public void cliclOnNextPaymentOrderPage(){
+	public void cliclOnNextPaymentOrderPage() {
 		click(XPATH_NEXT_PAYMENT_TYPE);
+	}
+
+	@Step("Clear Purchase Order Number on Payment Type page")
+	public void clearPurchaseOrderNumber() {
+		clear(XPATH_ORDER_NUMBER);
+	}
+
+	@Step("Verify empty Purchase Order Number field validation on Payment Type page")
+	public void verifyValidationText() {
+		verifyWebElementTextValue(validationErrorText, XPATH_VALIDATION_ERROR);
 	}
 
 }

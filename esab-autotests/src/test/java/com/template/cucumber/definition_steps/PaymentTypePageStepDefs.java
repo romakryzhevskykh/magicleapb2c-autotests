@@ -32,4 +32,14 @@ public class PaymentTypePageStepDefs extends AbstractStepDefs {
 	public void clickOnNextButton(){
 		paymentTypePage.cliclOnNextPaymentOrderPage();
 	}
+	
+	@And ("^Clear Purchase Order Number field on Payment Type page.$")
+	public void clearPurchaseOrderNumber(){
+		paymentTypePage.clearPurchaseOrderNumber();
+	}
+	
+	@And ("^Verify validation error text on Payment Type page.$")
+	public void verifyValidationError(){
+		paymentTypePage.verifyValidationText();
+	}
 }

@@ -36,4 +36,9 @@ public class OrderReviewPageStepDefs extends AbstractStepDefs {
 	public void isPlaceOrderButtonDisabled(){
 		orderReviewPage.isPlaceOrderDisabled();
 	}
+	
+	@And ("^Get ship To, Sold To address.$")
+	public void getShipToSoldToAddr(){
+		orderReviewPage.getSoldToAddr();
+	}
 }
