@@ -20,12 +20,20 @@ public class OrderReviewPage extends StorefrontBasePage {
 	final static Logger logger = Logger.getLogger(OrderReviewPage.class);
 	private String pageUrlMethod = "/esab/en/checkout/multi/summary/view";
 	private CheckoutDataModel checkoutDataModel;
+	private String orderReviewPageHeader = "Order Review";
 
 	@Override
 	public String getPageUrl() {
 		String orderReviewPageURL = storefrontProject.getBaseUrl() + pageUrlMethod;
+		if (checkoutDataModel == null) {
+			initCheckoutDataModel();
+		}
 		logger.info("Order Review Page URL: " + orderReviewPageURL);
 		return orderReviewPageURL;
+	}
+
+	private void initCheckoutDataModel() {
+		checkoutDataModel = checkoutDataController.getCheckoutDataModel();
 	}
 
 	@Step("Verify current page is Order Review page")
@@ -52,9 +60,8 @@ public class OrderReviewPage extends StorefrontBasePage {
 	}
 
 	@Step("Get Sold To Addr")
-	public void getSoldToAddr() {
+	public void verifyShipToSoldToAddr() {
 		waitJSExecution();
-		checkoutDataModel = checkoutDataController.getCheckoutDataModel();
 		List<WebElement> elements = getWebElements(XPATH_SHIPPING_INFO);
 		logger.info("Ship to Sold to elements: " + elements);
 		String validationText = "";
@@ -76,6 +83,32 @@ public class OrderReviewPage extends StorefrontBasePage {
 			logger.info("SOld To addr: \n" + actualText);
 
 		}
+	}
+
+	private void verifyValue(String xpath, String validationValue) {
+		assertTrue(isStringContainsText(xpath, validationValue), "There is no such value: " + validationValue);
+		logger.info("Element value is correct");
+	}
+
+	@Step("Verify Purchase Order Number")
+	public void verifyPurchaseOrderNumber() {
+		verifyValue(String.format(XPATH_PURCHASE_ORDER_VALUE, checkoutDataModel.getPurchaseOrderNumber()),
+				checkoutDataModel.getPurchaseOrderNumber());
+	}
+
+	@Step("Verify page header on Order Review")
+	public void verifyHeader() {
+		verifyWebElementTextValue(orderReviewPageHeader, XPATH_ORDER_REVIEW_PAGE_HEADER);
+	}
+
+	@Step("Verify Account Number on Order Review")
+	public void verifyAccountNumber() {
+		verifyValue(XPATH_ACCOUNT_NUMBER, checkoutDataModel.getAccount());
+	}
+
+	@Step("Verify Requested Deliver Date")
+	public void verifyRequestedDeliveryDate() {
+		verifyValue(XPATH_REQUESTED_DELIVERY_DATE, checkoutDataModel.getRequestedDeliveryDate());
 	}
 
 }

@@ -276,11 +276,14 @@ public abstract class BasePageObject {
 	protected boolean isStringContainsText(String xpath, String text) {
 		setImplicitWaitShort();
 		boolean IsTextPresent = false;
-		if ($(xpath) != null) {
-			logger.info("Web element text value is: " + $(xpath).getText());
-			IsTextPresent = $(xpath).getText().contains(text);
-		} else {
-			logger.error("There is no desired webelement");
+		WebElement element = getWebElement(xpath);
+		logger.info("Web element: " + element);
+		String elementText = "";
+		
+		if (element != null) {
+			elementText = element.getText();
+			logger.info("Web element text value is: " + elementText);
+			IsTextPresent = elementText.contains(text);
 		}
 		setDefaultImplicitWait();
 		return IsTextPresent;
@@ -299,13 +302,17 @@ public abstract class BasePageObject {
 	}
 
 	protected void verifyWebElementTextValue(String validationText, String xpath) {
-		String webElementText = getWebElement(xpath).getText().trim();
+		WebElement elemet = getWebElement(xpath);
+		String webElementText = elemet.getText().trim();
+		logger.info("Web element xpath: " + elemet);
 		logger.info("Web element actual value: " + webElementText);
 		logger.info("Web element expected value: " + validationText);
 		if (webElementText != null) {
 			assertEquals(webElementText, validationText,
 					"Actual text value is: " + webElementText + " but expected value is: " + validationText);
 			logger.info("Element label is CORRECT: " + webElementText);
+		} else {
+			logger.info("Web element text is NULL!!!");
 		}
 	}
 

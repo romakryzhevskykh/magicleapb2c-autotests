@@ -37,8 +37,28 @@ public class OrderReviewPageStepDefs extends AbstractStepDefs {
 		orderReviewPage.isPlaceOrderDisabled();
 	}
 	
-	@And ("^Get ship To, Sold To address.$")
-	public void getShipToSoldToAddr(){
-		orderReviewPage.getSoldToAddr();
+	@And ("^Verify Ship To, Sold To address on Order Review page.$")
+	public void verifyShipToSoldToAddr(){
+		orderReviewPage.verifyShipToSoldToAddr();
+	}
+	
+	@And("^Verify Purchase order number on Order Review page.$")
+	public void verifyPurchaseOrderNumber(){
+		orderReviewPage.verifyPurchaseOrderNumber();
+	}
+	
+	@And("^Verify header on Order Review page.$")
+	public void verifyOrderReviewPageHeader(){
+		orderReviewPage.verifyHeader();
+	}
+	
+	@And ("^Verify Account Number on Order Review page.$")
+	public void verifyAccountNumber(){
+		orderReviewPage.verifyAccountNumber();
+	}
+	
+	@And ("^Verify Requested Delivery Date on Order Review page.$")
+	public void verifyRequestedDeliverDate(){
+		orderReviewPage.verifyRequestedDeliveryDate();
 	}
 }
