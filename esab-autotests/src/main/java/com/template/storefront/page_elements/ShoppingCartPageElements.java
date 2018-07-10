@@ -13,8 +13,10 @@ public class ShoppingCartPageElements {
 	public static final String ADD_TO_CART_BUTTON_XPATH = "//button[@data-esab-ui='add-to-cart']";
 	public static final String QTY_FIELDS_XPATH = "//input[@class='js-quick-order-qty']";
 	// Product name value should be taken from ProductModel.
-	public static final String PRODUCT_NAME_XPATH = "//li[@class='esab-ui-cart__product-item']"
+	public static final String PRODUCT_NAME_FOR_VERIFICATION_XPATH = "//li[@class='esab-ui-cart__product-item']"
 			+ "//span[@class='item__name' and text()='%s']";
+	public static final String PRODUCT_NAME_ELEMENT_XPATH = "//li[@class='esab-ui-cart__product-item']"
+			+ "//div[@class='item__code' and text()='%s']//parent::div/parent::li//span[@class='item__name']";
 	// SCU value should be taken from ProductModel.
 	public static final String PRODUCT_SCU_XPATH = "//li[@class='esab-ui-cart__product-item']"
 			+ "//div[@class='item__code' and text()='%s']";

@@ -26,6 +26,8 @@ public abstract class BasePageObject {
 	protected ProductController productController;
 	@Autowired
 	protected CheckoutDataController checkoutDataController;
+	@Autowired
+	protected ProductPricesHelper productPriceHelper;
 
 	final static Logger logger = Logger.getLogger(BasePageObject.class);
 	private WebDriverWait wait;

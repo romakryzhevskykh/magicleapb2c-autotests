@@ -62,7 +62,7 @@ public class OrderReviewPage extends StorefrontBasePage {
 	@Step("Get Sold To Addr")
 	public void verifyShipToSoldToAddr() {
 		waitJSExecution();
-		List<WebElement> elements = getWebElements(XPATH_SHIPPING_INFO);
+		List<WebElement> elements = getWebElements(XPATH_SHIP_TO_SOLD_TO_ADDRESS_VALUE);
 		logger.info("Ship to Sold to elements: " + elements);
 		String validationText = "";
 
@@ -110,5 +110,22 @@ public class OrderReviewPage extends StorefrontBasePage {
 	public void verifyRequestedDeliveryDate() {
 		verifyValue(XPATH_REQUESTED_DELIVERY_DATE, checkoutDataModel.getRequestedDeliveryDate());
 	}
+	
+	@Step("Verify Allow Partial Delivery")
+	public void verifyAllowPartialDelivery(){
+		verifyValue(XPATH_ALLOW_PARTIAL_DELIVERY, checkoutDataModel.getPartialDeliveryAllowed());
+	}
+	
+	@Step("Verify Packaging Instructions")
+	public void verifyPackagingInstructions(){
+		verifyValue(XPATH_PACKAGING_INSTRUCTIONS, checkoutDataModel.getPackagingInstructions());
+	}
+	
+	@Step("Verify Shipping Instructions")
+	public void verifyShippingInstructions(){
+		verifyValue(XPATH_SHIPPING_INSTRUCTIONS, checkoutDataModel.getShippingInstructions());
+	}
+	
+	
 
 }

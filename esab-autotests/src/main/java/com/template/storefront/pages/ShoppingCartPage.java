@@ -6,10 +6,12 @@ import static org.testng.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
+import com.template.helpers.ProductPricesHelper;
 import com.template.storefront.models.CheckoutDataModel;
 import com.template.storefront.models.ProductModel;
 
@@ -30,11 +32,15 @@ public class ShoppingCartPage extends StorefrontBasePage {
 	private String validationShipToAddr;
 	private String checkOutButtonLabel = "Check Out";
 	private CheckoutDataModel checkoutDataModel;
+	List<ProductModel> products = new ArrayList<>();
 
 	@Override
 	public String getPageUrl() {
 		String shoppingCartPageURL = storefrontProject.getBaseUrl() + pageUrlMethod;
 		logger.info("Shopping Cart URL: " + shoppingCartPageURL);
+		if (products.isEmpty()) {
+			products = productController.getListOfProducts();
+		}
 		return shoppingCartPageURL;
 	}
 
@@ -75,9 +81,9 @@ public class ShoppingCartPage extends StorefrontBasePage {
 					checkoutDataModel.getPostalCode());
 		} else {
 			validationShipToAddr = String.format("%s, %s, %s", checkoutDataModel.getStreetName(),
-					checkoutDataModel.getTown(), checkoutDataModel.getPostalCode());	
+					checkoutDataModel.getTown(), checkoutDataModel.getPostalCode());
 		}
-		
+
 		logger.info("Generated Ship To Address: " + validationShipToAddr);
 	}
 
@@ -133,7 +139,6 @@ public class ShoppingCartPage extends StorefrontBasePage {
 	}
 
 	public void fillInFieldFromObjectModel() {
-		List<ProductModel> products = productController.getListOfProducts();
 		List<String> qtys = new ArrayList<String>();
 		List<String> scus = new ArrayList<String>();
 		String productQty = null;
@@ -156,19 +161,17 @@ public class ShoppingCartPage extends StorefrontBasePage {
 
 	@Step("Verify product name ")
 	public void verifyProductNameInCart() {
-		List<ProductModel> products = productController.getListOfProducts();
 		waitJSExecution();
 		if (products != null) {
 			for (ProductModel product : products) {
 				verifyWebElementTextValue(product.getProductName(),
-						String.format(PRODUCT_NAME_XPATH, product.getProductName()));
+						String.format(PRODUCT_NAME_FOR_VERIFICATION_XPATH, product.getProductName()));
 			}
 		}
 	}
 
 	@Step("Verify product SCU ")
 	public void verifyScuInCart() {
-		List<ProductModel> products = productController.getListOfProducts();
 		waitJSExecution();
 		if (products != null) {
 			for (ProductModel product : products) {
@@ -179,7 +182,6 @@ public class ShoppingCartPage extends StorefrontBasePage {
 
 	@Step("Verify In Stock value")
 	public void verifyInStock() {
-		List<ProductModel> products = productController.getListOfProducts();
 		waitJSExecution();
 		if (products != null) {
 			for (ProductModel product : products) {
@@ -198,7 +200,6 @@ public class ShoppingCartPage extends StorefrontBasePage {
 
 	@Step("Verify price by SCU")
 	public void verifyPriceBySCU() {
-		List<ProductModel> products = productController.getListOfProducts();
 		waitJSExecution();
 		if (products != null) {
 			for (ProductModel product : products) {
@@ -238,7 +239,6 @@ public class ShoppingCartPage extends StorefrontBasePage {
 
 	@Step("Verify Total price of Product in the list")
 	public void verifyTotalPriceInList() {
-		List<ProductModel> products = productController.getListOfProducts();
 		waitJSExecution();
 		if (products != null) {
 			for (ProductModel product : products) {
@@ -263,7 +263,6 @@ public class ShoppingCartPage extends StorefrontBasePage {
 
 	@Step("Remove all products by scu")
 	public void clickOnRemoveProduct() {
-		List<ProductModel> products = productController.getListOfProducts();
 		waitJSExecution();
 		if (products != null) {
 			for (ProductModel product : products) {
@@ -278,7 +277,7 @@ public class ShoppingCartPage extends StorefrontBasePage {
 	@Step("Verify subtotal")
 	public void verifySubtotal() {
 		float expectedSubtotal = 0;
-		List<ProductModel> products = productController.getListOfProducts();
+		// List<ProductModel> products = productController.getListOfProducts();
 		waitJSExecution();
 		String actualSubTotalRaw = getWebElement(SUBTOTAL_XPATH).getText().trim();
 		logger.info("Subtotal price = " + actualSubTotalRaw);
@@ -320,5 +319,67 @@ public class ShoppingCartPage extends StorefrontBasePage {
 	public void clickOnCheckOutButton() {
 		waitJSExecution();
 		click(CHECKOUT_BUTTON_XPATH);
+	}
+
+	private void addProductPriceMapping() {
+		waitJSExecution();
+		if (products != null) {
+			for (ProductModel product : products) {
+				String productScu = product.getScu();
+				String actualPriceRaw = getWebElement(String.format(PRODUCT_PRICE_XPATH, productScu)).getText().trim();
+				logger.info("Raw Price = " + actualPriceRaw);
+				String productNameByScu = getWebElement(String.format(PRODUCT_NAME_ELEMENT_XPATH, productScu)).getText()
+						.trim();
+				String actualPrice = getPriceWithoutDollarChar(actualPriceRaw);
+				float actualPriceNumber = castStringToFloat(actualPrice);
+				productPriceHelper.addProductNamePriceToMap(productNameByScu, actualPriceNumber);
+			}
+			Map<String, Float> productWithPrices = productPriceHelper.getProductWithPrices();
+			logger.info("Values in product Map: " + productWithPrices);
+			for (int i = 0; i < productWithPrices.size(); i++) {
+				logger.info("Saved Prices: Product name: " + products.get(i).getProductName() + " Price: "
+						+ productWithPrices.get(products.get(i).getProductName()));
+			}
+		}
+
+	}
+
+	private void addProductNameTotalPriceMapping() {
+		waitJSExecution();
+		if (products != null) {
+			for (ProductModel product : products) {
+				String productScu = product.getScu();
+				String productNameByScu = getWebElement(String.format(PRODUCT_NAME_ELEMENT_XPATH, productScu)).getText()
+						.trim();
+				String actualTotalPriceRaw = getWebElement(String.format(PRODUCT_TOTAL_PRICE, productScu)).getText()
+						.trim();
+				logger.info("Raw total price = " + actualTotalPriceRaw);
+				String actualTotalPrice = getPriceWithoutDollarChar(actualTotalPriceRaw);
+				float totalPriceNumber = castStringToFloat(actualTotalPrice);
+				productPriceHelper.addProductNameTotalPriceToMap(productNameByScu, totalPriceNumber);
+			}
+			Map<String, Float> productWithPrices = productPriceHelper.getProductWithTotalPrices();
+			logger.info("Values in product Map: " + productWithPrices);
+			for (int i = 0; i < productWithPrices.size(); i++) {
+				logger.info("Saved Total Price: Product name: " + products.get(i).getProductName() + " Price: "
+						+ productWithPrices.get(products.get(i).getProductName()));
+			}
+		}
+	}
+
+	private void saveSubtotalValue() {
+		waitJSExecution();
+		String actualSubTotalRaw = getWebElement(SUBTOTAL_XPATH).getText().trim();
+		logger.info("Subtotal price = " + actualSubTotalRaw);
+		String actualSubtotal = getPriceWithoutDollarChar(actualSubTotalRaw);
+		float actualSubtotalNumber = castStringToFloat(actualSubtotal);
+		productPriceHelper.setSubtotal(actualSubtotalNumber);
+		logger.info("Saved Subtotal price = " + productPriceHelper.getSubtotal());
+	}
+
+	public void savePricesTotalPricesAndSubtotal() {
+		saveSubtotalValue();
+		addProductNameTotalPriceMapping();
+		addProductPriceMapping();
 	}
 }

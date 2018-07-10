@@ -16,6 +16,7 @@ Scenario:
 	And Select Ship To address on Shopping Cart. 
 	Then Fill in SCU and Qty from Product Model. 
 	And Click on Add these products to shopping cart button. 
+	And Save Product Price, Product Total Price, Products Subtotal of Products on Shopping Cart page.
 	And Verify Check Out button label. 
 	And Click on Check Out button. 
 	#SHIPPING ADDR PAGE
@@ -57,6 +58,9 @@ Scenario:
 	And Verify Ship To, Sold To address on Order Review page.
 	And Verify Account Number on Order Review page.
 	And Verify Requested Delivery Date on Order Review page.
+	And Verify Allow Partial Delivery on Order Review page.
+	And Verify Packaging Instrictions on Order Review page.
+	And Verify Shipping Instructions on Order Review page.
 	And Verify Place Order button is Disabled on Order Review page. 
 	And Click on confirmation Checkbox on Order review page. 
 	And Click on Place Order button on Order Review page.

@@ -61,4 +61,19 @@ public class OrderReviewPageStepDefs extends AbstractStepDefs {
 	public void verifyRequestedDeliverDate(){
 		orderReviewPage.verifyRequestedDeliveryDate();
 	}
+	
+	@And("^Verify Allow Partial Delivery on Order Review page.$")
+	public void verifyAllowPartialDelivery(){
+		orderReviewPage.verifyAllowPartialDelivery();
+	}
+	
+	@And ("^Verify Packaging Instrictions on Order Review page.$")
+	public void verifyPackagingInstructions(){
+		orderReviewPage.verifyPackagingInstructions();
+	}
+	
+	@And ("^Verify Shipping Instructions on Order Review page.$")
+	public void verifyShippingInstructions(){
+		orderReviewPage.verifyShippingInstructions();
+	}
 }
