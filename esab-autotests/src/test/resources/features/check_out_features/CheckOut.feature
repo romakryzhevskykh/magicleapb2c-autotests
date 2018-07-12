@@ -3,8 +3,8 @@ Scenario:
 	Checkout test 1
 	Given Switch to Storefront shopper. 
 	Given Opened Start page. 
-	Given Add Product model: SCU: "1111", Qty: "1", Price: "111.00", Product name: "Product pr11", In Stock: "In Stock". 
-	Given Add Product model: SCU: "2222", Qty: "2", Price: "222.00", Product name: "Product pr22", In Stock: "In Stock". 
+	Given Add Product model: SCU: "1111", Qty: "10", Price: "111.00", Product name: "Product pr11", In Stock: "In Stock". 
+	Given Add Product model: SCU: "2222", Qty: "20", Price: "222.00", Product name: "Product pr22", In Stock: "In Stock". 
 	#Given Checkout data model: Ship To Address_StreetName: "999 South Wacker Drive", Ship To Address_StreetNumber: "", Ship To Address_PostalCode: "60606", Ship To Address_Town: "Chicago", Ship To Address_Country: "USA", Requested Delivery Date: "09/05/2018", Partial Delivery Allowed: "Yes", Account: "12345", Packaging Instructions: "Packaging Instruction", Shipping Instructions: "Shipping Instruction", Purchase Order Number: "987".
 	Given Checkout data model: Ship To Address_StreetName: "StreetName", Ship To Address_StreetNumber: "StreetNumber", Ship To Address_PostalCode: "PostalCode", Ship To Address_Town: "Town", Ship To Address_Country: "USA", Requested Delivery Date: "09/05/2018", Partial Delivery Allowed: "Yes", Account: "12345", Packaging Instructions: "Packaging Instruction", Shipping Instructions: "Shipping Instruction", Purchase Order Number: "987". 
 	And Login to Storefront. 

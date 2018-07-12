@@ -355,6 +355,9 @@ public abstract class BasePageObject {
 		logger.info("Invoke cast String to Float method");
 		float resultFloatValue = 0;
 		if ((sourceString != null) && (sourceString.length() > 0)) {
+			if(sourceString.contains(",")){
+				sourceString = sourceString.replace(",", "");
+			}
 			resultFloatValue = Float.valueOf(sourceString);
 			logger.info("Float value of source string is: " + resultFloatValue);
 		} else {
