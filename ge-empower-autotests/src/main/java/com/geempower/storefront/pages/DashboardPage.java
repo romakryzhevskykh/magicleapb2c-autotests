@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
+import static com.geempower.storefront.page_elements.AccountManagementPageElements.WE_ARE_NOW_ABB_OK_BUTTON_XPATH;
+import static com.geempower.storefront.page_elements.AccountManagementPageElements.WE_ARE_NOW_ABB_POP_UP_XPATH;
 import static com.geempower.storefront.page_elements.DashboardPageElements.*;
 
 @Component
@@ -81,5 +83,13 @@ public class DashboardPage extends StorefrontBasePage {
     @Step("Click on Submit button.")
     public void clickOnSubmitButton() {
         click(SUBMIT_SHIP_ADDRESS_BUTTON_XPATH);
+    }
+
+    @Step("Close we are now ABB pop-up")
+    public void closeWeAreNowAbbPopUpIfPresent(){
+        if(isDisplayed(WE_ARE_NOW_ABB_POP_UP_XPATH)){
+            click(WE_ARE_NOW_ABB_OK_BUTTON_XPATH);
+            waitUntilPageIsFullyLoaded();
+        }
     }
 }

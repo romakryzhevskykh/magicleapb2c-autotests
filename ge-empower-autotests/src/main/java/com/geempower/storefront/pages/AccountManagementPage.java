@@ -36,13 +36,21 @@ public class AccountManagementPage extends StorefrontBasePage {
         chooseRegion(chosenRegion);
     }
 
+    @Step("Close we are now ABB pop-up")
+    public void closeWeAreNowAbbPopUpIfPresent(){
+        if(isDisplayed(WE_ARE_NOW_ABB_POP_UP_XPATH)){
+            click(WE_ARE_NOW_ABB_OK_BUTTON_XPATH);
+            waitUntilPageIsFullyLoaded();
+        }
+    }
+
     @Step("Select appropriate region by region name")
-    public void chooseRegion(Region chosenRegion) {
+    private void chooseRegion(Region chosenRegion) {
         click(APPROPRIATE_REGION_BY_NAME_XPATH, chosenRegion.getRegionType().getRegionName());
     }
 
     @Step("Open regions list")
-    public void openRegionsList() {
+    private void openRegionsList() {
         waitUntilPageIsFullyLoaded();
         $(REGION_COMBOBOX_XPATH).click();
     }
@@ -54,12 +62,12 @@ public class AccountManagementPage extends StorefrontBasePage {
     }
 
     @Step("Set account number to search field")
-    public void setAccountNumberToSearchField(String accountName) {
+    private void setAccountNumberToSearchField(String accountName) {
         $(SEARCH_FIELD_XPATH).sendKeys(accountName);
     }
 
     @Step("Click on Search account button.")
-    public void clickOnSearchButton() {
+    private void clickOnSearchButton() {
         click(SEARCH_BUTTON_XPATH);
         waitUntilPageIsFullyLoaded();
     }

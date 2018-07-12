@@ -68,6 +68,7 @@ public class PreconditionStepDefs extends AbstractStepDefs {
             accountManagementPage.open();
         }
         accountManagementPage.isAccountPageFullyLoaded();
+        accountManagementPage.closeWeAreNowAbbPopUpIfPresent();
     }
 
     @And("^Orders page is opened.$")
@@ -172,5 +173,6 @@ public class PreconditionStepDefs extends AbstractStepDefs {
         if (!dashboardPage.isOpened()) {
             dashboardPage.open();
         }
+        dashboardPage.closeWeAreNowAbbPopUpIfPresent();
     }
 }

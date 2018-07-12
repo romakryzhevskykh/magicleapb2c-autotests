@@ -33,6 +33,8 @@ public class AccountManagementPageElements {
     public final static String FAVORITES_ACTIVE_TAB_XPATH = "//li[contains(@class,'active') and contains(@tab-id ,'1')]";
     public final static String APPROVED_ACCOUNTS_LIST_XPATH = "//table[@id='activeRequestsTable']/tbody/tr/td[2]/a";
     public final static String FAVORITES_ACCOUNTS_TABLE_ID = "favoritesTable";
+    public final static String WE_ARE_NOW_ABB_POP_UP_XPATH = "//img[contains(@src, 'WEAREABB')]";
+    public final static String WE_ARE_NOW_ABB_OK_BUTTON_XPATH = WE_ARE_NOW_ABB_POP_UP_XPATH + "//..//..//../div/button";
     //Request Account pop-up
     public final static String SALES_OFFICE_CODE_FIELD_ID = "requestSalesOfficeCode";
     public final static String SALES_ENGINEER_CODE_FIELD_ID = "requestSalesEngCode";
