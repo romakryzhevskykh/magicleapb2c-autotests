@@ -1,5 +1,7 @@
 package com.template.storefront.page_elements;
 
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 public class OrderReviewPageElements {
 	public static final String XPATH_CONFIRAMTION_CHECKBOX = "//form[@id='placeOrderForm1']//label";
 	public static final String XPATH_PLACE_ORDER_BUTTON = "//button[@id='placeOrder']";
@@ -23,5 +25,22 @@ public class OrderReviewPageElements {
 			"Packaging Instructions:");
 	public static final String XPATH_SHIPPING_INSTRUCTIONS = String.format(XPATH_SHIPPING_INFO_BASIC,
 			"Shipping Instructions:");
+	public static final String XPATH_NAME_PRODUCT_LINK = "//table[contains (@class, 'esab-ui-table-products')]"
+			+ "//a[text()='%s']";
+	public static final String XPATH_PRODUCT_TABLE_ROW_BY_PRODUCT_NAME = XPATH_NAME_PRODUCT_LINK
+			+ "//ancestor-or-self::tr";
+
+	// Used number of column because all of column is the same except the
+	// Product name
+	// td[3] - Qty
+	//In using need to use String format. 
+	//XPATH mask://table[contains (@class, 'esab-ui-table-products')]//a[text()='%s']//ancestor-or-self::tr//td[3]
+	//Example: String.format(XPATH_PRODUCT_QTY, "Some product name");
+	public static final String XPATH_PRODUCT_QTY = XPATH_PRODUCT_TABLE_ROW_BY_PRODUCT_NAME + "//td[3]";
+	// td[4] - Price
+	//Example: String.format(XPATH_PRODUCT_PRICE, "Some product name")
+	public static final String XPATH_PRODUCT_PRICE = XPATH_PRODUCT_TABLE_ROW_BY_PRODUCT_NAME + "//td[4]";
+	// td[5] - Total Price
+	public static final String XPATH_PRODUCT_TOTAL_PRICE = XPATH_PRODUCT_TABLE_ROW_BY_PRODUCT_NAME + "//td[5]";
 
 }

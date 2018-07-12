@@ -76,4 +76,14 @@ public class OrderReviewPageStepDefs extends AbstractStepDefs {
 	public void verifyShippingInstructions(){
 		orderReviewPage.verifyShippingInstructions();
 	}
+	
+	@And ("^Verify Product Names on Oerder Review page.$")
+	public void verifyProductNames(){
+		orderReviewPage.verifyListOfProducts();
+	}
+	
+	@And ("^Verify Prices on Order Review page.$")
+	public void verifyPrices(){
+		orderReviewPage.verActualPrices();
+	}
 }

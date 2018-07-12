@@ -89,7 +89,6 @@ public abstract class BasePageObject {
 			@Override
 			public Boolean apply(WebDriver driver) {
 				try {
-
 					boolean isJQueryLoaded = ((Long) ((JavascriptExecutor) getDriver())
 							.executeScript("return jQuery.active")) == 0;
 					logger.info("isJQueryLoaded value: " + isJQueryLoaded);
@@ -212,9 +211,10 @@ public abstract class BasePageObject {
 	}
 
 	protected void click(String xpath, String... args) {
+		waitJSExecution();
 		WebElement webElement = getWebElement(xpath, args);
 		setImplicitWaitShort();
-		waitJSExecution();
+		
 		try {
 			logger.info("Click on web element" + webElement);
 			webElement.click();

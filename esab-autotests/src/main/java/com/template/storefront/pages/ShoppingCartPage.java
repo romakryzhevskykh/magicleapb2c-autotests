@@ -38,7 +38,7 @@ public class ShoppingCartPage extends StorefrontBasePage {
 	public String getPageUrl() {
 		String shoppingCartPageURL = storefrontProject.getBaseUrl() + pageUrlMethod;
 		logger.info("Shopping Cart URL: " + shoppingCartPageURL);
-		if (products.isEmpty()) {
+		if (products.isEmpty()){
 			products = productController.getListOfProducts();
 		}
 		return shoppingCartPageURL;
@@ -143,6 +143,7 @@ public class ShoppingCartPage extends StorefrontBasePage {
 		List<String> scus = new ArrayList<String>();
 		String productQty = null;
 		String productScu = null;
+		
 		if (products != null) {
 			for (ProductModel product : products) {
 				productQty = product.getQty();
@@ -240,6 +241,7 @@ public class ShoppingCartPage extends StorefrontBasePage {
 	@Step("Verify Total price of Product in the list")
 	public void verifyTotalPriceInList() {
 		waitJSExecution();
+		
 		if (products != null) {
 			for (ProductModel product : products) {
 				String productScu = product.getScu();
@@ -277,7 +279,6 @@ public class ShoppingCartPage extends StorefrontBasePage {
 	@Step("Verify subtotal")
 	public void verifySubtotal() {
 		float expectedSubtotal = 0;
-		// List<ProductModel> products = productController.getListOfProducts();
 		waitJSExecution();
 		String actualSubTotalRaw = getWebElement(SUBTOTAL_XPATH).getText().trim();
 		logger.info("Subtotal price = " + actualSubTotalRaw);
@@ -322,7 +323,6 @@ public class ShoppingCartPage extends StorefrontBasePage {
 	}
 
 	private void addProductPriceMapping() {
-		waitJSExecution();
 		if (products != null) {
 			for (ProductModel product : products) {
 				String productScu = product.getScu();
@@ -345,7 +345,6 @@ public class ShoppingCartPage extends StorefrontBasePage {
 	}
 
 	private void addProductNameTotalPriceMapping() {
-		waitJSExecution();
 		if (products != null) {
 			for (ProductModel product : products) {
 				String productScu = product.getScu();
@@ -368,7 +367,7 @@ public class ShoppingCartPage extends StorefrontBasePage {
 	}
 
 	private void saveSubtotalValue() {
-		waitJSExecution();
+		
 		String actualSubTotalRaw = getWebElement(SUBTOTAL_XPATH).getText().trim();
 		logger.info("Subtotal price = " + actualSubTotalRaw);
 		String actualSubtotal = getPriceWithoutDollarChar(actualSubTotalRaw);
@@ -378,6 +377,7 @@ public class ShoppingCartPage extends StorefrontBasePage {
 	}
 
 	public void savePricesTotalPricesAndSubtotal() {
+		waitJSExecution();
 		saveSubtotalValue();
 		addProductNameTotalPriceMapping();
 		addProductPriceMapping();
