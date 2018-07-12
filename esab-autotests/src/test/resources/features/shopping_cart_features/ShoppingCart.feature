@@ -35,7 +35,7 @@ Scenario: Check Shopping Cart Layout
 	And Verify Check Out button label.
 	And Click on Check Out button.
 	#And Click on Save shopping cart button. 
-	#And Remove all products. 
+	And Remove all products by SCU on Shopping Cart. 
 	#And Verify SKU Inputs count on Shopping Cart is: "2" . 
 	
 	

@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
+import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 
 import com.template.helpers.ProductPricesHelper;
@@ -38,7 +40,7 @@ public class ShoppingCartPage extends StorefrontBasePage {
 	public String getPageUrl() {
 		String shoppingCartPageURL = storefrontProject.getBaseUrl() + pageUrlMethod;
 		logger.info("Shopping Cart URL: " + shoppingCartPageURL);
-		if (products.isEmpty()){
+		if (products.isEmpty()) {
 			products = productController.getListOfProducts();
 		}
 		return shoppingCartPageURL;
@@ -143,7 +145,7 @@ public class ShoppingCartPage extends StorefrontBasePage {
 		List<String> scus = new ArrayList<String>();
 		String productQty = null;
 		String productScu = null;
-		
+
 		if (products != null) {
 			for (ProductModel product : products) {
 				productQty = product.getQty();
@@ -217,14 +219,21 @@ public class ShoppingCartPage extends StorefrontBasePage {
 	}
 
 	private String getPriceWithoutDollarChar(String sourceString) {
-		String resultString = null;
-		if ((sourceString != null) && (sourceString.length() > 0)) {
-			resultString = (String) sourceString.subSequence(1, sourceString.length());
-			logger.info("String without dollar char is: " + resultString);
+		/*
+		 * String resultString = null; if ((sourceString != null) &&
+		 * (sourceString.length() > 0)) { resultString = (String)
+		 * sourceString.subSequence(1, sourceString.length());
+		 * logger.info("String without dollar char is: " + resultString); } else
+		 * { logger.error("Source string equals 0 or null. Source string = " +
+		 * sourceString); }
+		 */
+		if ((sourceString != null) && (sourceString.length() > 0) && (sourceString.contains("$"))) {
+			sourceString = sourceString.replace("$", "");
+			logger.info("String without dollar char is: " + sourceString);
 		} else {
 			logger.error("Source string equals 0 or null. Source string = " + sourceString);
 		}
-		return resultString;
+		return sourceString;
 	}
 
 	private void calculateAndCompareTotlaPrice(float actualQty, float actualPrice, float actualTotalPrice) {
@@ -241,7 +250,7 @@ public class ShoppingCartPage extends StorefrontBasePage {
 	@Step("Verify Total price of Product in the list")
 	public void verifyTotalPriceInList() {
 		waitJSExecution();
-		
+
 		if (products != null) {
 			for (ProductModel product : products) {
 				String productScu = product.getScu();
@@ -264,7 +273,7 @@ public class ShoppingCartPage extends StorefrontBasePage {
 	}
 
 	@Step("Remove all products by scu")
-	public void clickOnRemoveProduct() {
+	public void clickOnRemoveProductByScu() {
 		waitJSExecution();
 		if (products != null) {
 			for (ProductModel product : products) {
@@ -275,6 +284,22 @@ public class ShoppingCartPage extends StorefrontBasePage {
 			}
 		}
 	}
+	// TODO Need to be fixed
+	/*
+	 * @Step("Remove all Products") public void clickOnRemoveProduct() {
+	 * waitJSExecution(); List<WebElement> productDetailsButtons =
+	 * getWebElements(REMOVE_BUTTONS_ALL_XPATH);
+	 * 
+	 * if (!productDetailsButtons.isEmpty()) { for (int i = 0; i <=
+	 * productDetailsButtons.size(); i++) {
+	 * productDetailsButtons.get(i).click(); List<WebElement> removeButtons =
+	 * getWebElements(REMOVE_BUTTONS_ALL_XPATH); try {
+	 * TimeUnit.SECONDS.sleep(1); } catch (InterruptedException e) {
+	 * logger.error("Time Unit SLEEP method error!!!!"); } if
+	 * (!removeButtons.isEmpty()) { removeButtons.get(i).click(); } } }
+	 * 
+	 * }
+	 */
 
 	@Step("Verify subtotal")
 	public void verifySubtotal() {
@@ -367,7 +392,7 @@ public class ShoppingCartPage extends StorefrontBasePage {
 	}
 
 	private void saveSubtotalValue() {
-		
+
 		String actualSubTotalRaw = getWebElement(SUBTOTAL_XPATH).getText().trim();
 		logger.info("Subtotal price = " + actualSubTotalRaw);
 		String actualSubtotal = getPriceWithoutDollarChar(actualSubTotalRaw);

@@ -42,5 +42,9 @@ public class OrderReviewPageElements {
 	public static final String XPATH_PRODUCT_PRICE = XPATH_PRODUCT_TABLE_ROW_BY_PRODUCT_NAME + "//td[4]";
 	// td[5] - Total Price
 	public static final String XPATH_PRODUCT_TOTAL_PRICE = XPATH_PRODUCT_TABLE_ROW_BY_PRODUCT_NAME + "//td[5]";
+	//dd[1] is Subtotal, dd[2] is Tax. 
+	//There is no other way to locate element because there is 4 non unique elements on one level
+	public static final String XPATH_SUBTOTAL = "//dt[text()='Subtotal']//parent::dl/dd[1]";
+	public static final String XPATH_TAX = "//dt[text()='Subtotal']//parent::dl/dd[2]";
 
 }

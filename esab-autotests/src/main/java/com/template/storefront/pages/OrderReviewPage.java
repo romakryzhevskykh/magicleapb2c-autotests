@@ -146,14 +146,21 @@ public class OrderReviewPage extends StorefrontBasePage {
 	}
 
 	private String getPriceWithoutDollarChar(String sourceString) {
-		String resultString = null;
-		if ((sourceString != null) && (sourceString.length() > 0)) {
-			resultString = (String) sourceString.subSequence(1, sourceString.length());
-			logger.info("String without dollar char is: " + resultString);
+		/*
+		 * String resultString = null; if ((sourceString != null) &&
+		 * (sourceString.length() > 0)) { resultString = (String)
+		 * sourceString.subSequence(1, sourceString.length());
+		 * logger.info("String without dollar char is: " + resultString); } else
+		 * { logger.error("Source string equals 0 or null. Source string = " +
+		 * sourceString); } return resultString;
+		 */
+		if ((sourceString != null) && (sourceString.length() > 0) && (sourceString.contains("$"))) {
+			sourceString = sourceString.replace("$", "");
+			logger.info("String without dollar char is: " + sourceString);
 		} else {
 			logger.error("Source string equals 0 or null. Source string = " + sourceString);
 		}
-		return resultString;
+		return sourceString;
 	}
 
 	private float getPrice(String xpath) {
@@ -180,8 +187,35 @@ public class OrderReviewPage extends StorefrontBasePage {
 	}
 
 	@Step("Verify prices")
-	public void verActualPrices() {
+	public void verifyActualPrices() {
 		verifyPrices(productPriceHelper.getProductWithPrices(), XPATH_PRODUCT_PRICE);
+	}
+
+	@Step("Verify Total prices")
+	public void verifyActualTotalPrices() {
+		verifyPrices(productPriceHelper.getProductWithTotalPrices(), XPATH_PRODUCT_TOTAL_PRICE);
+	}
+
+	@Step("Verify Subtotal price")
+	public void verifySubtotal() {
+		float actualSubtotal = getPrice(XPATH_SUBTOTAL);
+		float expectedSubtotal = productPriceHelper.getSubtotal();
+		assertEquals(actualSubtotal, expectedSubtotal,
+				"Actual subtotal price: " + actualSubtotal + " is not equal to expected subtotal: " + expectedSubtotal);
+		logger.info("Actual subtotal price: " + actualSubtotal + " equals to expected subtotal: " + expectedSubtotal);
+	}
+
+	@Step("Verify Qty")
+	public void verifyQtyOrderReview() {
+		for (ProductModel product : products) {
+			String actualQtyRaw = getWebElement(String.format(XPATH_PRODUCT_QTY, product.getProductName())).getText()
+					.trim();
+			float actualQtyFloat = castStringToFloat(actualQtyRaw);
+			float expectedQty = castStringToFloat(product.getQty());
+			assertEquals(actualQtyFloat, expectedQty,
+					"Actual Qty: " + actualQtyFloat + " is not equal to expected Qty: " + expectedQty);
+			logger.info("Actual Qty: " + actualQtyFloat + " equals to expected Qty: " + expectedQty);
+		}
 	}
 
 }

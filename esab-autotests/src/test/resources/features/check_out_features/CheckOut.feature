@@ -14,7 +14,7 @@ Scenario:
 	Then Verify current page is Shopping Cart page. 
 	And Verify Ship-To address value on Shopping Cart. 
 	And Select Ship To address on Shopping Cart.
-	#And Remove all products. 
+	#And Remove all products on Shopping Cart.
 	Then Fill in SCU and Qty from Product Model. 
 	And Click on Add these products to shopping cart button. 
 	And Save Product Price, Product Total Price, Products Subtotal of Products on Shopping Cart page.
@@ -63,7 +63,10 @@ Scenario:
 	And Verify Packaging Instrictions on Order Review page.
 	And Verify Shipping Instructions on Order Review page.
 	And Verify Product Names on Oerder Review page.
+	And Verify Product Qty on Order Review page.
 	And Verify Prices on Order Review page.
+	And Verify Total Prices on Order Review page.
+	And Verify Subtotal on Order Review page.
 	And Verify Place Order button is Disabled on Order Review page. 
 	And Click on confirmation Checkbox on Order review page. 
 	And Click on Place Order button on Order Review page.
