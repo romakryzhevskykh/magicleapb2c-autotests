@@ -136,24 +136,28 @@ public abstract class BasePageObject {
 		logger.info("Locate Web elements if such present");
 		setImplicitWaitShort();
 		List<WebElement> elements = new ArrayList<WebElement>();
-		elements = initWebDriverWait()
-				.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(String.format(xpath, args))));
-		if (elements.size() > 0) {
-			for (WebElement loopElement : elements) {
-				logger.info("Verify WebElement is Displayed and Enabled");
-				if (loopElement.isDisplayed() && loopElement.isEnabled()) {
-					logger.info(loopElement);
-					logger.info("WebElement is Displayed and Enabled");
-				} else {
-					logger.error("Web element is not Displayed or Enabled");
-					setDefaultImplicitWait();
-					return null;
+		try {
+			elements = initWebDriverWait()
+					.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(String.format(xpath, args))));
+			if (elements.size() > 0) {
+				for (WebElement loopElement : elements) {
+					if (loopElement.isDisplayed() && loopElement.isEnabled()) {
+						logger.info(loopElement);
+						logger.info("WebElement is Displayed and Enabled");
+					} else {
+						logger.error("Web element is not Displayed or Enabled");
+						setDefaultImplicitWait();
+						return null;
+					}
 				}
+				setDefaultImplicitWait();
+				return elements;
 			}
+		} catch (TimeoutException e) {
+			logger.error("Find elements failed by timeout");
 			setDefaultImplicitWait();
-			return elements;
+			return null;
 		}
-		setDefaultImplicitWait();
 		return null;
 	}
 
@@ -211,10 +215,10 @@ public abstract class BasePageObject {
 	}
 
 	protected void click(String xpath, String... args) {
-		waitJSExecution();
+
 		WebElement webElement = getWebElement(xpath, args);
 		setImplicitWaitShort();
-		
+		waitJSExecution();
 		try {
 			logger.info("Click on web element" + webElement);
 			webElement.click();
@@ -281,7 +285,7 @@ public abstract class BasePageObject {
 		WebElement element = getWebElement(xpath);
 		logger.info("Web element: " + element);
 		String elementText = "";
-		
+
 		if (element != null) {
 			elementText = element.getText();
 			logger.info("Web element text value is: " + elementText);
@@ -355,7 +359,7 @@ public abstract class BasePageObject {
 		logger.info("Invoke cast String to Float method");
 		float resultFloatValue = 0;
 		if ((sourceString != null) && (sourceString.length() > 0)) {
-			if(sourceString.contains(",")){
+			if (sourceString.contains(",")) {
 				sourceString = sourceString.replace(",", "");
 			}
 			resultFloatValue = Float.valueOf(sourceString);

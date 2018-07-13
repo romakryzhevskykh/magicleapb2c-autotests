@@ -46,5 +46,6 @@ public class OrderReviewPageElements {
 	//There is no other way to locate element because there is 4 non unique elements on one level
 	public static final String XPATH_SUBTOTAL = "//dt[text()='Subtotal']//parent::dl/dd[1]";
 	public static final String XPATH_TAX = "//dt[text()='Subtotal']//parent::dl/dd[2]";
+	public static final String XPATH_ORDER_TOTAL = "//div[contains(@class, 'product-box-total')]//span";
 
 }

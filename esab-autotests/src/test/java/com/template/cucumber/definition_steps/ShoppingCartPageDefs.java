@@ -152,9 +152,9 @@ public class ShoppingCartPageDefs extends AbstractStepDefs {
 	public void testGetMap(){
 		shoppingCartPage.savePricesTotalPricesAndSubtotal();
 	}
-	//TODO need to be fixed
-	/*@And("^Remove all products on Shopping Cart.$")
+
+	@And("^Remove all products on Shopping Cart.$")
 	public void removeAllProducts(){
-		shoppingCartPage.clickOnRemoveProduct();
-	}*/
+		shoppingCartPage.removeAllProducts();
+	}
 }

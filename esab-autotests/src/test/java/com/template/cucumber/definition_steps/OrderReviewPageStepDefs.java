@@ -101,4 +101,9 @@ public class OrderReviewPageStepDefs extends AbstractStepDefs {
 	public void verifyQtyOrderReviewPage(){
 		orderReviewPage.verifyQtyOrderReview();
 	}
+	
+	@And ("^Verify Order Total on Order Review page.$")
+	public void verifyOrderTotalPrice(){
+		orderReviewPage.verifyOrderTotal();
+	}
 }

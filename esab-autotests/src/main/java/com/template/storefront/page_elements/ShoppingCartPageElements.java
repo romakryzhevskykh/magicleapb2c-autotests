@@ -38,6 +38,7 @@ public class ShoppingCartPageElements {
 			+ "//div[@class='col-xs-6 cart-totals-right text-right']";
 	public static final String SAVE_CART_BUTTON_XPATH = "//button[@class='btn btn-default save__cart--link cart__head--link js-save-cart-link']";
 	public static final String CHECKOUT_BUTTON_XPATH = "//button[@class='btn btn-primary btn--continue-checkout js-continue-checkout-button']";
-	public static final String REMOVE_BUTTONS_ALL_XPATH = "//li[@class='js-execute-entry-action-button' and @data-entry-action='REMOVE']";
-	public static final String DETAILS_BUTTONS_ALL_XPATH = "//div[@class='btn-group js-cartItemDetailGroup']";
+	//public static final String REMOVE_BUTTONS_ALL_XPATH = "//li[@class='js-execute-entry-action-button' and @data-entry-action='REMOVE']";
+	//public static final String DETAILS_BUTTONS_ALL_XPATH = "//div[@class='btn-group js-cartItemDetailGroup']";
+	public static final String TOTAL_COUNT_OF_PRODUCTS = "//div[@class='item__code']";
 }

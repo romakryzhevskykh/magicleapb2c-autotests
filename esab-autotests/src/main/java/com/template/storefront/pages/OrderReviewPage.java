@@ -198,11 +198,14 @@ public class OrderReviewPage extends StorefrontBasePage {
 
 	@Step("Verify Subtotal price")
 	public void verifySubtotal() {
-		float actualSubtotal = getPrice(XPATH_SUBTOTAL);
-		float expectedSubtotal = productPriceHelper.getSubtotal();
-		assertEquals(actualSubtotal, expectedSubtotal,
-				"Actual subtotal price: " + actualSubtotal + " is not equal to expected subtotal: " + expectedSubtotal);
-		logger.info("Actual subtotal price: " + actualSubtotal + " equals to expected subtotal: " + expectedSubtotal);
+		logger.info("Subtotal price verification");
+		verifySubtotalOrderTotal(XPATH_SUBTOTAL);
+	}
+	
+	@Step ("Verify Order Total")
+	public void verifyOrderTotal(){
+		logger.info("Order Total price verification");
+		verifySubtotalOrderTotal(XPATH_ORDER_TOTAL);
 	}
 
 	@Step("Verify Qty")
@@ -216,6 +219,15 @@ public class OrderReviewPage extends StorefrontBasePage {
 					"Actual Qty: " + actualQtyFloat + " is not equal to expected Qty: " + expectedQty);
 			logger.info("Actual Qty: " + actualQtyFloat + " equals to expected Qty: " + expectedQty);
 		}
+	}
+	
+	@Step ("Verify Order Total")
+	private void verifySubtotalOrderTotal(String xpath){
+		float actualPrice = getPrice(xpath);
+		float expectedPrice = productPriceHelper.getSubtotal();
+		assertEquals(actualPrice, expectedPrice,
+				"Actual Subtotal/Order Total price: " + actualPrice + " is not equal to expected subtotal/Order total: " + expectedPrice);
+		logger.info("Actual Subtotal/Order Total price: " + actualPrice + " equals to expected Subtotal/Order Total: " + expectedPrice);
 	}
 
 }

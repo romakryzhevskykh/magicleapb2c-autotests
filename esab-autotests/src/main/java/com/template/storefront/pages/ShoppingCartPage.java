@@ -145,7 +145,7 @@ public class ShoppingCartPage extends StorefrontBasePage {
 		List<String> scus = new ArrayList<String>();
 		String productQty = null;
 		String productScu = null;
-
+		waitJSExecution();
 		if (products != null) {
 			for (ProductModel product : products) {
 				productQty = product.getQty();
@@ -284,22 +284,28 @@ public class ShoppingCartPage extends StorefrontBasePage {
 			}
 		}
 	}
-	// TODO Need to be fixed
-	/*
-	 * @Step("Remove all Products") public void clickOnRemoveProduct() {
-	 * waitJSExecution(); List<WebElement> productDetailsButtons =
-	 * getWebElements(REMOVE_BUTTONS_ALL_XPATH);
-	 * 
-	 * if (!productDetailsButtons.isEmpty()) { for (int i = 0; i <=
-	 * productDetailsButtons.size(); i++) {
-	 * productDetailsButtons.get(i).click(); List<WebElement> removeButtons =
-	 * getWebElements(REMOVE_BUTTONS_ALL_XPATH); try {
-	 * TimeUnit.SECONDS.sleep(1); } catch (InterruptedException e) {
-	 * logger.error("Time Unit SLEEP method error!!!!"); } if
-	 * (!removeButtons.isEmpty()) { removeButtons.get(i).click(); } } }
-	 * 
-	 * }
-	 */
+
+	@Step("Remove all Products")
+	public void removeAllProducts() {
+		waitJSExecution();
+		List<WebElement> elements = getWebElements(TOTAL_COUNT_OF_PRODUCTS);
+		List<String> elValues = new ArrayList<String>();
+		if (elements != null) {
+			for (WebElement element : elements) {
+				String elementValue = element.getText().trim();
+				elValues.add(elementValue);
+			}
+			if (!elValues.isEmpty()) {
+				for (String elValue : elValues) {
+					logger.info("Web element SCU to be removed: " + elValue);
+					click(String.format(PRODUCT_DETAILS_BUTTON_XPATH, elValue));
+					click(String.format(PRODUCT_REMOVE_BUTTON_XPATH, elValue));
+				}
+			}
+		}else{
+			logger.info("There is no Products to delete");
+		}
+	}
 
 	@Step("Verify subtotal")
 	public void verifySubtotal() {
