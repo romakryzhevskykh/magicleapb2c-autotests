@@ -136,28 +136,24 @@ public abstract class BasePageObject {
 		logger.info("Locate Web elements if such present");
 		setImplicitWaitShort();
 		List<WebElement> elements = new ArrayList<WebElement>();
-		try {
-			elements = initWebDriverWait()
-					.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(String.format(xpath, args))));
-			if (elements.size() > 0) {
-				for (WebElement loopElement : elements) {
-					if (loopElement.isDisplayed() && loopElement.isEnabled()) {
-						logger.info(loopElement);
-						logger.info("WebElement is Displayed and Enabled");
-					} else {
-						logger.error("Web element is not Displayed or Enabled");
-						setDefaultImplicitWait();
-						return null;
-					}
+		elements = initWebDriverWait()
+				.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(String.format(xpath, args))));
+		if (elements.size() > 0) {
+			for (WebElement loopElement : elements) {
+				logger.info("Verify WebElement is Displayed and Enabled");
+				if (loopElement.isDisplayed() && loopElement.isEnabled()) {
+					logger.info(loopElement);
+					logger.info("WebElement is Displayed and Enabled");
+				} else {
+					logger.error("Web element is not Displayed or Enabled");
+					setDefaultImplicitWait();
+					return null;
 				}
-				setDefaultImplicitWait();
-				return elements;
 			}
-		} catch (TimeoutException e) {
-			logger.error("Find elements failed by timeout");
 			setDefaultImplicitWait();
-			return null;
+			return elements;
 		}
+		setDefaultImplicitWait();
 		return null;
 	}
 

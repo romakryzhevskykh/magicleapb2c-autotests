@@ -288,22 +288,31 @@ public class ShoppingCartPage extends StorefrontBasePage {
 	@Step("Remove all Products")
 	public void removeAllProducts() {
 		waitJSExecution();
-		List<WebElement> elements = getWebElements(TOTAL_COUNT_OF_PRODUCTS);
-		List<String> elValues = new ArrayList<String>();
-		if (elements != null) {
-			for (WebElement element : elements) {
-				String elementValue = element.getText().trim();
-				elValues.add(elementValue);
-			}
-			if (!elValues.isEmpty()) {
-				for (String elValue : elValues) {
-					logger.info("Web element SCU to be removed: " + elValue);
-					click(String.format(PRODUCT_DETAILS_BUTTON_XPATH, elValue));
-					click(String.format(PRODUCT_REMOVE_BUTTON_XPATH, elValue));
+		WebElement productQtyElement = getWebElement(PRODUCTS_QTY_FROM_CART_ICON);
+		String productQtyNumber = productQtyElement.getText().trim();
+		logger.info("Prduct Qty according to Cart Icon in the header: " + productQtyNumber);
+		if (!productQtyNumber.equals("0")) {
+			List<WebElement> elements = getWebElements(TOTAL_COUNT_OF_PRODUCTS);
+			List<String> elValues = new ArrayList<String>();
+			if (elements != null) {
+				for (WebElement element : elements) {
+					String elementValue = element.getText().trim();
+					elValues.add(elementValue);
 				}
+				if (!elValues.isEmpty()) {
+					for (String elValue : elValues) {
+						logger.info("Web element SCU to be removed: " + elValue);
+						click(String.format(PRODUCT_DETAILS_BUTTON_XPATH, elValue));
+						click(String.format(PRODUCT_REMOVE_BUTTON_XPATH, elValue));
+					}
+				}else{
+					logger.info("Products SCU list is not allocated");
+				}
+			}else{
+				logger.error("List of elements is null");
 			}
-		}else{
-			logger.info("There is no Products to delete");
+		} else {
+			logger.info("There is no Products in the cart");
 		}
 	}
 
