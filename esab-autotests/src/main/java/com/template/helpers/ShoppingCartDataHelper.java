@@ -9,13 +9,14 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProductPricesHelper {
+public class ShoppingCartDataHelper {
 	private float subtotal;
-	final static Logger logger = Logger.getLogger(ProductPricesHelper.class);
+	final static Logger logger = Logger.getLogger(ShoppingCartDataHelper.class);
 	private Map<String, Float> productWithPrices = new HashMap<String, Float>();
 	private Map<String, Float> productWithTotalPrices = new HashMap<String, Float>();
+	private String shoppingCartID = "";
 
-	public ProductPricesHelper() {
+	public ShoppingCartDataHelper() {
 	}
 
 	public float getSubtotal() {
@@ -30,8 +31,16 @@ public class ProductPricesHelper {
 		return productWithPrices;
 	}
 
+	public String getShoppingCartID() {
+		return shoppingCartID;
+	}
+
 	public void setSubtotal(float subtotal) {
 		this.subtotal = subtotal;
+	}
+
+	public void setShoppingCartID(String shoppingCartID) {
+		this.shoppingCartID = shoppingCartID;
 	}
 
 	public void addProductNamePriceToMap(String name, float price) {

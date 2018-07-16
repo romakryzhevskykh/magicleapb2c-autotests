@@ -12,13 +12,12 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 
-import com.template.helpers.ProductPricesHelper;
+import com.template.helpers.ShoppingCartDataHelper;
 import com.template.storefront.models.CheckoutDataModel;
 import com.template.storefront.models.ProductModel;
 
 import ru.yandex.qatools.allure.annotations.Step;
 import static com.template.storefront.page_elements.OrderReviewPageElements.*;
-import static com.template.storefront.page_elements.ShoppingCartPageElements.PRODUCT_PRICE_XPATH;
 
 @Component
 public class OrderReviewPage extends StorefrontBasePage {
@@ -27,11 +26,15 @@ public class OrderReviewPage extends StorefrontBasePage {
 	private String pageUrlMethod = "/esab/en/checkout/multi/summary/view";
 	private CheckoutDataModel checkoutDataModel;
 	private String orderReviewPageHeader = "Order Review";
-	List<ProductModel> products = new ArrayList<>();
+	private List<ProductModel> products = new ArrayList<>();
 
 	@Override
 	public String getPageUrl() {
-		String orderReviewPageURL = storefrontProject.getBaseUrl() + pageUrlMethod;
+		return getPageUrl(pageUrlMethod);
+	}
+	
+	public String getPageUrl(String pageMethod){
+		String pageURL = storefrontProject.getBaseUrl() + pageMethod;
 		if (checkoutDataModel == null) {
 			initCheckoutDataModel();
 		}
@@ -39,10 +42,10 @@ public class OrderReviewPage extends StorefrontBasePage {
 		if (products.isEmpty()) {
 			products = productController.getListOfProducts();
 		}
-		logger.info("Order Review Page URL: " + orderReviewPageURL);
-		return orderReviewPageURL;
+		logger.info("Order Review Page URL: " + pageURL);
+		return pageURL;
 	}
-
+	
 	private void initCheckoutDataModel() {
 		checkoutDataModel = checkoutDataController.getCheckoutDataModel();
 	}
@@ -188,12 +191,12 @@ public class OrderReviewPage extends StorefrontBasePage {
 
 	@Step("Verify prices")
 	public void verifyActualPrices() {
-		verifyPrices(productPriceHelper.getProductWithPrices(), XPATH_PRODUCT_PRICE);
+		verifyPrices(shoppingCartDataHelper.getProductWithPrices(), XPATH_PRODUCT_PRICE);
 	}
 
 	@Step("Verify Total prices")
 	public void verifyActualTotalPrices() {
-		verifyPrices(productPriceHelper.getProductWithTotalPrices(), XPATH_PRODUCT_TOTAL_PRICE);
+		verifyPrices(shoppingCartDataHelper.getProductWithTotalPrices(), XPATH_PRODUCT_TOTAL_PRICE);
 	}
 
 	@Step("Verify Subtotal price")
@@ -224,7 +227,7 @@ public class OrderReviewPage extends StorefrontBasePage {
 	@Step ("Verify Order Total")
 	private void verifySubtotalOrderTotal(String xpath){
 		float actualPrice = getPrice(xpath);
-		float expectedPrice = productPriceHelper.getSubtotal();
+		float expectedPrice = shoppingCartDataHelper.getSubtotal();
 		assertEquals(actualPrice, expectedPrice,
 				"Actual Subtotal/Order Total price: " + actualPrice + " is not equal to expected subtotal/Order total: " + expectedPrice);
 		logger.info("Actual Subtotal/Order Total price: " + actualPrice + " equals to expected Subtotal/Order Total: " + expectedPrice);

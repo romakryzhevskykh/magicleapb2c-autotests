@@ -1,7 +1,5 @@
 package com.template.storefront.page_elements;
 
-import org.omg.CORBA.PUBLIC_MEMBER;
-
 public class OrderReviewPageElements {
 	public static final String XPATH_CONFIRAMTION_CHECKBOX = "//form[@id='placeOrderForm1']//label";
 	public static final String XPATH_PLACE_ORDER_BUTTON = "//button[@id='placeOrder']";

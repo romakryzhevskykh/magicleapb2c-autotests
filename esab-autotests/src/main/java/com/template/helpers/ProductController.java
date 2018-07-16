@@ -18,7 +18,7 @@ public class ProductController {
 	private ProductModelBuilder productModelBuilder;
 	final static Logger logger = Logger.getLogger(RegisterPage.class);
 	private List<ProductModel> listOfProducts = new ArrayList<ProductModel>();
-	private ProductPricesHelper prodHelper;
+	private ShoppingCartDataHelper prodHelper;
 
 	public ProductController() {
 	}

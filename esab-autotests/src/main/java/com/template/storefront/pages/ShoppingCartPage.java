@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 
-import com.template.helpers.ProductPricesHelper;
+import com.template.helpers.ShoppingCartDataHelper;
 import com.template.storefront.models.CheckoutDataModel;
 import com.template.storefront.models.ProductModel;
 
@@ -194,11 +194,12 @@ public class ShoppingCartPage extends StorefrontBasePage {
 		}
 	}
 
-	public void getShoppingCartID() {
+	public void saveShoppingCartID() {
 		String actualHeader1 = getShoppingCartHeaderValue(H2_SHOPPING_CART_TITLE);
 		int indexOfDelimeter = actualHeader1.indexOf(':');
 		String shoppingCartID = (String) actualHeader1.subSequence(indexOfDelimeter + 1, actualHeader1.length());
 		logger.info("Shopping Cart ID is: " + shoppingCartID);
+		shoppingCartDataHelper.setShoppingCartID(shoppingCartID);
 	}
 
 	@Step("Verify price by SCU")
@@ -372,9 +373,9 @@ public class ShoppingCartPage extends StorefrontBasePage {
 						.trim();
 				String actualPrice = getPriceWithoutDollarChar(actualPriceRaw);
 				float actualPriceNumber = castStringToFloat(actualPrice);
-				productPriceHelper.addProductNamePriceToMap(productNameByScu, actualPriceNumber);
+				shoppingCartDataHelper.addProductNamePriceToMap(productNameByScu, actualPriceNumber);
 			}
-			Map<String, Float> productWithPrices = productPriceHelper.getProductWithPrices();
+			Map<String, Float> productWithPrices = shoppingCartDataHelper.getProductWithPrices();
 			logger.info("Values in product Map: " + productWithPrices);
 			for (int i = 0; i < productWithPrices.size(); i++) {
 				logger.info("Saved Prices: Product name: " + products.get(i).getProductName() + " Price: "
@@ -395,9 +396,9 @@ public class ShoppingCartPage extends StorefrontBasePage {
 				logger.info("Raw total price = " + actualTotalPriceRaw);
 				String actualTotalPrice = getPriceWithoutDollarChar(actualTotalPriceRaw);
 				float totalPriceNumber = castStringToFloat(actualTotalPrice);
-				productPriceHelper.addProductNameTotalPriceToMap(productNameByScu, totalPriceNumber);
+				shoppingCartDataHelper.addProductNameTotalPriceToMap(productNameByScu, totalPriceNumber);
 			}
-			Map<String, Float> productWithPrices = productPriceHelper.getProductWithTotalPrices();
+			Map<String, Float> productWithPrices = shoppingCartDataHelper.getProductWithTotalPrices();
 			logger.info("Values in product Map: " + productWithPrices);
 			for (int i = 0; i < productWithPrices.size(); i++) {
 				logger.info("Saved Total Price: Product name: " + products.get(i).getProductName() + " Price: "
@@ -412,8 +413,8 @@ public class ShoppingCartPage extends StorefrontBasePage {
 		logger.info("Subtotal price = " + actualSubTotalRaw);
 		String actualSubtotal = getPriceWithoutDollarChar(actualSubTotalRaw);
 		float actualSubtotalNumber = castStringToFloat(actualSubtotal);
-		productPriceHelper.setSubtotal(actualSubtotalNumber);
-		logger.info("Saved Subtotal price = " + productPriceHelper.getSubtotal());
+		shoppingCartDataHelper.setSubtotal(actualSubtotalNumber);
+		logger.info("Saved Subtotal price = " + shoppingCartDataHelper.getSubtotal());
 	}
 
 	public void savePricesTotalPricesAndSubtotal() {
@@ -421,5 +422,6 @@ public class ShoppingCartPage extends StorefrontBasePage {
 		saveSubtotalValue();
 		addProductNameTotalPriceMapping();
 		addProductPriceMapping();
+		saveShoppingCartID();
 	}
 }

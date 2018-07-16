@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.template.helpers.user_engine.UserSessions;
 import com.template.storefront.pages.OrderReviewPage;
+import com.template.storefront.pages.OrderConfirmationPage;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -16,6 +17,8 @@ public class OrderReviewPageStepDefs extends AbstractStepDefs {
 	public UserSessions userSessions;
 	@Autowired
 	public OrderReviewPage orderReviewPage;
+	@Autowired 
+	public OrderConfirmationPage orderConfirmationPage;
 
 	@And("^Click on Place Order button on Order Review page.$")
 	public void clickOnPlaceOrderButton() {
@@ -105,5 +108,15 @@ public class OrderReviewPageStepDefs extends AbstractStepDefs {
 	@And ("^Verify Order Total on Order Review page.$")
 	public void verifyOrderTotalPrice(){
 		orderReviewPage.verifyOrderTotal();
+	}
+	
+	@And ("Verify OrderConfirmation page URL")
+	public void verifyOrderConfirmationPageURL(){
+		orderConfirmationPage.isCurrentPageOrderConfirmationPage();
+	}
+	
+	@And ("^Verify Ship To address on Order Confirmation page.$")
+	public void verifyShipToAddrOrderConfirmation(){
+		orderConfirmationPage.verifyAddresses();
 	}
 }

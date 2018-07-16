@@ -28,7 +28,7 @@ public class ShoppingCartPageDefs extends AbstractStepDefs {
 	@And("^Verify h2 header1 on Shopping cart.$")
 	public void verifyH2Header1() {
 		shoppingCartPage.verifyShoppingCartHeader1();
-		shoppingCartPage.getShoppingCartID();
+		shoppingCartPage.saveShoppingCartID();
 	}
 
 	@And("^Verify h2 header2 on Shopping cart.$")
