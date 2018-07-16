@@ -16,15 +16,19 @@ public class OrderConfirmationPage extends OrderReviewPage {
 	public OrderConfirmationPage() {
 		super();
 	}
-	
-	/*private void generateOrderIdAccordingToShoppingCartId(){
-		int intValueOfShoppingCart = Integer.valueOf(shoppingCartDataHelper.getShoppingCartID());
-		logger.info("Int value of ID: " + intValueOfShoppingCart);
-		int str1 = shoppingCartDataHelper.getShoppingCartID().lastIndexOf("0");		
-		Subst
-		//String str1 = shoppingCartDataHelper.getShoppingCartID().substring(beginIndex, endIndex)
-		
-	}*/
+
+	/*
+	 * private void generateOrderIdAccordingToShoppingCartId(){ int
+	 * intValueOfShoppingCart =
+	 * Integer.valueOf(shoppingCartDataHelper.getShoppingCartID());
+	 * logger.info("Int value of ID: " + intValueOfShoppingCart); int str1 =
+	 * shoppingCartDataHelper.getShoppingCartID().lastIndexOf("0"); Subst
+	 * //String str1 =
+	 * shoppingCartDataHelper.getShoppingCartID().substring(beginIndex,
+	 * endIndex)
+	 * 
+	 * }
+	 */
 
 	@Step("Verify is current page Order Confirmation page")
 	public void isCurrentPageOrderConfirmationPage() {
@@ -33,11 +37,70 @@ public class OrderConfirmationPage extends OrderReviewPage {
 		String expectedURL = getPageUrl(pageUrlMethod);
 		isCurrentUrlExpectedURL(expectedURL);
 	}
-	
+
 	@Step("Verify Get Sold Addr")
-	public void verifyAddresses(){
+	public void verifyAddresses() {
 		verifyShipToSoldToAddr();
 	}
+
+	@Step("Verify Purchase order number")
+	public void verifyPurchaseOrderNumberOrderConfirmation() {
+		verifyPurchaseOrderNumber();
+	}
+
+	@Step("Verify Account Number")
+	public void verifyAccNumberOrderConfirmation() {
+		verifyAccountNumber();
+	}
+
+	@Step("Verify Reqested Delivery Date")
+	public void verifyRequestedDeliveryOrderConfirmation() {
+		verifyRequestedDeliveryDate();
+	}
+
+	@Step("Verify Allow Partial Delivery")
+	public void verifyPartialDeliveryOrderConfirmation() {
+		verifyAllowPartialDelivery();
+	}
+
+	@Step("Verify Pakaging Instructions")
+	public void verifyPackagingInstructionsOrderConfirmation() {
+		verifyPackagingInstructions();
+	}
+
+	@Step("Verify Shipping Instructions")
+	public void verifyShippingInstructionsOrderConfirmation() {
+		verifyShippingInstructions();
+	}
+
+	@Step("Verify Product Names")
+	public void verifyProductNamesOrderConfirmation() {
+		verifyListOfProducts();
+	}
+
+	@Step("Verify Product Qty")
+	public void verifyProductQtyOrderConfirmation() {
+		verifyQtyOrderReview();
+	}
+
+	@Step("Verify Product prices")
+	public void verifyPricesOrderConfirmation() {
+		verifyActualPrices();
+	}
+
+	@Step("Verify Total Prices")
+	public void verifyTotalPricesOrderConfirmation() {
+		verifyActualTotalPrices();
+	}
+
+	@Step("Verify Subtotal")
+	public void verifySubtotalOrderConfirmation() {
+		verifySubtotal();
+	}
 	
+	@Step ("Verify Order Total")
+	public void verifyOrderTotalOrderConfirmation(){
+		verifyOrderTotal();
+	}
 
 }

@@ -119,4 +119,66 @@ public class OrderReviewPageStepDefs extends AbstractStepDefs {
 	public void verifyShipToAddrOrderConfirmation(){
 		orderConfirmationPage.verifyAddresses();
 	}
+	
+	@And ("^Verify Order Purchase number on Order Confirmation page.$")
+	public void verifyOrderPurchaseNumberOrderConfirmation(){
+		orderConfirmationPage.verifyPurchaseOrderNumberOrderConfirmation();
+	}
+	
+	@And ("^Verify Account Number on Order Confirmation page.$")
+	public void verifyAccNumberOrderConfirmation(){
+		orderConfirmationPage.verifyAccNumberOrderConfirmation();
+	}
+	
+	@And ("^Verify Requested Delivery Date on Order Confirmation page.$")
+	public void verifyRequestedDeliveryOrderConfirmation(){
+		orderConfirmationPage.verifyRequestedDeliveryOrderConfirmation();
+	}
+	
+	@And ("^Verify Allow Partial Delivery on Order Confirmation page.$")
+	public void verifyAllowPArtialDeliveryOrderConfirmation(){
+		orderConfirmationPage.verifyPartialDeliveryOrderConfirmation();;
+	}
+	
+	@And ("^Verify Packaging Instructions on Order Confirmation page.$")
+	public void verifyPackagingInstructionsOrderConfirmation(){
+		orderConfirmationPage.verifyPackagingInstructionsOrderConfirmation();
+	}
+	
+	@And ("^Verify Shipping Instructions on Order Confirmation page.$")
+	public void verifyShipInstructionOrderConfirmation(){
+		orderConfirmationPage.verifyShippingInstructionsOrderConfirmation();
+	}
+	
+	@And ("^Verify Product Names on Order Confirmation page.$")
+	public void verifyProdNameOrderConfirmation(){
+		orderConfirmationPage.verifyProductNamesOrderConfirmation();
+	}
+	
+	@And ("^Verify Product Qty on Order Confirmation page.$")
+	public void verifyProdQtyOrderConfirmation(){
+		orderConfirmationPage.verifyProductQtyOrderConfirmation();
+	}
+	
+	@And ("^Verify Product Prices on Order Confirmation page.$")
+	public void verifyProductPricesOrderConfirmation(){
+		orderConfirmationPage.verifyPricesOrderConfirmation();
+	}
+	
+	@And ("^Verify Product Total Prices on Order Confirmation page.$")
+	public void verifyProductTotalPricesOrderConfirmation(){
+		orderConfirmationPage.verifyTotalPricesOrderConfirmation();
+	}
+	
+	@And ("^Verify Product Subtotal on Order Confirmation page.$")
+	public void verifySubtotalOrderConfirmation(){
+		orderConfirmationPage.verifySubtotalOrderConfirmation();
+	}
+	
+	@And ("^Verify Order Total on Order Confirmation page.$")
+	public void verifyOrderTotalOrderConfirmation(){
+		orderConfirmationPage.verifyOrderTotalOrderConfirmation();
+	}
+	
+	
 }

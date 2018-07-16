@@ -72,4 +72,16 @@ Scenario:
 	And Click on confirmation Checkbox on Order review page. 
 	And Click on Place Order button on Order Review page.
 	And Verify OrderConfirmation page URL
+	And Verify Order Purchase number on Order Confirmation page.
 	And Verify Ship To address on Order Confirmation page.
+	And Verify Account Number on Order Confirmation page.
+	And Verify Requested Delivery Date on Order Confirmation page.
+	And Verify Allow Partial Delivery on Order Confirmation page.
+	And Verify Packaging Instructions on Order Confirmation page.
+	And Verify Shipping Instructions on Order Confirmation page.
+	And Verify Product Names on Order Confirmation page.
+	And Verify Product Qty on Order Confirmation page.
+	And Verify Product Prices on Order Confirmation page.
+	And Verify Product Total Prices on Order Confirmation page.
+	And Verify Product Subtotal on Order Confirmation page.
+	And Verify Order Total on Order Confirmation page.
