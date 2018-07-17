@@ -128,6 +128,25 @@ public class CheckoutPaymentMethodStepBlock extends UIComponent {
         click(CHANGE_BILLING_ADDRESS_CHECKBOX_XPATH);
     }
 
+    @Step("Click on BILLING ADDRESS IS THE SAME AS SHIPPING ADDRESS checkbox.")
+    public void clickOnUseTheSameBillingAddressCheckox() {
+        click(BILLING_ADDRESS_IS_THE_SAME_AS_SHIPPING_ADDRESS_CHECKBOX_XPATH);
+    }
+
+    @Step("Deselect BILLING ADDRESS IS THE SAME AS SHIPPING ADDRESS checkbox.")
+    public void deselectGuestBillingAddressCheckbox() {
+        if($(BILLING_ADDRESS_IS_THE_SAME_AS_SHIPPING_ADDRESS_CHECKBOX_XPATH).isSelected()) {
+            clickOnUseTheSameBillingAddressCheckox();
+        }
+    }
+
+    @Step("Select BILLING ADDRESS IS THE SAME AS SHIPPING ADDRESS checkbox.")
+    public void selectGuestBillingAddressCheckbox() {
+        if(!$(BILLING_ADDRESS_IS_THE_SAME_AS_SHIPPING_ADDRESS_CHECKBOX_XPATH).isSelected()) {
+            clickOnUseTheSameBillingAddressCheckox();
+        }
+    }
+
     @Step("Get any Billing address country from drop-down.")
     public String getAnyCountryFromBillingAddressCountiesDropDown() {
         return $$(ITEMS_IN_BILLING_ADDRESS_COUNTRY_DROP_DOWN_XPATH).stream().findAny().get().getAttribute("value");

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DSCSATransactionsPage extends StorefrontBasePage {
 
-    private String pageUrlMethod = "boundtree/en/USD/reports/dscsa";
+    private String pageUrlMethod = "reports/dscsa";
 
     @Override
     public String getPageUrl() {

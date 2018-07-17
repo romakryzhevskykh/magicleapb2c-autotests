@@ -23,9 +23,9 @@ import java.util.stream.Collectors;
 public class CartManager {
     @Autowired ProductsManager productsManager;
 
-    private POSTRequest REMOVE_ENTRY_FROM_CART = new POSTRequest("Remove entry from active cart", "/boundtree/en/USD/cart/entry/execute/REMOVE");
-    private GETRequest GET_CART_PAGE_SOURCE = new GETRequest("Get cart page source", "/boundtree/en/USD/cart");
-    private POSTRequest ADD_UOMS_TO_CART = new POSTRequest("Add UOMs to cart", "/cart/addIndividualList");
+    private POSTRequest REMOVE_ENTRY_FROM_CART = new POSTRequest("Remove entry from active cart", "cart/entry/execute/REMOVE");
+    private GETRequest GET_CART_PAGE_SOURCE = new GETRequest("Get cart page source", "cart");
+    private POSTRequest ADD_UOMS_TO_CART = new POSTRequest("Add UOMs to cart", "cart/addIndividualList");
 
     @Step("Empty active cart.")
     public void emptyActiveCart(UserSession userSession) {

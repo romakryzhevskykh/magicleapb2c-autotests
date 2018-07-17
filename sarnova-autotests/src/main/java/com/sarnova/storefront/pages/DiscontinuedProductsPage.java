@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DiscontinuedProductsPage extends StorefrontBasePage {
 
-    private String pageUrlMethod = "boundtree/en/USD/reports/replacement-products";
+    private String pageUrlMethod = "reports/replacement-products";
 
     @Override
     public String getPageUrl() {

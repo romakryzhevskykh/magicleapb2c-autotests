@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PharmaceuticalBackorderReportPage extends StorefrontBasePage {
 
-    private String pageUrlMethod = "boundtree/en/USD/pharmaceutical-backorder-report";
+    private String pageUrlMethod = "pharmaceutical-backorder-report";
 
     @Override
     public String getPageUrl() {

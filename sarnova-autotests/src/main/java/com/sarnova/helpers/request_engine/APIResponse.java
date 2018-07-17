@@ -17,6 +17,7 @@ public class APIResponse implements API {
     private String contentType;
     private int responseCode;
     private Object responseBody;
+    private Map<String, List<String>> responseHeaders;
 
     private boolean isLogRequestShort = false;
 
@@ -79,6 +80,10 @@ public class APIResponse implements API {
         }
     }
 
+    public void setResponseHeaders() {
+        this.responseHeaders = connection.getHeaderFields();
+    }
+
     public void setResponseBody() {
         StringBuilder responseBody = null;
         try {
@@ -109,6 +114,10 @@ public class APIResponse implements API {
 
     public int getResponseCode() {
         return responseCode;
+    }
+
+    public Map<String, List<String>> getResponseHeaders() {
+        return responseHeaders;
     }
 
     public Object getValueOf(String parameter) {

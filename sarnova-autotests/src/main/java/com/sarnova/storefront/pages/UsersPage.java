@@ -8,7 +8,7 @@ import static com.sarnova.storefront.page_elements.UsersManagementPageElements.A
 @Component
 public class UsersPage extends StorefrontBasePage {
 
-    private String pageUrlMethod = "boundtree/en/USD/my-company/organization-management/manage-users/";
+    private String pageUrlMethod = "my-company/organization-management/manage-users/";
 
     @Override
     public String getPageUrl() {

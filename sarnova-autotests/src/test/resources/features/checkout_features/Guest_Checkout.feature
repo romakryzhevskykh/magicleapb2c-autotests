@@ -14,6 +14,7 @@ Feature: Guest checkout functionality
     When Add to cart VALID product with quantity 1.
     And Open cart page.
     And Click on Checkout button on Cart page.
+    And Click on Continue as guest button on Guest checkout login page.
     And Enter email to guest email text field on Guest checkout login page.
     And Enter email to guest confirm email text field on Guest checkout login page.
     And Click on Check out as a Guest button on Guest checkout login page.
@@ -23,6 +24,7 @@ Feature: Guest checkout functionality
     When Add to cart VALID product with quantity 1.
     And Open cart page.
     And Click on Checkout button on Cart page.
+    And Click on Continue as guest button on Guest checkout login page.
     And Login as guest for checkout on Guest checkout login page.
     And Click on Create new address button on Checkout Shipping address step.
     And Find any random valid Shipping address.
@@ -44,6 +46,7 @@ Feature: Guest checkout functionality
     When Add to cart VALID product with quantity 1.
     And Open cart page.
     And Click on Checkout button on Cart page.
+    And Click on Continue as guest button on Guest checkout login page.
     And Login as guest for checkout on Guest checkout login page.
     And Click on Create new address button on Checkout Shipping address step.
     And Find any random valid Shipping address.
@@ -68,6 +71,7 @@ Feature: Guest checkout functionality
     When Add to cart VALID product with quantity 1.
     And Open cart page.
     And Click on Checkout button on Cart page.
+    And Click on Continue as guest button on Guest checkout login page.
     And Login as guest for checkout on Guest checkout login page.
     And Click on Create new address button on Checkout Shipping address step.
     And Find any random valid Shipping address.
@@ -92,6 +96,7 @@ Feature: Guest checkout functionality
     When Add to cart VALID product with quantity 1.
     And Open cart page.
     And Click on Checkout button on Cart page.
+    And Click on Continue as guest button on Guest checkout login page.
     And Login as guest for checkout on Guest checkout login page.
     And Click on Create new address button on Checkout Shipping address step.
     And Find any random valid Shipping address.
@@ -116,6 +121,7 @@ Feature: Guest checkout functionality
     When Add to cart VALID product with quantity 1.
     And Open cart page.
     And Click on Checkout button on Cart page.
+    And Click on Continue as guest button on Guest checkout login page.
     And Login as guest for checkout on Guest checkout login page.
     And Click on Create new address button on Checkout Shipping address step.
     And Find any random valid Shipping address.
@@ -145,6 +151,7 @@ Feature: Guest checkout functionality
     When Add to cart VALID product with quantity 1.
     And Open cart page.
     And Click on Checkout button on Cart page.
+    And Click on Continue as guest button on Guest checkout login page.
     And Login as guest for checkout on Guest checkout login page.
     And Click on Create new address button on Checkout Shipping address step.
     And Find any random valid Shipping address.
@@ -175,6 +182,7 @@ Feature: Guest checkout functionality
     When Add to cart VALID product with quantity 1.
     And Open cart page.
     And Click on Checkout button on Cart page.
+    And Click on Continue as guest button on Guest checkout login page.
     And Login as guest for checkout on Guest checkout login page.
     And Click on Create new address button on Checkout Shipping address step.
     And Find any random valid Shipping address.
@@ -208,6 +216,7 @@ Feature: Guest checkout functionality
     When Add to cart VALID product with quantity 1.
     And Open cart page.
     And Click on Checkout button on Cart page.
+    And Click on Continue as guest button on Guest checkout login page.
     And Login as guest for checkout on Guest checkout login page.
     And Click on Create new address button on Checkout Shipping address step.
     And Find any random valid Shipping address.
@@ -231,7 +240,7 @@ Feature: Guest checkout functionality
     And Fill Expiry Year drop-down on Checkout Payment method step.
     And Fill Name on card field on Checkout Payment method step.
     And Fill Card Verification Number field on Checkout Payment method step.
-    And Click on Change Billing address on Checkout Payment method step.
+    And Deselect BILLING ADDRESS IS THE SAME AS SHIPPING ADDRESS on Guest Checkout Payment method step.
     And Find any random valid Billing address.
     And Click on Billing Countries drop-down on Checkout Payment method step.
     And Select Billing Country in drop-down on Checkout Payment method step.
@@ -257,6 +266,7 @@ Feature: Guest checkout functionality
     When Add to cart VALID product with quantity 1.
     And Open cart page.
     And Click on Checkout button on Cart page.
+    And Click on Continue as guest button on Guest checkout login page.
     And Login as guest for checkout on Guest checkout login page.
     And Click on Create new address button on Checkout Shipping address step.
     And Find any random valid Shipping address.
@@ -283,6 +293,7 @@ Feature: Guest checkout functionality
     And Click on Next button on Checkout Payment method step.
     And Switch to PayFabric agent.
     And User is logged in to Pay Fabric.
+    And Set Sandbox to non live key.
     And Open Customer Wallets page in Pay Fabric.
     Then Check that Credit card is displayed on Pay Fabric Wallets page.
 
@@ -290,6 +301,7 @@ Feature: Guest checkout functionality
     When Add to cart VALID product with quantity 1.
     And Open cart page.
     And Click on Checkout button on Cart page.
+    And Click on Continue as guest button on Guest checkout login page.
     And Login as guest for checkout on Guest checkout login page.
     And Click on Create new address button on Checkout Shipping address step.
     And Find any random valid Shipping address.
@@ -318,6 +330,7 @@ Feature: Guest checkout functionality
     And Click on Place order on Checkout Final Review step.
     And Switch to PayFabric agent.
     And User is logged in to Pay Fabric.
+    And Set Sandbox to non live key.
     And Open Daily Activity page in Pay Fabric.
     And Click on Run report on Pay Fabric Daily activity page.
     Then Check that transaction is displayed on Pay Fabric Daily activity page.

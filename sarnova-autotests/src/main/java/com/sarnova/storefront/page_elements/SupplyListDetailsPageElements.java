@@ -15,7 +15,7 @@ public class SupplyListDetailsPageElements {
 
     public static final String SHOW_INACTIVE_ENTRIES_BUTTON_ID = "toggleInactive";
 
-    public static final String SUPPLY_PRODUCTS_ROWS_XPATH = "//li[@class = 'product-listing-item nav']";
+    public static final String SUPPLY_PRODUCTS_ROWS_XPATH = "//li[contains(@class, 'product-listing-item nav')]";
     public static final String SUPPLY_PRODUCT_ROW_BY_SKU_XPATH = SUPPLY_PRODUCTS_ROWS_XPATH + "[@data-product-code='%s']";
 
     private static final String ACTIVE_PRODUCTS_BLOCK_XPATH = "//div[@id='activeEntriesSection']";

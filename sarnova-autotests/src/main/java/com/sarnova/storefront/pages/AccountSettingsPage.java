@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AccountSettingsPage extends StorefrontBasePage {
 
-    private String pageUrlMethod = "boundtree/en/USD/my-account/update-profile";
+    private String pageUrlMethod = "my-account/update-profile";
 
     @Override
     public String getPageUrl() {

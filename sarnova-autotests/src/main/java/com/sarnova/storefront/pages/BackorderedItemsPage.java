@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BackorderedItemsPage extends StorefrontBasePage {
 
-    private String pageUrlMethod = "boundtree/en/USD/reports/backordered-items";
+    private String pageUrlMethod = "reports/backordered-items";
 
     @Override
     public String getPageUrl() {

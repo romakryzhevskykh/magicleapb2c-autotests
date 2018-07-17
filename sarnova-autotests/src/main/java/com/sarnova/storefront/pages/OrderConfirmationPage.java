@@ -8,7 +8,7 @@ import static com.sarnova.storefront.page_elements.OrderConfirmationPageElements
 @Component
 public class OrderConfirmationPage extends StorefrontBasePage {
 
-    private String pageUrlMethod = "boundtree/en/USD/checkout/orderConfirmation/%s";
+    private String pageUrlMethod = "checkout/orderConfirmation/%s";
 
     public String getPageUrl(String orderID) {
         return String.format(getPageUrl(), orderID);

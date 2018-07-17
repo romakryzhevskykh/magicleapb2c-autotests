@@ -8,7 +8,7 @@ import static com.sarnova.storefront.page_elements.SavedCartDetailsPageElements.
 
 @Component
 public class SavedCartDetailsPage extends StorefrontBasePage {
-    private String methodPageUrl = "boundtree/en/USD/my-account/saved-carts/%s";
+    private String methodPageUrl = "my-account/saved-carts/%s";
 
     @Step("Get page label text.")
     public String getPageLabel() {

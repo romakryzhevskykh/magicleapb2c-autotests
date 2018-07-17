@@ -12,7 +12,7 @@ import static com.sarnova.storefront.page_block_elements.EditUserBlockElements.*
 
 @Component
 public class EditUserPage extends StorefrontBasePage {
-    private String pageUrlMethod = "boundtree/en/USD/my-company/organization-management/manage-users/edit?user=%s";
+    private String pageUrlMethod = "my-company/organization-management/manage-users/edit?user=%s";
 
     public boolean isOpened(User user) {
         return String.format(getPageUrl(), user.getUsername()).equalsIgnoreCase(getCurrentUrl());

@@ -9,7 +9,7 @@ import static com.sarnova.storefront.page_elements.UserDetailsPageElements.*;
 @Component
 public class UserDetailsPage extends StorefrontBasePage {
 
-    private String pageUrlMethod = "boundtree/en/USD/my-company/organization-management/manage-users/details?user=%s";
+    private String pageUrlMethod = "my-company/organization-management/manage-users/details?user=%s";
 
     @Step("Is details page opened for {0}.")
     public boolean isOpened(User user) {
@@ -27,12 +27,12 @@ public class UserDetailsPage extends StorefrontBasePage {
 
     @Step("Get first name field text.")
     public String getFirstName() {
-        return $(NAME_FIELD_VALUE_XPATH).getText().replaceAll("  ", " ").split(" ")[0].trim();
+        return $(NAME_FIELD_VALUE_XPATH).getText().replaceAll("  ", " ").split(" ")[1].trim();
     }
 
     @Step("Get last name field text.")
     public String getLastName() {
-        return $(NAME_FIELD_VALUE_XPATH).getText().replaceAll("  ", " ").split(" ")[1].trim();
+        return $(NAME_FIELD_VALUE_XPATH).getText().replaceAll("  ", " ").split(" ")[2].trim();
     }
 
     @Step("Get email field text.")

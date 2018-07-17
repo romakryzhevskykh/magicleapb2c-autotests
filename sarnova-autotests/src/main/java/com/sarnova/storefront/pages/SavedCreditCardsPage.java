@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SavedCreditCardsPage extends StorefrontBasePage {
 
-    private String pageUrlMethod = "boundtree/en/USD/my-account/payment-details";
+    private String pageUrlMethod = "my-account/payment-details";
 
     @Override
     public String getPageUrl() {

@@ -2,7 +2,7 @@ package com.sarnova.storefront.page_block_elements;
 
 public class CheckoutShippingAddressStepBlockElements {
     public static final String NEXT_BUTTON_ID = "addressSubmit";
-    public static final String CREATE_NEW_SHIPPING_ADDRESS_CHECKBOX_ID = "saveAddressInMyAddressBook";
+    public static final String CREATE_NEW_SHIPPING_ADDRESS_CHECKBOX_XPATH = "//label[@for='saveAddressInMyAddressBook']/span[@class='control__indicator']";
 
     public static final String SELECT_COUNTRY_DROP_DOWN_ID = "address.country";
     public static final String ITEMS_IN_COUNTRY_DROP_DOWN_XPATH = "//select[@id='address.country']/option[not(@disabled)]";

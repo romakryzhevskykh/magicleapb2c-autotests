@@ -6,6 +6,7 @@ Feature: Check user restrictions with SAVED CARTS and without it.
     And Valid test user is present.
     And Test user group is present.
     And Test user group has only SAVED_CARTS permission.
+    And Test user has no any roles.
     And Test user has only test user group assigned.
 
   Scenario: Check that user with only SAVED CARTS PERMISSION has access to Saved Carts item in My account menu.

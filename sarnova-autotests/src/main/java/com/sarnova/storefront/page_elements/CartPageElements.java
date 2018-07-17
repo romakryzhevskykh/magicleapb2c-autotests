@@ -12,7 +12,7 @@ public class CartPageElements {
     public static final String CHECKOUT_BUTTONS_XPATH = "//button[contains(@class, 'btn--continue-checkout')]";
     public static final String ADD_TO_SUPPLY_LIST_BUTTONS_XPATH = "//div[contains(@class,'cart-actions-bottom')]//button[contains(@class,'js-add-to-wishlist')]";
 
-    public static final String SAVE_CART_BUTTON_XPATH = "//a[contains(@class, 'js-save-cart-link')]";
-    public static final String SAVED_CARTS_BUTTON_XPATH = PAGE_CONTENT_CONTAINER_XPATH + "//a[@href='/boundtree/en/USD/my-account/saved-carts']";
+    public static final String SAVE_CART_BUTTON_XPATH = "//button[contains(@class, 'js-save-cart-link')]";
+    public static final String SAVED_CARTS_BUTTON_XPATH = PAGE_CONTENT_CONTAINER_XPATH + "//a[@href='/my-account/saved-carts']";
 
 }

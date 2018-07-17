@@ -18,11 +18,13 @@ import java.util.ArrayList;
 
 @Component
 public class UserGroupsManager {
+    GETRequest PERMISSIONS_PAGE_FOR_GROUP = new GETRequest("User group permissions page", "my-company/organization-management/manage-usergroups/permissions/?usergroup=%s");
+    GETRequest CREATE_USER_GROUP_PAGE = new GETRequest("Create new user group page", "my-company/organization-management/manage-usergroups/create");
     POSTRequest ADD_PERMISSION = new POSTRequest("Add permission to user", "my-company/organization-management/manage-usergroups/permissions/select/");
     POSTRequest REMOVE_PERMISSION = new POSTRequest("Remove permission to user", "my-company/organization-management/manage-usergroups/permissions/deselect/");
     POSTRequest CREATE_USER_GROUP = new POSTRequest("Create new user group", "my-company/organization-management/manage-usergroups/create/");
     POSTRequest DELETE_USER_GROUP = new POSTRequest("Delete user group", "my-company/organization-management/manage-usergroups/remove/");
-    GETRequest PERMISSIONS_PAGE = new GETRequest("User group Permissions page", "my-company/organization-management/manage-usergroups/permissions");
+    GETRequest PERMISSIONS_PAGE = new GETRequest("User group Permissions page", "my-company/organization-management/manage-usergroups/permissions/");
 
     private ArrayList<UserGroup> userGroups = new ArrayList<>();
 
@@ -33,21 +35,24 @@ public class UserGroupsManager {
     @SuppressWarnings("unchecked")
     @Step("Create User group.")
     public void createUserGroup(UserSession activeUserSession) {
-        String groupUID = RandomStringUtils.randomAlphabetic(10);
+//        String groupUID = RandomStringUtils.randomAlphabetic(10);
+        String csrfToken = getCreateGroupPageCsrfToken(activeUserSession);
         String groupName = RandomStringUtils.randomAlphabetic(10);
         Organization organization = activeUserSession.getUser().getOrganization();
         POSTRequest createUserGroup = CREATE_USER_GROUP.getClone();
         createUserGroup.addPostParameterAndValue(new API.PostParameterAndValue("originalUid", ""));
-        createUserGroup.addPostParameterAndValue(new API.PostParameterAndValue("uid", groupUID));
+        createUserGroup.addPostParameterAndValue(new API.PostParameterAndValue("uid", "uid"));
         createUserGroup.addPostParameterAndValue(new API.PostParameterAndValue("name", groupName));
         createUserGroup.addPostParameterAndValue(new API.PostParameterAndValue("parentUnit", organization.getId()));
+        createUserGroup.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", csrfToken));
         try {
             createUserGroup.sendPostRequest(activeUserSession);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println(createUserGroup.getResponse().getResponseHeaders());
 
-        createInstance(groupUID, groupName);
+        createInstance(createUserGroup.getResponse().getResponseHeaders().get("Location").get(0).split("=")[1], groupName);
     }
 
     @SuppressWarnings("unchecked")
@@ -89,10 +94,11 @@ public class UserGroupsManager {
     @SuppressWarnings("unchecked")
     @Step("Add {2} to {1}")
     public void addPermissionToUserGroup(UserSession activeUserSession, UserGroup editingUserGroup, Permission permission) {
+        String csrfToken = getCreateGroupPageCsrfToken(activeUserSession);
         POSTRequest addPermission = ADD_PERMISSION.getClone();
         addPermission.setGetParameterAndValue("usergroup", editingUserGroup.getUId());
         addPermission.setGetParameterAndValue("permission", permission.getPermissionCode());
-        addPermission.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", ""));
+        addPermission.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", csrfToken));
         try {
             addPermission.sendPostRequest(activeUserSession);
         } catch (IOException e) {
@@ -109,10 +115,11 @@ public class UserGroupsManager {
     @SuppressWarnings("unchecked")
     @Step("Remove {2} from {1}")
     public void removePermissionToUserGroup(UserSession activeUserSession, UserGroup editingUserGroup, Permission permission) {
+        String csrfToken = getCreateGroupPageCsrfToken(activeUserSession);
         POSTRequest removePermission = REMOVE_PERMISSION.getClone();
         removePermission.setGetParameterAndValue("usergroup", editingUserGroup.getUId());
         removePermission.setGetParameterAndValue("permission", permission.getPermissionCode());
-        removePermission.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", ""));
+        removePermission.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", csrfToken));
         try {
             removePermission.sendPostRequest(activeUserSession);
         } catch (IOException e) {
@@ -142,5 +149,16 @@ public class UserGroupsManager {
                     });
         }
         userGroup.setInitiated(true);
+    }
+
+    public String getCreateGroupPageCsrfToken(UserSession userSession) {
+        GETRequest getCartPageSource = CREATE_USER_GROUP_PAGE.getClone();
+        try {
+            getCartPageSource.sendGetRequest(userSession);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Document htmlResponse = getCartPageSource.getResponse().getHTMLResponseDocument();
+        return Xsoup.select(htmlResponse, "//input[@name=CSRFToken]/@value").list().stream().findAny().orElse(null);
     }
 }

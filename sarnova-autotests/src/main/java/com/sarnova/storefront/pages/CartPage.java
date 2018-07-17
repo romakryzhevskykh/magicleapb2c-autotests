@@ -24,7 +24,7 @@ public class CartPage extends StorefrontBasePage {
     @Autowired private AddToSupplyListPopUpBlock addToSupplyListPopUpBlock;
     @Autowired private SaveCartPopUpBlock saveCartPopUpBlock;
 
-    private String pageUrlMethod = "boundtree/en/USD/cart";
+    private String pageUrlMethod = "cart";
 
     public List<UnitOfMeasure> getUnitsOfMeasurementInCart() {
         List<Document> unitsOfMeasurementRows = isDisplayed(PRODUCTS_ROWS_XPATH) ?

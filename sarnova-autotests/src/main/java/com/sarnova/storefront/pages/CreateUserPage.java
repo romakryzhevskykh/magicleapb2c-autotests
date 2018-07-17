@@ -11,7 +11,7 @@ import static com.sarnova.storefront.page_block_elements.EditUserBlockElements.*
 
 @Component
 public class CreateUserPage extends StorefrontBasePage {
-    private String pageUrlMethod = "boundtree/en/USD/my-company/organization-management/manage-users/create";
+    private String pageUrlMethod = "my-company/organization-management/manage-users/create";
 
     @Step("Select title: {0}.")
     public void selectTitle(UserTitle userTitle) {

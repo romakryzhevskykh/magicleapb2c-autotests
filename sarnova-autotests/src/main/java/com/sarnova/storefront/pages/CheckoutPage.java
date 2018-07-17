@@ -23,7 +23,7 @@ public class CheckoutPage extends StorefrontBasePage {
 
     @Autowired private ProductsManager productsManager;
 
-    private String pageUrlMethod = "boundtree/en/USD/checkout/%s";
+    private String pageUrlMethod = "checkout/%s";
 
     public void clickOnNextButtonOnShippingAddressStep() {
         shippingAddressStepBlock.clickOnNextButton();
@@ -246,6 +246,10 @@ public class CheckoutPage extends StorefrontBasePage {
 
     public void clickOnChangeBillingAddress() {
         paymentMethodStepBlock.clickOnChangeBillingAddress();
+    }
+
+    public void deselectGuestBillingAddressCheckbox() {
+        paymentMethodStepBlock.deselectGuestBillingAddressCheckbox();
     }
 
     public String getAnyBillingCountryFromDropDown() {

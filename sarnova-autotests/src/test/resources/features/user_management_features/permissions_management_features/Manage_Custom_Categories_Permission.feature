@@ -6,6 +6,7 @@ Feature: Check user restrictions with MANAGE CUSTOM CATALOG PERMISSION and witho
     And Valid test user is present.
     And Test user group is present.
     And Test user group has only MANAGE_CUSTOM_CATALOG permission.
+    And Test user has no any roles.
     And Test user has only test user group assigned.
 
   Scenario: Check that user with only MANAGE CUSTOM CATALOG PERMISSION has access to Custom Category item on Account Dashboard page.

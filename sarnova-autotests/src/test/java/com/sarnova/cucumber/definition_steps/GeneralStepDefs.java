@@ -134,6 +134,7 @@ public class GeneralStepDefs extends AbstractStepDefs {
     @And("^Check that current Supply list is displayed in favorite Supply lists drop-down in page header.$")
     public void checkThatCurrentSupplyListIsDisplayedInFavoriteSupplyListsDropDownOnSupplyListDetailsPage() {
         List<String> favoriteSupplyListNames = headerRowPageBlock.getSupplyListNamesFromFavoriteSupplyListsDropDown();
+        System.out.println("FAVORITE SLS: " + favoriteSupplyListNames);
         String testSupplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
         assertTrue(favoriteSupplyListNames.stream()
                 .anyMatch(supplyListName -> supplyListName.equals(StringUtils.capitalize(testSupplyListName))));
@@ -142,6 +143,7 @@ public class GeneralStepDefs extends AbstractStepDefs {
     @And("^Check that current Supply list is not displayed in favorite Supply lists drop-down in page header.$")
     public void checkThatCurrentSupplyListIsNotDisplayedInFavoriteSupplyListsDropDownOnSupplyListDetailsPage() {
         List<String> favoriteSupplyListNames = headerRowPageBlock.getSupplyListNamesFromFavoriteSupplyListsDropDown();
+        System.out.println("FAVORITE SLS: " + favoriteSupplyListNames);
         String testSupplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
         assertTrue(favoriteSupplyListNames.stream()
                 .noneMatch(supplyListName -> supplyListName.equals(StringUtils.capitalize(testSupplyListName))));

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PurchasesPerMonthPage extends StorefrontBasePage {
 
-    private String pageUrlMethod = "boundtree/en/USD/purchases-per-month-report";
+    private String pageUrlMethod = "purchases-per-month-report";
 
     @Override
     public String getPageUrl() {

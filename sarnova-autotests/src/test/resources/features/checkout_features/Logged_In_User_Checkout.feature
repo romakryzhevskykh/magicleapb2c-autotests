@@ -259,6 +259,7 @@ Feature: Logged in user checkout functionality
     And Click on Next button on Checkout Payment method step.
     And Switch to PayFabric agent.
     And User is logged in to Pay Fabric.
+    And Set Sandbox to non live key.
     And Open Customer Wallets page in Pay Fabric.
     Then Check that Credit card is displayed on Pay Fabric Wallets page.
 
@@ -280,6 +281,7 @@ Feature: Logged in user checkout functionality
     And Click on Place order on Checkout Final Review step.
     And Switch to PayFabric agent.
     And User is logged in to Pay Fabric.
+    And Set Sandbox to non live key.
     And Open Daily Activity page in Pay Fabric.
     And Click on Run report on Pay Fabric Daily activity page.
     Then Check that transaction is displayed on Pay Fabric Daily activity page.

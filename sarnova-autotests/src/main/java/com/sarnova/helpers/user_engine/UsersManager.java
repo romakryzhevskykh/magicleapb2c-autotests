@@ -27,12 +27,50 @@ public class UsersManager {
     @Autowired UserGroupsManager userGroupsManager;
     @Autowired OrganizationsManager organizationsManager;
 
-    POSTRequest CREATE_REQUEST = new POSTRequest("Create new test user", "boundtree/en/USD/my-company/organization-management/manage-users/create");
+    GETRequest USER_GROUPS = new GETRequest("Add user groups page", "my-company/organization-management/manage-users/usergroups?user=%s");
+    GETRequest CREATE_PAGE = new GETRequest("Create new test user page", "my-company/organization-management/manage-users/create");
+    POSTRequest CREATE_REQUEST = new POSTRequest("Create new test user", "my-company/organization-management/manage-users/create");
+    GETRequest RESET_PASSWORD_PAGE = new GETRequest("Reset password to User page", "my-company/organization-management/manage-users/resetpassword?user=%s");
     POSTRequest RESET_PASSWORD = new POSTRequest("Reset password to User", "my-company/organization-management/manage-users/resetpassword?user=%s");
     POSTRequest REMOVE_GROUP_FROM_USER = new POSTRequest("Remove group from user", "my-company/organization-management/manage-users/usergroups/deselect/");
     POSTRequest ADD_GROUP_TO_USER = new POSTRequest("Add group to user", "my-company/organization-management/manage-users/usergroups/select/");
     GETRequest USER_DETAILS_PAGE = new GETRequest("User details page", "my-company/organization-management/manage-users/details/");
     ArrayList<User> users = new ArrayList<>();
+
+    public String getManageUserGroupsPageCsrfToken(UserSession userSession, User user) {
+        GETRequest getManageGroupsSource = USER_GROUPS.getClone();
+        getManageGroupsSource.setValue(user.getUsername());
+        try {
+            getManageGroupsSource.sendGetRequest(userSession);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Document htmlResponse = getManageGroupsSource.getResponse().getHTMLResponseDocument();
+        return Xsoup.select(htmlResponse, "//input[@name=CSRFToken]/@value").list().stream().findAny().orElse(null);
+    }
+
+    public String getCreateUserPageCsrfToken(UserSession userSession) {
+        GETRequest getCartPageSource = CREATE_PAGE.getClone();
+        try {
+            getCartPageSource.sendGetRequest(userSession);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Document htmlResponse = getCartPageSource.getResponse().getHTMLResponseDocument();
+        return Xsoup.select(htmlResponse, "//input[@name=CSRFToken]/@value").list().stream().findAny().orElse(null);
+    }
+
+    public String getResetPasswordPageCsrfToken(UserSession userSession, User userToResetPassword) {
+        GETRequest getResetPasswordPageSource = RESET_PASSWORD_PAGE.getClone();
+        getResetPasswordPageSource.setValue(userToResetPassword.getUsername());
+        try {
+            getResetPasswordPageSource.sendGetRequest(userSession);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Document htmlResponse = getResetPasswordPageSource.getResponse().getHTMLResponseDocument();
+        return Xsoup.select(htmlResponse, "//input[@name=CSRFToken]/@value").list().stream().findAny().orElse(null);
+    }
 
     public void createInstance(String username, String password, Cockpit userCockpit, ArrayList<String> cockpitRoles) {
         User user = new User(username, password, userCockpit);
@@ -53,24 +91,27 @@ public class UsersManager {
     @Step("Create user with random parameters.")
     public void createTestUserByApi(UserSession userSession) {
         POSTRequest createUser = CREATE_REQUEST.getClone();
+        String csrfToken = getCreateUserPageCsrfToken(userSession);
 //        UserTitle userTitle = UserTitle.getRandom();
         String firstName = RandomStringUtils.randomAlphabetic(10);
         String lastName = RandomStringUtils.randomAlphabetic(10);
         String email = RandomStringUtils.randomAlphabetic(10) + "@" + RandomStringUtils.randomAlphabetic(5) + ".com";
         String username = RandomStringUtils.randomAlphabetic(10);
-//        StorefrontUserRole role = StorefrontUserRole.TEST_USER;
+        StorefrontUserRole role = StorefrontUserRole.TEST_USER;
+//        StorefrontUserRole adminRole = StorefrontUserRole.ADMIN;
         Organization organization = userSession.getUser().getOrganization();
-        ArrayList<StorefrontUserRole> userRoles = new ArrayList<>();
-//        {{
-//            add(role);
-//        }};
+        ArrayList<StorefrontUserRole> userRoles = new ArrayList() {{
+            add(role);
+//            add(adminRole);
+        }};
 //        createUser.addPostParameterAndValue(new API.PostParameterAndValue("titleCode", userTitle.name().toLowerCase()));
         createUser.addPostParameterAndValue(new API.PostParameterAndValue("uid", username));
         createUser.addPostParameterAndValue(new API.PostParameterAndValue("firstName", firstName));
         createUser.addPostParameterAndValue(new API.PostParameterAndValue("lastName", lastName));
         createUser.addPostParameterAndValue(new API.PostParameterAndValue("email", email));
         createUser.addPostParameterAndValue(new API.PostParameterAndValue("parentB2BUnit", organization.getId()));
-//        userRoles.forEach(userRole -> createUser.addPostParameterAndValue(new API.PostParameterAndValue("roles", role.getRoleCode())));
+        userRoles.forEach(userRole -> createUser.addPostParameterAndValue(new API.PostParameterAndValue("roles", userRole.getRoleCode())));//.stream().filter(userRole1 -> !userRole1.isTest())
+        createUser.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", csrfToken));
         createUser.setHeader("Upgrade-Insecure-Requests", "1");
         try {
             createUser.sendPostRequest(userSession);
@@ -89,10 +130,12 @@ public class UsersManager {
     public void resetPassword(UserSession activeUserSession, User userToResetPassword) {
         POSTRequest resetPassword = RESET_PASSWORD.getClone();
         String passwordToSet = RandomStringUtils.randomAlphanumeric(10);
+        String csrfToken = getResetPasswordPageCsrfToken(activeUserSession, userToResetPassword);
         resetPassword.setValue(userToResetPassword.getUsername());
         resetPassword.addPostParameterAndValue(new API.PostParameterAndValue("uid", userToResetPassword.getUsername()));
         resetPassword.addPostParameterAndValue(new API.PostParameterAndValue("newPassword", passwordToSet));
         resetPassword.addPostParameterAndValue(new API.PostParameterAndValue("checkNewPassword", passwordToSet));
+        resetPassword.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", csrfToken));
         resetPassword.setHeader("Upgrade-Insecure-Requests", "1");
         try {
             resetPassword.sendPostRequest(activeUserSession);
@@ -118,13 +161,25 @@ public class UsersManager {
                         Xsoup.select(element, "div[@class=account-cards-actions]/span/a/@data-action-confirmation-modal-id")
                                 .get()
                                 .contains("removeUserGroup"))
-                .filter(element -> StorefrontUserRole.getRoleByRoleCode(Xsoup.select(element, "ul/li/a/text()").get()) == null)
+                .filter(element -> StorefrontUserRole.getRoleByRoleCode(Xsoup.select(element, "ul/li").getElements().get(0).text()) == null)
                 .forEach(element -> {
-                    String groupName = Xsoup.select(element, "ul/li/a/text()").getElements().get(0).text().trim();
+                    System.out.println("TEXT ON ELEMENT GROUP: " + StorefrontUserRole.getRoleByRoleCode(Xsoup.select(element, "ul/li").getElements().get(0).text()));
+                    String groupName = Xsoup.select(element, "ul/li").getElements().get(0).text().trim();
                     if (userGroupsManager.getUserGroupByUid(groupName) == null) {
                         userGroupsManager.createInstance(groupName);
                     }
                     user.getUserGroups().add(userGroupsManager.getUserGroupByUid(groupName));
+                });
+        elements.stream()
+                .filter(element ->
+                        Xsoup.select(element, "div[@class=account-cards-actions]/span/a/@data-action-confirmation-modal-id")
+                                .get()
+                                .contains("removeUserGroup"))
+                .filter(element -> StorefrontUserRole.getRoleByRoleCode(Xsoup.select(element, "ul/li").getElements().get(0).text()) != null)
+                .forEach(element -> {
+                    System.out.println("TEXT ON ELEMENT ROLE: " + StorefrontUserRole.getRoleByRoleCode(Xsoup.select(element, "ul/li").getElements().get(0).text()));
+                    String roleName = Xsoup.select(element, "ul/li").getElements().get(0).text().trim();
+                    user.getUserRoles().add(StorefrontUserRole.getRoleByRoleCode(roleName));
                 });
         user.setInitialized(true);
     }
@@ -230,14 +285,43 @@ public class UsersManager {
         user.getUserGroups().clear();
     }
 
+    @Step("Remove all user {1} user roles.")
+    @SuppressWarnings("unchecked")
+    public void removeAllUserRolesForUser(UserSession activeUserSession, User user) {
+        user.getUserRoles().forEach(userRole -> {
+            if (!userRole.equals(StorefrontUserRole.TEST_USER)) {
+                String csrfToken = getCreateUserPageCsrfToken(activeUserSession);
+                POSTRequest removeGroup = REMOVE_GROUP_FROM_USER.getClone();
+                removeGroup.setGetParameterAndValue("user", user.getUsername());
+                removeGroup.setGetParameterAndValue("usergroup", userRole.getRoleCode());
+
+                removeGroup.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", csrfToken));
+                try {
+                    removeGroup.sendPostRequest(activeUserSession);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        boolean isTestRolePresent = false;
+        if (user.getUserRoles().contains(StorefrontUserRole.TEST_USER)) {
+            isTestRolePresent = true;
+        }
+        user.getUserRoles().clear();
+        if (isTestRolePresent) {
+            user.getUserRoles().add(StorefrontUserRole.TEST_USER);
+        }
+    }
+
     @Step("Set user group {2} to user {1}.")
     @SuppressWarnings("unchecked")
     public void setUserGroupForUser(UserSession activeUserSession, User user, UserGroup userGroup) {
+        String csrfToken = getCreateUserPageCsrfToken(activeUserSession);
         POSTRequest addGroup = ADD_GROUP_TO_USER.getClone();
         addGroup.setGetParameterAndValue("user", user.getUsername());
         addGroup.setGetParameterAndValue("usergroup", userGroup.getUId());
 
-        addGroup.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", ""));
+        addGroup.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", csrfToken));
         try {
             addGroup.sendPostRequest(activeUserSession);
         } catch (IOException e) {

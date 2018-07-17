@@ -20,7 +20,7 @@ public class ProductDetailsPage extends StorefrontBasePage {
     @Autowired private AddToSupplyListPopUpBlock addToSupplyListPopUpBlock;
     @Autowired private AddToCartPopUpBlock addToCartPopUpBlock;
 
-    private final String pageUrlMethod = "boundtree/en/USD/p/%s";
+    private final String pageUrlMethod = "p/%s";
 
     @Step("Click on Add to Supply list button on PDP.")
     public void clickOnAddToSupplyListButton() {

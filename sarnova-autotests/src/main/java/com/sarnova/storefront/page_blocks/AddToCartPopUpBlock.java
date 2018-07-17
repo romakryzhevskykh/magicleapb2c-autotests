@@ -12,6 +12,7 @@ public class AddToCartPopUpBlock extends UIComponent {
     @Step("Click on Checkout in Add to cart pop-up.")
     public void clickOnCheckoutButtonInAddToCartPopUp() {
         click(CHECKOUT_BUTTON_XPATH);
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Get Add to cart pop-up's text content.")

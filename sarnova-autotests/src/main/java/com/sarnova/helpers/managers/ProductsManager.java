@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class ProductsManager {
-    private GETRequest GET_PDP_SOURCE = new GETRequest("Get PDP source", "boundtree/en/USD/p/%s");
+    private GETRequest GET_PDP_SOURCE = new GETRequest("Get PDP source", "p/%s");
 
     private ArrayList<Product> testProducts = new ArrayList<>();
 

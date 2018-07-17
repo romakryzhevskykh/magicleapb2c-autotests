@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderHistoryPage extends StorefrontBasePage {
 
-    private String pageUrlMethod = "boundtree/en/USD/my-account/orders";
+    private String pageUrlMethod = "my-account/orders";
 
     @Override
     public String getPageUrl() {

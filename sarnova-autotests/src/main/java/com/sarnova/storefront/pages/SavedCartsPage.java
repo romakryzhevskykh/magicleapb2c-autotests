@@ -12,7 +12,7 @@ import static com.sarnova.storefront.page_elements.SavedCartsPageElements.*;
 @Component
 public class SavedCartsPage extends StorefrontBasePage {
 
-    private String pageUrlMethod = "boundtree/en/USD/my-account/saved-carts";
+    private String pageUrlMethod = "my-account/saved-carts";
 
     @Step("Is Saved carts title visible?")
     public boolean isSavedCartsTitleVisible() {

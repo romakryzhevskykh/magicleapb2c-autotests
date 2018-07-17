@@ -6,6 +6,7 @@ Feature: Check user restrictions with MANAGE SUPPLY LISTS PERMISSION and without
     And Valid test user is present.
     And Test user group is present.
     And Test user group has only MANAGE_SUPPLY_LISTS permission.
+    And Test user has no any roles.
     And Test user has only test user group assigned.
 
   Scenario: Check that user with only MANAGE SUPPLY LISTS PERMISSION has access to Supply lists drop-down in header.

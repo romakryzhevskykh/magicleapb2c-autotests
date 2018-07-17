@@ -24,7 +24,7 @@ public class CheckoutShippingAddressStepBlock extends UIComponent {
 
     @Step("Select Create new shipping address checkbox.")
     public void selectCreateNewShippingAddress() {
-        click(By.id(CREATE_NEW_SHIPPING_ADDRESS_CHECKBOX_ID));
+        click(CREATE_NEW_SHIPPING_ADDRESS_CHECKBOX_XPATH);
     }
 
     @Step("Get any country from drop-down.")

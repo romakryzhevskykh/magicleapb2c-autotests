@@ -8,7 +8,7 @@ import static com.sarnova.storefront.page_elements.AccountDashboardPageElements.
 @Component
 public class AccountDashboardPage extends StorefrontBasePage {
 
-    private String pageUrlMethod = "boundtree/en/USD/my-account/account-dashboard";
+    private String pageUrlMethod = "my-account/account-dashboard";
 
     @Override
     public void open() {

@@ -387,4 +387,9 @@ public class CheckoutStepDefs extends AbstractStepDefs {
     public void clickOnChangeBillingAddressOnCheckoutPaymentMethodStep() {
         checkoutPage.clickOnChangeBillingAddress();
     }
+
+    @And("^Deselect BILLING ADDRESS IS THE SAME AS SHIPPING ADDRESS on Guest Checkout Payment method step.$")
+    public void clickOnChangeBillingAddressOnGuestCheckoutPaymentMethodStep() {
+        checkoutPage.deselectGuestBillingAddressCheckbox();
+    }
 }

@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class SavedCartsManager {
-    private POSTRequest SAVE_CART = new POSTRequest("Save cart", "boundtree/en/USD/cart/save");
+    private POSTRequest SAVE_CART = new POSTRequest("Save cart", "cart/save");
     @Autowired CartManager cartManager;
     private List<SavedCart> savedCarts = new ArrayList<>();
 

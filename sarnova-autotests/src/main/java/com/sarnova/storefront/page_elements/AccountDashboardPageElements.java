@@ -1,7 +1,7 @@
 package com.sarnova.storefront.page_elements;
 
 public class AccountDashboardPageElements {
-    public static final String LEFT_BAR_MENU_XPATH = "//div[@class='side-content col-md-3']";
+    public static final String LEFT_BAR_MENU_XPATH = "//div[contains(@class,'side-content')]";
     public static final String MENU_ITEMS_XPATH = LEFT_BAR_MENU_XPATH + "//li[@class='menu-item']";
 
     private static final String ACCOUNT_DASHBOARD_ITEMS_XPATH = "//div[@class='dashboard-menu-body']/ul[@class='menu-body-list-container']";

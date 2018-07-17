@@ -16,7 +16,7 @@ import static com.sarnova.storefront.page_elements.SupplyListsPageElements.*;
 public class SupplyListsPage extends StorefrontBasePage {
     @Autowired private SupplyListsManager supplyListsManager;
 
-    private final String pageUrlMethod = "boundtree/en/USD/my-account/supply-lists";
+    private final String pageUrlMethod = "my-account/supply-lists";
 
     @Override
     public String getPageUrl() {

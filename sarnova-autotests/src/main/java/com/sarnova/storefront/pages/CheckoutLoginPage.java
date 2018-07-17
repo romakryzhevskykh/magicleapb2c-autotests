@@ -8,7 +8,7 @@ import static com.sarnova.storefront.page_elements.CheckoutLoginPageElements.*;
 
 @Component
 public class CheckoutLoginPage extends StorefrontBasePage {
-    private String pageUrlMethod = "boundtree/en/USD/login/checkout";
+    private String pageUrlMethod = "login/checkout";
 
     @Step("Fill guest email: {0}.")
     public void fillGuestEmail(String email) {
@@ -37,5 +37,10 @@ public class CheckoutLoginPage extends StorefrontBasePage {
     @Override
     public String getPageUrl() {
         return storefrontProject.getBaseUrl() + pageUrlMethod;
+    }
+
+    @Step("Click on Continue as guest.")
+    public void clickOnContinueAsGuest() {
+        click(CONTINUE_AS_GUEST_BUTTON_XPATH);
     }
 }

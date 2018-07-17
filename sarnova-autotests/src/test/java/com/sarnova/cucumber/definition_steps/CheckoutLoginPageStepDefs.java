@@ -19,6 +19,11 @@ public class CheckoutLoginPageStepDefs extends AbstractStepDefs {
         checkoutLoginPage.fillGuestEmail(randomEmail);
     }
 
+    @When("Click on Continue as guest button on Guest checkout login page.")
+    public void clickOnContinueAsGuest() {
+        checkoutLoginPage.clickOnContinueAsGuest();
+    }
+
     @When("^Enter email to guest confirm email text field on Guest checkout login page.$")
     public void enterConfirmEmailToGuestEmailField() {
         String randomEmail = threadVarsHashMap.getString(TestKeyword.GUEST_EMAIL);

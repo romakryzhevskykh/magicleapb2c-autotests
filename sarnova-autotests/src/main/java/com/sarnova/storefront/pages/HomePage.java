@@ -5,7 +5,7 @@ import ru.yandex.qatools.allure.annotations.Step;
 
 @Component
 public class HomePage extends StorefrontBasePage {
-    private final String pageUrlMethod = "boundtree/en/USD/";
+    private final String pageUrlMethod = "";
 
     public boolean isOpened() {
         return isCurrentURLEqualsToHomePageURL() && isUserLoggedIn();

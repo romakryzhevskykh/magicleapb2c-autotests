@@ -29,7 +29,7 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
     @Autowired private LoggedInHeaderRowBlock loggedInHeaderRowBlock;
 
     @Autowired private AddToCartPopUpBlock addToCartPopUpBlock;
-    private final String pageUrlMethod = "boundtree/en/USD/my-account/supply-lists/%s";
+    private final String pageUrlMethod = "my-account/supply-lists/%s";
 
     @Step("Get Supply list name from Supply list details page.")
     public String getSupplyListName() {

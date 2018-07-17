@@ -10,7 +10,7 @@ import static com.sarnova.storefront.page_elements.LoginPageElements.*;
 @Component
 public class LoginPage extends StorefrontBasePage {
 
-    private final String pageUrlMethod = "boundtree/en/USD/login";
+    private final String pageUrlMethod = "login";
 
     public void loginToStorefront(UserSession userSession) {
         fillUsernameFieldWith(userSession.getUsername());

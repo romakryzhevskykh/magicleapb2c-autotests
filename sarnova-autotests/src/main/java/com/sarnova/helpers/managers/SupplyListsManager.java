@@ -27,11 +27,11 @@ public class SupplyListsManager {
     @Autowired ProductsManager productsManager;
     @Autowired UserSessions userSessions;
 
-    private POSTRequest CREATE_NEW_SUPPLY_LIST = new POSTRequest("Create new Supply list by User session, number of products and name", "boundtree/en/USD/my-account/supply-lists/addProduct/");
-    private PUTRequest DEACTIVATE_SUPPLY_LIST = new PUTRequest("Deactivate Supply list", "boundtree/en/USD/my-account/supply-lists/%s/deactivate");
-    private PUTRequest DEACTIVATE_PRODUCT_IN_SUPPLY_LIST = new PUTRequest("Deactivate product in the Supply list", "/boundtree/en/USD/my-account/supply-lists/%s/deactivate/%s");
-    private POSTRequest CHANGE_FAVORITE_STATUS_FOR_SUPPLY_LIST = new POSTRequest("Change Supply list favorite status", "/my-account/supply-lists/%s/toggleFavorite");
-    private GETRequest SUPPLY_LIST_DETAILS_PAGE = new GETRequest("Supply list details page", "/boundtree/en/USD/my-account/supply-lists/%s");
+    private POSTRequest CREATE_NEW_SUPPLY_LIST = new POSTRequest("Create new Supply list by User session, number of products and name", "my-account/supply-lists/addProduct/");
+    private PUTRequest DEACTIVATE_SUPPLY_LIST = new PUTRequest("Deactivate Supply list", "my-account/supply-lists/%s/deactivate");
+    private PUTRequest DEACTIVATE_PRODUCT_IN_SUPPLY_LIST = new PUTRequest("Deactivate product in the Supply list", "my-account/supply-lists/%s/deactivate/%s");
+    private POSTRequest CHANGE_FAVORITE_STATUS_FOR_SUPPLY_LIST = new POSTRequest("Change Supply list favorite status", "my-account/supply-lists/%s/toggleFavorite");
+    private GETRequest SUPPLY_LIST_DETAILS_PAGE = new GETRequest("Supply list details page", "my-account/supply-lists/%s");
 
     private ArrayList<SupplyList> allSupplyLists;
     private ArrayList<SupplyList> testSupplyLists = new ArrayList<>();

@@ -15,6 +15,7 @@ import com.sarnova.helpers.models.supply_lists.SupplyList;
 import com.sarnova.helpers.models.supply_lists.SupplyListProduct;
 import com.sarnova.helpers.models.users.UserGroup;
 import com.sarnova.helpers.user_engine.*;
+import com.sarnova.pay_fabric.page_blocks.PayFabricHeaderBlock;
 import com.sarnova.pay_fabric.page_blocks.PayFabricLeftBarBlock;
 import com.sarnova.pay_fabric.pages.PayFabricLoginPage;
 import com.sarnova.storefront.page_blocks.HeaderRowPageBlock;
@@ -44,6 +45,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     @Autowired private CustomCategoriesManager customCategoriesManager;
     @Autowired private RandomUtils randomUtils;
     @Autowired private PayFabricLeftBarBlock payFabricLeftBarBlock;
+    @Autowired private PayFabricHeaderBlock payFabricHeaderBlock;
 
     @Given("^User is logged in to Storefront.$")
     public void userIsLoggedInToStorefront() {
@@ -65,6 +67,11 @@ public class PreConditionStepDefs extends AbstractStepDefs {
             payFabricLoginPage.open();
             payFabricLoginPage.loginToPayFabric(userSessions.getActiveUserSession());
         }
+    }
+
+    @Given("^Set Sandbox to non live key.$")
+    public void sandboxInNonLiveKey() {
+        payFabricHeaderBlock.setNonLiveKey();
     }
 
     @SuppressWarnings("unchecked")
@@ -355,6 +362,16 @@ public class PreConditionStepDefs extends AbstractStepDefs {
         }
     }
 
+    @And("^Test user has no any roles.$")
+    public void testUserHasNoRoles() {
+        User testUser = usersManager.getUserByUsername(threadVarsHashMap.getString(TestKeyword.TEST_USER_USERNAME));
+        if (!testUser.isInitialized())
+            usersManager.initUserGroups(userSessions.getActiveUserSession(), testUser);
+        if (!testUser.getUserRoles().isEmpty() && !(testUser.getUserRoles().size() == 1 && testUser.getUserRoles().contains(StorefrontUserRole.TEST_USER))) {
+            usersManager.removeAllUserRolesForUser(userSessions.getActiveUserSession(), testUser);
+        }
+    }
+
     @And("^Test user group has no any permissions.$")
     public void testUserGroupHasNoAnyPermissions() {
         UserGroup testUserGroup = userGroupsManager.getUserGroupByUid(threadVarsHashMap.getString(TestKeyword.TEST_USER_GROUP_UID));
@@ -377,8 +394,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
                 userGroupsManager.addPermissionToUserGroup(userSessions.getActiveUserSession(), testUserGroup, testPermission);
                 testUserGroup.getPermissions().add(testPermission);
             } else {
-                ArrayList<Permission> permissionsToRemove = new ArrayList<>();
-                permissionsToRemove.addAll(testUserGroup.getPermissions());
+                ArrayList<Permission> permissionsToRemove = new ArrayList<>(testUserGroup.getPermissions());
                 permissionsToRemove.remove(testPermission);
                 userGroupsManager.removePermissionsToUserGroup(userSessions.getActiveUserSession(), testUserGroup, permissionsToRemove);
             }

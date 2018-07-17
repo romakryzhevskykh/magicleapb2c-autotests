@@ -14,7 +14,7 @@ import static com.sarnova.storefront.page_elements.CustomCategoryPageElements.*;
 @Component
 public class CustomCategoryPage extends StorefrontBasePage {
 
-    private String pageUrlMethod = "boundtree/en/USD/custom-category";
+    private String pageUrlMethod = "custom-category";
 
     @Step("Is Custom categories tree visible?")
     public boolean isCustomCategoriesTreeVisible() {
