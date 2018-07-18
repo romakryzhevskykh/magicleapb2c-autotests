@@ -71,6 +71,7 @@ Scenario:
 	And Verify Place Order button is Disabled on Order Review page. 
 	And Click on confirmation Checkbox on Order review page. 
 	And Click on Place Order button on Order Review page.
+	# ORDER CONFIRMATION PAGE
 	And Verify OrderConfirmation page URL
 	And Verify Order Purchase number on Order Confirmation page.
 	And Verify Ship To address on Order Confirmation page.
