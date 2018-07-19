@@ -1,23 +1,23 @@
 package com.template.storefront.pages;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 
-import com.template.helpers.ShoppingCartDataHelper;
 import com.template.storefront.models.CheckoutDataModel;
 import com.template.storefront.models.ProductModel;
 
 import ru.yandex.qatools.allure.annotations.Step;
+
 import static com.template.storefront.page_elements.ShoppingCartPageElements.*;
 
 @Component
@@ -48,6 +48,7 @@ public class ShoppingCartPage extends StorefrontBasePage {
 
 	@Step("Verify current page is Cart page")
 	public void isCurrentPageUrlShoppingCartUrl() {
+		waitJSExecution();
 		String expectedUrl = getPageUrl();
 		isCurrentUrlExpectedURL(expectedUrl);
 	}
@@ -417,6 +418,7 @@ public class ShoppingCartPage extends StorefrontBasePage {
 		logger.info("Saved Subtotal price = " + shoppingCartDataHelper.getSubtotal());
 	}
 
+	@Step ("Save Shopping cart data")
 	public void savePricesTotalPricesAndSubtotal() {
 		waitJSExecution();
 		saveSubtotalValue();
@@ -424,4 +426,22 @@ public class ShoppingCartPage extends StorefrontBasePage {
 		addProductPriceMapping();
 		saveShoppingCartID();
 	}
+	
+	@Step ("Click On Cancel button in SAve Cart popup")
+	public void clickOnCancelButtonInSaveCartPopup(){
+		click(XPATH_CANCEL_SAVE_CART_POPUP);
+	}
+	
+	@Step ("Check if Save button disabled")
+	public void isSaveButtonDisabled(){
+		waitJSExecution();
+		assertFalse(isElementEnabled(XPATH_SAVE_CART_BUTTON_POPUP), "Save Cart button Enabled, butshould be Disabled");
+		logger.info("Save Cart button is Disabled");
+	}
+	
+	@Step("Fill in Cart name")
+	public void fillInCartName(String cartName){
+		fillInTextInput(cartName, XPATH_SAVE_CART_NAME_INPUT_POPUP);
+	}
+	
 }

@@ -232,5 +232,7 @@ public class OrderReviewPage extends StorefrontBasePage {
 				"Actual Subtotal/Order Total price: " + actualPrice + " is not equal to expected subtotal/Order total: " + expectedPrice);
 		logger.info("Actual Subtotal/Order Total price: " + actualPrice + " equals to expected Subtotal/Order Total: " + expectedPrice);
 	}
+	
+	
 
 }

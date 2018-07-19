@@ -8,8 +8,8 @@
 		<classes>
 			<!-- <class name="com.template.cucumber.RegistrationSuite" /> -->
 			<!-- <class name="com.template.cucumber.LoginSuite" /> -->
-			<!-- <class name="com.template.cucumber.ShoppingCartSuite" />  -->
-			<class name="com.template.cucumber.CheckOutSuite" />
+			<class name="com.template.cucumber.ShoppingCartSuite" />
+			<!-- <class name="com.template.cucumber.CheckOutSuite" /> -->
 
 		</classes>
 	</test>

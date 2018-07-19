@@ -97,10 +97,16 @@ public class OrderConfirmationPage extends OrderReviewPage {
 	public void verifySubtotalOrderConfirmation() {
 		verifySubtotal();
 	}
-	
-	@Step ("Verify Order Total")
-	public void verifyOrderTotalOrderConfirmation(){
+
+	@Step("Verify Order Total")
+	public void verifyOrderTotalOrderConfirmation() {
 		verifyOrderTotal();
+	}
+
+	@Step("Click on Continue Shopping button")
+	public void clickOnContinueShoppingButtonOrderConfirmation() {
+		waitJSExecution();
+		click(XPATH_CONTINUE_SHOPPING);
 	}
 
 }

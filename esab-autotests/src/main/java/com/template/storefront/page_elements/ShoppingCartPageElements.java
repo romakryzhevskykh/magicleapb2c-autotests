@@ -36,10 +36,13 @@ public class ShoppingCartPageElements {
 			+ " and @data-entry-product-code='%s' and @data-entry-action='REMOVE']";
 	public static final String SUBTOTAL_XPATH = "//div[@class='js-cart-totals row']"
 			+ "//div[@class='col-xs-6 cart-totals-right text-right']";
-	public static final String SAVE_CART_BUTTON_XPATH = "//button[@class='btn btn-default save__cart--link cart__head--link js-save-cart-link']";
+	public static final String SAVE_CART_BUTTON_XPATH = "//button[contains(@class, 'js-save-cart-link') ]";
 	public static final String CHECKOUT_BUTTON_XPATH = "//button[@class='btn btn-primary btn--continue-checkout js-continue-checkout-button']";
-	//public static final String REMOVE_BUTTONS_ALL_XPATH = "//li[@class='js-execute-entry-action-button' and @data-entry-action='REMOVE']";
-	//public static final String DETAILS_BUTTONS_ALL_XPATH = "//div[@class='btn-group js-cartItemDetailGroup']";
 	public static final String TOTAL_COUNT_OF_PRODUCTS = "//div[@class='item__code']";
 	public static final String PRODUCTS_QTY_FROM_CART_ICON = "//a[@href='/esab/en/cart']//span[@class='value-cart']";
+	public static final String XPATH_CANCEL_SAVE_CART_POPUP = "//button[@id='cancelSaveCartButton']";
+	public static final String XPATH_SAVE_CART_BUTTON_POPUP = "//button[@id='saveCartButton']";
+	//input[@id='saveCartName']
+	public static final String XPATH_SAVE_CART_NAME_INPUT_POPUP = "//input[@id='saveCartName']";
+	
 }

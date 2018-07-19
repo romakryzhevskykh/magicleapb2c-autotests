@@ -10,9 +10,11 @@ Scenario: Check Shopping Cart Layout
 	Then Verify current page is Home page. 
 	Then Check that user is logged in ESAB. 
 	Then Navigate to Shopping Cart by icon in the header. 
+	# SHOPPING CART PAGE
 	Then Verify current page is Shopping Cart page. 
 	And Verify h2 header1 on Shopping cart. 
 	And Verify h2 header2 on Shopping cart. 
+	And Remove all products on Shopping Cart.
 	And Verify Header2 subtitle on Shopping Cart. 
 	And Verify Ship-To address value on Shopping Cart. 
 	And Select Ship To address on Shopping Cart. 
@@ -33,9 +35,13 @@ Scenario: Check Shopping Cart Layout
 	And Verify Subtotal price on Shopping Cart.
 	And Verify Save Cart button label.
 	And Verify Check Out button label.
-	And Click on Check Out button.
-	#And Click on Save shopping cart button. 
+	#And Click on Check Out button.
+	And Click on Save shopping cart button. 
+	And Verify is Save Cart button disabled in Save Cart Popup on Shopping Cart page.
+	And Fill in Shopping cart name in Save Cart Popup on Shopping Cart page.
+	#And Verify is Save Cart button disabled in Save Cart Popup on Shopping Cart page.
+	And Click on Cancel button in Save Cart Popup on Shopping Cart page.
 	And Remove all products by SCU on Shopping Cart. 
-	#And Verify SKU Inputs count on Shopping Cart is: "2" . 
+	And Verify SKU Inputs count on Shopping Cart is: "2" . 
 	
 	

@@ -157,4 +157,19 @@ public class ShoppingCartPageDefs extends AbstractStepDefs {
 	public void removeAllProducts(){
 		shoppingCartPage.removeAllProducts();
 	}
+	
+	@And("^Click on Cancel button in Save Cart Popup on Shopping Cart page.$")
+	public void clickOnCancelSaveCartPopup(){
+		shoppingCartPage.clickOnCancelButtonInSaveCartPopup();
+	}
+	
+	@And ("^Verify is Save Cart button disabled in Save Cart Popup on Shopping Cart page.$")
+	public void isSaveCartButtonDisabledPopup(){
+		shoppingCartPage.isSaveButtonDisabled();
+	}
+	
+	@And("^Fill in Shopping cart name in Save Cart Popup on Shopping Cart page.$")
+	public void fillInShoppingCartNameSAveCartPopup(){
+		shoppingCartPage.fillInCartName("Cart name 1");
+	}
 }

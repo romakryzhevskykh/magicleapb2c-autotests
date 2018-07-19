@@ -86,3 +86,8 @@ Scenario:
 	And Verify Product Total Prices on Order Confirmation page.
 	And Verify Product Subtotal on Order Confirmation page.
 	And Verify Order Total on Order Confirmation page.
+	And Click on Continue Shopping on Order Confirmation page.
+		#SHOPPING CART PAGE 
+	Then Verify current page is Shopping Cart page. 
+	And Verify Ship-To address value on Shopping Cart.
+	
