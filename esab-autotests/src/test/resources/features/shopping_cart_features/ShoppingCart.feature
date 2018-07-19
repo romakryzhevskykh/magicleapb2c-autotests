@@ -36,6 +36,7 @@ Scenario: Check Shopping Cart Layout
 	And Verify Save Cart button label.
 	And Verify Check Out button label.
 	#And Click on Check Out button.
+	And Save Products information added to the cart on Shopping Cart page.
 	And Click on Save shopping cart button. 
 	And Verify is Save Cart button disabled in Save Cart Popup on Shopping Cart page.
 	And Fill in Shopping cart name in Save Cart Popup on Shopping Cart page.

@@ -287,8 +287,7 @@ public class ShoppingCartPage extends StorefrontBasePage {
 		}
 	}
 
-	@Step("Remove all Products")
-	public void removeAllProducts() {
+	private List<String> getListOfAddedSCUS() {
 		waitJSExecution();
 		WebElement productQtyElement = getWebElement(PRODUCTS_QTY_FROM_CART_ICON);
 		String productQtyNumber = productQtyElement.getText().trim();
@@ -300,21 +299,50 @@ public class ShoppingCartPage extends StorefrontBasePage {
 				for (WebElement element : elements) {
 					String elementValue = element.getText().trim();
 					elValues.add(elementValue);
+					logger.info("SCUs: " + elValues);
 				}
-				if (!elValues.isEmpty()) {
-					for (String elValue : elValues) {
-						logger.info("Web element SCU to be removed: " + elValue);
-						click(String.format(PRODUCT_DETAILS_BUTTON_XPATH, elValue));
-						click(String.format(PRODUCT_REMOVE_BUTTON_XPATH, elValue));
-					}
-				}else{
-					logger.info("Products SCU list is not allocated");
-				}
-			}else{
+				return elValues;
+			} else {
 				logger.error("List of elements is null");
 			}
 		} else {
 			logger.info("There is no Products in the cart");
+		}
+		return null;
+	}
+
+	@Step("Remove all Products")
+	public void removeAllProducts() {
+		List<String> elValues = getListOfAddedSCUS();
+		if (elValues != null) {
+			for (String elValue : elValues) {
+				logger.info("Web element SCU to be removed: " + elValue);
+				click(String.format(PRODUCT_DETAILS_BUTTON_XPATH, elValue));
+				click(String.format(PRODUCT_REMOVE_BUTTON_XPATH, elValue));
+			}
+		} else {
+			logger.info("Products SCU list is not allocated");
+		}
+	}
+
+	private void saveListOfSCUs() {
+		List<String> elValues = getListOfAddedSCUS();
+		if (elValues != null) {
+			shoppingCartDataHelper.setshoppingCartProductSCUs(elValues);
+			logger.info("Saved SCUs: " + shoppingCartDataHelper.getshoppingCartProductSCUs());
+		} else {
+			logger.info("Products SCU list is not allocated");
+		}
+
+	}
+
+	private void saveListOfProductsInCart(List<String> productSCUs) {
+		if (!productSCUs.isEmpty()) {
+			for (String scu : productSCUs) {
+				String productNameByScu = getWebElement(String.format(PRODUCT_NAME_ELEMENT_XPATH, scu)).getText()
+						.trim();
+				shoppingCartDataHelper.addScuProductToMap(scu, productNameByScu);
+			}
 		}
 	}
 
@@ -364,14 +392,12 @@ public class ShoppingCartPage extends StorefrontBasePage {
 		click(CHECKOUT_BUTTON_XPATH);
 	}
 
-	private void addProductPriceMapping() {
-		if (products != null) {
-			for (ProductModel product : products) {
-				String productScu = product.getScu();
-				String actualPriceRaw = getWebElement(String.format(PRODUCT_PRICE_XPATH, productScu)).getText().trim();
+	private void addProductPriceMapping(List<String> productSCUs) {
+		if (!productSCUs.isEmpty()) {
+			for (String scu : productSCUs) {
+				String actualPriceRaw = getWebElement(String.format(PRODUCT_PRICE_XPATH, scu)).getText().trim();
 				logger.info("Raw Price = " + actualPriceRaw);
-				String productNameByScu = getWebElement(String.format(PRODUCT_NAME_ELEMENT_XPATH, productScu)).getText()
-						.trim();
+				String productNameByScu = shoppingCartDataHelper.getScuProductMap().get(scu);
 				String actualPrice = getPriceWithoutDollarChar(actualPriceRaw);
 				float actualPriceNumber = castStringToFloat(actualPrice);
 				shoppingCartDataHelper.addProductNamePriceToMap(productNameByScu, actualPriceNumber);
@@ -383,17 +409,13 @@ public class ShoppingCartPage extends StorefrontBasePage {
 						+ productWithPrices.get(products.get(i).getProductName()));
 			}
 		}
-
 	}
 
-	private void addProductNameTotalPriceMapping() {
-		if (products != null) {
-			for (ProductModel product : products) {
-				String productScu = product.getScu();
-				String productNameByScu = getWebElement(String.format(PRODUCT_NAME_ELEMENT_XPATH, productScu)).getText()
-						.trim();
-				String actualTotalPriceRaw = getWebElement(String.format(PRODUCT_TOTAL_PRICE, productScu)).getText()
-						.trim();
+	private void addProductNameTotalPriceMapping(List<String> productSCUs) {
+		if (!productSCUs.isEmpty()) {
+			for (String scu : productSCUs) {
+				String productNameByScu = shoppingCartDataHelper.getScuProductMap().get(scu);
+				String actualTotalPriceRaw = getWebElement(String.format(PRODUCT_TOTAL_PRICE, scu)).getText().trim();
 				logger.info("Raw total price = " + actualTotalPriceRaw);
 				String actualTotalPrice = getPriceWithoutDollarChar(actualTotalPriceRaw);
 				float totalPriceNumber = castStringToFloat(actualTotalPrice);
@@ -409,7 +431,6 @@ public class ShoppingCartPage extends StorefrontBasePage {
 	}
 
 	private void saveSubtotalValue() {
-
 		String actualSubTotalRaw = getWebElement(SUBTOTAL_XPATH).getText().trim();
 		logger.info("Subtotal price = " + actualSubTotalRaw);
 		String actualSubtotal = getPriceWithoutDollarChar(actualSubTotalRaw);
@@ -418,30 +439,33 @@ public class ShoppingCartPage extends StorefrontBasePage {
 		logger.info("Saved Subtotal price = " + shoppingCartDataHelper.getSubtotal());
 	}
 
-	@Step ("Save Shopping cart data")
+	@Step("Save Shopping cart data")
 	public void savePricesTotalPricesAndSubtotal() {
 		waitJSExecution();
+		saveListOfSCUs();
+		List<String> productSCUs = shoppingCartDataHelper.getshoppingCartProductSCUs();
 		saveSubtotalValue();
-		addProductNameTotalPriceMapping();
-		addProductPriceMapping();
+		saveListOfProductsInCart(productSCUs);
+		addProductNameTotalPriceMapping(productSCUs);
+		addProductPriceMapping(productSCUs);
 		saveShoppingCartID();
 	}
-	
-	@Step ("Click On Cancel button in SAve Cart popup")
-	public void clickOnCancelButtonInSaveCartPopup(){
+
+	@Step("Click On Cancel button in SAve Cart popup")
+	public void clickOnCancelButtonInSaveCartPopup() {
 		click(XPATH_CANCEL_SAVE_CART_POPUP);
 	}
-	
-	@Step ("Check if Save button disabled")
-	public void isSaveButtonDisabled(){
+
+	@Step("Check if Save button disabled")
+	public void isSaveButtonDisabled() {
 		waitJSExecution();
 		assertFalse(isElementEnabled(XPATH_SAVE_CART_BUTTON_POPUP), "Save Cart button Enabled, butshould be Disabled");
 		logger.info("Save Cart button is Disabled");
 	}
-	
+
 	@Step("Fill in Cart name")
-	public void fillInCartName(String cartName){
+	public void fillInCartName(String cartName) {
 		fillInTextInput(cartName, XPATH_SAVE_CART_NAME_INPUT_POPUP);
 	}
-	
+
 }

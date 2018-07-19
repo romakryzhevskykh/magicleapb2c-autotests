@@ -14,9 +14,15 @@ public class ShoppingCartDataHelper {
 	final static Logger logger = Logger.getLogger(ShoppingCartDataHelper.class);
 	private Map<String, Float> productWithPrices = new HashMap<String, Float>();
 	private Map<String, Float> productWithTotalPrices = new HashMap<String, Float>();
+	private List<String> shoppingCartProductSCUs = new ArrayList<String>();
 	private String shoppingCartID = "";
+	private Map<String, String> scuProductMap = new HashMap<String, String>();
 
 	public ShoppingCartDataHelper() {
+	}
+
+	public List<String> getshoppingCartProductSCUs() {
+		return shoppingCartProductSCUs;
 	}
 
 	public float getSubtotal() {
@@ -35,12 +41,24 @@ public class ShoppingCartDataHelper {
 		return shoppingCartID;
 	}
 
+	public Map<String, String> getScuProductMap() {
+		return scuProductMap;
+	}
+
 	public void setSubtotal(float subtotal) {
 		this.subtotal = subtotal;
 	}
 
+	public void setshoppingCartProductSCUs(List<String> shoppingCartProductSCUs) {
+		this.shoppingCartProductSCUs = shoppingCartProductSCUs;
+	}
+
 	public void setShoppingCartID(String shoppingCartID) {
 		this.shoppingCartID = shoppingCartID;
+	}
+
+	public void addScuProductToMap(String scu, String productName) {
+		scuProductMap.put(scu, productName);
 	}
 
 	public void addProductNamePriceToMap(String name, float price) {

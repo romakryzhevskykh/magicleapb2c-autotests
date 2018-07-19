@@ -148,7 +148,7 @@ public class ShoppingCartPageDefs extends AbstractStepDefs {
 		shoppingCartPage.clickOnCheckOutButton();
 	}
 	
-	@And("^Save Product Price, Product Total Price, Products Subtotal of Products on Shopping Cart page.$")
+	@And("^Save Products information added to the cart on Shopping Cart page.$")
 	public void testGetMap(){
 		shoppingCartPage.savePricesTotalPricesAndSubtotal();
 	}

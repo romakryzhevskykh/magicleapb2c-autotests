@@ -17,7 +17,7 @@ Scenario:
 	And Remove all products on Shopping Cart.
 	Then Fill in SCU and Qty from Product Model. 
 	And Click on Add these products to shopping cart button. 
-	And Save Product Price, Product Total Price, Products Subtotal of Products on Shopping Cart page.
+	And Save Products information added to the cart on Shopping Cart page.
 	And Verify Check Out button label. 
 	And Click on Check Out button. 
 	#SHIPPING ADDR PAGE
