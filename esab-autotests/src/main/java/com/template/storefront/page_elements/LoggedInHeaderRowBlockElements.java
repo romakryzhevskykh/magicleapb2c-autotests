@@ -10,5 +10,6 @@ public class LoggedInHeaderRowBlockElements {
     public static final String WELCOME_TO_DASHBOARD_NAME = "//div[@class='top-info']//h2[normalize-space(text())]";
     public static final String CUSTOMER_NAME = "Customer";
     public static final String CART_ICON_XPATH="//a[@href='/esab/en/cart']";
+    public static final String XPATH_SAVED_CARTS_PAGE="//li[@class='yCmsComponent']//a[@href='/my-account/saved-carts']";
 
 }

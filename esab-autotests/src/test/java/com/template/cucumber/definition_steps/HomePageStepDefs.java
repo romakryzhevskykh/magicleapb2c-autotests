@@ -67,4 +67,9 @@ public class HomePageStepDefs extends AbstractStepDefs {
     	homePage.navigateToShoppingCartByIcon();
     }
     
+    @Then("^Navigate to Saved Carts page by link in the Header.$")
+    public void navigateToSavedCartsPage(){
+    	homePage.navigateToSavedCartsPage();
+    }
+    
 }

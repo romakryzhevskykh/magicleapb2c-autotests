@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
@@ -280,9 +281,19 @@ public class ShoppingCartPage extends StorefrontBasePage {
 		if (products != null) {
 			for (ProductModel product : products) {
 				String productSCU = product.getScu();
+				// TODO Need to refactor in future. Sometimes element is not
+				// attached webdriver message shown on attempt to delete
+				// products.
+				try {
+					TimeUnit.SECONDS.sleep(3);
+				} catch (InterruptedException e) {
+					logger.info("Time Unit method failed");
+				}
 				logger.info("Delete product by SCU: " + productSCU);
 				click(String.format(PRODUCT_DETAILS_BUTTON_XPATH, productSCU));
+				logger.info("Click on product details button");
 				click(String.format(PRODUCT_REMOVE_BUTTON_XPATH, productSCU));
+				logger.info("Click on Remove button");
 			}
 		}
 	}
@@ -439,6 +450,18 @@ public class ShoppingCartPage extends StorefrontBasePage {
 		logger.info("Saved Subtotal price = " + shoppingCartDataHelper.getSubtotal());
 	}
 
+	private void saveQtyValue(List<String> productSCUs) {
+		if (!productSCUs.isEmpty()) {
+			List<String> qtys = new ArrayList<String>();
+			for (String scu : productSCUs) {
+				String actualQty = getWebElement(String.format(PRODUCT_QTY_XPATH, scu)).getAttribute("value").trim();
+				qtys.add(actualQty);
+				shoppingCartDataHelper.setQtyValuesList(qtys);
+			}
+			logger.info("Saved Qtys: " + Arrays.asList(shoppingCartDataHelper.getQtyValuesList()));
+		}
+	}
+
 	@Step("Save Shopping cart data")
 	public void savePricesTotalPricesAndSubtotal() {
 		waitJSExecution();
@@ -448,6 +471,7 @@ public class ShoppingCartPage extends StorefrontBasePage {
 		saveListOfProductsInCart(productSCUs);
 		addProductNameTotalPriceMapping(productSCUs);
 		addProductPriceMapping(productSCUs);
+		saveQtyValue(productSCUs);
 		saveShoppingCartID();
 	}
 
@@ -466,6 +490,16 @@ public class ShoppingCartPage extends StorefrontBasePage {
 	@Step("Fill in Cart name")
 	public void fillInCartName(String cartName) {
 		fillInTextInput(cartName, XPATH_SAVE_CART_NAME_INPUT_POPUP);
+	}
+
+	@Step("Fill in Cart Description")
+	public void fillInCartDescription(String cartDescription) {
+		fillInTextInput(cartDescription, XPATH_SAVE_CART_DESCRIPTION_TEXTAREA_POPUP);
+	}
+
+	@Step("Click on save button in Save Cart popup")
+	public void clickOnSaveButtonInPopup() {
+		click(XPATH_SAVE_CART_BUTTON_POPUP);
 	}
 
 }

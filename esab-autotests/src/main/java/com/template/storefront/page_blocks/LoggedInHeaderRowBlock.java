@@ -48,7 +48,15 @@ public class LoggedInHeaderRowBlock extends BasePageObject {
         $(MY_ACCOUNT_ADDRESS_BOOK_XPATH).click();
     }
     
+    @Step("Navigate to Shopping cart by icon")
     public void navigateToShoppingCartByIcon(){
     	click(CART_ICON_XPATH);
     }
+    
+    @Step("Navigate to Saved Carts Page")
+    public void navigateToSavedCarts(){
+    	click(XPATH_SAVED_CARTS_PAGE);
+    }
+    
+    
 }

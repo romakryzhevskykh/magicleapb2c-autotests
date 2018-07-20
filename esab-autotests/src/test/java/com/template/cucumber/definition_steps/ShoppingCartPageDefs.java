@@ -147,29 +147,39 @@ public class ShoppingCartPageDefs extends AbstractStepDefs {
 	public void clickOnCheckOutButton() {
 		shoppingCartPage.clickOnCheckOutButton();
 	}
-	
+
 	@And("^Save Products information added to the cart on Shopping Cart page.$")
-	public void testGetMap(){
+	public void testGetMap() {
 		shoppingCartPage.savePricesTotalPricesAndSubtotal();
 	}
 
 	@And("^Remove all products on Shopping Cart.$")
-	public void removeAllProducts(){
+	public void removeAllProducts() {
 		shoppingCartPage.removeAllProducts();
 	}
-	
+
 	@And("^Click on Cancel button in Save Cart Popup on Shopping Cart page.$")
-	public void clickOnCancelSaveCartPopup(){
+	public void clickOnCancelSaveCartPopup() {
 		shoppingCartPage.clickOnCancelButtonInSaveCartPopup();
 	}
-	
-	@And ("^Verify is Save Cart button disabled in Save Cart Popup on Shopping Cart page.$")
-	public void isSaveCartButtonDisabledPopup(){
+
+	@And("^Verify is Save Cart button disabled in Save Cart Popup on Shopping Cart page.$")
+	public void isSaveCartButtonDisabledPopup() {
 		shoppingCartPage.isSaveButtonDisabled();
 	}
+
+	@And("^Fill in Shopping cart name: \"(.*)\" in Save Cart Popup on Shopping Cart page.$")
+	public void fillInShoppingCartNameSaveCartPopup(String shoppingCartName) {
+		shoppingCartPage.fillInCartName(shoppingCartName);
+	}
+
+	@And("^Fill in Shopping cart description: \"(.*)\" in Save Cart Popup on Shopping Cart page.$")
+	public void fillInShoppingCartDescriptionSaveCartPopup(String shoppingCartDescription) {
+		shoppingCartPage.fillInCartDescription(shoppingCartDescription);
+	}
 	
-	@And("^Fill in Shopping cart name in Save Cart Popup on Shopping Cart page.$")
-	public void fillInShoppingCartNameSAveCartPopup(){
-		shoppingCartPage.fillInCartName("Cart name 1");
+	@And("^Click on Save button in Save Cart popup on Shopping page.$")
+	public void clickSaveInPopup(){
+		shoppingCartPage.clickOnSaveButtonInPopup();
 	}
 }

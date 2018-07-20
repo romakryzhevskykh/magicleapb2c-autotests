@@ -37,6 +37,11 @@ public class HomePage extends StorefrontBasePage {
 	public void navigateToShoppingCartByIcon() {
 		headerRowPageBlock.navigateToShoppingCartByIcon();
 	}
+	
+	@Step("Navigate to Saved Carts page")
+	public void navigateToSavedCartsPage(){
+		headerRowPageBlock.navigateToSavedCartsPage();
+	}
 
 	@Override
 	public String getPageUrl() {

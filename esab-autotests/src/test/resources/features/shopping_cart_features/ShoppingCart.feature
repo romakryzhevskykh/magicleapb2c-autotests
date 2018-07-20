@@ -39,9 +39,15 @@ Scenario: Check Shopping Cart Layout
 	And Save Products information added to the cart on Shopping Cart page.
 	And Click on Save shopping cart button. 
 	And Verify is Save Cart button disabled in Save Cart Popup on Shopping Cart page.
-	And Fill in Shopping cart name in Save Cart Popup on Shopping Cart page.
+	And Fill in Shopping cart name: "Shopping Cart 1" in Save Cart Popup on Shopping Cart page.
+	And Fill in Shopping cart description: "Shopping Cart Description 1" in Save Cart Popup on Shopping Cart page.
 	#And Verify is Save Cart button disabled in Save Cart Popup on Shopping Cart page.
 	And Click on Cancel button in Save Cart Popup on Shopping Cart page.
+	And Click on Save shopping cart button.
+	And Fill in Shopping cart name: "Shopping Cart 1" in Save Cart Popup on Shopping Cart page.
+	And Fill in Shopping cart description: "Shopping Cart Description 1" in Save Cart Popup on Shopping Cart page.
+	And Click on Save button in Save Cart popup on Shopping page.
+	Then Verify current page is Shopping Cart page.
 	And Remove all products by SCU on Shopping Cart. 
 	And Verify SKU Inputs count on Shopping Cart is: "2" . 
 	

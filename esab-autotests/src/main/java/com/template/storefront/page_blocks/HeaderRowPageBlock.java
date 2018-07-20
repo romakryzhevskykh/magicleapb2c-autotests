@@ -38,4 +38,9 @@ public class HeaderRowPageBlock {
     public void navigateToShoppingCartByIcon(){
     	loggedInHeaderRowBlock.navigateToShoppingCartByIcon();
     }
+    
+    @Step("Navigate to Saved Carts Page")
+    public void navigateToSavedCartsPage(){
+    	loggedInHeaderRowBlock.navigateToSavedCarts();
+    }
 }

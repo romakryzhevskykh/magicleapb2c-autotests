@@ -17,8 +17,13 @@ public class ShoppingCartDataHelper {
 	private List<String> shoppingCartProductSCUs = new ArrayList<String>();
 	private String shoppingCartID = "";
 	private Map<String, String> scuProductMap = new HashMap<String, String>();
+	private List<String> qtyValuesList = new ArrayList<String>();
 
 	public ShoppingCartDataHelper() {
+	}
+
+	public List<String> getQtyValuesList() {
+		return qtyValuesList;
 	}
 
 	public List<String> getshoppingCartProductSCUs() {
@@ -55,6 +60,10 @@ public class ShoppingCartDataHelper {
 
 	public void setShoppingCartID(String shoppingCartID) {
 		this.shoppingCartID = shoppingCartID;
+	}
+
+	public void setQtyValuesList(List<String> qtyValuesList) {
+		this.qtyValuesList = qtyValuesList;
 	}
 
 	public void addScuProductToMap(String scu, String productName) {
