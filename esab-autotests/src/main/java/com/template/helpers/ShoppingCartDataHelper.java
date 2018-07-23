@@ -18,6 +18,7 @@ public class ShoppingCartDataHelper {
 	private String shoppingCartID = "";
 	private Map<String, String> scuProductMap = new HashMap<String, String>();
 	private List<String> qtyValuesList = new ArrayList<String>();
+	private String savedCardName = "";
 
 	public ShoppingCartDataHelper() {
 	}
@@ -50,6 +51,10 @@ public class ShoppingCartDataHelper {
 		return scuProductMap;
 	}
 
+	public String getSavedCardName() {
+		return savedCardName;
+	}
+
 	public void setSubtotal(float subtotal) {
 		this.subtotal = subtotal;
 	}
@@ -64,6 +69,10 @@ public class ShoppingCartDataHelper {
 
 	public void setQtyValuesList(List<String> qtyValuesList) {
 		this.qtyValuesList = qtyValuesList;
+	}
+
+	public void setSavedCardName(String savedCardName) {
+		this.savedCardName = savedCardName;
 	}
 
 	public void addScuProductToMap(String scu, String productName) {

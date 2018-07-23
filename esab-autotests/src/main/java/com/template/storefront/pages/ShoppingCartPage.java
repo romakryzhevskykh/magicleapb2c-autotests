@@ -500,6 +500,16 @@ public class ShoppingCartPage extends StorefrontBasePage {
 	@Step("Click on save button in Save Cart popup")
 	public void clickOnSaveButtonInPopup() {
 		click(XPATH_SAVE_CART_BUTTON_POPUP);
+		try {
+			TimeUnit.SECONDS.sleep(3);
+		} catch (InterruptedException e) {
+			logger.info("Time Unit method failed");
+		}
+	}
+	
+	@Step("Save Shopping Cart name during saving")
+	public void saveShoppingCartName(String savedCardName){
+		shoppingCartDataHelper.setSavedCardName(savedCardName);
 	}
 
 }

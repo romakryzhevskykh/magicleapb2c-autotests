@@ -25,4 +25,9 @@ public class SavedCartsPage extends StorefrontBasePage {
 		String expectedUrl = getPageUrl();
 		isCurrentUrlExpectedURL(expectedUrl);
 	}
+	
+	@Step ("Go to Saved cart details page")
+	public void goToSavedCartDetails(){
+		click(String.format(XPATH_SAVED_CART_NAME, shoppingCartDataHelper.getSavedCardName()));
+	}
 }

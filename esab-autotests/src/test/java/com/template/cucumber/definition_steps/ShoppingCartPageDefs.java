@@ -171,6 +171,7 @@ public class ShoppingCartPageDefs extends AbstractStepDefs {
 	@And("^Fill in Shopping cart name: \"(.*)\" in Save Cart Popup on Shopping Cart page.$")
 	public void fillInShoppingCartNameSaveCartPopup(String shoppingCartName) {
 		shoppingCartPage.fillInCartName(shoppingCartName);
+		shoppingCartPage.saveShoppingCartName(shoppingCartName);
 	}
 
 	@And("^Fill in Shopping cart description: \"(.*)\" in Save Cart Popup on Shopping Cart page.$")

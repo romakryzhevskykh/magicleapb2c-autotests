@@ -40,6 +40,7 @@ public class HomePage extends StorefrontBasePage {
 	
 	@Step("Navigate to Saved Carts page")
 	public void navigateToSavedCartsPage(){
+		waitJSExecution();
 		headerRowPageBlock.navigateToSavedCartsPage();
 	}
 

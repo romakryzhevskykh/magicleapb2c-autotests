@@ -23,5 +23,10 @@ public class SavedCartsPageStepDefs extends AbstractStepDefs {
 	public void verifyCaurrentPageIsSavedCatrtsPage() {
 		savedCartsPage.isCurrentPageUrlSavedCartsUrl();
 	}
+	
+	@Then ("^Click on Saved Cart name on Shoppin Carts page.$")
+	public void clickOnSavedCartName(){
+		savedCartsPage.goToSavedCartDetails();
+	}
 
 }
