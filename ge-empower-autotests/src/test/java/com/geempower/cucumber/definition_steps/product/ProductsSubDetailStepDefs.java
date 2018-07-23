@@ -4,9 +4,7 @@ import com.geempower.cucumber.definition_steps.AbstractStepDefs;
 import com.geempower.cucumber.definition_steps.TestKeyword;
 import com.geempower.helpers.models.Product;
 import com.geempower.storefront.pages.product.ProductSubDetailPage;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import cucumber.api.java.en.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
@@ -54,5 +52,12 @@ public class ProductsSubDetailStepDefs extends AbstractStepDefs {
             double finalNetPrice = Double.parseDouble(product.getFinalNetPrice());
             assertEquals(finalNetPrice, Double.parseDouble(productSubDetailPage.getOrderValueFromCheckoutPopUp()), delta);
         });
+    }
+
+    @When("^User clicks on catalogNo link.$")
+    public void userClicksOnCatalogNoLink() {
+        threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
+        String catalogNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
+        productSubDetailPage.clickOnCatalogNoLink(catalogNo);
     }
 }
