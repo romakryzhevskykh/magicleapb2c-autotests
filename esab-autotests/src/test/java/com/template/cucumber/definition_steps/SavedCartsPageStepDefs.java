@@ -28,5 +28,10 @@ public class SavedCartsPageStepDefs extends AbstractStepDefs {
 	public void clickOnSavedCartName(){
 		savedCartsPage.goToSavedCartDetails();
 	}
+	
+	@Then("^Get number of saved carts on Shopping Carts page.$")
+	public void getNumberOfSavedCarts(){
+		savedCartsPage.getSavedCartsNumber();
+	}
 
 }

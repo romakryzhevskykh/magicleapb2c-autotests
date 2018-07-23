@@ -22,6 +22,7 @@ Scenario: Save Cart and Verify
 	Then Navigate to Saved Carts page by link in the Header.
 	#SAVED CARTS PAGE
 	And Verify current page is Saved Carts page.
+	And Get number of saved carts on Shopping Carts page.
 	And Click on Saved Cart name on Shoppin Carts page.
 	#SAVED CART DETAILS
 	And Verify current page is Saved Cart Details Page.

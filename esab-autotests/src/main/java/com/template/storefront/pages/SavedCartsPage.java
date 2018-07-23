@@ -11,6 +11,7 @@ import static com.template.storefront.page_elements.SavedCartsPageElements.*;
 public class SavedCartsPage extends StorefrontBasePage {
 	final static Logger logger = Logger.getLogger(SavedCartsPage.class);
 	private String pageUrlMethod = "/my-account/saved-carts";
+	private final int maxNumberOfCartsOnThePage = 5;
 
 	@Override
 	public String getPageUrl() {
@@ -18,16 +19,24 @@ public class SavedCartsPage extends StorefrontBasePage {
 		logger.info("Saved Carts URL: " + savedCartsPageURL);
 		return savedCartsPageURL;
 	}
-	
+
 	@Step("Verify current page is Saved Carts page")
-	public void isCurrentPageUrlSavedCartsUrl(){
+	public void isCurrentPageUrlSavedCartsUrl() {
 		waitJSExecution();
 		String expectedUrl = getPageUrl();
 		isCurrentUrlExpectedURL(expectedUrl);
 	}
-	
-	@Step ("Go to Saved cart details page")
-	public void goToSavedCartDetails(){
+
+	@Step("Go to Saved cart details page")
+	public void goToSavedCartDetails() {
 		click(String.format(XPATH_SAVED_CART_NAME, shoppingCartDataHelper.getSavedCardName()));
+	}
+
+	@Step("Get number of carts")
+	public void getSavedCartsNumber() {
+		int countOfCartsOnthePage = parsePaginationBarResults(XPATH_SAVED_CARTS_LIST, XPATH_PAGINATION_BAR_RESULTS,
+				"Saved", maxNumberOfCartsOnThePage);
+		savedCartsDataExchanger.setSavedCartsCount(countOfCartsOnthePage);
+		logger.info("Qty of saved carts in the list: " + savedCartsDataExchanger.getSavedCartsCount());
 	}
 }
