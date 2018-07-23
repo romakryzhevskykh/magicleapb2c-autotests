@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static com.template.storefront.page_elements.SavedCartsPageElements.XPATH_PAGINATION_BAR_RESULTS;
+import static com.template.storefront.page_elements.SavedCartsPageElements.XPATH_SAVED_CARTS_LIST;
 import static org.testng.Assert.assertEquals;
 
 import java.util.ArrayList;
@@ -28,6 +30,8 @@ public abstract class BasePageObject {
 	protected CheckoutDataController checkoutDataController;
 	@Autowired
 	protected ShoppingCartDataHelper shoppingCartDataHelper;
+	@Autowired
+	protected SavedCartsDataExchanger savedCartsDataExchanger;
 
 	final static Logger logger = Logger.getLogger(BasePageObject.class);
 	private WebDriverWait wait;
@@ -371,6 +375,50 @@ public abstract class BasePageObject {
 		isEnabled = getDriver().findElement(By.xpath(xpath)).isEnabled();
 		logger.info("Is Element enabled is: " + isEnabled);
 		return isEnabled;
+	}
+
+	// Method returns qty of rows in the table which has Pagination and
+	// Pagination results bar in format "<some rows qty> of <all rows qty> <Name
+	// of elements (Rows)>".
+	// Usage: Need to provide:
+	// 1. String xpathOfElementOnThePage - xpath locator of any row in the
+	// table,
+	// 2. String xpathPaginationBarResultsString - xpath locator of Pagination
+	// results string,
+	// 3. String wordAfterElementsQty - the words which is follow just after the
+	// number of elements in the table,
+	// 4. int defaultNumberOfElementsOnThePage - maxQty of the rows per page
+	// Example:
+	// 1. XPATH_SAVED_CARTS_LIST - xpath which provide possibility to locate row
+	// on Saved Carts list
+	// 2. XPATH_PAGINATION_BAR_RESULTS - xpath which provide possibility to
+	// locate pagination results string (1 - 5 of 6 Saved Carts)
+	// 3. "Saved" - pagination results string is (1 - 5 of 6 Saved Carts)
+	// 4. maxNumberOfCartsOnThePage - any int the qty of rows per page
+	// parsePaginationBarResults(XPATH_SAVED_CARTS_LIST,
+	// XPATH_PAGINATION_BAR_RESULTS, "Saved", maxNumberOfCartsOnThePage);
+	
+	public int parsePaginationBarResults(String xpathOfElementOnThePage, String xpathPaginationBarResultsString,
+			String wordAfterElementsQty, int maxNumberOfRowsInTheTAble) {
+		int countOfRowsInTheTable = getWebElements(xpathOfElementOnThePage).size();
+		boolean moreThanDefaultElementsInTheList = false;
+		if (countOfRowsInTheTable == maxNumberOfRowsInTheTAble) {
+			String paginationResultsString = getWebElement(xpathPaginationBarResultsString).getText().trim();
+			moreThanDefaultElementsInTheList = paginationResultsString.contains("of");
+			if (moreThanDefaultElementsInTheList) {
+				int firstIndexOfElementsQty = paginationResultsString.lastIndexOf("of") + 2;
+				logger.info("OF substring last index is: " + firstIndexOfElementsQty);
+				int lastIndexElementsQty = paginationResultsString.indexOf(wordAfterElementsQty);
+				logger.info(wordAfterElementsQty + " substring first index is: " + lastIndexElementsQty);
+				String numberOfElementsText = paginationResultsString
+						.subSequence(firstIndexOfElementsQty, lastIndexElementsQty).toString().trim();
+				logger.info("Number of elements in text format: " + numberOfElementsText);
+				countOfRowsInTheTable = Integer.parseInt(numberOfElementsText);
+			} else {
+				countOfRowsInTheTable = maxNumberOfRowsInTheTAble;
+			}
+		}
+		return countOfRowsInTheTable;
 	}
 
 }
