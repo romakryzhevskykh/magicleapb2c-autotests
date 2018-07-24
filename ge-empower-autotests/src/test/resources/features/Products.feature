@@ -51,7 +51,7 @@ Feature: Some actions on Products page
 #      | ASIA          |
 #      | EMEA          |
 
-  Scenario Outline: Check that user is able to place order from the Products pageAnd Account management page is opened.
+  Scenario Outline: Check that user is able to open PDP and check Product Detail and P&A tabs.
     And Account management page is opened.
     When Choose <region> region.
     And Search random account for chosen region.
@@ -62,9 +62,22 @@ Feature: Some actions on Products page
     Then Product sub-detail page is opened.
     When User clicks on catalogNo link.
     Then PDP page is opened.
-    Then Catalog No. number header is displayed.
-    Then Product Details panel title is displayed.
+    Then Is Catalog No. number header displayed on PDP page.
+    Then Is Product Details panel title and image displayed in Product Details block on PDP page.
+    Then Is Add to Cart button displayed in Product Details block on PDP page.
+    Then Is active Product Details Tab Selected on PDP page.
+    Then Is Product Summary header title in Product Detail tab displayed.
+    Then Check that product details table contains correct titles <product_details_table_items>.
+    When Click on Price and Availability tab on PDP page.
+    Then Is active Price and Availability tab Selected on PDP page.
+    Then Is Availability Details header title displayed in Price and Availability tab.
+    Then Info table contains Distribution Warehouse and Product Availability headers in Price and Availability tab.
+    Then Is Pricing Details header title and table displayed in Price and Availability tab.
+    Then Check that Pricing details table contains correct titles <pricing_details_table_items>.
 
     Examples:
-      | region        |
-      | North_America |
+      | region        | product_details_table_items                                                                                                                                                                                           | pricing_details_table_items                                                                                                                                               |
+      | North_America | Catalog No., Description, Std. Package Weight, Product Family, Restock Fee, Customer Reference No., Minimum Order Qty., UPC, GSA Compliance, Discount Schedule, CCC, Currency, Notes, Package Qty., Country of Origin | Agreement No., Agreement Type, Unit of Measure, Book Price, Book Multiplier, Standard Price, List Price, Agreement Factor, Factor Type, Claimback Amount, Final Net Price |
+      | ASIA          | Catalog No., Description, Std. Package Weight, Product Family, Restock Fee, Customer Reference No., Minimum Order Qty., UPC, GSA Compliance, Discount Schedule, CCC, Currency, Notes, Package Qty., Country of Origin | Agreement No., Agreement Type, Unit of Measure, Book Price, Book Multiplier, Standard Price, List Price, Agreement Factor, Factor Type, Claimback Amount, Final Net Price |
+      | EMEA          | Catalog No., Description, Std. Package Weight, Product Family, Restock Fee, Customer Reference No., Minimum Order Qty., UPC, GSA Compliance, Discount Schedule, CCC, Currency, Notes, Package Qty., Country of Origin | Agreement No., Agreement Type, Unit of Measure, Book Price, Book Multiplier, Standard Price, List Price, Agreement Factor, Factor Type, Claimback Amount, Final Net Price |
+      | Latin_America | Catalog No., Description, Std. Package Weight, Product Family, Restock Fee, Customer Reference No., Minimum Order Qty., UPC, GSA Compliance, Discount Schedule, CCC, Currency, Notes, Package Qty., Country of Origin | Agreement No., Agreement Type, Unit of Measure, Book Price, Book Multiplier, Standard Price, List Price, Agreement Factor, Factor Type, Claimback Amount, Final Net Price |
