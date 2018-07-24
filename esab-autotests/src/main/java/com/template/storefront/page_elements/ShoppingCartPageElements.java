@@ -44,4 +44,5 @@ public class ShoppingCartPageElements {
 	public static final String XPATH_SAVE_CART_BUTTON_POPUP = "//button[@id='saveCartButton']";
 	public static final String XPATH_SAVE_CART_NAME_INPUT_POPUP = "//input[@id='saveCartName']";
 	public static final String XPATH_SAVE_CART_DESCRIPTION_TEXTAREA_POPUP = "//textarea[@id='saveCartDescription']";
+	public static final String XPATH_SAVED_CARTS_BUTTON ="//a[contains(text(),'Saved Carts')]";
 }

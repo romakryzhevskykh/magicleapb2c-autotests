@@ -506,10 +506,40 @@ public class ShoppingCartPage extends StorefrontBasePage {
 			logger.info("Time Unit method failed");
 		}
 	}
-	
+
 	@Step("Save Shopping Cart name during saving")
-	public void saveShoppingCartName(String savedCardName){
+	public void saveShoppingCartName(String savedCardName) {
 		shoppingCartDataHelper.setSavedCardName(savedCardName);
+	}
+
+	@Step("Click on Saved Carts link")
+	public void clickOnSavedCartsLink() {
+		waitJSExecution();
+		click(XPATH_SAVED_CARTS_BUTTON);
+	}
+
+	private int getSavedCartsNumber() {
+		int savedCartsQty = 0;
+		if (savedCartsDataExchanger.getSavedCartsCount() != 0) {
+			String savedCartsValueRaw = getWebElement(XPATH_SAVED_CARTS_BUTTON).getText().trim();
+			if (savedCartsValueRaw != "") {
+				int firstIndexOfElementsQty = savedCartsValueRaw.indexOf("(") + 1;
+				logger.info("substring1 first index is: " + firstIndexOfElementsQty);
+				int lastIndexElementsQty = savedCartsValueRaw.indexOf(")");
+				logger.info("substring2 first index is: " + lastIndexElementsQty);
+				String numberOfElementsText = savedCartsValueRaw
+						.subSequence(firstIndexOfElementsQty, lastIndexElementsQty).toString().trim();
+				logger.info("Number of elements in text format: " + numberOfElementsText);
+				savedCartsQty = Integer.parseInt(numberOfElementsText);
+			}
+		}
+		return savedCartsQty;
+	}
+
+	@Step("Verify saved carts Qty")
+	public void verifySavedCartsQty() {
+		int savedCartsQtyOnShoppingCart = getSavedCartsNumber();
+		assertEquals(savedCartsDataExchanger.getSavedCartsCount(), savedCartsQtyOnShoppingCart);
 	}
 
 }

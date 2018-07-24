@@ -183,4 +183,14 @@ public class ShoppingCartPageDefs extends AbstractStepDefs {
 	public void clickSaveInPopup(){
 		shoppingCartPage.clickOnSaveButtonInPopup();
 	}
+	
+	@And("^Verify number of saved carts on Shopping Cart page.$")
+	public void verifyNumberOfSavedCarts(){
+		shoppingCartPage.verifySavedCartsQty();
+	}
+	
+	@And ("^Click on Saved Carts button on Shopping Cart page.$")
+	public void clickOnSavedCardsButton(){
+		shoppingCartPage.clickOnSavedCartsLink();
+	}
 }
