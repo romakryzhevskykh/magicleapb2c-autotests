@@ -43,4 +43,10 @@ public class ProductSubDetailPage extends StorefrontBasePage {
         String orderValue = $(ORDER_VALUE_XPATH).getText();
         return orderValue.substring(0, orderValue.length() - 4);
     }
+
+    @Step("Click on Catalog No Link.")
+    public void clickOnCatalogNoLink(String catalogNo) {
+        waitUntilPageIsFullyLoaded();
+        click(CATALOG_NO_LINK_XPATH, catalogNo);
+    }
 }

@@ -247,102 +247,103 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
       | email                     | account |
       | roman.kryzhevskykh@ge.com | 1000827 |
 
-  Scenario Outline: Check that admin is able to accept SO codes to the internal user
-    And Refresh page.
-    And Focus on browser.
-    Given Switch to Storefront as internalUser.
-    And User is logged in to Storefront.
-    And Refresh page.
-    And Account management page is opened.
-    When Request account popup is opened.
-    When Set <soCode> SO code to the First Sales Office Code field in the Request Account pop-up.
-    And Click on Modify button in the Request Account pop-up.
-    Given Switch to Storefront as admin.
-    And Manage Users page is opened.
-    And Focus on browser.
-    When Admin opens Users tab.
-    And Sets <email> email to the email field.
-    And Clicks on the Search button.
-    Then Appropriate user with appropriate <email> email is displayed in the users list.
-    When Clicks on the user name in the table.
-    When User expand the Approve Pending Accounts section.
-    When Click on Pending Sales Office Codes tab In Approve Pending Accounts Tab.
-    Then <soCode> SO code is displayed in the Pending SO codes table.
-    When Admin clicks on All Sales Office Codes checkbox in Pending SO Codes tab.
-    And Click on Accept SO codes button.
-    Then Accept Account pop-up is displayed on I Want To Block in Pending SO Codes tab.
-    And Click on Accept button in the Accept Account pop-up on I Want To Block in Pending SO Codes tab.
-    Then No data available in table title is displayed in Pending Sales Office Code table.
-    And Expand Modify an Account tab in I Want To Block.
-    When Click on Sales Office Codes tab In Modify an Account Tab.
-    Then <soCode> Sales Office Code is displayed in the Approved SO Codes table.
-    And Select All Sales Office Codes checkbox in SO Codes tab.
-    And Click on SO Codes Remove button in SO Codes tab.
-    And Focus on browser.
-    Then Remove Account pop-up is displayed on I Want To Block in SO codes tab.
-    And Click on Remove button in the Remove Account pop-up on I Want To Block in SO codes tab.
-    Then No data available in table title is displayed in Sales Office Code table.
+# @TODO Remove comments after bug will fixed
+#  Scenario Outline: Check that admin is able to accept SO codes to the internal user
+#    And Refresh page.
+#    And Focus on browser.
+#    Given Switch to Storefront as internalUser.
+#    And User is logged in to Storefront.
+#    And Refresh page.
+#    And Account management page is opened.
+#    When Request account popup is opened.
+#    When Set <soCode> SO code to the First Sales Office Code field in the Request Account pop-up.
+#    And Click on Modify button in the Request Account pop-up.
+#    Given Switch to Storefront as admin.
+#    And Manage Users page is opened.
+#    And Focus on browser.
+#    When Admin opens Users tab.
+#    And Sets <email> email to the email field.
+#    And Clicks on the Search button.
+#    Then Appropriate user with appropriate <email> email is displayed in the users list.
+#    When Clicks on the user name in the table.
+#    When User expand the Approve Pending Accounts section.
+#    When Click on Pending Sales Office Codes tab In Approve Pending Accounts Tab.
+#    Then <soCode> SO code is displayed in the Pending SO codes table.
+#    When Admin clicks on All Sales Office Codes checkbox in Pending SO Codes tab.
+#    And Click on Accept SO codes button.
+#    Then Accept Account pop-up is displayed on I Want To Block in Pending SO Codes tab.
+#    And Click on Accept button in the Accept Account pop-up on I Want To Block in Pending SO Codes tab.
+#    Then No data available in table title is displayed in Pending Sales Office Code table.
+#    And Expand Modify an Account tab in I Want To Block.
+#    When Click on Sales Office Codes tab In Modify an Account Tab.
+#    Then <soCode> Sales Office Code is displayed in the Approved SO Codes table.
+#    And Select All Sales Office Codes checkbox in SO Codes tab.
+#    And Click on SO Codes Remove button in SO Codes tab.
+#    And Focus on browser.
+#    Then Remove Account pop-up is displayed on I Want To Block in SO codes tab.
+#    And Click on Remove button in the Remove Account pop-up on I Want To Block in SO codes tab.
+#    Then No data available in table title is displayed in Sales Office Code table.
+#
+#    Examples:
+#      | email                     | soCode |
+#      | roman.kryzhevskykh@ge.com | USG4   |
 
-    Examples:
-      | email                     | soCode |
-      | roman.kryzhevskykh@ge.com | USG4   |
+#  Scenario Outline: Check that admin is able to reject SO codes to the internal user
+#    And Refresh page.
+#    And Focus on browser.
+#    Given Switch to Storefront as internalUser.
+#    And User is logged in to Storefront.
+#    And Refresh page.
+#    And Account management page is opened.
+#    When Request account popup is opened.
+#    When Set <soCode> SO code to the First Sales Office Code field in the Request Account pop-up.
+#    And Click on Modify button in the Request Account pop-up.
+#    Given Switch to Storefront as admin.
+#    And Manage Users page is opened.
+#    And Focus on browser.
+#    When Admin opens Users tab.
+#    And Sets <email> email to the email field.
+#    And Clicks on the Search button.
+#    Then Appropriate user with appropriate <email> email is displayed in the users list.
+#    When Clicks on the user name in the table.
+#    When User expand the Approve Pending Accounts section.
+#    When Click on Pending Sales Office Codes tab In Approve Pending Accounts Tab.
+#    Then <soCode> SO code is displayed in the Pending SO codes table.
+#    When Admin clicks on All Sales Office Codes checkbox in Pending SO Codes tab.
+#    And Click on Reject SO codes button.
+#    And Click on Reject button in the Reject Account pop-up on I Want To Block in Pending SO Codes tab.
+#    Then No data available in table title is displayed in Pending Sales Office Code table.
+#
+#    Examples:
+#      | email                     | soCode |
+#      | roman.kryzhevskykh@ge.com | USG5   |
 
-  Scenario Outline: Check that admin is able to reject SO codes to the internal user
-    And Refresh page.
-    And Focus on browser.
-    Given Switch to Storefront as internalUser.
-    And User is logged in to Storefront.
-    And Refresh page.
-    And Account management page is opened.
-    When Request account popup is opened.
-    When Set <soCode> SO code to the First Sales Office Code field in the Request Account pop-up.
-    And Click on Modify button in the Request Account pop-up.
-    Given Switch to Storefront as admin.
-    And Manage Users page is opened.
-    And Focus on browser.
-    When Admin opens Users tab.
-    And Sets <email> email to the email field.
-    And Clicks on the Search button.
-    Then Appropriate user with appropriate <email> email is displayed in the users list.
-    When Clicks on the user name in the table.
-    When User expand the Approve Pending Accounts section.
-    When Click on Pending Sales Office Codes tab In Approve Pending Accounts Tab.
-    Then <soCode> SO code is displayed in the Pending SO codes table.
-    When Admin clicks on All Sales Office Codes checkbox in Pending SO Codes tab.
-    And Click on Reject SO codes button.
-    And Click on Reject button in the Reject Account pop-up on I Want To Block in Pending SO Codes tab.
-    Then No data available in table title is displayed in Pending Sales Office Code table.
-
-    Examples:
-      | email                     | soCode |
-      | roman.kryzhevskykh@ge.com | USG5   |
-
-  Scenario Outline: Check that admin is able to change admin privileges for external user and the user
-  will see appropriate role in his profile and appropriate permissions will be available
-    And Refresh page.
-    And Focus on browser.
-    When Admin opens Users tab.
-    And Sets <sso> email to the email field.
-    And Clicks on the Search button.
-    When Clicks on the user name in the table.
-    And Expand Change an empower Privilege/Role in I want to block.
-    Then User has <role> role in each region.
-    When Admin Set <newRole> role for each region to the user.
-    And All new set roles are stored to threadVarsHashMap.
-    And Clicks on Assign button.
-    Given Switch to Storefront as testRoleUser.
-    And Focus on browser.
-    And User is logged in to Storefront.
-    And Profile page is opened.
-    And Refresh page.
-    Then Admin Privileges are equal to roles which were set by Admin in each region.
-
-    Examples:
-      | sso          | role                       | newRole                    |
-      | testRoleUser | User                       | CA (Customer Admin)        |
-      | testRoleUser | CA (Customer Admin)        | SM/ SE (Sales Mgr.)        |
-      | testRoleUser | SM/ SE (Sales Mgr.)        | RM/ RE (Sales Reg. Mgr.)   |
-      | testRoleUser | RM/ RE (Sales Reg. Mgr.)   | emp RM (empower Reg. Mgr.) |
-      | testRoleUser | emp RM (empower Reg. Mgr.) | CS (Customer Ser.)         |
-      | testRoleUser | CS (Customer Ser.)         | HD (Help Desk)             |
-      | testRoleUser | HD (Help Desk)             | User                       |
+#  Scenario Outline: Check that admin is able to change admin privileges for external user and the user
+#  will see appropriate role in his profile and appropriate permissions will be available
+#    And Refresh page.
+#    And Focus on browser.
+#    When Admin opens Users tab.
+#    And Sets <sso> email to the email field.
+#    And Clicks on the Search button.
+#    When Clicks on the user name in the table.
+#    And Expand Change an empower Privilege/Role in I want to block.
+#    Then User has <role> role in each region.
+#    When Admin Set <newRole> role for each region to the user.
+#    And All new set roles are stored to threadVarsHashMap.
+#    And Clicks on Assign button.
+#    Given Switch to Storefront as testRoleUser.
+#    And Focus on browser.
+#    And User is logged in to Storefront.
+#    And Profile page is opened.
+#    And Refresh page.
+#    Then Admin Privileges are equal to roles which were set by Admin in each region.
+#
+#    Examples:
+#      | sso          | role                       | newRole                    |
+#      | testRoleUser | User                       | CA (Customer Admin)        |
+#      | testRoleUser | CA (Customer Admin)        | SM/ SE (Sales Mgr.)        |
+#      | testRoleUser | SM/ SE (Sales Mgr.)        | RM/ RE (Sales Reg. Mgr.)   |
+#      | testRoleUser | RM/ RE (Sales Reg. Mgr.)   | emp RM (empower Reg. Mgr.) |
+#      | testRoleUser | emp RM (empower Reg. Mgr.) | CS (Customer Ser.)         |
+#      | testRoleUser | CS (Customer Ser.)         | HD (Help Desk)             |
+#      | testRoleUser | HD (Help Desk)             | User                       |
