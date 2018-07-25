@@ -53,7 +53,7 @@ public class PDPPage extends StorefrontBasePage {
 
     @Step("Get All Product Detail Table Items.")
     public List<String> getAllProductDetailTableItems() {
-        return $$(ALL_PRODUCT_DETAILS_TABLE_ITEMS).stream().map(WebElement::getText).collect(Collectors.toList());
+        return $$(ALL_PRODUCT_DETAILS_TABLE_ITEMS_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
     @Step("Click On Price And Availability Tab On PDP Page.")
@@ -89,7 +89,7 @@ public class PDPPage extends StorefrontBasePage {
 
     @Step("Get All Pricing Details Items.")
     public List<String> getAllPricingDetailsItems() {
-        return $$(ALL_PRICING_DETAILS_TABLE_ITEMS).stream().map(WebElement::getText).collect(Collectors.toList());
+        return $$(ALL_PRICING_DETAILS_TABLE_ITEMS_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
     @Step("Is Add To Cart Button Displayed In Product Details Block On PDP Page.")

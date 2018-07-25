@@ -47,6 +47,6 @@ public class ProductSubDetailPage extends StorefrontBasePage {
     @Step("Click on Catalog No Link.")
     public void clickOnCatalogNoLink(String catalogNo) {
         waitUntilPageIsFullyLoaded();
-        $(CATALOG_NO_LINK_XPATH, catalogNo).click();
+        click(CATALOG_NO_LINK_XPATH, catalogNo);
     }
 }

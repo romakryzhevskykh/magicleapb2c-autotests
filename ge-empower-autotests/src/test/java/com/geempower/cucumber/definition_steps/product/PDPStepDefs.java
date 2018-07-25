@@ -17,12 +17,12 @@ import static org.testng.Assert.assertTrue;
 public class PDPStepDefs extends AbstractStepDefs {
 
     @Autowired
-    PDPPage pdpPage;
+    private PDPPage pdpPage;
     @Autowired
-    FullProductDetailsPopUpBlock fullProductDetailsPopUpBlock;
+    private FullProductDetailsPopUpBlock fullProductDetailsPopUpBlock;
 
     @Then("^PDP page is opened.$")
-    public void checkThatPPDPageIsOpened() {
+    public void checkThatPDPPageIsOpened() {
         assertTrue(pdpPage.isOpened());
     }
 
