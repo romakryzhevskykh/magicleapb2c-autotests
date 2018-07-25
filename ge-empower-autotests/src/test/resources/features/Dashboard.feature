@@ -119,7 +119,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
 
     Examples:
       | default quantity |
-      | 1                |
+      | 10               |
 
   Scenario Outline: Check that all the Global P&A error messages are shown on the P&A page - DE86025
     And Account management page is opened.
