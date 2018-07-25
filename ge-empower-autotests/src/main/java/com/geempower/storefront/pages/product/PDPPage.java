@@ -96,4 +96,20 @@ public class PDPPage extends StorefrontBasePage {
     public boolean isAddToCartButtonDisplayedInProductDetailsBlockOnPDPPage() {
         return isDisplayed(ADD_TO_CART_BUTTON_ON_PDP_PAGE_XPATH);
     }
+
+    @Step("user Clicks On Specifications Tab.")
+    public void userClicksOnSpecificationsTab() {
+        click(SPECIFICATIONS_TAB_XPATH);
+    }
+
+    @Step("is Active Specification Tab Selected.")
+    public String isActiveSpecificationTabSelected() {
+        return $(ACTIVE_SPECIFICATION_TAB_XPATH).getAttribute("class");
+    }
+
+    @Step("Get Specifications Tab Header Title.")
+    public String getGeneralCharacteristicsTabHeaderTitle() {
+        waitUntilPageIsFullyLoaded();
+        return $(GENERAL_CHARACTERISTICS_HEADER_TITLE_XPATH).getText();
+    }
 }

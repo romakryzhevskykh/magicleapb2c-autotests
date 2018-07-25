@@ -89,4 +89,19 @@ public class PDPStepDefs extends AbstractStepDefs {
     public void isAddToCartButtonDisplayedInProductDetailsBlockOnPDPPage() {
         assertTrue(pdpPage.isAddToCartButtonDisplayedInProductDetailsBlockOnPDPPage());
     }
+
+    @When("^user clicks on Specifications tab.$")
+    public void userClicksOnSpecificationsTab()  {
+        pdpPage.userClicksOnSpecificationsTab();
+    }
+
+    @Then("^is (.*) Specification tab selected on PDP page.$")
+    public void isActiveSpecificationTabSelectedOnPDPPage(String status) {
+        assertTrue(pdpPage.isActiveSpecificationTabSelected().contains(status));
+    }
+
+    @Then("^is (.*) header titles in Specification tab displayed.$")
+    public void isGeneralNecessaryHeaderTitlesInSpecificationTabDisplayed(String title){
+        assertEquals(title, pdpPage.getGeneralCharacteristicsTabHeaderTitle());
+    }
 }
