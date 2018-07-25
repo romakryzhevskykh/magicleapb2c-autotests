@@ -44,9 +44,9 @@ public class PDPStepDefs extends AbstractStepDefs {
         pdpPage.clickOnPriceAndAvailabilityTabOnPDPPage();
     }
 
-    @Then("^Is active Product Details Tab Selected on PDP page.$")
-    public void isActiveProductDetailsTabSelectedOnPDPPage() {
-        assertTrue(pdpPage.isActiveProductDetailsTabSelected());
+    @Then("^Is (.*) Product Details Tab Selected on PDP page.$")
+    public void isActiveProductDetailsTabSelectedOnPDPPage(String status) {
+        assertTrue(pdpPage.isActiveProductDetailsTabSelected().contains(status));
     }
 
     @And("^Is (.*) header title in Product Detail tab displayed.$")
@@ -59,9 +59,9 @@ public class PDPStepDefs extends AbstractStepDefs {
         assertTrue(pdpPage.getAllProductDetailTableItems().containsAll(tableItems));
     }
 
-    @Then("^Is active Price and Availability tab Selected on PDP page.$")
-    public void isActivePriceAndAvailabilityTabSelectedOnPDPPage() {
-        assertTrue(pdpPage.isActivePATabSelected());
+    @Then("^Is (.*) Price and Availability tab Selected on PDP page.$")
+    public void isActivePriceAndAvailabilityTabSelectedOnPDPPage(String status) {
+        assertTrue(pdpPage.isActivePATabSelected().contains(status));
     }
 
     @Then("^Is (.*) header title displayed in Price and Availability tab.$")

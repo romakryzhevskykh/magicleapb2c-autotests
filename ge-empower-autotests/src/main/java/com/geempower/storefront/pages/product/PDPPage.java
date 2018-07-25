@@ -42,8 +42,8 @@ public class PDPPage extends StorefrontBasePage {
     }
 
     @Step("Is Active Product Details Tab Selected.")
-    public boolean isActiveProductDetailsTabSelected() {
-        return isDisplayed(ACTIVE_PRODUCT_DETAILS_TAB_XPATH);
+    public String isActiveProductDetailsTabSelected() {
+        return $(ACTIVE_PRODUCT_DETAILS_TAB_XPATH).getAttribute("class");
     }
 
     @Step("Get Product Summary Title.")
@@ -62,8 +62,8 @@ public class PDPPage extends StorefrontBasePage {
     }
 
     @Step("Is Active PA Tab Selected.")
-    public boolean isActivePATabSelected() {
-        return isDisplayed(ACTIVE_PA_TAB_XPATH);
+    public String isActivePATabSelected() {
+        return $(ACTIVE_PA_TAB_XPATH).getAttribute("class");
     }
 
     @Step("Get Availability Details Header Title.")
