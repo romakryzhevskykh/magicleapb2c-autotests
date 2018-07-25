@@ -61,7 +61,6 @@ Feature: Return creation tests
     Then Warning with correct message <warning_message> is displayed.
     And Upload test return file with name request2.xlsx.
     And Click on the Next button Return Creation 1 page.
-    And Refresh page.
     Then Return Creation 2 page is opened.
     Then Correct list of catalogNumbers <catalogNoList> is displayed on Return Creation 2 page.
     And Select random reason for request for each product.
