@@ -81,3 +81,4 @@ Feature: Return creation tests
 
     Examples:
       | warning_message                                                                           | catalogNoList                  |
+      | For North America stock balancing returns, upload a maximum of 150 line items per request | 10091352G1, 10100542G1, TEY330 |
