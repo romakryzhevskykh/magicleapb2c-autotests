@@ -1,11 +1,12 @@
 package com.geempower.helpers.models;
 
 import lombok.Getter;
+import java.util.Optional;
 
 public class Return {
     @Getter final String id;
     @Getter String catalogueNo;
-    @Getter final long invoiceNo;
+    @Getter Optional<Long> invoiceNo;
     @Getter int qty;
     @Getter final String reasonForRequest;
     @Getter double netPrice;
@@ -13,10 +14,10 @@ public class Return {
     @Getter String requestSubType;
     @Getter String additionalInformation;
 
-    public Return(String id, String catalogueNo, long invoiceNo, String reasonForRequest, String requestedAction){
+    public Return(String id, String catalogueNo, Long invoiceNo, String reasonForRequest, String requestedAction){
         this.id = id;
         this.catalogueNo = catalogueNo;
-        this.invoiceNo = invoiceNo;
+        this.invoiceNo = Optional.ofNullable(invoiceNo);
         this.reasonForRequest = reasonForRequest;
         this.requestedAction = requestedAction;
     }
