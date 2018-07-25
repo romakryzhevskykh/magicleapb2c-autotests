@@ -3,13 +3,16 @@ package com.geempower.cucumber.definition_steps.returns;
 import com.geempower.cucumber.definition_steps.AbstractStepDefs;
 import com.geempower.cucumber.definition_steps.TestKeyword;
 import com.geempower.storefront.pages.returns.ReturnCreation3Page;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.Assert;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 
 public class ReturnCreation3StepDefs extends AbstractStepDefs {
 
@@ -55,5 +58,34 @@ public class ReturnCreation3StepDefs extends AbstractStepDefs {
         assertEquals(reasonForRequest, returnCreation3Page.getReasonForRequest());
         assertEquals(requestedAction, returnCreation3Page.getRequestedAction());
         assertEquals(catalogNo, returnCreation3Page.getCatalogNo());
+    }
+
+    @Then("^Alert message (.*) is displayed on Return Creation 3 page.$")
+    public void textIsDisplayedOnReturnCreationPage(String message) {
+        assertEquals(message, returnCreation3Page.getAlertTextForNonReturnableProducts());
+    }
+
+    @Then("^Warning icon is displayed for non-returnable products with (.*) flag.$")
+    public void warningIconIsDisplayedForNonReturnableProductsWithNoFlag(String flag) {
+        assertTrue(returnCreation3Page.checkIfExclamationMarkDisplayed(flag));
+    }
+
+    @Then("^Warning icon is not displayed for returnable products with (.*) flag.$")
+    public void warningIconIsNotDisplayedForReturnableProductsWithYesFlag(String flag) {
+        assertFalse(returnCreation3Page.checkIfExclamationMarkDisplayed(flag));
+    }
+
+    @Then("^Next button is disabled with (.*) value on Return Creation 3 page.$")
+    public void nextButtonIsNotClickableOnReturnCreationPage(String attributeValue) {
+        assertEquals(attributeValue, returnCreation3Page.getDisableAttributeOfNextButton());
+    }
+
+    @When("^User deletes non-returnable products.$")
+    public void userDeletesNonReturnableProducts() {
+        returnCreation3Page.deleteAllNonReturnableProducts();
+        threadVarsHashMap.put(TestKeyword.RETURN_CATALOG_NO, returnCreation3Page.storeActualProductToTheThreadVars());
+        threadVarsHashMap.put(TestKeyword.RETURN_REASON_FOR_REQUEST, returnCreation3Page.storeActualReasonForRequestToTheThreadVars());
+        threadVarsHashMap.put(TestKeyword.RETURN_REQUESTED_ACTION, returnCreation3Page.storeActualRequestedActionToTheThreadVars());
+
     }
 }

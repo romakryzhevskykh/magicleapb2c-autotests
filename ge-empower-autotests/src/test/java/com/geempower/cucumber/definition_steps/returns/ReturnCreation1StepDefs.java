@@ -9,6 +9,7 @@ import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static junit.framework.TestCase.assertTrue;
+import static org.testng.Assert.assertEquals;
 
 public class ReturnCreation1StepDefs extends AbstractStepDefs {
 
@@ -38,5 +39,20 @@ public class ReturnCreation1StepDefs extends AbstractStepDefs {
     @And("Click on the Next button Return Creation 1 page.$")
     public void clickOnNextButton() {
         returnCreation1Page.clickOnNextButton();
+    }
+
+    @And("^Click on Manual entry option.$")
+    public void selectManualEntryOption() {
+        returnCreation1Page.clickManualEntryOption();
+    }
+
+    @And("^Upload test return file with name (.*).$")
+    public void uploadReturnFile(String fileName) {
+        returnCreation1Page.uploadReturnFile(fileName);
+    }
+
+    @Then("^Warning with correct message (.*) is displayed.$")
+    public void warningWithCorrectMessageIsDisplayed(String warningMessage) {
+        assertEquals(warningMessage, returnCreation1Page.getWarningMessage());
     }
 }
