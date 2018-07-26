@@ -90,48 +90,48 @@ public class PDPStepDefs extends AbstractStepDefs {
         assertTrue(pdpPage.isAddToCartButtonDisplayedInProductDetailsBlockOnPDPPage());
     }
 
-    @When("^user clicks on Specifications tab.$")
+    @When("^User clicks on Specifications tab.$")
     public void userClicksOnSpecificationsTab() {
         pdpPage.userClicksOnSpecificationsTab();
     }
 
-    @Then("^is (.*) Specification tab selected on PDP page.$")
+    @Then("^Is (.*) Specification tab selected on PDP page.$")
     public void isActiveSpecificationTabSelectedOnPDPPage(String status) {
         assertTrue(pdpPage.isActiveSpecificationTabSelected().contains(status));
     }
 
-    @Then("^is (.*) header titles in Specification tab displayed.$")
+    @Then("^Is (.*) header titles in Specification tab displayed.$")
     public void isGeneralNecessaryHeaderTitlesInSpecificationTabDisplayed(String title) {
         assertEquals(title, pdpPage.getGeneralCharacteristicsTabHeaderTitle());
     }
 
-    @Then("^check that general characteristics table contains correct titles (.*) in Specification tab.$")
+    @Then("^Check that general characteristics table contains correct titles (.*) in Specification tab.$")
     public void checkThatGeneralCharacteristicsTableContainsCorrectTitlesInSpecificationTab(List<String> tableItems) {
         assertTrue(pdpPage.getAllGeneralCharacteristicsItems().containsAll(tableItems));
     }
 
-    @When("^user clicks on Publications tab.$")
+    @When("^User clicks on Publications tab.$")
     public void userClicksOnPublicationsTab() {
         pdpPage.userClicksOnPublicationsTab();
     }
 
-    @Then("^is (.*) List of Publications tab selected on PDP page.$")
+    @Then("^Is (.*) List of Publications tab selected on PDP page.$")
     public void isActiveListOfPublicationsTabSelectedOnPDPPage(String status) {
         assertTrue(pdpPage.isActivePublicationsTabSelected().contains(status));
     }
 
-    @Then("^is (.*) header title in Publications tab displayed.$")
+    @Then("^Is (.*) header title in Publications tab displayed.$")
     public void isListOfPublicationsHeaderTitleInPublicationsTabDisplayed(String title)  {
         assertEquals(title, pdpPage.getListOfPublicationsHeaderTitle());
     }
 
-    @Then("^is Publications table with correct headers (.*) displayed.$")
+    @Then("^Is Publications table with correct headers (.*) displayed.$")
     public void isPublicationsTableWithCorrectHeadersDisplayed(List<String> tableHeaders)  {
         assertTrue(pdpPage.getAllPublicationTableHeaders().containsAll(tableHeaders));
     }
 
-    @Then("^is Publications table contains link.$")
-    public void isPublicationTableContainsLink(){
-        assertTrue(pdpPage.isPublicationTableContainsLink());
+    @Then("^Is Publications table contains link (.*).$")
+    public void isPublicationTableContainsLink(String link){
+        assertTrue(pdpPage.isPublicationTableContainsLink().contains(link));
     }
 }

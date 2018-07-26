@@ -18,10 +18,12 @@ public class PDPPageElements {
     public final static String GENERAL_CHARACTERISTICS_HEADER_TITLE_XPATH = "//div[@id ='specifications']/h3";
     public final static String LIST_OF_PUBLICATIONS_HEADER_TITLE_XPATH = "//div[@id ='publications']/h4";
 
-    public final static String ACTIVE_PRODUCT_DETAILS_TAB_XPATH = "//div[@class ='my-pending-accounts-wrapper']//li[@tab-id='0']";
-    public final static String ACTIVE_PA_TAB_XPATH = "//div[@class ='my-pending-accounts-wrapper']//li[@tab-id='1']";
-    public final static String ACTIVE_SPECIFICATION_TAB_XPATH = "//div[@class ='my-pending-accounts-wrapper']//li[@tab-id='2']";
-    public final static String ACTIVE_PUBLICATIONS_TAB_XPATH = "//div[@class ='my-pending-accounts-wrapper']//li[@tab-id='3']";
+    private final static String ALL_TABS_BLOCK_XPATH = "//div[@class ='my-pending-accounts-wrapper']";
+
+    public final static String ACTIVE_PRODUCT_DETAILS_TAB_XPATH = "//li[@tab-id='0']";
+    public final static String ACTIVE_PA_TAB_XPATH = ALL_TABS_BLOCK_XPATH + "//li[@tab-id='1']";
+    public final static String ACTIVE_SPECIFICATION_TAB_XPATH = ALL_TABS_BLOCK_XPATH + "//li[@tab-id='2']";
+    public final static String ACTIVE_PUBLICATIONS_TAB_XPATH = ALL_TABS_BLOCK_XPATH + "//li[@tab-id='3']";
 
     public final static String PRICE_AND_AVAILABILITY_TAB_XPATH = "//a[@href='#price-availability']";
     public final static String SPECIFICATIONS_TAB_XPATH = "//a[@href='#specifications']";

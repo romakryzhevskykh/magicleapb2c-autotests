@@ -93,15 +93,15 @@ Feature: Some actions on Products page
     Then Product sub-detail page is opened.
     When User clicks on catalogNo link.
     Then PDP page is opened.
-    When user clicks on Specifications tab.
-    Then is active Specification tab selected on PDP page.
-    Then is General Characteristics , Dimensions and Classifications header titles in Specification tab displayed.
-    Then check that general characteristics table contains correct titles <general_characteristic_table_items> in Specification tab.
-    When user clicks on Publications tab.
-    Then is active List of Publications tab selected on PDP page.
-    Then is List of Publications header title in Publications tab displayed.
-    Then is Publications table with correct headers <publication_table_titles> displayed.
-    Then is Publications table contains link.
+    When User clicks on Specifications tab.
+    Then Is active Specification tab selected on PDP page.
+    Then Is General Characteristics , Dimensions and Classifications header titles in Specification tab displayed.
+    Then Check that general characteristics table contains correct titles <general_characteristic_table_items> in Specification tab.
+    When User clicks on Publications tab.
+    Then Is active List of Publications tab selected on PDP page.
+    Then Is List of Publications header title in Publications tab displayed.
+    Then Is Publications table with correct headers <publication_table_titles> displayed.
+    Then Is Publications table contains link http://apps.geindustrial.com/publibrary.
 
     Examples:
       | region        | general_characteristic_table_items                                                                                                                                                                                                                                                                                              | publication_table_titles                                     |

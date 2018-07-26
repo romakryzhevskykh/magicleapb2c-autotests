@@ -97,12 +97,12 @@ public class PDPPage extends StorefrontBasePage {
         return isDisplayed(ADD_TO_CART_BUTTON_ON_PDP_PAGE_XPATH);
     }
 
-    @Step("user Clicks On Specifications Tab.")
+    @Step("User Clicks On Specifications Tab.")
     public void userClicksOnSpecificationsTab() {
         click(SPECIFICATIONS_TAB_XPATH);
     }
 
-    @Step("is Active Specification Tab Selected.")
+    @Step("Is Active Specification Tab Selected.")
     public String isActiveSpecificationTabSelected() {
         return $(ACTIVE_SPECIFICATION_TAB_XPATH).getAttribute("class");
     }
@@ -118,29 +118,29 @@ public class PDPPage extends StorefrontBasePage {
         return $$(ALL_GENERAL_CHARACTERISTICS_TABLE_ITEMS_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
-    @Step("user Clicks On Publications Tab.")
+    @Step("User Clicks On Publications Tab.")
     public void userClicksOnPublicationsTab() {
         click(PUBLICATIONS_TAB_XPATH);
     }
 
-    @Step("get List Of Publications Header Title.")
+    @Step("Get List Of Publications Header Title.")
     public String getListOfPublicationsHeaderTitle() {
         waitUntilPageIsFullyLoaded();
         return $(LIST_OF_PUBLICATIONS_HEADER_TITLE_XPATH).getText();
     }
 
-    @Step("is Active Publications Tab Selected.")
+    @Step("Is Active Publications Tab Selected.")
     public String isActivePublicationsTabSelected() {
         return $(ACTIVE_PUBLICATIONS_TAB_XPATH).getAttribute("class");
     }
 
-    @Step("get All Publication Table Headers.")
+    @Step("Get All Publication Table Headers.")
     public List<String> getAllPublicationTableHeaders() {
         return $$(ALL_PUBLICATIONS_HEADERS_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
-    @Step("is Publication Table Contains Link.")
-    public boolean isPublicationTableContainsLink() {
-        return isDisplayed(LINK_IN_THE_PUBLICATIONS_TABLE_XPATH);
+    @Step("Is Publication Table Contains Link.")
+    public String isPublicationTableContainsLink() {
+        return $(LINK_IN_THE_PUBLICATIONS_TABLE_XPATH).getAttribute("href");
     }
 }
