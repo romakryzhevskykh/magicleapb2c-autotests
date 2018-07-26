@@ -101,7 +101,7 @@ Feature: Some actions on Products page
     Then is active List of Publications tab selected on PDP page.
     Then is List of Publications header title in Publications tab displayed.
     Then is Publications table with correct headers <publication_table_titles> displayed.
-    Then is Publication table contains link.
+    Then is Publications table contains link.
 
     Examples:
       | region        | general_characteristic_table_items                                                                                                                                                                                                                                                                                              | publication_table_titles                                     |

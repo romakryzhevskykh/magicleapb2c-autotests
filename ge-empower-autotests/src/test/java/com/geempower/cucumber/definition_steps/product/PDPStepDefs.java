@@ -4,7 +4,6 @@ import com.geempower.cucumber.definition_steps.AbstractStepDefs;
 import com.geempower.cucumber.definition_steps.TestKeyword;
 import com.geempower.storefront.page_blocks.FullProductDetailsPopUpBlock;
 import com.geempower.storefront.pages.product.PDPPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -131,7 +130,7 @@ public class PDPStepDefs extends AbstractStepDefs {
         assertTrue(pdpPage.getAllPublicationTableHeaders().containsAll(tableHeaders));
     }
 
-    @Then("^is Publication table contains link.$")
+    @Then("^is Publications table contains link.$")
     public void isPublicationTableContainsLink(){
         assertTrue(pdpPage.isPublicationTableContainsLink());
     }
