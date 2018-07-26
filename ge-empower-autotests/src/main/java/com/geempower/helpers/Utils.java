@@ -19,4 +19,10 @@ public class Utils extends UIComponent {
     public void focusOnActiveBrowser() {
         webDriverPool.getActiveDriver().switchTo().window(webDriverPool.getActiveDriver().getWindowHandle());
     }
+
+    @Step("Upload file with appropriate name.")
+    public void uploadFileByName(String fileName, String uploadInputXpath){
+        String filePath = System.getProperty("user.dir") + "/src/test/resources/testdata/" + fileName;
+        $(uploadInputXpath).sendKeys(filePath);
+    }
 }

@@ -1,6 +1,8 @@
 package com.geempower.storefront.pages.returns;
 
+import com.geempower.helpers.Utils;
 import com.geempower.storefront.StorefrontBasePage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -9,9 +11,11 @@ import java.time.ZoneId;
 
 import static com.geempower.storefront.page_elements.returns.ReturnCreation3PageElements.*;
 
-
 @Component
 public class ReturnCreation3Page extends StorefrontBasePage {
+
+    @Autowired
+    private Utils utils;
 
     private final String pageUri = "returnAdditionalInformation";
 
@@ -80,5 +84,51 @@ public class ReturnCreation3Page extends StorefrontBasePage {
     @Step("Get Catalog No")
     public String getCatalogNo() {
         return $(CATALOG_NO_VALUE_XPATH).getText();
+    }
+
+    @Step("Get Alert Text For Non Returnable Products")
+    public String getAlertTextForNonReturnableProducts() {
+        return $(MESSAGE_FOR_NON_RETURNABLE_PRODUCTS_XPATH).getText();
+    }
+
+    @Step("Check If Exclamation Mark Displayed")
+    public boolean checkIfExclamationMarkDisplayed(String flag) {
+        return isDisplayed(EXCLAMATION_MARK_FOR_NON_RETURNABLE_PRODUCT_XPATH, flag);
+    }
+
+    @Step("Get Disable Attribute Of Next Button")
+    public String getDisableAttributeOfNextButton() {
+        return $(BOTTOM_NEXT_BUTTON_XPATH).getAttribute("disabled");
+    }
+
+    @Step("Delete All Non Returnable Products")
+    public void deleteAllNonReturnableProducts() {
+        $$(ALL_NON_RETURNABLE_PRODUCTS_REMOVE_ICON_XPATH).forEach(product -> {
+            product.click();
+            waitUntilPageIsFullyLoaded();
+        });
+    }
+
+    @Step("Store Actual Product To The Thread Vars")
+    public String storeActualProductToTheThreadVars() {
+        waitUntilPageIsFullyLoaded();
+        return $(ALL_CATALOG_NUMBERS_TEXT_XPATH).getText();
+    }
+
+    @Step("Store Actual Reason for request To The Thread Vars")
+    public String storeActualReasonForRequestToTheThreadVars() {
+        waitUntilPageIsFullyLoaded();
+        return $(ALL_REASONS_FOR_REQUEST_XPATH).getText();
+    }
+
+    @Step("Store Actual Requested action To The Thread Vars")
+    public String storeActualRequestedActionToTheThreadVars() {
+        waitUntilPageIsFullyLoaded();
+        return $(ALL_REQUESTED_ACTION_XPATH).getText();
+    }
+
+    public void uploadAdditionalInfoFile(String fileName) {
+        waitUntilPageIsFullyLoaded();
+        utils.uploadFileByName(fileName, ADDITIONAL_INFO_PATH_INPUT_XPATH);
     }
 }

@@ -69,7 +69,7 @@ public class ReturnCreation4StepDefs extends AbstractStepDefs {
     public void returnIsCreated() {
         returnManager.createReturnInstance(returnCreation4Page.getRequestConfirmNo(),
                 threadVarsHashMap.getString(RETURN_CATALOG_NO),
-                (long) threadVarsHashMap.get(RETURN_INVOICE_NO),
+                (Long) threadVarsHashMap.get(RETURN_INVOICE_NO),
                 threadVarsHashMap.getString(RETURN_REASON_FOR_REQUEST),
                 threadVarsHashMap.getString(RETURN_REQUESTED_ACTION));
         returnCreation4Page.closeRequestPopUp();

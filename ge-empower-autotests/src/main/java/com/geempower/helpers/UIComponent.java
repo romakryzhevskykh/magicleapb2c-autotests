@@ -74,6 +74,7 @@ public abstract class UIComponent {
             wait.until(ExpectedConditions.elementToBeClickable(webElement));
             webElement.click();
         } catch (WebDriverException ex) {
+            System.out.println("ERROR: " + ex);
             ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", webElement);
             webElement.click();
         } finally {

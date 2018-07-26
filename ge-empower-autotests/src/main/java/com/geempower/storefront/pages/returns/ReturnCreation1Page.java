@@ -1,15 +1,19 @@
 package com.geempower.storefront.pages.returns;
 
+import com.geempower.helpers.Utils;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.Keys;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import static com.geempower.storefront.page_elements.returns.ReturnsCreation1PageElements.*;
 
-
 @Component
 public class ReturnCreation1Page extends StorefrontBasePage {
+
+    @Autowired
+    private Utils utils;
 
     private final String pageUri = "returnRequest";
 
@@ -47,18 +51,35 @@ public class ReturnCreation1Page extends StorefrontBasePage {
     public String selectFirstProduct() {
         waitUntilPageIsFullyLoaded();
         click(FIRST_CHECKBOX_IN_TABLE_XPATH);
-        return $(FIRST_ACTIVE_CATALOGUE_NO_IN_TABLE_XPATH ).getText();
+        return $(FIRST_ACTIVE_CATALOGUE_NO_IN_TABLE_XPATH).getText();
     }
 
     @Step("Click on Top Next button")
     public void clickOnNextButton() {
         waitUntilPageIsFullyLoaded();
         click(TOP_NEXT_BUTTON_XPATH);
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Get Catalog No.")
     public String getCatalogueNo() {
         waitUntilPageIsFullyLoaded();
         return $(FIRST_ACTIVE_CATALOGUE_NO_IN_TABLE_XPATH).getText();
+    }
+
+    @Step("Click Manual Entry Option")
+    public void clickManualEntryOption() {
+        click(MANUAL_ENTRY_RETURN_OPTION_XPATH);
+    }
+
+    @Step("Upload Return File")
+    public void uploadReturnFile(String fileName) {
+        utils.uploadFileByName(fileName, UPLOAD_FILE_INPUT_XPATH);
+    }
+
+    @Step("Get Warning Message")
+    public String getWarningMessage() {
+        waitUntilPageIsFullyLoaded();
+        return $(NORTH_AMERICA_WARNING_MESSAGE_XPATH).getText();
     }
 }

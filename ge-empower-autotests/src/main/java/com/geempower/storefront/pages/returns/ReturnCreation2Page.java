@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.geempower.storefront.page_elements.returns.ReturnCreation2PageElements.*;
 
@@ -43,6 +45,7 @@ public class ReturnCreation2Page extends StorefrontBasePage {
     public void selectRequestedAction(String action) {
         waitUntilPageIsFullyLoaded();
         click(FIRST_ROW_REQUESTED_ACTION_FIELD_XPATH);
+        waitUntilPageIsFullyLoaded();
         $$(REQUESTED_ACTION_DROP_DOWN_ELEMENTS_XPATH).stream()
                 .filter(webElement -> webElement.getText().equals(action)).findAny().ifPresent(WebElement::click);
         waitUntilPageIsFullyLoaded();
@@ -73,5 +76,36 @@ public class ReturnCreation2Page extends StorefrontBasePage {
     @Step("Get Catalog No")
     public String getCatalogNo() {
         return $(CATALOG_NO_VALUE_XPATH).getText();
+    }
+
+    @Step("Get List of Catalog No.")
+    public List<String> getAllCatalogNo() {
+        waitUntilPageIsFullyLoaded();
+        List<String> catalogList = new ArrayList<>();
+        $$(CATALOG_NO_VALUE_XPATH).forEach(product -> catalogList.add(product.getText()));
+        return catalogList;
+    }
+
+    @Step("Set Random Reasons For list of products in Request")
+    public void setRandomReasonsForListOfProductsInRequest(int rowNumber) {
+        for (int i = 1; i <= rowNumber; i++) {
+            waitUntilPageIsFullyLoaded();
+            $(ROW_BY_NUMBER_REASON_FOR_REQUEST_FIELD_XPATH, String.valueOf(i)).click();
+            $$(FINAL_REASON_FOR_REQUEST_DROP_DOWN_ELEMENTS_XPATH).stream().findAny().ifPresent(WebElement::click);
+        }
+    }
+
+    @Step("Set Reasons Type For Request")
+    public void selectRequestTypeForRequest(String type) {
+        waitUntilPageIsFullyLoaded();
+        $$(REQUEST_TYPE_LIST_XPATH).stream()
+                .filter(webElement -> webElement.getText().equals(type)).findAny().ifPresent(WebElement::click);
+    }
+
+    @Step("Set Reasons SubType For Request")
+    public void selectRequestSubTypeForRequest(String subType) {
+        waitUntilPageIsFullyLoaded();
+        $$(REQUEST_SUB_TYPE_LIST_XPATH).stream()
+                .filter(webElement -> webElement.getText().equals(subType)).findAny().ifPresent(WebElement::click);
     }
 }
