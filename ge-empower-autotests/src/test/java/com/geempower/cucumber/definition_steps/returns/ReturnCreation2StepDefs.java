@@ -69,4 +69,14 @@ public class ReturnCreation2StepDefs extends AbstractStepDefs {
         ArrayList catalogList = (ArrayList) threadVarsHashMap.get(TestKeyword.RETURN_CATALOG_NO_LIST);
         returnCreation2Page.setRandomReasonsForListOfProductsInRequest(catalogList.size());
     }
+
+    @And("^Select (.*) Request type on Return Creation 2 page.$")
+    public void selectCosmeticRequestTypeOnReturnCreationPage(String type) {
+        returnCreation2Page.selectRequestTypeForRequest(type);
+    }
+
+    @And("^Select (.*) Request sub-type on Return Creation 2 page.$")
+    public void selectPaintRequestSubTypeOnReturnCreationPage(String subType) {
+        returnCreation2Page.selectRequestSubTypeForRequest(subType);
+    }
 }
