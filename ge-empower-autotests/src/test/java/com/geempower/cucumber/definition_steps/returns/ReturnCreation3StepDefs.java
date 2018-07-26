@@ -37,7 +37,6 @@ public class ReturnCreation3StepDefs extends AbstractStepDefs {
     @And("^Set Additional Information field on Return Creation 3 page.$")
     public void setAdditionalInformationField() {
         threadVarsHashMap.put(TestKeyword.RETURN_ADDITIONAL_INFO, returnCreation3Page.setAdditionalInformationField());
-
     }
 
     @And("^Click on Save button on Return Creation 3 page.$")
@@ -87,5 +86,10 @@ public class ReturnCreation3StepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.RETURN_REASON_FOR_REQUEST, returnCreation3Page.storeActualReasonForRequestToTheThreadVars());
         threadVarsHashMap.put(TestKeyword.RETURN_REQUESTED_ACTION, returnCreation3Page.storeActualRequestedActionToTheThreadVars());
 
+    }
+
+    @And("^Upload (.*) file to the Optional Attach file field on Return Creation 3 page.$")
+    public void uploadTestFileToTheOptionalAttachFileFieldOnReturnCreationPage(String fileName) {
+        returnCreation3Page.uploadAdditionalInfoFile(fileName);
     }
 }

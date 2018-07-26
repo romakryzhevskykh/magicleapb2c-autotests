@@ -82,3 +82,35 @@ Feature: Return creation tests
     Examples:
       | warning_message                                                                           | catalogNoList                  |
       | For North America stock balancing returns, upload a maximum of 150 line items per request | 10091352G1, 10100542G1, TEY330 |
+
+  Scenario: Test coverage for DE91664 - Return with attaching file can't be created
+    And Account management page is opened.
+    When Choose North_America region.
+    And Select account 1143G08.
+    And Click on account with USS1 sales division.
+    When Returns page is opened.
+    And Click on Create Request button.
+    Then Return Creation 1 page is opened.
+    When Search All PO No. in the Search field on Return Creation 1 page.
+    And Select First Invoice No. in the Search Result table on Return Creation 1 page.
+    And Select First Product in the Product List table on Return Creation 1 page.
+    And Click on the Next button Return Creation 1 page.
+    Then Return Creation 2 page is opened.
+    And Select Defective Reason for Request on Return Creation 2 page.
+    And Select Cosmetic Request type on Return Creation 2 page.
+    And Select Paint Request sub-type on Return Creation 2 page.
+    And Select Return & Credit Requested Action on Return Creation 2 page.
+    And Set value 1 to the Qty. field on Return Creation 2 page.
+    And Click on Next button on Return Creation 2 page.
+    Then Return Creation 3 page is opened.
+    When Click on Additional Info button on Return Creation 3 page.
+    And Set Additional Information field on Return Creation 3 page.
+    And Upload request2.xlsx file to the Optional Attach file field on Return Creation 3 page.
+    And Click on Save button on Return Creation 3 page.
+    And Click on Next button on Return Creation 3 page.
+    Then Return Creation 4 page is opened.
+    When Click on Submit Request button on Return Creation 4 page.
+    And Submit Terms and Conditions for Sale of Products and Services pop-up on Return Creation 4 page.
+    Then Request Submission Successful pop-up is displayed on Return Creation 4 page.
+    When Return is created on Return Creation 4 page.
+    Then All Cases title is displayed on Returns page.

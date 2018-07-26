@@ -45,6 +45,7 @@ public class ReturnCreation2Page extends StorefrontBasePage {
     public void selectRequestedAction(String action) {
         waitUntilPageIsFullyLoaded();
         click(FIRST_ROW_REQUESTED_ACTION_FIELD_XPATH);
+        waitUntilPageIsFullyLoaded();
         $$(REQUESTED_ACTION_DROP_DOWN_ELEMENTS_XPATH).stream()
                 .filter(webElement -> webElement.getText().equals(action)).findAny().ifPresent(WebElement::click);
         waitUntilPageIsFullyLoaded();
@@ -92,5 +93,19 @@ public class ReturnCreation2Page extends StorefrontBasePage {
             $(ROW_BY_NUMBER_REASON_FOR_REQUEST_FIELD_XPATH, String.valueOf(i)).click();
             $$(FINAL_REASON_FOR_REQUEST_DROP_DOWN_ELEMENTS_XPATH).stream().findAny().ifPresent(WebElement::click);
         }
+    }
+
+    @Step("Set Reasons Type For Request")
+    public void selectRequestTypeForRequest(String type) {
+        waitUntilPageIsFullyLoaded();
+        $$(REQUEST_TYPE_LIST_XPATH).stream()
+                .filter(webElement -> webElement.getText().equals(type)).findAny().ifPresent(WebElement::click);
+    }
+
+    @Step("Set Reasons SubType For Request")
+    public void selectRequestSubTypeForRequest(String subType) {
+        waitUntilPageIsFullyLoaded();
+        $$(REQUEST_SUB_TYPE_LIST_XPATH).stream()
+                .filter(webElement -> webElement.getText().equals(subType)).findAny().ifPresent(WebElement::click);
     }
 }
