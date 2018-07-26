@@ -48,7 +48,7 @@ public class PDPPage extends StorefrontBasePage {
 
     @Step("Get Product Summary Title.")
     public String getProductSummaryTitle() {
-        return $(PRODUCT_SUMMARY_TITLE_XPATH).getText();
+        return $(PRODUCT_SUMMARY_HEADER_TITLE_XPATH).getText();
     }
 
     @Step("Get All Product Detail Table Items.")
@@ -84,7 +84,7 @@ public class PDPPage extends StorefrontBasePage {
 
     @Step("Get Pricing Details Header Title.")
     public String getPricingDetailsHeaderTitle() {
-        return $(PRICING_DETAILS_TITLE_XPATH).getText();
+        return $(PRICING_DETAILS_HEADER_TITLE_XPATH).getText();
     }
 
     @Step("Get All Pricing Details Items.")
@@ -111,5 +111,36 @@ public class PDPPage extends StorefrontBasePage {
     public String getGeneralCharacteristicsTabHeaderTitle() {
         waitUntilPageIsFullyLoaded();
         return $(GENERAL_CHARACTERISTICS_HEADER_TITLE_XPATH).getText();
+    }
+
+    @Step("Get All General Characteristics Items.")
+    public List<String> getAllGeneralCharacteristicsItems() {
+        return $$(ALL_GENERAL_CHARACTERISTICS_TABLE_ITEMS_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    @Step("user Clicks On Publications Tab.")
+    public void userClicksOnPublicationsTab() {
+        click(PUBLICATIONS_TAB_XPATH);
+    }
+
+    @Step("get List Of Publications Header Title.")
+    public String getListOfPublicationsHeaderTitle() {
+        waitUntilPageIsFullyLoaded();
+        return $(LIST_OF_PUBLICATIONS_HEADER_TITLE_XPATH).getText();
+    }
+
+    @Step("is Active Publications Tab Selected.")
+    public String isActivePublicationsTabSelected() {
+        return $(ACTIVE_PUBLICATIONS_TAB_XPATH).getAttribute("class");
+    }
+
+    @Step("get All Publication Table Headers.")
+    public List<String> getAllPublicationTableHeaders() {
+        return $$(ALL_PUBLICATIONS_HEADERS_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    @Step("is Publication Table Contains Link.")
+    public boolean isPublicationTableContainsLink() {
+        return isDisplayed(LINK_IN_THE_PUBLICATIONS_TABLE_XPATH);
     }
 }

@@ -4,6 +4,7 @@ import com.geempower.cucumber.definition_steps.AbstractStepDefs;
 import com.geempower.cucumber.definition_steps.TestKeyword;
 import com.geempower.storefront.page_blocks.FullProductDetailsPopUpBlock;
 import com.geempower.storefront.pages.product.PDPPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -91,7 +92,7 @@ public class PDPStepDefs extends AbstractStepDefs {
     }
 
     @When("^user clicks on Specifications tab.$")
-    public void userClicksOnSpecificationsTab()  {
+    public void userClicksOnSpecificationsTab() {
         pdpPage.userClicksOnSpecificationsTab();
     }
 
@@ -101,7 +102,37 @@ public class PDPStepDefs extends AbstractStepDefs {
     }
 
     @Then("^is (.*) header titles in Specification tab displayed.$")
-    public void isGeneralNecessaryHeaderTitlesInSpecificationTabDisplayed(String title){
+    public void isGeneralNecessaryHeaderTitlesInSpecificationTabDisplayed(String title) {
         assertEquals(title, pdpPage.getGeneralCharacteristicsTabHeaderTitle());
+    }
+
+    @Then("^check that general characteristics table contains correct titles (.*) in Specification tab.$")
+    public void checkThatGeneralCharacteristicsTableContainsCorrectTitlesInSpecificationTab(List<String> tableItems) {
+        assertTrue(pdpPage.getAllGeneralCharacteristicsItems().containsAll(tableItems));
+    }
+
+    @When("^user clicks on Publications tab.$")
+    public void userClicksOnPublicationsTab() {
+        pdpPage.userClicksOnPublicationsTab();
+    }
+
+    @Then("^is (.*) List of Publications tab selected on PDP page.$")
+    public void isActiveListOfPublicationsTabSelectedOnPDPPage(String status) {
+        assertTrue(pdpPage.isActivePublicationsTabSelected().contains(status));
+    }
+
+    @Then("^is (.*) header title in Publications tab displayed.$")
+    public void isListOfPublicationsHeaderTitleInPublicationsTabDisplayed(String title)  {
+        assertEquals(title, pdpPage.getListOfPublicationsHeaderTitle());
+    }
+
+    @Then("^is Publications table with correct headers (.*) displayed.$")
+    public void isPublicationsTableWithCorrectHeadersDisplayed(List<String> tableHeaders)  {
+        assertTrue(pdpPage.getAllPublicationTableHeaders().containsAll(tableHeaders));
+    }
+
+    @Then("^is Publication table contains link.$")
+    public void isPublicationTableContainsLink(){
+        assertTrue(pdpPage.isPublicationTableContainsLink());
     }
 }
