@@ -61,7 +61,7 @@ public class MyCartStepDefs extends AbstractStepDefs {
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         selectedProducts.keySet().forEach(product -> {
             Random random = new Random();
-            int randomQuantity = 400 + random.nextInt((1000 - 400) + 1);
+            int randomQuantity = (10 + random.nextInt((20 - 10) + 1)) * 10;
             myCartPage.setQuantityForProduct(product, randomQuantity);
             selectedProducts.put(product, randomQuantity);
         });

@@ -214,7 +214,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then Is <claimbackMessage> blue block message displayed on the OE 3 page.
     Then Is Claimback icon displayed in Extended Price cell on the OE 3 page.
     When Click on <product> link on the OE 3 page.
-    Then Is P<claimbackMessage> message below Pricing Details title displayed in Short Product Details pop-up.
+    Then Is <claimbackMessage> message below Pricing Details title displayed in Short Product Details pop-up.
     When Close Short Product Details pop-up.
 
     Examples:
