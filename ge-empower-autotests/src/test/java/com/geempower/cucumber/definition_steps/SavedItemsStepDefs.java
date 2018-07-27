@@ -12,6 +12,7 @@ public class SavedItemsStepDefs extends AbstractStepDefs {
     @Autowired
     private SavedItemsPage savedItemsPage;
 
+
     @Then("^Check that Saved Items page is opened.$")
     public void isSavedItemsPageOpened(){
         assertTrue(savedItemsPage.isOpened());
@@ -61,8 +62,8 @@ public class SavedItemsStepDefs extends AbstractStepDefs {
     @Then("^List data values are correct in Saved Lists table.$")
     public void listDataValuesAreCorrectInSavedListsTable() {
         String listName = threadVarsHashMap.getString(TestKeyword.NEW_SAVED_LIST_NAME);
-        assertEquals(listName, savedItemsPage.getCreatedOnValueOfSavedList());
-        assertEquals(listName, savedItemsPage.getLastEditedOnValueOfSavedList());
+        assertTrue(listName.contains(savedItemsPage.getCreatedOnValueOfSavedList()));
+        assertTrue(listName.contains(savedItemsPage.getLastEditedOnValueOfSavedList()));
     }
 
     @When("^User opens the saved list.$")
