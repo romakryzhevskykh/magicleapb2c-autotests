@@ -1,17 +1,18 @@
 package com.geempower.storefront.pages;
 
+import com.geempower.helpers.Utils;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import static com.geempower.storefront.page_elements.SavedItemsPageElements.*;
 
 @Component
 public class SavedItemsPage extends StorefrontBasePage {
+    @Autowired private Utils utils;
+
     private final String pageUri = "savedLists";
 
     @Override
@@ -47,16 +48,10 @@ public class SavedItemsPage extends StorefrontBasePage {
     @Step("Set New List Name To The New List Pop Up")
     public String setNewListNameToTheNewListPopUp() {
         waitHTMLTemplateLoad();
-        String listName = getLocalDateTimeStamp();
+        String listName = utils.getLocalDateTimeStamp();
         $(NEW_LIST_NAME_FIELD_XPATH).clear();
         $(NEW_LIST_NAME_FIELD_XPATH).sendKeys(listName);
         return listName;
-    }
-
-    private String getLocalDateTimeStamp() {
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-        return now.format(formatter);
     }
 
     @Step("Click On Add New List Button On New List Pop Up")

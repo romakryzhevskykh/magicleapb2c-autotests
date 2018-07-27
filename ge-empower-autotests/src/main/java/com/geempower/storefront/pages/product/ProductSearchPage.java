@@ -1,16 +1,18 @@
 package com.geempower.storefront.pages.product;
 
+import com.geempower.helpers.Utils;
 import com.geempower.storefront.StorefrontBasePage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import static com.geempower.storefront.page_elements.product.ProductsSearchPageElements.*;
 
 @Component
 public class ProductSearchPage extends StorefrontBasePage {
+
+    @Autowired
+    private Utils utils;
 
     private final String pageUri = "product/search?onlyOneProduct=false&product";
 
@@ -31,7 +33,7 @@ public class ProductSearchPage extends StorefrontBasePage {
 
     @Step("Verify Alternate Column")
     public boolean verifyAlternateColumn() {
-       return isDisplayed(ALTERNATE_CAT_NO_XPATH);
+        return isDisplayed(ALTERNATE_CAT_NO_XPATH);
     }
 
     @Step("Click On Product Link On The Search Result Page.")
@@ -58,16 +60,10 @@ public class ProductSearchPage extends StorefrontBasePage {
     @Step("Set List Name To The New List Field.")
     public String setListNameToTheNewListField() {
         waitUntilPageIsFullyLoaded();
-        String listName = getLocalDateTimeStamp();
+        String listName = utils.getLocalDateTimeStamp();
         $(NEW_LIST_FIELD_IN_SAVE_LIST_POP_UP_XPATH).clear();
         $(NEW_LIST_FIELD_IN_SAVE_LIST_POP_UP_XPATH).sendKeys(listName);
         return listName;
-    }
-
-    private String getLocalDateTimeStamp() {
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-        return now.format(formatter);
     }
 
     @Step("Click On Save Button In The Save To List PopUp.")
