@@ -81,3 +81,28 @@ Feature: Some actions on Products page
       | ASIA          | Catalog No., Description, Std. Package Weight, Product Family, Restock Fee, Customer Reference No., Minimum Order Qty., UPC, GSA Compliance, Discount Schedule, CCC, Currency, Notes, Package Qty., Country of Origin | Agreement No., Agreement Type, Unit of Measure, Book Price, Book Multiplier, Standard Price, List Price, Agreement Factor, Factor Type, Claimback Amount, Final Net Price |
       | EMEA          | Catalog No., Description, Std. Package Weight, Product Family, Restock Fee, Customer Reference No., Minimum Order Qty., UPC, GSA Compliance, Discount Schedule, CCC, Currency, Notes, Package Qty., Country of Origin | Agreement No., Agreement Type, Unit of Measure, Book Price, Book Multiplier, Standard Price, List Price, Agreement Factor, Factor Type, Claimback Amount, Final Net Price |
       | Latin_America | Catalog No., Description, Std. Package Weight, Product Family, Restock Fee, Customer Reference No., Minimum Order Qty., UPC, GSA Compliance, Discount Schedule, CCC, Currency, Notes, Package Qty., Country of Origin | Agreement No., Agreement Type, Unit of Measure, Book Price, Book Multiplier, Standard Price, List Price, Agreement Factor, Factor Type, Claimback Amount, Final Net Price |
+
+  Scenario Outline: Check that user is able to open PDP and check Specification and Publication tabs.
+    And Account management page is opened.
+    When Choose <region> region.
+    And Search random account for chosen region.
+    And Click on chosen account.
+    And Products page is opened.
+    Given Select test product for chosen region.
+    When User search for a product by catalog No. on the Products page.
+    Then Product sub-detail page is opened.
+    When User clicks on catalogNo link.
+    Then PDP page is opened.
+    When User clicks on Specifications tab.
+    Then Is active Specification tab selected on PDP page.
+    Then Is General Characteristics , Dimensions and Classifications header titles in Specification tab displayed.
+    Then Check that general characteristics table contains correct titles <general_characteristic_table_items> in Specification tab.
+    When User clicks on Publications tab.
+    Then Is active List of Publications tab selected on PDP page.
+    Then Is List of Publications header title in Publications tab displayed.
+    Then Is Publications table with correct headers <publication_table_titles> displayed.
+    Then Is Publications table contains link http://apps.geindustrial.com/publibrary.
+
+    Examples:
+      | region        | general_characteristic_table_items                                                                                                                                                                                                                                                                                              | publication_table_titles                                     |
+      | North_America | Category, GO Schedule, Amperage, Frame Type, Trip Style, System Voltage, Poles, Trip Function, Continuous Current Rated, 120 Vac Interrupting Rating, 120/240 Vac Interrupting Rating, Suitable for Reverse Feed, Product Line, Long Time, Instantaneous, Protective Relays, Current Metering, Special Markings, GSA Compliance | Title, Type of Doc., Date, Publication No., Publication Type |

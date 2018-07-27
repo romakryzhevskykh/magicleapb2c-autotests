@@ -179,11 +179,11 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     And Click on P&A button.
     Then Price&Availability page is opened.
     When User select <agreementNo> Agreement No for all the product.
-    Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Agreement No field displayed on P&A page.
+    Then Is <claimbackMessage> message below Agreement No field displayed on P&A page.
     When Click on <product> link on P&A page.
     Then Is Full Product Details pop-up on Price and Availability page displayed.
     When Click on Product Details tab in Full Product Details pop-up.
-    Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Pricing Details title displayed in Full Product Details pop-up.
+    Then Is <claimbackMessage> message below Pricing Details title displayed in Full Product Details pop-up.
     When Click on Availability Details tab in Full Product Details pop-up.
     Then Is Active Availability Details tab selected in Full Product Details pop-up.
     When Close Full Product Details pop-up.
@@ -193,33 +193,33 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     When User clicks on My Cart icon in Header block.
     When User clicks on Checkout button in Header block.
     Then My Cart page is opened.
-    Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Agreement No field displayed on My Cart page.
+    Then Is <claimbackMessage> message below Agreement No field displayed on My Cart page.
     When Click on <product> link on My Cart page.
     Then Is Full Product Details pop-up on Price and Availability page displayed.
     When Click on Product Details tab in Full Product Details pop-up.
-    Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Pricing Details title displayed in Full Product Details pop-up.
+    Then Is <claimbackMessage> message below Pricing Details title displayed in Full Product Details pop-up.
     When Click on Availability Details tab in Full Product Details pop-up.
     Then Is Active Availability Details tab selected in Full Product Details pop-up.
     When Close Full Product Details pop-up.
     When User clicks on the Next top button on the My Cart page.
     When User fills PO no. to the PO no. field on the OE 2 page.
     And Select Shipment Address from the existing addresses on the OE 2 page.
-    Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) blue block message displayed on the OE 2 page.
+    Then Is <claimbackMessage> blue block message displayed on the OE 2 page.
     Then Is Claimback icon displayed in Extended Price cell on the OE 2 page.
     When Click on <product> link on the OE 2 page.
     Then Is Short Product Details pop-up on the displayed.
-    Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Pricing Details title displayed in Short Product Details pop-up.
+    Then Is <claimbackMessage> message below Pricing Details title displayed in Short Product Details pop-up.
     When Close Short Product Details pop-up.
     When User clicks on the Bottom Next button on the OE 2 page.
-    Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) blue block message displayed on the OE 3 page.
+    Then Is <claimbackMessage> blue block message displayed on the OE 3 page.
     Then Is Claimback icon displayed in Extended Price cell on the OE 3 page.
     When Click on <product> link on the OE 3 page.
-    Then Is Price displayed is net after rebate. Order will bill at Standard (Claimback only) message below Pricing Details title displayed in Short Product Details pop-up.
+    Then Is P<claimbackMessage> message below Pricing Details title displayed in Short Product Details pop-up.
     When Close Short Product Details pop-up.
 
     Examples:
-      | region        | product | agreementNo | salesDivision | account |
-      | North_America | TEY150  | 45003866    | USS1_10_10    | 3394020 |
+      | region        | product | agreementNo | salesDivision | account | claimbackMessage                                                                  |
+      | North_America | TEY150  | 45003866    | USS1_10_10    | 3394020 | Price displayed is net after rebate. Order will bill at Standard (Claimback only) |
 
   Scenario Outline: Check that user can place order in CELA account
     And Account management page is opened.

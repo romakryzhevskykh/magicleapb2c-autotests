@@ -48,7 +48,7 @@ public class PDPPage extends StorefrontBasePage {
 
     @Step("Get Product Summary Title.")
     public String getProductSummaryTitle() {
-        return $(PRODUCT_SUMMARY_TITLE_XPATH).getText();
+        return $(PRODUCT_SUMMARY_HEADER_TITLE_XPATH).getText();
     }
 
     @Step("Get All Product Detail Table Items.")
@@ -84,7 +84,7 @@ public class PDPPage extends StorefrontBasePage {
 
     @Step("Get Pricing Details Header Title.")
     public String getPricingDetailsHeaderTitle() {
-        return $(PRICING_DETAILS_TITLE_XPATH).getText();
+        return $(PRICING_DETAILS_HEADER_TITLE_XPATH).getText();
     }
 
     @Step("Get All Pricing Details Items.")
@@ -95,5 +95,52 @@ public class PDPPage extends StorefrontBasePage {
     @Step("Is Add To Cart Button Displayed In Product Details Block On PDP Page.")
     public boolean isAddToCartButtonDisplayedInProductDetailsBlockOnPDPPage() {
         return isDisplayed(ADD_TO_CART_BUTTON_ON_PDP_PAGE_XPATH);
+    }
+
+    @Step("User Clicks On Specifications Tab.")
+    public void userClicksOnSpecificationsTab() {
+        click(SPECIFICATIONS_TAB_XPATH);
+    }
+
+    @Step("Is Active Specification Tab Selected.")
+    public String isActiveSpecificationTabSelected() {
+        return $(ACTIVE_SPECIFICATION_TAB_XPATH).getAttribute("class");
+    }
+
+    @Step("Get Specifications Tab Header Title.")
+    public String getGeneralCharacteristicsTabHeaderTitle() {
+        waitUntilPageIsFullyLoaded();
+        return $(GENERAL_CHARACTERISTICS_HEADER_TITLE_XPATH).getText();
+    }
+
+    @Step("Get All General Characteristics Items.")
+    public List<String> getAllGeneralCharacteristicsItems() {
+        return $$(ALL_GENERAL_CHARACTERISTICS_TABLE_ITEMS_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    @Step("User Clicks On Publications Tab.")
+    public void userClicksOnPublicationsTab() {
+        click(PUBLICATIONS_TAB_XPATH);
+    }
+
+    @Step("Get List Of Publications Header Title.")
+    public String getListOfPublicationsHeaderTitle() {
+        waitUntilPageIsFullyLoaded();
+        return $(LIST_OF_PUBLICATIONS_HEADER_TITLE_XPATH).getText();
+    }
+
+    @Step("Is Active Publications Tab Selected.")
+    public String isActivePublicationsTabSelected() {
+        return $(ACTIVE_PUBLICATIONS_TAB_XPATH).getAttribute("class");
+    }
+
+    @Step("Get All Publication Table Headers.")
+    public List<String> getAllPublicationTableHeaders() {
+        return $$(ALL_PUBLICATIONS_HEADERS_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    @Step("Is Publication Table Contains Link.")
+    public String isPublicationTableContainsLink() {
+        return $(LINK_IN_THE_PUBLICATIONS_TABLE_XPATH).getAttribute("href");
     }
 }
