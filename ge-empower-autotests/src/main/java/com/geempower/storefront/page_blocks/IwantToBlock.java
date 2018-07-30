@@ -3,6 +3,8 @@ package com.geempower.storefront.page_blocks;
 import com.geempower.helpers.UIComponent;
 import com.geempower.helpers.models.RegionType;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
@@ -24,10 +26,33 @@ public class IwantToBlock extends UIComponent {
         click(MODIFY_AN_ACCOUNT_TAB_XPATH);
     }
 
+    @Step("Is Orders Table Empty.")
+    private boolean isAccountsTableEmpty() {
+        try {
+            return $(EMPTY_ALL_ACCOUNTS_TABLE_XPATH).isDisplayed();
+        } catch (NoSuchElementException | NullPointerException exception) {
+            return false;
+        }
+    }
+
+    @Step("Get Count Of Pages With Accounts.")
+    private int getCountOfPagesAllAccountsTab() {
+        String countOfPages = $(COUNT_OF_PAGES_ALL_ACCOUNTS_TAB_XPATH).getText();
+        int actualCount = 0;
+        if (!countOfPages.equals("")) {
+            actualCount = Integer.parseInt(countOfPages.replace("of ", ""));
+        } else if (!isAccountsTableEmpty() && countOfPages.equals("")) {
+            actualCount = 1;
+        } else if (isAccountsTableEmpty()) {
+            actualCount = 0;
+        }
+        return actualCount;
+    }
+
     @Step("Get All Account Names.")
-    public Stream<WebElement> getAllAccountNames() {
+    public Stream<WebElement> getAllAccountNo() {
         waitUntilPageIsFullyLoaded();
-        return $$(ALL_ACCOUNT_NAMES_IN_ACCOUNTS_TABLE_XPATH).stream();
+        return $$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream();
     }
 
     @Step("Click On Sales Office Codes Tab.")
@@ -282,7 +307,7 @@ public class IwantToBlock extends UIComponent {
         click(getAllRolesFromRolesDropdown().filter(role -> role.getText().trim().equals(newRole)).findAny().orElse(null));
     }
 
-    private Stream<WebElement> getAllRolesFromRolesDropdown(){
+    private Stream<WebElement> getAllRolesFromRolesDropdown() {
         waitUntilPageIsFullyLoaded();
         return $$(ALL_ROLES_IN_ROLES_DROPDOWN_XPATH).stream();
     }
@@ -291,5 +316,29 @@ public class IwantToBlock extends UIComponent {
     public void clickOnAssignRolesButton() {
         waitUntilPageIsFullyLoaded();
         click(By.id(ASSIGN_ROLES_OR_PRIVILEGES_BUTTON_ID));
+    }
+
+    @Step("Check That Account Is Not Displayed In The All Accounts Table.")
+    public void checkThatAccountIsNotDisplayedInTheAllAccountsTable(String accountNo) {
+        waitUntilPageIsFullyLoaded();
+        int actualCountOfPages = getCountOfPagesAllAccountsTab();
+        for (int i = 0; i < actualCountOfPages; i++) {
+            if ($$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream().noneMatch(account -> account.getText().equals(accountNo))) {
+                waitUntilPageIsFullyLoaded();
+                click(NEXT_PAGINATION_BUTTON_ALL_ACCOUNTS_TAB_XPATH);
+                waitUntilPageIsFullyLoaded();
+            }
+            else if ($$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream().anyMatch(account -> account.getText().equals(accountNo))) {
+                waitUntilPageIsFullyLoaded();
+                click(ACCOUNT_CHECKBOX_XPATH, accountNo);
+                waitUntilPageIsFullyLoaded();
+                ((JavascriptExecutor)getDriver()).executeScript("scroll(0,0)");
+                click(REMOVE_BUTTON_IN_ALL_ACCOUNTS_TAB_XPATH);
+                waitUntilPageIsFullyLoaded();
+                click(REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_IN_ALL_ACCOUNTS_TAB_XPATH);
+                actualCountOfPages = i;
+            }
+
+        }
     }
 }

@@ -105,14 +105,15 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
 
     @And("^Search Account From Add Account Pop-Up.$")
     public void searchAccountFromAddAccPopUp() {
-        String accountName = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NAME);
+        String accountName = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NO);
         accountManagementPage.searchAccountByAccountName(accountName);
     }
 
     @Then("^Appropriate account is displayed in the table on Account Management Page.$")
     public void appropriateAccountIsDisplayedInTheTable() {
-        String accountName = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NAME);
-        assertEquals(accountName, accountManagementPage.getFirstAccountNameInTheTable());
+        String accountName = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NO);
+        assertTrue(accountManagementPage.getAllApprovedAccounts()
+                .anyMatch(account -> account.getText().equals(accountName)));
     }
 
     @And("^Select account (.*).$")

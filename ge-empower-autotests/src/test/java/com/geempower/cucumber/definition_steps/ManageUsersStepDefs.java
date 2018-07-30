@@ -95,14 +95,13 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     @Then("^Add New Accounts table is displayed in the Add Account pop-up.$")
     public void addNewAccountsTableIsDisplayed() {
         assertTrue(manageUsersPage.addNewAccountsTableIsDisplayed());
-        threadVarsHashMap.put(TestKeyword.MANAGE_USERS_ACCOUNT_NAME, manageUsersPage.getAccountNameFromAddAccPopUp());
     }
 
-    @Then("^Account from Add Account pop-up is displayed in the the All Accounts tab.$")
-    public void previouslyAddedAccountIsDisplayedInTheTheAllAccountsTab() {
-        String accountName = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NAME);
-        assertTrue(iWantToBlock.getAllAccountNames()
-                .anyMatch(account -> account.getText().equals(accountName)));
+    @Then("^Account from Add Account pop-up is displayed in the All Accounts tab.$")
+    public void previouslyAddedAccountIsDisplayedInTheAllAccountsTab() {
+        String accountNo = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NO);
+        assertTrue(iWantToBlock.getAllAccountNo()
+                .anyMatch(account -> account.getText().equals(accountNo)));
     }
 
     @When("^Click on Sales Office Codes tab In Modify an Account Tab.$")
@@ -202,6 +201,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         manageUsersPage.clickOnTheUserNameInTheTable();
     }
 
+    @SuppressWarnings("unchecked")
     @When("^Clicks on the user name in the table with pending accounts.$")
     public void clickOnTheUserNameInTheTableWithPendingRequests() {
         ArrayList<String> requestedAccounts = (ArrayList<String>) threadVarsHashMap.get(TestKeyword.LIST_OF_REQUESTED_ACCOUNTS);
@@ -380,8 +380,8 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
 
     @Then("^Account from Add Account pop-up is not displayed in the the All Accounts tab.$")
     public void previouslyAddedAccountIsNotDisplayedInTheTheAllAccountsTab() {
-        String accountName = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NAME);
-        assertFalse(iWantToBlock.getAllAccountNames()
+        String accountName = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NO);
+        assertFalse(iWantToBlock.getAllAccountNo()
                 .anyMatch(account -> account.getText().equals(accountName)));
     }
 
@@ -408,7 +408,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     public void userHasRoleInEachRegion(String role) {
         HashMap<String, String> userRolesInEachRegion = iWantToBlock.getAllRolesForEachRegion();
         userRolesInEachRegion.values().forEach(roleForRegion ->
-            assertTrue(roleForRegion.equals(role)));
+                assertTrue(roleForRegion.equals(role)));
     }
 
     @When("^Admin Set (.*) role for each region to the user.$")
@@ -425,5 +425,15 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     public void allNewSetRolesAreStoredToThreadVarsHashMap() {
         HashMap<String, String> userRolesInEachRegion = iWantToBlock.getAllRolesForEachRegion();
         threadVarsHashMap.put(TestKeyword.USER_ROLES_IN_EACH_REGION, userRolesInEachRegion);
+    }
+
+    @And("^Put account No (.*) to the hashmap.$")
+    public void putAccountNoToTheHashmap(String account) {
+        threadVarsHashMap.put(TestKeyword.MANAGE_USERS_ACCOUNT_NO, account);
+    }
+
+    @Then("^Check that (.*) is not displayed in the All Accounts table.$")
+    public void checkThatAccountIsNotDisplayedInTheAllAccountsTable(String account) {
+        iWantToBlock.checkThatAccountIsNotDisplayedInTheAllAccountsTable(account);
     }
 }

@@ -204,6 +204,12 @@ public class AccountManagementPage extends StorefrontBasePage {
         return $$(By.xpath(APPROVED_ACCOUNTS_LIST_XPATH));
     }
 
+    @Step("Get all approved accounts.")
+    public Stream<WebElement> getAllApprovedAccounts() {
+        waitUntilPageIsFullyLoaded();
+        return $$(APPROVED_ACCOUNTS_LIST_XPATH).stream();
+    }
+
     @Step("Remove account by account number.")
     public void removeAccountByAccountNo(String account){
         waitUntilPageIsFullyLoaded();
