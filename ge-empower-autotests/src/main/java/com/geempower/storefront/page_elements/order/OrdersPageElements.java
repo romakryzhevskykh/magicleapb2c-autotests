@@ -8,4 +8,5 @@ public class OrdersPageElements {
     public final static String EMPTY_ORDERS_TABLE_XPATH = "//td[@class='dataTables_empty']";
     public final static String FIRST_ORDER_IN_APPROPRIATE_STATUS_XPATH = "//td[@class='table-visible-lg-block sorting_1' and contains(text(), '%s')]//..//../tr[1]/td[1]/a";
     public final static String SORTING_ORDERS_TABLE_ICON_BY_STATUS_ID = "sortStatus";
+    public final static String ORDER_LINK_BY_ORDER_NO_XPATH = "//td/a[contains(@href, '%s')]";
 }

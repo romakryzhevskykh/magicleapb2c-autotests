@@ -7,10 +7,11 @@ import com.geempower.helpers.models.Order;
 import com.geempower.storefront.pages.order.OrderDetailsPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static junit.framework.TestCase.assertTrue;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class OrderDetailsStepDefs extends AbstractStepDefs {
     @Autowired
@@ -26,7 +27,7 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     }
 
     @Then("^GE Order No. is correct.$")
-    public void GeOrderNoIsCorrect() {
+    public void geOrderNoIsCorrect() {
         assertEquals(threadVarsHashMap.get(TestKeyword.GE_ORDER_NO), orderDetailsPage.getGeOrderNo());
     }
 
@@ -56,5 +57,46 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     @And("^Admin closes the pop-up.$")
     public void adminClosesThePopUp() {
         orderDetailsPage.closeInvoiceDetailsPopUp();
+    }
+
+    @Then("^Tracking information is (.*).$")
+    public void trackingInformationIsMultiple(String fieldName) {
+        assertEquals(fieldName, orderDetailsPage.getTrackingInformationData());
+    }
+
+
+    @When("^User clicks on Multiple hyperlink.$")
+    public void userClicksOnMultipleHyperlink() {
+        orderDetailsPage.clickOnMultipleHyperlink();
+    }
+
+    @Then("^(.*) pop-up appears.$")
+    public void bolAndTrackingNumbersPopUpAppears(String popUpTitle) {
+        assertEquals(popUpTitle, orderDetailsPage.getBolAndTrackingNumbersPopUpTitle());
+    }
+
+    @Then("^More than one BOL are displayed in the pop-up.$")
+    public void moreThanOneBOLAreDisplayedInThePopUp() {
+        assertTrue(orderDetailsPage.getCountOfBillsInBOLPopUp() > 1);
+    }
+
+    @When("^User expands order details section.$")
+    public void userExpandsOrderDetailsSection() {
+        orderDetailsPage.expandFirstLineOrderDetails();
+    }
+
+    @Then("^Bill of landing is (.*).$")
+    public void billOfLandingIsMULTIPLE(String fieldName) {
+        assertEquals(fieldName, orderDetailsPage.getBOLInformationData());
+    }
+
+    @When("^User clicks on Multiple hyperlink on BOL.$")
+    public void userClicksOnMultipleHyperlinkOnBOL() {
+        orderDetailsPage.clickOnBOLHyperlink();
+    }
+
+    @And("^User closes BOL and Tracking Numbers pop-up.$")
+    public void userClosesBOLAndTrackingNumbersPopUp() {
+        orderDetailsPage.closeBOLPopUp();
     }
 }
