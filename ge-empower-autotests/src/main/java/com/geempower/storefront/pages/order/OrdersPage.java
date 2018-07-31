@@ -77,4 +77,15 @@ public class OrdersPage extends StorefrontBasePage {
             click(By.id(SORTING_ORDERS_TABLE_ICON_BY_STATUS_ID));
         }
     }
+
+    @Step("Get current page url.")
+    public String getCurrentUrl() {
+        return getCurrentUrl();
+    }
+
+    @Step("Click On Order By Order No.")
+    public void clickOnOrderByOrderNo(String orderNo) {
+        waitUntilPageIsFullyLoaded();
+        click(ORDER_LINK_BY_ORDER_NO_XPATH, orderNo);
+    }
 }

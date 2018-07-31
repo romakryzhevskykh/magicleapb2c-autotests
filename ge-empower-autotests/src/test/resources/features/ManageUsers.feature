@@ -18,82 +18,82 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
       | email                    |
       | externaluser1@zaelab.com |
 
-#  Scenario Outline: Check that admin is able to add/remove SO code to the internal user
-#    And Refresh page.
-#    When Admin opens Users tab.
-#    And Sets <email> email to the email field.
-#    And Clicks on the Search button.
-#    Then Appropriate user with appropriate <email> email is displayed in the users list.
-#    When Clicks on the user name in the table.
-#    When Click on Add account button in User Detail block.
-#    Then Add Account pop-up is displayed on Manage Users page.
-#    And Select North_America in the Region field in the Add Account pop-up.
-#    And Set <soCode> SO code to the Second Sales Office Code field in the Add Account pop-up.
-#    And Click on the Search button in the Add Account pop-up.
-#    Then Add New Accounts table is displayed in the Add Account pop-up.
-#    When Set <soCode> SO code to the First Sales Office Code field in the Add Account pop-up.
-#    And Click on Modify button in the Add Account pop-up.
-#    And Expand Modify an Account tab in I Want To Block.
-#    Then Account from Add Account pop-up is displayed in the the All Accounts tab.
-#    When Click on Sales Office Codes tab In Modify an Account Tab.
-#    Then <soCode> Sales Office Code is displayed in the Approved SO Codes table.
-#    Given Switch to Storefront as internalUser.
-#    And User is logged in to Storefront.
-#    And Refresh page.
-#    And Account management page is opened.
-#    When Choose North_America region.
-#    And Search Account From Add Account Pop-Up.
-#    Then Appropriate account is displayed in the table on Account Management Page.
-#    Given Switch to Storefront as admin.
-#    And Select All Sales Office Codes checkbox in SO Codes tab.
-#    And Click on SO Codes Remove button in SO Codes tab.
-#    And Focus on browser.
-#    Then Remove Account pop-up is displayed on I Want To Block in SO codes tab.
-#    And Click on Remove button in the Remove Account pop-up on I Want To Block in SO codes tab.
-#    Then No data available in table title is displayed in Sales Office Code table.
-#
-#    Examples:
-#      | email                     | soCode |
-#      | roman.kryzhevskykh@ge.com | USG2   |
+  Scenario Outline: Check that admin is able to add/remove SO code to the internal user
+    And Refresh page.
+    When Admin opens Users tab.
+    And Sets <email> email to the email field.
+    And Clicks on the Search button.
+    Then Appropriate user with appropriate <email> email is displayed in the users list.
+    When Clicks on the user name in the table.
+    When Click on Add account button in User Detail block.
+    Then Add Account pop-up is displayed on Manage Users page.
+    And Select North_America in the Region field in the Add Account pop-up.
+    And Set <soCode> SO code to the Second Sales Office Code field in the Add Account pop-up.
+    And Click on the Search button in the Add Account pop-up.
+    Then Add New Accounts table is displayed in the Add Account pop-up.
+    When Set <soCode> SO code to the First Sales Office Code field in the Add Account pop-up.
+    And Click on Modify button in the Add Account pop-up.
+    And Expand Modify an Account tab in I Want To Block.
+    Then Account from Add Account pop-up is displayed in the the All Accounts tab.
+    When Click on Sales Office Codes tab In Modify an Account Tab.
+    Then <soCode> Sales Office Code is displayed in the Approved SO Codes table.
+    Given Switch to Storefront as internalUser.
+    And User is logged in to Storefront.
+    And Refresh page.
+    And Account management page is opened.
+    When Choose North_America region.
+    And Search Account From Add Account Pop-Up.
+    Then Appropriate account is displayed in the table on Account Management Page.
+    Given Switch to Storefront as admin.
+    And Select All Sales Office Codes checkbox in SO Codes tab.
+    And Click on SO Codes Remove button in SO Codes tab.
+    And Focus on browser.
+    Then Remove Account pop-up is displayed on I Want To Block in SO codes tab.
+    And Click on Remove button in the Remove Account pop-up on I Want To Block in SO codes tab.
+    Then No data available in table title is displayed in Sales Office Code table.
 
-#  Scenario Outline: Check that admin is able to add/remove SE code to the internal user
-#    And Refresh page.
-#    And Focus on browser.
-#    When Admin opens Users tab.
-#    And Sets <email> email to the email field.
-#    And Clicks on the Search button.
-#    Then Appropriate user with appropriate <email> email is displayed in the users list.
-#    When Clicks on the user name in the table.
-#    When Click on Add account button in User Detail block.
-#    Then Add Account pop-up is displayed on Manage Users page.
-#    And Select North_America in the Region field in the Add Account pop-up.
-#    And Set <seCode> SE code to the Second Sales Engineer Code field in the Add Account pop-up.
-#    And Click on the Search button in the Add Account pop-up.
-#    Then Add New Accounts table is displayed in the Add Account pop-up.
-#    When Set <seCode> SE code to the First Sales Engineer Code field in the Add Account pop-up.
-#    And Click on Modify button in the Add Account pop-up.
-#    And Expand Modify an Account tab in I Want To Block.
-#    Then Account from Add Account pop-up is displayed in the the All Accounts tab.
-#    When Click on Sales Engineer Codes tab In Modify an Account Tab.
-#    Then <seCode> Sales Engineer Code is displayed in the Approved SE Codes table.
-#    Given Switch to Storefront as internalUser.
-#    And User is logged in to Storefront.
-#    And Refresh page.
-#    And Account management page is opened.
-#    When Choose North_America region.
-#    And Search Account From Add Account Pop-Up.
-#    Then Appropriate account is displayed in the table on Account Management Page.
-#    Given Switch to Storefront as admin.
-#    And Select All Sales Engineer Codes checkbox in SE Codes tab.
-#    And Click on SE Codes Remove button in SE Codes tab.
-#    And Focus on browser.
-#    Then Remove Account pop-up is displayed on I Want To Block in SE codes tab.
-#    And Click on Remove button in the Remove Account pop-up on I Want To Block in SE codes tab.
-#    Then No data available in table title is displayed in Sales Engineer Code table.
-#
-#    Examples:
-#      | email                     | seCode    |
-#      | roman.kryzhevskykh@ge.com | 220028351 |
+    Examples:
+      | email                     | soCode |
+      | roman.kryzhevskykh@ge.com | USG2   |
+
+  Scenario Outline: Check that admin is able to add/remove SE code to the internal user
+    And Refresh page.
+    And Focus on browser.
+    When Admin opens Users tab.
+    And Sets <email> email to the email field.
+    And Clicks on the Search button.
+    Then Appropriate user with appropriate <email> email is displayed in the users list.
+    When Clicks on the user name in the table.
+    When Click on Add account button in User Detail block.
+    Then Add Account pop-up is displayed on Manage Users page.
+    And Select North_America in the Region field in the Add Account pop-up.
+    And Set <seCode> SE code to the Second Sales Engineer Code field in the Add Account pop-up.
+    And Click on the Search button in the Add Account pop-up.
+    Then Add New Accounts table is displayed in the Add Account pop-up.
+    When Set <seCode> SE code to the First Sales Engineer Code field in the Add Account pop-up.
+    And Click on Modify button in the Add Account pop-up.
+    And Expand Modify an Account tab in I Want To Block.
+    Then Account from Add Account pop-up is displayed in the the All Accounts tab.
+    When Click on Sales Engineer Codes tab In Modify an Account Tab.
+    Then <seCode> Sales Engineer Code is displayed in the Approved SE Codes table.
+    Given Switch to Storefront as internalUser.
+    And User is logged in to Storefront.
+    And Refresh page.
+    And Account management page is opened.
+    When Choose North_America region.
+    And Search Account From Add Account Pop-Up.
+    Then Appropriate account is displayed in the table on Account Management Page.
+    Given Switch to Storefront as admin.
+    And Select All Sales Engineer Codes checkbox in SE Codes tab.
+    And Click on SE Codes Remove button in SE Codes tab.
+    And Focus on browser.
+    Then Remove Account pop-up is displayed on I Want To Block in SE codes tab.
+    And Click on Remove button in the Remove Account pop-up on I Want To Block in SE codes tab.
+    Then No data available in table title is displayed in Sales Engineer Code table.
+
+    Examples:
+      | email                     | seCode    |
+      | roman.kryzhevskykh@ge.com | 220028351 |
 
   Scenario Outline: Check that admin is able to find user by some account from each region
     And Refresh page.
@@ -247,46 +247,45 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
       | email                     | account |
       | roman.kryzhevskykh@ge.com | 1000827 |
 
-# @TODO Remove comments after bug will fixed
-#  Scenario Outline: Check that admin is able to accept SO codes to the internal user
-#    And Refresh page.
-#    And Focus on browser.
-#    Given Switch to Storefront as internalUser.
-#    And User is logged in to Storefront.
-#    And Refresh page.
-#    And Account management page is opened.
-#    When Request account popup is opened.
-#    When Set <soCode> SO code to the First Sales Office Code field in the Request Account pop-up.
-#    And Click on Modify button in the Request Account pop-up.
-#    Given Switch to Storefront as admin.
-#    And Manage Users page is opened.
-#    And Focus on browser.
-#    When Admin opens Users tab.
-#    And Sets <email> email to the email field.
-#    And Clicks on the Search button.
-#    Then Appropriate user with appropriate <email> email is displayed in the users list.
-#    When Clicks on the user name in the table.
-#    When User expand the Approve Pending Accounts section.
-#    When Click on Pending Sales Office Codes tab In Approve Pending Accounts Tab.
-#    Then <soCode> SO code is displayed in the Pending SO codes table.
-#    When Admin clicks on All Sales Office Codes checkbox in Pending SO Codes tab.
-#    And Click on Accept SO codes button.
-#    Then Accept Account pop-up is displayed on I Want To Block in Pending SO Codes tab.
-#    And Click on Accept button in the Accept Account pop-up on I Want To Block in Pending SO Codes tab.
-#    Then No data available in table title is displayed in Pending Sales Office Code table.
-#    And Expand Modify an Account tab in I Want To Block.
-#    When Click on Sales Office Codes tab In Modify an Account Tab.
-#    Then <soCode> Sales Office Code is displayed in the Approved SO Codes table.
-#    And Select All Sales Office Codes checkbox in SO Codes tab.
-#    And Click on SO Codes Remove button in SO Codes tab.
-#    And Focus on browser.
-#    Then Remove Account pop-up is displayed on I Want To Block in SO codes tab.
-#    And Click on Remove button in the Remove Account pop-up on I Want To Block in SO codes tab.
-#    Then No data available in table title is displayed in Sales Office Code table.
-#
-#    Examples:
-#      | email                     | soCode |
-#      | roman.kryzhevskykh@ge.com | USG4   |
+  Scenario Outline: Check that admin is able to accept SO codes to the internal user
+    And Refresh page.
+    And Focus on browser.
+    Given Switch to Storefront as internalUser.
+    And User is logged in to Storefront.
+    And Refresh page.
+    And Account management page is opened.
+    When Request account popup is opened.
+    When Set <soCode> SO code to the First Sales Office Code field in the Request Account pop-up.
+    And Click on Modify button in the Request Account pop-up.
+    Given Switch to Storefront as admin.
+    And Manage Users page is opened.
+    And Focus on browser.
+    When Admin opens Users tab.
+    And Sets <email> email to the email field.
+    And Clicks on the Search button.
+    Then Appropriate user with appropriate <email> email is displayed in the users list.
+    When Clicks on the user name in the table.
+    When User expand the Approve Pending Accounts section.
+    When Click on Pending Sales Office Codes tab In Approve Pending Accounts Tab.
+    Then <soCode> SO code is displayed in the Pending SO codes table.
+    When Admin clicks on All Sales Office Codes checkbox in Pending SO Codes tab.
+    And Click on Accept SO codes button.
+    Then Accept Account pop-up is displayed on I Want To Block in Pending SO Codes tab.
+    And Click on Accept button in the Accept Account pop-up on I Want To Block in Pending SO Codes tab.
+    Then No data available in table title is displayed in Pending Sales Office Code table.
+    And Expand Modify an Account tab in I Want To Block.
+    When Click on Sales Office Codes tab In Modify an Account Tab.
+    Then <soCode> Sales Office Code is displayed in the Approved SO Codes table.
+    And Select All Sales Office Codes checkbox in SO Codes tab.
+    And Click on SO Codes Remove button in SO Codes tab.
+    And Focus on browser.
+    Then Remove Account pop-up is displayed on I Want To Block in SO codes tab.
+    And Click on Remove button in the Remove Account pop-up on I Want To Block in SO codes tab.
+    Then No data available in table title is displayed in Sales Office Code table.
+
+    Examples:
+      | email                     | soCode |
+      | roman.kryzhevskykh@ge.com | USG4   |
 
   Scenario Outline: Check that admin is able to reject SO codes to the internal user
     And Refresh page.
@@ -318,36 +317,35 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
       | email                     | soCode |
       | roman.kryzhevskykh@ge.com | USG5   |
 
+  Scenario Outline: Check that admin is able to reject SO codes to the internal user
+    And Refresh page.
+    And Focus on browser.
+    Given Switch to Storefront as internalUser.
+    And User is logged in to Storefront.
+    And Refresh page.
+    And Account management page is opened.
+    When Request account popup is opened.
+    When Set <soCode> SO code to the First Sales Office Code field in the Request Account pop-up.
+    And Click on Modify button in the Request Account pop-up.
+    Given Switch to Storefront as admin.
+    And Manage Users page is opened.
+    And Focus on browser.
+    When Admin opens Users tab.
+    And Sets <email> email to the email field.
+    And Clicks on the Search button.
+    Then Appropriate user with appropriate <email> email is displayed in the users list.
+    When Clicks on the user name in the table.
+    When User expand the Approve Pending Accounts section.
+    When Click on Pending Sales Office Codes tab In Approve Pending Accounts Tab.
+    Then <soCode> SO code is displayed in the Pending SO codes table.
+    When Admin clicks on All Sales Office Codes checkbox in Pending SO Codes tab.
+    And Click on Reject SO codes button.
+    And Click on Reject button in the Reject Account pop-up on I Want To Block in Pending SO Codes tab.
+    Then No data available in table title is displayed in Pending Sales Office Code table.
 
-#  Scenario Outline: Check that admin is able to reject SO codes to the internal user
-#    And Refresh page.
-#    And Focus on browser.
-#    Given Switch to Storefront as internalUser.
-#    And User is logged in to Storefront.
-#    And Refresh page.
-#    And Account management page is opened.
-#    When Request account popup is opened.
-#    When Set <soCode> SO code to the First Sales Office Code field in the Request Account pop-up.
-#    And Click on Modify button in the Request Account pop-up.
-#    Given Switch to Storefront as admin.
-#    And Manage Users page is opened.
-#    And Focus on browser.
-#    When Admin opens Users tab.
-#    And Sets <email> email to the email field.
-#    And Clicks on the Search button.
-#    Then Appropriate user with appropriate <email> email is displayed in the users list.
-#    When Clicks on the user name in the table.
-#    When User expand the Approve Pending Accounts section.
-#    When Click on Pending Sales Office Codes tab In Approve Pending Accounts Tab.
-#    Then <soCode> SO code is displayed in the Pending SO codes table.
-#    When Admin clicks on All Sales Office Codes checkbox in Pending SO Codes tab.
-#    And Click on Reject SO codes button.
-#    And Click on Reject button in the Reject Account pop-up on I Want To Block in Pending SO Codes tab.
-#    Then No data available in table title is displayed in Pending Sales Office Code table.
-#
-#    Examples:
-#      | email                     | soCode |
-#      | roman.kryzhevskykh@ge.com | USG5   |
+    Examples:
+      | email                     | soCode |
+      | roman.kryzhevskykh@ge.com | USG5   |
 
   Scenario Outline: Check that admin is able to change admin privileges for external user and the user
   will see appropriate role in his profile and appropriate permissions will be available
