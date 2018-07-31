@@ -86,7 +86,7 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     }
 
     @Then("^Bill of landing is (.*).$")
-    public void billOfLandingIsMULTIPLE(String fieldName) {
+    public void billOfLandingIsMultiple(String fieldName) {
         assertEquals(fieldName, orderDetailsPage.getBOLInformationData());
     }
 
