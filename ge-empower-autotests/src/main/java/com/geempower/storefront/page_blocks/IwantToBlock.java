@@ -325,8 +325,8 @@ public class IwantToBlock extends UIComponent {
         click(By.id(ASSIGN_ROLES_OR_PRIVILEGES_BUTTON_ID));
     }
 
-    @Step("Account should not displayed in the all accounts tab.")
-    public void accountShouldNotDisplayedInTheAllAccountsTab(String accountNo) {
+    @Step("Prevent Appearing Account In The All Accounts Tab.")
+    public void preventAppearingAccountInTheAllAccountsTab(String accountNo) {
         waitUntilPageIsFullyLoaded();
         int actualCountOfPages = getCountOfPagesAllAccountsTab();
         for (int i = 0; i < actualCountOfPages; i++) {

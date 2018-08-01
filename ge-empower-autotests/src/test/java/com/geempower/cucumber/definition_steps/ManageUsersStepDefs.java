@@ -438,8 +438,8 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.USER_ROLES_IN_EACH_REGION, userRolesInEachRegion);
     }
 
-    @Then("^Account (.*) should not displayed in the All Accounts tab.$")
-    public void accountShouldNotDisplayedInTheAllAccountsTab(String account) {
-        iWantToBlock.accountShouldNotDisplayedInTheAllAccountsTab(account);
+    @Then("^Prevent appearing (.*) in the All Accounts tab.$")
+    public void preventAppearingAccountInTheAllAccountsTab(String account) {
+        iWantToBlock.preventAppearingAccountInTheAllAccountsTab(account);
     }
 }
