@@ -34,7 +34,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     When Set <soCode> SO code to the First Sales Office Code field in the Add Account pop-up.
     And Click on Modify button in the Add Account pop-up.
     And Expand Modify an Account tab in I Want To Block.
-    Then Account from Add Account pop-up is displayed in the All Accounts tab.
+    Then Is account from add account pop-up displayed in the all accounts tab.
     When Click on Sales Office Codes tab In Modify an Account Tab.
     Then <soCode> Sales Office Code is displayed in the Approved SO Codes table.
     Given Switch to Storefront as internalUser.

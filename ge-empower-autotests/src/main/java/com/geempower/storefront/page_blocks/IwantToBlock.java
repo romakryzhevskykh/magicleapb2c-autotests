@@ -345,26 +345,8 @@ public class IwantToBlock extends UIComponent {
         }
     }
 
-    @Step("Is account displayed in all acc tab.")
+    @Step("Is account displayed in all account tab.")
     public boolean isAccountDisplayedInAllAccTab(String accountNo) {
-        waitUntilPageIsFullyLoaded();
-        boolean result = false;
-        int actualCountOfPages = getCountOfPagesAllAccountsTab();
-        for (int i = 0; i < actualCountOfPages; i++) {
-            if ($$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream().noneMatch(account -> account.getText().equals(accountNo))) {
-                if (actualCountOfPages > 1) {
-                    click(NEXT_PAGINATION_BUTTON_ALL_ACCOUNTS_TAB_XPATH);
-                }
-            } else if ($$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream().anyMatch(account -> account.getText().equals(accountNo))) {
-                actualCountOfPages = i;
-                result = true;
-            }
-        }
-        return result;
-    }
-
-    @Step("Is account not displayed in all acc tab.")
-    public boolean isAccountNotDisplayedInAllAccTab(String accountNo) {
         waitUntilPageIsFullyLoaded();
         boolean result = false;
         int actualCountOfPages = getCountOfPagesAllAccountsTab();
