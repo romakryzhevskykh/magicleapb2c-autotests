@@ -95,10 +95,28 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     @Then("^Add New Accounts table is displayed in the Add Account pop-up.$")
     public void addNewAccountsTableIsDisplayed() {
         assertTrue(manageUsersPage.addNewAccountsTableIsDisplayed());
+        threadVarsHashMap.put(TestKeyword.MANAGE_USERS_ACCOUNT_NO, manageUsersPage.getAccountNameFromAddAccPopUp());
+    }
+
+    @Then("^Is account (.*) displayed in the All Accounts tab.$")
+    public void isAccountDisplayedInAllAccTab(String accountNo) {
+        assertTrue(iWantToBlock.isAccountDisplayedInAllAccTab(accountNo));
+    }
+
+    @Then("^Is (.*) account not displayed in the All Accounts tab.$")
+    public void isAccountNotDisplayedInAllAccTab(String accountNo) {
+        assertFalse(iWantToBlock.isAccountNotDisplayedInAllAccTab(accountNo));
     }
 
     @Then("^Account from Add Account pop-up is displayed in the All Accounts tab.$")
     public void previouslyAddedAccountIsDisplayedInTheAllAccountsTab() {
+        String accountNo = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NO);
+        assertTrue(iWantToBlock.getAllAccountNo()
+                .anyMatch(account -> account.getText().equals(accountNo)));
+    }
+
+    @Then("^Is account from add account pop-up displayed in the all accounts tab.$")
+    public void isAccountFromAddAccountPopUpDisplayedInTheAllAccountsTab() {
         String accountNo = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NO);
         assertTrue(iWantToBlock.getAllAccountNo()
                 .anyMatch(account -> account.getText().equals(accountNo)));
@@ -378,13 +396,6 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         assertEquals(popUpTitle, iWantToBlock.getAcceptAllAccountsPopUpTitle());
     }
 
-    @Then("^Account from Add Account pop-up is not displayed in the the All Accounts tab.$")
-    public void previouslyAddedAccountIsNotDisplayedInTheTheAllAccountsTab() {
-        String accountName = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NO);
-        assertFalse(iWantToBlock.getAllAccountNo()
-                .anyMatch(account -> account.getText().equals(accountName)));
-    }
-
     @Then("^(.*) SO code is displayed in the Pending SO codes table.$")
     public void soCodeIsDisplayedInThePendingSOCodesTable(String salesCode) {
         assertTrue(iWantToBlock.getAllSOCodesFromPendingSOCodesTable()
@@ -427,13 +438,8 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.USER_ROLES_IN_EACH_REGION, userRolesInEachRegion);
     }
 
-    @And("^Put account No (.*) to the hashmap.$")
-    public void putAccountNoToTheHashmap(String account) {
-        threadVarsHashMap.put(TestKeyword.MANAGE_USERS_ACCOUNT_NO, account);
-    }
-
-    @Then("^Check that (.*) is not displayed in the All Accounts table.$")
-    public void checkThatAccountIsNotDisplayedInTheAllAccountsTable(String account) {
-        iWantToBlock.checkThatAccountIsNotDisplayedInTheAllAccountsTable(account);
+    @Then("^Account (.*) should not displayed in the All Accounts tab.$")
+    public void accountShouldNotDisplayedInTheAllAccountsTab(String account) {
+        iWantToBlock.accountShouldNotDisplayedInTheAllAccountsTab(account);
     }
 }

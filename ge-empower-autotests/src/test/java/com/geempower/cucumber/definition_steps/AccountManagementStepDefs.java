@@ -43,7 +43,7 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
             throw new NullPointerException("No Accounts in the selected region");
         });
         threadVarsHashMap.put(TestKeyword.CHOSEN_ACCOUNT, accountName);
-        accountManagementPage.searchAccountByAccountName(accountName);
+        accountManagementPage.searchAnAccountOnAccountManagementPage(accountName);
     }
 
     @And("^Click on chosen account.$")
@@ -103,22 +103,33 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
         accountManagementPage.removeRequestedAccounts(Integer.parseInt(threadVarsHashMap.getString(TestKeyword.COUNT_OF_PENDING_REQUESTS)));
     }
 
+    @And("^Search an account (.*) on Account Management Page.$")
+    public void searchAnAccountOnAccountManagementPage(String accountNo) {
+        accountManagementPage.searchAnAccountOnAccountManagementPage(accountNo);
+    }
+
+    @Then("^Is account (.*) displayed in the table on Account Management Page.$")
+    public void isAccountDisplayedInTheTableOnAccountManagementPage(String accountNo) {
+        assertTrue(accountManagementPage.getAllApprovedAccounts()
+                .anyMatch(account -> account.getText().equals(accountNo)));
+    }
+
+    @And("^Select account (.*).$")
+    public void selectAccount(String accountNo) {
+        accountManagementPage.searchAnAccountOnAccountManagementPage(accountNo);
+    }
+
     @And("^Search Account From Add Account Pop-Up.$")
     public void searchAccountFromAddAccPopUp() {
-        String accountName = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NO);
-        accountManagementPage.searchAccountByAccountName(accountName);
+        String accountNo = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NO);
+        accountManagementPage.searchAccountByAccountName(accountNo);
     }
 
     @Then("^Appropriate account is displayed in the table on Account Management Page.$")
     public void appropriateAccountIsDisplayedInTheTable() {
-        String accountName = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NO);
+        String accountNo = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NO);
         assertTrue(accountManagementPage.getAllApprovedAccounts()
-                .anyMatch(account -> account.getText().equals(accountName)));
-    }
-
-    @And("^Select account (.*).$")
-    public void selectAccount(String accountName) {
-        accountManagementPage.searchAccountByAccountName(accountName);
+                .anyMatch(account -> account.getText().equals(accountNo)));
     }
 
     @And("^All requested accounts are stored to the thread vars hashmap.$")

@@ -104,6 +104,12 @@ public class ManageUsersPage extends StorefrontBasePage {
         $(SEARCH_BUTTON_XPATH).click();
     }
 
+    @Step("Get Account Name from Add Account Pop-Up.")
+    public String getAccountNameFromAddAccPopUp() {
+        waitUntilPageIsFullyLoaded();
+        return $(ACCOUNT_NO_NEW_ACC_TABLE_XPATH).getText();
+    }
+
     @Step("Check that Add New Accounts Table Is Displayed in the Add Account Pop-Up.")
     public boolean addNewAccountsTableIsDisplayed() {
         waitUntilPageIsFullyLoaded();

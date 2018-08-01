@@ -35,18 +35,23 @@ public class IwantToBlock extends UIComponent {
         }
     }
 
-    @Step("Get Count Of Pages With Accounts.")
+    @Step("Get Count Of Pages All Accounts tab.")
     private int getCountOfPagesAllAccountsTab() {
-        String countOfPages = $(COUNT_OF_PAGES_ALL_ACCOUNTS_TAB_XPATH).getText();
         int actualCount = 0;
-        if (!countOfPages.equals("")) {
+        if (isPaginatorDisplayed()) {
+            String countOfPages = $(COUNT_OF_PAGES_ALL_ACCOUNTS_TAB_XPATH).getText();
             actualCount = Integer.parseInt(countOfPages.replace("of ", ""));
-        } else if (!isAccountsTableEmpty() && countOfPages.equals("")) {
+        } else if (!isPaginatorDisplayed()) {
             actualCount = 1;
         } else if (isAccountsTableEmpty()) {
             actualCount = 0;
         }
         return actualCount;
+    }
+
+    @Step("Is Paginator Displayed.")
+    private boolean isPaginatorDisplayed() {
+        return isDisplayed(COUNT_OF_PAGES_ALL_ACCOUNTS_TAB_XPATH);
     }
 
     @Step("Get All Account Names.")
@@ -266,6 +271,7 @@ public class IwantToBlock extends UIComponent {
         click(ALL_CHECKBOX_SALES_OFFICE_CODES_IN_PENDING_SALES_OFFICE_TAB_XPATH);
     }
 
+    @Step("Get all SO codes from pending SO codes table.")
     public Stream<WebElement> getAllSOCodesFromPendingSOCodesTable() {
         waitUntilPageIsFullyLoaded();
         return $$(ALL_SO_CODES_IN_PENDING_SO_CODES_TABLE_XPATH).stream();
@@ -283,7 +289,7 @@ public class IwantToBlock extends UIComponent {
         waitUntilPageIsFullyLoaded();
     }
 
-    @Step("Expand Change EmpPrivilege Block")
+    @Step("Expand Change EmpPrivilege Block.")
     public void expandChangeEmpPrivilegeBlock() {
         waitUntilPageIsFullyLoaded();
         click(EXPAND_CHANGE_EMPOWER_PRIVILEGES_ROLES_ICON_XPATH);
@@ -299,7 +305,7 @@ public class IwantToBlock extends UIComponent {
         return rolesForRegions;
     }
 
-    @Step("Set New Role To User For Each Region")
+    @Step("Set New Role To User For Each Region.")
     public void setNewRoleToUserForEachRegion(String region, String newRole) {
         waitUntilPageIsFullyLoaded();
         click(OPEN_ROLES_LIST_FOR_APPROPRIATE_REGION_ICON_XPATH, region);
@@ -307,6 +313,7 @@ public class IwantToBlock extends UIComponent {
         click(getAllRolesFromRolesDropdown().filter(role -> role.getText().trim().equals(newRole)).findAny().orElse(null));
     }
 
+    @Step("Get all roles from roles drop-down.")
     private Stream<WebElement> getAllRolesFromRolesDropdown() {
         waitUntilPageIsFullyLoaded();
         return $$(ALL_ROLES_IN_ROLES_DROPDOWN_XPATH).stream();
@@ -318,27 +325,59 @@ public class IwantToBlock extends UIComponent {
         click(By.id(ASSIGN_ROLES_OR_PRIVILEGES_BUTTON_ID));
     }
 
-    @Step("Check That Account Is Not Displayed In The All Accounts Table.")
-    public void checkThatAccountIsNotDisplayedInTheAllAccountsTable(String accountNo) {
+    @Step("Account should not displayed in the all accounts tab.")
+    public void accountShouldNotDisplayedInTheAllAccountsTab(String accountNo) {
         waitUntilPageIsFullyLoaded();
         int actualCountOfPages = getCountOfPagesAllAccountsTab();
         for (int i = 0; i < actualCountOfPages; i++) {
             if ($$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream().noneMatch(account -> account.getText().equals(accountNo))) {
+                if (actualCountOfPages > 1) {
+                    click(NEXT_PAGINATION_BUTTON_ALL_ACCOUNTS_TAB_XPATH);
+                }
                 waitUntilPageIsFullyLoaded();
-                click(NEXT_PAGINATION_BUTTON_ALL_ACCOUNTS_TAB_XPATH);
-                waitUntilPageIsFullyLoaded();
-            }
-            else if ($$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream().anyMatch(account -> account.getText().equals(accountNo))) {
-                waitUntilPageIsFullyLoaded();
+            } else if ($$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream().anyMatch(account -> account.getText().equals(accountNo))) {
                 click(ACCOUNT_CHECKBOX_XPATH, accountNo);
-                waitUntilPageIsFullyLoaded();
-                ((JavascriptExecutor)getDriver()).executeScript("scroll(0,0)");
+                ((JavascriptExecutor) getDriver()).executeScript("scroll(0,0)");
                 click(REMOVE_BUTTON_IN_ALL_ACCOUNTS_TAB_XPATH);
-                waitUntilPageIsFullyLoaded();
                 click(REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_IN_ALL_ACCOUNTS_TAB_XPATH);
                 actualCountOfPages = i;
             }
-
         }
+    }
+
+    @Step("Is account displayed in all acc tab.")
+    public boolean isAccountDisplayedInAllAccTab(String accountNo) {
+        waitUntilPageIsFullyLoaded();
+        boolean result = false;
+        int actualCountOfPages = getCountOfPagesAllAccountsTab();
+        for (int i = 0; i < actualCountOfPages; i++) {
+            if ($$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream().noneMatch(account -> account.getText().equals(accountNo))) {
+                if (actualCountOfPages > 1) {
+                    click(NEXT_PAGINATION_BUTTON_ALL_ACCOUNTS_TAB_XPATH);
+                }
+            } else if ($$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream().anyMatch(account -> account.getText().equals(accountNo))) {
+                actualCountOfPages = i;
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    @Step("Is account not displayed in all acc tab.")
+    public boolean isAccountNotDisplayedInAllAccTab(String accountNo) {
+        waitUntilPageIsFullyLoaded();
+        boolean result = false;
+        int actualCountOfPages = getCountOfPagesAllAccountsTab();
+        for (int i = 0; i < actualCountOfPages; i++) {
+            if ($$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream().noneMatch(account -> account.getText().equals(accountNo))) {
+                if (actualCountOfPages > 1) {
+                    click(NEXT_PAGINATION_BUTTON_ALL_ACCOUNTS_TAB_XPATH);
+                }
+            } else if ($$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream().anyMatch(account -> account.getText().equals(accountNo))) {
+                actualCountOfPages = i;
+                result = true;
+            }
+        }
+        return result;
     }
 }

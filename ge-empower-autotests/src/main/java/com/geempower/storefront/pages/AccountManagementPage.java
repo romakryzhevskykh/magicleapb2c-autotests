@@ -36,7 +36,7 @@ public class AccountManagementPage extends StorefrontBasePage {
         chooseRegion(chosenRegion);
     }
 
-    @Step("Close we are now ABB pop-up")
+    @Step("Close we are now ABB pop-up.")
     public void closeWeAreNowAbbPopUpIfPresent(){
         if(isDisplayed(WE_ARE_NOW_ABB_POP_UP_XPATH)){
             click(WE_ARE_NOW_ABB_OK_BUTTON_XPATH);
@@ -44,24 +44,24 @@ public class AccountManagementPage extends StorefrontBasePage {
         }
     }
 
-    @Step("Select appropriate region by region name")
+    @Step("Select appropriate region by region name.")
     private void chooseRegion(Region chosenRegion) {
         click(APPROPRIATE_REGION_BY_NAME_XPATH, chosenRegion.getRegionType().getRegionName());
     }
 
-    @Step("Open regions list")
+    @Step("Open regions list.")
     private void openRegionsList() {
         waitUntilPageIsFullyLoaded();
         $(REGION_COMBOBOX_XPATH).click();
     }
 
-    @Step("Search account by account name.")
-    public void searchAccountByAccountName(String accountName) {
+    @Step("Search an account by account name on account management page.")
+    public void searchAnAccountOnAccountManagementPage(String accountName) {
         setAccountNumberToSearchField(accountName);
         clickOnSearchButton();
     }
 
-    @Step("Set account number to search field")
+    @Step("Set account number to search field.")
     private void setAccountNumberToSearchField(String accountName) {
         $(SEARCH_FIELD_XPATH).sendKeys(accountName);
     }
@@ -99,6 +99,12 @@ public class AccountManagementPage extends StorefrontBasePage {
     public void selectRegionFromRegionsListInRequestAccountPopupByCounter(Region chosenRegion, int counter) {
         click(REGIONS_DROP_DOWN_BY_COUNTER_IN_POPUP_XPATH, String.valueOf(counter));
         chooseRegion(chosenRegion);
+    }
+
+    @Step("Search account by account name.")
+    public void searchAccountByAccountName(String accountName) {
+        setAccountNumberToSearchField(accountName);
+        clickOnSearchButton();
     }
 
     @Step("Set account number to account field in popup.")
@@ -220,4 +226,3 @@ public class AccountManagementPage extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
     }
 }
-

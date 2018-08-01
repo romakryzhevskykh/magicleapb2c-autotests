@@ -21,7 +21,7 @@ public class IwantToBlockElements {
     public final static String EMPTY_ALL_ACCOUNTS_TABLE_XPATH = "//table[@id = 'activeRequestsTableForCustomer']//td[@class = 'dataTables_empty']";
     public final static String REMOVE_ACCOUNT_POP_UP_SO_CODES_XPATH = "//*[@id='remove-salesoffice-modal']//div[@class='modal-content']";
     public final static String REMOVE_ACCOUNT_POP_UP_SE_CODES_XPATH = "//*[@id='remove-salesengineer-modal']//div[@class='modal-content']";
-    public final static String COUNT_OF_PAGES_ALL_ACCOUNTS_TAB_XPATH = "//div[@id = 'activeRequestsTableForCustomer_paginate']//span[@class='paginate_of']";
+    public final static String COUNT_OF_PAGES_ALL_ACCOUNTS_TAB_XPATH = "//div[@id = 'activeRequestsTableForCustomer_paginate'][not(contains(@style,'display: none;'))]//span[@class='paginate_of']";
     public final static String NEXT_PAGINATION_BUTTON_ALL_ACCOUNTS_TAB_XPATH = "//span[@id = 'activeRequestsTableForCustomer_next']";
 
     //APPROVE PENDING ACCOUNTS TAB
