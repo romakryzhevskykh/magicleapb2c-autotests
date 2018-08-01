@@ -18,7 +18,7 @@ public class OrderDetailsPage extends StorefrontBasePage {
 
     @Step("Correct page is opened.")
     public boolean isOpened(String orderNo) {
-        return getCurrentUrl().equals(getPageUrl().concat(orderNo));
+        return getCurrentUrl().contains(orderNo);
     }
 
     @Step("Get GE order NO.")
@@ -29,7 +29,7 @@ public class OrderDetailsPage extends StorefrontBasePage {
     @Step("Get Total Net Price.")
     public String getTotalNetPrice() {
         String netPrice = $(TOTAL_NET_PRICE_VALUE_XPATH).getText();
-        return netPrice.substring(0, netPrice.length() - 4).replace(",","");
+        return netPrice.substring(0, netPrice.length() - 4).replace(",", "");
     }
 
     @Step("Click On Expand Order Details Icon.")
@@ -63,5 +63,48 @@ public class OrderDetailsPage extends StorefrontBasePage {
     @Step("Close Invoice Details Pop-Up.")
     public void closeInvoiceDetailsPopUp() {
         click(INVOICE_DETAILS_POP_UP_CLOSE_BUTTON_XPATH);
+    }
+
+    @Step("Get Tracking Information Data.")
+    public String getTrackingInformationData() {
+        return $(TRACKING_INFO_DATA_XPATH).getText();
+    }
+
+    @Step("Click On Multiple Hyper link.")
+    public void clickOnMultipleHyperlink() {
+        click(TRACKING_INFO_DATA_XPATH);
+    }
+
+    @Step("Get Bol And Tracking Numbers Pop-Up Title.")
+    public String getBolAndTrackingNumbersPopUpTitle() {
+        waitUntilPageIsFullyLoaded();
+        return $(BOL_AND_TRACKING_NUMBERS_POP_UP_TITLE_XPATH).getText();
+    }
+
+    @Step("Get Count Of Bills In BOL Pop-Up.")
+    public int getCountOfBillsInBOLPopUp() {
+        return $$(BILLS_OF_LANDING_IN_BOL_AND_TRACKING_NUMBERS_POP_UP_XPATH).size();
+    }
+
+    @Step("Expand First Line Order Details.")
+    public void expandFirstLineOrderDetails() {
+        waitUntilPageIsFullyLoaded();
+        click(EXPAND_FIRST_LINE_ORDER_DETAILS_ICON_XPATH);
+    }
+
+    @Step("Get BOL Information Data.")
+    public String getBOLInformationData() {
+        waitUntilPageIsFullyLoaded();
+        return $(BOL_DATA_XPATH).getText();
+    }
+
+    @Step("Click On BOL Hyper link.")
+    public void clickOnBOLHyperlink() {
+        click(BOL_DATA_XPATH);
+    }
+
+    @Step("Close BOL Pop-Up.")
+    public void closeBOLPopUp() {
+        click(CLOSE_BOL_POP_UP_ICON_XPATH);
     }
 }

@@ -83,11 +83,19 @@ public class DashboardPage extends StorefrontBasePage {
         click(SUBMIT_SHIP_ADDRESS_BUTTON_XPATH);
     }
 
-    @Step("Close we are now ABB pop-up")
-    public void closeWeAreNowAbbPopUpIfPresent(){
-        if(isDisplayed(WE_ARE_NOW_ABB_POP_UP_XPATH)){
+    @Step("Close we are now ABB pop-up.")
+    public void closeWeAreNowAbbPopUpIfPresent() {
+        if (isDisplayed(WE_ARE_NOW_ABB_POP_UP_XPATH)) {
             click(WE_ARE_NOW_ABB_OK_BUTTON_XPATH);
             waitUntilPageIsFullyLoaded();
         }
+    }
+
+    @Step("Search Order Via Order Search Field.")
+    public void searchOrderViaOrderSearchField(String orderNo) {
+        waitUntilPageIsFullyLoaded();
+        $(ORDER_SEARCH_INPUT_XPATH).clear();
+        $(ORDER_SEARCH_INPUT_XPATH).sendKeys(orderNo);
+        click(SEARCH_ORDER_BY_PARAMS_BUTTON_XPATH);
     }
 }

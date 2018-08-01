@@ -7,7 +7,9 @@ import com.geempower.storefront.page_blocks.OrderStatusWidget;
 import com.geempower.storefront.page_blocks.PriceAndAvailabilityBlock;
 import com.geempower.storefront.pages.DashboardPage;
 import com.geempower.storefront.pages.order.OrdersPage;
-import cucumber.api.java.en.*;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
@@ -189,9 +191,14 @@ public class DashboardStepDefs extends AbstractStepDefs {
     }
 
     @When("^User create product with: product number (.*), product id(.*) and quantity (\\d+).$")
-    public void userCreateProductWithProductRegionProductIdQuantity(String productNo, String id, int quantity){
+    public void userCreateProductWithProductRegionProductIdQuantity(String productNo, String id, int quantity) {
         HashMap<Product, Integer> selectedProducts = getSelectedProducts();
-        Product product = new Product(productNo,(Region) threadVarsHashMap.get(TestKeyword.CHOSEN_REGION), id);
-        selectedProducts.put(product,quantity);
+        Product product = new Product(productNo, (Region) threadVarsHashMap.get(TestKeyword.CHOSEN_REGION), id);
+        selectedProducts.put(product, quantity);
+    }
+
+    @When("^User searches order by (.*) orderNo via Order Search field.$")
+    public void userSetsOrderNoToTheOrderSearchField(String orderNo) {
+        dashboardPage.searchOrderViaOrderSearchField(orderNo);
     }
 }

@@ -248,7 +248,6 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
       | email                     | account |
       | roman.kryzhevskykh@ge.com | 1000827 |
 
-
 #  Scenario Outline: Check that admin is able to accept SO codes to the internal user
 #    And Refresh page.
 #    And Focus on browser.
@@ -318,7 +317,6 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
 #    Examples:
 #      | email                     | soCode |
 #      | roman.kryzhevskykh@ge.com | USG5   |
-
 
   Scenario Outline: Check that admin is able to change admin privileges for external user and the user
   will see appropriate role in his profile and appropriate permissions will be available
