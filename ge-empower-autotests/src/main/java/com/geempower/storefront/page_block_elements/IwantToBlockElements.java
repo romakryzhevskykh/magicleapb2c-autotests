@@ -23,6 +23,7 @@ public class IwantToBlockElements {
     public final static String REMOVE_ACCOUNT_POP_UP_SE_CODES_XPATH = "//*[@id='remove-salesengineer-modal']//div[@class='modal-content']";
     public final static String COUNT_OF_PAGES_ALL_ACCOUNTS_TAB_XPATH = "//div[@id = 'activeRequestsTableForCustomer_paginate'][not(contains(@style,'display: none;'))]//span[@class='paginate_of']";
     public final static String NEXT_PAGINATION_BUTTON_ALL_ACCOUNTS_TAB_XPATH = "//span[@id = 'activeRequestsTableForCustomer_next']";
+    public final static String APPROPRIATE_SO_CODE_CHECKBOX_XPATH = "//tr[contains(@class, '%s')]//label";
 
     //APPROVE PENDING ACCOUNTS TAB
     public final static String PENDING_SALES_OFFICE_CODES_TAB_APPROVED_PENDING_ACC_TAB_XPATH = "//*[@href='#pending-sales-office-codes-tab']";

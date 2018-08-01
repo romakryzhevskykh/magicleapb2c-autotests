@@ -442,4 +442,9 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     public void accountShouldNotDisplayedInTheAllAccountsTab(String account) {
         iWantToBlock.accountShouldNotDisplayedInTheAllAccountsTab(account);
     }
+
+    @And("^Prevent appearing of SO code (.*) in SO Codes tab.$")
+    public void preventAppearingOfSoCodeInSOCodesTab(String soCode) {
+        iWantToBlock.preventAppearingOfSoCodeInSOCodesTab(soCode);
+    }
 }
