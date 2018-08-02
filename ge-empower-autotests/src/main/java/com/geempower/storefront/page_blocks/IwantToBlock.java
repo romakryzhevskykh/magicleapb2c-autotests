@@ -332,7 +332,7 @@ public class IwantToBlock extends UIComponent {
         for (int i = 0; i < actualCountOfPages; i++) {
             if ($$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream().noneMatch(account -> account.getText().equals(accountNo))) {
                 if (actualCountOfPages > 1) {
-                    click(NEXT_PAGINATION_BUTTON_ALL_ACCOUNTS_TAB_XPATH);
+                    goToNextPageAccountTab();
                 }
                 waitUntilPageIsFullyLoaded();
             } else if ($$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream().anyMatch(account -> account.getText().equals(accountNo))) {
