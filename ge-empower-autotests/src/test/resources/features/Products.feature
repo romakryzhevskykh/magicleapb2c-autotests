@@ -6,7 +6,7 @@ Feature: Some actions on Products page
 
   Scenario: Check that user able to open Products page and correct header title is displayed
     And Products page is opened.
-    Then All Products title is displayed on Products page.
+    Then Products title is displayed on Products page.
 
   Scenario Outline: Check that user is able to place order from the Products pageAnd Account management page is opened.
     And Account management page is opened.
