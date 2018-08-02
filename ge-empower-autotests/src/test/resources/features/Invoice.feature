@@ -6,4 +6,4 @@ Feature: Some actions on Invoice page
     And Invoice page is opened.
 
   Scenario: Check that user able to open Invoice page and correct header title is displayed
-    Then All Invoices title is displayed on Invoice page.
+    Then Invoices title is displayed on Invoice page.
