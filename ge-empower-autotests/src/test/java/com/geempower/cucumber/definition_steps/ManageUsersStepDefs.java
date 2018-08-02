@@ -287,6 +287,12 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
                 .anyMatch(code -> code.getText().trim().equals(salesOfficeCode)));
     }
 
+    @Then("^Is (.*) Sales Office Code not displayed in the Approved SO Codes table.$")
+    public void isAppropriateSalesOfficeCodeNotDisplayedInTheTable(String salesOfficeCode) {
+        assertFalse(iWantToBlock.getAllSoCodesFromApprovedSoCodesTable()
+                .anyMatch(code -> code.getText().contains(salesOfficeCode)));
+    }
+
     @SuppressWarnings("unchecked")
     @Then("^(.*) section is displayed with appropriate count of accounts.$")
     public void approvePendingAccountsSectionIsDisplayedWithAppropriateCountOfAccounts(String sectionTitle) {
