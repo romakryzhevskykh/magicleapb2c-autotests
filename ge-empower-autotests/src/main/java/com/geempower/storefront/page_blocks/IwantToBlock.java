@@ -3,6 +3,8 @@ package com.geempower.storefront.page_blocks;
 import com.geempower.helpers.UIComponent;
 import com.geempower.helpers.models.RegionType;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
@@ -24,10 +26,38 @@ public class IwantToBlock extends UIComponent {
         click(MODIFY_AN_ACCOUNT_TAB_XPATH);
     }
 
+    @Step("Is Orders Table Empty.")
+    private boolean isAccountsTableEmpty() {
+        try {
+            return $(EMPTY_ALL_ACCOUNTS_TABLE_XPATH).isDisplayed();
+        } catch (NoSuchElementException | NullPointerException exception) {
+            return false;
+        }
+    }
+
+    @Step("Get Count Of Pages All Accounts tab.")
+    private int getCountOfPagesAllAccountsTab() {
+        int actualCount = 0;
+        if (isPaginatorDisplayed()) {
+            String countOfPages = $(COUNT_OF_PAGES_ALL_ACCOUNTS_TAB_XPATH).getText();
+            actualCount = Integer.parseInt(countOfPages.replace("of ", ""));
+        } else if (!isPaginatorDisplayed()) {
+            actualCount = 1;
+        } else if (isAccountsTableEmpty()) {
+            actualCount = 0;
+        }
+        return actualCount;
+    }
+
+    @Step("Is Paginator Displayed.")
+    private boolean isPaginatorDisplayed() {
+        return isDisplayed(COUNT_OF_PAGES_ALL_ACCOUNTS_TAB_XPATH);
+    }
+
     @Step("Get All Account Names.")
-    public Stream<WebElement> getAllAccountNames() {
+    public Stream<WebElement> getAllAccountNo() {
         waitUntilPageIsFullyLoaded();
-        return $$(ALL_ACCOUNT_NAMES_IN_ACCOUNTS_TABLE_XPATH).stream();
+        return $$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream();
     }
 
     @Step("Click On Sales Office Codes Tab.")
@@ -241,6 +271,7 @@ public class IwantToBlock extends UIComponent {
         click(ALL_CHECKBOX_SALES_OFFICE_CODES_IN_PENDING_SALES_OFFICE_TAB_XPATH);
     }
 
+    @Step("Get all SO codes from pending SO codes table.")
     public Stream<WebElement> getAllSOCodesFromPendingSOCodesTable() {
         waitUntilPageIsFullyLoaded();
         return $$(ALL_SO_CODES_IN_PENDING_SO_CODES_TABLE_XPATH).stream();
@@ -258,7 +289,7 @@ public class IwantToBlock extends UIComponent {
         waitUntilPageIsFullyLoaded();
     }
 
-    @Step("Expand Change EmpPrivilege Block")
+    @Step("Expand Change EmpPrivilege Block.")
     public void expandChangeEmpPrivilegeBlock() {
         waitUntilPageIsFullyLoaded();
         click(EXPAND_CHANGE_EMPOWER_PRIVILEGES_ROLES_ICON_XPATH);
@@ -274,7 +305,7 @@ public class IwantToBlock extends UIComponent {
         return rolesForRegions;
     }
 
-    @Step("Set New Role To User For Each Region")
+    @Step("Set New Role To User For Each Region.")
     public void setNewRoleToUserForEachRegion(String region, String newRole) {
         waitUntilPageIsFullyLoaded();
         click(OPEN_ROLES_LIST_FOR_APPROPRIATE_REGION_ICON_XPATH, region);
@@ -282,7 +313,8 @@ public class IwantToBlock extends UIComponent {
         click(getAllRolesFromRolesDropdown().filter(role -> role.getText().trim().equals(newRole)).findAny().orElse(null));
     }
 
-    private Stream<WebElement> getAllRolesFromRolesDropdown(){
+    @Step("Get all roles from roles drop-down.")
+    private Stream<WebElement> getAllRolesFromRolesDropdown() {
         waitUntilPageIsFullyLoaded();
         return $$(ALL_ROLES_IN_ROLES_DROPDOWN_XPATH).stream();
     }
@@ -291,5 +323,51 @@ public class IwantToBlock extends UIComponent {
     public void clickOnAssignRolesButton() {
         waitUntilPageIsFullyLoaded();
         click(By.id(ASSIGN_ROLES_OR_PRIVILEGES_BUTTON_ID));
+    }
+
+    @Step("Prevent Appearing Account In The All Accounts Tab.")
+    public void preventAppearingAccountInTheAllAccountsTab(String accountNo) {
+        waitUntilPageIsFullyLoaded();
+        int actualCountOfPages = getCountOfPagesAllAccountsTab();
+        for (int i = 0; i < actualCountOfPages; i++) {
+            if ($$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream().noneMatch(account -> account.getText().equals(accountNo))) {
+                if (actualCountOfPages > 1) {
+                    goToNextPageAccountTab();
+                }
+                waitUntilPageIsFullyLoaded();
+            } else if ($$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream().anyMatch(account -> account.getText().equals(accountNo))) {
+                removeAccInAccountTab(accountNo);
+                actualCountOfPages = i;
+            }
+        }
+    }
+
+    @Step("Is account displayed in all account tab.")
+    public boolean isAccountDisplayedInAllAccTab(String accountNo) {
+        waitUntilPageIsFullyLoaded();
+        boolean result = false;
+        int actualCountOfPages = getCountOfPagesAllAccountsTab();
+        for (int i = 0; i < actualCountOfPages; i++) {
+            if ($$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream().noneMatch(account -> account.getText().equals(accountNo))) {
+                if (actualCountOfPages > 1) {
+                    goToNextPageAccountTab();
+                }
+            } else if ($$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream().anyMatch(account -> account.getText().equals(accountNo))) {
+                actualCountOfPages = i;
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    private void goToNextPageAccountTab() {
+        click(NEXT_PAGINATION_BUTTON_ALL_ACCOUNTS_TAB_XPATH);
+    }
+
+    private void removeAccInAccountTab(String accountNo) {
+        click(ACCOUNT_CHECKBOX_XPATH, accountNo);
+        ((JavascriptExecutor) getDriver()).executeScript("scroll(0,0)");
+        click(REMOVE_BUTTON_IN_ALL_ACCOUNTS_TAB_XPATH);
+        click(REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_IN_ALL_ACCOUNTS_TAB_XPATH);
     }
 }

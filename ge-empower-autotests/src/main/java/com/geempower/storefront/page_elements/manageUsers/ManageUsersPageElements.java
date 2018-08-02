@@ -35,7 +35,7 @@ public class ManageUsersPageElements {
     public final static String REVALIDATION_TAB_XPATH = "//a[@aria-controls='revalidation']";
 
     //USER DETAIL BLOCK
-    public final static String ADD_ACCOUNT_BUTTON_XPATH = ".//i[@data-original-title='Add Account']";
+    public final static String ADD_ACCOUNT_BUTTON_XPATH = "//i[@data-original-title='Add Account']";
 
     //Add Account pop-up
     public final static String ADD_ACCOUNT_TITLE_XPATH = ".//*[@id='add-account-modal']//h4[@class='modal-title']";
@@ -49,7 +49,7 @@ public class ManageUsersPageElements {
     public final static String SALES_ENGINEER_CODE_SECOND_FIELD_ID = "salesEngCodeInput";
     public final static String SEARCH_BUTTON_XPATH = ".//*[@class='btn primary-btn manageuser-account-search-btn']";
     public final static String ADD_NEW_ACCOUNTS_TABLE_ID = "addNewAccountsTable";
-    public final static String ACCOUNT_NAME_NEW_ACC_TABLE_XPATH = ".//*[@id='addNewAccountsTable']/tbody/tr[1]/td[3]";
+    public final static String ACCOUNT_NO_NEW_ACC_TABLE_XPATH = "//*[@id='addNewAccountsTable']/tbody/tr[1]/td[2]";
     public final static String ACCOUNT_FIELD_XPATH = ".//*[contains(@class,'account-new-search')]";
     public final static String SELECT_ALL_CHECKBOX_XPATH = ".//*[@id='add-account-modal']//li[@class='select-all-link']//ins[@class='iCheck-helper']";
     public final static String ADD_BUTTON_ID = "addAccountBtn";

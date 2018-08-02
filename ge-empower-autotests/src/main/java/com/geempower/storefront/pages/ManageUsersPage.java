@@ -3,6 +3,7 @@ package com.geempower.storefront.pages;
 import com.geempower.helpers.models.Region;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -56,12 +57,15 @@ public class ManageUsersPage extends StorefrontBasePage {
 
     @Step("Click on Add Account Button In User Detail Block.")
     public void clickOnAddAccountButtonInUserDetailBlock() {
+        waitUntilPageIsFullyLoaded();
+        ((JavascriptExecutor)getDriver()).executeScript("scroll(0,0)");
         click(ADD_ACCOUNT_BUTTON_XPATH);
     }
 
     @Step("Get Add Account Pop Up Title.")
     public String getAddAccPopUpTitle() {
         waitUntilPageIsFullyLoaded();
+        ((JavascriptExecutor)getDriver()).executeScript("scroll(0,0)");
         return $(ADD_ACCOUNT_TITLE_XPATH).getText();
     }
 
@@ -100,16 +104,16 @@ public class ManageUsersPage extends StorefrontBasePage {
         $(SEARCH_BUTTON_XPATH).click();
     }
 
+    @Step("Get Account No from Add Account Pop-Up.")
+    public String getAccountNoFromAddAccPopUp() {
+        waitUntilPageIsFullyLoaded();
+        return $(ACCOUNT_NO_NEW_ACC_TABLE_XPATH).getText();
+    }
+
     @Step("Check that Add New Accounts Table Is Displayed in the Add Account Pop-Up.")
     public boolean addNewAccountsTableIsDisplayed() {
         waitUntilPageIsFullyLoaded();
         return isDisplayed(By.id(ADD_NEW_ACCOUNTS_TABLE_ID));
-    }
-
-    @Step("Get Account Name from Add Account Pop-Up.")
-    public String getAccountNameFromAddAccPopUp() {
-        waitUntilPageIsFullyLoaded();
-        return $(ACCOUNT_NAME_NEW_ACC_TABLE_XPATH).getText();
     }
 
     @Step("Is Add Account Pop-up is displayed.")
@@ -213,4 +217,5 @@ public class ManageUsersPage extends StorefrontBasePage {
     public void clickOnAddButtonInTheAddAccountPopUp() {
         click(By.id(ADD_BUTTON_ID));
     }
+
 }

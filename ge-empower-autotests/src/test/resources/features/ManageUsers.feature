@@ -34,7 +34,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     When Set <soCode> SO code to the First Sales Office Code field in the Add Account pop-up.
     And Click on Modify button in the Add Account pop-up.
     And Expand Modify an Account tab in I Want To Block.
-    Then Account from Add Account pop-up is displayed in the the All Accounts tab.
+    Then Is account from add account pop-up displayed in the all accounts tab.
     When Click on Sales Office Codes tab In Modify an Account Tab.
     Then <soCode> Sales Office Code is displayed in the Approved SO Codes table.
     Given Switch to Storefront as internalUser.
@@ -73,7 +73,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     When Set <seCode> SE code to the First Sales Engineer Code field in the Add Account pop-up.
     And Click on Modify button in the Add Account pop-up.
     And Expand Modify an Account tab in I Want To Block.
-    Then Account from Add Account pop-up is displayed in the the All Accounts tab.
+    Then Is account from add account pop-up displayed in the all accounts tab.
     When Click on Sales Engineer Codes tab In Modify an Account Tab.
     Then <seCode> Sales Engineer Code is displayed in the Approved SE Codes table.
     Given Switch to Storefront as internalUser.
@@ -218,6 +218,8 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     And Clicks on the Search button.
     Then Appropriate user with appropriate <email> email is displayed in the users list.
     When Clicks on the user name in the table.
+    And Expand Modify an Account tab in I Want To Block.
+    Then Prevent appearing <account> in the All Accounts tab.
     When Click on Add account button in User Detail block.
     Then Add Account pop-up is displayed on Manage Users page.
     And Select EMEA in the Region field in the Add Account pop-up.
@@ -226,22 +228,21 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then Add New Accounts table is displayed in the Add Account pop-up.
     When Click on Select All checkbox in the Add Account pop-up.
     And Click on Add button in the Add Account pop-up.
-    And Expand Modify an Account tab in I Want To Block.
-    Then Account from Add Account pop-up is displayed in the the All Accounts tab.
+    Then Is account <account> displayed in the All Accounts tab.
     Given Switch to Storefront as internalUser.
     And User is logged in to Storefront.
     And Refresh page.
     And Account management page is opened.
     When Choose EMEA region.
-    And Search Account From Add Account Pop-Up.
-    Then Appropriate account is displayed in the table on Account Management Page.
+    And Search an account <account> on Account Management Page.
+    Then Is account <account> displayed in the table on Account Management Page.
     Given Switch to Storefront as admin.
-    When Click on <account> checkbox in I Want To Block in All Accounts tab.
     And Focus on browser.
+    When Click on <account> checkbox in I Want To Block in All Accounts tab.
     And Click on Remove button in All Accounts tab.
     Then Remove Account pop-up is displayed on I Want To Block in All Accounts tab.
     And Click on Remove button in the Remove Account pop-up on I Want To Block in All Accounts tab.
-    Then Account from Add Account pop-up is not displayed in the the All Accounts tab.
+    Then Is <account> account not displayed in the All Accounts tab.
 
     Examples:
       | email                     | account |
@@ -286,36 +287,6 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Examples:
       | email                     | soCode |
       | roman.kryzhevskykh@ge.com | USG4   |
-
-  Scenario Outline: Check that admin is able to reject SO codes to the internal user
-    And Refresh page.
-    And Focus on browser.
-    Given Switch to Storefront as internalUser.
-    And User is logged in to Storefront.
-    And Refresh page.
-    And Account management page is opened.
-    When Request account popup is opened.
-    When Set <soCode> SO code to the First Sales Office Code field in the Request Account pop-up.
-    And Click on Modify button in the Request Account pop-up.
-    Given Switch to Storefront as admin.
-    And Manage Users page is opened.
-    And Focus on browser.
-    When Admin opens Users tab.
-    And Sets <email> email to the email field.
-    And Clicks on the Search button.
-    Then Appropriate user with appropriate <email> email is displayed in the users list.
-    When Clicks on the user name in the table.
-    When User expand the Approve Pending Accounts section.
-    When Click on Pending Sales Office Codes tab In Approve Pending Accounts Tab.
-    Then <soCode> SO code is displayed in the Pending SO codes table.
-    When Admin clicks on All Sales Office Codes checkbox in Pending SO Codes tab.
-    And Click on Reject SO codes button.
-    And Click on Reject button in the Reject Account pop-up on I Want To Block in Pending SO Codes tab.
-    Then No data available in table title is displayed in Pending Sales Office Code table.
-
-    Examples:
-      | email                     | soCode |
-      | roman.kryzhevskykh@ge.com | USG5   |
 
   Scenario Outline: Check that admin is able to reject SO codes to the internal user
     And Refresh page.
