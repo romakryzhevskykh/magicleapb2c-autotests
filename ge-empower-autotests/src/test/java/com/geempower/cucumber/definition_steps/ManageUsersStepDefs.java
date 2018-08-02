@@ -95,7 +95,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     @Then("^Add New Accounts table is displayed in the Add Account pop-up.$")
     public void addNewAccountsTableIsDisplayed() {
         assertTrue(manageUsersPage.addNewAccountsTableIsDisplayed());
-        threadVarsHashMap.put(TestKeyword.MANAGE_USERS_ACCOUNT_NO, manageUsersPage.getAccountNameFromAddAccPopUp());
+        threadVarsHashMap.put(TestKeyword.MANAGE_USERS_ACCOUNT_NO, manageUsersPage.getAccountNoFromAddAccPopUp());
     }
 
     @Then("^Is account (.*) displayed in the All Accounts tab.$")
@@ -105,14 +105,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
 
     @Then("^Is (.*) account not displayed in the All Accounts tab.$")
     public void isAccountNotDisplayedInAllAccTab(String accountNo) {
-        assertFalse(iWantToBlock.isAccountNotDisplayedInAllAccTab(accountNo));
-    }
-
-    @Then("^Account from Add Account pop-up is displayed in the All Accounts tab.$")
-    public void previouslyAddedAccountIsDisplayedInTheAllAccountsTab() {
-        String accountNo = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NO);
-        assertTrue(iWantToBlock.getAllAccountNo()
-                .anyMatch(account -> account.getText().equals(accountNo)));
+        assertFalse(iWantToBlock.isAccountDisplayedInAllAccTab(accountNo));
     }
 
     @Then("^Is account from add account pop-up displayed in the all accounts tab.$")
@@ -444,9 +437,9 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.USER_ROLES_IN_EACH_REGION, userRolesInEachRegion);
     }
 
-    @Then("^Account (.*) should not displayed in the All Accounts tab.$")
-    public void accountShouldNotDisplayedInTheAllAccountsTab(String account) {
-        iWantToBlock.accountShouldNotDisplayedInTheAllAccountsTab(account);
+    @Then("^Prevent appearing (.*) in the All Accounts tab.$")
+    public void preventAppearingAccountInTheAllAccountsTab(String account) {
+        iWantToBlock.preventAppearingAccountInTheAllAccountsTab(account);
     }
 
     @And("^Prevent appearing of SO code (.*) in SO Codes tab.$")

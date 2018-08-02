@@ -325,27 +325,24 @@ public class IwantToBlock extends UIComponent {
         click(By.id(ASSIGN_ROLES_OR_PRIVILEGES_BUTTON_ID));
     }
 
-    @Step("Account should not displayed in the all accounts tab.")
-    public void accountShouldNotDisplayedInTheAllAccountsTab(String accountNo) {
+    @Step("Prevent Appearing Account In The All Accounts Tab.")
+    public void preventAppearingAccountInTheAllAccountsTab(String accountNo) {
         waitUntilPageIsFullyLoaded();
         int actualCountOfPages = getCountOfPagesAllAccountsTab();
         for (int i = 0; i < actualCountOfPages; i++) {
             if ($$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream().noneMatch(account -> account.getText().equals(accountNo))) {
                 if (actualCountOfPages > 1) {
-                    click(NEXT_PAGINATION_BUTTON_ALL_ACCOUNTS_TAB_XPATH);
+                    goToNextPageAccountTab();
                 }
                 waitUntilPageIsFullyLoaded();
             } else if ($$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream().anyMatch(account -> account.getText().equals(accountNo))) {
-                click(ACCOUNT_CHECKBOX_XPATH, accountNo);
-                ((JavascriptExecutor) getDriver()).executeScript("scroll(0,0)");
-                click(REMOVE_BUTTON_IN_ALL_ACCOUNTS_TAB_XPATH);
-                click(REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_IN_ALL_ACCOUNTS_TAB_XPATH);
+                removeAccInAccountTab(accountNo);
                 actualCountOfPages = i;
             }
         }
     }
 
-    @Step("Is account displayed in all acc tab.")
+    @Step("Is account displayed in all account tab.")
     public boolean isAccountDisplayedInAllAccTab(String accountNo) {
         waitUntilPageIsFullyLoaded();
         boolean result = false;
@@ -353,7 +350,7 @@ public class IwantToBlock extends UIComponent {
         for (int i = 0; i < actualCountOfPages; i++) {
             if ($$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream().noneMatch(account -> account.getText().equals(accountNo))) {
                 if (actualCountOfPages > 1) {
-                    click(NEXT_PAGINATION_BUTTON_ALL_ACCOUNTS_TAB_XPATH);
+                    goToNextPageAccountTab();
                 }
             } else if ($$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream().anyMatch(account -> account.getText().equals(accountNo))) {
                 actualCountOfPages = i;
@@ -363,31 +360,14 @@ public class IwantToBlock extends UIComponent {
         return result;
     }
 
-    @Step("Is account not displayed in all acc tab.")
-    public boolean isAccountNotDisplayedInAllAccTab(String accountNo) {
-        waitUntilPageIsFullyLoaded();
-        boolean result = false;
-        int actualCountOfPages = getCountOfPagesAllAccountsTab();
-        for (int i = 0; i < actualCountOfPages; i++) {
-            if ($$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream().noneMatch(account -> account.getText().equals(accountNo))) {
-                if (actualCountOfPages > 1) {
-                    click(NEXT_PAGINATION_BUTTON_ALL_ACCOUNTS_TAB_XPATH);
-                }
-            } else if ($$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream().anyMatch(account -> account.getText().equals(accountNo))) {
-                actualCountOfPages = i;
-                result = true;
-            }
-        }
-        return result;
+    private void goToNextPageAccountTab() {
+        click(NEXT_PAGINATION_BUTTON_ALL_ACCOUNTS_TAB_XPATH);
     }
 
-    @Step("Prevent Appearing Of So Code In SO Codes Tab.")
-    public void preventAppearingOfSoCodeInSOCodesTab(String soCode) {
-        waitUntilPageIsFullyLoaded();
-        if ($$(ALL_APPROVED_SALES_OFFICE_CODE_XPATH).stream().anyMatch(code -> code.getText().trim().equals(soCode))) {
-            click(APPROPRIATE_SO_CODE_CHECKBOX_XPATH, soCode);
-            click(REMOVE_BUTTON_IN_SO_CODES_TAB_IN_MODIFY_AN_ACC_TAB_XPATH);
-            click(REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_IN_SO_CODES_TAB_XPATH);
-        }
+    private void removeAccInAccountTab(String accountNo) {
+        click(ACCOUNT_CHECKBOX_XPATH, accountNo);
+        ((JavascriptExecutor) getDriver()).executeScript("scroll(0,0)");
+        click(REMOVE_BUTTON_IN_ALL_ACCOUNTS_TAB_XPATH);
+        click(REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_IN_ALL_ACCOUNTS_TAB_XPATH);
     }
 }
