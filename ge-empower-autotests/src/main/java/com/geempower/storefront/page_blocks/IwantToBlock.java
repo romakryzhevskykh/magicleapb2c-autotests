@@ -336,10 +336,7 @@ public class IwantToBlock extends UIComponent {
                 }
                 waitUntilPageIsFullyLoaded();
             } else if ($$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream().anyMatch(account -> account.getText().equals(accountNo))) {
-                click(ACCOUNT_CHECKBOX_XPATH, accountNo);
-                ((JavascriptExecutor) getDriver()).executeScript("scroll(0,0)");
-                click(REMOVE_BUTTON_IN_ALL_ACCOUNTS_TAB_XPATH);
-                click(REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_IN_ALL_ACCOUNTS_TAB_XPATH);
+                removeAccInAccountTab(accountNo);
                 actualCountOfPages = i;
             }
         }
@@ -353,7 +350,7 @@ public class IwantToBlock extends UIComponent {
         for (int i = 0; i < actualCountOfPages; i++) {
             if ($$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream().noneMatch(account -> account.getText().equals(accountNo))) {
                 if (actualCountOfPages > 1) {
-                    click(NEXT_PAGINATION_BUTTON_ALL_ACCOUNTS_TAB_XPATH);
+                    goToNextPageAccountTab();
                 }
             } else if ($$(ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH).stream().anyMatch(account -> account.getText().equals(accountNo))) {
                 actualCountOfPages = i;
@@ -361,5 +358,16 @@ public class IwantToBlock extends UIComponent {
             }
         }
         return result;
+    }
+
+    private void goToNextPageAccountTab() {
+        click(NEXT_PAGINATION_BUTTON_ALL_ACCOUNTS_TAB_XPATH);
+    }
+
+    private void removeAccInAccountTab(String accountNo) {
+        click(ACCOUNT_CHECKBOX_XPATH, accountNo);
+        ((JavascriptExecutor) getDriver()).executeScript("scroll(0,0)");
+        click(REMOVE_BUTTON_IN_ALL_ACCOUNTS_TAB_XPATH);
+        click(REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_IN_ALL_ACCOUNTS_TAB_XPATH);
     }
 }
