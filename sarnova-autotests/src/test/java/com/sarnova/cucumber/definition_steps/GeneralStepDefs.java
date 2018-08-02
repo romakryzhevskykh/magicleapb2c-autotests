@@ -20,7 +20,7 @@ public class GeneralStepDefs extends AbstractStepDefs {
     @Autowired private StartPage startPage;
 
     @And("^Refresh page.$")
-    public void refreshPage() throws Throwable {
+    public void refreshPage() {
         generalPageActivities.refreshPage();
     }
 
@@ -111,7 +111,7 @@ public class GeneralStepDefs extends AbstractStepDefs {
         headerRowPageBlock.clickOnBusinessInfoItemInMyAccountMenu();
     }
 
-    @When("^Click on Help/New To Boundtree\\? item in My Account menu.$")
+    @When("^Click on Help item in My Account menu.$")
     public void clickOnHelpNewToBoundtreeItemInMyAccountMenu() {
         headerRowPageBlock.clickOnHelpNewToBoundtreeItemInMyAccountMenu();
     }
@@ -134,7 +134,6 @@ public class GeneralStepDefs extends AbstractStepDefs {
     @And("^Check that current Supply list is displayed in favorite Supply lists drop-down in page header.$")
     public void checkThatCurrentSupplyListIsDisplayedInFavoriteSupplyListsDropDownOnSupplyListDetailsPage() {
         List<String> favoriteSupplyListNames = headerRowPageBlock.getSupplyListNamesFromFavoriteSupplyListsDropDown();
-        System.out.println("FAVORITE SLS: " + favoriteSupplyListNames);
         String testSupplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
         assertTrue(favoriteSupplyListNames.stream()
                 .anyMatch(supplyListName -> supplyListName.equals(StringUtils.capitalize(testSupplyListName))));
@@ -143,7 +142,6 @@ public class GeneralStepDefs extends AbstractStepDefs {
     @And("^Check that current Supply list is not displayed in favorite Supply lists drop-down in page header.$")
     public void checkThatCurrentSupplyListIsNotDisplayedInFavoriteSupplyListsDropDownOnSupplyListDetailsPage() {
         List<String> favoriteSupplyListNames = headerRowPageBlock.getSupplyListNamesFromFavoriteSupplyListsDropDown();
-        System.out.println("FAVORITE SLS: " + favoriteSupplyListNames);
         String testSupplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
         assertTrue(favoriteSupplyListNames.stream()
                 .noneMatch(supplyListName -> supplyListName.equals(StringUtils.capitalize(testSupplyListName))));
@@ -157,5 +155,10 @@ public class GeneralStepDefs extends AbstractStepDefs {
     @Then("^Check that Supply lists drop-down is present in Header.$")
     public void checkThatSupplyListsDropDownIsPresentInHeader() {
         assertTrue(headerRowPageBlock.isFavoriteSupplyListsDropDownPresent());
+    }
+
+    @Then("^Check that user is logged out.$")
+    public void checkThatUserIsLoggedOut() {
+        assertTrue(headerRowPageBlock.isUserLoggedOut());
     }
 }

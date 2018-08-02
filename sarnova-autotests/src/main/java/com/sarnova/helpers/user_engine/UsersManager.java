@@ -33,6 +33,7 @@ public class UsersManager {
     GETRequest RESET_PASSWORD_PAGE = new GETRequest("Reset password to User page", "my-company/organization-management/manage-users/resetpassword?user=%s");
     POSTRequest RESET_PASSWORD = new POSTRequest("Reset password to User", "my-company/organization-management/manage-users/resetpassword?user=%s");
     POSTRequest REMOVE_GROUP_FROM_USER = new POSTRequest("Remove group from user", "my-company/organization-management/manage-users/usergroups/deselect/");
+    POSTRequest REMOVE_ROLE_FROM_USER = new POSTRequest("Remove role from user", "my-company/organization-management/manage-users/globalRoles/deselect/");
     POSTRequest ADD_GROUP_TO_USER = new POSTRequest("Add group to user", "my-company/organization-management/manage-users/usergroups/select/");
     GETRequest USER_DETAILS_PAGE = new GETRequest("User details page", "my-company/organization-management/manage-users/details/");
     ArrayList<User> users = new ArrayList<>();
@@ -291,7 +292,7 @@ public class UsersManager {
         user.getUserRoles().forEach(userRole -> {
             if (!userRole.equals(StorefrontUserRole.TEST_USER)) {
                 String csrfToken = getCreateUserPageCsrfToken(activeUserSession);
-                POSTRequest removeGroup = REMOVE_GROUP_FROM_USER.getClone();
+                POSTRequest removeGroup = REMOVE_ROLE_FROM_USER.getClone();
                 removeGroup.setGetParameterAndValue("user", user.getUsername());
                 removeGroup.setGetParameterAndValue("usergroup", userRole.getRoleCode());
 

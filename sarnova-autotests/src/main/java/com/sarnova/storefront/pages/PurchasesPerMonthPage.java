@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PurchasesPerMonthPage extends StorefrontBasePage {
 
-    private String pageUrlMethod = "purchases-per-month-report";
+    private String pageUrlMethod = "reports/purchases-per-month";
 
     @Override
     public String getPageUrl() {

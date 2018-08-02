@@ -15,6 +15,12 @@ Feature: Check user restrictions with SUPPLY LISTS PERMISSION and without it.
     And Refresh page.
     Then Check that Supply lists drop-down is present in Header.
 
+  Scenario: Check that user with only SUPPLY LISTS PERMISSION has access to Supply lists item in My Account drop-down.
+    When Switch to Storefront cockpit test user.
+    And User is logged in to Storefront.
+    And My Account menu is opened.
+    Then Check that Supply Lists item is present in My Account menu.
+
   Scenario: Check that user with only SUPPLY LISTS PERMISSION has access to Supply lists on Account Dashboard page.
     When Switch to Storefront cockpit test user.
     And User is logged in to Storefront.

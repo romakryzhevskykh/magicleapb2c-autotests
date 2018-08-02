@@ -123,6 +123,7 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
     @Step("Click on Add to cart button.")
     public void clickOnAddToCartButton() {
         click(ADD_TO_CART_BUTTON_XPATH);
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Is Add to cart button visible?")

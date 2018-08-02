@@ -51,11 +51,11 @@ public class ShippingAddress {
         return phoneNumber;
     }
 
-    public String getFirstName() {
+    public String getFirstNameText() {
         return firstName;
     }
 
-    public String getLastName() {
+    public String getLastNameText() {
         return lastName;
     }
 

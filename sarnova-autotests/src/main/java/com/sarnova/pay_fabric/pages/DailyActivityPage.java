@@ -25,7 +25,7 @@ public class DailyActivityPage extends PayFabricBasePage {
     public Transaction getLastTransactionInTheList() {
         WebElement firstWallet = getElementsInFrame("portalFrame", TRANSACTION_ITEMS_XPATH).get(0);
         getDriver().switchTo().frame("portalFrame");
-        String customerId = firstWallet.findElement(By.xpath("td[@aria-describedby='trxdailyactivitylist_Customerid']")).getText();
+        String customerId = firstWallet.findElement(By.xpath("td[@aria-describedby='trxdailyactivitylist_CustomerNumber']")).getText();
         String account = firstWallet.findElement(By.xpath("td[@aria-describedby='trxdailyactivitylist_Account']")).getText();
         String expDate = firstWallet.findElement(By.xpath("td[@aria-describedby='trxdailyactivitylist_Expirationdate']")).getText();
         String amount = firstWallet.findElement(By.xpath("td[@aria-describedby='trxdailyactivitylist_Trxamount']")).getText();

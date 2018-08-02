@@ -15,16 +15,16 @@
             <class name="com.sarnova.cucumber.AccountDashboardSuit"/>
         </classes>
     </test>
-    <test name="Supply lists, user management, add to cart and checkout functionality">
-        <parameter name="browserName" value="chrome"/>
-        <classes>
-            <class name="com.sarnova.cucumber.UserManagementSuite"/>
-            <class name="com.sarnova.cucumber.PermissionsSuite"/>
-            <class name="com.sarnova.cucumber.AddToSupplyListSuite"/>
-            <class name="com.sarnova.cucumber.SupplyListsFunctionalitySuit"/>
-            <class name="com.sarnova.cucumber.AddToCartSuite"/>
-            <class name="com.sarnova.cucumber.CheckoutSuite"/>
-            <class name="com.sarnova.cucumber.AddToSupplyListFromCartSuit"/>
-        </classes>
-    </test>
+    <!--<test name="Supply lists, user management, add to cart and checkout functionality">-->
+        <!--<parameter name="browserName" value="chrome"/>-->
+        <!--<classes>-->
+            <!--&lt;!&ndash;<class name="com.sarnova.cucumber.UserManagementSuite"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;<class name="com.sarnova.cucumber.PermissionsSuite"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;<class name="com.sarnova.cucumber.AddToSupplyListSuite"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;<class name="com.sarnova.cucumber.SupplyListsFunctionalitySuit"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;<class name="com.sarnova.cucumber.AddToCartSuite"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;<class name="com.sarnova.cucumber.CheckoutSuite"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;<class name="com.sarnova.cucumber.AddToSupplyListFromCartSuit"/>&ndash;&gt;-->
+        <!--</classes>-->
+    <!--</test>-->
 </suite>

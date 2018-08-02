@@ -53,12 +53,12 @@ public class LoggedInHeaderRowBlock extends UIComponent {
 
     @Step("Get My Account menu item names.")
     public List<String> getMyAccountMenuNames() {
-        return $$(MY_ACCOUNT_MENU_ITEM_NAMES_XPATH).stream().map(webElement -> webElement.getText().trim()).collect(Collectors.toList());
+        return $$(MY_ACCOUNT_MENU_LINK_ITEM_NAMES_XPATH).stream().map(webElement -> webElement.getText().trim()).collect(Collectors.toList());
     }
 
     @Step("Get My Account menu {0} item index.")
     public int getIndexOfMyAccountMenuItemByName(String menuItemName) {
-        List<WebElement> myAccountItems = $$(MY_ACCOUNT_MENU_ITEMS_XPATH);
+        List<WebElement> myAccountItems = $$(MY_ACCOUNT_MENU_LINK_ITEMS_XPATH);
         WebElement searchedItem = myAccountItems.stream()
                 .filter(webElement -> webElement.getText().contains(menuItemName))
                 .findFirst()

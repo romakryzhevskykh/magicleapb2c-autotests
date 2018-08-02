@@ -73,6 +73,10 @@ Feature: Logged in user checkout functionality
     Then Check that Order confirmation page is opened.
     And Check that Shipping Address is correct on Order confirmation page.
 
+#    GROUND Check that shipping price was added to total
+#    DAY_2ND Check that shipping price was not added to total
+#    OVERNIGHT Check that shipping price was not added to total
+
   Scenario: Check that User can place order with 2-DAY Shipping method.
     Given Add to cart INDIVIDUAL, VALID product with quantity 1.
     And Open cart page.

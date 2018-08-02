@@ -45,9 +45,9 @@ Feature: Account Dashboard menu items on click redirects functionality.
     When Click on DSCSA Transactions item on Account Dashboard page.
     Then Check that DSCSA Transactions page is opened.
 
-  Scenario: Check that Pharmaceutical Backorder Report Account Dashboard item redirects to Reports page.
-    When Click on Pharmaceutical Backorder Report item on Account Dashboard page.
-    Then Check that Pharmaceutical Backorder Report page is opened.
+#  Scenario: Check that Pharmaceutical Backorder Report Account Dashboard item redirects to Reports page.
+#    When Click on Pharmaceutical Backorder Report item on Account Dashboard page.
+#    Then Check that Pharmaceutical Backorder Report page is opened.
 
   Scenario: Check that Purchases Per Month Account Dashboard item redirects to Business Info page.
     When Click on Purchases Per Month item on Account Dashboard page.
@@ -78,8 +78,8 @@ Feature: Account Dashboard menu items on click redirects functionality.
     Then Check that Account Settings page is opened.
 
   Scenario: Check that Help/New To Boundtree? Account Dashboard item redirects to Help/New To Boundtree? page.
-    When Click on Help/New To Boundtree? item on Account Dashboard page.
-    Then Check that Help/New To Boundtree? page is opened.
+    When Click on Help item on Account Dashboard page.
+    Then Check that Help page is opened.
 
 #  Scenario: Check that Saved Credit Cards Account Dashboard item redirects to Saved Credit Cards page.
 #    When Click on Saved Credit Cards item on Account Dashboard page.

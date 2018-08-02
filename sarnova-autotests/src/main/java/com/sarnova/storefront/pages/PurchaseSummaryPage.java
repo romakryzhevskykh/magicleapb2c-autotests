@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PurchaseSummaryPage extends StorefrontBasePage {
 
-    private String pageUrlMethod = "purchase-summary-report";
+    private String pageUrlMethod = "reports/purchase-summary";
 
     @Override
     public String getPageUrl() {

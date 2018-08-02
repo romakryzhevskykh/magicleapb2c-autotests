@@ -29,6 +29,6 @@ public class AccountDashboardPageElements {
 
     private static final String PREFERENCES_ITEMS_XPATH = "//div[@id = 'dashboard-menu-body-Preferences']/ul[@class='menu-body-list-container']";
     public static final String ACCOUNT_SETTINGS_ITEM_XPATH = PREFERENCES_ITEMS_XPATH + "/li//a[@title='Account Settings']";
-    public static final String HELP_ITEM_XPATH = PREFERENCES_ITEMS_XPATH + "/li//a[@title='Help/New to Boundtree?']";
+    public static final String HELP_ITEM_XPATH = PREFERENCES_ITEMS_XPATH + "/li//a[@title='Help']";
 
 }

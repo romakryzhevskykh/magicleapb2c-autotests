@@ -24,16 +24,16 @@ public class CreateUsersPageStepDefs extends AbstractStepDefs {
 
     @And("^Fill First name field with a random text on Create user page.$")
     public void fillFirstNameFieldWithARandomTextOnEditUserPage() {
-        String randomName = randomUtils.randomName();
-        threadVarsHashMap.put(TestKeyword.EDIT_USER_FIRST_NAME, randomName);
-        createUserPage.fillFirstName(randomName);
+        String randomFirstName = randomUtils.getRandomTestFirstName();
+        threadVarsHashMap.put(TestKeyword.EDIT_USER_FIRST_NAME, randomFirstName);
+        createUserPage.fillFirstName(randomFirstName);
     }
 
     @And("^Fill Last name field with a random text on Create user page.$")
     public void fillLastNameFieldWithARandomTextOnEditUserPage() {
-        String randomName = randomUtils.randomName();
-        threadVarsHashMap.put(TestKeyword.EDIT_USER_LAST_NAME, randomName);
-        createUserPage.fillLastName(randomName);
+        String randomLastName = randomUtils.getRandomTestLastName();
+        threadVarsHashMap.put(TestKeyword.EDIT_USER_LAST_NAME, randomLastName);
+        createUserPage.fillLastName(randomLastName);
     }
 
     @And("^Fill Email field with a random email on Create user page.$")
@@ -45,7 +45,7 @@ public class CreateUsersPageStepDefs extends AbstractStepDefs {
 
     @And("^Fill Username field with a random email on Create user page.$")
     public void fillUsernameFieldWithARandomEmailOnEditUserPage() {
-        String randomUsername = randomUtils.randomName();
+        String randomUsername = randomUtils.getRandomUsername();
         threadVarsHashMap.put(TestKeyword.EDIT_USER_USERNAME, randomUsername);
         createUserPage.fillUsername(randomUsername);
     }

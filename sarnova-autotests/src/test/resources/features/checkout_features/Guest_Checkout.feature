@@ -42,6 +42,10 @@ Feature: Guest checkout functionality
     And Click on Next button on Checkout Shipping address step.
     Then Check that Checkout Shipping method step is opened.
 
+    #    GROUND Check that shipping price was added to total
+    #    DAY_2ND Check that shipping price was not added to total
+    #    OVERNIGHT Check that shipping price was not added to total
+
   Scenario: Check that Guest can pass to Payment method step with 2-nd day Shipping method.
     When Add to cart VALID product with quantity 1.
     And Open cart page.

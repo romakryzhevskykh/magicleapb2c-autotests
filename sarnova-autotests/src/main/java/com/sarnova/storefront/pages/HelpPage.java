@@ -3,12 +3,13 @@ package com.sarnova.storefront.pages;
 import org.springframework.stereotype.Component;
 
 @Component
-public class HelpNewToBoundtreePage extends StorefrontBasePage {
+public class HelpPage extends StorefrontBasePage {
 
-    private String pageUrlMethod = "my-account/help-new-to-boundtree";
+    private String pageUrlMethod = "help";
 
     @Override
     public String getPageUrl() {
         return storefrontProject.getBaseUrl() + pageUrlMethod;
     }
+
 }

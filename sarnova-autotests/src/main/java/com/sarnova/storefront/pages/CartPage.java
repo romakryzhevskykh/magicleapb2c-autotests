@@ -57,6 +57,7 @@ public class CartPage extends StorefrontBasePage {
     @Step("Click on Add to Supply list button on Cart page.")
     public void clickOnAddToSupplyListButton() {
         click(ADD_TO_SUPPLY_LIST_BUTTONS_XPATH);
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Click on Add to Supply list button for UOM: {0} on Cart page.")

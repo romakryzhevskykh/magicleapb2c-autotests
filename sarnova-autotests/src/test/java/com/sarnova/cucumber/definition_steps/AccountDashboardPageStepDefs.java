@@ -88,7 +88,7 @@ public class AccountDashboardPageStepDefs extends AbstractStepDefs {
         assertTrue(accountDashboardPage.isAccountSettingsItemVisible());
     }
 
-    @Then("^Check that Help/New To Boundtree\\? item is visible on Account Dashboard page.$")
+    @Then("^Check that Help item is visible on Account Dashboard page.$")
     public void checkThatHelpItemIsVisible() {
         assertTrue(accountDashboardPage.isHelpItemVisible());
     }
@@ -188,7 +188,7 @@ public class AccountDashboardPageStepDefs extends AbstractStepDefs {
         accountDashboardPage.clickOnAccountSettingsItem();
     }
 
-    @When("^Click on Help/New To Boundtree\\? item on Account Dashboard page.$")
+    @When("^Click on Help item on Account Dashboard page.$")
     public void clickOnHelpItem() {
         accountDashboardPage.clickOnHelpItem();
     }

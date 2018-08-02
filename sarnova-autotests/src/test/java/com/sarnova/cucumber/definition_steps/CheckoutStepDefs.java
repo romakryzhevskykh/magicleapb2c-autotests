@@ -231,13 +231,13 @@ public class CheckoutStepDefs extends AbstractStepDefs {
     @And("^Fill First name field on Checkout Shipping address step.$")
     public void fillFirstNameFieldOnCheckoutShippingAddressStep() {
         ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_SHIPPING_ADDRESS);
-        checkoutPage.fillFirstName(shippingAddress.getFirstName());
+        checkoutPage.fillFirstName(shippingAddress.getFirstNameText());
     }
 
     @And("^Fill Last name field on Checkout Shipping address step.$")
     public void fillLastNameFieldOnCheckoutShippingAddressStep() {
         ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_SHIPPING_ADDRESS);
-        checkoutPage.fillLastName(shippingAddress.getLastName());
+        checkoutPage.fillLastName(shippingAddress.getLastNameText());
     }
 
     @And("^Fill Address line 1 field on Checkout Shipping address step.$")
@@ -333,13 +333,13 @@ public class CheckoutStepDefs extends AbstractStepDefs {
     @And("^Fill Billing First name field on Checkout Payment method step.$")
     public void fillFirstNameFieldOnCheckoutPaymentMethodStep() {
         ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_BILLING_ADDRESS);
-        checkoutPage.fillBillingFirstName(shippingAddress.getFirstName());
+        checkoutPage.fillBillingFirstName(shippingAddress.getFirstNameText());
     }
 
     @And("^Fill Billing Last name field on Checkout Payment method step.$")
     public void fillLastNameFieldOnCheckoutPaymentMethodStep() {
         ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_BILLING_ADDRESS);
-        checkoutPage.fillBillingLastName(shippingAddress.getLastName());
+        checkoutPage.fillBillingLastName(shippingAddress.getLastNameText());
     }
 
     @And("^Fill Billing Address line 1 field on Checkout Payment method step.$")

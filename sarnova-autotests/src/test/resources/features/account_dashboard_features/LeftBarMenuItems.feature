@@ -59,8 +59,8 @@ Feature: Account Dashboard menu items visibility.
   Scenario: Check that Account Settings item is present in Account Dashboard left-bar menu.
     Then Check that Account Settings item is visible on Account Dashboard page.
 
-  Scenario: Check that Help/New to Boundtree? item is present in Account Dashboard left-bar menu.
-    Then Check that Help/New To Boundtree? item is visible on Account Dashboard page.
+  Scenario: Check that Help item is present in Account Dashboard left-bar menu.
+    Then Check that Help item is visible on Account Dashboard page.
 
 #  Scenario: Check that Saved Credit Cards item is present in Account Dashboard left-bar menu.
 #    Then Check that Saved Credit Cards item is visible on Account Dashboard page.
