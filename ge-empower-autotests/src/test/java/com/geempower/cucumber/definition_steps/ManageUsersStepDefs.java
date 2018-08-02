@@ -274,7 +274,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
                 .anyMatch(code -> code.getText().trim().equals(selesEngCode)));
     }
 
-    @Then("^(.*) Sales Office Code is displayed in the Approved SO Codes table.$")
+    @Then("^Is (.*) Sales Office Code displayed in the Approved SO Codes table.$")
     public void appropriateSalesOfficeCodeIsDisplayedInTheTable(String salesOfficeCode) {
         assertTrue(iWantToBlock.getAllSoCodesFromApprovedSoCodesTable()
                 .anyMatch(code -> code.getText().trim().equals(salesOfficeCode)));
@@ -445,5 +445,12 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     @And("^Prevent appearing of SO code (.*) in SO Codes tab.$")
     public void preventAppearingOfSoCodeInSOCodesTab(String soCode) {
         iWantToBlock.preventAppearingOfSoCodeInSOCodesTab(soCode);
+    }
+
+    @Then("^Account from Add Account pop-up is displayed in the All Accounts tab.$")
+    public void previouslyAddedAccountIsDisplayedInTheAllAccountsTab() {
+        String accountNo = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NO);
+        assertTrue(iWantToBlock.getAllAccountNo()
+                .anyMatch(account -> account.getText().equals(accountNo)));
     }
 }

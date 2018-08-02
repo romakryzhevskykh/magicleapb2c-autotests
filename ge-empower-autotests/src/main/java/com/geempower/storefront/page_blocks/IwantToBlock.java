@@ -370,4 +370,18 @@ public class IwantToBlock extends UIComponent {
         click(REMOVE_BUTTON_IN_ALL_ACCOUNTS_TAB_XPATH);
         click(REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_IN_ALL_ACCOUNTS_TAB_XPATH);
     }
+
+    @Step("Prevent Appearing Of So Code In SO Codes Tab.")
+    public void preventAppearingOfSoCodeInSOCodesTab(String soCode) {
+        waitUntilPageIsFullyLoaded();
+        if ($$(ALL_APPROVED_SALES_OFFICE_CODE_XPATH).stream().anyMatch(code -> code.getText().trim().equals(soCode))) {
+            removeSoCodeFromApprovedSoCodeTab(soCode);
+        }
+    }
+
+    private void removeSoCodeFromApprovedSoCodeTab(String soCode) {
+        click(APPROPRIATE_SO_CODE_CHECKBOX_XPATH, soCode);
+        click(REMOVE_BUTTON_IN_SO_CODES_TAB_IN_MODIFY_AN_ACC_TAB_XPATH);
+        click(REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_IN_SO_CODES_TAB_XPATH);
+    }
 }
