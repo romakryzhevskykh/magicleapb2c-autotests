@@ -24,7 +24,7 @@ public class ReturnsPage extends StorefrontBasePage {
 
     @Step("Get Returns title")
     public String getReturnsTitle() {
-        return $(ALL_CASES_TITLE_XPATH).getText();
+        return $(CASES_TITLE_XPATH).getText();
     }
 
     @Step("Click on Create Request Button")

@@ -23,6 +23,6 @@ public class InvoicePage extends StorefrontBasePage {
 
     @Step("Get Invoice title")
     public String getInvoicesTitle() {
-        return $(ALL_INVOICES_TITLE_XPATH).getText();
+        return $(INVOICES_TITLE_XPATH).getText();
     }
 }
