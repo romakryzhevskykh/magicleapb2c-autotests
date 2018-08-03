@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ThreadVarsHashMap {
@@ -16,7 +17,7 @@ public class ThreadVarsHashMap {
         if (tlHashMapList.get() == null) {
             tlHashMapList.set(new HashMap<>());
         }
-        if(get(key) == null){
+        if (get(key) == null) {
             tlHashMapList.get().put(key, value);
         } else if (!(get(key) instanceof List)) {
             tlHashMapList.get().put(key, new ArrayList() {{
@@ -37,6 +38,11 @@ public class ThreadVarsHashMap {
     public String getString(Enum key) {
         if (tlHashMapList.get() == null) return null;
         else return tlHashMapList.get().get(key) != null ? tlHashMapList.get().get(key).toString() : null;
+    }
+
+    public void replace(Enum key, Object value) {
+        if (tlHashMapList.get() != null) tlHashMapList.get().remove(key);
+        put(key, value);
     }
 
     public void clear() {
