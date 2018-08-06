@@ -30,15 +30,15 @@ Feature: Some actions with toggles, UI components on the Notification Center pag
     And Notification Center page is opened.
     Then Lessonly toggle is switched to previously chosen state.
 
-#   Scenario: Check that admin is able to switch OFF the Status Page toggle and then switch ON.
-#     And Current Status Page toggle position is saved to the threadVarsHashMap.
-#     When Admin switches the Status Page toggle to another state.
-#     And Click on Save notification preferences button.
-#     Then Check that Dashboard page is opened.
-#     And Notification Center page is opened.
-#     Then Status Page toggle is switched to previously chosen state.
-#     When Admin switches the Status Page toggle to another state.
-#     And Click on Save notification preferences button.
-#     Then Check that Dashboard page is opened.
-#     And Notification Center page is opened.
-#     Then Status Page toggle is switched to previously chosen state.
+   Scenario: Check that admin is able to switch OFF the Status Page toggle and then switch ON.
+     And Current Status Page toggle position is saved to the threadVarsHashMap.
+     When Admin switches the Status Page toggle to another state.
+     And Click on Save notification preferences button.
+     Then Check that Dashboard page is opened.
+     And Notification Center page is opened.
+     Then Status Page toggle is switched to previously chosen state.
+     When Admin switches the Status Page toggle to another state.
+     And Click on Save notification preferences button.
+     Then Check that Dashboard page is opened.
+     And Notification Center page is opened.
+     Then Status Page toggle is switched to previously chosen state.
