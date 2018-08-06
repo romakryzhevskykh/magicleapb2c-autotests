@@ -20,7 +20,7 @@ public class OrdersPage extends StorefrontBasePage {
 
     @Step("Get Orders title")
     public String getOrdersTitle() {
-        return $(ALL_ORDERS_TITLE_XPATH).getText();
+        return $(ORDERS_TITLE_XPATH).getText();
     }
 
     private int getCountOfPagesWithOrders() {
@@ -80,7 +80,7 @@ public class OrdersPage extends StorefrontBasePage {
 
     @Step("Get current page url.")
     public String getCurrentUrl() {
-        return getCurrentUrl();
+        return getDriver().getCurrentUrl();
     }
 
     @Step("Click On Order By Order No.")
