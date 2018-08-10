@@ -274,10 +274,16 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
                 .anyMatch(code -> code.getText().trim().equals(selesEngCode)));
     }
 
-    @Then("^(.*) Sales Office Code is displayed in the Approved SO Codes table.$")
+    @Then("^Is (.*) Sales Office Code displayed in the Approved SO Codes table.$")
     public void appropriateSalesOfficeCodeIsDisplayedInTheTable(String salesOfficeCode) {
         assertTrue(iWantToBlock.getAllSoCodesFromApprovedSoCodesTable()
                 .anyMatch(code -> code.getText().trim().equals(salesOfficeCode)));
+    }
+
+    @Then("^Is (.*) Sales Office Code not displayed in the Approved SO Codes table.$")
+    public void isAppropriateSalesOfficeCodeNotDisplayedInTheTable(String salesOfficeCode) {
+        assertFalse(iWantToBlock.getAllSoCodesFromApprovedSoCodesTable()
+                .anyMatch(code -> code.getText().contains(salesOfficeCode)));
     }
 
     @SuppressWarnings("unchecked")
@@ -434,5 +440,22 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     @Then("^Prevent appearing (.*) in the All Accounts tab.$")
     public void preventAppearingAccountInTheAllAccountsTab(String account) {
         iWantToBlock.preventAppearingAccountInTheAllAccountsTab(account);
+    }
+
+    @And("^Prevent appearing of SO code in SO Codes tab.$")
+    public void preventAppearingOfSoCodeInSOCodesTab() {
+        iWantToBlock.preventAppearingOfSoCodeInSOCodesTab();
+    }
+
+    @And("^Prevent appearing of SE code in SE Codes tab.$")
+    public void preventAppearingOfSeCodeInSECodesTab() {
+        iWantToBlock.preventAppearingOfSeCodeInSECodesTab();
+    }
+
+    @Then("^Account from Add Account pop-up is displayed in the All Accounts tab.$")
+    public void previouslyAddedAccountIsDisplayedInTheAllAccountsTab() {
+        String accountNo = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NO);
+        assertTrue(iWantToBlock.getAllAccountNo()
+                .anyMatch(account -> account.getText().equals(accountNo)));
     }
 }

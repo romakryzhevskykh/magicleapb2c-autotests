@@ -23,6 +23,7 @@ public class IwantToBlockElements {
     public final static String REMOVE_ACCOUNT_POP_UP_SE_CODES_XPATH = "//*[@id='remove-salesengineer-modal']//div[@class='modal-content']";
     public final static String COUNT_OF_PAGES_ALL_ACCOUNTS_TAB_XPATH = "//div[@id = 'activeRequestsTableForCustomer_paginate'][not(contains(@style,'display: none;'))]//span[@class='paginate_of']";
     public final static String NEXT_PAGINATION_BUTTON_ALL_ACCOUNTS_TAB_XPATH = "//span[@id = 'activeRequestsTableForCustomer_next']";
+    public final static String APPROPRIATE_SO_CODE_CHECKBOX_XPATH = "//tr[contains(@class, '%s')]//label";
 
     //APPROVE PENDING ACCOUNTS TAB
     public final static String PENDING_SALES_OFFICE_CODES_TAB_APPROVED_PENDING_ACC_TAB_XPATH = "//*[@href='#pending-sales-office-codes-tab']";
@@ -32,7 +33,7 @@ public class IwantToBlockElements {
     public final static String ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH = "//*[@id='activeRequestsTableForCustomer']/tbody/tr/td[2]";
     public final static String ALL_SO_CODES_IN_PENDING_SO_CODES_TABLE_XPATH = "//*[@id='pending-salesoffice']//tr[@class='odd']/td[2]";
     public final static String SALES_OFFICE_CODE_TABLE_XPATH = "//table[contains (@class, 'approved-sales-office-request-table')]";
-    public final static String ALL_APPROVED_SALES_OFFICE_CODE_XPATH = "//*[@id='approved-salesofficecode']//tr[contains(@class,'odd')]/td[2]";
+    public final static String ALL_APPROVED_SALES_OFFICE_CODE_XPATH = "//div[@id='approved-salesofficecode']//td[contains(@class,'number-col')]";
     public final static String ALL_APPROVED_SALES_ENGINEER_CODES_XPATH = "//*[@id='approved-salesengineer']//tr[contains(@class,'odd')]/td[2]";
     private final static String APPROVE_PENDING_ACCOUNTS_SECTION_XPATH = "//div[@class='account-detail-desc-wrapper manageuser-accordion']//a[@href='#pending-panel']";
     public final static String APPROVE_PENDING_ACCOUNTS_SECTION_TITLE_XPATH = APPROVE_PENDING_ACCOUNTS_SECTION_XPATH + "/span";

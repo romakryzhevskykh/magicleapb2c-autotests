@@ -370,4 +370,32 @@ public class IwantToBlock extends UIComponent {
         click(REMOVE_BUTTON_IN_ALL_ACCOUNTS_TAB_XPATH);
         click(REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_IN_ALL_ACCOUNTS_TAB_XPATH);
     }
+
+    @Step("Prevent Appearing Of So Code In SO Codes Tab.")
+    public void preventAppearingOfSoCodeInSOCodesTab() {
+        waitUntilPageIsFullyLoaded();
+        if (!isDisplayed(EMPTY_SO_CODES_TABLE_XPATH)) {
+            removeAllSoCodesFromApprovedSoCodeTab();
+        }
+    }
+
+    @Step("Prevent Appearing Of Se Code In SE Codes Tab.")
+    public void preventAppearingOfSeCodeInSECodesTab() {
+        waitUntilPageIsFullyLoaded();
+        if (!isDisplayed(EMPTY_SE_CODES_TABLE_XPATH)) {
+            removeAllSeCodesFromApprovedSeCodeTab();
+        }
+    }
+
+    private void removeAllSoCodesFromApprovedSoCodeTab() {
+        click(ALL_SO_CODES_CHECKBOX_IN_MODIFY_AN_ACC_TAB_XPATH);
+        click(REMOVE_BUTTON_IN_SO_CODES_TAB_IN_MODIFY_AN_ACC_TAB_XPATH);
+        click(REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_IN_SO_CODES_TAB_XPATH);
+    }
+
+    private void removeAllSeCodesFromApprovedSeCodeTab() {
+        click(ALL_SE_CODES_CHECKBOX_IN_MODIFY_AN_ACC_TAB_XPATH);
+        click(REMOVE_BUTTON_IN_SE_CODES_TAB_IN_MODIFY_AN_ACC_TAB_XPATH);
+        click(REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_IN_SE_CODES_TAB_XPATH);
+    }
 }
