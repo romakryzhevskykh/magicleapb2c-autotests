@@ -6,7 +6,7 @@ Feature: Some actions on Orders page
 
   Scenario: Check that user able to open Orders page and correct header title is displayed
     And Orders page is opened.
-    Then All Orders title is displayed on Orders page.
+    Then Orders title is displayed on Orders page.
 
   Scenario: Check that Invoice details pop-up is appeared and displayed correctly
     And Account management page is opened.
@@ -49,4 +49,3 @@ Feature: Some actions on Orders page
     Examples:
       | account | salesDivision | orderNo   |
       | 5093868 | USS1          | 150775814 |
-

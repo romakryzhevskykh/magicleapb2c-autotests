@@ -6,7 +6,7 @@ Feature: Some actions on Special Pricing page
 
   Scenario: Check that user able to open Special Pricing page and correct header title is displayed
     And Special Pricing page is opened.
-    Then All Special Pricing title is displayed on Special Pricing page.
+    Then Price Agreements title is displayed on Special Pricing page.
 
   Scenario Outline: Check that New Local List price TAB is displayed with correct document for each EMEA account
     And Account management page is opened.

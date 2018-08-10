@@ -6,7 +6,7 @@ Feature: Return creation tests
 
   Scenario: Check that user able to open Returns page and correct header title is displayed
     And Returns page is opened.
-    Then All Cases title is displayed on Returns page.
+    Then Cases title is displayed on Returns page.
 
   Scenario Outline: Check that user is able to create returns in NA, EMEA, ASIA regions
     And Account management page is opened.
@@ -41,7 +41,7 @@ Feature: Return creation tests
     And Submit Terms and Conditions for Sale of Products and Services pop-up on Return Creation 4 page.
     Then Request Submission Successful pop-up is displayed on Return Creation 4 page.
     When Return is created on Return Creation 4 page.
-    Then All Cases title is displayed on Returns page.
+    Then Cases title is displayed on Returns page.
 
     Examples:
       | region        |
@@ -77,7 +77,7 @@ Feature: Return creation tests
     And Submit Terms and Conditions for Sale of Products and Services pop-up on Return Creation 4 page.
     Then Request Submission Successful pop-up is displayed on Return Creation 4 page.
     When Return is created on Return Creation 4 page.
-    Then All Cases title is displayed on Returns page.
+    Then Cases title is displayed on Returns page.
 
     Examples:
       | warning_message                                                                           | catalogNoList                  |
@@ -113,4 +113,4 @@ Feature: Return creation tests
     And Submit Terms and Conditions for Sale of Products and Services pop-up on Return Creation 4 page.
     Then Request Submission Successful pop-up is displayed on Return Creation 4 page.
     When Return is created on Return Creation 4 page.
-    Then All Cases title is displayed on Returns page.
+    Then Cases title is displayed on Returns page.

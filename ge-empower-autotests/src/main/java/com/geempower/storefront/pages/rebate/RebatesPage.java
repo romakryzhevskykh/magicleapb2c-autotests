@@ -22,7 +22,7 @@ public class RebatesPage extends StorefrontBasePage {
 
     @Step("Get Rebates title")
     public String getRebatesTitle() {
-        return $(ALL_REBATES_TITLE_XPATH).getText();
+        return $(REBATES_TITLE_XPATH).getText();
     }
 
     @Step("Click on Create rebate button.")

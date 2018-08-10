@@ -45,6 +45,8 @@ public class PreconditionStepDefs extends AbstractStepDefs {
     private ProfilePage profilePage;
     @Autowired
     private PriceAndAvailabilityPage priceAndAvailabilityPage;
+    @Autowired
+    private NotificationCenterPage notificationCenterPage;
 
 
     @Given("^User is logged in to Storefront.$")
@@ -174,5 +176,13 @@ public class PreconditionStepDefs extends AbstractStepDefs {
             dashboardPage.open();
         }
         dashboardPage.closeWeAreNowAbbPopUpIfPresent();
+    }
+
+    @And("^Notification Center page is opened.$")
+    public void NotificationCenterPageIsOpened() {
+        notificationCenterPage.waitUntilPageIsFullyLoaded();
+        if (!notificationCenterPage.isOpened()) {
+            notificationCenterPage.open();
+        }
     }
 }
