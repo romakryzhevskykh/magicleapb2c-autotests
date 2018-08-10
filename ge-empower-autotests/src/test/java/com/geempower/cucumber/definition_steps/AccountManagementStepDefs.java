@@ -119,7 +119,7 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
         accountManagementPage.searchAnAccountOnAccountManagementPage(accountNo);
     }
 
-    @And("^Search Account From Add Account Pop-Up.$")
+    @And("^Search account from Add Account pop-up.$")
     public void searchAccountFromAddAccPopUp() {
         String accountNo = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NO);
         accountManagementPage.searchAccountByAccountName(accountNo);

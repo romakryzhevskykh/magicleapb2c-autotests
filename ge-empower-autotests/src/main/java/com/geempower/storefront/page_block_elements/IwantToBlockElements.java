@@ -33,7 +33,7 @@ public class IwantToBlockElements {
     public final static String ALL_ACCOUNT_NO_IN_ACCOUNTS_TABLE_XPATH = "//*[@id='activeRequestsTableForCustomer']/tbody/tr/td[2]";
     public final static String ALL_SO_CODES_IN_PENDING_SO_CODES_TABLE_XPATH = "//*[@id='pending-salesoffice']//tr[@class='odd']/td[2]";
     public final static String SALES_OFFICE_CODE_TABLE_XPATH = "//table[contains (@class, 'approved-sales-office-request-table')]";
-    public final static String ALL_APPROVED_SALES_OFFICE_CODE_XPATH = "//*[@id='approved-salesofficecode']//tr[contains(@class,'odd')]/td[2]";
+    public final static String ALL_APPROVED_SALES_OFFICE_CODE_XPATH = "//*[@id='approved-salesofficecode']//td[@class='account-number-col account-number-col']";
     public final static String ALL_APPROVED_SALES_ENGINEER_CODES_XPATH = "//*[@id='approved-salesengineer']//tr[contains(@class,'odd')]/td[2]";
     private final static String APPROVE_PENDING_ACCOUNTS_SECTION_XPATH = "//div[@class='account-detail-desc-wrapper manageuser-accordion']//a[@href='#pending-panel']";
     public final static String APPROVE_PENDING_ACCOUNTS_SECTION_TITLE_XPATH = APPROVE_PENDING_ACCOUNTS_SECTION_XPATH + "/span";

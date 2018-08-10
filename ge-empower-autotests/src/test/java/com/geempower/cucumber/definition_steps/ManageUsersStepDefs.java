@@ -442,9 +442,14 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         iWantToBlock.preventAppearingAccountInTheAllAccountsTab(account);
     }
 
-    @And("^Prevent appearing of SO code (.*) in SO Codes tab.$")
-    public void preventAppearingOfSoCodeInSOCodesTab(String soCode) {
-        iWantToBlock.preventAppearingOfSoCodeInSOCodesTab(soCode);
+    @And("^Prevent appearing of SO code in SO Codes tab.$")
+    public void preventAppearingOfSoCodeInSOCodesTab() {
+        iWantToBlock.preventAppearingOfSoCodeInSOCodesTab();
+    }
+
+    @And("^Prevent appearing of SE code in SE Codes tab.$")
+    public void preventAppearingOfSeCodeInSECodesTab() {
+        iWantToBlock.preventAppearingOfSeCodeInSECodesTab();
     }
 
     @Then("^Account from Add Account pop-up is displayed in the All Accounts tab.$")
