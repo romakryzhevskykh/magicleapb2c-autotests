@@ -235,7 +235,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then Appropriate user with appropriate <email> email is displayed in the users list.
     When Clicks on the user name in the table.
     And Expand Modify an Account tab in I Want To Block.
-    Then Account <account> is not displayed in the All Accounts tab.
+    Then Prevent appearing <account> in the All Accounts tab.
     When Click on Add account button in User Detail block.
     Then Add Account pop-up is displayed on Manage Users page.
     And Select EMEA in the Region field in the Add Account pop-up.
