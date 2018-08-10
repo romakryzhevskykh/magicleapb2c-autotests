@@ -29,7 +29,6 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     And Expand Modify an Account tab in I Want To Block.
     When Click on Sales Office Codes tab In Modify an Account Tab.
     And Prevent appearing of SO code in SO Codes tab.
-
     When Click on Add account button in User Detail block.
     Then Add Account pop-up is displayed on Manage Users page.
     And Select <region> in the Region field in the Add Account pop-up.
@@ -55,8 +54,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then Remove Account pop-up is displayed on I Want To Block in SO codes tab.
     And Click on Remove button in the Remove Account pop-up on I Want To Block in SO codes tab.
     Then No data available in table title is displayed in Sales Office Code table.
-
-
+    
     Examples:
       | email                     | soCode | region        |
       | roman.kryzhevskykh@ge.com | USG2   | North_America |
@@ -72,7 +70,6 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     When Click on Sales Engineer Codes tab In Modify an Account Tab.
     And Prevent appearing of SE code in SE Codes tab.
     Then No data available in table title is displayed in Sales Engineer Code table.
-
     And Refresh page.
     And Focus on browser.
     When Admin opens Users tab.
@@ -275,7 +272,6 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     When Click on Sales Office Codes tab In Modify an Account Tab.
     And Prevent appearing of SO code in SO Codes tab.
     Then No data available in table title is displayed in Sales Office Code table.
-
     And Refresh page.
     And Focus on browser.
     Given Switch to Storefront as internalUser.
@@ -328,7 +324,6 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     When Click on Sales Office Codes tab In Modify an Account Tab.
     And Prevent appearing of SO code in SO Codes tab.
     Then No data available in table title is displayed in Sales Office Code table.
-
     And Refresh page.
     And Focus on browser.
     Given Switch to Storefront as internalUser.
