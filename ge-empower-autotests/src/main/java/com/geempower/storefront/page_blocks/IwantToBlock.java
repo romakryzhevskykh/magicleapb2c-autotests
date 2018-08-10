@@ -379,7 +379,7 @@ public class IwantToBlock extends UIComponent {
         }
     }
 
-    @Step("Prevent Appearing Of Se Code In SO Codes Tab.")
+    @Step("Prevent Appearing Of Se Code In SE Codes Tab.")
     public void preventAppearingOfSeCodeInSECodesTab() {
         waitUntilPageIsFullyLoaded();
         if (!isDisplayed(EMPTY_SE_CODES_TABLE_XPATH)) {
