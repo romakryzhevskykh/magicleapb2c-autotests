@@ -1,5 +1,7 @@
 package com.geempower.cucumber.definition_steps;
 
+import com.geempower.helpers.user_engine.StorefrontUserRoles;
+import com.geempower.hybris.hac.pages.HacLoginPage;
 import com.geempower.storefront.page_blocks.HeaderBlock;
 import com.geempower.storefront.pages.*;
 import com.geempower.storefront.pages.order.OrdersPage;
@@ -14,7 +16,7 @@ public class PreconditionStepDefs extends AbstractStepDefs {
     @Autowired
     private HeaderBlock headerBlock;
     @Autowired
-    private LoginPage loginPage;
+    private com.geempower.storefront.pages.LoginPage loginPage;
     @Autowired
     private SsoLoginPage ssoLoginPage;
     @Autowired
@@ -47,7 +49,8 @@ public class PreconditionStepDefs extends AbstractStepDefs {
     private PriceAndAvailabilityPage priceAndAvailabilityPage;
     @Autowired
     private NotificationCenterPage notificationCenterPage;
-
+    @Autowired
+    private HacLoginPage hacLoginPage;
 
     @Given("^User is logged in to Storefront.$")
     public void userIsLoggedInToStorefront() {
@@ -60,6 +63,18 @@ public class PreconditionStepDefs extends AbstractStepDefs {
             } else if (ssoLoginPage.isOpened()) {
                 ssoLoginPage.loginToStorefront(userSessions.getActiveUserSession());
             }
+        }
+    }
+
+    @Given("^Admin is logged in to HAC.$")
+    public void adminIsLoggedInToHAC() {
+        hacLoginPage.open();
+        if (ssoLoginPage.isOpened())
+            ssoLoginPage.loginToStorefront(userSessions.getUsersList().stream().filter(user -> user.getUserRole().equals(StorefrontUserRoles.EMPOWERADMIN)).findAny().get());
+        hacLoginPage.open();
+        hacLoginPage.waitUntilPageIsFullyLoaded();
+        if (hacLoginPage.isOpened()) {
+            hacLoginPage.loginToHac(userSessions.getActiveUserSession());
         }
     }
 
