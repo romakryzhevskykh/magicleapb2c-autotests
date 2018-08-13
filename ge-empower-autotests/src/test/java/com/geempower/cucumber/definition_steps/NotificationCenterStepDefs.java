@@ -1,8 +1,6 @@
 package com.geempower.cucumber.definition_steps;
 
-import com.geempower.helpers.ThreadVarsHashMap;
 import com.geempower.storefront.pages.NotificationCenterPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -46,20 +44,20 @@ public class NotificationCenterStepDefs extends AbstractStepDefs {
         assertTrue(notificationCenterPage.getNotificationPreferencesSectionHeader().equals(sectionHeader));
     }
 
-    @When("^Admin switches the Lessonly toggle to another state.$")
-    public void adminSwitchesTheLessonlyToggle() {
-        String currentTogglePosition = threadVarsHashMap.getString(TestKeyword.LESSONLY_TOGGLE_POSITION);
-        notificationCenterPage.switchTheLessonlyToggle();
+    @When("^Admin switches the empowerU toggle to another state.$")
+    public void adminSwitchesTheempowerUToggle() {
+        String currentTogglePosition = threadVarsHashMap.getString(TestKeyword.EMPOWER_U_TOGGLE_POSITION);
+        notificationCenterPage.switchTheEmpowerUToggle();
         if (currentTogglePosition.equals("ON")) {
-            threadVarsHashMap.replace(TestKeyword.LESSONLY_TOGGLE_POSITION, "OFF");
+            threadVarsHashMap.replace(TestKeyword.EMPOWER_U_TOGGLE_POSITION, "OFF");
         } else if (currentTogglePosition.equals("OFF")) {
-            threadVarsHashMap.replace(TestKeyword.LESSONLY_TOGGLE_POSITION, "ON");
+            threadVarsHashMap.replace(TestKeyword.EMPOWER_U_TOGGLE_POSITION, "ON");
         }
     }
 
-    @And("^Current Lessonly toggle position is saved to the threadVarsHashMap.$")
-    public void currentLessonlyTogglePositionIsSavedToTheThreadVarsHashMap() {
-        threadVarsHashMap.replace(TestKeyword.LESSONLY_TOGGLE_POSITION, notificationCenterPage.getLessonlyTogglePosition());
+    @And("^Current empowerU toggle position is saved to the threadVarsHashMap.$")
+    public void currentEmpowerUTogglePositionIsSavedToTheThreadVarsHashMap() {
+        threadVarsHashMap.replace(TestKeyword.EMPOWER_U_TOGGLE_POSITION, notificationCenterPage.getEmpowerUTogglePosition());
     }
 
     @And("^Click on Save notification preferences button.$")
@@ -67,29 +65,29 @@ public class NotificationCenterStepDefs extends AbstractStepDefs {
         notificationCenterPage.saveNotificationPreferences();
     }
 
-    @Then("^Lessonly toggle is switched to previously chosen state.$")
-    public void lessonlyToggleIsSwitchedToPreviouslyChosenState() {
-        assertEquals(threadVarsHashMap.getString(TestKeyword.LESSONLY_TOGGLE_POSITION), notificationCenterPage.getLessonlyTogglePosition());
+    @Then("^empowerU toggle is switched to previously chosen state.$")
+    public void empowerUToggleIsSwitchedToPreviouslyChosenState() {
+        assertEquals(threadVarsHashMap.getString(TestKeyword.EMPOWER_U_TOGGLE_POSITION), notificationCenterPage.getEmpowerUTogglePosition());
     }
 
-    @And("^Current Status Page toggle position is saved to the threadVarsHashMap.$")
-    public void currentStatusPageTogglePositionIsSavedToTheThreadVarsHashMap() {
-        threadVarsHashMap.replace(TestKeyword.STATUS_PAGE_TOGGLE_POSITION, notificationCenterPage.getStatusPageTogglePosition());
+    @And("^Current System Status toggle position is saved to the threadVarsHashMap.$")
+    public void currentSystemStatusTogglePositionIsSavedToTheThreadVarsHashMap() {
+        threadVarsHashMap.replace(TestKeyword.SYSTEM_STATUS_TOGGLE_POSITION, notificationCenterPage.getSystemStatusTogglePosition());
     }
 
-    @When("^Admin switches the Status Page toggle to another state.$")
-    public void adminSwitchesTheStatusPageToggleToAnotherState() {
-        String currentTogglePosition = threadVarsHashMap.getString(TestKeyword.STATUS_PAGE_TOGGLE_POSITION);
-        notificationCenterPage.switchTheStatusPageToggle();
+    @When("^Admin switches the System Status toggle to another state.$")
+    public void adminSwitchesTheSystemStatusToggleToAnotherState() {
+        String currentTogglePosition = threadVarsHashMap.getString(TestKeyword.SYSTEM_STATUS_TOGGLE_POSITION);
+        notificationCenterPage.switchTheSystemStatusToggle();
         if (currentTogglePosition.equals("ON")) {
-            threadVarsHashMap.replace(TestKeyword.STATUS_PAGE_TOGGLE_POSITION, "OFF");
+            threadVarsHashMap.replace(TestKeyword.SYSTEM_STATUS_TOGGLE_POSITION, "OFF");
         } else if (currentTogglePosition.equals("OFF")) {
-            threadVarsHashMap.replace(TestKeyword.STATUS_PAGE_TOGGLE_POSITION, "ON");
+            threadVarsHashMap.replace(TestKeyword.SYSTEM_STATUS_TOGGLE_POSITION, "ON");
         }
     }
 
-    @Then("^Status Page toggle is switched to previously chosen state.$")
-    public void statusPageToggleIsSwitchedToPreviouslyChosenState() {
-        assertEquals(threadVarsHashMap.getString(TestKeyword.STATUS_PAGE_TOGGLE_POSITION), notificationCenterPage.getStatusPageTogglePosition());
+    @Then("^System Status toggle is switched to previously chosen state.$")
+    public void systemStatusToggleIsSwitchedToPreviouslyChosenState() {
+        assertEquals(threadVarsHashMap.getString(TestKeyword.SYSTEM_STATUS_TOGGLE_POSITION), notificationCenterPage.getSystemStatusTogglePosition());
     }
 }
