@@ -219,10 +219,10 @@ public class AccountManagementPage extends StorefrontBasePage {
     @Step("Remove account by account number.")
     public void removeAccountByAccountNo(String account){
         waitUntilPageIsFullyLoaded();
-        $(REMOVE_ACCOUNT_ACTION_FOR_APPROPRIATE_ACCOUNT_THREE_DOT_ICON_XPATH, account).click();
-        $(THREE_DOT_ICON_REMOVE_ACCOUNT_XPATH, account).click();
+        click(REMOVE_ACCOUNT_ACTION_FOR_APPROPRIATE_ACCOUNT_THREE_DOT_ICON_XPATH, account);
+        click(THREE_DOT_ICON_REMOVE_ACCOUNT_XPATH, account);
         waitUntilPageIsFullyLoaded();
-        $(CONFIRMATION_FOR_REMOVE_ACTIVE_ACCOUNT_BUTTON_XPATH).click();
+        click(CONFIRMATION_FOR_REMOVE_ACTIVE_ACCOUNT_BUTTON_XPATH);
         waitUntilPageIsFullyLoaded();
     }
 }

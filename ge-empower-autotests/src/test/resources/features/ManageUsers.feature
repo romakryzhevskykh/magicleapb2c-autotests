@@ -18,7 +18,6 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
       | email                    |
       | externaluser1@zaelab.com |
 
-
   Scenario Outline: Check that admin is able to add/remove SO code to the internal user
     And Refresh page.
     When Admin opens Users tab.
@@ -54,7 +53,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then Remove Account pop-up is displayed on I Want To Block in SO codes tab.
     And Click on Remove button in the Remove Account pop-up on I Want To Block in SO codes tab.
     Then No data available in table title is displayed in Sales Office Code table.
-    
+
     Examples:
       | email                     | soCode | region        |
       | roman.kryzhevskykh@ge.com | USG2   | North_America |

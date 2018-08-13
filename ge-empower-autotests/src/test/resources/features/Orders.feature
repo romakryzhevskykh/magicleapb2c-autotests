@@ -11,7 +11,7 @@ Feature: Some actions on Orders page
   Scenario: Check that Invoice details pop-up is appeared and displayed correctly
     And Account management page is opened.
     When Choose Latin_America region.
-    And Search random account for chosen region.
+    And Select account 1000839.
     And Click on chosen account.
     When Click on Skip button.
     And Orders page is opened.
