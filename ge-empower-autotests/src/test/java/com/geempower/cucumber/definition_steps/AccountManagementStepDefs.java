@@ -15,8 +15,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class AccountManagementStepDefs extends AbstractStepDefs {
     @Autowired
@@ -188,5 +187,36 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
                 }
             });
         }
+    }
+
+    @And("^First account is stored to the threadVarsHashMap.$")
+    public void firstAccountIsStoredToTheThreadVarsHashMap() {
+        threadVarsHashMap.put(TestKeyword.FIRST_ACCOUNT_ON_APPROVED_ACCOUNTS_PAGE, accountManagementPage.getFirstAccountFullInfo());
+    }
+
+    @When("^User marks first account as favorite on approved accounts tab.$")
+    public void userMarksFirstAccountAsFavoriteOnApprovedAccountsTab() {
+        accountManagementPage.markAppropriateAccountAsFavorite(threadVarsHashMap.getString(TestKeyword.FIRST_ACCOUNT_ON_APPROVED_ACCOUNTS_PAGE));
+    }
+
+    @And("^User switch to Favorites Accounts tab on Account management page.$")
+    public void userSwitchToFavoritesAccountsTabOnAccountManagementPage() {
+        accountManagementPage.switchToFavoritesAccountsTab();
+    }
+
+    @Then("^Favorite account is present on the Favorites Accounts table.$")
+    public void favoriteAccountIsPresentOnTheFavoritesAccountsTable() {
+        assertTrue(accountManagementPage.getAllFavoriteAccounts().anyMatch(favAccount ->
+                favAccount.getAttribute("href").contains(threadVarsHashMap.getString(TestKeyword.FIRST_ACCOUNT_ON_APPROVED_ACCOUNTS_PAGE))));
+    }
+
+    @When("^User unmarks the account as favorite on favorites accounts tab.$")
+    public void userUnmarksTheAccountAsFavoriteOnFavoritesAccountsTab() {
+        accountManagementPage.unmarkAsFavoriteAppropriateAccountOnFavoritesTab(threadVarsHashMap.getString(TestKeyword.FIRST_ACCOUNT_ON_APPROVED_ACCOUNTS_PAGE));
+    }
+
+    @Then("^The account is not displayed more on the table.$")
+    public void theAccountIsNotDisplayedMoreOnTheTable() {
+        assertFalse(accountManagementPage.isFavoriteAccountDisplayedOnFavoritesTab(threadVarsHashMap.getString(TestKeyword.FIRST_ACCOUNT_ON_APPROVED_ACCOUNTS_PAGE)));
     }
 }

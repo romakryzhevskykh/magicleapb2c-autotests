@@ -37,8 +37,8 @@ public class AccountManagementPage extends StorefrontBasePage {
     }
 
     @Step("Close we are now ABB pop-up.")
-    public void closeWeAreNowAbbPopUpIfPresent(){
-        if(isDisplayed(WE_ARE_NOW_ABB_POP_UP_XPATH)){
+    public void closeWeAreNowAbbPopUpIfPresent() {
+        if (isDisplayed(WE_ARE_NOW_ABB_POP_UP_XPATH)) {
             click(WE_ARE_NOW_ABB_OK_BUTTON_XPATH);
             waitUntilPageIsFullyLoaded();
         }
@@ -158,6 +158,12 @@ public class AccountManagementPage extends StorefrontBasePage {
         return $(ACCOUNT_NAME_VALUE_IN_TABLE_XPATH).getText();
     }
 
+    @Step("Get Full Account Number with divisions In The Approved Accounts Table.")
+    public String getFirstAccountFullInfo() {
+        waitUntilPageIsFullyLoaded();
+        return  $(FULL_INFO_OF_FIRST_ACCOUNT_APPROVED_ACC_TAB_XPATH).getAttribute("href").split("/select-account/")[1];
+    }
+
     @Step("Get No Data Title From Pending Accounts Table.")
     public String getNoDataTitleFromPendingAccountsTable() {
         waitUntilPageIsFullyLoaded();
@@ -168,7 +174,12 @@ public class AccountManagementPage extends StorefrontBasePage {
     public void switchToApprovedAccountsTab() {
         waitUntilPageIsFullyLoaded();
         click(APPROVED_ACCOUNTS_TAB_XPATH);
+    }
+
+    @Step("Switch To Favorites Accounts Tab.")
+    public void switchToFavoritesAccountsTab() {
         waitUntilPageIsFullyLoaded();
+        click(FAVORITES_ACCOUNTS_TAB_XPATH);
     }
 
     @Step("Get All Approved Accounts In Approved Accounts Tab.")
@@ -217,12 +228,33 @@ public class AccountManagementPage extends StorefrontBasePage {
     }
 
     @Step("Remove account by account number.")
-    public void removeAccountByAccountNo(String account){
+    public void removeAccountByAccountNo(String account) {
         waitUntilPageIsFullyLoaded();
         $(REMOVE_ACCOUNT_ACTION_FOR_APPROPRIATE_ACCOUNT_THREE_DOT_ICON_XPATH, account).click();
         $(THREE_DOT_ICON_REMOVE_ACCOUNT_XPATH, account).click();
         waitUntilPageIsFullyLoaded();
         $(CONFIRMATION_FOR_REMOVE_ACTIVE_ACCOUNT_BUTTON_XPATH).click();
         waitUntilPageIsFullyLoaded();
+    }
+
+    @Step("Mark appropriate account as favourite.")
+    public void markAppropriateAccountAsFavorite(String accountDetails) {
+        click(STAR_ICON_FOR_APPROPRIATE_ACCOUNT_ON_APPROVED_ACCOUNT_TAB_XPATH, accountDetails);
+    }
+
+    @Step("Get All favorites accounts.")
+    public Stream<WebElement> getAllFavoriteAccounts() {
+        return $$(LIST_OF_FAVORITES_ACCOUNTS_FULL_INFO_XPATH).stream();
+    }
+
+    @Step("Unmark as favorite appropriate account on the favorites tab.")
+    public void unmarkAsFavoriteAppropriateAccountOnFavoritesTab(String favAccount) {
+        waitUntilPageIsFullyLoaded();
+        click(STAR_ICON_FOR_APPROPRIATE_ACCOUNT_ON_FAVORITES_TAB_XPATH, favAccount);
+    }
+
+    @Step("Check that favorite account is displayed on favorites tab.")
+    public boolean isFavoriteAccountDisplayedOnFavoritesTab(String favAccount) {
+        return isDisplayed(STAR_ICON_FOR_APPROPRIATE_ACCOUNT_ON_FAVORITES_TAB_XPATH, favAccount);
     }
 }
