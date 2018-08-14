@@ -25,11 +25,6 @@ public class UserSwitchStepDefs {
         webDriverPool.setDriverActive(StorefrontUserRoles.EMPOWERADMIN);
     }
 
-    @Given("Switch to HAC as admin.")
-    public void switchToHACAsAdmin() {
-        webDriverPool.setDriverActive(HACUserRoles.ADMIN);
-    }
-
     @Given("Switch to HAC (.*) as admin.")
     public void switchToHACF1AsAdmin(String node) {
         templateHAC.setHacActiveNode(HacActiveNode.valueOf(node));
