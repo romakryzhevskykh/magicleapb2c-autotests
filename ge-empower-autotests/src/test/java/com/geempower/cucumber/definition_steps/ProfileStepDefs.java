@@ -1,7 +1,6 @@
 package com.geempower.cucumber.definition_steps;
 
 import com.geempower.storefront.pages.ProfilePage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
