@@ -13,7 +13,7 @@ Feature: Some actions on Saved Items page
   Scenario Outline: Check that user is able to add new List.
     And Account management page is opened.
     When Choose North_America region.
-    And Select account 1318501.
+    And Select account 722751G.
     And Click on chosen account.
     And Saved Items page is opened.
     When User clicks on the Add New List button on the All Items page.
