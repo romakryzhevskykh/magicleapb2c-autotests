@@ -34,4 +34,10 @@ Feature: Some actions on Account Management page as external user
       | title                                                                         |
       | Optional:  Input a Pre Authorization Code to view the Pre Authorized accounts |
 
-
+  Scenario: Check that Help button works correctly on the Account Management page.
+    And Help button is displayed.
+    When User clicks on Help button.
+    And Click on Sign in with your GE SSO Account button on Lessonly page.
+    Then Check that Account management page is opened.
+    When User clicks on Help button.
+    Then Navigating Accounts tip is displayed on Lessonly widget.

@@ -250,4 +250,9 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
     public void tableWithAccountsDisappears() {
         assertFalse(accountManagementPage.isPreAuthAccountsTableDisplayed());
     }
+
+    @Then("^Check that Account management page is opened.$")
+    public void checkThatAccountManagementPageIsOpened() {
+        assertTrue(accountManagementPage.isOpened());
+    }
 }
