@@ -1,10 +1,12 @@
 package com.geempower.storefront.pages;
 
+import com.geempower.helpers.Utils;
 import com.geempower.helpers.models.Region;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -19,6 +21,9 @@ import static com.geempower.storefront.page_elements.AccountManagementPageElemen
 public class AccountManagementPage extends StorefrontBasePage {
 
     private final String pageUri = "my-account/manage-accounts";
+
+    @Autowired
+    private Utils utils;
 
     @Override
     public String getPageUrl() {
@@ -161,7 +166,7 @@ public class AccountManagementPage extends StorefrontBasePage {
     @Step("Get Full Account Number with divisions In The Approved Accounts Table.")
     public String getFirstAccountFullInfo() {
         waitUntilPageIsFullyLoaded();
-        return  $(FULL_INFO_OF_FIRST_ACCOUNT_APPROVED_ACC_TAB_XPATH).getAttribute("href").split("/select-account/")[1];
+        return $(FULL_INFO_OF_FIRST_ACCOUNT_APPROVED_ACC_TAB_XPATH).getAttribute("href").split("/select-account/")[1];
     }
 
     @Step("Get No Data Title From Pending Accounts Table.")
@@ -256,5 +261,37 @@ public class AccountManagementPage extends StorefrontBasePage {
     @Step("Check that favorite account is displayed on favorites tab.")
     public boolean isFavoriteAccountDisplayedOnFavoritesTab(String favAccount) {
         return isDisplayed(STAR_ICON_FOR_APPROPRIATE_ACCOUNT_ON_FAVORITES_TAB_XPATH, favAccount);
+    }
+
+    @Step("Get Pre Auth Code Section Title.")
+    public String getPreAuthCodeSectionTitle() {
+        waitUntilPageIsFullyLoaded();
+        return $(PRE_AUTHORIZATION_CODE_SECTION_FIRST_PART_TITLE_XPATH).getText();
+    }
+
+    @Step("Set Data To Pre Auth Field.")
+    public void setDataToPreAuthField() {
+        $(PRE_AUTH_INPUT_XPATH).clear();
+        $(PRE_AUTH_INPUT_XPATH).sendKeys(utils.getLocalDateTimeStamp());
+    }
+
+    @Step("Click On Go Pre Auth Code Button.")
+    public void clickOnGoPreAuthCodeButton() {
+        click(PRE_AUTH_GO_BUTTON_XPATH);
+    }
+
+    @Step("Is Pre Auth Accounts Table Displayed.")
+    public boolean isPreAuthAccountsTableDisplayed() {
+        return isDisplayed(PRE_AUTH_ACCOUNTS_TABLE_XPATH);
+    }
+
+    @Step("Is Pre Auth Accounts Table Empty.")
+    public boolean isPreAuthAccountsTableEmpty() {
+        return $(PRE_AUTH_ACCOUNTS_TABLE_BODY_XPATH).getText().length() == 0;
+    }
+
+    @Step("Click On Send Pre Auth Code.")
+    public void clickOnSendPreAuthCode() {
+        click(PRE_AUTH_SEND_REQUEST_BUTTON_XPATH);
     }
 }
