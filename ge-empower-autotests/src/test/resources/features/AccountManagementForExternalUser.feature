@@ -41,5 +41,3 @@ Feature: Some actions on Account Management page as external user
     Then Check that Account management page is opened.
     When User clicks on Help button.
     Then Navigating Accounts tip is displayed on Lessonly widget.
-
-
