@@ -10,6 +10,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static com.geempower.cucumber.definition_steps.TestKeyword.GE_ORDER_NO;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -98,5 +99,13 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     @And("^User closes BOL and Tracking Numbers pop-up.$")
     public void userClosesBOLAndTrackingNumbersPopUp() {
         orderDetailsPage.closeBOLPopUp();
+    }
+
+    @When("^User Selects random catalog No checkbox on Orders Details page.$")
+    public void userSelectsCatalogNoCheckboxOnOrdersDetailsPage() {
+        long orderNo = Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO));
+        String catalogNo = String.valueOf(orderDetailsPage.selectRandomCatalogNo());
+        int quantity = Integer.parseInt(orderDetailsPage.getQuantityOfSelectedCatalogNoCheckbox(catalogNo));
+        orderManager.createOrderInstance(orderNo, catalogNo, quantity);
     }
 }

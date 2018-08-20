@@ -88,4 +88,14 @@ public class OrdersPage extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
         click(ORDER_LINK_BY_ORDER_NO_XPATH, orderNo);
     }
+
+    @Step("User click on random order No.")
+    public StringBuilder userClickOnRandomOrderNo() {
+        StringBuilder orderNo = new StringBuilder("");
+        $$(LIST_OF_ORDER_NO_LINKS_XPATH).stream().findAny().ifPresent(webElement -> {
+            orderNo.append(webElement.getText());
+            click(webElement);
+        });
+        return orderNo;
+    }
 }
