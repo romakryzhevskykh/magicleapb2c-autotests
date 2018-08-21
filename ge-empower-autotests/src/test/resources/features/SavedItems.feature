@@ -13,7 +13,7 @@ Feature: Some actions on Saved Items page
   Scenario Outline: Check that user is able to add new List.
     And Account management page is opened.
     When Choose North_America region.
-    And Select account 722751G.
+    And Select account 2244411.
     And Click on chosen account.
     And Saved Items page is opened.
     When User clicks on the Add New List button on the All Items page.
@@ -38,7 +38,7 @@ Feature: Some actions on Saved Items page
 
     Examples:
       | productNo | agreementNo |
-      | thql1120  | 45000220    |
+      | thql1120  | 45000514    |
 
   Scenario: Check that Help button works correctly on the Saved Items page.
     And Saved Items page is opened.
