@@ -52,9 +52,9 @@ public class NotificationCenterPage extends StorefrontBasePage {
     }
 
     @Step("Get Lessonly Toggle Position")
-    public String getLessonlyTogglePosition() {
+    public String getEmpowerUTogglePosition() {
         String togglePosition;
-        if ($(LESSONLY_TOGGLE_XPATH).getCssValue("background-color").equals("rgba(59, 115, 185, 1)")) {
+        if ($(EMPOWER_U_TOGGLE_XPATH).getCssValue("background-color").equals("rgba(59, 115, 185, 1)")) {
             togglePosition = "ON";
         } else {
             togglePosition = "OFF";
@@ -62,9 +62,9 @@ public class NotificationCenterPage extends StorefrontBasePage {
         return togglePosition;
     }
 
-    @Step("Switch The Lessonly Toggle")
-    public void switchTheLessonlyToggle() {
-        click(LESSONLY_TOGGLE_XPATH);
+    @Step("Switch The empowerU Toggle")
+    public void switchTheEmpowerUToggle() {
+        click(EMPOWER_U_TOGGLE_XPATH);
     }
 
     @Step("Save Notification Preferences")
@@ -72,10 +72,10 @@ public class NotificationCenterPage extends StorefrontBasePage {
         click(SAVE_NOTIFICATION_PREFERENCES_BUTTON_XPATH);
     }
 
-    @Step("Get Status Page Toggle Position")
-    public String getStatusPageTogglePosition() {
+    @Step("Get System status Toggle Position")
+    public String getSystemStatusTogglePosition() {
         String togglePosition;
-        if ($(STATUS_PAGE_TOGGLE_XPATH).getCssValue("background-color").equals("rgba(59, 115, 185, 1)")) {
+        if ($(SYSTEM_STATUS_TOGGLE_XPATH).getCssValue("background-color").equals("rgba(59, 115, 185, 1)")) {
             togglePosition = "ON";
         } else {
             togglePosition = "OFF";
@@ -83,8 +83,8 @@ public class NotificationCenterPage extends StorefrontBasePage {
         return togglePosition;
     }
 
-    @Step("Switch The Status Page Toggle")
-    public void switchTheStatusPageToggle() {
-        click(STATUS_PAGE_TOGGLE_XPATH);
+    @Step("Switch The System status Toggle")
+    public void switchTheSystemStatusToggle() {
+        click(SYSTEM_STATUS_TOGGLE_XPATH);
     }
 }

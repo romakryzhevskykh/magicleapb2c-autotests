@@ -1,7 +1,10 @@
 package com.geempower.cucumber.definition_steps;
 
+import com.geempower.helpers.user_engine.HACUserRoles;
 import com.geempower.helpers.user_engine.StorefrontUserRoles;
 import com.geempower.helpers.web_engine.WebDriverSessions;
+import com.geempower.hybris.hac.models.HacActiveNode;
+import com.geempower.hybris.hac.models.TemplateHAC;
 import cucumber.api.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -9,11 +12,8 @@ public class UserSwitchStepDefs {
 
     @Autowired
     protected WebDriverSessions webDriverPool;
-
-//    @Given("Switch to Backoffice Admin user.")
-//    public void switchToBackofficeAdmin() {
-//        webDriverPool.setDriverActive(BackofficeUserRoles.ADMIN);
-//    }
+    @Autowired
+    private TemplateHAC templateHAC;
 
     @Given("Switch to Storefront as externalUser1.")
     public void switchToStorefrontAsExternalUser1() {
@@ -23,6 +23,12 @@ public class UserSwitchStepDefs {
     @Given("Switch to Storefront as admin.")
     public void switchToStorefrontAsAdmin() {
         webDriverPool.setDriverActive(StorefrontUserRoles.EMPOWERADMIN);
+    }
+
+    @Given("Switch to HAC (.*) as admin.")
+    public void switchToHACF1AsAdmin(String node) {
+        templateHAC.setHacActiveNode(HacActiveNode.valueOf(node));
+        webDriverPool.setDriverActive(HACUserRoles.ADMIN);
     }
 
     @Given("Switch to Storefront as smAdmin.")
@@ -44,11 +50,6 @@ public class UserSwitchStepDefs {
     public void switchToStorefrontAsRegionalView() {
         webDriverPool.setDriverActive(StorefrontUserRoles.REGIONALVIEW);
     }
-
-    //    @Given("Switch to Import cockpit import manager role.")
-//    public void switchToImportCockpitAsImportManager() {
-//        webDriverPool.setDriverActive(ImportCockpitUserRoles.IMPORT_MANAGER);
-//    }
 
     @Given("Switch to Storefront as testRoleUser.")
     public void switchToStorefrontAsTestRoleUser() {

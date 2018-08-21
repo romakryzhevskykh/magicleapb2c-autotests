@@ -15,8 +15,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class AccountManagementStepDefs extends AbstractStepDefs {
     @Autowired
@@ -188,5 +187,72 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
                 }
             });
         }
+    }
+
+    @And("^First account is stored to the threadVarsHashMap.$")
+    public void firstAccountIsStoredToTheThreadVarsHashMap() {
+        threadVarsHashMap.put(TestKeyword.FIRST_ACCOUNT_ON_APPROVED_ACCOUNTS_PAGE, accountManagementPage.getFirstAccountFullInfo());
+    }
+
+    @When("^User marks first account as favorite on approved accounts tab.$")
+    public void userMarksFirstAccountAsFavoriteOnApprovedAccountsTab() {
+        accountManagementPage.markAppropriateAccountAsFavorite(threadVarsHashMap.getString(TestKeyword.FIRST_ACCOUNT_ON_APPROVED_ACCOUNTS_PAGE));
+    }
+
+    @And("^User switch to Favorites Accounts tab on Account management page.$")
+    public void userSwitchToFavoritesAccountsTabOnAccountManagementPage() {
+        accountManagementPage.switchToFavoritesAccountsTab();
+    }
+
+    @Then("^Favorite account is present on the Favorites Accounts table.$")
+    public void favoriteAccountIsPresentOnTheFavoritesAccountsTable() {
+        assertTrue(accountManagementPage.getAllFavoriteAccounts().anyMatch(favAccount ->
+                favAccount.getAttribute("href").contains(threadVarsHashMap.getString(TestKeyword.FIRST_ACCOUNT_ON_APPROVED_ACCOUNTS_PAGE))));
+    }
+
+    @When("^User unmarks the account as favorite on favorites accounts tab.$")
+    public void userUnmarksTheAccountAsFavoriteOnFavoritesAccountsTab() {
+        accountManagementPage.unmarkAsFavoriteAppropriateAccountOnFavoritesTab(threadVarsHashMap.getString(TestKeyword.FIRST_ACCOUNT_ON_APPROVED_ACCOUNTS_PAGE));
+    }
+
+    @Then("^The account is not displayed more on the table.$")
+    public void theAccountIsNotDisplayedMoreOnTheTable() {
+        assertFalse(accountManagementPage.isFavoriteAccountDisplayedOnFavoritesTab(threadVarsHashMap.getString(TestKeyword.FIRST_ACCOUNT_ON_APPROVED_ACCOUNTS_PAGE)));
+    }
+
+    @Then("^(.*) title is displayed on Pre Authorization Code section.$")
+    public void titleIsDisplayedOnPreAuthorizationCodeSection(String title) {
+        assertEquals(title, accountManagementPage.getPreAuthCodeSectionTitle());
+    }
+
+    @When("^User sets some data to the Pre Authorization Code input.$")
+    public void userSetsSomeDataToThePreAuthorizationCodeInput() {
+        accountManagementPage.setDataToPreAuthField();
+    }
+
+    @And("^Click on Go button.$")
+    public void clickOnGoButton() {
+        accountManagementPage.clickOnGoPreAuthCodeButton();
+    }
+
+    @Then("^Empty table with necessary columns appears.$")
+    public void emptyTableWithNecessaryColumnsAppears() {
+        assertTrue(accountManagementPage.isPreAuthAccountsTableDisplayed());
+        assertTrue(accountManagementPage.isPreAuthAccountsTableEmpty());
+    }
+
+    @When("^User clicks on Send request button.$")
+    public void userClicksOnSendRequestButton() {
+        accountManagementPage.clickOnSendPreAuthCode();
+    }
+
+    @Then("^Table with accounts disappears.$")
+    public void tableWithAccountsDisappears() {
+        assertFalse(accountManagementPage.isPreAuthAccountsTableDisplayed());
+    }
+
+    @Then("^Check that Account management page is opened.$")
+    public void checkThatAccountManagementPageIsOpened() {
+        assertTrue(accountManagementPage.isOpened());
     }
 }

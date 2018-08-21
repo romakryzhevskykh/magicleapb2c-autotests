@@ -76,6 +76,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     And Clicks on the Search button.
     Then Appropriate user with appropriate <email> email is displayed in the users list.
     When Clicks on the user name in the table.
+    And Expand Modify an Account tab in I Want To Block.
     When Click on Add account button in User Detail block.
     Then Add Account pop-up is displayed on Manage Users page.
     And Select North_America in the Region field in the Add Account pop-up.
@@ -84,7 +85,6 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then Add New Accounts table is displayed in the Add Account pop-up.
     When Set <seCode> SE code to the First Sales Engineer Code field in the Add Account pop-up.
     And Click on Modify button in the Add Account pop-up.
-    And Expand Modify an Account tab in I Want To Block.
     Then Is account from add account pop-up displayed in the all accounts tab.
     When Click on Sales Engineer Codes tab In Modify an Account Tab.
     Then <seCode> Sales Engineer Code is displayed in the Approved SE Codes table.
