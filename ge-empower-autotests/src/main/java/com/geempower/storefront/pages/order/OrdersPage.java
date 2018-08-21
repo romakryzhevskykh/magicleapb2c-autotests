@@ -88,4 +88,57 @@ public class OrdersPage extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
         click(ORDER_LINK_BY_ORDER_NO_XPATH, orderNo);
     }
+
+    @Step("Get Open Order Message.")
+    public String getOpenOrderMessage() {
+        waitUntilPageIsFullyLoaded();
+        return $(OPEN_ORDER_REPORT_TEXT_XPATH).getText();
+    }
+
+    @Step("Click On Open Order Report Window Button.")
+    public void clickOnOpenOrderReportWindowButton() {
+        click(OPEN_ORDER_REPORT_OPEN_BUTTON_XPATH);
+    }
+
+    @Step("Get Open Order Report Window Title.")
+    public String getOpenOrderReportWindowTitle() {
+        waitUntilPageIsFullyLoaded();
+        return $(OPEN_ORDER_REPORT_WINDOW_TITLE_XPATH).getText();
+    }
+
+    @Step("Select Pricing Option.")
+    public void selectPricingOption(String pricingOption) {
+        click(OPEN_PRICING_OPTIONS_ICON_XPATH);
+        waitUntilPageIsFullyLoaded();
+        click(PRICING_OPTION_BY_OPTION_LABEL_XPATH, pricingOption);
+    }
+
+    @Step("Click On Generate Now Open Order Report Button.")
+    public void clickOnGenerateNowOpenOrderReportButton() {
+        click(GENERATE_NOW_OPEN_ORDER_REPORT_BUTTON_XPATH);
+    }
+
+    @Step("Get Post Report Date.")
+    public String getPostReportDate() {
+        waitUntilPageIsFullyLoaded();
+        return $(OPEN_ORDER_REPORT_FIRST_ROW_POST_DATE_XPATH).getText();
+    }
+
+    @Step("Get Post Report Pricing Option.")
+    public String getPostReportPricingOption() {
+        waitUntilPageIsFullyLoaded();
+        return $(OPEN_ORDER_REPORT_FIRST_ROW_PRICING_OPTION_XPATH).getText();
+    }
+
+    @Step("Get Post Report Comment.")
+    public String getPostReportComment() {
+        waitUntilPageIsFullyLoaded();
+        return $(OPEN_ORDER_REPORT_FIRST_ROW_COMMENT_XPATH).getText();
+    }
+
+    @Step("Close The Open Orders Report Window.")
+    public void closeTheOpenOrdersReportWindow() {
+        waitUntilPageIsFullyLoaded();
+        click(OPEN_ORDER_REPORT_WINDOW_CLOSE_ICON_XPATH);
+    }
 }

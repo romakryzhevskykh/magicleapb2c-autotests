@@ -21,31 +21,52 @@ Feature: Some actions on Orders page
     And Clicks on Invoice hyperlink.
     Then Invoice Details pop-up is appear with correct text and header.
     And Admin closes the pop-up.
+#
+#  Scenario Outline: Check that Multiple BOL is displayed correctly
+#    And Account management page is opened.
+#    When Choose North_America region.
+#    And Select account <account>.
+#    And Click on account with <salesDivision> sales division.
+#    And Dashboard page is opened.
+#    When Click on Skip button.
+#    When Close cookies pop-up.
+#    When User searches order by <orderNo> orderNo via Order Search field.
+#    Then Order by parameters page with appropriate <orderNo> is opened.
+#    When User clicks on appropriate <orderNo>.
+#    Then Orders Details page is opened.
+#    Then Tracking information is MULTIPLE.
+#    When User clicks on Multiple hyperlink.
+#    Then BOL and Tracking Numbers pop-up appears.
+#    Then More than one BOL are displayed in the pop-up.
+#    And User closes BOL and Tracking Numbers pop-up.
+#    When User expands order details section.
+#    Then Bill of landing is MULTIPLE.
+#    When User clicks on Multiple hyperlink on BOL.
+#    Then BOL and Tracking Numbers pop-up appears.
+#    Then More than one BOL are displayed in the pop-up.
+#    And User closes BOL and Tracking Numbers pop-up.
+#
+#    Examples:
+#      | account | salesDivision | orderNo   |
+#      | 5093868 | USS1          | 150775814 |
 
-  Scenario Outline: Check that Multiple BOL is displayed correctly
-    And Account management page is opened.
-    When Choose North_America region.
-    And Select account <account>.
-    And Click on account with <salesDivision> sales division.
-    And Dashboard page is opened.
-    When Click on Skip button.
-    When Close cookies pop-up.
-    When User searches order by <orderNo> orderNo via Order Search field.
-    Then Order by parameters page with appropriate <orderNo> is opened.
-    When User clicks on appropriate <orderNo>.
-    Then Orders Details page is opened.
-    Then Tracking information is MULTIPLE.
-    When User clicks on Multiple hyperlink.
-    Then BOL and Tracking Numbers pop-up appears.
-    Then More than one BOL are displayed in the pop-up.
-    And User closes BOL and Tracking Numbers pop-up.
-    When User expands order details section.
-    Then Bill of landing is MULTIPLE.
-    When User clicks on Multiple hyperlink on BOL.
-    Then BOL and Tracking Numbers pop-up appears.
-    Then More than one BOL are displayed in the pop-up.
-    And User closes BOL and Tracking Numbers pop-up.
+  Scenario Outline: Check that user is able to request open order report with pricing/ without pricing.
+    And Orders page is opened.
+    Then <openOrderReportMessage> message is displayed.
+    When User clicks on request open order report icon.
+    Then Open Order Report window with appropriate title Open Orders Report opened.
+    And User selects <pricingOption> option.
+    And User clicks on generate now button.
+    Then Correct date is displayed in Post date column.
+    Then Pricing value is the same as <pricingOption>.
+    Then Comment is equal to The request will be sent to <userEmail>.
+    When User closes the Open Order Report window.
+    And Refresh page.
+    When User clicks on request open order report icon.
+    Then Open order report is displayed with appropriate date and time.
+    When User closes the Open Order Report window.
 
     Examples:
-      | account | salesDivision | orderNo   |
-      | 5093868 | USS1          | 150775814 |
+      | openOrderReportMessage                   | pricingOption   | userEmail            |
+      | New! Download your open orders report -> | With Pricing    | rmautotest@gmail.com |
+      | New! Download your open orders report -> | Without Pricing | rmautotest@gmail.com |
