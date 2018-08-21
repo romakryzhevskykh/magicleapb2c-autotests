@@ -40,7 +40,12 @@ public class AccountManagementPageElements {
     public final static String LIST_OF_FAVORITES_ACCOUNTS_FULL_INFO_XPATH = "//table[@id='favoritesTable']/tbody/tr/td[2]/a";
     public final static String WE_ARE_NOW_ABB_POP_UP_XPATH = "//img[contains(@src, 'WEAREABB')]";
     public final static String WE_ARE_NOW_ABB_OK_BUTTON_XPATH = WE_ARE_NOW_ABB_POP_UP_XPATH + "//..//..//../div/button";
-
+    public final static String PRE_AUTHORIZATION_CODE_SECTION_FIRST_PART_TITLE_XPATH = "//label[@class='control-label']";
+    public final static String PRE_AUTH_INPUT_XPATH = "//input[@id='preauthorizedCode']";
+    public final static String PRE_AUTH_GO_BUTTON_XPATH = "//button[@class='btn primary-btn pre-authorized-btn-ma-js']";
+    public final static String PRE_AUTH_ACCOUNTS_TABLE_XPATH = "//table[@id='preauthorizedAccountsTbl']";
+    public final static String PRE_AUTH_ACCOUNTS_TABLE_BODY_XPATH = "//table[@id='preauthorizedAccountsTbl']/tbody";
+    public final static String PRE_AUTH_SEND_REQUEST_BUTTON_XPATH = "//button[@id='sendPreauthorizeRequestBtn']";
     //Request Account pop-up
     public final static String SALES_OFFICE_CODE_FIELD_ID = "requestSalesOfficeCode";
     public final static String SALES_ENGINEER_CODE_FIELD_ID = "requestSalesEngCode";

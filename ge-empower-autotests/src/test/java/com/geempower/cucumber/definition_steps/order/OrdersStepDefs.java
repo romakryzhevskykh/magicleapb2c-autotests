@@ -2,10 +2,8 @@ package com.geempower.cucumber.definition_steps.order;
 
 import com.geempower.cucumber.definition_steps.AbstractStepDefs;
 import com.geempower.cucumber.definition_steps.TestKeyword;
-import com.geempower.helpers.ThreadVarsHashMap;
 import com.geempower.helpers.Utils;
 import com.geempower.storefront.pages.order.OrdersPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;

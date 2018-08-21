@@ -219,4 +219,40 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
     public void theAccountIsNotDisplayedMoreOnTheTable() {
         assertFalse(accountManagementPage.isFavoriteAccountDisplayedOnFavoritesTab(threadVarsHashMap.getString(TestKeyword.FIRST_ACCOUNT_ON_APPROVED_ACCOUNTS_PAGE)));
     }
+
+    @Then("^(.*) title is displayed on Pre Authorization Code section.$")
+    public void titleIsDisplayedOnPreAuthorizationCodeSection(String title) {
+        assertEquals(title, accountManagementPage.getPreAuthCodeSectionTitle());
+    }
+
+    @When("^User sets some data to the Pre Authorization Code input.$")
+    public void userSetsSomeDataToThePreAuthorizationCodeInput() {
+        accountManagementPage.setDataToPreAuthField();
+    }
+
+    @And("^Click on Go button.$")
+    public void clickOnGoButton() {
+        accountManagementPage.clickOnGoPreAuthCodeButton();
+    }
+
+    @Then("^Empty table with necessary columns appears.$")
+    public void emptyTableWithNecessaryColumnsAppears() {
+        assertTrue(accountManagementPage.isPreAuthAccountsTableDisplayed());
+        assertTrue(accountManagementPage.isPreAuthAccountsTableEmpty());
+    }
+
+    @When("^User clicks on Send request button.$")
+    public void userClicksOnSendRequestButton() {
+        accountManagementPage.clickOnSendPreAuthCode();
+    }
+
+    @Then("^Table with accounts disappears.$")
+    public void tableWithAccountsDisappears() {
+        assertFalse(accountManagementPage.isPreAuthAccountsTableDisplayed());
+    }
+
+    @Then("^Check that Account management page is opened.$")
+    public void checkThatAccountManagementPageIsOpened() {
+        assertTrue(accountManagementPage.isOpened());
+    }
 }
