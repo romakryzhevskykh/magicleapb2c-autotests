@@ -5,6 +5,7 @@ import com.geempower.cucumber.definition_steps.TestKeyword;
 import com.geempower.helpers.managers.OrderManager;
 import com.geempower.helpers.models.Order;
 import com.geempower.storefront.pages.order.OrderDetailsPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -104,8 +105,15 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     @When("^User Selects random catalog No checkbox on Orders Details page.$")
     public void userSelectsCatalogNoCheckboxOnOrdersDetailsPage() {
         long orderNo = Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO));
-        String catalogNo = String.valueOf(orderDetailsPage.selectRandomCatalogNo());
+        String catalogNo = orderDetailsPage.getRandomCatalogNo();
         int quantity = Integer.parseInt(orderDetailsPage.getQuantityOfSelectedCatalogNoCheckbox(catalogNo));
         orderManager.createOrderInstance(orderNo, catalogNo, quantity);
+
+        orderDetailsPage.selectRandomCheckboxCatalogNo(catalogNo);
+    }
+
+    @And("^User clicks on Reorder button on Order Details page.$")
+    public void userClicksOnAddToCartButtonOnOrderDetailsPage() {
+        orderDetailsPage.clickOnAddToCartButtonOnOrderDetailsPage();
     }
 }

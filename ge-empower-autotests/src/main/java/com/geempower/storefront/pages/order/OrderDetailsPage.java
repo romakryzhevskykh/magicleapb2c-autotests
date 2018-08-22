@@ -108,16 +108,26 @@ public class OrderDetailsPage extends StorefrontBasePage {
         click(CLOSE_BOL_POP_UP_ICON_XPATH);
     }
 
-    public StringBuilder selectRandomCatalogNo() {
-        StringBuilder catalogNo = new StringBuilder("");
-        $$(LIST_OF_ALL_CHECKBOXES_CATALOG_NO_XPATH).stream().findAny().ifPresent(webElement -> {
-            catalogNo.append(webElement.getAttribute("value"));
-            click(webElement);
-        });
-        return catalogNo;
+    public void selectRandomCheckboxCatalogNo(String catalogNo) {
+        click(CHECKBOX_RELATES_TO_CATALOG_NO_XPATH, catalogNo);
     }
 
     public String getQuantityOfSelectedCatalogNoCheckbox(String catalogNo) {
-        return $(NECESSARY_QUANTITY_OF_CAT_NO_VALUE_XPATH, catalogNo).getText();
+        return $(CAT_NO_QUANTITY_XPATH, catalogNo).getText();
+    }
+
+    @Step("Get all catalog No.")
+    public String getRandomCatalogNo() {
+        waitUntilPageIsFullyLoaded();
+        StringBuilder catalogNo = new StringBuilder("");
+        $$(ALL_CATALOG_NO_XPATH).stream().findAny().ifPresent(webElement -> {
+            catalogNo.append(webElement.getText());
+        });
+        return String.valueOf(catalogNo);
+    }
+
+    @Step("Click On Add To Cart Button On Order Details Page.")
+    public void clickOnAddToCartButtonOnOrderDetailsPage() {
+        click(REORDER_BUTTON_XPATH);
     }
 }
