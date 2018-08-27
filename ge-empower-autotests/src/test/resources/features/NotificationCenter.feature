@@ -20,13 +20,11 @@ Feature: Some actions with toggles, UI components on the Notification Center pag
   Scenario: Check that admin is able to switch OFF the LessonLy toggle and then switch ON.
     And Current empowerU toggle position is saved to the threadVarsHashMap.
     When Admin switches the empowerU toggle to another state.
-    And Click on Save notification preferences button.
-    Then Check that Dashboard page is opened.
+    And Dashboard page is opened.
     And Notification Center page is opened.
     Then empowerU toggle is switched to previously chosen state.
     When Admin switches the empowerU toggle to another state.
-    And Click on Save notification preferences button.
-    Then Check that Dashboard page is opened.
+    And Dashboard page is opened.
     And Notification Center page is opened.
     Then empowerU toggle is switched to previously chosen state.
 
@@ -44,12 +42,10 @@ Feature: Some actions with toggles, UI components on the Notification Center pag
      Given Switch to Storefront as admin.
      And Current System Status toggle position is saved to the threadVarsHashMap.
      When Admin switches the System Status toggle to another state.
-     And Click on Save notification preferences button.
-     Then Check that Dashboard page is opened.
+     And Dashboard page is opened.
      And Notification Center page is opened.
      Then System Status toggle is switched to previously chosen state.
      When Admin switches the System Status toggle to another state.
-     And Click on Save notification preferences button.
-     Then Check that Dashboard page is opened.
+     And Dashboard page is opened.
      And Notification Center page is opened.
      Then System Status toggle is switched to previously chosen state.
