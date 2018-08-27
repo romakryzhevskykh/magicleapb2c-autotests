@@ -1,19 +1,24 @@
 package com.geempower.cucumber.definition_steps.order;
 
 import com.geempower.cucumber.definition_steps.AbstractStepDefs;
+import com.geempower.cucumber.definition_steps.TestKeyword;
+import com.geempower.helpers.Utils;
 import com.geempower.helpers.managers.OrderManager;
 import com.geempower.storefront.pages.order.OrdersPage;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static com.geempower.cucumber.definition_steps.TestKeyword.*;
+import static com.geempower.cucumber.definition_steps.TestKeyword.GE_ORDER_NO;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class OrdersStepDefs extends AbstractStepDefs {
     @Autowired
     private OrdersPage ordersPage;
+    @Autowired
+    private Utils utils;
 
     @Autowired
     private OrderManager orderManager;
@@ -49,4 +54,55 @@ public class OrdersStepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(GE_ORDER_NO, ordersPage.userClickOnRandomOrderNo());
     }
 
+    @Then("^(.*) message is displayed.$")
+    public void openOrderReportMessageIsDisplayed(String openOrderReportText) {
+        assertEquals(openOrderReportText, ordersPage.getOpenOrderMessage());
+    }
+
+    @When("^User clicks on request open order report icon.$")
+    public void userClicksOnRequestOpenOrderReportIcon() {
+        ordersPage.clickOnOpenOrderReportWindowButton();
+    }
+
+    @Then("^Open Order Report window with appropriate title (.*) opened.$")
+    public void openOrderReportWindowWithAppropriateTitleOpened(String openOrderReportWindowTitle) {
+        assertEquals(openOrderReportWindowTitle, ordersPage.getOpenOrderReportWindowTitle());
+    }
+
+    @And("^User selects (.*) option.$")
+    public void userSelectsPricingOption(String pricingOption) {
+        ordersPage.selectPricingOption(pricingOption);
+    }
+
+    @And("^User clicks on generate now button.$")
+    public void userClicksOnGenerateNowButton() {
+        ordersPage.clickOnGenerateNowOpenOrderReportButton();
+    }
+
+    @Then("^Correct date is displayed in Post date column.$")
+    public void correctDateIsDisplayedInPostDateColumn() {
+        String postReportDate = ordersPage.getPostReportDate();
+        threadVarsHashMap.put(TestKeyword.OPEN_ORDER_REPORT_DATE_CREATION, postReportDate);
+        assertTrue(postReportDate.contains(utils.getLocalDateTimeStamp("MM/dd/yyyy")));
+    }
+
+    @Then("^Pricing value is the same as (.*).$")
+    public void pricingValueIsTheSameAsPricingOption(String pricingOption) {
+        assertEquals(pricingOption, ordersPage.getPostReportPricingOption());
+    }
+
+    @Then("^Comment is equal to (.*)(.*).$")
+    public void commentIsEqualToTheRequestWillBeSentToUserEmail(String commentText, String userEmail) {
+        assertEquals(commentText.concat(userEmail), ordersPage.getPostReportComment());
+    }
+
+    @When("^User closes the Open Order Report window.$")
+    public void userClosesTheOpenOrderReportWindow() {
+        ordersPage.closeTheOpenOrdersReportWindow();
+    }
+
+    @Then("^Open order report is displayed with appropriate date and time.$")
+    public void openOrderReportIsDisplayedWithAppropriateDateAndTime() {
+        assertEquals(threadVarsHashMap.get(TestKeyword.OPEN_ORDER_REPORT_DATE_CREATION), ordersPage.getPostReportDate());
+    }
 }

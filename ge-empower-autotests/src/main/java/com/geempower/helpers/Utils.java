@@ -35,4 +35,11 @@ public class Utils extends UIComponent {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm");
         return now.format(formatter);
     }
+
+    @Step("Get Local Date Time Stamp.")
+    public String getLocalDateTimeStamp(String dateFormat) {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
+        return now.format(formatter);
+    }
 }
