@@ -60,7 +60,7 @@ public class OrdersStepDefs extends AbstractStepDefs {
     }
 
     @And("^User selects (.*) option.$")
-    public void userSelectsPricingOptionOption(String pricingOption) {
+    public void userSelectsPricingOption(String pricingOption) {
         ordersPage.selectPricingOption(pricingOption);
     }
 
