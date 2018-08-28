@@ -72,23 +72,23 @@ Feature: Some actions on Orders page
     And Terms and Conditions pop-up is confirmed.
     Then Order Successful pop-up appears at the OE 3 page.
 
-#  Scenario Outline: Check that user is able to request open order report with pricing/ without pricing.
-#    And Orders page is opened.
-#    Then <openOrderReportMessage> message is displayed.
-#    When User clicks on request open order report icon.
-#    Then Open Order Report window with appropriate title Open Orders Report opened.
-#    And User selects <pricingOption> option.
-#    And User clicks on generate now button.
-#    Then Correct date is displayed in Post date column.
-#    Then Pricing value is the same as <pricingOption>.
-#    Then Comment is equal to The request will be sent to <userEmail>.
-#    When User closes the Open Order Report window.
-#    And Refresh page.
-#    When User clicks on request open order report icon.
-#    Then Open order report is displayed with appropriate date and time.
-#    When User closes the Open Order Report window.
-#
-#    Examples:
-#      | openOrderReportMessage                   | pricingOption   | userEmail            |
-#      | New! Download your open orders report -> | With Pricing    | rmautotest@gmail.com |
-#      | New! Download your open orders report -> | Without Pricing | rmautotest@gmail.com |
+  Scenario Outline: Check that user is able to request open order report with pricing/ without pricing.
+    And Orders page is opened.
+    Then <openOrderReportMessage> message is displayed.
+    When User clicks on request open order report icon.
+    Then Open Order Report window with appropriate title Open Orders Report opened.
+    And User selects <pricingOption> option.
+    And User clicks on generate now button.
+    Then Correct date is displayed in Post date column.
+    Then Pricing value is the same as <pricingOption>.
+    Then Comment is equal to The request will be sent to <userEmail>.
+    When User closes the Open Order Report window.
+    And Refresh page.
+    When User clicks on request open order report icon.
+    Then Open order report is displayed with appropriate date and time.
+    When User closes the Open Order Report window.
+
+    Examples:
+      | openOrderReportMessage                   | pricingOption   | userEmail            |
+      | New! Download your open orders report -> | With Pricing    | rmautotest@gmail.com |
+      | New! Download your open orders report -> | Without Pricing | rmautotest@gmail.com |
