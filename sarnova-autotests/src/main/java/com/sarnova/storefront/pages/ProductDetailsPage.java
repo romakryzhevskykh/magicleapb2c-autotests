@@ -26,11 +26,7 @@ public class ProductDetailsPage extends StorefrontBasePage {
     public void clickOnAddToSupplyListButton() {
         click(ADD_TO_SUPPLY_LIST_BUTTONS_XPATH);
         waitUntilPageIsFullyLoaded();
-//        if (isDisplayed(By.xpath(SUPPLY_POP_UP_IMAGES_XPATH))) {
-//            $$(SUPPLY_POP_UP_IMAGES_XPATH).forEach(webElement ->
-//                    waitUntil(driver1 -> (webElement.getSize().getHeight() == 65 && webElement.getSize().getWidth() == 65))
-//            );
-//        }
+        addToSupplyListPopUpBlock.waitUntilProductImagesAreVisible();
     }
 
     @Step("Set QTY: {1} for product UOM: {0}.")
@@ -112,10 +108,21 @@ public class ProductDetailsPage extends StorefrontBasePage {
         click(ADD_TO_CART_BUTTONS_XPATH);
         waitUntilPageIsFullyLoaded();
         waitUntilElementIsVisible(By.id(POP_UP_ID));
+        addToCartPopUpBlock.waitUntilProductImagesAreVisible();
     }
 
     @Step("Is Add to Supply list button visible?")
     public boolean isAddToSupplyListButtonVisible() {
         return isDisplayed(ADD_TO_SUPPLY_LIST_BUTTONS_XPATH);
+    }
+
+    @Step("Is Add to cart button enable?")
+    public boolean isAddToCartButtonEnable() {
+        return $(ADD_TO_CART_BUTTONS_XPATH).isEnabled();
+    }
+
+    @Step("Is Add to Supply list button enable?")
+    public boolean isAddToSupplyListButtonEnable() {
+        return $(ADD_TO_SUPPLY_LIST_BUTTONS_XPATH).isEnabled();
     }
 }

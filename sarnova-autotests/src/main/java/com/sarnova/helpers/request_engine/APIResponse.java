@@ -179,6 +179,7 @@ public class APIResponse implements API {
     }
 
     public Document getHTMLResponseDocument() {
+//        System.out.println("RESPONSE1: " + this.responseBody);
         return (Document) this.responseBody;
     }
 }

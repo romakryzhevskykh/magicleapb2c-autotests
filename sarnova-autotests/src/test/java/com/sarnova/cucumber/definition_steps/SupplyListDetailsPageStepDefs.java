@@ -21,9 +21,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
     @Autowired private ProductsManager productsManager;
@@ -384,5 +382,10 @@ public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
     @Then("^Check that Share Supply list functionality is visible on Supply list details page.$")
     public void checkThatShareSupplyListFunctionalityIsVisibleOnSupplyListDetailsPage() {
         assertTrue(supplyListDetailsPage.isShareCheckboxVisible());
+    }
+
+    @Then("^Check that Add to cart button is unable on Supply list details page.$")
+    public void checkThatAddToCartButtonIsUnableOnSupplyListDetailsPage() throws Throwable {
+        assertFalse(supplyListDetailsPage.isAddToCartButtonEnable());
     }
 }

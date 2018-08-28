@@ -6,7 +6,6 @@ import com.sarnova.storefront.pages.StartPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -136,7 +135,8 @@ public class GeneralStepDefs extends AbstractStepDefs {
         List<String> favoriteSupplyListNames = headerRowPageBlock.getSupplyListNamesFromFavoriteSupplyListsDropDown();
         String testSupplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
         assertTrue(favoriteSupplyListNames.stream()
-                .anyMatch(supplyListName -> supplyListName.equals(StringUtils.capitalize(testSupplyListName))));
+                .anyMatch(supplyListName -> supplyListName.equals(testSupplyListName)),
+                "Favorite Supply lists: " + favoriteSupplyListNames);
     }
 
     @And("^Check that current Supply list is not displayed in favorite Supply lists drop-down in page header.$")
@@ -144,7 +144,8 @@ public class GeneralStepDefs extends AbstractStepDefs {
         List<String> favoriteSupplyListNames = headerRowPageBlock.getSupplyListNamesFromFavoriteSupplyListsDropDown();
         String testSupplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
         assertTrue(favoriteSupplyListNames.stream()
-                .noneMatch(supplyListName -> supplyListName.equals(StringUtils.capitalize(testSupplyListName))));
+                .noneMatch(supplyListName -> supplyListName.equals(testSupplyListName)),
+                "Favorite Supply lists: " + favoriteSupplyListNames);
     }
 
     @Then("^Click on Supply lists drop-down in Header.$")
@@ -160,5 +161,10 @@ public class GeneralStepDefs extends AbstractStepDefs {
     @Then("^Check that user is logged out.$")
     public void checkThatUserIsLoggedOut() {
         assertTrue(headerRowPageBlock.isUserLoggedOut());
+    }
+
+    @Then("^Check that user is logged in.$")
+    public void checkThatUserIsLoggedIn() {
+        assertTrue(headerRowPageBlock.isUserLoggedIn());
     }
 }

@@ -113,7 +113,7 @@ public class AccountDashboardPage extends StorefrontBasePage {
 
     @Step("Is Saved Credit Cards item visible?")
     public boolean isSavedCreditCardsItemVisible() {
-        return false;
+        return isDisplayed(SAVED_CREDIT_CARDS_ITEM_XPATH);
     }
 
     @Step("Click on Order History item.")
@@ -153,8 +153,7 @@ public class AccountDashboardPage extends StorefrontBasePage {
 
     @Step("Click on Saved Credit Cards item.")
     public void clickOnSavedCreditCardsItem() {
-        //TODO
-//        click(SAVED_CARTS_ITEM_XPATH);
+        click(SAVED_CREDIT_CARDS_ITEM_XPATH);
     }
 
     @Step("Click on Supply Lists item.")
@@ -220,5 +219,37 @@ public class AccountDashboardPage extends StorefrontBasePage {
     @Step("Click on Pharmaceutical Backorder Report item.")
     public void clickOnPharmaceuticalBackorderReportItem() {
         click(PHARMACEUTICAL_BACKORDER_REPORT_ITEM_XPATH);
+    }
+
+    @Step("Expand Account Dashboard section in the left bar menu.")
+    public void expandAccountDashboardSection() {
+        if(!isDisplayed(ACCOUNT_DASHBOARD_ITEMS_XPATH)) {
+            click(EXPAND_ACCOUNT_DASHBOARD_ITMES_XPATH);
+            waitUntil(driver1 -> $(EXPAND_ACCOUNT_DASHBOARD_ITMES_XPATH).getAttribute("class").contains("rotate"));
+        }
+    }
+
+    @Step("Expand Reports section in the left bar menu.")
+    public void expandReportsSection() {
+        if(!isDisplayed(REPORTS_ITEMS_XPATH)) {
+            click(EXPAND_REPORTS_ITEMS_XPATH);
+            waitUntil(driver1 -> $(EXPAND_REPORTS_ITEMS_XPATH).getAttribute("class").contains("rotate"));
+        }
+    }
+
+    @Step("Expand Administration section in the left bar menu.")
+    public void expandAdministrationSection() {
+        if(!isDisplayed(ADMINISTRATION_ITEMS_XPATH)) {
+            click(EXPAND_ADMINISTRATION_ITEMS_XPATH);
+            waitUntil(driver1 -> $(EXPAND_ADMINISTRATION_ITEMS_XPATH).getAttribute("class").contains("rotate"));
+        }
+    }
+
+    @Step("Expand Preferences section in the left bar menu.")
+    public void expandPreferencesSection() {
+        if(!isDisplayed(PREFERENCES_ITEMS_XPATH)) {
+            click(EXPAND_PREFERENCES_ITEMS_XPATH);
+            waitUntil(driver1 -> $(EXPAND_PREFERENCES_ITEMS_XPATH).getAttribute("class").contains("rotate"));
+        }
     }
 }

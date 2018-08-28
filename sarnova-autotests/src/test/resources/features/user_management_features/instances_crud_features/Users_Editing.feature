@@ -30,4 +30,4 @@ Feature: Check that owner role can edit user.
     And Switch to Storefront cockpit test user.
     And Opened Login page.
     And Login to Storefront.
-    Then Check that Home page is opened.
+    Then Check that user is logged in.

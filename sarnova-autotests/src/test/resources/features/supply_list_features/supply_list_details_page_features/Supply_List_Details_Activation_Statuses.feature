@@ -25,7 +25,7 @@ Feature: Deactivation and activation features for products and supply lists on S
     Given Active Supply list with only 1 active products exists.
     And Opened Supply list details page.
     When Click on deactivate any product button on Supply list details page.
-    Then Check that There's no active entries in this supply list message is shown on Supply list details page.
+    Then Check that There are no active entries in this supply list message is shown on Supply list details page.
     Then Click on Show inactivate entries checkbox on Supply list details page.
     And Check that product is deactivated on Supply list details page.
 

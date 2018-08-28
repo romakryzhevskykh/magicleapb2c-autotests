@@ -18,4 +18,4 @@ Feature: Login page functionality
     Given Opened Login page.
     When Click on Sign in button.
     And Login to Storefront.
-    Then Check that Home page is opened.
+    Then Check that user is logged in.

@@ -227,4 +227,24 @@ public class AccountDashboardPageStepDefs extends AbstractStepDefs {
     public void clickOnPharmaceuticalBackorderReportItemOnAccountDashboardPage() {
         accountDashboardPage.clickOnPharmaceuticalBackorderReportItem();
     }
+
+    @When("^Expand Account Dashboard section on Account Dashboard page.$")
+    public void expandAccountDashboardSectionOnAccountDashboardPage() {
+        accountDashboardPage.expandAccountDashboardSection();
+    }
+
+    @When("^Expand Reports section on Account Dashboard page.$")
+    public void expandReportsSectionOnAccountDashboardPage() {
+        accountDashboardPage.expandReportsSection();
+    }
+
+    @When("^Expand Administration section on Account Dashboard page.$")
+    public void expandAdministrationSectionOnAccountDashboardPage() {
+        accountDashboardPage.expandAdministrationSection();
+    }
+
+    @When("^Expand Preferences section on Account Dashboard page.$")
+    public void expandPreferencesSectionOnAccountDashboardPage() {
+        accountDashboardPage.expandPreferencesSection();
+    }
 }

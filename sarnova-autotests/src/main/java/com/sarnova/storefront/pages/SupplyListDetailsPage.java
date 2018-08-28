@@ -124,6 +124,7 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
     public void clickOnAddToCartButton() {
         click(ADD_TO_CART_BUTTON_XPATH);
         waitUntilPageIsFullyLoaded();
+        addToCartPopUpBlock.waitUntilProductImagesAreVisible();
     }
 
     @Step("Is Add to cart button visible?")
@@ -263,7 +264,7 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
     @Step("Click on favorite checkbox.")
     public void clickOnFavoriteCheckbox() {
         click(FAVORITE_CHECKBOX_XPATH);
-        waitJQueryRequestsLoad();
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Open Quick add block.")
@@ -293,7 +294,7 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
     @Step("Click on Quick add checkbox.")
     public void clickOnQuickAddCheckbox() {
         click(By.id(QUICK_ADD_CHECKBOX_ID));
-        waitJQueryRequestsLoad();
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Enter SKU value to any empty Quick add row: {0}.")
@@ -305,7 +306,7 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
                 });
         emptyRow.sendKeys(newProductSKU);
         blurElement(emptyRow);
-        waitJQueryRequestsLoad();
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Click on Add to this Supply list Quick Add button.")
@@ -348,5 +349,10 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
     @Step("Is Share checkbox visible?")
     public boolean isShareCheckboxVisible() {
         return isDisplayed(By.id(SHOW_SHARE_FUNC_CHECKBOX_ID));
+    }
+
+    @Step("Is Add to cart button enable?")
+    public boolean isAddToCartButtonEnable() {
+        return $(ADD_TO_CART_BUTTON_XPATH).isEnabled();
     }
 }

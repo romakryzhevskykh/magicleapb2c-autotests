@@ -67,4 +67,12 @@ public class AddToSupplyListPopUpBlock extends UIComponent {
         return Iterables.getLast(Arrays.asList($(ADD_TO_SUPPLY_LIST_POP_UP_VIEW_SUPPLY_LIST_BUTTON_XPATH).getAttribute("href").split("/")));
     }
 
+    @Step("Wait images are loaded.")
+    public void waitUntilProductImagesAreVisible() {
+        if (isDisplayed(By.xpath(SUPPLY_POP_UP_IMAGES_XPATH))) {
+            $$(SUPPLY_POP_UP_IMAGES_XPATH).forEach(webElement ->
+                    waitUntil(driver1 -> (webElement.getSize().getHeight() >= 20 && webElement.getSize().getWidth() >= 20))
+            );
+        }
+    }
 }

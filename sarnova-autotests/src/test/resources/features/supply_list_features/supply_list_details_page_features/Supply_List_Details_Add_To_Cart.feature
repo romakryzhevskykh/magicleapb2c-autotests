@@ -9,8 +9,9 @@ Feature: Add to cart from Supply list details page functionality
     Given Supply list with at least 1 active products.
     And Opened Supply list details page.
     When Set QTY 0 to all products(UOMs) on the Supply list details page.
-    And Click on Add to cart button on Supply list details page.
-    Then Check that Add to cart pop-up displays Please provide a positive number to update the quantity of an item. message on Supply list details page.
+    Then Check that Add to cart button is unable on Supply list details page.
+#    And Click on Add to cart button on Supply list details page.
+#    Then Check that Add to cart pop-up displays Please provide a positive number to update the quantity of an item. message on Supply list details page.
     And Open cart page.
     And Check that there are no products on Cart page.
 

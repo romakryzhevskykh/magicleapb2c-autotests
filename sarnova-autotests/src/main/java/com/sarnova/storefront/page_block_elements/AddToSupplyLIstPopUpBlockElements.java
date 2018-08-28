@@ -13,4 +13,6 @@ public class AddToSupplyLIstPopUpBlockElements {
     public static final String ADD_TO_SUPPLY_LIST_POP_UP_ADD_TO_SUPPLY_LIST_BUTTON_XPATH = ADD_TO_SUPPLY_LIST_POP_UP_XPATH + "//button[contains(@class, 'add-to-wishlist-popup-button')]";
     public static final String ADD_TO_SUPPLY_LIST_POP_UP_VIEW_SUPPLY_LIST_BUTTON_XPATH = ADD_TO_SUPPLY_LIST_POP_UP_XPATH + "//a[contains(@class, 'wishlist-link')]";
     public static final String ADD_TO_SUPPLY_LIST_POP_UP_CONTINUE_BUTTON_XPATH = ADD_TO_SUPPLY_LIST_POP_UP_XPATH + "//button[contains(@class, 'js-close-popup')]";
+
+    public static final String SUPPLY_POP_UP_IMAGES_XPATH = ADD_TO_SUPPLY_LIST_POP_UP_XPATH + "//div[@class='mini-cart']//img";
 }
