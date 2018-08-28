@@ -117,8 +117,8 @@ public class MyCartStepDefs extends AbstractStepDefs {
         assertEquals(countryHashmap, myCartPage.getCountryOfOriginValueOnMyCartPage());
     }
 
-    @Then("^Is Qty value equal with value on the Order page.$")
-    public void isQtyValueEqualWithValueOnTheOrderPage(){
+    @Then("^Is Qty value equal to value on the Order page.$")
+    public void isQtyValueEqualToValueOnTheOrderPage(){
         Order randomOrder = orderManager.getOrderById(Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO)));
         assertTrue(randomOrder.getQuantity() == myCartPage.getQtyValue(randomOrder.getCatalogNo()));
     }

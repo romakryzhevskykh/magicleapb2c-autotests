@@ -113,7 +113,7 @@ public class OrderDetailsPage extends StorefrontBasePage {
     }
 
     public String getQuantityOfSelectedCatalogNoCheckbox(String catalogNo) {
-        return $(CAT_NO_QUANTITY_XPATH, catalogNo).getText();
+        return $(QUANTITY_OF_APPROPRIATE_PRODUCT_XPATH, catalogNo).getText();
     }
 
     @Step("Get all catalog No.")

@@ -56,7 +56,6 @@ Feature: Some actions on Orders page
     And Search random account for chosen region.
     And Click on chosen account.
     And Orders page is opened.
-    When All orders were sorted by orderStatus.
     When User clicks on random order No.
     Then Orders Details page is opened.
     When User selects random catalog No checkbox on Orders Details page.
@@ -64,7 +63,7 @@ Feature: Some actions on Orders page
     When User clicks on My Cart icon in Header block.
     When User clicks on Checkout button in Header block.
     Then My Cart page is opened.
-    Then Is Qty value equal with value on the Order page.
+    Then Is Qty value equal to value on the Order page.
     When User clicks on the Next top button on the My Cart page.
     When User fills PO no. to the PO no. field on the OE 2 page.
     And Select Shipment Address from the existing addresses on the OE 2 page.
