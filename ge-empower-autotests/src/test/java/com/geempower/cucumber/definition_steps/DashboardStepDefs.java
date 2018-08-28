@@ -190,13 +190,6 @@ public class DashboardStepDefs extends AbstractStepDefs {
         headerBlock.clickOnSearchProductIcon();
     }
 
-    @When("^User create product with: product number (.*), product id(.*) and quantity (\\d+).$")
-    public void userCreateProductWithProductRegionProductIdQuantity(String productNo, String id, int quantity) {
-        HashMap<Product, Integer> selectedProducts = getSelectedProducts();
-        Product product = new Product(productNo, (Region) threadVarsHashMap.get(TestKeyword.CHOSEN_REGION), id);
-        selectedProducts.put(product, quantity);
-    }
-
     @When("^User searches order by (.*) orderNo via Order Search field.$")
     public void userSetsOrderNoToTheOrderSearchField(String orderNo) {
         dashboardPage.searchOrderViaOrderSearchField(orderNo);

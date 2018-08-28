@@ -229,8 +229,8 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then Dashboard page is opened.
     When Click on Skip button.
     When Close cookies pop-up.
-    When User add list of <productNo> products to the Copy&Paste block.
-    When User create product with: product number <productNo>, product id <productId> and quantity <quantity>.
+    Given Select test product for chosen region.
+    When User set chosen catalogueNo to the Product Number field.
     And Click on P&A button.
     Then Price&Availability page is opened.
     Then Is Country of Origin sort column header displayed.
@@ -256,8 +256,8 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
 
 
     Examples:
-      | region        | productNo | salesDivision | account | productId     | quantity |
-      | North_America | THQL1130  | USS1_10_10    | 8192306 | 9328719331329 | 1        |
+      | region        | salesDivision | account |
+      | North_America | USS1_10_10    | 8192306 |
 
   Scenario: Check that user is able to send feedback successfully
     And Dashboard page is opened.
