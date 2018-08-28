@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 public class ProductDetailsPageStepDefs extends AbstractStepDefs {
 
@@ -176,5 +176,25 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
     @And("^Click on Checkout button in Add to cart pop-up on PDP.$")
     public void clickOnCheckoutButtonInAddToCartPopUpOnPDP() {
         productDetailsPage.clickOnCheckoutButtonInAddToCartPopUp();
+    }
+
+    @Then("^Check that Add to Supply list button is not visible on PDP.$")
+    public void checkThatAddToSupplyListButtonIsNotVisibleOnPDP() {
+        assertFalse(productDetailsPage.isAddToSupplyListButtonVisible());
+    }
+
+    @Then("^Check that Add to Supply list button is visible on PDP.$")
+    public void checkThatAddToSupplyListButtonIsVisibleOnPDP() {
+        assertTrue(productDetailsPage.isAddToSupplyListButtonVisible());
+    }
+
+    @Then("^Check that Add to cart button is unable on PDP.$")
+    public void checkThatAddToCartButtonIsUnableOnPDP() {
+        assertFalse(productDetailsPage.isAddToCartButtonEnable());
+    }
+
+    @Then("^Check that Add to Supply list button is unable on PDP.$")
+    public void checkThatAddToSupplyListButtonIsUnableOnPDP() {
+        assertFalse(productDetailsPage.isAddToSupplyListButtonEnable());
     }
 }

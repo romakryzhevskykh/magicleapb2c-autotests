@@ -9,6 +9,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.yandex.qatools.allure.annotations.Step;
 import us.codecraft.xsoup.Xsoup;
 
 import java.io.IOException;
@@ -22,27 +23,33 @@ import java.util.stream.Collectors;
 public class CartManager {
     @Autowired ProductsManager productsManager;
 
-    private POSTRequest REMOVE_ENTRY_FROM_CART = new POSTRequest("Remove entry from active cart", "/boundtree/en/USD/cart/entry/execute/REMOVE");
-    private GETRequest GET_CART_PAGE_SOURCE = new GETRequest("Get cart page source", "/boundtree/en/USD/cart");
-    private POSTRequest ADD_UOMS_TO_CART = new POSTRequest("Add UOMs to cart", "/cart/addIndividualList");
+    private POSTRequest REMOVE_ENTRY_FROM_CART = new POSTRequest("Remove entry from active cart", "cart/entry/execute/REMOVE");
+    private GETRequest GET_CART_PAGE_SOURCE = new GETRequest("Get cart page source", "cart");
+    private POSTRequest ADD_UOMS_TO_CART = new POSTRequest("Add UOMs to cart", "cart/addIndividualList");
 
-    @SuppressWarnings("unchecked")
+    @Step("Empty active cart.")
     public void emptyActiveCart(UserSession userSession) {
         List<UnitOfMeasure> unitsOfMeasurementInCart = getUOMsFromCartPage(userSession);
         String csrfToken = getCartPageCsrfToken(userSession);
         for (int i = 0; i < unitsOfMeasurementInCart.size(); i++) {
-            try {
-                POSTRequest removeEntryFromCart = REMOVE_ENTRY_FROM_CART.getClone();
-                removeEntryFromCart.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", csrfToken));
-                removeEntryFromCart.addPostParameterAndValue(new API.PostParameterAndValue("entryNumbers", "0"));
-                removeEntryFromCart.sendPostRequest(userSession);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            removeUOMFromCart(userSession, csrfToken);
         }
     }
 
-    private String getCartPageCsrfToken(UserSession userSession) {
+    @SuppressWarnings("unchecked")
+    @Step("Remove UOM from cart.")
+    public void removeUOMFromCart(UserSession userSession, String csrfToken) {
+        try {
+            POSTRequest removeEntryFromCart = REMOVE_ENTRY_FROM_CART.getClone();
+            removeEntryFromCart.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", csrfToken));
+            removeEntryFromCart.addPostParameterAndValue(new API.PostParameterAndValue("entryNumbers", "0"));
+            removeEntryFromCart.sendPostRequest(userSession);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getCartPageCsrfToken(UserSession userSession) {
         GETRequest getCartPageSource = GET_CART_PAGE_SOURCE.getClone();
         try {
             getCartPageSource.sendGetRequest(userSession);
@@ -53,6 +60,19 @@ public class CartManager {
         return Xsoup.select(htmlResponse, "//input[@name=CSRFToken]/@value").list().stream().findAny().orElse(null);
     }
 
+    @Step("Get current cart ID.")
+    public String getCurrentCartId(UserSession userSession) {
+        GETRequest getCartPageSource = GET_CART_PAGE_SOURCE.getClone();
+        try {
+            getCartPageSource.sendGetRequest(userSession);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Document htmlResponse = getCartPageSource.getResponse().getHTMLResponseDocument();
+        return Xsoup.select(htmlResponse, "//span[@class=cart__id]/text()").get();
+    }
+
+    @Step("Get UOMs from active cart.")
     private List<UnitOfMeasure> getUOMsFromCartPage(UserSession userSession) {
         GETRequest getCartPageSource = GET_CART_PAGE_SOURCE.getClone();
         try {
@@ -66,14 +86,18 @@ public class CartManager {
     }
 
     @SuppressWarnings("unchecked")
+    @Step("Add {1} to cart.")
     public void addUOMsToCartViaApi(UserSession userSession, HashMap<UnitOfMeasure, Integer> unitsOfMeasurementToAdd) {
         POSTRequest addUOMsToCart = ADD_UOMS_TO_CART.getClone();
         int counter = 0;
         for(Map.Entry<UnitOfMeasure, Integer> unitOfMeasure : unitsOfMeasurementToAdd.entrySet()) {
+            System.out.println("UOM1 :"  + unitOfMeasure.getKey().getUomType().name());
             addUOMsToCart.addPostParameterAndValue(new API.PostParameterAndValue("productList[" + counter + "].unit",
                     unitOfMeasure.getKey().getUomType().name()));
+            System.out.println("UOM2 :"  + unitOfMeasure.getValue());
             addUOMsToCart.addPostParameterAndValue(new API.PostParameterAndValue("productList[" + counter + "].qty",
                     unitOfMeasure.getValue()));
+            System.out.println("UOM3 :"  + productsManager.getProductByUOM(unitOfMeasure.getKey()).getSku());
             addUOMsToCart.addPostParameterAndValue(new API.PostParameterAndValue("productList[" + counter + "].productCode",
                     productsManager.getProductByUOM(unitOfMeasure.getKey()).getSku()));
         }
@@ -81,6 +105,7 @@ public class CartManager {
                 .stream()
                 .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
                 .collect(Collectors.toList()));
+        System.out.println("UOM CSRF :"  + csrfToken);
         addUOMsToCart.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", csrfToken));
         try {
             addUOMsToCart.sendPostRequest(userSession);

@@ -7,8 +7,7 @@ import org.json.JSONObject;
 import javax.net.ssl.HttpsURLConnection;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -42,12 +41,15 @@ public class POSTRequest extends APIRequest {
         if (postParametersAndValues != null) {
             this.postParametersAndValues = postParametersAndValues;
             for (PostParameterAndValue parameterAndValue : postParametersAndValues) {
-                try {
+                System.out.println("Parametr: " + parameterAndValue);
+//                try {
+//                    this.stringOfPostParameters.append(parameterAndValue.parameter).append("=")
+//                            .append(URLEncoder.encode(parameterAndValue.getValue(), "UTF-8"));
                     this.stringOfPostParameters.append(parameterAndValue.parameter).append("=")
-                            .append(URLEncoder.encode(parameterAndValue.getValue(), "UTF-8"));
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
+                            .append(parameterAndValue.getValue());
+//                } catch (UnsupportedEncodingException e) {
+//                    e.printStackTrace();
+//                }
                 if (!postParametersAndValues
                         .get(postParametersAndValues.size() - 1)
                         .equals(parameterAndValue)) {
@@ -90,6 +92,7 @@ public class POSTRequest extends APIRequest {
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         connection.setRequestProperty("X-Requested-With", "XMLHttpRequest");
+        connection.setInstanceFollowRedirects(false);
 
         if (headers.size() > 0) {
             for (Map.Entry<String, String> header : headers.entrySet()) {
@@ -111,12 +114,26 @@ public class POSTRequest extends APIRequest {
         if (connection.getRequestProperty("Content-Type").contains("json")) {
             setPayloadPostParametersAndValues(postParametersAndValues);
         } else {
+            System.out.println("PARAMS: " + postParametersAndValues);
             setFormDataPostParametersAndValues(postParametersAndValues);
         }
         //Send request
         System.out.println("POST parameters: " + stringOfPostParameters);
         DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
         wr.writeBytes(stringOfPostParameters.toString());
+        int status = connection.getResponseCode();
+        boolean redirect = false;
+        if (status != HttpURLConnection.HTTP_OK) {
+            if (status == HttpURLConnection.HTTP_MOVED_TEMP
+                    || status == HttpURLConnection.HTTP_MOVED_PERM
+                    || status == HttpURLConnection.HTTP_SEE_OTHER)
+                redirect = true;
+        }
+//        userSession.setCookies(connection.getHeaderFields().get("Set-Cookie"));
+        if (redirect) {
+            followRedirection(connection, userSession);
+        }
+//        connection.setInstanceFollowRedirects(true);
         wr.flush();
         wr.close();
 
@@ -124,6 +141,7 @@ public class POSTRequest extends APIRequest {
         this.response.setContentType();
         this.response.setResponseCode();
         this.response.setResponseBody();
+        this.response.setResponseHeaders();
 
         System.out.println("*******");
         connection.disconnect();

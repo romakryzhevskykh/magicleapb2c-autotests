@@ -16,8 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class CartPageStepDefs extends AbstractStepDefs {
 
@@ -141,5 +140,65 @@ public class CartPageStepDefs extends AbstractStepDefs {
         String newSupplyListName = RandomStringUtils.randomAlphanumeric(10);
         threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, newSupplyListName);
         cartPage.enterNewSupplyListNameText(newSupplyListName);
+    }
+
+    @Then("^Check that Add to Supply list button is not visible on Cart page.$")
+    public void checkThatAddToSupplyListButtonIsNotVisibleOnCartPage() {
+        assertFalse(cartPage.isAddToSupplyListButtonVisible());
+    }
+
+    @Then("^Check that Add to Supply list button is visible on Cart page.$")
+    public void checkThatAddToSupplyListButtonIsVisibleOnCartPage() {
+        assertTrue(cartPage.isAddToSupplyListButtonVisible());
+    }
+
+    @Then("^Check that Checkout button is visible on Cart page.$")
+    public void checkThatCheckoutButtonIsVisibleOnCartPage() {
+        assertTrue(cartPage.isCheckoutButtonVisible());
+    }
+
+    @Then("^Check that Save Cart button is visible on Cart page.$")
+    public void checkThatSaveCartButtonIsVisibleOnCartPage() {
+        assertTrue(cartPage.isSaveCartButtonVisible());
+    }
+
+    @When("^Click on Save Cart button on Cart page.$")
+    public void clickOnSaveCartButton() {
+        cartPage.clickOnSaveCartButton();
+    }
+
+    @When("^Click on Saved Carts button on Cart page.$")
+    public void clickOnSavedCartsButton() {
+        cartPage.clickOnSavedCartsButton();
+    }
+
+    @Then("^Check that Save Cart pop-up is visible on Cart page.$")
+    public void checkThatSaveCartPopUpIsVisibleOnCartPage() {
+        assertTrue(cartPage.isSaveCartPopUpOpened());
+    }
+
+    @Then("^Check that Save Cart name field is visible in Save Cart pop-up on Cart page.$")
+    public void checkThatSaveCartNameFieldIsVisible() {
+        assertTrue(cartPage.isPopUpSaveCartNameFieldVisible());
+    }
+
+    @Then("^Check that Save Cart description field is visible in Save Cart pop-up on Cart page.$")
+    public void checkThatSaveCartDescriptionFieldIsVisible() {
+        assertTrue(cartPage.isPopUpSaveCartDescriptionVisible());
+    }
+
+    @Then("^Check that Save Cart button is visible in Save Cart pop-up on Cart page.$")
+    public void checkThatSaveCartButtonIsVisible() {
+        assertTrue(cartPage.isPopUpSaveCartButtonVisible());
+    }
+
+    @Then("^Check that Cancel Save Cart button is visible in Save Cart pop-up on Cart page.$")
+    public void checkThatCancelSaveCartButtonIsVisible() {
+        assertTrue(cartPage.isPopUpCancelSaveCartButtonVisible());
+    }
+
+    @Then("^Check that Saved Carts button is visible on Cart page.$")
+    public void checkThatSavedCartsButtonVisible() {
+        assertTrue(cartPage.isSavedCartsButtonVisible());
     }
 }

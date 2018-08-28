@@ -20,17 +20,13 @@ public class ProductDetailsPage extends StorefrontBasePage {
     @Autowired private AddToSupplyListPopUpBlock addToSupplyListPopUpBlock;
     @Autowired private AddToCartPopUpBlock addToCartPopUpBlock;
 
-    private final String pageUrlMethod = "boundtree/en/USD/p/%s";
+    private final String pageUrlMethod = "p/%s";
 
     @Step("Click on Add to Supply list button on PDP.")
     public void clickOnAddToSupplyListButton() {
         click(ADD_TO_SUPPLY_LIST_BUTTONS_XPATH);
         waitUntilPageIsFullyLoaded();
-        if (isDisplayed(By.xpath(SUPPLY_POP_UP_IMGAGES_XPATH))) {
-            $$(SUPPLY_POP_UP_IMGAGES_XPATH).forEach(webElement ->
-                    waitUntil(driver1 -> (webElement.getSize().getHeight() == 65 && webElement.getSize().getWidth() == 65))
-            );
-        }
+        addToSupplyListPopUpBlock.waitUntilProductImagesAreVisible();
     }
 
     @Step("Set QTY: {1} for product UOM: {0}.")
@@ -111,6 +107,22 @@ public class ProductDetailsPage extends StorefrontBasePage {
     public void clickOnAddToCartButton() {
         click(ADD_TO_CART_BUTTONS_XPATH);
         waitUntilPageIsFullyLoaded();
-        waitUntilVisible(By.id(POP_UP_ID));
+        waitUntilElementIsVisible(By.id(POP_UP_ID));
+        addToCartPopUpBlock.waitUntilProductImagesAreVisible();
+    }
+
+    @Step("Is Add to Supply list button visible?")
+    public boolean isAddToSupplyListButtonVisible() {
+        return isDisplayed(ADD_TO_SUPPLY_LIST_BUTTONS_XPATH);
+    }
+
+    @Step("Is Add to cart button enable?")
+    public boolean isAddToCartButtonEnable() {
+        return $(ADD_TO_CART_BUTTONS_XPATH).isEnabled();
+    }
+
+    @Step("Is Add to Supply list button enable?")
+    public boolean isAddToSupplyListButtonEnable() {
+        return $(ADD_TO_SUPPLY_LIST_BUTTONS_XPATH).isEnabled();
     }
 }

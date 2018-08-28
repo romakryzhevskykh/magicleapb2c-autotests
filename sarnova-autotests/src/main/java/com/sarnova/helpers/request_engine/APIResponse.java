@@ -17,6 +17,7 @@ public class APIResponse implements API {
     private String contentType;
     private int responseCode;
     private Object responseBody;
+    private Map<String, List<String>> responseHeaders;
 
     private boolean isLogRequestShort = false;
 
@@ -79,10 +80,19 @@ public class APIResponse implements API {
         }
     }
 
+    public void setResponseHeaders() {
+        this.responseHeaders = connection.getHeaderFields();
+    }
+
     public void setResponseBody() {
         StringBuilder responseBody = null;
         try {
-            BufferedReader rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            BufferedReader rd;
+            if (connection.getResponseCode() >= 400) {
+                rd = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+            } else {
+                rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            }
             responseBody = new StringBuilder();
             String inputLine;
             while ((inputLine = rd.readLine()) != null) {
@@ -104,6 +114,10 @@ public class APIResponse implements API {
 
     public int getResponseCode() {
         return responseCode;
+    }
+
+    public Map<String, List<String>> getResponseHeaders() {
+        return responseHeaders;
     }
 
     public Object getValueOf(String parameter) {
@@ -165,6 +179,7 @@ public class APIResponse implements API {
     }
 
     public Document getHTMLResponseDocument() {
+//        System.out.println("RESPONSE1: " + this.responseBody);
         return (Document) this.responseBody;
     }
 }

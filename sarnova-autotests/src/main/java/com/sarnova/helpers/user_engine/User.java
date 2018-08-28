@@ -1,73 +1,33 @@
 package com.sarnova.helpers.user_engine;
 
+import com.sarnova.helpers.models.users.Organization;
+import com.sarnova.helpers.models.users.UserGroup;
 import com.sarnova.hybris.Cockpit;
-import com.sarnova.hybris.backoffice.models.SarnovaBackoffice;
-import com.sarnova.hybris.hac.models.SarnovaHAC;
-import com.sarnova.hybris.import_cockpit.models.SarnovaImportCockpit;
-import com.sarnova.storefront.models.SarnovaStorefront;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class User {
 
+    private boolean isInitialized = false;
+
+    private UserTitle userTitle;
+    private String firstName;
+    private String lastName;
+    private String email;
     private String username;
     private String password;
-    private UserRole userRole;
+    private Set<UserRole> userRoles = new HashSet<>();
     private Cockpit userCockpit;
+    private Set<UserGroup> userGroups = new HashSet<>();
+    private Organization organization;
+    private boolean isEnabled;
 
-    public User(String username, String password, Cockpit userCockpit, String cockpitRole) {
+    public User(String username, String password, Cockpit userCockpit) {
         this.username = username;
         this.password = password;
         this.userCockpit = userCockpit;
-        if (userCockpit instanceof SarnovaStorefront) {
-            switch (cockpitRole) {
-                case "shopper":
-                    userRole = StorefrontUserRoles.SHOPPER;
-                    break;
-                case "guest":
-                    userRole = StorefrontUserRoles.GUEST;
-                    break;
-                default:
-                    userRole = null;
-                    break;
-            }
-        } else if (userCockpit instanceof SarnovaBackoffice) {
-            switch (cockpitRole) {
-                case "admin":
-                    userRole = BackofficeUserRoles.ADMIN;
-                    break;
-                case "warehouse agent":
-                    userRole = BackofficeUserRoles.WAREHOUSE_AGENT;
-                    break;
-                case "customer support agent":
-                    userRole = BackofficeUserRoles.CUSTOMER_SUPPORT_AGENT;
-                    break;
-                default:
-                    userRole = null;
-                    break;
-            }
-        } else if (userCockpit instanceof SarnovaHAC) {
-            switch (cockpitRole) {
-                case "admin":
-                    userRole = HACUserRoles.ADMIN;
-                    break;
-                default:
-                    userRole = null;
-                    break;
-            }
-        } else if (userCockpit instanceof SarnovaImportCockpit) {
-            switch (cockpitRole) {
-                case "admin":
-                    userRole = ImportCockpitUserRoles.ADMIN;
-                    break;
-                case "importmanager":
-                    userRole = ImportCockpitUserRoles.IMPORT_MANAGER;
-                    break;
-                default:
-                    userRole = null;
-                    break;
-            }
-        } else {
-            userRole = null;
-        }
+        this.isEnabled = true;
     }
 
     public String getUsername() {
@@ -86,11 +46,76 @@ public class User {
         this.password = password;
     }
 
-    public UserRole getUserRole() {
-        return userRole;
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
     }
 
     public Cockpit getUserCockpit() {
         return userCockpit;
+    }
+
+    @Override
+    public String toString() {
+        return "User: " + this.username + ", Cockpit: " + this.userCockpit.getBaseUrl() + ", Roles: " + this.getUserRoles();
+    }
+
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public UserTitle getUserTitle() {
+        return userTitle;
+    }
+
+    public void setUserTitle(UserTitle userTitle) {
+        this.userTitle = userTitle;
+    }
+
+    public Set<UserGroup> getUserGroups() {
+        return userGroups;
+    }
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
+    }
+
+    public boolean isInitialized() {
+        return isInitialized;
+    }
+
+    public void setInitialized(boolean initialized) {
+        isInitialized = initialized;
     }
 }

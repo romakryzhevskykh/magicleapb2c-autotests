@@ -30,7 +30,7 @@ public class AddToSupplyListPopUpBlock extends UIComponent {
 
     @Step("Enter new Supply list name: {0} in Add to Supply list pop-up.")
     public void enterNewSupplyListNameText(String newSupplyListName) {
-        $(By.id(ADD_TO_SUPPLY_LIST_POP_UP_NEW_SUPPLY_LIST_NAME_FIELD_ID)).sendKeys(newSupplyListName);
+        enterText(newSupplyListName, By.id(ADD_TO_SUPPLY_LIST_POP_UP_NEW_SUPPLY_LIST_NAME_FIELD_ID));
     }
 
     @Step("Click on Add to Supply list button in Add to Supply list pop-up.")
@@ -67,4 +67,12 @@ public class AddToSupplyListPopUpBlock extends UIComponent {
         return Iterables.getLast(Arrays.asList($(ADD_TO_SUPPLY_LIST_POP_UP_VIEW_SUPPLY_LIST_BUTTON_XPATH).getAttribute("href").split("/")));
     }
 
+    @Step("Wait images are loaded.")
+    public void waitUntilProductImagesAreVisible() {
+        if (isDisplayed(By.xpath(SUPPLY_POP_UP_IMAGES_XPATH))) {
+            $$(SUPPLY_POP_UP_IMAGES_XPATH).forEach(webElement ->
+                    waitUntil(driver1 -> (webElement.getSize().getHeight() >= 20 && webElement.getSize().getWidth() >= 20))
+            );
+        }
+    }
 }

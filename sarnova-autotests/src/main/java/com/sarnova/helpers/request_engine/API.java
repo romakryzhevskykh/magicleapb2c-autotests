@@ -67,6 +67,12 @@ public interface API {
         }
 
         public String getValue() {
+//            try {
+//                return URLDecoder.decode(value.toString(), "UTF-8");
+//            } catch (UnsupportedEncodingException e) {
+//                e.printStackTrace();
+//                return null;
+//            }
             return value.toString();
         }
 
@@ -76,6 +82,11 @@ public interface API {
 
         public boolean containsDelimiter(DELIMITER delimiter) {
             return this.delimiter.equals(delimiter);
+        }
+
+        @Override
+        public String toString() {
+            return "parameter: " + this.parameter + ", value: " + this.value;
         }
     }
 }

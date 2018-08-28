@@ -3,6 +3,7 @@ package com.sarnova.storefront.pages;
 import com.sarnova.helpers.managers.ProductsManager;
 import com.sarnova.helpers.models.products.UnitOfMeasure;
 import com.sarnova.storefront.page_blocks.AddToSupplyListPopUpBlock;
+import com.sarnova.storefront.page_blocks.SaveCartPopUpBlock;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,9 @@ public class CartPage extends StorefrontBasePage {
 
     @Autowired private ProductsManager productsManager;
     @Autowired private AddToSupplyListPopUpBlock addToSupplyListPopUpBlock;
+    @Autowired private SaveCartPopUpBlock saveCartPopUpBlock;
 
-    private String pageUrlMethod = "boundtree/en/USD/cart";
+    private String pageUrlMethod = "cart";
 
     public List<UnitOfMeasure> getUnitsOfMeasurementInCart() {
         List<Document> unitsOfMeasurementRows = isDisplayed(PRODUCTS_ROWS_XPATH) ?
@@ -42,25 +44,37 @@ public class CartPage extends StorefrontBasePage {
         return Integer.valueOf(
                 $(UOM_QTY_BY_SKU_AND_UOM_TYPE_XPATH,
                         productsManager.getProductByUOM(unitOfMeasure).getSku(),
-                        unitOfMeasure.getUomType().name()
+                        unitOfMeasure.getUomType().getFullName()
                 ).getAttribute("value"));
     }
 
     @Step("Click on Checkout button on Cart page.")
     public void clickOnCheckoutButton() {
         click(CHECKOUT_BUTTONS_XPATH);
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Click on Add to Supply list button on Cart page.")
     public void clickOnAddToSupplyListButton() {
         click(ADD_TO_SUPPLY_LIST_BUTTONS_XPATH);
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Click on Add to Supply list button for UOM: {0} on Cart page.")
     public void clickOnAddToSupplyListButtonForUOM(UnitOfMeasure unitOfMeasure) {
         click(ADD_UOM_TO_SUPPLY_LIST_BUTTON_BY_SKU_AND_UOM_TYPE_XPATH,
                 productsManager.getProductByUOM(unitOfMeasure).getSku(),
-                unitOfMeasure.getUomType().name());
+                unitOfMeasure.getUomType().getFullName());
+    }
+
+    @Step("Is Saved Carts button visible?")
+    public boolean isSavedCartsButtonVisible() {
+        return isDisplayed(SAVED_CARTS_BUTTON_XPATH);
+    }
+
+    @Step("Click on Saved Carts button.")
+    public void clickOnSavedCartsButton() {
+        click(SAVED_CARTS_BUTTON_XPATH);
     }
 
     public void clickOnSelectSupplyListInAddToSupplyListPopUp() {
@@ -97,5 +111,46 @@ public class CartPage extends StorefrontBasePage {
 
     public void enterNewSupplyListNameText(String newSupplyListName) {
         addToSupplyListPopUpBlock.enterNewSupplyListNameText(newSupplyListName);
+    }
+
+    @Step("Is Add to Supply list button visible?")
+    public boolean isAddToSupplyListButtonVisible() {
+        return isDisplayed(ADD_TO_SUPPLY_LIST_BUTTONS_XPATH);
+    }
+
+    @Step("Is Checkout button visible?")
+    public boolean isCheckoutButtonVisible() {
+        return isDisplayed(CHECKOUT_BUTTONS_XPATH);
+    }
+
+    @Step("Is Save Cart button visible?")
+    public boolean isSaveCartButtonVisible() {
+        return isDisplayed(SAVE_CART_BUTTON_XPATH);
+    }
+
+    @Step("Click on Save Cart button.")
+    public void clickOnSaveCartButton() {
+        click(SAVE_CART_BUTTON_XPATH);
+        waitUntilPageIsFullyLoaded();
+    }
+
+    public boolean isSaveCartPopUpOpened() {
+        return saveCartPopUpBlock.isOpened();
+    }
+
+    public boolean isPopUpSaveCartButtonVisible() {
+        return saveCartPopUpBlock.isSaveCartButtonVisible();
+    }
+
+    public boolean isPopUpCancelSaveCartButtonVisible() {
+        return saveCartPopUpBlock.isCancelSaveCartButtonVisible();
+    }
+
+    public boolean isPopUpSaveCartNameFieldVisible() {
+        return saveCartPopUpBlock.isSaveCartNameFieldVisible();
+    }
+
+    public boolean isPopUpSaveCartDescriptionVisible() {
+        return saveCartPopUpBlock.isSaveCartDescriptionFieldVisible();
     }
 }

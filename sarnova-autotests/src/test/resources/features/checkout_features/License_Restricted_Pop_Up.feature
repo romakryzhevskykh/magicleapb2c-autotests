@@ -1,7 +1,7 @@
 Feature: Checkout page license restricted page functionality
 
   Background:
-    Given Switch to Storefront shopper.
+    Given Switch to Storefront owner.
     And User is logged in to Storefront.
     And Empty Cart.
 
@@ -48,5 +48,3 @@ Feature: Checkout page license restricted page functionality
     And Click on Continue button on Checkout Shipping method step in License pop-up.
     Then Check that Checkout Shipping method step is opened.
     And Check that only selected(expected) products are displaying on Checkout page.
-
-

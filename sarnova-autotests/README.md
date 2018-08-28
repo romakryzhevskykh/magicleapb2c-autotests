@@ -1,7 +1,7 @@
 SARNOVA TEST AUTOMATION PROJECT
 
 #project configuration:
-1. create package /src/main/resources/META-INF (in .gitignore)
+1. create package /src/test/resources/META-INF (in .gitignore)
 2. create properties files with project settings and credentials in META-INF package:
     1) META-INF/dev.properties
     2) META-INF/stage.properties 

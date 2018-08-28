@@ -9,12 +9,11 @@ import com.sarnova.helpers.request_engine.API;
 import com.sarnova.helpers.request_engine.GETRequest;
 import com.sarnova.helpers.request_engine.POSTRequest;
 import com.sarnova.helpers.request_engine.PUTRequest;
-import com.sarnova.helpers.user_engine.User;
-import com.sarnova.helpers.user_engine.UserSession;
-import com.sarnova.helpers.user_engine.UserSessions;
+import com.sarnova.helpers.user_engine.*;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.yandex.qatools.allure.annotations.Step;
 import us.codecraft.xsoup.Xsoup;
 
 import java.io.IOException;
@@ -28,11 +27,11 @@ public class SupplyListsManager {
     @Autowired ProductsManager productsManager;
     @Autowired UserSessions userSessions;
 
-    private POSTRequest CREATE_NEW_SUPPLY_LIST = new POSTRequest("Create new Supply list by User session, number of products and name", "boundtree/en/USD/my-account/supply-lists/addProduct/");
-    private PUTRequest DEACTIVATE_SUPPLY_LIST = new PUTRequest("Deactivate Supply list", "boundtree/en/USD/my-account/supply-lists/%s/deactivate");
-    private PUTRequest DEACTIVATE_PRODUCT_IN_SUPPLY_LIST = new PUTRequest("Deactivate product in the Supply list", "/boundtree/en/USD/my-account/supply-lists/%s/deactivate/%s");
-    private POSTRequest CHANGE_FAVORITE_STATUS_FOR_SUPPLY_LIST = new POSTRequest("Change Supply list favorite status", "/my-account/supply-lists/%s/toggleFavorite");
-    private GETRequest SUPPLY_LIST_DETAILS_PAGE = new GETRequest("Supply list details page", "/boundtree/en/USD/my-account/supply-lists/%s");
+    private POSTRequest CREATE_NEW_SUPPLY_LIST = new POSTRequest("Create new Supply list by User session, number of products and name", "my-account/supply-lists/addProduct/");
+    private PUTRequest DEACTIVATE_SUPPLY_LIST = new PUTRequest("Deactivate Supply list", "my-account/supply-lists/%s/deactivate");
+    private PUTRequest DEACTIVATE_PRODUCT_IN_SUPPLY_LIST = new PUTRequest("Deactivate product in the Supply list", "my-account/supply-lists/%s/deactivate/%s");
+    private POSTRequest CHANGE_FAVORITE_STATUS_FOR_SUPPLY_LIST = new POSTRequest("Change Supply list favorite status", "my-account/supply-lists/%s/toggleFavorite");
+    private GETRequest SUPPLY_LIST_DETAILS_PAGE = new GETRequest("Supply list details page", "my-account/supply-lists/%s");
 
     private ArrayList<SupplyList> allSupplyLists;
     private ArrayList<SupplyList> testSupplyLists = new ArrayList<>();
@@ -59,9 +58,9 @@ public class SupplyListsManager {
     }
 
     @SuppressWarnings("unchecked")
+    @Step("Create Supply list for user: {0}, with name: {1} and products: {2}")
     public void createViaApi(UserSession userSession, String name, List<IndividualProduct> products) {
         String csrfToken = productsManager.getCSRFTokenFromPDPOf(userSession, products);
-
         POSTRequest createNewSupplyList = CREATE_NEW_SUPPLY_LIST.getClone();
         createNewSupplyList.setHeader("CSRFToken", csrfToken);
         createNewSupplyList.setHeader("Content-Type", "application/json");
@@ -91,6 +90,7 @@ public class SupplyListsManager {
         return testSupplyLists.stream().filter(supplyList -> supplyList.getName().equals(name)).findAny().orElse(null);
     }
 
+    @Step("Deactivate Supply list: {1}")
     public void deactivate(UserSession userSession, SupplyList activeSupplyList) {
         PUTRequest deactivateSupplyList = DEACTIVATE_SUPPLY_LIST.getClone();
         deactivateSupplyList.setValue(activeSupplyList.getId());
@@ -102,6 +102,7 @@ public class SupplyListsManager {
         activeSupplyList.setActive(false);
     }
 
+    @Step("Deactivate Supply list: {0}")
     public void deactivate(SupplyList activeSupplyList) {
         UserSession userSession = userSessions.getAnyUserSessionForUser(activeSupplyList.getUser());
         if (userSession != null) {
@@ -111,6 +112,7 @@ public class SupplyListsManager {
         }
     }
 
+    @Step("Deactivate product {2} in Supply list: {1}")
     public void deactivateProductInList(UserSession userSession, SupplyList activeSupplyList, SupplyListProduct supplyListProduct) {
         PUTRequest deactivateProductInSupplyList = DEACTIVATE_PRODUCT_IN_SUPPLY_LIST.getClone();
         deactivateProductInSupplyList.setValue(activeSupplyList.getId());
@@ -124,6 +126,7 @@ public class SupplyListsManager {
     }
 
     @SuppressWarnings("unchecked")
+    @Step("Mark {1} as favorite.")
     public void markSupplyListAsFavorite(UserSession activeUserSession, SupplyList supplyList) {
         String csrfToken = getCsrfTokenFromSLDP(activeUserSession, supplyList);
         POSTRequest toggleSupplyListFavoriteStatus = CHANGE_FAVORITE_STATUS_FOR_SUPPLY_LIST.getClone();
@@ -139,6 +142,7 @@ public class SupplyListsManager {
     }
 
     @SuppressWarnings("unchecked")
+    @Step("Mark {1} as not favorite.")
     public void markSupplyListAsNotFavorite(UserSession activeUserSession, SupplyList supplyList) {
         String csrfToken = getCsrfTokenFromSLDP(activeUserSession, supplyList);
         POSTRequest toggleSupplyListFavoriteStatus = CHANGE_FAVORITE_STATUS_FOR_SUPPLY_LIST.getClone();
@@ -165,6 +169,11 @@ public class SupplyListsManager {
 
         Document htmlResponse = supplyListDetailsPage.getResponse().getHTMLResponseDocument();
         return Xsoup.select(htmlResponse, "//input[@name=CSRFToken]/@value").get();
+    }
+
+    @Step("Share {2} with {1}.")
+    public void shareSupplyListWithUser(UserSession activeUserSession, User userToShareWith, SupplyList supplyList) {
+
     }
 
 //    public SupplyList parseSupplyListFromHTMLSupplyListDetailsPage(User user, String name, String id, String activeStatus,
