@@ -45,7 +45,6 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
         orderEntry3Page.submitTermsAndConditions();
     }
 
-    //@TODO debug methot that contains IF
     @SuppressWarnings("unchecked")
     @Then("^(.*) pop-up appears at the OE 3 page.$")
     public void orderSuccessfulPopUpAppears(String title) {
