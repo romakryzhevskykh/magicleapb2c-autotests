@@ -64,6 +64,14 @@ Feature: Some actions on Orders page
     When User clicks on My Cart icon in Header block.
     When User clicks on Checkout button in Header block.
     Then My Cart page is opened.
+    Then Is Qty value equal with value on the Order page.
+    When User clicks on the Next top button on the My Cart page.
+    When User fills PO no. to the PO no. field on the OE 2 page.
+    And Select Shipment Address from the existing addresses on the OE 2 page.
+    When User clicks on the Bottom Next button on the OE 2 page.
+    When User clicks on Place Order button at the OE 3 page.
+    And Terms and Conditions pop-up is confirmed.
+    Then Order Successful pop-up appears at the OE 3 page.
 
 #  Scenario Outline: Check that user is able to request open order report with pricing/ without pricing.
 #    And Orders page is opened.

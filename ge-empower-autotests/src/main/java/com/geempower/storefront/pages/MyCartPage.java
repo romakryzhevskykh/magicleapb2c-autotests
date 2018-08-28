@@ -99,6 +99,10 @@ public class MyCartPage extends StorefrontBasePage {
         return $(QTY_VALUE_INPUT_XPATH, product.getCatalogueNo().toUpperCase()).getAttribute("value");
     }
 
+    public int getQtyValue(String catalogNo) {
+        return Integer.parseInt($(QTY_VALUE_INPUT_XPATH, catalogNo.toUpperCase()).getAttribute("value"));
+    }
+
     @Step("Set Quantity value to qty. field for each product.")
     public void setQuantityForProduct(Product product, int randomQuantity) {
         waitUntilPageIsFullyLoaded();

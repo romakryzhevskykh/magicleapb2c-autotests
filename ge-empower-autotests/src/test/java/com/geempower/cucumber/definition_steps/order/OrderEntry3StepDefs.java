@@ -3,14 +3,18 @@ package com.geempower.cucumber.definition_steps.order;
 import com.geempower.cucumber.definition_steps.AbstractStepDefs;
 import com.geempower.cucumber.definition_steps.TestKeyword;
 import com.geempower.helpers.managers.OrderManager;
+import com.geempower.helpers.models.Order;
 import com.geempower.helpers.models.Product;
 import com.geempower.helpers.models.Region;
 import com.geempower.storefront.pages.order.OrderEntry3Page;
-import cucumber.api.java.en.*;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
 
+import static com.geempower.cucumber.definition_steps.TestKeyword.GE_ORDER_NO;
 import static org.testng.Assert.*;
 
 public class OrderEntry3StepDefs extends AbstractStepDefs {
@@ -41,13 +45,29 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
         orderEntry3Page.submitTermsAndConditions();
     }
 
+    //@TODO debug methot that contains IF
     @SuppressWarnings("unchecked")
     @Then("^(.*) pop-up appears at the OE 3 page.$")
     public void orderSuccessfulPopUpAppears(String title) {
         String orderNo = orderEntry3Page.getGEOrderNoFromOrderSuccessPopUp(title);
         HashMap<Product, Integer> selectedProducts = getSelectedProducts();
-        orderManager.createOrderInstance(Long.parseLong(orderNo), selectedProducts);
+        if (!selectedProducts.isEmpty()) {
+            createOrderInstance(orderNo);
+        } else {
+            Order randomOrder = orderManager.getOrderById(Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO)));
+            createOrderInstance(orderNo, randomOrder.getCatalogNo(), randomOrder.getQuantity());
+        }
+
         threadVarsHashMap.put(TestKeyword.GE_ORDER_NO, orderNo);
+    }
+
+    private void createOrderInstance(String orderNo) {
+        HashMap<Product, Integer> selectedProducts = getSelectedProducts();
+        orderManager.createOrderInstance(Long.parseLong(orderNo), selectedProducts);
+    }
+
+    private void createOrderInstance(String orderNo, String catalogNo, int quantity) {
+        orderManager.createOrderInstance(Long.parseLong(orderNo), catalogNo, quantity);
     }
 
     @When("^User closes the pop-up.$")
