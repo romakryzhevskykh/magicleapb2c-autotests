@@ -9,9 +9,7 @@ public class OrdersPageElements {
     public final static String FIRST_ORDER_IN_APPROPRIATE_STATUS_XPATH = "//td[@class='table-visible-lg-block sorting_1' and contains(text(), '%s')]//..//../tr[1]/td[1]/a";
     public final static String SORTING_ORDERS_TABLE_ICON_BY_STATUS_ID = "sortStatus";
     public final static String ORDER_LINK_BY_ORDER_NO_XPATH = "//td/a[contains(@href, '%s')]";
-
     public final static String LIST_OF_ORDER_NO_LINKS_XPATH = "//table[contains(@class,'all-order-list-table')]//td[@class = 'table-visible-lg-block']/a[contains(@href,'openOrderDetails')]";
-
     public final static String OPEN_ORDER_REPORT_TEXT_XPATH = "//span[@class='mr-10 hidden-sm']";
     public final static String OPEN_ORDER_REPORT_OPEN_BUTTON_XPATH = "//i[@class='fa fa-file-text']";
     public final static String OPEN_ORDER_REPORT_WINDOW_TITLE_XPATH = "//header/h3";

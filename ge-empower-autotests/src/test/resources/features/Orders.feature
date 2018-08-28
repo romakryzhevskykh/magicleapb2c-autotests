@@ -59,7 +59,7 @@ Feature: Some actions on Orders page
     When All orders were sorted by orderStatus.
     When User clicks on random order No.
     Then Orders Details page is opened.
-    When User Selects random catalog No checkbox on Orders Details page.
+    When User selects random catalog No checkbox on Orders Details page.
     And User clicks on Reorder button on Order Details page.
     When User clicks on My Cart icon in Header block.
     When User clicks on Checkout button in Header block.

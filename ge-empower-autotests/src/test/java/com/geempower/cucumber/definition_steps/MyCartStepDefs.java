@@ -4,7 +4,6 @@ import com.geempower.helpers.managers.OrderManager;
 import com.geempower.helpers.models.Order;
 import com.geempower.helpers.models.Product;
 import com.geempower.storefront.pages.MyCartPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;

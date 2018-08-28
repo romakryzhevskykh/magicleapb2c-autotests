@@ -108,7 +108,7 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
         orderManager.createOrderInstance(orderNo, catalogNo, quantity);
     }
 
-    @When("^User Selects random catalog No checkbox on Orders Details page.$")
+    @When("^User selects random catalog No checkbox on Orders Details page.$")
     public void userSelectsCatalogNoCheckboxOnOrdersDetailsPage() {
         createOrderInstance();
         Order randomOrder = orderManager.getOrderById(Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO)));
