@@ -157,6 +157,12 @@ public class IwantToBlock extends UIComponent {
         return $(EMPTY_SO_CODES_TABLE_IN_PENDING_SO_CODES_XPATH).getText();
     }
 
+    @Step("Get No Data Title in All Accounts table.")
+    public String getNoDataTitleInAllAccountsTable() {
+        waitUntilPageIsFullyLoaded();
+        return $(EMPTY_ALL_ACCOUNTS_TABLE_XPATH).getText();
+    }
+
     @Step("Get No Data Title in SE Codes table.")
     public String getNoDataTitleInSeCodesTable() {
         waitUntilPageIsFullyLoaded();

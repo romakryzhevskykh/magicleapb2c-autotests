@@ -16,7 +16,7 @@ public class OrderDetailsPage extends StorefrontBasePage {
         return storefrontProject.getBaseUrl().concat(pageUri);
     }
 
-    @Step("Correct page is opened.")
+    @Step("Orders Details page is opened.")
     public boolean isOpened(String orderNo) {
         return getCurrentUrl().contains(orderNo);
     }
@@ -106,5 +106,28 @@ public class OrderDetailsPage extends StorefrontBasePage {
     @Step("Close BOL Pop-Up.")
     public void closeBOLPopUp() {
         click(CLOSE_BOL_POP_UP_ICON_XPATH);
+    }
+
+    public void selectRandomCheckboxCatalogNo(String catalogNo) {
+        click(CHECKBOX_RELATES_TO_CATALOG_NO_XPATH, catalogNo);
+    }
+
+    public String getQuantityOfSelectedCatalogNoCheckbox(String catalogNo) {
+        return $(QUANTITY_OF_APPROPRIATE_PRODUCT_XPATH, catalogNo).getText();
+    }
+
+    @Step("Get all catalog No.")
+    public String getRandomCatalogNo() {
+        waitUntilPageIsFullyLoaded();
+        StringBuilder catalogNo = new StringBuilder("");
+        $$(ALL_CATALOG_NO_XPATH).stream().findAny().ifPresent(webElement -> {
+            catalogNo.append(webElement.getText());
+        });
+        return String.valueOf(catalogNo);
+    }
+
+    @Step("Click On Add To Cart Button On Order Details Page.")
+    public void clickOnAddToCartButtonOnOrderDetailsPage() {
+        click(REORDER_BUTTON_XPATH);
     }
 }
