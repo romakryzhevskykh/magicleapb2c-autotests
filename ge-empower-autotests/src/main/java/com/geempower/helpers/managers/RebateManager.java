@@ -16,6 +16,10 @@ public class RebateManager {
         rebatesList.add(new Rebate(id, spaQuoteNo, endCustomerNo, distributorInvoiceNo, products));
     }
 
+    public void createRebateInstance(String id, long spaQuoteNo, String catalogNo){
+        rebatesList.add(new Rebate(id, spaQuoteNo, catalogNo));
+    }
+
     public Rebate getRebateById(String rebateId) {
         return rebatesList.stream().filter(rebate -> rebate.getId().equals(rebateId)).findAny().orElse(null);
     }

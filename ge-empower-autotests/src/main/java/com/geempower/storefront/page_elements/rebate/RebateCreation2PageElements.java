@@ -10,5 +10,7 @@ public class RebateCreation2PageElements {
     public final static String END_CUSTOMER_INVOICE_DATE_VALUE_XPATH = "//input[contains(@name, 'endCustomerInvoiceDateStr')]";
     public final static String DISTRIBUTOR_INVOICE_NO_VALUE_XPATH = "//input[contains(@name, 'distributorInvoiceNumber')]";
     public final static String QTY_SOLD_VALUE_XPATH = "//input[contains(@name, 'qtySold')]";
-    public final static String NEXT_TOP_BUTTON = "//div[contains(@class,'return-order-title')]//button[@class='btn primary-btn btnRequestSummary reviewRequestsValidate']";
+    public final static String NEXT_TOP_BUTTON_XPATH = "//div[contains(@class,'return-order-title')]//button[@class='btn primary-btn btnRequestSummary reviewRequestsValidate']";
+    public final static String END_CUSTOMER_INVOICE_DATE_VALIDATION_MESSAGE_XPATH = "//p[@class='text-red font-12']";
+    public final static String ERROR_MESSAGE_ON_REBATE_CREATION_SECOND_PAGE_XPATH = "//span[@class='warning-text']/../../../div[@class='errors-rebates warning-message']";
 }

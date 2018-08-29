@@ -43,3 +43,37 @@ Feature: Some actions on Rebates page
     And Rebate is created with all parameters.
     Then Rebates title is displayed on Rebates page.
     Then Created rebate is appeared on the All Rebates page.
+
+  Scenario: Check that user is able to place rebate via file uploading.
+    When Users click on the Create Rebate button on the All Rebates page.
+    Then First step of rebate creation process is opened.
+    And Upload test rebate file with name rebate2.xlsx.
+    When User clicks on the Next top button on the first rebate creation step.
+    Then Second step is opened.
+    And Spa No. and Catalog No. are stored to the threadVarsHashMap.
+    When User clicks on the Next top button on the second rebate creation step.
+    Then Request summary step is opened.
+    When User clicks on the Submit rebate button.
+    And Users accepts Terms and Conditions for Rebates popup.
+    Then Request Submission Successful pop-up is displayed.
+    And Rebate is created with all parameters.
+    Then Rebates title is displayed on Rebates page.
+    Then Created rebate is appeared on the All Rebates page.
+
+  Scenario: Check validation message for End Customer Invoice Date > Current date via file uploading.
+    When Users click on the Create Rebate button on the All Rebates page.
+    Then First step of rebate creation process is opened.
+    And Upload test rebate file with name futureDate-rebate2.xlsx.
+    When User clicks on the Next top button on the first rebate creation step.
+    Then Second step is opened.
+    Then Validation message Date should not be more than current date is displayed under the End Customer Invoice Date field.
+    Then Error message is displayed Invalid invoice dates: 01/01/2020 in the top of Rebate Second step page.
+
+  Scenario: Check validation message for End Customer Invoice Date > Current date via file uploading.
+    When Users click on the Create Rebate button on the All Rebates page.
+    Then First step of rebate creation process is opened.
+    And Upload test rebate file with name pastDate-rebate2.xlsx.
+    When User clicks on the Next top button on the first rebate creation step.
+    Then Second step is opened.
+    Then Validation message Date should not be more than 90 days prior to current date is displayed under the End Customer Invoice Date field.
+    Then Error message is displayed Invalid invoice dates: 01/01/2017 in the top of Rebate Second step page.

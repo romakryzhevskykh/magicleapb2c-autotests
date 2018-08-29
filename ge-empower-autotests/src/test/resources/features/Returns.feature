@@ -49,7 +49,7 @@ Feature: Return creation tests
       | EMEA          |
       | ASIA          |
 
-  Scenario Outline: Check that user is able to create returns manually via uploading file
+  Scenario Outline: Check that user is able to create returns manually via uploading file.
     And Account management page is opened.
     When Choose North_America region.
     And Search random account for chosen region.

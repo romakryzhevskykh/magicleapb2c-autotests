@@ -254,7 +254,6 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then Orders Details page is opened.
     Then GE Order No. is correct.
 
-
     Examples:
       | region        | productNo | salesDivision | account | productId     | quantity |
       | North_America | THQL1130  | USS1_10_10    | 8192306 | 9328719331329 | 1        |

@@ -1,7 +1,9 @@
 package com.geempower.storefront.pages.rebate;
 
+import com.geempower.helpers.Utils;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -11,6 +13,9 @@ import static com.geempower.storefront.page_elements.rebate.RebateCreation1PageE
 
 @Component
 public class RebateCreation1Page extends StorefrontBasePage {
+
+    @Autowired
+    private Utils utils;
 
     private final String pageUri = "rebate/create-rebate";
 
@@ -109,7 +114,13 @@ public class RebateCreation1Page extends StorefrontBasePage {
 
     @Step("Click On Next Button On First Page")
     public void clickOnTopNextButton() {
+        waitUntilPageIsFullyLoaded();
         $(NEXT_TOP_BUTTON_FIRST_STEP_XPATH).click();
         waitUntilPageIsFullyLoaded();
+    }
+
+    public void uploadRebateFile(String fileName) {
+        waitUntilPageIsFullyLoaded();
+        utils.uploadFileByName(fileName, UPLOAD_INPUT_PATH_XPATH);
     }
 }
