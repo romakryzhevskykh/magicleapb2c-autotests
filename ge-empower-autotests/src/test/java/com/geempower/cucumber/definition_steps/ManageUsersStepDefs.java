@@ -197,6 +197,11 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         assertEquals(title, iWantToBlock.getNoDataTitleInPendingSoCodesTable());
     }
 
+    @Then("^(.*) title is displayed in All Accounts table.$")
+    public void getNoDataTitleInAllAccountsTable(String title) {
+        assertEquals(title, iWantToBlock.getNoDataTitleInAllAccountsTable());
+    }
+
     @And("^Sets (.*) account to the account field.$")
     public void setsAccountAccountToTheAccountField(String account) {
         manageUsersPage.setAccountToTheAccountSearchField(account);
