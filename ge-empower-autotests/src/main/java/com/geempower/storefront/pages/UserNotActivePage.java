@@ -17,5 +17,4 @@ public class UserNotActivePage extends StorefrontBasePage {
     public boolean isOpened() {
         return getCurrentUrl().equals(getPageUrl());
     }
-
 }
