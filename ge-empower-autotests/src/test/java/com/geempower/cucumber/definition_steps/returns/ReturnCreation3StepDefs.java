@@ -3,12 +3,10 @@ package com.geempower.cucumber.definition_steps.returns;
 import com.geempower.cucumber.definition_steps.AbstractStepDefs;
 import com.geempower.cucumber.definition_steps.TestKeyword;
 import com.geempower.storefront.pages.returns.ReturnCreation3Page;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.testng.Assert;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.testng.Assert.assertEquals;
