@@ -13,6 +13,7 @@ public class Rebate {
     @Getter @Setter String endCustomerNo;
     @Getter @Setter String distributorInvoiceNo;
     @Getter @Setter LocalDate dateSubmitted;
+    @Getter @Setter String catalogNo;
     @Getter HashMap <Product, Integer> products = new HashMap<>();
 
     public Rebate(String id, long spaQuoteNo, String endCustomerNo, String distributorInvoiceNo, HashMap<Product, Integer> products){
@@ -21,5 +22,11 @@ public class Rebate {
         this.endCustomerNo = endCustomerNo;
         this.distributorInvoiceNo = distributorInvoiceNo;
         this.products.putAll(products);
+    }
+
+    public Rebate(String id, long spaQuoteNo, String catalogNo) {
+        this.id = id;
+        this.spaQuoteNo = spaQuoteNo;
+        this.catalogNo = catalogNo;
     }
 }

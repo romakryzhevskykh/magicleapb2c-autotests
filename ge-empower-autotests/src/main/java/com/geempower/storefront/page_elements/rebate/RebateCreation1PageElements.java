@@ -20,4 +20,5 @@ public class RebateCreation1PageElements {
     public final static String NEXT_TOP_BUTTON_FIRST_STEP_XPATH = "//div[@class='panel clearfix']//button[@class='btn primary-btn pass-to-review-request-btn']";
     public final static String SPECIAL_PRICING_LOOKUP_POP_UP_TITLE_XPATH = "//div[@id='rebate-special-pricing-lookup-modal']//h4[@class='modal-title']";
     public final static String END_CUSTOMER_ACCOUNT_NO_POP_UP_TITLE_XPATH = "//div[@id='rebate-end-customer-modal']//h4[@class='modal-title']";
+    public final static String UPLOAD_INPUT_PATH_XPATH = "//input[@id='rebate-upload-file']";
 }

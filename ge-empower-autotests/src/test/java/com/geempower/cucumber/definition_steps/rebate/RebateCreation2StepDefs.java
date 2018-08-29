@@ -4,12 +4,14 @@ import com.geempower.cucumber.definition_steps.AbstractStepDefs;
 import com.geempower.cucumber.definition_steps.TestKeyword;
 import com.geempower.helpers.models.Product;
 import com.geempower.storefront.pages.rebate.RebateCreation2Page;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class RebateCreation2StepDefs extends AbstractStepDefs {
@@ -38,5 +40,21 @@ public class RebateCreation2StepDefs extends AbstractStepDefs {
     @When("^User clicks on the Next top button on the second rebate creation step.$")
     public void userClicksOnTheNextTopButtonOnTheSecondRebateCreationStep() {
         rebateCreation2Page.clickOnNextButtonOnSecondPage();
+    }
+
+    @And("^Spa No. and Catalog No. are stored to the threadVarsHashMap.$")
+    public void spaNoAndCatalogNoAreStoredToTheThreadVarsHashMap() {
+        threadVarsHashMap.put(TestKeyword.REBATE_SPA_NO,rebateCreation2Page.getSpaNo());
+        threadVarsHashMap.put(TestKeyword.REBATE_CATALOG_NO, rebateCreation2Page.getCatalogNo());
+    }
+
+    @Then("^Validation message (.*) is displayed under the End Customer Invoice Date field.$")
+    public void validationMessageIsDisplayedUnderTheEndCustomerInvoiceDateField(String validationMessage) {
+        assertEquals(validationMessage, rebateCreation2Page.getValidationMessageForEndCustomerInvoiceDate());
+    }
+
+    @Then("^Error message is displayed (.*) in the top of Rebate Second step page.$")
+    public void errorMessageIsDisplayedInvalidInvoiceDatesInTheTopOfRebateSecondStepPage(String errorMessage) {
+        assertEquals(errorMessage, rebateCreation2Page.getErrorMessageOnTheTopRebatePage());
     }
 }
