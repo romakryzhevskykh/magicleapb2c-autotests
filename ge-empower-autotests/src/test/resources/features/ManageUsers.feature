@@ -151,7 +151,6 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
       | externaluser01 |
 
   Scenario Outline: Check that admin is able Wipe All Accounts to user and user will see /userNotActive page
-    And Profile page is opened.
     And Manage Users page is opened.
     When Admin opens Users tab.
     And Sets <userId> email to the email field.
@@ -176,6 +175,41 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     When Click on Select All checkbox in the Add Account pop-up.
     And Click on Add button in the Add Account pop-up.
     Then Is account <account> displayed in the All Accounts tab.
+
+    Examples:
+      | userId         | account |
+      | externaluser01 | 9012306 |
+
+  Scenario Outline: Check that admin is able Wipe All Accounts & Deactivate to user and user will see /userNotActive page
+    And Profile page is opened.
+    And Admin's name and last name are stored to threadVars.
+    And Manage Users page is opened.
+    When Admin opens Users tab.
+    And Sets <userId> email to the email field.
+    And Clicks on the Search button.
+    When Clicks on the user name in the table.
+    Then User details block for chosen user with <userId> userId is opened.
+    When Admin opens Actions list.
+    And Chooses Wipe All Accounts & Deactivate User option from the actions list.
+    Then Chosen user's status has been changed to Inactive and sub-status details are correct.
+    Given Switch to Storefront as externalUser1.
+    And User is logged in to Storefront.
+    And Refresh page.
+    Then User sees User not active page.
+    Given Switch to Storefront as admin.
+    When Admin opens Actions list.
+    And Expand Modify an Account tab in I Want To Block.
+    Then No data available in table title is displayed in All Accounts table.
+    When Click on Add account button in User Detail block.
+    And Select ASIA in the Region field in the Add Account pop-up.
+    And Set <account> to the Account field in the Add Account pop-up.
+    And Click on the Search button in the Add Account pop-up.
+    Then Add New Accounts table is displayed in the Add Account pop-up.
+    When Click on Select All checkbox in the Add Account pop-up.
+    And Click on Add button in the Add Account pop-up.
+    Then Is account <account> displayed in the All Accounts tab.
+    When Clicks on the user name in the table.
+    Then Chosen user has Active user status.
 
     Examples:
       | userId         | account |
