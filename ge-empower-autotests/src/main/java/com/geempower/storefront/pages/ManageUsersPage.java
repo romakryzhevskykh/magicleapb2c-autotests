@@ -32,7 +32,7 @@ public class ManageUsersPage extends StorefrontBasePage {
 
     @Step("Open Users tab.")
     public void openUsersTab() {
-        $(USERS_TAB_XPATH).click();
+        click(USERS_TAB_XPATH);
         waitUntilPageIsFullyLoaded();
     }
 
@@ -45,7 +45,7 @@ public class ManageUsersPage extends StorefrontBasePage {
 
     @Step("Click on Search User button.")
     public void clickOnSearchUserButton() {
-        $(SEARCH_USER_BY_PARAMS_BUTTON_XPATH).click();
+        click(SEARCH_USER_BY_PARAMS_BUTTON_XPATH);
         waitUntilPageIsFullyLoaded();
     }
 
@@ -101,7 +101,7 @@ public class ManageUsersPage extends StorefrontBasePage {
     @Step("Click On Search Button In The Add Account Pop-Up.")
     public void clickOnTheSearchButtonInTheAddAccountPopUp() {
         waitUntilPageIsFullyLoaded();
-        $(SEARCH_BUTTON_XPATH).click();
+        click(SEARCH_BUTTON_XPATH);
     }
 
     @Step("Get Account No from Add Account Pop-Up.")
@@ -183,7 +183,7 @@ public class ManageUsersPage extends StorefrontBasePage {
 
     @Step("Click on appropriate option in actions list.")
     public void clickOnAppropriateOptionOnActionsList(String actionName) {
-        $(APPROPRIATE_USER_OPTION_XPATH, actionName).click();
+        click(APPROPRIATE_USER_OPTION_XPATH, actionName);
     }
 
     @Step("Getting user's sub status.")

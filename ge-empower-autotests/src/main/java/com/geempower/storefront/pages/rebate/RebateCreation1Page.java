@@ -36,7 +36,7 @@ public class RebateCreation1Page extends StorefrontBasePage {
     }
     @Step("Choose Manual Entry Option")
     public void chooseManualEntryOption() {
-        $(MANUAL_ENTRY_OPTION_XPATH).click();
+        click(MANUAL_ENTRY_OPTION_XPATH);
     }
 
     @Step("Set Appropriate Account To The Account No Field")
@@ -44,13 +44,13 @@ public class RebateCreation1Page extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
         $(ACCOUNT_NO_INPUT_XPATH).clear();
         $(ACCOUNT_NO_INPUT_XPATH).sendKeys(chosenAccountNo);
-        $(FIRST_ACCOUNT_FROM_THE_RESULT_ACCOUNTS_LIST_XPATH).click();
+        click(FIRST_ACCOUNT_FROM_THE_RESULT_ACCOUNTS_LIST_XPATH);
     }
 
     @Step("Choose Random Spa No From The List Of Available Spa")
     public long chooseRandomSpaNoFromTheListOfAvailableSpa(String listTitle) {
         waitUntilPageIsFullyLoaded();
-        $(SPA_NO_SEARCH_ICON_XPATH).click();
+        click(SPA_NO_SEARCH_ICON_XPATH);
         waitUntilPageIsFullyLoaded();
         StringBuilder spaNo = new StringBuilder("");
         waitForElementWithAppropriateTextToAppear(By.xpath(SPECIAL_PRICING_LOOKUP_POP_UP_TITLE_XPATH), listTitle);
@@ -58,7 +58,7 @@ public class RebateCreation1Page extends StorefrontBasePage {
             spaNo.append(webElement.getText());
             click(webElement);
         });
-        $(SPECIAL_PRICING_LOOKUP_APPLY_BUTTON_XPATH).click();
+        click(SPECIAL_PRICING_LOOKUP_APPLY_BUTTON_XPATH);
         return Long.parseLong(String.valueOf(spaNo));
     }
 
@@ -71,24 +71,24 @@ public class RebateCreation1Page extends StorefrontBasePage {
     @Step("Set Random End Customer No")
     public String setRandomEndCustomerNo(String listTitle) {
         waitUntilPageIsFullyLoaded();
-        $(END_CUSTOMER_ACCOUNT_NO_SEARCH_ICON_XPATH).click();
+        click(END_CUSTOMER_ACCOUNT_NO_SEARCH_ICON_XPATH);
         waitUntilPageIsFullyLoaded();
         StringBuilder endCustomerNo = new StringBuilder("");
         waitForElementWithAppropriateTextToAppear(By.xpath(END_CUSTOMER_ACCOUNT_NO_POP_UP_TITLE_XPATH), listTitle);
         $$(END_CUSTOMER_NO_LIST_XPATH).stream().findAny().ifPresent(webElement -> {
             moveToElement(webElement);
             endCustomerNo.append(webElement.getText());
-            webElement.click();
+            click(webElement);
         });
-        $(END_CUSTOMER_NO_APPLY_BUTTON_XPATH).click();
+        click(END_CUSTOMER_NO_APPLY_BUTTON_XPATH);
         return String.valueOf(endCustomerNo);
     }
 
     @Step("Set End Customer Invoice Date")
     public void setEndCustomerInvoiceDate() {
         waitUntilPageIsFullyLoaded();
-        $(END_CUSTOMER_INVOICE_DATE_ICON_XPATH).click();
-        $(SOME_AVAILABLE_DAY_FROM_CALENDAR_XPATH).click();
+        click(END_CUSTOMER_INVOICE_DATE_ICON_XPATH);
+        click(SOME_AVAILABLE_DAY_FROM_CALENDAR_XPATH);
     }
 
     @Step("Set Random Distributor Invoice No")
@@ -114,13 +114,12 @@ public class RebateCreation1Page extends StorefrontBasePage {
 
     @Step("Click On Next Button On First Page")
     public void clickOnTopNextButton() {
-        waitUntilPageIsFullyLoaded();
-        $(NEXT_TOP_BUTTON_FIRST_STEP_XPATH).click();
-        waitUntilPageIsFullyLoaded();
+        click(NEXT_TOP_BUTTON_FIRST_STEP_XPATH);
     }
 
     public void uploadRebateFile(String fileName) {
         waitUntilPageIsFullyLoaded();
         utils.uploadFileByName(fileName, UPLOAD_INPUT_PATH_XPATH);
+        waitUntilPageIsFullyLoaded();
     }
 }

@@ -69,7 +69,7 @@ Feature: Some actions on Rebates page
     Then Validation message Date should not be more than current date is displayed under the End Customer Invoice Date field.
     Then Error message is displayed Invalid invoice dates: 01/01/2020 in the top of Rebate Second step page.
 
-  Scenario: Check validation message for End Customer Invoice Date > Current date via file uploading.
+  Scenario: Check validation message for Current date < 90 days via file uploading.
     When Users click on the Create Rebate button on the All Rebates page.
     Then First step of rebate creation process is opened.
     And Upload test rebate file with name pastDate-rebate2.xlsx.

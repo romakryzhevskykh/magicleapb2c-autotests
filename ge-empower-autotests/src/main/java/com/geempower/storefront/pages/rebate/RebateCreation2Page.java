@@ -42,8 +42,7 @@ public class RebateCreation2Page extends StorefrontBasePage {
 
     @Step("Click On Next Button On Second Page.")
     public void clickOnNextButtonOnSecondPage() {
-        waitUntilPageIsFullyLoaded();
-        $(NEXT_TOP_BUTTON_XPATH).click();
+        click(NEXT_TOP_BUTTON_XPATH);
     }
 
     @Step("Get actual Spa no. value on the second Rebate creation page.")

@@ -48,8 +48,8 @@ public class RebateCreation3Page extends StorefrontBasePage {
     @Step("Accept Terms And Condition PopUp")
     public void acceptTermsAndConditionPopUp(String popupTitle) {
         waitForElementWithAppropriateTextToAppear(By.xpath(TERMS_AND_CONDITIONS_POPUP_XPATH), popupTitle);
-        $(TERMS_AND_CONDITIONS_POPUP_CHECKBOX_XPATH).click();
-        $(TERMS_AND_CONDITIONS_SUBMIT_BUTTON_XPATH).click();
+        click(TERMS_AND_CONDITIONS_POPUP_CHECKBOX_XPATH);
+        click(TERMS_AND_CONDITIONS_SUBMIT_BUTTON_XPATH);
     }
 
     @Step("Check than submission Popup Is Appeared")
@@ -66,6 +66,6 @@ public class RebateCreation3Page extends StorefrontBasePage {
     @Step("Close Successful Popup")
     public void closeSuccessfulPopup() {
         waitUntilPageIsFullyLoaded();
-        $(REQUEST_SUBMISSION_POPUP_CLOSE_BUTTON_XPATH).click();
+        click(REQUEST_SUBMISSION_POPUP_CLOSE_BUTTON_XPATH);
     }
 }
