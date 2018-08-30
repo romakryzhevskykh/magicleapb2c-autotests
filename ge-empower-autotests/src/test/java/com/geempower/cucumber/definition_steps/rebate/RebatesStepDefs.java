@@ -10,8 +10,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class RebatesStepDefs extends AbstractStepDefs {
     @Autowired
@@ -45,5 +44,30 @@ public class RebatesStepDefs extends AbstractStepDefs {
         int rebatesCountForAdmin = (Integer) threadVarsHashMap.get(TestKeyword.ALL_REBATES_COUNT);
         int rebatesCountForRegionalView = rebatesPage.getNumberOfAllRebates();
         assertTrue(rebatesCountForAdmin == rebatesCountForRegionalView);
+    }
+
+    @When("^User opens Saved credit request tab.$")
+    public void userOpensSavedCreditRequestTab() {
+        rebatesPage.openSavedCreditRequestsTab();
+    }
+
+    @Then("^The rebate with appropriate name is displayed on the Saved credit request tab.$")
+    public void theRebateWithAppropriateNameIsDisplayedOnTheSavedCreditRequestTab() {
+        assertEquals(threadVarsHashMap.get(TestKeyword.REBATE_SAVE_FOR_LATER_LIST_NAME), rebatesPage.getLastSavedRebateName());
+    }
+
+    @When("^User clicks on Edit saved rebate icon.$")
+    public void userClicksOnEditSavedRebateIcon() {
+        rebatesPage.editJustSavedRebate();
+    }
+
+    @And("^Delete just saved rebate.$")
+    public void deleteJustSavedRebate() {
+        rebatesPage.deleteJustSavedRebate();
+    }
+
+    @Then("^The rebate with appropriate name is not displayed on the Saved credit request tab.$")
+    public void theRebateWithAppropriateNameIsNotDisplayedOnTheSavedCreditRequestTab() {
+        assertNotEquals(threadVarsHashMap.get(TestKeyword.REBATE_SAVE_FOR_LATER_LIST_NAME), rebatesPage.getLastSavedRebateName());
     }
 }

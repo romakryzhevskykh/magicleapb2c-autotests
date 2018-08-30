@@ -1,6 +1,8 @@
 package com.geempower.storefront.pages.rebate;
 
+import com.geempower.helpers.Utils;
 import com.geempower.storefront.StorefrontBasePage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -8,6 +10,9 @@ import static com.geempower.storefront.page_elements.rebate.RebateCreation2PageE
 
 @Component
 public class RebateCreation2Page extends StorefrontBasePage {
+
+    @Autowired
+    private Utils utils;
 
     private final String pageUri = "rebate/review-request";
 
@@ -19,7 +24,7 @@ public class RebateCreation2Page extends StorefrontBasePage {
     @Override
     public boolean isOpened() {
         waitUntilPageIsFullyLoaded();
-        return getCurrentUrl().equals(getPageUrl());
+        return getCurrentUrl().contains(getPageUrl());
     }
 
     @Step("Check that second Step Is Opened.")
@@ -62,6 +67,38 @@ public class RebateCreation2Page extends StorefrontBasePage {
 
     @Step("Get error message on the top of the page.")
     public String getErrorMessageOnTheTopRebatePage() {
+        waitUntilPageIsFullyLoaded();
         return $(ERROR_MESSAGE_ON_REBATE_CREATION_SECOND_PAGE_XPATH).getText();
+    }
+
+    @Step("Click On Save For Later Button.")
+    public void clickOnSaveForLaterButton() {
+        click(SAVE_FOR_LATER_REBATE_BUTTON_XPATH);
+    }
+
+    @Step("Get Save For Later Pop-Up Title.")
+    public String getSaveForLaterPopUpTitle() {
+        waitUntilPageIsFullyLoaded();
+        return $(SAVE_FOR_LATER_POP_UP_TITLE_XPATH).getText();
+    }
+
+    @Step("Get Save For Later Pop-up Header.")
+    public String getSaveForLaterPopUpHeader() {
+        waitUntilPageIsFullyLoaded();
+        return $(SAVE_FOR_LATER_POP_UP_HEADER_XPATH).getText();
+    }
+
+    @Step("Click Save New Rebates List.")
+    public void clickSaveNewRebatesList() {
+        click(SAVE_FOR_LATER_POP_UP_SAVE_BUTTON_XPATH);
+    }
+
+    @Step("Set Name For New Saved Rebate List.")
+    public String setNameForNewSavedRebateList() {
+        waitUntilPageIsFullyLoaded();
+        String rebateListName = utils.getLocalDateTimeStamp();
+        $(SAVE_FOR_LATER_POP_UP_LIST_NAME_INPUT_XPATH).clear();
+        $(SAVE_FOR_LATER_POP_UP_LIST_NAME_INPUT_XPATH).sendKeys(rebateListName);
+        return rebateListName;
     }
 }

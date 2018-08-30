@@ -13,4 +13,9 @@ public class RebateCreation2PageElements {
     public final static String NEXT_TOP_BUTTON_XPATH = "//div[contains(@class,'return-order-title')]//button[@class='btn primary-btn btnRequestSummary reviewRequestsValidate']";
     public final static String END_CUSTOMER_INVOICE_DATE_VALIDATION_MESSAGE_XPATH = "//p[@class='text-red font-12']";
     public final static String ERROR_MESSAGE_ON_REBATE_CREATION_SECOND_PAGE_XPATH = "//div[@class='errors-rebates warning-message']";
+    public final static String SAVE_FOR_LATER_REBATE_BUTTON_XPATH = "//button[@class='btn btn-white save-for-later']";
+    public final static String SAVE_FOR_LATER_POP_UP_TITLE_XPATH = "//div[@id='save-rebate-request-modal']//h4";
+    public final static String SAVE_FOR_LATER_POP_UP_HEADER_XPATH = "//p[@class='save-list-heading']";
+    public final static String SAVE_FOR_LATER_POP_UP_LIST_NAME_INPUT_XPATH = "//input[@class='form-control new-list-input']";
+    public final static String SAVE_FOR_LATER_POP_UP_SAVE_BUTTON_XPATH = "//button[@class='btn primary-btn save-rebate-request-btn-js']";
 }
