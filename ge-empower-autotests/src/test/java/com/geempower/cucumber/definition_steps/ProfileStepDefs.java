@@ -24,6 +24,11 @@ public class ProfileStepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.USER_FIRST_AND_LAST_NAME, profilePage.getUserName() + " " + profilePage.getUserLastName());
     }
 
+    @And("^Admin's name is stored to threadVars.$")
+    public void adminNameIsStoredToThreadVars() {
+        threadVarsHashMap.put(TestKeyword.USER_FIRST_NAME, profilePage.getUserName());
+    }
+
     @SuppressWarnings("unchecked")
     @Then("^Admin Privileges are equal to roles which were set by Admin in each region.$")
     public void adminPrivilegesAreEqualToRolesWhichWereSetByAdminInEachRegion() {

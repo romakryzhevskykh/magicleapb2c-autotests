@@ -215,6 +215,49 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
       | userId         | account |
       | externaluser01 | 9012306 |
 
+
+  Scenario Outline: Check that user can open /userNotActive page and verify main elements
+    And Profile page is opened.
+    And Admin's name is stored to threadVars.
+    And Manage Users page is opened.
+    When Admin opens Users tab.
+    And Sets <userId> email to the email field.
+    And Clicks on the Search button.
+    When Clicks on the user name in the table.
+    Then User details block for chosen user with <userId> userId is opened.
+    When Admin opens Actions list.
+    And Chooses Wipe All Accounts option from the actions list.
+    Given Switch to Storefront as externalUser1.
+    And User is logged in to Storefront.
+    And Refresh page.
+    Then User sees User not active page.
+    Then Is Account Management title displayed.
+    Then Is Appropriate text displayed in the main block.
+    Then Is Appropriate text displayed in the footer block.
+    When User clicks on Request Account button.
+    Then Is Request Account title displayed in request pop-up.
+    And User closes Request Account pop-up.
+    When User clicks on Add New Account field button.
+    Then Is Appropriate 2 account No fields displayed.
+    Given Switch to Storefront as admin.
+    When Admin opens Actions list.
+    And Expand Modify an Account tab in I Want To Block.
+    Then No data available in table title is displayed in All Accounts table.
+    When Click on Add account button in User Detail block.
+    And Select ASIA in the Region field in the Add Account pop-up.
+    And Set <account> to the Account field in the Add Account pop-up.
+    And Click on the Search button in the Add Account pop-up.
+    Then Add New Accounts table is displayed in the Add Account pop-up.
+    When Click on Select All checkbox in the Add Account pop-up.
+    And Click on Add button in the Add Account pop-up.
+    Then Is account <account> displayed in the All Accounts tab.
+    When Clicks on the user name in the table.
+    Then Chosen user has Active user status.
+
+    Examples:
+      | userId         | account |
+      | externaluser01 | 9012306 |
+
   Scenario: Check that admin is able to approve some account requests from external user
     Given Switch to Storefront as externalUser1.
     And User is logged in to Storefront.
