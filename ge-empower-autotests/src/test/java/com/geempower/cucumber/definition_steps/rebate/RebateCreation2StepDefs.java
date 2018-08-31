@@ -16,7 +16,8 @@ import static org.testng.Assert.assertTrue;
 
 public class RebateCreation2StepDefs extends AbstractStepDefs {
 
-    @Autowired private RebateCreation2Page rebateCreation2Page;
+    @Autowired
+    private RebateCreation2Page rebateCreation2Page;
 
     @Then("^Second step is opened.$")
     public void secondStepIsOpened() {
@@ -44,7 +45,7 @@ public class RebateCreation2StepDefs extends AbstractStepDefs {
 
     @And("^Spa No. and Catalog No. are stored to the threadVarsHashMap.$")
     public void spaNoAndCatalogNoAreStoredToTheThreadVarsHashMap() {
-        threadVarsHashMap.put(TestKeyword.REBATE_SPA_NO,rebateCreation2Page.getSpaNo());
+        threadVarsHashMap.put(TestKeyword.REBATE_SPA_NO, rebateCreation2Page.getSpaNo());
         threadVarsHashMap.put(TestKeyword.REBATE_CATALOG_NO, rebateCreation2Page.getCatalogNo());
     }
 
@@ -56,5 +57,30 @@ public class RebateCreation2StepDefs extends AbstractStepDefs {
     @Then("^Error message is displayed (.*) in the top of Rebate Second step page.$")
     public void errorMessageIsDisplayedInvalidInvoiceDatesInTheTopOfRebateSecondStepPage(String errorMessage) {
         assertEquals(errorMessage, rebateCreation2Page.getErrorMessageOnTheTopRebatePage());
+    }
+
+    @Then("^Save to Rebates List with title (.*) pop-up is appeared.$")
+    public void saveForLaterPopUpAppearsWithTitle(String saveForLaterPopUpTitle) {
+        assertEquals(saveForLaterPopUpTitle, rebateCreation2Page.getSaveForLaterPopUpTitle());
+    }
+
+    @When("^User clicks on Save for later button.$")
+    public void userClicksOnSaveForLaterButton() {
+        rebateCreation2Page.clickOnSaveForLaterButton();
+    }
+
+    @Then("^Save for later pop-up contains (.*) header.$")
+    public void saveForLaterPopUpContainsCorrectHeader(String popUpHeader) {
+        assertEquals(popUpHeader, rebateCreation2Page.getSaveForLaterPopUpHeader());
+    }
+
+    @When("^User sets random name to the list name input.$")
+    public void userSetsRandomNameToTheListNameInput() {
+        threadVarsHashMap.put(TestKeyword.REBATE_SAVE_FOR_LATER_LIST_NAME, rebateCreation2Page.setNameForNewSavedRebateList());
+    }
+
+    @And("^User clicks on Save button in Save for later pop-up.$")
+    public void userClicksOnSaveButtonInSaveForLaterPopUp() {
+        rebateCreation2Page.clickSaveNewRebatesList();
     }
 }

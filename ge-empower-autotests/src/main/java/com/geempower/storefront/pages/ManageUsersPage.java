@@ -143,7 +143,7 @@ public class ManageUsersPage extends StorefrontBasePage {
             waitUntilPageIsFullyLoaded();
             counter++;
         }
-        while (!isUserDetailFullyLoaded(countOfAccount) && counter < 30);
+        while (!isUserDetailFullyLoaded(countOfAccount) && counter < 50);
         waitUntilPageIsFullyLoaded();
     }
 
