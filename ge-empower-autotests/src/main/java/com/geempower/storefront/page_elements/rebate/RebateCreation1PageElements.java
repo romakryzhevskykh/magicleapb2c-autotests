@@ -13,7 +13,7 @@ public class RebateCreation1PageElements {
     public final static String END_CUSTOMER_ACCOUNT_NO_SEARCH_ICON_XPATH = "//a[@class='input-group-addon search-end-customer']/i";
     public final static String END_CUSTOMER_NO_LIST_XPATH = "//tr[contains(@class, 'select-end-customer')]/td[1]";
     public final static String END_CUSTOMER_NO_APPLY_BUTTON_XPATH = "//button[@class='btn primary-btn rebates-end-cus-no rebates-end-cus-no-apply-btn']";
-    public final static String END_CUSTOMER_INVOICE_DATE_ICON_XPATH = "//i[@class='fa fa-calendar']";
+    public final static String END_CUSTOMER_INVOICE_DATE_ICON_XPATH = "//i[@class='far fa-calendar-alt']";
     public final static String SOME_AVAILABLE_DAY_FROM_CALENDAR_XPATH = "//td[@class='day']";
     public final static String DISTRIBUTOR_INVOICE_NO_INPUT_XPATH = "//input[contains(@name, 'distributorInvoiceNumber')]";
     public final static String QTY_SOLD_INPUT_XPATH = "//input[@class='form-control numbersOnly mandatory-input']";

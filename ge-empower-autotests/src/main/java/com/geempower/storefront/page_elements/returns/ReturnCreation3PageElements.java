@@ -15,7 +15,7 @@ public class ReturnCreation3PageElements {
     public final static String CATALOG_NO_VALUE_XPATH = "//table[@class='table info-table create-return-table create-return-additional-info-table']//td[@class='create-catalog-col']";
     public final static String MESSAGE_FOR_NON_RETURNABLE_PRODUCTS_XPATH = "//div[@class='warning-message catalog-error-message']/span[2]";
     public final static String EXCLAMATION_MARK_FOR_NON_RETURNABLE_PRODUCT_XPATH = "//td[contains(text(),'%s') and @class]//../td//i[@class='fa fa-exclamation-triangle error-mark']";
-    public final static String ALL_NON_RETURNABLE_PRODUCTS_REMOVE_ICON_XPATH = "//td[contains(text(),'No') and @class]//../td//i[@class='fa fa-trash']";
+    public final static String ALL_NON_RETURNABLE_PRODUCTS_REMOVE_ICON_XPATH = "//td[contains(text(),'No') and @class]//../td//i[@class='fas fa-trash']";
     public final static String ALL_CATALOG_NUMBERS_TEXT_XPATH = "//td[@class='create-catalog-col']";
     public final static String ALL_REASONS_FOR_REQUEST_XPATH = "//td[contains(@class,'create-reason-request-col')]";
     public final static String ALL_REQUESTED_ACTION_XPATH = "//td[contains(@class,'create-requested-action')]";
