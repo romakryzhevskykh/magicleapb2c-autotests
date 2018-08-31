@@ -113,7 +113,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
 
     @Given("^Empty Cart.$")
     public void emptyCart() {
-        cartManager.emptyActiveCart(userSessions.getActiveUserSession());
+        cartManager.clearActiveCart(userSessions.getActiveUserSession());
     }
 
     @SuppressWarnings("unchecked")

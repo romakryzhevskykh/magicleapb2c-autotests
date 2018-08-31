@@ -25,6 +25,7 @@ Feature: Check user restrictions with SUPPLY LISTS PERMISSION and without it.
     When Switch to Storefront cockpit test user.
     And User is logged in to Storefront.
     And Account Dashboard page is opened.
+    And Expand Account Dashboard section on Account Dashboard page.
     Then Check that Supply Lists item is visible on Account Dashboard page.
 
   Scenario: Check that user with only SUPPLY LISTS PERMISSION has access to Supply lists page.
@@ -99,7 +100,7 @@ Feature: Check user restrictions with SUPPLY LISTS PERMISSION and without it.
     When Opened Supply list details page.
     Then Check that change Supply lit status button is visible on Supply list details page.
 
-  Scenario: Check that user with only SUPPLY LISTS PERMISSION has access to Share functionality on Supply list details page.
+  Scenario: Check that user with only SUPPLY LISTS PERMISSION has no access to Share functionality on Supply list details page.
     Given Switch to Storefront cockpit test user.
     And User is logged in to Storefront.
     And Active Supply list exists.
@@ -118,4 +119,6 @@ Feature: Check user restrictions with SUPPLY LISTS PERMISSION and without it.
     When Add to cart INDIVIDUAL, VALID product with quantity 1.
     And Open cart page.
     Then Check that Add to Supply list button is not visible on Cart page.
+
+
 

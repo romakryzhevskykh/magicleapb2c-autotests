@@ -13,6 +13,7 @@ Feature: Check user restrictions with MANAGE CUSTOM CATALOG PERMISSION and witho
     Given Switch to Storefront cockpit test user.
     And User is logged in to Storefront.
     And Open Account Dashboard page.
+    And Expand Administration section on Account Dashboard page.
     Then Check that Custom Category item is visible on Account Dashboard page.
 
   Scenario: Check that user with only MANAGE CUSTOM CATALOG PERMISSION has access to Custom Category page.
