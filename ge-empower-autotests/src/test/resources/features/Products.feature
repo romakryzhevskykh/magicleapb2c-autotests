@@ -8,7 +8,7 @@ Feature: Some actions on Products page
     And Products page is opened.
     Then Products title is displayed on Products page.
 
-  Scenario Outline: Check that user is able to place order from the Products pageAnd Account management page is opened.
+  Scenario Outline: Check that user is able to place order from the Products page.
     And Account management page is opened.
     When Choose <region> region.
     And Search random account for chosen region.
