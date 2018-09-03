@@ -11,7 +11,7 @@ public class OrdersPageElements {
     public final static String ORDER_LINK_BY_ORDER_NO_XPATH = "//td/a[contains(@href, '%s')]";
     public final static String LIST_OF_ORDER_NO_LINKS_XPATH = "//table[contains(@class,'all-order-list-table')]//td[@class = 'table-visible-lg-block']/a[contains(@href,'openOrderDetails')]";
     public final static String OPEN_ORDER_REPORT_TEXT_XPATH = "//span[@class='mr-10 hidden-sm']";
-    public final static String OPEN_ORDER_REPORT_OPEN_BUTTON_XPATH = "//i[@class='fa fa-file-text']";
+    public final static String OPEN_ORDER_REPORT_OPEN_BUTTON_XPATH = "//i[@class='fas fa-file-alt']";
     public final static String OPEN_ORDER_REPORT_WINDOW_TITLE_XPATH = "//header/h3";
     public final static String OPEN_PRICING_OPTIONS_ICON_XPATH = "//span[@id='select2-open-order-report-pricing-container']//../span[2]/b";
     public final static String PRICING_OPTION_BY_OPTION_LABEL_XPATH = "//li[contains(text(),'%s')]";
