@@ -22,9 +22,9 @@
             <class name="com.sarnova.cucumber.PermissionsSuite"/>
             <class name="com.sarnova.cucumber.AddToSupplyListSuite"/>
             <class name="com.sarnova.cucumber.SupplyListsFunctionalitySuit"/>
-            <class name="com.sarnova.cucumber.AddToCartSuite"/>
-            <class name="com.sarnova.cucumber.CheckoutSuite"/>
-            <class name="com.sarnova.cucumber.AddToSupplyListFromCartSuit"/>
+            <!--<class name="com.sarnova.cucumber.AddToCartSuite"/>-->
+            <!--<class name="com.sarnova.cucumber.CheckoutSuite"/>-->
+            <!--<class name="com.sarnova.cucumber.AddToSupplyListFromCartSuit"/>-->
         </classes>
     </test>
 </suite>
