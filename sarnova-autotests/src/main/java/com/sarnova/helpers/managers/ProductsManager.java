@@ -146,7 +146,7 @@ public class ProductsManager {
                                 .get().trim().replaceFirst("Item #: ", "")))
                         .getUnitsOfMeasurement()
                         .stream()
-                        .filter(unitOfMeasure -> unitOfMeasure.getUomType().equalsByFullName(
+                        .filter(unitOfMeasure -> unitOfMeasure.getUomType().equalsByAbbreviation(
                                 Xsoup.select(unitOfMeasureRow, "//div[@class=item__unit]/span[2]/text()").get().trim())
                         )
                 ).collect(Collectors.toList());

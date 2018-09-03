@@ -8,7 +8,7 @@ public class SupplyListDetailsPageElements {
     public static final String SUPPLY_LIST_HEADER_XPATH = "//div[@class = 'well well-tertiary well-lg']";
     public static final String SUPPLY_LIST_ACTIVE_STATUS_XPATH = SUPPLY_LIST_HEADER_XPATH + "//a[contains(@onclick,'activateSavedList')]/span";
     public static final String SUPPLY_LIST_ID_VALUE_XPATH = SUPPLY_LIST_HEADER_XPATH + "//div[@class = 'col-sm-2 item-wrapper']//span[@class = 'item-value']";
-    public static final String ADD_TO_CART_BUTTON_XPATH = "//button[contains(@id,'addGroupToCartButtonTop')]";
+    public static final String ADD_TO_CART_BUTTON_XPATH = "//button[contains(@class,'js-add-to-cart')]";
     public static final String FAVORITE_CHECKBOX_XPATH = "//input[@class='js-savedlist-favorite-checkbox']";
 
     public static final String SHOW_SHARE_FUNC_CHECKBOX_ID = "toggleSupplyListSharingComponent";

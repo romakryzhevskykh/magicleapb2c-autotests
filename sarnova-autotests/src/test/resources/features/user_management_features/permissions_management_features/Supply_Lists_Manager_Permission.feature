@@ -25,6 +25,7 @@ Feature: Check user restrictions with MANAGE SUPPLY LISTS PERMISSION and without
     When Switch to Storefront cockpit test user.
     And User is logged in to Storefront.
     And Account Dashboard page is opened.
+    And Expand Account Dashboard section on Account Dashboard page.
     Then Check that Supply Lists item is visible on Account Dashboard page.
 
   Scenario: Check that user with only MANAGE SUPPLY LISTS PERMISSION has access to Supply lists page.
