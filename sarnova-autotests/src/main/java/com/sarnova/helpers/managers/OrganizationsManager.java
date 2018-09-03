@@ -8,7 +8,7 @@ public class OrganizationsManager {
     private final Organization organization;
 
     public OrganizationsManager() {
-        this.organization = new Organization("E15019000_ESHIP000");
+        this.organization = new Organization("E160280_ESHIP001");
     }
 
     public Organization getOrganization() {
