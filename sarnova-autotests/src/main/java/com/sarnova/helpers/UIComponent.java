@@ -223,6 +223,11 @@ public abstract class UIComponent {
         } catch (UnhandledAlertException ex) {
             System.out.println("[ERROR]: " + ex);
         }
+        try {
+            Thread.sleep((long) (1000 * webDriverPool.getActiveDriverSession().getShortTimeOut() / 10));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void waitForAngularLoad() {

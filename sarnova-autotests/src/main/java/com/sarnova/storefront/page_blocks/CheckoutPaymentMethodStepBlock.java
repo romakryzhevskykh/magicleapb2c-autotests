@@ -130,7 +130,8 @@ public class CheckoutPaymentMethodStepBlock extends UIComponent {
 
     @Step("Click on BILLING ADDRESS IS THE SAME AS SHIPPING ADDRESS checkbox.")
     public void clickOnUseTheSameBillingAddressCheckox() {
-        click(BILLING_ADDRESS_IS_THE_SAME_AS_SHIPPING_ADDRESS_CHECKBOX_XPATH);
+//        click("//input[@name='changeBillingAddress']");
+        click(BILLING_ADDRESS_IS_THE_SAME_AS_SHIPPING_ADDRESS_SELECTBOX_XPATH);
     }
 
     @Step("Deselect BILLING ADDRESS IS THE SAME AS SHIPPING ADDRESS checkbox.")
