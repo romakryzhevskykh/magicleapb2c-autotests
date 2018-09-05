@@ -2,6 +2,7 @@ package com.sarnova.storefront.page_blocks;
 
 import com.sarnova.helpers.UIComponent;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -21,7 +22,7 @@ public class CheckoutPaymentMethodStepBlock extends UIComponent {
     @Step("Select Card payment type on Checkout Payment method step.")
     public void selectCardPaymentType() {
         click(CARD_PAYMENT_CHECKBOX_XPATH);
-        waitUntilElementIsVisible(By.id(CARD_ACCOUNT_NUMBER_FIELD_ID));
+        loadingCCForm();
     }
 
     @Step("Is Card payment type checkbox visible?")
@@ -205,5 +206,22 @@ public class CheckoutPaymentMethodStepBlock extends UIComponent {
     @Step("Enter Billing address Phone number: {0}.")
     public void fillBillingAddressPhoneNumber(String phoneNumber) {
         enterText(phoneNumber, By.id(BILLING_ADDRESS_PHONE_FIELD_ID));
+    }
+
+    @Step("wait until CC details are loaded.")
+    public void waitUntilCreditCardDetailsAreLoaded() {
+        if(isCCMustBeOpened()) {
+            loadingCCForm();
+        }
+    }
+
+    @Step("Is CC must be opened?")
+    private boolean isCCMustBeOpened() {
+        return !$(CREDIT_CARD_DETAILS_BLOCK_XPATH).getAttribute("class").equals("hidden");
+    }
+
+    @Step("Loading CC fields.")
+    private void loadingCCForm() {
+        waitUntil(driver1 -> $$(CREDIT_CARD_FORM_FIELDS_XPATH).stream().allMatch(WebElement::isDisplayed));
     }
 }

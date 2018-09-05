@@ -1,7 +1,6 @@
 package com.sarnova.storefront.page_blocks;
 
 import com.sarnova.helpers.UIComponent;
-import org.openqa.selenium.By;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -21,12 +20,30 @@ public class AddToCartPopUpBlock extends UIComponent {
         return $(CONTENT_MESSAGE_TEXT_XPATH).getText().trim();
     }
 
-    @Step("Wait images are loaded.")
+    @Step("Wait product images are loaded.")
     public void waitUntilProductImagesAreVisible() {
-        if (isDisplayed(By.xpath(CART_POP_UP_IMAGES_XPATH))) {
-            $$(CART_POP_UP_IMAGES_XPATH).forEach(webElement ->
-                    waitUntil(driver1 -> (webElement.getSize().getHeight() >= 20 && webElement.getSize().getWidth() >= 20))
-            );
+        if (isPresent(CART_POP_UP_IMAGES_XPATH)) {
+            loadingProductImages();
         }
+    }
+
+    @Step("Loading product images.")
+    private void loadingProductImages() {
+        $$(CART_POP_UP_IMAGES_XPATH).forEach(webElement ->
+                waitUntil(driver1 -> (webElement.getSize().getHeight() >= 20 && webElement.getSize().getWidth() >= 20))
+        );
+    }
+
+    @Step("Wait banner image is loaded.")
+    public void waitUntilBannerImageIsVisible() {
+        if (isPresent(CART_POP_UP_BANNER_IMAGE_XPATH)) {
+            loadingBannerImage();
+        }
+    }
+
+    @Step("Loading banner image.")
+    private void loadingBannerImage() {
+        waitUntil(driver1 -> ($(CART_POP_UP_BANNER_IMAGE_XPATH).getSize().getHeight() >= 20
+                && $(CART_POP_UP_BANNER_IMAGE_XPATH).getSize().getWidth() >= 20));
     }
 }

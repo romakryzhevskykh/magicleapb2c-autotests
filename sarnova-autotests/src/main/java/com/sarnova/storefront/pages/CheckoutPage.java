@@ -31,6 +31,7 @@ public class CheckoutPage extends StorefrontBasePage {
 
     public void clickOnNextButtonOnShippingMethodStep() {
         shippingMethodStepBlock.clickOnNextButton();
+        paymentMethodStepBlock.waitUntilCreditCardDetailsAreLoaded();
     }
 
     public boolean isLicensePopUpOpened() {
@@ -302,5 +303,10 @@ public class CheckoutPage extends StorefrontBasePage {
 
     public boolean isPlaceOrderButtonEnabled() {
         return finalReviewStepBlock.isPlaceOrderButtonEnabled();
+    }
+
+    public void waitUntilShippingAddressPageIsLoaded() {
+        waitUntilPageIsFullyLoaded();
+        shippingAddressStepBlock.waitUntilCountryCheckboxIsDisappeared();
     }
 }

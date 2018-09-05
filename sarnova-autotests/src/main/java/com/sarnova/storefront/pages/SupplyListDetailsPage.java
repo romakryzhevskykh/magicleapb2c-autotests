@@ -125,6 +125,7 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
         click(ADD_TO_CART_BUTTON_XPATH);
         waitUntilPageIsFullyLoaded();
         addToCartPopUpBlock.waitUntilProductImagesAreVisible();
+        addToCartPopUpBlock.waitUntilBannerImageIsVisible();
     }
 
     @Step("Is Add to cart button visible?")
