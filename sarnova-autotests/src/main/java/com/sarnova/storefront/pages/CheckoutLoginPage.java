@@ -1,6 +1,7 @@
 package com.sarnova.storefront.pages;
 
 import org.openqa.selenium.By;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -9,6 +10,7 @@ import static com.sarnova.storefront.page_elements.CheckoutLoginPageElements.*;
 @Component
 public class CheckoutLoginPage extends StorefrontBasePage {
     private String pageUrlMethod = "login/checkout";
+    @Autowired CheckoutPage checkoutPage;
 
     @Step("Fill guest email: {0}.")
     public void fillGuestEmail(String email) {
@@ -23,7 +25,7 @@ public class CheckoutLoginPage extends StorefrontBasePage {
     @Step("Click on confirm login button.")
     public void clickOnCheckOutAsAGuest() {
         click(CONFIRM_LOGIN_BUTTON_XPATH);
-        waitUntilPageIsFullyLoaded();
+        checkoutPage.waitUntilShippingAddressPageIsLoaded();
     }
 
     @Step("Login as a guest with a random email.")

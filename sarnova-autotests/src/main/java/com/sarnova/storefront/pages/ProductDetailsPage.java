@@ -110,6 +110,7 @@ public class ProductDetailsPage extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
         waitUntilElementIsVisible(By.id(POP_UP_ID));
         addToCartPopUpBlock.waitUntilProductImagesAreVisible();
+        addToCartPopUpBlock.waitUntilBannerImageIsVisible();
     }
 
     @Step("Is Add to Supply list button visible?")

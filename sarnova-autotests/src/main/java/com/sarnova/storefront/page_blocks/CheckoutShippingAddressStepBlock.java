@@ -96,4 +96,9 @@ public class CheckoutShippingAddressStepBlock extends UIComponent {
     public void fillPhoneNumber(String phoneNUmber) {
         enterText(phoneNUmber, By.id(PHONE_FIELD_ID));
     }
+
+    @Step("Wait until Country checkbox is disappeared.")
+    public void waitUntilCountryCheckboxIsDisappeared() {
+        waitUntil(driver1 -> !isDisplayed(By.id(SELECT_COUNTRY_DROP_DOWN_ID)));
+    }
 }
