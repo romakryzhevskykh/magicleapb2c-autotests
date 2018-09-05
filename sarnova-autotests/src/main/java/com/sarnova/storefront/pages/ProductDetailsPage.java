@@ -27,6 +27,7 @@ public class ProductDetailsPage extends StorefrontBasePage {
         click(ADD_TO_SUPPLY_LIST_BUTTONS_XPATH);
         waitUntilPageIsFullyLoaded();
         addToSupplyListPopUpBlock.waitUntilProductImagesAreVisible();
+        addToSupplyListPopUpBlock.waitUntilBannerImageIsVisible();
     }
 
     @Step("Set QTY: {1} for product UOM: {0}.")
