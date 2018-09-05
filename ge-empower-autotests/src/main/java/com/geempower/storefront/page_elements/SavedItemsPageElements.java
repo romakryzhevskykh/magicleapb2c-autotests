@@ -10,6 +10,7 @@ public class SavedItemsPageElements {
     public final static String ASCENDING_SORTING_LISTS_TABLE_BY_CREATION_DATE_XPATH = "//table[@id='savedListTable']//th[@aria-label='Created On: activate to sort column ascending']";
     public final static String DESCENDING_SORTING_LISTS_TABLE_BY_CREATION_DATE_XPATH = "//table[@id='savedListTable']//th[@aria-label='Created On: activate to sort column descending']";
     private final static String FIRST_LIST_FROM_THE_SAVED_LISTS_TABLE_XPATH ="//table[@id='savedListTable']/tbody/tr[1]";
+    public final static String NO_DATA_IN_SAVED_ITEMS_TABLE_XPATH = FIRST_LIST_FROM_THE_SAVED_LISTS_TABLE_XPATH + "/td";
     public final static String FIRST_LIST_NAME_FROM_THE_SAVED_LISTS_TABLE_XPATH = FIRST_LIST_FROM_THE_SAVED_LISTS_TABLE_XPATH + "/td[1]/a";
     public final static String FIRST_LIST_CREATED_ON_FROM_THE_SAVED_LISTS_TABLE_XPATH = FIRST_LIST_FROM_THE_SAVED_LISTS_TABLE_XPATH + "/td[2]";
     public final static String FIRST_LIST_LAST_EDITED_ON_FROM_THE_SAVED_LISTS_TABLE_XPATH = FIRST_LIST_FROM_THE_SAVED_LISTS_TABLE_XPATH + "/td[3]";
