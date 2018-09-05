@@ -59,6 +59,7 @@ public class CartPage extends StorefrontBasePage {
         click(ADD_TO_SUPPLY_LIST_BUTTONS_XPATH);
         waitUntilPageIsFullyLoaded();
         addToSupplyListPopUpBlock.waitUntilProductImagesAreVisible();
+        addToSupplyListPopUpBlock.waitUntilBannerImageIsVisible();
     }
 
     @Step("Click on Add to Supply list button for UOM: {0} on Cart page.")

@@ -24,7 +24,7 @@ Feature: Individual PDP add to Supply list functionality
 
   Scenario: Check that shopper can add product to existing(already created) Supply list.
     When Set QTY 1 to any product(UOM) on the PDP.
-    And Supply list that doesn't contain this products exists.
+    And Active Supply list that doesn't contain this products exists.
     And Click on add to Supply list button on PDP.
     And Select Select a Supply list radio button in Add to Supply list pop-up on PDP.
     And Select existing Supply list in Add to Supply list pop-up on PDP.

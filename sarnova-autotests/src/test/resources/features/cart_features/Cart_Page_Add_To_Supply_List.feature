@@ -7,7 +7,7 @@ Feature: Cart page Add to Supply list functionality.
     And Add to cart INDIVIDUAL, VALID product with quantity 1.
 
 #  Scenario: Check that shopper can add a single product(from product row button) from cart to existing Supply list.
-#    Given Supply list that doesn't contain this products exists.
+#    Given Active Supply list that doesn't contain this products exists.
 #    And Open cart page.
 #    And Click on add to Supply list button for any selected UOMs on Cart page.
 #    And Select Select a Supply list radio button in Add to Supply list pop-up on Cart page.
@@ -30,7 +30,7 @@ Feature: Cart page Add to Supply list functionality.
 #    Then Check that selected product(s) is(are) displayed on the Supply list details page.
 
   Scenario: Check that shopper can add a single product from cart to existing Supply list.
-    Given Supply list that doesn't contain this products exists.
+    Given Active Supply list that doesn't contain this products exists.
     And Open cart page.
     And Click on add to Supply list button on Cart page.
     And Select Select a Supply list radio button in Add to Supply list pop-up on Cart page.
@@ -54,7 +54,7 @@ Feature: Cart page Add to Supply list functionality.
 
   Scenario: Check that shopper can add few product from cart to existing Supply list.
     Given Add to cart INDIVIDUAL, VALID product with quantity 1 that hasn't been added before.
-    And Supply list that doesn't contain this products exists.
+    And Active Supply list that doesn't contain this products exists.
     And Open cart page.
     And Click on add to Supply list button on Cart page.
     And Select Select a Supply list radio button in Add to Supply list pop-up on Cart page.

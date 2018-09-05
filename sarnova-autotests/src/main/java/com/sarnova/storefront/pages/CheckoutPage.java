@@ -248,7 +248,7 @@ public class CheckoutPage extends StorefrontBasePage {
         paymentMethodStepBlock.clickOnChangeBillingAddress();
     }
 
-    public void  deselectGuestBillingAddressCheckbox() {
+    public void deselectGuestBillingAddressCheckbox() {
         paymentMethodStepBlock.deselectGuestBillingAddressCheckbox();
     }
 

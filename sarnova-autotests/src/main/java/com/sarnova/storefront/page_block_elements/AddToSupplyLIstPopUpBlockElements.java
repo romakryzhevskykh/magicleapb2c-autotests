@@ -15,4 +15,5 @@ public class AddToSupplyLIstPopUpBlockElements {
     public static final String ADD_TO_SUPPLY_LIST_POP_UP_CONTINUE_BUTTON_XPATH = ADD_TO_SUPPLY_LIST_POP_UP_XPATH + "//button[contains(@class, 'js-close-popup')]";
 
     public static final String SUPPLY_POP_UP_IMAGES_XPATH = ADD_TO_SUPPLY_LIST_POP_UP_XPATH + "//div[@class='mini-cart']//img";
+    public static final String SUPPLY_POP_UP_BANNER_IMAGE_XPATH = ADD_TO_SUPPLY_LIST_POP_UP_CONTENT_XPATH + "//div[contains(@class,'banner__component')]/img[@src[(string())]]";
 }

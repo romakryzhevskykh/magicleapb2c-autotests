@@ -75,11 +75,12 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     }
 
     @SuppressWarnings("unchecked")
-    @And("^Supply list that doesn't contain this products exists.$")
+    @And("^Active Supply list that doesn't contain this products exists.$")
     public void existingSupplyListThatDoesNotContainThisProducts() {
         HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = getSelectedUOMS();
         String existingSupplyListName = supplyListsManager.getTestSupplyLists()
                 .stream()
+                .filter(SupplyList::isActive)
                 .filter(supplyList -> supplyList.getUser() == userSessions.getActiveUserSession().getUser())
                 .filter(supplyList -> supplyList.getSupplyProductsInList()
                         .stream()

@@ -48,6 +48,7 @@ public class LoggedInHeaderRowBlock extends UIComponent {
     public void openMyAccountMenu() {
         if (!isMyAccountMenuOpened()) {
             clickOnMyAccountDropDownButton();
+            waitUntil(driver1 -> $$(MY_ACCOUNT_MENU_LINK_ITEMS_XPATH).stream().allMatch(WebElement::isDisplayed));
         }
     }
 
