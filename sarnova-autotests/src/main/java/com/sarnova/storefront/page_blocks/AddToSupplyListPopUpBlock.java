@@ -69,25 +69,34 @@ public class AddToSupplyListPopUpBlock extends UIComponent {
 
     @Step("Wait images are loaded.")
     public void waitUntilProductImagesAreVisible() {
-        if ($(SUPPLY_POP_UP_IMAGES_XPATH) != null) {
-            $$(SUPPLY_POP_UP_IMAGES_XPATH).forEach(webElement ->
-                    waitUntil(driver1 -> (webElement.getSize().getHeight() >= 20
-                            && webElement.getSize().getWidth() >= 20))
-            );
+        if (isPresent(SUPPLY_POP_UP_IMAGES_XPATH)) {
+            loadingProductImages();
         }
+    }
+
+    @Step("Loading products images.")
+    private void loadingProductImages() {
+        $$(SUPPLY_POP_UP_IMAGES_XPATH).forEach(webElement ->
+                waitUntil(driver1 -> (webElement.getSize().getHeight() >= 20
+                        && webElement.getSize().getWidth() >= 20))
+        );
     }
 
     @Step("Wait banner image is loaded.")
     public void waitUntilBannerImageIsVisible() {
         if (isBannerPresent()) {
-            waitUntil(driver1 -> ($(SUPPLY_POP_UP_BANNER_IMAGE_XPATH).getSize().getHeight() >= 20
-                    && $(SUPPLY_POP_UP_BANNER_IMAGE_XPATH).getSize().getWidth() >= 20));
-
+            loadingBannerImage();
         }
+    }
+
+    @Step("Loading banner image.")
+    private void loadingBannerImage() {
+        waitUntil(driver1 -> ($(SUPPLY_POP_UP_BANNER_IMAGE_XPATH).getSize().getHeight() >= 20
+                && $(SUPPLY_POP_UP_BANNER_IMAGE_XPATH).getSize().getWidth() >= 20));
     }
 
     @Step("Is banner present.")
     public boolean isBannerPresent() {
-        return $(SUPPLY_POP_UP_BANNER_IMAGE_XPATH) != null;
+        return isPresent(SUPPLY_POP_UP_BANNER_IMAGE_XPATH);
     }
 }

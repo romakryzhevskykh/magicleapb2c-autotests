@@ -191,6 +191,38 @@ public abstract class UIComponent {
         }
     }
 
+    protected boolean isPresent(String xpath, String... args) {
+        webDriverPool.getActiveDriverSession().setShortImplicitWait();
+        try {
+            getDriver().findElement(By.xpath(String.format(xpath, args)));
+            return true;
+        } catch (UnhandledAlertException ex) {
+            System.out.println("WARNING: Unexpected alert: " + ex);
+            alertHandling();
+            return isPresent(xpath, args);
+        } catch (NoSuchElementException ex) {
+            return false;
+        } finally {
+            webDriverPool.getActiveDriverSession().restoreDefaultImplicitWait();
+        }
+    }
+
+    protected boolean isPresent(By by) {
+        webDriverPool.getActiveDriverSession().setShortImplicitWait();
+        try {
+            getDriver().findElement(by);
+            return true;
+        } catch (UnhandledAlertException ex) {
+            System.out.println("WARNING: Unexpected alert: " + ex);
+            alertHandling();
+            return isPresent(by);
+        } catch (NoSuchElementException ex) {
+            return false;
+        } finally {
+            webDriverPool.getActiveDriverSession().restoreDefaultImplicitWait();
+        }
+    }
+
     @Step("Wait until page is fully loaded.")
     protected void waitUntilPageIsFullyLoaded() {
         waitHTMLTemplateLoad();
