@@ -78,10 +78,10 @@ public class SavedItemsPage extends StorefrontBasePage {
 
     @Step("Get First List Name From The Saved Lists Table")
     public String getFirstListNameFromTheSavedListsTable() {
-        if (!$(NO_DATA_IN_SAVED_ITEMS_TABLE_XPATH).getText().equals("No data available in table")) {
+        if (!$(NO_DATA_TITLE_IN_SAVED_ITEMS_TABLE_XPATH).getText().equals("No data available in table")) {
             return $(FIRST_LIST_NAME_FROM_THE_SAVED_LISTS_TABLE_XPATH).getText();
         } else
-            return $(NO_DATA_IN_SAVED_ITEMS_TABLE_XPATH).getText();
+            return $(NO_DATA_TITLE_IN_SAVED_ITEMS_TABLE_XPATH).getText();
     }
 
     @Step("Get Created On Value Of Saved List")
