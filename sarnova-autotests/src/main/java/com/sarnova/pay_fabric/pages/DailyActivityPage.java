@@ -32,6 +32,8 @@ public class DailyActivityPage extends PayFabricBasePage {
         String dateTime = firstWallet.findElement(By.xpath("td[@aria-describedby='trxdailyactivitylist_Trxdate']")).getText();
         if (dateTime.indexOf("/") == 1)
             dateTime = "0" + dateTime;
+        if (new Character('/').equals(dateTime.charAt(4)))
+            dateTime = dateTime.substring(0, 3) + "0" + dateTime.substring(3);
         if (dateTime.indexOf(":") == 12)
             dateTime = dateTime.substring(0, 11) + "0" + dateTime.substring(11);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss a");

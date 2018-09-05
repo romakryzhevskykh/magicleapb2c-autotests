@@ -1,5 +1,6 @@
 package com.sarnova.storefront.pages;
 
+import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -13,7 +14,7 @@ public class AccountDashboardPage extends StorefrontBasePage {
     @Override
     public void open() {
         super.open();
-        waitUntilElementIsVisible(MENU_ITEMS_XPATH);
+        waitUntilElementIsVisible(LEFT_BAR_MENU_XPATH);
     }
 
     @Step("Is Order History item visible?")
@@ -224,8 +225,9 @@ public class AccountDashboardPage extends StorefrontBasePage {
     @Step("Expand Account Dashboard section in the left bar menu.")
     public void expandAccountDashboardSection() {
         if(!isDisplayed(ACCOUNT_DASHBOARD_ITEMS_XPATH)) {
-            click(EXPAND_ACCOUNT_DASHBOARD_ITMES_XPATH);
-            waitUntil(driver1 -> $(EXPAND_ACCOUNT_DASHBOARD_ITMES_XPATH).getAttribute("class").contains("rotate"));
+            click(EXPAND_ACCOUNT_DASHBOARD_ITEMS_XPATH);
+            waitUntil(driver1 -> $(EXPAND_ACCOUNT_DASHBOARD_ITEMS_XPATH).getAttribute("class").contains("rotate"));
+            waitUntil(driver1 -> $$(ACCOUNT_DASHBOARD_ITEMS_XPATH).stream().allMatch(WebElement::isDisplayed));
         }
     }
 
@@ -234,6 +236,7 @@ public class AccountDashboardPage extends StorefrontBasePage {
         if(!isDisplayed(REPORTS_ITEMS_XPATH)) {
             click(EXPAND_REPORTS_ITEMS_XPATH);
             waitUntil(driver1 -> $(EXPAND_REPORTS_ITEMS_XPATH).getAttribute("class").contains("rotate"));
+            waitUntil(driver1 -> $$(REPORTS_ITEMS_XPATH).stream().allMatch(WebElement::isDisplayed));
         }
     }
 
@@ -242,6 +245,7 @@ public class AccountDashboardPage extends StorefrontBasePage {
         if(!isDisplayed(ADMINISTRATION_ITEMS_XPATH)) {
             click(EXPAND_ADMINISTRATION_ITEMS_XPATH);
             waitUntil(driver1 -> $(EXPAND_ADMINISTRATION_ITEMS_XPATH).getAttribute("class").contains("rotate"));
+            waitUntil(driver1 -> $$(ADMINISTRATION_ITEMS_XPATH).stream().allMatch(WebElement::isDisplayed));
         }
     }
 
@@ -250,6 +254,7 @@ public class AccountDashboardPage extends StorefrontBasePage {
         if(!isDisplayed(PREFERENCES_ITEMS_XPATH)) {
             click(EXPAND_PREFERENCES_ITEMS_XPATH);
             waitUntil(driver1 -> $(EXPAND_PREFERENCES_ITEMS_XPATH).getAttribute("class").contains("rotate"));
+            waitUntil(driver1 -> $$(PREFERENCES_ITEMS_XPATH).stream().allMatch(WebElement::isDisplayed));
         }
     }
 }

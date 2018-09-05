@@ -40,8 +40,9 @@ public class RandomUtils {
         State state = town.getState();
         Country country = state.getCountry();
         String addressLine1 = getRandomAddressLine1();
+        String phoneNumber = RandomStringUtils.randomNumeric(10);
 
-        return shippingAddressesManager.createInstance(firstName, lastName, addressLine1, town, state, country, zip);
+        return shippingAddressesManager.createInstance(firstName, lastName, addressLine1, town, state, country, zip, phoneNumber);
     }
 
     public ShippingAddress getRandomValidShippingAddressWithAllPossibleFields() {

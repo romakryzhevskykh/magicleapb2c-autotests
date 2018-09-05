@@ -13,7 +13,7 @@ public class ShippingAddressesManager {
         return new ShippingAddress(firstName, lastName, addressLine1, town, state, country, postcode, addressLine2, phoneNumber);
     }
 
-    public ShippingAddress createInstance(String firstName, String lastName, String addressLine1, Town town, State state, Country country, String postcode) {
-        return new ShippingAddress(firstName, lastName, addressLine1, town, state, country, postcode);
+    public ShippingAddress createInstance(String firstName, String lastName, String addressLine1, Town town, State state, Country country, String postcode, String phoneNumber) {
+        return new ShippingAddress(firstName, lastName, addressLine1, town, state, country, postcode, phoneNumber);
     }
 }

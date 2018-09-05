@@ -23,8 +23,8 @@ public class ShippingAddress {
         this.country = country;
     }
 
-    public ShippingAddress(String firstName, String lastName, String addressLine1, Town town, State state, Country country, String postcode) {
-        this(firstName, lastName, addressLine1, town, state, country, postcode, "", "");
+    public ShippingAddress(String firstName, String lastName, String addressLine1, Town town, State state, Country country, String postcode, String phoneNumber) {
+        this(firstName, lastName, addressLine1, town, state, country, postcode, "", phoneNumber);
     }
 
     public String getAddressLine1() {
