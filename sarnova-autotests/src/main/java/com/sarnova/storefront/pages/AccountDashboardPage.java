@@ -15,6 +15,7 @@ public class AccountDashboardPage extends StorefrontBasePage {
     public void open() {
         super.open();
         waitUntilElementIsVisible(LEFT_BAR_MENU_XPATH);
+        waitUntil(driver1 ->$$(MENU_ENABLED_PARENT_ITEMS_XPATH).stream().allMatch(WebElement::isDisplayed));
     }
 
     @Step("Is Order History item visible?")

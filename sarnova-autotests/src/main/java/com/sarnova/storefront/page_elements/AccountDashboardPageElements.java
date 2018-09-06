@@ -2,7 +2,7 @@ package com.sarnova.storefront.page_elements;
 
 public class AccountDashboardPageElements {
     public static final String LEFT_BAR_MENU_XPATH = "//div[contains(@class,'side-content')]";
-    public static final String MENU_ITEMS_XPATH = LEFT_BAR_MENU_XPATH + "//li[@class='menu-item']";
+    public static final String MENU_ENABLED_PARENT_ITEMS_XPATH = LEFT_BAR_MENU_XPATH + "//div[contains(@class,'dashboard-menu-block')][not(@style='display: none;')]";
 
     public static final String ACCOUNT_DASHBOARD_ITEMS_XPATH = "//div[contains(@class,'dashboard-menu-body') and not(@id)]/ul[@class='menu-body-list-container']/li//a";
     public static final String EXPAND_ACCOUNT_DASHBOARD_ITEMS_XPATH = "//div[@class='dashboard-menu-header'][div/span/a[contains(text(), 'Account Dashboard')]]//i";
