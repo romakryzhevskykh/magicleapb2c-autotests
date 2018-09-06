@@ -21,6 +21,11 @@ public class SupplyListsPageStepDefs extends AbstractStepDefs {
         assertTrue(supplyListsPage.isOpened());
     }
 
+    @Then("^Check that Supply Lists page is not opened.$")
+    public void checkThatSupplyListsPageIsNotOpened() {
+        assertFalse(supplyListsPage.isOpened());
+    }
+
     @Then("^Check that active Supply Lists block is visible on Supply lists page.$")
     public void checkThatActiveSupplyListsBlockIsVisible() {
         assertTrue(supplyListsPage.isActiveSupplyListsVisible());

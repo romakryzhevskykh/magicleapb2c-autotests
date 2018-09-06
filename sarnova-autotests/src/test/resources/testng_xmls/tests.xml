@@ -27,4 +27,10 @@
             <class name="com.sarnova.cucumber.AddToSupplyListFromCartSuit"/>
         </classes>
     </test>
+    <test name="Guest user suit">
+        <parameter name="browserName" value="chrome"/>
+        <classes>
+            <class name="com.sarnova.cucumber.GuestUserSuit"/>
+        </classes>
+    </test>
 </suite>

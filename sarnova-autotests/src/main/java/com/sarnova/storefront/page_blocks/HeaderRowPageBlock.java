@@ -118,4 +118,8 @@ public class HeaderRowPageBlock extends UIComponent {
     public void clickOnPreviouslyOrderedItemsItemInMyAccountMenu() {
         loggedInHeaderRowBlock.clickOnPreviouslyOrderedItemsItemInMyAccountMenu();
     }
+
+    public boolean isViewAllSupplyListsButtonPresentInDropDown() {
+        return loggedInHeaderRowBlock.isViewAllSupplyListsButtonPresentInDropDown();
+    }
 }
