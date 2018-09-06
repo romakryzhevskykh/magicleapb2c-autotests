@@ -1,6 +1,7 @@
 package com.sarnova.storefront.page_elements;
 
 public class SupplyListsPageElements {
+    public static final String ADD_NEW_BUTTON_XPATH = "//button[contains(@class, 'create-wishlist')]";
 
     public static final String SHOW_INACTIVE_ENTRIES_CHECKBOX_XPATH = "//input[@class='js-toggle-show-inactive-supply-lists']";
     public static final String INACTIVE_SUPPLY_LISTS_BLOCK_XPATH = "//div[@id='inactiveListContainer']";

@@ -91,6 +91,12 @@ Feature: Check user restrictions with MANAGE SUPPLY LISTS PERMISSION and without
     And Quick order page is opened.
     Then Check that Add to Supply list button is visible on Quick order page.
 
+  Scenario: Check that user with only MANAGE SUPPLY LISTS PERMISSION has access to Add new button on Supply lists page.
+    Given Switch to Storefront cockpit test user.
+    And User is logged in to Storefront.
+    And Open Supply lists page.
+    Then Check that Add new button is visible on Supply lists page.
+
   Scenario: Check that user with only MANAGE SUPPLY LISTS PERMISSION has access to Remove button for his own Supply list on Supply list details page.
     Given Switch to Storefront cockpit test user.
     And User is logged in to Storefront.
