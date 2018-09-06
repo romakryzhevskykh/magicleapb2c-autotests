@@ -107,18 +107,21 @@ Feature: Check user restrictions with SUPPLY LISTS PERMISSION and without it.
     When Opened Supply list details page.
     Then Check that Share Supply list functionality is not visible on Supply list details page.
 
-  Scenario: Check that user with only SUPPLY LISTS PERMISSION has access to Add to Supply list button on PDP.
+  Scenario: Check that user with only SUPPLY LISTS PERMISSION has no access to Add to Supply list button on PDP.
     Given Switch to Storefront cockpit test user.
     And User is logged in to Storefront.
     When PDP for INDIVIDUAL, VALID product.
     Then Check that Add to Supply list button is not visible on PDP.
 
-  Scenario: Check that user with only SUPPLY LISTS PERMISSION has access to Add to Supply list button on Cart page.
+  Scenario: Check that user with only SUPPLY LISTS PERMISSION has no access to Add to Supply list button on Cart page.
     Given Switch to Storefront cockpit test user.
     And User is logged in to Storefront.
     When Add to cart INDIVIDUAL, VALID product with quantity 1.
     And Open cart page.
     Then Check that Add to Supply list button is not visible on Cart page.
 
-
-
+  Scenario: Check that user with only SUPPLY LISTS PERMISSION has no access to Add to Supply list button on Quick order page.
+    Given Switch to Storefront cockpit test user.
+    And User is logged in to Storefront.
+    When Quick order page is opened.
+    Then Check that Add to Supply list button is not visible on Quick order page.

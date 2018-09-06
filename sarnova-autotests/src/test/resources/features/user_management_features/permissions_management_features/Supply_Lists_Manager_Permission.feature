@@ -85,6 +85,12 @@ Feature: Check user restrictions with MANAGE SUPPLY LISTS PERMISSION and without
     And Open cart page.
     Then Check that Add to Supply list button is visible on Cart page.
 
+  Scenario: Check that user with only MANAGE SUPPLY LISTS PERMISSION has access to Add to Supply list button on Quick order page.
+    Given Switch to Storefront cockpit test user.
+    And User is logged in to Storefront.
+    And Quick order page is opened.
+    Then Check that Add to Supply list button is visible on Quick order page.
+
   Scenario: Check that user with only MANAGE SUPPLY LISTS PERMISSION has access to Remove button for his own Supply list on Supply list details page.
     Given Switch to Storefront cockpit test user.
     And User is logged in to Storefront.
