@@ -30,4 +30,5 @@ public class LoggedInHeaderRowBlockElements {
     private static final String RIGHT_BOTTOM_NAVIGATION_BAR_XPATH = "//div[@class='yCmsContentSlot order-navigation-bar pull-right']";
     public static final String SUPPLY_LISTS_DROP_DOWN_XPATH = RIGHT_BOTTOM_NAVIGATION_BAR_XPATH + "/div[@class='yCmsComponent  pull-right order-navigation-bar-item'][div[contains(@class, 'supply-lists')]]";
     public static final String SUPPLY_LIST_NAMES_FROM_SUPPLY_LISTS_DROP_DOWN_XPATH = SUPPLY_LISTS_DROP_DOWN_XPATH + "//ul/li/a/span[@class='name']";
+    public static final String SUPPLY_LIST_ALL_SUPPLY_LISTS_LINK_FROM_SUPPLY_LISTS_DROP_DOWN_XPATH = SUPPLY_LISTS_DROP_DOWN_XPATH + "//ul/li/a[@href='/my-account/supply-lists/']";
 }
