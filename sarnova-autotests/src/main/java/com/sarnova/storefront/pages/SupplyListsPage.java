@@ -119,4 +119,9 @@ public class SupplyListsPage extends StorefrontBasePage {
     public void clickOnDeactivateButtonInDeleteSLPopUp() {
         click(DEACTIVATE_SUPPLY_LIST_POP_UP_DEACTIVATE_BUTTON_XPATH);
     }
+
+    @Step("Is Add new button visible?")
+    public boolean isAddNewButtonVisible() {
+        return isDisplayed(ADD_NEW_BUTTON_XPATH);
+    }
 }

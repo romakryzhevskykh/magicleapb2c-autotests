@@ -8,6 +8,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class SupplyListsPageStepDefs extends AbstractStepDefs {
@@ -87,5 +88,15 @@ public class SupplyListsPageStepDefs extends AbstractStepDefs {
         String supplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
         SupplyList testSupplyList = supplyListsManager.getSupplyListByName(supplyListName);
         supplyListsPage.isDeactivateButtonVisibleForSupplyList(testSupplyList);
+    }
+
+    @Then("^Check that Add new button is not visible on Supply lists page.$")
+    public void checkThatAddNewButtonIsNotVisibleOnSupplyListsPage() {
+        assertFalse(supplyListsPage.isAddNewButtonVisible());
+    }
+
+    @Then("^Check that Add new button is visible on Supply lists page.$")
+    public void checkThatAddNewButtonIsVisibleOnSupplyListsPage() {
+        assertTrue(supplyListsPage.isAddNewButtonVisible());
     }
 }

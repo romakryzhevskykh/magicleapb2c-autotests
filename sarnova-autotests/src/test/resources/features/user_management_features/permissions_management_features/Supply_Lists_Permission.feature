@@ -125,3 +125,9 @@ Feature: Check user restrictions with SUPPLY LISTS PERMISSION and without it.
     And User is logged in to Storefront.
     When Quick order page is opened.
     Then Check that Add to Supply list button is not visible on Quick order page.
+
+  Scenario: Check that user with only SUPPLY LISTS PERMISSION has no access to Add new Supply list button on Supply lists page.
+    Given Switch to Storefront cockpit test user.
+    And User is logged in to Storefront.
+    When Open Supply lists page.
+    Then Check that Add new button is not visible on Supply lists page.
