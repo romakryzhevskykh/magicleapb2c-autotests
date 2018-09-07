@@ -24,4 +24,5 @@ public class QuickOrderPage extends StorefrontBasePage {
     public boolean isAddToSupplyListButtonEnabled() {
         return $(ADD_TO_SUPPLY_LIST_BUTTONS_XPATH).isEnabled();
     }
+
 }
