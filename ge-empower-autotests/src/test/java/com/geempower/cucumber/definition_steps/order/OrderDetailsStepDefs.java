@@ -120,13 +120,11 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
         orderDetailsPage.clickOnAddToCartButtonOnOrderDetailsPage();
     }
 
-    @When("^Save total net price to hashmap.$")
-    public void saveTotalNetPriceToHashmap() {
-        threadVarsHashMap.put(TestKeyword.ORDER_DETAILS_TOTAL_NET_PRICE_VALUE, orderDetailsPage.getTotalNetPrice());
-    }
-
     @And("^User clicks on random status box.$")
     public void userClicksOnRandomStatusBox() {
+        long orderNo = Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO));
+        double totalNetPrice = Double.parseDouble(orderDetailsPage.getTotalNetPrice());
+        orderManager.createOrderInstance(orderNo, totalNetPrice);
         orderDetailsPage.userClicksOnRandomStatusBox();
     }
 
@@ -137,6 +135,7 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
 
     @Then("^Is Total Net Price value correct after changing status boxes.$")
     public void isTotalNetPriceValueCorrectAfterChangingStatusBoxes() {
-        assertEquals(threadVarsHashMap.get(TestKeyword.ORDER_DETAILS_TOTAL_NET_PRICE_VALUE), orderDetailsPage.getTotalNetPrice());
+        double totalNetPrice = orderManager.getOrderById(Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO))).getTotalNetPrice();
+        assertEquals(totalNetPrice, Double.parseDouble(orderDetailsPage.getTotalNetPrice()));
     }
 }

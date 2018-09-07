@@ -15,6 +15,8 @@ public class Order {
     String catalogNo;
     @Getter
     int quantity;
+    @Getter
+    double totalNetPrice;
 
     public Order(long orderId, HashMap<Product, Integer> products) {
         this.orderId = orderId;
@@ -28,5 +30,10 @@ public class Order {
         this.orderId = orderId;
         this.catalogNo = catalogNo;
         this.quantity = quantity;
+    }
+
+    public Order(long orderId, double totalNetPrice) {
+        this.orderId = orderId;
+        this.totalNetPrice = totalNetPrice;
     }
 }

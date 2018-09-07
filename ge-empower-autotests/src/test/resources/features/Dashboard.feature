@@ -61,10 +61,6 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then Orders Details page is opened.
     Then GE Order No. is correct.
     Then Total Net Price is equal to Extend Price.
-    When Save total net price to hashmap.
-    And User clicks on random status box.
-    And User clicks on All status box.
-    Then Is Total Net Price value correct after changing status boxes.
 
     Examples:
       | region        |
@@ -120,10 +116,6 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then Orders Details page is opened.
     Then GE Order No. is correct.
     Then Total Net Price is equal to Extend Price.
-    When Save total net price to hashmap.
-    And User clicks on random status box.
-    And User clicks on All status box.
-    Then Is Total Net Price value correct after changing status boxes.
 
     Examples:
       | default quantity |
@@ -261,10 +253,6 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     When User closes the pop-up.
     Then Orders Details page is opened.
     Then GE Order No. is correct.
-    When Save total net price to hashmap.
-    And User clicks on random status box.
-    And User clicks on All status box.
-    Then Is Total Net Price value correct after changing status boxes.
 
     Examples:
       | region        | salesDivision | account |
