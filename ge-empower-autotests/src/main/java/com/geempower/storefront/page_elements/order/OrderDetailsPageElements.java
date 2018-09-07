@@ -9,4 +9,6 @@ public class OrderDetailsPageElements {
     public final static String QUANTITY_OF_APPROPRIATE_PRODUCT_XPATH = "//a[@data-code-view = '%s']/../../../td[@class='create-summary-qty']/span";
     public final static String ALL_CATALOG_NO_XPATH = "//table[@id='order-description-table']//a[@class='catalog-name-input modal-toggle product-popup']";
     public final static String REORDER_BUTTON_XPATH = "//a[@class='re-order-btn']";
+    public final static String STATUS_BOXES_XPATH = "//div[@class='order-item']";
+    public final static String ALL_STATUS_BOX_XPATH = "//div[@class='order-item orders-item-all']";
 }

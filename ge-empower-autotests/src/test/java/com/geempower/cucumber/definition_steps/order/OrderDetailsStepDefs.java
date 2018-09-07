@@ -119,4 +119,24 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     public void userClicksOnAddToCartButtonOnOrderDetailsPage() {
         orderDetailsPage.clickOnAddToCartButtonOnOrderDetailsPage();
     }
+
+    @When("^Save total net price to hashmap.$")
+    public void saveTotalNetPriceToHashmap() {
+        threadVarsHashMap.put(TestKeyword.ORDER_DETAILS_TOTAL_NET_PRICE_VALUE, orderDetailsPage.getTotalNetPrice());
+    }
+
+    @And("^Users clicks on random status box.$")
+    public void usersClicksOnRandomStatusBox() {
+        orderDetailsPage.usersClicksOnRandomStatusBox();
+    }
+
+    @And("^User clicks on All status box.$")
+    public void userClicksOnAllStatusBox() {
+        orderDetailsPage.userClicksOnAllStatusBox();
+    }
+
+    @Then("^Is Total Net Price value correct after changing status boxes.$")
+    public void isTotalNetPriceValueCorrectlyAfterChangingStatusBoxes() {
+        assertEquals(threadVarsHashMap.get(TestKeyword.ORDER_DETAILS_TOTAL_NET_PRICE_VALUE), orderDetailsPage.getTotalNetPrice());
+    }
 }
