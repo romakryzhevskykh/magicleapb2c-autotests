@@ -136,7 +136,7 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     }
 
     @Then("^Is Total Net Price value correct after changing status boxes.$")
-    public void isTotalNetPriceValueCorrectlyAfterChangingStatusBoxes() {
+    public void isTotalNetPriceValueCorrectAfterChangingStatusBoxes() {
         assertEquals(threadVarsHashMap.get(TestKeyword.ORDER_DETAILS_TOTAL_NET_PRICE_VALUE), orderDetailsPage.getTotalNetPrice());
     }
 }
