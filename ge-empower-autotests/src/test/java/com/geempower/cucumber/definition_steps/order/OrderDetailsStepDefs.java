@@ -125,9 +125,9 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.ORDER_DETAILS_TOTAL_NET_PRICE_VALUE, orderDetailsPage.getTotalNetPrice());
     }
 
-    @And("^Users clicks on random status box.$")
-    public void usersClicksOnRandomStatusBox() {
-        orderDetailsPage.usersClicksOnRandomStatusBox();
+    @And("^User clicks on random status box.$")
+    public void userClicksOnRandomStatusBox() {
+        orderDetailsPage.userClicksOnRandomStatusBox();
     }
 
     @And("^User clicks on All status box.$")

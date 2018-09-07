@@ -102,7 +102,7 @@ Feature: Some actions on Orders page
       When User clicks on random order No.
       Then Orders Details page is opened.
       When Save total net price to hashmap.
-      And Users clicks on random status box.
+      And User clicks on random status box.
       And User clicks on All status box.
       Then Is Total Net Price value correct after changing status boxes.
 

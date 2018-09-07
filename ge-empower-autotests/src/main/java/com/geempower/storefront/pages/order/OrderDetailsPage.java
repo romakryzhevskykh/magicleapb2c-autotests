@@ -134,8 +134,8 @@ public class OrderDetailsPage extends StorefrontBasePage {
         click(REORDER_BUTTON_XPATH);
     }
 
-    @Step("Users Clicks On Random Status Box.")
-    public void usersClicksOnRandomStatusBox() {
+    @Step("User Clicks On Random Status Box.")
+    public void userClicksOnRandomStatusBox() {
         $$(STATUS_BOXES_XPATH).stream().findAny().ifPresent(this::click);
     }
 
