@@ -1,8 +1,11 @@
 package com.geempower.storefront.pages.order;
 
 import com.geempower.storefront.StorefrontBasePage;
+import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
+
+import java.util.List;
 
 import static com.geempower.storefront.page_block_elements.InvoiceDetailsPopUpElements.*;
 import static com.geempower.storefront.page_elements.order.OrderDetailsPageElements.*;
@@ -28,6 +31,7 @@ public class OrderDetailsPage extends StorefrontBasePage {
 
     @Step("Get Total Net Price.")
     public String getTotalNetPrice() {
+        waitUntilPageIsFullyLoaded();
         String netPrice = $(TOTAL_NET_PRICE_VALUE_XPATH).getText();
         return netPrice.substring(0, netPrice.length() - 4).replace(",", "");
     }
@@ -108,15 +112,17 @@ public class OrderDetailsPage extends StorefrontBasePage {
         click(CLOSE_BOL_POP_UP_ICON_XPATH);
     }
 
+    @Step("Select Random Checkbox Catalog No.")
     public void selectRandomCheckboxCatalogNo(String catalogNo) {
         click(CHECKBOX_RELATES_TO_CATALOG_NO_XPATH, catalogNo);
     }
 
+    @Step("Get Quantity Of Selected Catalog No Checkbox.")
     public String getQuantityOfSelectedCatalogNoCheckbox(String catalogNo) {
         return $(QUANTITY_OF_APPROPRIATE_PRODUCT_XPATH, catalogNo).getText();
     }
 
-    @Step("Get all catalog No.")
+    @Step("Get random catalog No.")
     public String getRandomCatalogNo() {
         waitUntilPageIsFullyLoaded();
         StringBuilder catalogNo = new StringBuilder("");
@@ -129,5 +135,30 @@ public class OrderDetailsPage extends StorefrontBasePage {
     @Step("Click On Add To Cart Button On Order Details Page.")
     public void clickOnAddToCartButtonOnOrderDetailsPage() {
         click(REORDER_BUTTON_XPATH);
+    }
+
+    @Step("User Clicks On Random Status Box.")
+    public void userClicksOnRandomStatusBox() {
+        $$(STATUS_BOXES_XPATH).stream().findAny().ifPresent(this::click);
+    }
+
+    @Step("User Clicks On All Status Box.")
+    public void userClicksOnAllStatusBox() {
+        click(ALL_STATUS_BOX_XPATH);
+    }
+
+    @Step("Get List Of Catalog No.")
+    public List<WebElement> getListOfCatalogNo() {
+        return $$(ALL_CATALOG_NO_XPATH);
+    }
+
+    @Step("Get Catalog No By Row.")
+    public String getCatalogNoByRow(String rowNo) {
+       return $(ALL_CATALOG_NO_BY_ROW_XPATH, rowNo).getText();
+    }
+
+    @Step("Get Description By Row.")
+    public String getDescriptionByRow(String rowNo) {
+        return $(ALL_DESCRIPTION_BY_ROW_XPATH, rowNo).getText();
     }
 }

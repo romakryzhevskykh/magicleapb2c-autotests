@@ -92,3 +92,22 @@ Feature: Some actions on Orders page
       | openOrderReportMessage                   | pricingOption   | userEmail            |
       | New! Download your open orders report -> | With Pricing    | rmautotest@gmail.com |
       | New! Download your open orders report -> | Without Pricing | rmautotest@gmail.com |
+
+    Scenario Outline: Check that Total Net Price value is correctly after changing status boxes - DE95700
+      And Account management page is opened.
+      When Choose <region> region.
+      And Search random account for chosen region.
+      And Click on chosen account.
+      And Orders page is opened.
+      When User clicks on random order No.
+      Then Orders Details page is opened.
+      And User clicks on random status box.
+      And User clicks on All status box.
+      Then Is Total Net Price value correct after changing status boxes.
+
+      Examples:
+        | region        |
+        | North_America |
+        | EMEA          |
+        | ASIA          |
+        | Latin_America |

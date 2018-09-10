@@ -27,7 +27,7 @@ public class ProductsSubDetailStepDefs extends AbstractStepDefs {
     @When("^User select the product by Catalog No. from the products list on the Product Sub-Detail page.$")
     public void userSelectTheProductOnTheProductSubDetailPage() {
         threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
-        String catalogNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
+        String catalogNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
         productSubDetailPage.chooseSelectedProductsByCatalogNo(catalogNo);
     }
 
@@ -57,7 +57,7 @@ public class ProductsSubDetailStepDefs extends AbstractStepDefs {
     @When("^User clicks on catalogNo link.$")
     public void userClicksOnCatalogNoLink() {
         threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
-        String catalogNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
+        String catalogNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
         productSubDetailPage.clickOnCatalogNoLink(catalogNo);
     }
 }

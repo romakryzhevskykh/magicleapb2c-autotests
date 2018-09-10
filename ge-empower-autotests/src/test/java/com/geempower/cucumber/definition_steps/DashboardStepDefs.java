@@ -90,14 +90,14 @@ public class DashboardStepDefs extends AbstractStepDefs {
     @When("^User set catalogueNo to Copy & Paste field.$")
     public void userSetCatalogueNoToCopyPasteField() {
         threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
-        String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
+        String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
         priceAndAvailabilityBlock.setCatalogueNoToTheCopyAndPasteField(catalogueNo);
     }
 
     @When("^User set chosen catalogueNo to the Product Number field.$")
     public void userSetCatalogueNoToProductField() {
         threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
-        String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
+        String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
         priceAndAvailabilityBlock.setCatalogueNoToProductField(catalogueNo);
     }
 
@@ -185,7 +185,7 @@ public class DashboardStepDefs extends AbstractStepDefs {
     @And("^Search catalogueNo in the search product field.$")
     public void searchProductInTheSearchProductField() {
         threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
-        String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
+        String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
         headerBlock.setProductToTheSearchProductField(catalogueNo);
         headerBlock.clickOnSearchProductIcon();
     }

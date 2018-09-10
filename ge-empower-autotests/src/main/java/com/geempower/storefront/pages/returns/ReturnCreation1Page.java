@@ -62,7 +62,7 @@ public class ReturnCreation1Page extends StorefrontBasePage {
     }
 
     @Step("Get Catalog No.")
-    public String getCatalogueNo() {
+    public String getCatalogNo() {
         waitUntilPageIsFullyLoaded();
         return $(FIRST_ACTIVE_CATALOGUE_NO_IN_TABLE_XPATH).getText();
     }

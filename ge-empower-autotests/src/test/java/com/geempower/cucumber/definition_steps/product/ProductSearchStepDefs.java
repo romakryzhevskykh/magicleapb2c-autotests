@@ -25,7 +25,7 @@ public class ProductSearchStepDefs extends AbstractStepDefs {
     @Then("^Search Result title for appropriate product is displayed on Product Search page.$")
     public void searchResultForProductTitleIsDisplayed() {
         threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
-        String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
+        String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
         String title = "Search Result for '" + catalogueNo + "'";
         assertEquals(title, productSearchPage.getSearchResultTitle());
     }
@@ -44,7 +44,7 @@ public class ProductSearchStepDefs extends AbstractStepDefs {
     @When("^Click on catalogueNo link on Product Search page.$")
     public void clickOnProductLinkOnTheSearchResultPage() {
         threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
-        String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
+        String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
         productSearchPage.clickOnProductLinkOnTheSearchResultPage(catalogueNo);
     }
 
@@ -66,7 +66,7 @@ public class ProductSearchStepDefs extends AbstractStepDefs {
     @When("^Click on appropriate product checkbox on Product Search page.$")
     public void clickOnAppropriateProductCheckboxOnProductSearchPage() {
         threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
-        String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
+        String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
         productSearchPage.clickOnAppropriateProductCheckboxOnProductSearchPage(catalogueNo);
     }
 

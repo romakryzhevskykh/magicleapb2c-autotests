@@ -20,6 +20,10 @@ public class OrderManager {
         ordersList.add(new Order(orderId, catalogNo, quantity));
     }
 
+    public void createOrderInstance(long orderId, double totalNetPrice, ArrayList<Product> products) {
+        ordersList.add(new Order(orderId, totalNetPrice, products));
+    }
+
     public Order getOrderById(long orderId) {
         return ordersList.stream().filter(order -> order.getOrderId() == orderId).findAny().orElse(null);
     }

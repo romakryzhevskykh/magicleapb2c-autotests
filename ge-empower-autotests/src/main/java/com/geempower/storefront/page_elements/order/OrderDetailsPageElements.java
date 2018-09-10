@@ -8,5 +8,10 @@ public class OrderDetailsPageElements {
     public final static String CHECKBOX_RELATES_TO_CATALOG_NO_XPATH = "//td[@class= 'create-summary-catalog']//a[@data-code-view='%s']/../../../td[@class='checkbox-col']//ins";
     public final static String QUANTITY_OF_APPROPRIATE_PRODUCT_XPATH = "//a[@data-code-view = '%s']/../../../td[@class='create-summary-qty']/span";
     public final static String ALL_CATALOG_NO_XPATH = "//table[@id='order-description-table']//a[@class='catalog-name-input modal-toggle product-popup']";
+    public final static String ALL_CATALOG_NO_BY_ROW_XPATH = "//tr[contains(@class,'show-item')]['%s']//a[@data-code]";
+    public final static String ALL_DESCRIPTION_BY_ROW_XPATH = "//tr[contains(@class,'show-item')]['%s']//td[@class = 'create-summary-invoice']/span";
+    public final static String ALL_EXTENDED_PRICE_BY_ROW_XPATH = "//tr[contains(@class, 'order-line show-item')]['%s']//td[@class = 'create-summary-ext-total text-center']/input";
     public final static String REORDER_BUTTON_XPATH = "//a[@class='re-order-btn']";
+    public final static String STATUS_BOXES_XPATH = "//div[@class='order-item']";
+    public final static String ALL_STATUS_BOX_XPATH = "//div[@class='order-item orders-item-all']";
 }

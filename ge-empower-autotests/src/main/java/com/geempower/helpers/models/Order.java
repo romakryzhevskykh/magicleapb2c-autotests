@@ -2,6 +2,7 @@ package com.geempower.helpers.models;
 
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Order {
@@ -15,6 +16,11 @@ public class Order {
     String catalogNo;
     @Getter
     int quantity;
+    @Getter
+    double totalNetPrice;
+    @Getter
+    ArrayList<Product> allProducts = new ArrayList<>();
+
 
     public Order(long orderId, HashMap<Product, Integer> products) {
         this.orderId = orderId;
@@ -28,5 +34,11 @@ public class Order {
         this.orderId = orderId;
         this.catalogNo = catalogNo;
         this.quantity = quantity;
+    }
+
+    public Order(long orderId, double totalNetPrice, ArrayList<Product> allProducts) {
+        this.orderId = orderId;
+        this.totalNetPrice = totalNetPrice;
+        this.allProducts.addAll(allProducts);
     }
 }

@@ -96,7 +96,7 @@ public class MyCartPage extends StorefrontBasePage {
 
     @Step("Get Qty value.")
     public String getQtyValue(Product product) {
-        return $(QTY_VALUE_INPUT_XPATH, product.getCatalogueNo().toUpperCase()).getAttribute("value");
+        return $(QTY_VALUE_INPUT_XPATH, product.getCatalogNo().toUpperCase()).getAttribute("value");
     }
 
     public int getQtyValue(String catalogNo) {
@@ -106,8 +106,8 @@ public class MyCartPage extends StorefrontBasePage {
     @Step("Set Quantity value to qty. field for each product.")
     public void setQuantityForProduct(Product product, int randomQuantity) {
         waitUntilPageIsFullyLoaded();
-        $(QTY_VALUE_INPUT_XPATH, product.getCatalogueNo().toUpperCase()).clear();
-        $(QTY_VALUE_INPUT_XPATH, product.getCatalogueNo().toUpperCase()).sendKeys(Integer.toString(randomQuantity));
+        $(QTY_VALUE_INPUT_XPATH, product.getCatalogNo().toUpperCase()).clear();
+        $(QTY_VALUE_INPUT_XPATH, product.getCatalogNo().toUpperCase()).sendKeys(Integer.toString(randomQuantity));
     }
 
     @Step("Select all products by clicking on All checkbox.")
@@ -124,7 +124,7 @@ public class MyCartPage extends StorefrontBasePage {
     @Step("Getting the updated Extended price.")
     public String getNewExtendPrice(Product product) {
         waitUntilPageIsFullyLoaded();
-        return $(EXTENDED_PRICE_ON_MY_CART_XPATH, product.getCatalogueNo().toUpperCase()).getText();
+        return $(EXTENDED_PRICE_ON_MY_CART_XPATH, product.getCatalogNo().toUpperCase()).getText();
 
     }
 
