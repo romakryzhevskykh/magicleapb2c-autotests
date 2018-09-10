@@ -129,8 +129,7 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     }
 
     private ArrayList<Product> createProductsListInstance() {
-        Stream<WebElement> allCatalogNo = orderDetailsPage.getListOfCatalogNo();
-        long productListSize = allCatalogNo.count();
+        int productListSize = orderDetailsPage.getListOfCatalogNo().size();
         for (int i = 1; i <= productListSize; i++){
             String catalogNo = orderDetailsPage.getCatalogNoByRow(String.valueOf(i));
             String description  = orderDetailsPage.getDescriptionByRow(String.valueOf(i));

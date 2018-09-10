@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import java.util.stream.Stream;
+import java.util.List;
 
 import static com.geempower.storefront.page_block_elements.InvoiceDetailsPopUpElements.*;
 import static com.geempower.storefront.page_elements.order.OrderDetailsPageElements.*;
@@ -148,17 +148,17 @@ public class OrderDetailsPage extends StorefrontBasePage {
     }
 
     @Step("Get List Of Catalog No.")
-    public Stream<WebElement> getListOfCatalogNo() {
-        return $$(ALL_CATALOG_NO_XPATH).stream();
+    public List<WebElement> getListOfCatalogNo() {
+        return $$(ALL_CATALOG_NO_XPATH);
     }
 
     @Step("Get Catalog No By Row.")
-    public String getCatalogNoByRow(String i) {
-       return $(ALL_CATALOG_NO_BY_ROW_XPATH, i).getText();
+    public String getCatalogNoByRow(String rowNo) {
+       return $(ALL_CATALOG_NO_BY_ROW_XPATH, rowNo).getText();
     }
 
     @Step("Get Description By Row.")
-    public String getDescriptionByRow(String i) {
-        return $(ALL_DESCRIPTION_BY_ROW_XPATH, i).getText();
+    public String getDescriptionByRow(String rowNo) {
+        return $(ALL_DESCRIPTION_BY_ROW_XPATH, rowNo).getText();
     }
 }
