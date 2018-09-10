@@ -59,25 +59,25 @@ public class RebateCreation3StepDefs extends AbstractStepDefs {
     public void rebateIsCreatedWithAllParameters() {
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         if (selectedProducts != null) {
-            createRebateInstanсe(rebateCreation3Page.getRebateId(),
+            createRebateInstance(rebateCreation3Page.getRebateId(),
                     (long) threadVarsHashMap.get(TestKeyword.REBATE_SPA_NO),
                     threadVarsHashMap.getString(TestKeyword.REBATE_END_CUSTOMER_NO),
                     threadVarsHashMap.getString(TestKeyword.REBATE_DISTRIBUTOR_INVOICE_NO),
                     selectedProducts);
         }
         else {
-            createRebateInstanсe(rebateCreation3Page.getRebateId(),
+            createRebateInstance(rebateCreation3Page.getRebateId(),
                     (long) threadVarsHashMap.get(TestKeyword.REBATE_SPA_NO),
                     threadVarsHashMap.getString(TestKeyword.REBATE_CATALOG_NO));
         }
         rebateCreation3Page.closeSuccessfulPopup();
     }
 
-    private void createRebateInstanсe(String rebateId, long spaQuoteNo, String catalogNo) {
+    private void createRebateInstance(String rebateId, long spaQuoteNo, String catalogNo) {
         rebateManager.createRebateInstance(rebateId, spaQuoteNo, catalogNo);
     }
 
-    private void createRebateInstanсe(String rebateId, long spaQuoteNo, String endCustomerNo, String distributorInvoiceNo, HashMap<Product, Integer> selectedProducts) {
+    private void createRebateInstance(String rebateId, long spaQuoteNo, String endCustomerNo, String distributorInvoiceNo, HashMap<Product, Integer> selectedProducts) {
         rebateManager.createRebateInstance(rebateId, spaQuoteNo, endCustomerNo, distributorInvoiceNo, selectedProducts);
     }
 }

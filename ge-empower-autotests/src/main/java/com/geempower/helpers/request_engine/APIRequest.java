@@ -135,6 +135,44 @@ public abstract class APIRequest implements API {
         return null;
     }
 
+    protected void generateRequestURL() {
+        String requestUrl = getSystemAddress();
+        String parametersWithSlashSeparator = "";
+        String parametersWithAmpersandSeparator = "";
+        for (PostParameterAndValue parameterAndValue : parametersAndValues)
+            if (parameterAndValue.containsDelimiter(DELIMITER.FORWARD_SLASH))
+                parametersWithSlashSeparator += parameterAndValue.delimiter
+                        + parameterAndValue.parameter
+                        + parameterAndValue.delimiter
+                        + parameterAndValue.value;
+            else if (parameterAndValue.containsDelimiter(DELIMITER.AMPERSAND))
+                parametersWithAmpersandSeparator += (requestUrl.contains(DELIMITER.QUESTION_MARK.toString())
+                        || parametersWithAmpersandSeparator.contains(DELIMITER.QUESTION_MARK.toString()))
+                        ?
+                        parameterAndValue.delimiter
+                                + parameterAndValue.parameter
+                                + DELIMITER.EQUALS_SIGN
+                                + parameterAndValue.value
+                        :
+                        DELIMITER.QUESTION_MARK
+                                + parameterAndValue.parameter
+                                + DELIMITER.EQUALS_SIGN
+                                + parameterAndValue.value;
+        try {
+            requestUrl = requestUrl.contains(DELIMITER.QUESTION_MARK.toString())
+                    ?
+                    new StringBuffer(requestUrl).insert(requestUrl.indexOf(DELIMITER.QUESTION_MARK.toString()), parametersWithSlashSeparator).toString()
+                            + parametersWithAmpersandSeparator
+                    :
+                    requestUrl + parametersWithSlashSeparator + parametersWithAmpersandSeparator;
+            requestUrl = requestUrl.replaceAll(" ", "%20");
+            this.requestURL = new URL(requestUrl);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            System.out.println("URL format is incorrect: " + requestUrl);
+        }
+    }
+
     protected void generateRequestURL(UserSession userSession) {
         String requestUrl = userSession.getUser().getUserCockpit().getBaseUrl() + getSystemAddress();
         String parametersWithSlashSeparator = "";
