@@ -25,6 +25,10 @@ public class APIResponse implements API {
         this.responseBody = new Object();
     }
 
+    public Object getResponseBody() {
+        return responseBody;
+    }
+
     @SuppressWarnings("unchecked")
     public <T> APIResponse(T response) {
         Object results = null;
@@ -151,17 +155,6 @@ public class APIResponse implements API {
 
     public String getResponseBodyText() {
         return responseBody.toString();
-    }
-
-    public HashMap getResponseBodyHashMapFromXMLRpc() {
-        return (HashMap) responseBody;
-    }
-
-    @SuppressWarnings("unchecked")
-    public ArrayList<HashMap> getResponseBodyHashMapArrayFromXMLRpc() {
-        return responseBody instanceof HashMap ? new ArrayList<HashMap>() {{
-            add((HashMap) responseBody);
-        }} : (ArrayList<HashMap>) responseBody;
     }
 
     public Document getHTMLResponseDocument() {

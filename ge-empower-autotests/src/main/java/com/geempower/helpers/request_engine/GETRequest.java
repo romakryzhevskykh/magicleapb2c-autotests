@@ -36,26 +36,16 @@ public class GETRequest extends APIRequest {
             //add connection time out in milliseconds
             connection.setConnectTimeout(connectionTimeout);
             connection.setReadTimeout(connectionTimeout);
-
-//            if (userSession.getUsername() != null && userSession.getPassword() != null) {
-//                String userpass = userSession.getUsername() + ":" + userSession.getPassword();
-//                String basicAuth = "Basic " + base64Format(userpass);
-//                connection.setRequestProperty("Authorization", basicAuth);
-//                System.out.println("Set Authorization: " + basicAuth);
-//            }
-
             if (headers.size() > 0) {
                 for (Map.Entry<String, String> header : headers.entrySet()) {
                     System.out.println("Set request header: " + header);
                     connection.setRequestProperty(header.getKey(), header.getValue());
                 }
             }
-
             if (userSession.getCookies() != null) {
                 connection.setRequestProperty("Cookie", String.join("; ", userSession.getCookies()));
                 System.out.println("Set cookie: " + String.join("; ", userSession.getCookies()));
             }
-
             this.response = new APIResponse(connection);
             this.response.setLogRequestShort(isShortLogResponse);
             this.response.setContentType();
@@ -63,6 +53,84 @@ public class GETRequest extends APIRequest {
             this.response.setResponseBody();
         } catch (SocketTimeoutException exTimeout) {
             System.out.println("Timeout exception after: " + connectionTimeout + " seconds. No response!");
+        } finally {
+            System.out.println("*******");
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+    }
+
+    public void sendGetRequest(String login, String password) throws IOException {
+        generateRequestURL();
+        try {
+            System.out.println("*******");
+            System.out.println("API: " + this.name);
+            System.out.println("Sending 'GET' request to URL : " + requestURL.toString());
+            connection = (HttpsURLConnection) requestURL.openConnection();
+            connection.setRequestMethod("GET");
+            //add request header
+            connection.setRequestProperty("User-Agent", "Mozilla/5.0");
+            //add connection time out in milliseconds
+            connection.setConnectTimeout(connectionTimeout);
+            connection.setReadTimeout(connectionTimeout);
+            if (login != null && password != null) {
+                String userpass = login + ":" + password;
+                String basicAuth = "Basic " + base64Format(userpass);
+                connection.setRequestProperty("Authorization", basicAuth);
+                System.out.println("Set Authorization: " + basicAuth);
+            }
+            if (headers.size() > 0) {
+                for (Map.Entry<String, String> header : headers.entrySet()) {
+                    System.out.println("Set request header: " + header);
+                    connection.setRequestProperty(header.getKey(), header.getValue());
+                }
+            }
+            this.response = new APIResponse(connection);
+            this.response.setLogRequestShort(isShortLogResponse);
+            this.response.setContentType();
+            this.response.setResponseCode();
+            this.response.setResponseBody();
+        } catch (SocketTimeoutException exTimeout) {
+            System.out.println("Timeout exception after: " + connectionTimeout + " seconds. No response!");
+        } finally {
+            System.out.println("*******");
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+    }
+
+    public void sendGetRequest(String oAuthHeader) {
+        generateRequestURL();
+        try {
+            System.out.println("*******");
+            System.out.println("API: " + this.name);
+            System.out.println("Sending 'GET' request to URL : " + requestURL.toString());
+            connection = (HttpsURLConnection) requestURL.openConnection();
+            connection.setRequestMethod("GET");
+            //add request header
+            connection.setRequestProperty("User-Agent", "Mozilla/5.0");
+            //add connection time out in milliseconds
+            connection.setConnectTimeout(connectionTimeout);
+            connection.setReadTimeout(connectionTimeout);
+            connection.setRequestProperty("Authorization", oAuthHeader);
+            System.out.println("oAuth: " + oAuthHeader);
+            if (headers.size() > 0) {
+                for (Map.Entry<String, String> header : headers.entrySet()) {
+                    System.out.println("Set request header: " + header);
+                    connection.setRequestProperty(header.getKey(), header.getValue());
+                }
+            }
+            this.response = new APIResponse(connection);
+            this.response.setLogRequestShort(isShortLogResponse);
+            this.response.setContentType();
+            this.response.setResponseCode();
+            this.response.setResponseBody();
+        } catch (SocketTimeoutException exTimeout) {
+            System.out.println("Timeout exception after: " + connectionTimeout + " seconds. No response!");
+        } catch (IOException e) {
+            e.printStackTrace();
         } finally {
             System.out.println("*******");
             if (connection != null) {

@@ -1,8 +1,12 @@
 package com.geempower.storefront.pages;
 
+import com.geempower.helpers.request_engine.GETRequest;
+import com.geempower.helpers.user_engine.UserSession;
 import com.geempower.storefront.StorefrontBasePage;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
+
+import java.io.IOException;
 
 import static com.geempower.storefront.page_elements.NotificationCenterPageElements.*;
 
