@@ -29,7 +29,7 @@ public class PDPStepDefs extends AbstractStepDefs {
     @Then("^Is (.*) (.*) header displayed on PDP page.$")
     public void isCatalogNoHeaderDisplayed(String title, String catalogNo) {
         threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
-        catalogNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
+        catalogNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
         assertEquals(title + catalogNo, pdpPage.getCatalogNoHeaderTitle());
     }
 

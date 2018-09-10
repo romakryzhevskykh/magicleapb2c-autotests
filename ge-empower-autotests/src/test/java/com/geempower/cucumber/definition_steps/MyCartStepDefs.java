@@ -107,7 +107,7 @@ public class MyCartStepDefs extends AbstractStepDefs {
     @Then("^Correct Catalog No. is displayed on My Cart page.$")
     public void correctCatalogNoIsDisplayedOnMyCartPage() {
         threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
-        String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
+        String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
         assertEquals(catalogueNo, myCartPage.correctCatalogNoIsDisplayedOnMyCartPage());
     }
 

@@ -42,7 +42,7 @@ public class RebateCreation1StepDefs extends AbstractStepDefs {
 
     @When("^User sets appropriate Catalog No. for appropriate account to the Catalog No. field.$")
     public void userSetsAppropriateCatalogNoForAppropriateAccountToTheCatalogNoField() {
-        String catalogNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
+        String catalogNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
         rebateCreation1Page.setChosenProductCatalogNoToTheInput(catalogNo);
     }
 

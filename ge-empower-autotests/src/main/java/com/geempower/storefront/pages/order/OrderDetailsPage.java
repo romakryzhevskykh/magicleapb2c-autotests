@@ -1,8 +1,11 @@
 package com.geempower.storefront.pages.order;
 
 import com.geempower.storefront.StorefrontBasePage;
+import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
+
+import java.util.stream.Stream;
 
 import static com.geempower.storefront.page_block_elements.InvoiceDetailsPopUpElements.*;
 import static com.geempower.storefront.page_elements.order.OrderDetailsPageElements.*;
@@ -119,7 +122,7 @@ public class OrderDetailsPage extends StorefrontBasePage {
         return $(QUANTITY_OF_APPROPRIATE_PRODUCT_XPATH, catalogNo).getText();
     }
 
-    @Step("Get all catalog No.")
+    @Step("Get random catalog No.")
     public String getRandomCatalogNo() {
         waitUntilPageIsFullyLoaded();
         StringBuilder catalogNo = new StringBuilder("");
@@ -142,5 +145,20 @@ public class OrderDetailsPage extends StorefrontBasePage {
     @Step("User Clicks On All Status Box.")
     public void userClicksOnAllStatusBox() {
         click(ALL_STATUS_BOX_XPATH);
+    }
+
+    @Step("Get List Of Catalog No.")
+    public Stream<WebElement> getListOfCatalogNo() {
+        return $$(ALL_CATALOG_NO_XPATH).stream();
+    }
+
+    @Step("Get Catalog No By Row.")
+    public String getCatalogNoByRow(String i) {
+       return $(ALL_CATALOG_NO_BY_ROW_XPATH, i).getText();
+    }
+
+    @Step("Get Description By Row.")
+    public String getDescriptionByRow(String i) {
+        return $(ALL_DESCRIPTION_BY_ROW_XPATH, i).getText();
     }
 }

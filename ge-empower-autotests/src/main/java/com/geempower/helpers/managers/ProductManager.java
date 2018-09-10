@@ -22,8 +22,16 @@ public class ProductManager {
     private RegionsManager regionsManager;
     private ArrayList<Product> productsList = new ArrayList<>();
 
-    public void createInstance(String catalogueNo, String region, String id) {
-        productsList.add(new Product(catalogueNo, regionsManager.getRegionByValue(region), id));
+    public void createInstance(String catalogNo, String region, String id) {
+        productsList.add(new Product(catalogNo, regionsManager.getRegionByValue(region), id));
+    }
+
+    public void createInstance(String catalogNo, String description) {
+        productsList.add(new Product(catalogNo, description));
+    }
+
+    public ArrayList<Product> getProductsList(){
+        return productsList;
     }
 
     private Product getProductByRegion(Region region) {

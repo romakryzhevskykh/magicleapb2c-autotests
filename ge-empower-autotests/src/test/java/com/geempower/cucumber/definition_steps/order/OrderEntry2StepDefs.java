@@ -50,7 +50,7 @@ public class OrderEntry2StepDefs extends AbstractStepDefs {
     public void allNecessaryElementsAreDisplayedOnTheProductDetailsBlockAtOE2Page() {
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         selectedProducts.keySet().forEach(product -> {
-            assertEquals(product.getCatalogueNo().toUpperCase(), orderEntry2Page.getCatalogNoFromTheProductDetailsBlock());
+            assertEquals(product.getCatalogNo().toUpperCase(), orderEntry2Page.getCatalogNoFromTheProductDetailsBlock());
             assertEquals(product.getDescription(), orderEntry2Page.getDescriptionFromTheProductDetailsBlock());
             int quantity = selectedProducts.get(product);
             assertTrue(quantity == orderEntry2Page.getQuantityFromTheProductDetailsBlock());

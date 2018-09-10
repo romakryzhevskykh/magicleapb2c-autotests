@@ -3,12 +3,18 @@ package com.geempower.cucumber.definition_steps.order;
 import com.geempower.cucumber.definition_steps.AbstractStepDefs;
 import com.geempower.cucumber.definition_steps.TestKeyword;
 import com.geempower.helpers.managers.OrderManager;
+import com.geempower.helpers.managers.ProductManager;
 import com.geempower.helpers.models.Order;
+import com.geempower.helpers.models.Product;
 import com.geempower.storefront.pages.order.OrderDetailsPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
+import java.util.stream.Stream;
 
 import static com.geempower.cucumber.definition_steps.TestKeyword.GE_ORDER_NO;
 import static org.testng.Assert.assertEquals;
@@ -19,6 +25,8 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     private OrderDetailsPage orderDetailsPage;
     @Autowired
     private OrderManager orderManager;
+    @Autowired
+    private ProductManager productManager;
 
     private final double delta = 0.000001;
 
@@ -120,11 +128,22 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
         orderDetailsPage.clickOnAddToCartButtonOnOrderDetailsPage();
     }
 
+    private ArrayList<Product> createProductsListInstance() {
+        Stream<WebElement> allCatalogNo = orderDetailsPage.getListOfCatalogNo();
+        long productListSize = allCatalogNo.count();
+        for (int i = 1; i <= productListSize; i++){
+            String catalogNo = orderDetailsPage.getCatalogNoByRow(String.valueOf(i));
+            String description  = orderDetailsPage.getDescriptionByRow(String.valueOf(i));
+            productManager.createInstance(catalogNo, description);
+        }
+        return productManager.getProductsList();
+    }
+
     @And("^User clicks on random status box.$")
     public void userClicksOnRandomStatusBox() {
         long orderNo = Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO));
         double totalNetPrice = Double.parseDouble(orderDetailsPage.getTotalNetPrice());
-        orderManager.createOrderInstance(orderNo, totalNetPrice);
+        orderManager.createOrderInstance(orderNo, totalNetPrice, createProductsListInstance());
         orderDetailsPage.userClicksOnRandomStatusBox();
     }
 

@@ -39,7 +39,7 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
 
     @Step("Get Qty value")
     public String getQtyValue(Product product) {
-        return $(QUANTITY_INPUT_XPATH, product.getCatalogueNo().toUpperCase()).getAttribute("value");
+        return $(QUANTITY_INPUT_XPATH, product.getCatalogNo().toUpperCase()).getAttribute("value");
     }
 
     @Step("Get Description")
@@ -59,13 +59,13 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
 
     @Step("Get Availability")
     public String getAvailability(Product product) {
-        return $(AVAILABILITY_FIELD_XPATH, product.getCatalogueNo().toUpperCase()).getText();
+        return $(AVAILABILITY_FIELD_XPATH, product.getCatalogNo().toUpperCase()).getText();
     }
 
     @Step("Set quantity to quantity field")
     public void setQuantityForProduct(Product product, int quantity) {
-        $(QUANTITY_INPUT_XPATH, product.getCatalogueNo().toUpperCase()).clear();
-        $(QUANTITY_INPUT_XPATH, product.getCatalogueNo().toUpperCase()).sendKeys(Integer.toString(quantity));
+        $(QUANTITY_INPUT_XPATH, product.getCatalogNo().toUpperCase()).clear();
+        $(QUANTITY_INPUT_XPATH, product.getCatalogNo().toUpperCase()).sendKeys(Integer.toString(quantity));
     }
 
     @Step("Click on Update Price and Availability button")
@@ -77,7 +77,7 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
     @Step("Getting final extend price for product")
     public String getNewExtendPrice(Product product) {
         waitUntilPageIsFullyLoaded();
-        return $(EXTENDED_PRICE_XPATH, product.getCatalogueNo().toUpperCase()).getText();
+        return $(EXTENDED_PRICE_XPATH, product.getCatalogNo().toUpperCase()).getText();
     }
 
     @Step("Check that all the product are shown on the P&A page.")

@@ -30,7 +30,7 @@ public class RebateCreation2StepDefs extends AbstractStepDefs {
     public void allDataHasBeenReplacedCorrectlyFromFirstToSecondStep() {
         String accountNo = (String) threadVarsHashMap.get(TestKeyword.CHOSEN_ACCOUNT);
         long spaNo = (long) threadVarsHashMap.get(TestKeyword.REBATE_SPA_NO);
-        String catalogNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
+        String catalogNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
         String endCustomerAccountNo = (String) threadVarsHashMap.get(TestKeyword.REBATE_END_CUSTOMER_NO);
         String distributorInvoiceNo = threadVarsHashMap.getString(TestKeyword.REBATE_DISTRIBUTOR_INVOICE_NO);
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);

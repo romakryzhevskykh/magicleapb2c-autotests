@@ -38,7 +38,7 @@ public class ProductsStepDefs extends AbstractStepDefs {
     @When("^User search for a product by catalog No. on the Products page.$")
     public void userSearchForAProductByCatalogNoOnTheProductsPage() {
         threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
-        String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogueNo();
+        String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
         productsPage.setCatalogNoToSearchField(catalogueNo);
     }
 }
