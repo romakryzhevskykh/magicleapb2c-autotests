@@ -34,7 +34,7 @@ public class LessonLyService {
     }
 
     @Step("Get do_not_email value from lessonLy service.")
-    public Boolean getDoNotEmailValueForUserByUserId(String lessonlyUserId) {
+    public boolean getDoNotEmailValueForUserByUserId(String lessonlyUserId) {
         boolean doNotEmail = false;
         GETRequest doNotEmailRequest = getDoNotEmailValueForUser.getClone();
         doNotEmailRequest.setValue(lessonlyUserId);
