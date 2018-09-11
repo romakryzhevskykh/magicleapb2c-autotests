@@ -46,6 +46,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     @Autowired private RandomUtils randomUtils;
     @Autowired private PayFabricLeftBarBlock payFabricLeftBarBlock;
     @Autowired private PayFabricHeaderBlock payFabricHeaderBlock;
+    @Autowired private QuickOrderManager quickOrderManager;
 
     @Given("^User is logged in to Storefront.$")
     public void userIsLoggedInToStorefront() {
@@ -489,5 +490,13 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     public void findAnyRandomValidCreditCard() {
         CreditCard creditCard = randomUtils.getRandomCreditCard();
         threadVarsHashMap.put(TestKeyword.CREDIT_CARD, creditCard);
+    }
+
+    @And("^Quick order list is empty.$")
+    public void quickOrderListIsEmpty() {
+        Map<UnitOfMeasure, Integer> uomsInQO = quickOrderManager.getUOMs(userSessions.getActiveUserSession());
+        if(!uomsInQO.isEmpty()) {
+            quickOrderManager.removeAllProductsFromList(userSessions.getActiveUserSession());
+        }
     }
 }
