@@ -17,7 +17,7 @@ public class LessonLyService {
     private String lessonLyPassword;
 
     private GETRequest getUserInfo = new GETRequest("GET USER INFO FROM LESSONLY BY EMAIL", "https://api.lessonly.com/api/v1/users");
-    private GETRequest getDoNotEmailValueForUser = new GETRequest("GET DO NOT EMAIL VALUE FROM LESSONLY FOR USER", "https://api.lessonly.com/api/v1/users/%s");
+    private GETRequest getPersonalUserSettings = new GETRequest("GET PERSONAL USER SETTINGS", "https://api.lessonly.com/api/v1/users/%s");
 
     @Step("Get User id from lessonLy service.")
     public String getUserIdByEmailFromLessonLy(String email) {
@@ -36,7 +36,7 @@ public class LessonLyService {
     @Step("Get do_not_email value from lessonLy service.")
     public boolean getDoNotEmailValueForUserByUserId(String lessonlyUserId) {
         boolean doNotEmail = false;
-        GETRequest doNotEmailRequest = getDoNotEmailValueForUser.getClone();
+        GETRequest doNotEmailRequest = getPersonalUserSettings.getClone();
         doNotEmailRequest.setValue(lessonlyUserId);
         try {
             doNotEmailRequest.sendGetRequest(lessonLyUser, lessonLyPassword);
@@ -51,5 +51,25 @@ public class LessonLyService {
             }
         }
         return doNotEmail;
+    }
+
+    @Step("Get User Status In Lessonly Service.")
+    public String getUserStatusInLessonlyService(String lessonlyUserId) {
+        String userStatus = "";
+        GETRequest userStatusRequest = getPersonalUserSettings.getClone();
+        userStatusRequest.setValue(lessonlyUserId);
+        try {
+            userStatusRequest.sendGetRequest(lessonLyUser, lessonLyPassword);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        JSONArray fieldsData = (JSONArray) userStatusRequest.getResponse().getValueOf("custom_user_field_data");
+        for (int i = 0; i < fieldsData.length(); i++) {
+            JSONObject fieldData = fieldsData.getJSONObject(i);
+            if (fieldData.get("name").equals("user_status")) {
+                userStatus = fieldData.getString("value");
+            }
+        }
+        return userStatus;
     }
 }

@@ -189,9 +189,13 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     And Clicks on the Search button.
     When Clicks on the user name in the table.
     Then User details block for chosen user with <userId> userId is opened.
+    And Get user status in lessonly service for user by email <email>.
+    Then User status in lessonly service corresponds to user status in Manage Users page.
     When Admin opens Actions list.
     And Chooses Wipe All Accounts & Deactivate User option from the actions list.
     Then Chosen user's status has been changed to Inactive and sub-status details are correct.
+    And Get user status in lessonly service for user by email <email>.
+    Then Is INACTIVE user status displayed in lessonly service.
     Given Switch to Storefront as externalUser1.
     And User is logged in to Storefront.
     And Refresh page.
@@ -200,6 +204,10 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     When Admin opens Actions list.
     And Expand Modify an Account tab in I Want To Block.
     Then No data available in table title is displayed in All Accounts table.
+    When Admin opens Actions list.
+    And Chooses Reactivate User option from the actions list.
+    Then Chosen user has Active user status.
+    And Expand Modify an Account tab in I Want To Block.
     When Click on Add account button in User Detail block.
     And Select ASIA in the Region field in the Add Account pop-up.
     And Set <account> to the Account field in the Add Account pop-up.
@@ -209,12 +217,12 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     And Click on Add button in the Add Account pop-up.
     Then Is account <account> displayed in the All Accounts tab.
     When Clicks on the user name in the table.
-    Then Chosen user has Active user status.
+    And Get user status in lessonly service for user by email <email>.
+    Then Is ACTIVE user status displayed in lessonly service.
 
     Examples:
-      | userId         | account |
-      | externaluser01 | 9012306 |
-
+      | userId      | account | email                   |
+      | testcaadmin | 9012306 | testcaadmin@yopmail.com |
 
   Scenario Outline: Check that user can open /userNotActive page and verify main elements
     And Profile page is opened.
