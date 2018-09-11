@@ -467,6 +467,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
                 .anyMatch(account -> account.getText().equals(accountNo)));
     }
 
+
     @And("^Get user status in lessonly service for user by email (.*).$")
     public void getUserStatusInLessonlyResponseForUserByEmailEmail(String email) {
         String lessonLyUserId = lessonLyService.getUserIdByEmailFromLessonLy(email);
@@ -477,15 +478,21 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     @Then("^User status in lessonly service corresponds to user status in Manage Users page.$")
     public void userStatusInLessonlyServiceCorrespondsToUserStatusInManageUsersPage() {
         if (manageUsersPage.getFullUserSubStatus().contains("Active")) {
-            assertEquals(threadVarsHashMap.get(TestKeyword.USER_STATUS_VALUE_IN_LESSONLY),("ACTIVE"));
+            assertEquals(threadVarsHashMap.get(TestKeyword.USER_STATUS_VALUE_IN_LESSONLY), ("ACTIVE"));
         }
         if (manageUsersPage.getFullUserSubStatus().contains("Inactive")) {
-            assertEquals(threadVarsHashMap.get(TestKeyword.USER_STATUS_VALUE_IN_LESSONLY),("INACTIVE"));
+            assertEquals(threadVarsHashMap.get(TestKeyword.USER_STATUS_VALUE_IN_LESSONLY), ("INACTIVE"));
         }
     }
 
     @Then("^Is (.*) user status displayed in lessonly service.$")
     public void isAppropriateUserStatusDisplayedInLessonlyService(String userStatus) {
-        assertEquals(threadVarsHashMap.get(TestKeyword.USER_STATUS_VALUE_IN_LESSONLY),(userStatus));
+        assertEquals(threadVarsHashMap.get(TestKeyword.USER_STATUS_VALUE_IN_LESSONLY), (userStatus));
+    }
+
+    @Then("^User sub-status contains (.*).$")
+    public void userSubStatusIsEqualToInactiveDeactivatedByUser(String subStatus) {
+        assertTrue(manageUsersPage.getFullUserSubStatus().contains(subStatus));
+
     }
 }

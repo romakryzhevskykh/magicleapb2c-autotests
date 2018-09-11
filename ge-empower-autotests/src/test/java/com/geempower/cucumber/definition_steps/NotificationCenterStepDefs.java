@@ -3,7 +3,6 @@ package com.geempower.cucumber.definition_steps;
 import com.geempower.helpers.managers.LessonLyService;
 import com.geempower.helpers.managers.StatusPageService;
 import com.geempower.storefront.pages.NotificationCenterPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -21,7 +20,7 @@ public class NotificationCenterStepDefs extends AbstractStepDefs {
     @Autowired
     private NotificationCenterPage notificationCenterPage;
 
-    @Then("^(.*) title is displayed.$")
+    @Then("^Notification preferences (.*) title is displayed.$")
     public void isNotificationPreferencesTitleDisplayed(String title) {
         assertEquals(title, notificationCenterPage.getNotificationCenterPageTitle());
     }
