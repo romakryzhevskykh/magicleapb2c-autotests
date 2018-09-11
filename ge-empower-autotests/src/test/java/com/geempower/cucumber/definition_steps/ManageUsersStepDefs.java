@@ -477,15 +477,15 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     @Then("^User status in lessonly service corresponds to user status in Manage Users page.$")
     public void userStatusInLessonlyServiceCorrespondsToUserStatusInManageUsersPage() {
         if (manageUsersPage.getFullUserSubStatus().contains("Active")) {
-            assertTrue(threadVarsHashMap.get(TestKeyword.USER_STATUS_VALUE_IN_LESSONLY).equals("ACTIVE"));
+            assertEquals(threadVarsHashMap.get(TestKeyword.USER_STATUS_VALUE_IN_LESSONLY),("ACTIVE"));
         }
         if (manageUsersPage.getFullUserSubStatus().contains("Inactive")) {
-            assertTrue(threadVarsHashMap.get(TestKeyword.USER_STATUS_VALUE_IN_LESSONLY).equals("INACTIVE"));
+            assertEquals(threadVarsHashMap.get(TestKeyword.USER_STATUS_VALUE_IN_LESSONLY),("INACTIVE"));
         }
     }
 
     @Then("^Is (.*) user status displayed in lessonly service.$")
     public void isAppropriateUserStatusDisplayedInLessonlyService(String userStatus) {
-        assertTrue(threadVarsHashMap.get(TestKeyword.USER_STATUS_VALUE_IN_LESSONLY).equals(userStatus));
+        assertEquals(threadVarsHashMap.get(TestKeyword.USER_STATUS_VALUE_IN_LESSONLY),(userStatus));
     }
 }

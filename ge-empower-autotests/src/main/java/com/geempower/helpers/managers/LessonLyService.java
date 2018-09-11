@@ -55,7 +55,7 @@ public class LessonLyService {
 
     @Step("Get User Status In Lessonly Service.")
     public String getUserStatusInLessonlyService(String lessonlyUserId) {
-        String userStatus = null;
+        String userStatus = "";
         GETRequest userStatusRequest = getPersonalUserSettings.getClone();
         userStatusRequest.setValue(lessonlyUserId);
         try {
