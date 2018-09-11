@@ -20,6 +20,11 @@ public class UserSwitchStepDefs {
         webDriverPool.setDriverActive(StorefrontUserRoles.EXTERNALUSER1);
     }
 
+    @Given("Switch to Storefront as caAdmin.")
+    public void switchToStorefrontAsCaAdmin() {
+        webDriverPool.setDriverActive(StorefrontUserRoles.CAADMIN);
+    }
+
     @Given("Switch to Storefront as admin.")
     public void switchToStorefrontAsAdmin() {
         webDriverPool.setDriverActive(StorefrontUserRoles.EMPOWERADMIN);

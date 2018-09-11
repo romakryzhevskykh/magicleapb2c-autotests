@@ -1,5 +1,6 @@
 package com.geempower.cucumber.definition_steps;
 
+import com.geempower.helpers.managers.LessonLyService;
 import com.geempower.helpers.managers.RegionsManager;
 import com.geempower.helpers.models.Region;
 import com.geempower.storefront.page_blocks.IwantToBlock;
@@ -24,6 +25,8 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     private IwantToBlock iWantToBlock;
     @Autowired
     private RegionsManager regionsManager;
+    @Autowired
+    private LessonLyService lessonLyService;
 
     @Then("^(.*) title is displayed on Manage Users page.$")
     public void checkManageUsersTitle(String manageUsersTitle) {
@@ -462,5 +465,27 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         String accountNo = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NO);
         assertTrue(iWantToBlock.getAllAccountNo()
                 .anyMatch(account -> account.getText().equals(accountNo)));
+    }
+
+    @And("^Get user status in lessonly service for user by email (.*).$")
+    public void getUserStatusInLessonlyResponseForUserByEmailEmail(String email) {
+        String lessonLyUserId = lessonLyService.getUserIdByEmailFromLessonLy(email);
+        String userStatus = lessonLyService.getUserStatusInLessonlyService(lessonLyUserId);
+        threadVarsHashMap.replace(TestKeyword.USER_STATUS_VALUE_IN_LESSONLY, userStatus);
+    }
+
+    @Then("^User status in lessonly service corresponds to user status in Manage Users page.$")
+    public void userStatusInLessonlyServiceCorrespondsToUserStatusInManageUsersPage() {
+        if (manageUsersPage.getFullUserSubStatus().contains("Active")) {
+            assertTrue(threadVarsHashMap.get(TestKeyword.USER_STATUS_VALUE_IN_LESSONLY).equals("ACTIVE"));
+        }
+        if (manageUsersPage.getFullUserSubStatus().contains("Inactive")) {
+            assertTrue(threadVarsHashMap.get(TestKeyword.USER_STATUS_VALUE_IN_LESSONLY).equals("INACTIVE"));
+        }
+    }
+
+    @Then("^Is (.*) user status displayed in lessonly service.$")
+    public void isAppropriateUserStatusDisplayedInLessonlyService(String userStatus) {
+        assertTrue(threadVarsHashMap.get(TestKeyword.USER_STATUS_VALUE_IN_LESSONLY).equals(userStatus));
     }
 }

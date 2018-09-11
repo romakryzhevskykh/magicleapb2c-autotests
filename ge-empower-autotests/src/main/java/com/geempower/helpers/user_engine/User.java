@@ -39,6 +39,9 @@ public class User {
                 case "testroleuser":
                     userRole = StorefrontUserRoles.TESTROLEUSER;
                     break;
+                case "caadmin":
+                    userRole = StorefrontUserRoles.CAADMIN;
+                    break;
                 default:
                     userRole = null;
                     break;
