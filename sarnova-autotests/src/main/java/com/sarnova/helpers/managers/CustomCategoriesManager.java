@@ -32,7 +32,7 @@ public class CustomCategoriesManager {
     private ArrayList<CustomCategory> customCategories = new ArrayList<>();
 
     public ParentCustomCategory createParentInstance(String id, String name, User user) {
-        ParentCustomCategory parentCustomCategory = new ParentCustomCategory(id, name, user.getOrganization());
+        ParentCustomCategory parentCustomCategory = new ParentCustomCategory(id, name, user.getDepartment());
         customCategories.add(parentCustomCategory);
         return parentCustomCategory;
     }

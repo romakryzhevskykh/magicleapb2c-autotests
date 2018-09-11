@@ -428,7 +428,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
         return (ParentCustomCategory) customCategoriesManager.getCustomCategories().stream()
                 .filter(ParentCustomCategory.class::isInstance)
                 .filter(parentCustomCategory -> parentCustomCategory.getOrganization()
-                        .equals(userSessions.getActiveUserSession().getUser().getOrganization()))
+                        .equals(userSessions.getActiveUserSession().getUser().getDepartment()))
                 .findAny().orElseGet(() -> {
                     String ccName = RandomStringUtils.randomAlphabetic(8);
                     return customCategoriesManager.createNewParentCustomCategoryByApi(userSessions.getActiveUserSession(), ccName);
@@ -450,7 +450,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
         return ((ParentCustomCategory) customCategoriesManager.getCustomCategories().stream()
                 .filter(ParentCustomCategory.class::isInstance)
                 .filter(parentCustomCategory -> parentCustomCategory.getOrganization()
-                        .equals(userSessions.getActiveUserSession().getUser().getOrganization()))
+                        .equals(userSessions.getActiveUserSession().getUser().getDepartment()))
                 .filter(parentCategory -> !((ParentCustomCategory) parentCategory).getChildCustomCategories().isEmpty())
                 .findAny()
                 .orElseGet(() -> {
