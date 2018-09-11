@@ -106,3 +106,22 @@ Feature: Some actions on Products page
     Examples:
       | region        | general_characteristic_table_items                                                                                                                                                                                                                                                                                              | publication_table_titles                                     |
       | North_America | Category, GO Schedule, Amperage, Frame Type, Trip Style, System Voltage, Poles, Trip Function, Continuous Current Rated, 120 Vac Interrupting Rating, 120/240 Vac Interrupting Rating, Suitable for Reverse Feed, Product Line, Long Time, Instantaneous, Protective Relays, Current Metering, Special Markings, GSA Compliance | Title, Type of Doc., Date, Publication No., Publication Type |
+
+  Scenario Outline: Check that Total Net Price value is correctly after changing status boxes - DE95700
+    And Account management page is opened.
+    When Choose <region> region.
+    And Search random account for chosen region.
+    And Click on chosen account.
+    And Orders page is opened.
+    When User clicks on random order No.
+    Then Orders Details page is opened.
+    And User clicks on random status box.
+    And User clicks on All status box.
+    Then Is Total Net Price value correct after changing status boxes.
+
+    Examples:
+      | region        |
+      | North_America |
+      | EMEA          |
+      | ASIA          |
+      | Latin_America |
