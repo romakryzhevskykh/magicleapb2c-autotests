@@ -6,7 +6,7 @@ Feature: Some actions with toggles, UI components on the Notification Center pag
     And Notification Center page is opened.
 
   Scenario Outline: Check that all necessary elements are displayed on the Notification Center page
-    Then Notification Preferences title is displayed.
+    Then Notification preferences Notification Preferences title is displayed.
     Then Marketing and promotional content title of section is displayed.
     Then Informational toggle section contains <text> description.
     Then Subscription preference <text2> is displayed.

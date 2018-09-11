@@ -48,4 +48,47 @@ public class ProfilePage extends StorefrontBasePage {
                         region -> $(USER_ROLE_IN_EACH_REGION_XPATH, region.getRegionName()).getText())));
         return rolesForRegions;
     }
+
+    @Step("Get Unregister Section Title.")
+    public String getUnregisterSectionTitle() {
+        return $(UNREGISTER_SECTION_TITLE_XPATH).getText();
+    }
+
+    @Step("Get Deactivate Action Description.")
+    public String getDeactivateActionDescription() {
+        return $(DEACTIVATE_ACTION_DESCRIPTION_XPATH).getText();
+    }
+
+    @Step("Click On Deactivate My User ID Button.")
+    public void clickOnDeactivateMyUserIDButton() {
+        click(DEACTIVATE_BUTTON_XPATH);
+    }
+
+    @Step("Get Confirmation Text From Confirmation Pop-Up.")
+    public String getConfirmationTextFromConfirmationPopUp() {
+        waitUntilPageIsFullyLoaded();
+        return $(CONFIRMATION_TEXT_DEACTIVATE_ACTION_POP_UP_XPATH).getText();
+    }
+
+    @Step("Get Confirmation Second Text From Confirmation Pop-Up.")
+    public String getConfirmationSecondTextFromConfirmationPopUp() {
+        waitUntilPageIsFullyLoaded();
+        return $(CONFIRMATION2_TEXT_DEACTIVATE_ACTION_POP_UP_XPATH).getText();
+    }
+
+    @Step("Is Deactivate Button Disabled.")
+    public boolean isDeactivateButtonDisabled() {
+        return Boolean.parseBoolean($(DEACTIVATE_MY_USER_ID_XPATH).getAttribute("disabled"));
+    }
+
+    @Step("Confirm Deactivation.")
+    public void confirmDeactivation() {
+        click(CHECKBOX_DEACTIVATE_ACTION_POP_UP_XPATH);
+    }
+
+    @Step("Click On Deactivate My User Id Button.")
+    public void clickOnDeactivateMyUserIdButton() {
+        click(DEACTIVATE_MY_USER_ID_XPATH);
+        waitUntilPageIsFullyLoaded();
+    }
 }
