@@ -463,4 +463,9 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         assertTrue(iWantToBlock.getAllAccountNo()
                 .anyMatch(account -> account.getText().equals(accountNo)));
     }
+
+    @Then("^User sub-status contains (.*).$")
+    public void userSubStatusIsEqualToInactiveDeactivatedByUser(String subStatus) {
+        assertTrue(manageUsersPage.getFullUserSubStatus().contains(subStatus));
+    }
 }

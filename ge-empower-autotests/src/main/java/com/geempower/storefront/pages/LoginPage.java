@@ -7,18 +7,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoginPage extends StorefrontBasePage {
 
-    private final String pageUri = "login";
+    private final String pageUri = "index.html";
 
     @Override
     public boolean isOpened() {
-        return getCurrentUrl().equals(getPageUrl());
+        waitUntilPageIsFullyLoaded();
+        return getCurrentUrl().contains(getPageUrl());
     }
 
     @Override
     public String getPageUrl() {
-        return storefrontProject.getBaseUrl().concat(pageUri);
+        waitUntilPageIsFullyLoaded();
+        return storefrontProject.getBaseUrl().replace("geempower/", "").replace("https", "").concat(pageUri);
     }
-
 
     public void loginToStorefront(User user) {
 
