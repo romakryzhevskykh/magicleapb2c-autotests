@@ -18,6 +18,7 @@
     <test name="Supply lists, user management, add to cart and checkout functionality">
         <parameter name="browserName" value="chrome"/>
         <classes>
+            <class name="com.sarnova.cucumber.QuickOrderSuit"/>
             <class name="com.sarnova.cucumber.UserManagementSuite"/>
             <class name="com.sarnova.cucumber.PermissionsSuite"/>
             <class name="com.sarnova.cucumber.AddToSupplyListSuite"/>
