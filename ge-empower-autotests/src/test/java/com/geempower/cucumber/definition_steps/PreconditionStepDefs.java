@@ -1,12 +1,15 @@
 package com.geempower.cucumber.definition_steps;
 
+import com.geempower.cucumber.definition_steps.rebate.RebateCreation1StepDefs;
 import com.geempower.helpers.user_engine.StorefrontUserRoles;
 import com.geempower.hybris.hac.pages.HacLoginPage;
 import com.geempower.storefront.page_blocks.HeaderBlock;
 import com.geempower.storefront.pages.*;
 import com.geempower.storefront.pages.order.OrdersPage;
 import com.geempower.storefront.pages.product.ProductsPage;
+import com.geempower.storefront.pages.rebate.RebateCreation1Page;
 import com.geempower.storefront.pages.rebate.RebatesPage;
+import com.geempower.storefront.pages.returns.ReturnCreation1Page;
 import com.geempower.storefront.pages.returns.ReturnsPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -38,7 +41,11 @@ public class PreconditionStepDefs extends AbstractStepDefs {
     @Autowired
     private ReturnsPage returnsPage;
     @Autowired
+    private ReturnCreation1Page returnCreation1Page;
+    @Autowired
     private RebatesPage rebatesPage;
+    @Autowired
+    private RebateCreation1Page rebateCreation1Page;
     @Autowired
     private SpecialPricingPage specialPricingPage;
     @Autowired
@@ -144,11 +151,27 @@ public class PreconditionStepDefs extends AbstractStepDefs {
         }
     }
 
+    @And("^Create Returns page is opened.$")
+    public void createReturnsPageIsOpened() {
+        returnCreation1Page.waitUntilPageIsFullyLoaded();
+        if (!returnCreation1Page.isOpened()) {
+            returnCreation1Page.open();
+        }
+    }
+
     @And("^Rebates page is opened.$")
     public void rebatesPageIsOpened() {
         rebatesPage.waitUntilPageIsFullyLoaded();
         if (!rebatesPage.isOpened()) {
             rebatesPage.open();
+        }
+    }
+
+    @And("^Create Rebates page is opened.$")
+    public void createRebatesPageIsOpened() {
+        rebateCreation1Page.waitUntilPageIsFullyLoaded();
+        if (!rebateCreation1Page.isOpened()) {
+            rebateCreation1Page.open();
         }
     }
 
