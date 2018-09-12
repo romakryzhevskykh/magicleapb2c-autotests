@@ -46,6 +46,8 @@ public class AccountManagementPageElements {
     public final static String PRE_AUTH_ACCOUNTS_TABLE_XPATH = "//table[@id='preauthorizedAccountsTbl']";
     public final static String PRE_AUTH_ACCOUNTS_TABLE_BODY_XPATH = "//table[@id='preauthorizedAccountsTbl']/tbody";
     public final static String PRE_AUTH_SEND_REQUEST_BUTTON_XPATH = "//button[@id='sendPreauthorizeRequestBtn']";
+    public final static String MODAL_DIALOG_XPATH = "//div[@class='modal-dialog']";
+
     //Request Account pop-up
     public final static String SALES_OFFICE_CODE_FIELD_ID = "requestSalesOfficeCode";
     public final static String SALES_ENGINEER_CODE_FIELD_ID = "requestSalesEngCode";

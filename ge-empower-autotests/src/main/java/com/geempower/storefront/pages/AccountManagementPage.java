@@ -97,6 +97,7 @@ public class AccountManagementPage extends StorefrontBasePage {
     @Step("Open request account pop-up.")
     public void openRequestAccountPopup() {
         waitUntilPageIsFullyLoaded();
+        waitForElementToDisappear(By.xpath(MODAL_DIALOG_XPATH));
         click(REQUEST_ACCOUNT_BUTTON);
     }
 
@@ -195,6 +196,7 @@ public class AccountManagementPage extends StorefrontBasePage {
     @Step("Remove All Active Requested Accounts.")
     public void removeAllRequestedAccounts(ArrayList<String> approvedAccounts) {
         waitUntilPageIsFullyLoaded();
+        waitForElementToDisappear(By.xpath(MODAL_DIALOG_XPATH));
         approvedAccounts.forEach(this::removeAccountByAccountNo);
     }
 
