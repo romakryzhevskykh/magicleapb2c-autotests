@@ -196,7 +196,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then Chosen user's status has been changed to Inactive and sub-status details are correct.
     And Get user status in lessonly service for user by email <email>.
     Then Is INACTIVE user status displayed in lessonly service.
-    Given Switch to Storefront as externalUser1.
+    Given Switch to Storefront as caAdmin..
     And User is logged in to Storefront.
     And Refresh page.
     Then User sees User not active page.
