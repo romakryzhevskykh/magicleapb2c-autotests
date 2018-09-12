@@ -390,3 +390,38 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Examples:
       | region |
       | ASIA   |
+
+  Scenario Outline: Check that T&B Access widget is displayed for user and works properly.
+    Given Switch to Storefront as admin.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    When Admin opens Users tab.
+    And Sets <userId> email to the email field.
+    And Clicks on the Search button.
+    When Clicks on the user name in the table.
+    And Expand Change an empower Privilege/Role in I want to block.
+    Then T&B Access toggle section is displayed.
+    When Admin turn on T&B Access toggle.
+    And Clicks on Assign button.
+    Given Switch to Storefront as smAdmin.
+    And User is logged in to Storefront.
+    And Dashboard page is opened.
+    When Click on Skip button.
+    When Close cookies pop-up.
+    Then T&B Access widget is displayed.
+    Then T&B Access widget title <tNbTitle> is correct.
+    Then User clicks on T&B Access button and T&B Access web site is successfully opened in new tab with correct url <tNbUrl>.
+    Given Switch to Storefront as admin.
+    When Admin turn off T&B Access toggle.
+    And Clicks on Assign button.
+    Given Switch to Storefront as smAdmin.
+    And User is logged in to Storefront.
+    And Dashboard page is opened.
+    And Refresh page.
+    When Click on Skip button.
+    When Close cookies pop-up.
+    Then T&B Access widget is not displayed.
+
+    Examples:
+      | userId  | tNbTitle                       | tNbUrl                             |
+      | rost.sm | Click here to enter T&B Access | https://tnbaccess.tnb.com/sps/tbx/ |

@@ -5,6 +5,7 @@ import com.geempower.helpers.managers.RegionsManager;
 import com.geempower.helpers.models.Region;
 import com.geempower.storefront.page_blocks.IwantToBlock;
 import com.geempower.storefront.pages.ManageUsersPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -493,5 +494,20 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     @Then("^User sub-status contains (.*).$")
     public void userSubStatusIsEqualToInactiveDeactivatedByUser(String subStatus) {
         assertTrue(manageUsersPage.getFullUserSubStatus().contains(subStatus));
+    }
+
+    @Then("^(.*) toggle section is displayed.$")
+    public void tBAccessToggleSectionIsDisplayed(String toggleText) {
+        assertEquals(toggleText, iWantToBlock.isTnbAccessToggleSectionDisplayed());
+    }
+
+    @When("^Admin turn on T&B Access toggle.$")
+    public void adminTurnOnTBAccessToggle() {
+        iWantToBlock.turnTnBToggleOn();
+    }
+
+    @When("^Admin turn off T&B Access toggle.$")
+    public void adminTurnOffTBAccessToggle() {
+        iWantToBlock.turnTnBToggleOff();
     }
 }

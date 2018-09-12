@@ -65,4 +65,7 @@ public class IwantToBlockElements {
     public final static String ALL_ROLES_IN_ROLES_DROPDOWN_XPATH = "//ul[@class='select2-results__options']/li";
     public final static String ROLE_BY_TEXT_IN_DROPDOWN_ROLES_XPATH = "//ul[@class='select2-results__options']/li[normalize-space()='%s']";
     public final static String ASSIGN_ROLES_OR_PRIVILEGES_BUTTON_ID = "assignUserRoles-new";
+    public final static String T_AND_B_ACCESS_TOGGLE_SECTION_TEXT_XPATH = "//div[@class='row accessTandB-selction enabled-important']/div[1]//label";
+    public final static String T_AND_B_TOGGLE_CHANGE_POSITION_XPATH = "//label[@for='accessTandBPrivilege']/span[2]";
+    public final static String T_AND_B_TOGGLE_CURRENT_POSITION_XPATH = "//div[@class='row accessTandB-selction enabled-important']//input";
 }
