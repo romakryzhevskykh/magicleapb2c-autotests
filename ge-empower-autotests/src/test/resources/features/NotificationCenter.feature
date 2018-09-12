@@ -18,6 +18,17 @@ Feature: Some actions with toggles, UI components on the Notification Center pag
       | I would like to receive information on products, services, solutions and events from Industrial Solutions and I give explicit consent based on the privacy policy listed at the footer. Your data may be shared within Industrial Solutions legal entities throughout the world, only to the extent needed to inform you about our products, services, solutions and events. | At any time you will be able to withdraw your consent by modifying your subscription preference. |
 
   Scenario Outline: Check that admin is able to switch OFF the LessonLy toggle and then switch ON.
+    Given Switch to HAC f1 as admin.
+    And Admin is logged in to HAC.
+    When Admin opens configuration section.
+    And Search configuration property by name lessonly.enabled.
+    And Set new property value true.
+    Given Switch to HAC f2 as admin.
+    And Admin is logged in to HAC.
+    When Admin opens configuration section.
+    And Search configuration property by name lessonly.enabled.
+    And Set new property value true.
+    Given Switch to Storefront as internalUser.
     And Current empowerU toggle position is saved to the threadVarsHashMap.
     And Get Lessonly status for user by email <email>.
     Then Lessonly status corresponds to lessonly toggle position.
@@ -39,17 +50,6 @@ Feature: Some actions with toggles, UI components on the Notification Center pag
       | roman.kryzhevskykh@ge.com |
 
   Scenario Outline: Check that admin is able to switch OFF the System Status toggle and then switch ON.
-    Given Switch to HAC f1 as admin.
-    And Admin is logged in to HAC.
-    When Admin opens configuration section.
-    And Search configuration property by name lessonly.enabled.
-    And Set new property value true.
-    Given Switch to HAC f2 as admin.
-    And Admin is logged in to HAC.
-    When Admin opens configuration section.
-    And Search configuration property by name lessonly.enabled.
-    And Set new property value true.
-    Given Switch to Storefront as internalUser.
     And Current System Status toggle position is saved to the threadVarsHashMap.
     Then StatusPage status for user <email> corresponds to the current System status toggle position.
     When Admin switches the System Status toggle to another state.

@@ -18,6 +18,8 @@ Feature: Some actions on Profile page
     When User confirms the deactivate action.
     And User clicks on Deactivate my User ID button.
     Then Login page is opened.
+    And Get user status in lessonly service for user by email <email>.
+    Then Is INACTIVE user status displayed in lessonly service.
     Given Switch to Storefront as admin.
     And User is logged in to Storefront.
     And Manage Users page is opened.
@@ -30,7 +32,9 @@ Feature: Some actions on Profile page
     When Admin opens Actions list.
     And Chooses Reactivate User option from the actions list.
     Then Chosen user has Active user status.
+    And Get user status in lessonly service for user by email <email>.
+    Then Is ACTIVE user status displayed in lessonly service.
 
     Examples:
-      | description                               | confirmation                                                       | confirmation2                          | userId  |
-      | If you want to deactivate your empower ID | Are you sure you want to deactivate your user? (No data is erased) | I confirm I want to deactivate my user | rost.rm |
+      | email                | description                               | confirmation                                                       | confirmation2                          | userId  |
+      | rmautotest@gmail.com | If you want to deactivate your empower ID | Are you sure you want to deactivate your user? (No data is erased) | I confirm I want to deactivate my user | rost.rm |

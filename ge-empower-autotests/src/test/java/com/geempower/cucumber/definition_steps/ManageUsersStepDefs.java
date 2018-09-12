@@ -493,6 +493,5 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     @Then("^User sub-status contains (.*).$")
     public void userSubStatusIsEqualToInactiveDeactivatedByUser(String subStatus) {
         assertTrue(manageUsersPage.getFullUserSubStatus().contains(subStatus));
-
     }
 }
