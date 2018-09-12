@@ -27,13 +27,11 @@ public class WebDriverSessions {
     private InheritableThreadLocal<WebDriverPool> tlWebDriverPool = new InheritableThreadLocal<>();
 
     public synchronized void setDriver(URL hubUrl, String browserName, boolean headless, UserRole userRole) {
-//        DesiredCapabilities capabilities = new DesiredCapabilities();
-//        capabilities.setBrowserName(browserName);
-//        capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
         Capabilities capabilities;
         if (browserName.equals("chrome")) {
             capabilities = new ChromeOptions();
             ((ChromeOptions) capabilities).setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+            ((ChromeOptions) capabilities).setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
             if (headless) {
                 ((ChromeOptions) capabilities).addArguments("--headless");
                 ((ChromeOptions) capabilities).addArguments("window-size=1920x1080");
