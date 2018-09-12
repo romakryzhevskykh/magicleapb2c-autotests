@@ -114,6 +114,7 @@ public class OrderDetailsPage extends StorefrontBasePage {
 
     @Step("Select Random Checkbox Catalog No.")
     public void selectRandomCheckboxCatalogNo(String catalogNo) {
+        waitUntilPageIsFullyLoaded();
         click(CHECKBOX_RELATES_TO_CATALOG_NO_XPATH, catalogNo);
     }
 
