@@ -404,4 +404,22 @@ public class IwantToBlock extends UIComponent {
         click(REMOVE_BUTTON_IN_SE_CODES_TAB_IN_MODIFY_AN_ACC_TAB_XPATH);
         click(REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_IN_SE_CODES_TAB_XPATH);
     }
+
+    @Step("Check if T&B Access Toggle Section displayed.")
+    public String isTnbAccessToggleSectionDisplayed() {
+        waitUntilPageIsFullyLoaded();
+        return $(T_AND_B_ACCESS_TOGGLE_SECTION_TEXT_XPATH).getText();
+    }
+
+    @Step("Turn T&B Toggle on.")
+    public void turnTnBToggleOn() {
+        if (!$(T_AND_B_TOGGLE_CURRENT_POSITION_XPATH).getAttribute("value").equals("true"))
+            click(T_AND_B_TOGGLE_CHANGE_POSITION_XPATH);
+    }
+
+    @Step("Turn T&B Toggle off.")
+    public void turnTnBToggleOff() {
+        waitUntilPageIsFullyLoaded();
+        click(T_AND_B_TOGGLE_CHANGE_POSITION_XPATH);
+    }
 }

@@ -14,8 +14,11 @@ public class DashboardPageElements {
     public final static String WE_ARE_NOW_ABB_OK_BUTTON_XPATH = WE_ARE_NOW_ABB_POP_UP_XPATH + "//..//..//../div/button";
     public final static String ORDER_SEARCH_INPUT_XPATH = "//input[@name='orderNum']";
     public final static String SEARCH_ORDER_BY_PARAMS_BUTTON_XPATH = "//input[@class='btn primary-btn pull-right']";
-
+    public final static String T_AND_B_ACCESS_WIDGET_XPATH = "//div[@class='panel accessTandB-panel']";
+    public final static String T_AND_B_ACCESS_WIDGET_TITLE_XPATH = T_AND_B_ACCESS_WIDGET_XPATH + "//p";
+    public final static String T_AND_B_ACCESS_BUTTON_XPATH = T_AND_B_ACCESS_WIDGET_XPATH + "//a[@class='pull-right button primary-btn btn']";
     public final static String SELECT_SHIP_ADDRESS_MODAL_XPATH = "//*[@id='select-ship-address-modal']//*[@class='modal-dialog']";
     public final static String SELECT_SHIP_ADDRESS_FIELD_ID = "select2-shippingAddress-container";
     public final static String SUBMIT_SHIP_ADDRESS_BUTTON_XPATH = "//button[@class='btn primary-btn js-submit-modal']";
+
 }

@@ -1,7 +1,5 @@
 package com.geempower.cucumber.definition_steps;
 
-import com.geempower.helpers.models.Product;
-import com.geempower.helpers.models.Region;
 import com.geempower.storefront.page_blocks.HeaderBlock;
 import com.geempower.storefront.page_blocks.OrderStatusWidget;
 import com.geempower.storefront.page_blocks.PriceAndAvailabilityBlock;
@@ -12,10 +10,10 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.HashMap;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class DashboardStepDefs extends AbstractStepDefs {
@@ -193,5 +191,25 @@ public class DashboardStepDefs extends AbstractStepDefs {
     @When("^User searches order by (.*) orderNo via Order Search field.$")
     public void userSetsOrderNoToTheOrderSearchField(String orderNo) {
         dashboardPage.searchOrderViaOrderSearchField(orderNo);
+    }
+
+    @Then("^T&B Access widget is displayed.")
+    public void tBAccessWidgetIsDisplayed() {
+        assertTrue(dashboardPage.isTnBWidgetDisplayed());
+    }
+
+    @Then("^T&B Access widget title (.*) is correct.$")
+    public void tBAccessWidgetTitleIsCorrect(String tAndBTitle) {
+        assertEquals(tAndBTitle, dashboardPage.getTnBAccessWidgetTitle());
+    }
+
+    @Then("^User clicks on T&B Access button and T&B Access web site is successfully opened in new tab with correct url (.*).$")
+    public void tBAccessWebSiteIsSuccessfullyOpenedInNewTabWithCorrectUrl(String tNbUrl) {
+        assertEquals(tNbUrl, dashboardPage.clickOnTandBAccessButtonAndGetSiteUrl());
+    }
+
+    @Then("^T&B Access widget is not displayed.")
+    public void tBAccessWidgetIsNotDisplayed() {
+        assertFalse(dashboardPage.isTnBWidgetDisplayed());
     }
 }

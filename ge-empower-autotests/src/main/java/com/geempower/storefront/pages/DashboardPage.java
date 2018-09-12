@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
+import java.util.ArrayList;
+
 import static com.geempower.storefront.page_elements.DashboardPageElements.*;
 
 @Component
@@ -98,4 +100,31 @@ public class DashboardPage extends StorefrontBasePage {
         $(ORDER_SEARCH_INPUT_XPATH).sendKeys(orderNo);
         click(SEARCH_ORDER_BY_PARAMS_BUTTON_XPATH);
     }
+
+    @Step("Check if T&B widget displayed on Dashboard.")
+    public boolean isTnBWidgetDisplayed() {
+        waitUntilPageIsFullyLoaded();
+        return isDisplayed(T_AND_B_ACCESS_WIDGET_XPATH);
+    }
+
+    @Step("Get T&B Access Widget Title.")
+    public String getTnBAccessWidgetTitle() {
+        waitUntilPageIsFullyLoaded();
+        return $(T_AND_B_ACCESS_WIDGET_TITLE_XPATH).getText();
+    }
+
+    @Step("Click On T&B Access Button And Get Site Url.")
+    public String clickOnTandBAccessButtonAndGetSiteUrl() {
+        String oldTab = getDriver().getWindowHandle();
+        click(T_AND_B_ACCESS_BUTTON_XPATH);
+        waitUntilPageIsFullyLoaded();
+        ArrayList<String> newTab = new ArrayList<>(getDriver().getWindowHandles());
+        newTab.remove(oldTab);
+        getDriver().switchTo().window(newTab.get(0));
+        String currentUrl = getDriver().getCurrentUrl();
+        getDriver().close();
+        getDriver().switchTo().window(oldTab);
+        return currentUrl;
+    }
+
 }
