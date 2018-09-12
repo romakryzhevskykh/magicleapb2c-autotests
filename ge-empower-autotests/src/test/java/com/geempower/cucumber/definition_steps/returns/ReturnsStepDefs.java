@@ -12,13 +12,4 @@ public class ReturnsStepDefs extends AbstractStepDefs {
     @Autowired
     private ReturnsPage returnsPage;
 
-    @Then("^(.*) title is displayed on Returns page.$")
-    public void checkAllCasesTitle(String allCasesTitle) {
-        assertEquals(returnsPage.getReturnsTitle(), allCasesTitle);
-    }
-
-    @And("^Click on Create Request button.$")
-    public void clickOnCreateRequestButton(){
-        returnsPage.clickOnCreateRequestButton();
-    }
 }

@@ -24,40 +24,4 @@ public class ProductsSubDetailStepDefs extends AbstractStepDefs {
         assertTrue(productSubDetailPage.isOpened());
     }
 
-    @When("^User select the product by Catalog No. from the products list on the Product Sub-Detail page.$")
-    public void userSelectTheProductOnTheProductSubDetailPage() {
-        threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
-        String catalogNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
-        productSubDetailPage.chooseSelectedProductsByCatalogNo(catalogNo);
-    }
-
-    @And("^Add all the chosen products to the My Cart.$")
-    public void addAllSelectedProductsToMyCart() {
-        productSubDetailPage.clickOnAddToCartButton();
-    }
-
-
-    @SuppressWarnings("unchecked")
-    @Then("^Correct Line Items is displayed in the Checkout pop-up on the Product Sub-Detail page.$")
-    public void correctLineItemsIsDisplayedInTheCheckoutPopUpOnTheProductSubDetailPage() {
-        HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
-        assertTrue(productSubDetailPage.getLineItemsValue() == selectedProducts.keySet().size());
-    }
-
-    @SuppressWarnings("unchecked")
-    @Then("^Correct Order Value is displayed in the Checkout pop-up on the Product Sub-Detail page.$")
-    public void checkoutOrderValueIsCorrect() {
-        HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
-        selectedProducts.keySet().forEach(product -> {
-            double finalNetPrice = Double.parseDouble(product.getFinalNetPrice());
-            assertEquals(finalNetPrice, Double.parseDouble(productSubDetailPage.getOrderValueFromCheckoutPopUp()), delta);
-        });
-    }
-
-    @When("^User clicks on catalogNo link.$")
-    public void userClicksOnCatalogNoLink() {
-        threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
-        String catalogNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
-        productSubDetailPage.clickOnCatalogNoLink(catalogNo);
-    }
 }

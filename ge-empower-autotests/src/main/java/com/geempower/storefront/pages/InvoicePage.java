@@ -21,8 +21,4 @@ public class InvoicePage extends StorefrontBasePage {
         return getCurrentUrl().contains(getPageUrl());
     }
 
-    @Step("Get Invoice title")
-    public String getInvoicesTitle() {
-        return $(INVOICES_TITLE_XPATH).getText();
-    }
 }

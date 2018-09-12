@@ -2,7 +2,6 @@ package com.geempower.helpers.user_engine;
 
 import com.geempower.hybris.Cockpit;
 import com.geempower.hybris.backoffice.models.TemplateBackoffice;
-import com.geempower.hybris.hac.models.TemplateHAC;
 import com.geempower.storefront.models.EmpowerStorefront;
 
 public class User {
@@ -56,15 +55,6 @@ public class User {
                     break;
                 case "customer support agent":
                     userRole = BackofficeUserRoles.CUSTOMER_SUPPORT_AGENT;
-                    break;
-                default:
-                    userRole = null;
-                    break;
-            }
-        } else if (userCockpit instanceof TemplateHAC) {
-            switch (cockpitRole) {
-                case "admin":
-                    userRole = HACUserRoles.ADMIN;
                     break;
                 default:
                     userRole = null;

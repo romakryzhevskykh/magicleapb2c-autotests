@@ -1,8 +1,5 @@
 package com.geempower.cucumber.definition_steps;
 
-import com.geempower.cucumber.definition_steps.rebate.RebateCreation1StepDefs;
-import com.geempower.helpers.user_engine.StorefrontUserRoles;
-import com.geempower.hybris.hac.pages.HacLoginPage;
 import com.geempower.storefront.page_blocks.HeaderBlock;
 import com.geempower.storefront.pages.*;
 import com.geempower.storefront.pages.order.OrdersPage;
@@ -56,8 +53,6 @@ public class PreconditionStepDefs extends AbstractStepDefs {
     private PriceAndAvailabilityPage priceAndAvailabilityPage;
     @Autowired
     private NotificationCenterPage notificationCenterPage;
-    @Autowired
-    private HacLoginPage hacLoginPage;
 
     @Given("^User is logged in to Storefront.$")
     public void userIsLoggedInToStorefront() {
@@ -73,26 +68,12 @@ public class PreconditionStepDefs extends AbstractStepDefs {
         }
     }
 
-    @Given("^Admin is logged in to HAC.$")
-    public void adminIsLoggedInToHAC() {
-        hacLoginPage.open();
-        if (ssoLoginPage.isOpened())
-            ssoLoginPage.loginToStorefront(userSessions.getUsersList().stream().filter(user -> user.getUserRole().equals(StorefrontUserRoles.EMPOWERADMIN)).findAny().get());
-        hacLoginPage.open();
-        hacLoginPage.waitUntilPageIsFullyLoaded();
-        if (hacLoginPage.isOpened()) {
-            hacLoginPage.loginToHac(userSessions.getActiveUserSession());
-        }
-    }
-
     @And("^Account management page is opened.$")
     public void accountManagementPageIsOpened() {
         accountManagementPage.waitUntilPageIsFullyLoaded();
         if (!accountManagementPage.isOpened()) {
             accountManagementPage.open();
         }
-        accountManagementPage.isAccountPageFullyLoaded();
-        accountManagementPage.closeWeAreNowAbbPopUpIfPresent();
     }
 
     @And("^Orders page is opened.$")
@@ -213,7 +194,6 @@ public class PreconditionStepDefs extends AbstractStepDefs {
         if (!dashboardPage.isOpened()) {
             dashboardPage.open();
         }
-        dashboardPage.closeWeAreNowAbbPopUpIfPresent();
     }
 
     @And("^Notification Center page is opened.$")

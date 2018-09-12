@@ -20,24 +20,4 @@ public class ShipmentsPage extends StorefrontBasePage {
     public boolean isOpened() {
         return getCurrentUrl().equals(getPageUrl());
     }
-
-    @Step("Get Shipment title")
-    public String getShipmentsTitle() {
-        return $(SHIPMENTS_TITLE_XPATH).getText();
-    }
-
-    @Step("Color boxes are displayed")
-    public boolean colorBoxesIsDisplayed() {
-        return isDisplayed(COLOR_BOXES_XPATH);
-    }
-
-    @Step("Shipments table displayed")
-    public boolean shipmentsTableHeaderIsDisplayed() {
-        return isDisplayed(SHIPMENTS_TABLE_FILTERS_XPATH);
-    }
-
-    @Step("Click on Download button")
-    public void clickOnDownloadButton() {
-        click(DOWNLOAD_BUTTON_XPATH);
-    }
 }

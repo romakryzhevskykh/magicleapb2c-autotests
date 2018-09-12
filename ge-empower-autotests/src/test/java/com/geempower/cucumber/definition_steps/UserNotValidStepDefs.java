@@ -18,9 +18,4 @@ public class UserNotValidStepDefs extends AbstractStepDefs {
         assertTrue(userNotValidPage.isOpened());
     }
 
-    @Then("^Appropriate text is displayed on the page.$")
-    public void appropriateTextIsDisplayedOnThePage() {
-        assertEquals("Customer Registration", userNotValidPage.getTitle());
-        assertEquals("It seems that your account is inactive.Please contact customer service.", userNotValidPage.getHelloMessage());
-    }
 }

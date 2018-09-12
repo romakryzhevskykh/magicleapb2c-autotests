@@ -22,14 +22,5 @@ public class ReturnsPage extends StorefrontBasePage {
         return getCurrentUrl().equals(getPageUrl());
     }
 
-    @Step("Get Returns title")
-    public String getReturnsTitle() {
-        return $(CASES_TITLE_XPATH).getText();
-    }
-
-    @Step("Click on Create Request Button")
-    public void clickOnCreateRequestButton() {
-        click(By.id(CREATE_REQUEST_BUTTON_ID));
-    }
 }
 

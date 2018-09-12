@@ -12,23 +12,4 @@ public class ShipmentsStepDefs extends AbstractStepDefs {
     @Autowired
     private ShipmentsPage shipmentsPage;
 
-    @When("^(.*) title is displayed on Shipments page.$")
-    public void checkShipmentsTitle(String shipmentTitle) {
-        assertEquals(shipmentsPage.getShipmentsTitle(), shipmentTitle);
-    }
-
-    @And("^Color boxes are displayed on Shipments page.$")
-    public void colorBoxesIsDisplayed() {
-        assertTrue(shipmentsPage.colorBoxesIsDisplayed());
-    }
-
-    @And("^Shipment table header is displayed on Shipments page.$")
-    public void shipmentsTableHeaderIsDisplayed() {
-        assertTrue(shipmentsPage.shipmentsTableHeaderIsDisplayed());
-    }
-
-    @When("^Click on Download button on Shipments page.$")
-    public void clickOnDownloadButtonOnShipmentsPage() {
-        shipmentsPage.clickOnDownloadButton();
-    }
 }

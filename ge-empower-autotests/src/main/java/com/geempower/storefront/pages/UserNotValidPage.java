@@ -20,14 +20,4 @@ public class UserNotValidPage extends StorefrontBasePage {
         return getCurrentUrl().equals(getPageUrl());
     }
 
-    @Step("Get userNotValid page title.")
-    public String getTitle() {
-        waitUntilPageIsFullyLoaded();
-        return $(USER_NOT_VALID_TITLE_XPATH).getText();
-    }
-
-    @Step("Get Hello message on the userNotValid page.")
-    public String getHelloMessage() {
-        return $(HELLO_USER_MESSAGE_2).getText() + $(HELLO_USER_MESSAGE_3).getText();
-    }
 }
