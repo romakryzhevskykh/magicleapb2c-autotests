@@ -156,4 +156,9 @@ public class LoggedInHeaderRowBlock extends UIComponent {
     public void clickOnPreviouslyOrderedItemsItemInMyAccountMenu() {
         click(PREVIOUSLY_ORDERED_ITEMS_ITEM_XPATH);
     }
+
+    @Step("Is View all supply lists item present?")
+    public boolean isViewAllSupplyListsButtonPresentInDropDown() {
+        return isDisplayed(SUPPLY_LIST_ALL_SUPPLY_LISTS_LINK_FROM_SUPPLY_LISTS_DROP_DOWN_XPATH);
+    }
 }

@@ -1,13 +1,13 @@
 package com.sarnova.helpers.models.categories;
 
-import com.sarnova.helpers.models.users.Organization;
+import com.sarnova.helpers.models.users.Department;
 
 import java.util.HashSet;
 
 public class ParentCustomCategory extends CustomCategory {
     private HashSet<ChildCustomCategory> childCustomCategories = new HashSet<>();
 
-    public ParentCustomCategory(String id, String name, Organization organization) {
+    public ParentCustomCategory(String id, String name, Department organization) {
         super(id, name, organization);
     }
 

@@ -1,6 +1,6 @@
 package com.sarnova.helpers.user_engine;
 
-import com.sarnova.helpers.models.users.Organization;
+import com.sarnova.helpers.models.users.Department;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -74,9 +74,9 @@ public class UserSessions {
                 .findAny().orElse(null);
     }
 
-    public UserSession getAnyUserSessionForOrganization(Organization organization) {
+    public UserSession getAnyUserSessionForOrganization(Department organization) {
         return allSessionsList.stream()
-                .filter(userSession -> userSession.getUser().getOrganization().equals(organization))
+                .filter(userSession -> userSession.getUser().getDepartment().equals(organization))
                 .filter(UserSession::isLoggedIn)
                 .findAny().orElse(null);
     }

@@ -72,6 +72,7 @@ public class CreateUsersPageStepDefs extends AbstractStepDefs {
             usersManager.createTestInstance(threadVarsHashMap.getString(TestKeyword.EDIT_USER_USERNAME),
                     "",
                     userSessions.getActiveUserSession().getUser().getUserCockpit(),
+                    userSessions.getActiveUserSession().getUser().getDepartment(),
                     getSelectedUserRoles());
             User user = usersManager.getUserByUsername(threadVarsHashMap.getString(TestKeyword.EDIT_USER_USERNAME));
             user.setEmail(threadVarsHashMap.getString(TestKeyword.EDIT_USER_EMAIL));

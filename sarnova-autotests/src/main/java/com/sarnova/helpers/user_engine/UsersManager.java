@@ -1,8 +1,8 @@
 package com.sarnova.helpers.user_engine;
 
-import com.sarnova.helpers.managers.OrganizationsManager;
+import com.sarnova.helpers.managers.DepartmentsManager;
 import com.sarnova.helpers.managers.UserGroupsManager;
-import com.sarnova.helpers.models.users.Organization;
+import com.sarnova.helpers.models.users.Department;
 import com.sarnova.helpers.models.users.UserGroup;
 import com.sarnova.helpers.request_engine.API;
 import com.sarnova.helpers.request_engine.GETRequest;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class UsersManager {
     @Autowired UserGroupsManager userGroupsManager;
-    @Autowired OrganizationsManager organizationsManager;
+    @Autowired DepartmentsManager departmentsManager;
 
     GETRequest USER_GROUPS = new GETRequest("Add user groups page", "my-company/organization-management/manage-users/usergroups?user=%s");
     GETRequest CREATE_PAGE = new GETRequest("Create new test user page", "my-company/organization-management/manage-users/create");
@@ -75,14 +75,20 @@ public class UsersManager {
 
     public void createInstance(String username, String password, Cockpit userCockpit, ArrayList<String> cockpitRoles) {
         User user = new User(username, password, userCockpit);
-        user.setOrganization(organizationsManager.getOrganization());
         this.users.add(user);
         user.getUserRoles().addAll(parseUserRoles(userCockpit, cockpitRoles));
     }
 
-    public void createTestInstance(String username, String password, Cockpit userCockpit, ArrayList<? extends UserRole> userRoles) {
+    public void createInstance(String username, String password, Cockpit userCockpit, Department department, ArrayList<String> cockpitRoles) {
         User user = new User(username, password, userCockpit);
-        user.setOrganization(organizationsManager.getOrganization());
+        user.setDepartment(department);
+        this.users.add(user);
+        user.getUserRoles().addAll(parseUserRoles(userCockpit, cockpitRoles));
+    }
+
+    public void createTestInstance(String username, String password, Cockpit userCockpit, Department department, ArrayList<? extends UserRole> userRoles) {
+        User user = new User(username, password, userCockpit);
+        user.setDepartment(department);
         this.users.add(user);
         user.getUserRoles().addAll(userRoles);
         user.getUserRoles().add(getTestRole(userCockpit));
@@ -100,7 +106,7 @@ public class UsersManager {
         String username = RandomStringUtils.randomAlphabetic(10);
         StorefrontUserRole role = StorefrontUserRole.TEST_USER;
 //        StorefrontUserRole adminRole = StorefrontUserRole.ADMIN;
-        Organization organization = userSession.getUser().getOrganization();
+        Department organization = userSession.getUser().getDepartment();
         ArrayList<StorefrontUserRole> userRoles = new ArrayList() {{
             add(role);
 //            add(adminRole);
@@ -119,7 +125,7 @@ public class UsersManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        createTestInstance(username, "", userSession.getUser().getUserCockpit(), userRoles);
+        createTestInstance(username, "", userSession.getUser().getUserCockpit(), userSession.getUser().getDepartment(), userRoles);
         User user = getUserByUsername(username);
         user.setEmail(email);
         user.setFirstName(firstName);

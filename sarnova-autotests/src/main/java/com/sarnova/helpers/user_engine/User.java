@@ -1,6 +1,6 @@
 package com.sarnova.helpers.user_engine;
 
-import com.sarnova.helpers.models.users.Organization;
+import com.sarnova.helpers.models.users.Department;
 import com.sarnova.helpers.models.users.UserGroup;
 import com.sarnova.hybris.Cockpit;
 
@@ -20,7 +20,7 @@ public class User {
     private Set<UserRole> userRoles = new HashSet<>();
     private Cockpit userCockpit;
     private Set<UserGroup> userGroups = new HashSet<>();
-    private Organization organization;
+    private Department department;
     private boolean isEnabled;
 
     public User(String username, String password, Cockpit userCockpit) {
@@ -103,12 +103,12 @@ public class User {
         return userGroups;
     }
 
-    public Organization getOrganization() {
-        return organization;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setOrganization(Organization organization) {
-        this.organization = organization;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public boolean isInitialized() {

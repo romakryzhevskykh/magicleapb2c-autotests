@@ -167,4 +167,9 @@ public class GeneralStepDefs extends AbstractStepDefs {
     public void checkThatUserIsLoggedIn() {
         assertTrue(headerRowPageBlock.isUserLoggedIn());
     }
+
+    @Then("^Check that View all supply lists item is present in Supply lists drop-down in Header.$")
+    public void checkThatViewAllSupplyListsItemIsPresentInSupplyListsDropDownInHeader() {
+        assertTrue(headerRowPageBlock.isViewAllSupplyListsButtonPresentInDropDown());
+    }
 }
