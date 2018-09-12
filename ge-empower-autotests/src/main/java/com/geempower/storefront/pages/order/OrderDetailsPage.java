@@ -145,7 +145,6 @@ public class OrderDetailsPage extends StorefrontBasePage {
     @Step("User Clicks On All Status Box.")
     public void userClicksOnAllStatusBox() {
         click(ALL_STATUS_BOX_XPATH);
-        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Get List Of Catalog No.")
