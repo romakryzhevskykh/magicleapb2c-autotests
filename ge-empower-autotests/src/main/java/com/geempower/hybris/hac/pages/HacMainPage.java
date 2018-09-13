@@ -18,6 +18,7 @@ public class HacMainPage extends HACBasePage {
     public void openConfigurationSection() {
         waitUntilPageIsFullyLoaded();
         click(PLATFORM_SECTION_XPATH);
+        waitUntilPageIsFullyLoaded();
         click(CONFIGURATION_SUB_SECTION_XPATH);
     }
 }

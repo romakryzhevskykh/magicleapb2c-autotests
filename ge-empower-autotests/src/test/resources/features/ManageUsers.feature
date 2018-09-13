@@ -181,6 +181,9 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
       | externaluser01 | 9012306 |
 
   Scenario Outline: Check that admin is able Wipe All Accounts & Deactivate to user and user will see /userNotActive page
+    Given Set true value for lessonly.enabled property on HAC f1, HAC f2.
+    Given Switch to Storefront as admin.
+    And User is logged in to Storefront.
     And Profile page is opened.
     And Admin's name and last name are stored to threadVars.
     And Manage Users page is opened.
@@ -188,7 +191,6 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     And Sets <userId> email to the email field.
     And Clicks on the Search button.
     When Clicks on the user name in the table.
-    Then User details block for chosen user with <userId> userId is opened.
     And Get user status in lessonly service for user by email <email>.
     Then User status in lessonly service corresponds to user status in Manage Users page.
     When Admin opens Actions list.
