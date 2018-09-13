@@ -1,7 +1,6 @@
 package com.geempower.cucumber.definition_steps;
 
 import com.geempower.helpers.managers.LessonLyService;
-import com.geempower.helpers.models.LessonLy;
 import com.geempower.helpers.user_engine.HACUserRoles;
 import com.geempower.helpers.user_engine.StorefrontUserRoles;
 import com.geempower.helpers.web_engine.WebDriverSessions;
@@ -16,7 +15,6 @@ import com.geempower.storefront.pages.order.OrdersPage;
 import com.geempower.storefront.pages.product.ProductsPage;
 import com.geempower.storefront.pages.rebate.RebatesPage;
 import com.geempower.storefront.pages.returns.ReturnsPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,8 +67,7 @@ public class PreconditionStepDefs extends AbstractStepDefs {
     @Autowired
     private ConfigurationPropertiesPage configurationPropertiesPage;
     @Autowired
-    private
-    LessonLyService lessonLyService;
+    private LessonLyService lessonLyService;
 
     @Given("^User is logged in to Storefront.$")
     public void userIsLoggedInToStorefront() {
@@ -223,7 +220,7 @@ public class PreconditionStepDefs extends AbstractStepDefs {
 
     @Given("^Set (.*) value for (.*) property on HAC (.*), HAC (.*).$")
     public void setTrueValueForLessonLyEnabledProperty(String propertyValue, String propertyName, String node1, String node2) {
-        if(!lessonLyService.getInstance().getLessonLyEnabled()) {
+        if (!lessonLyService.getInstance().getLessonLyEnabled()) {
             enableLessonLyOnHacForNode(node1, propertyValue, propertyName);
             enableLessonLyOnHacForNode(node2, propertyValue, propertyName);
             lessonLyService.getInstance().setLessonLyEnabled(true);
