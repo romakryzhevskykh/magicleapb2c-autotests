@@ -224,7 +224,6 @@ public class PreconditionStepDefs extends AbstractStepDefs {
             enableLessonLyOnHacForNode(node1, propertyValue, propertyName);
             enableLessonLyOnHacForNode(node2, propertyValue, propertyName);
             lessonLyService.getInstance().setLessonLyEnabled(true);
-            System.out.println("setLessonLyEnabled(true)");
         }
     }
 
