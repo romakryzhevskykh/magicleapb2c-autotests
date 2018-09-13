@@ -229,7 +229,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
 
     @Then("^User details block for chosen user with (.*) userId is opened.$")
     public void userDetailsBlockIsOpened(String userId) {
-//        assertTrue(manageUsersPage.isUserDetailsBlockOpened());
+        assertTrue(manageUsersPage.isUserDetailsBlockOpened());
         assertEquals(userId, manageUsersPage.getUserIdFromUserDetailsBlock());
     }
 
