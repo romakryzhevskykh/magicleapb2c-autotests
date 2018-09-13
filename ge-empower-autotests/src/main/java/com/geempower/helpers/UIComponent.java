@@ -146,7 +146,7 @@ public abstract class UIComponent {
         }
     }
 
-    public void waitForElementToDisappear(By by) {
+    protected void waitForElementToDisappear(By by) {
         WebElement webElement = $(by);
         webDriverPool.getActiveDriverSession().setShortImplicitWait();
         WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getShortTimeOut());
@@ -154,7 +154,7 @@ public abstract class UIComponent {
         wait.until(ExpectedConditions.invisibilityOf(webElement));
     }
 
-    public void waitForElementWithAppropriateTextToAppear(By by, String text) {
+    protected void waitForElementWithAppropriateTextToAppear(By by, String text) {
         webDriverPool.getActiveDriverSession().setImplicitWait();
         try {
             WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getTimeOut());

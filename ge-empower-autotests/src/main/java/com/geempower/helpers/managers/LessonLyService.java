@@ -1,5 +1,6 @@
 package com.geempower.helpers.managers;
 
+import com.geempower.helpers.models.LessonLy;
 import com.geempower.helpers.request_engine.GETRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -15,6 +16,15 @@ public class LessonLyService {
     private String lessonLyUser;
     @Autowired
     private String lessonLyPassword;
+
+    private static LessonLy instance;
+
+    public static synchronized LessonLy getInstance() {
+        if (instance == null) {
+            instance = new LessonLy();
+        }
+        return instance;
+    }
 
     private GETRequest getUserInfo = new GETRequest("GET USER INFO FROM LESSONLY BY EMAIL", "https://api.lessonly.com/api/v1/users");
     private GETRequest getPersonalUserSettings = new GETRequest("GET PERSONAL USER SETTINGS", "https://api.lessonly.com/api/v1/users/%s");

@@ -163,7 +163,8 @@ public class ManageUsersPage extends StorefrontBasePage {
     @Step("Check that user details block is opened.")
     public boolean isUserDetailsBlockOpened() {
         waitUntilPageIsFullyLoaded();
-        return $(USER_DETAILS_BLOCK_XPATH).isDisplayed();
+        ((JavascriptExecutor)getDriver()).executeScript("scroll(0,0)");
+        return isDisplayed(USER_DETAILS_BLOCK_XPATH);
     }
 
     @Step("Getting user's id from the user's details block.")

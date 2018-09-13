@@ -121,7 +121,7 @@ Feature: Some actions on Products page
 
     Examples:
       | region        |
-#      | North_America |
+      | North_America |
       | EMEA          |
       | ASIA          |
       | Latin_America |
