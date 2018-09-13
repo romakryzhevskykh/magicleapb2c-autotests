@@ -1,7 +1,10 @@
 package com.geempower.storefront.pages.order;
 
 import com.geempower.storefront.StorefrontBasePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -31,7 +34,8 @@ public class OrderDetailsPage extends StorefrontBasePage {
 
     @Step("Get Total Net Price.")
     public String getTotalNetPrice() {
-        waitUntilPageIsFullyLoaded();
+        WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getShortTimeOut());
+        wait.until(ExpectedConditions.attributeToBe(By.xpath(ALL_STATUS_BOX_XPATH), "class", "selected"));
         String netPrice = $(TOTAL_NET_PRICE_VALUE_XPATH).getText();
         return netPrice.substring(0, netPrice.length() - 4).replace(",", "");
     }
@@ -140,11 +144,13 @@ public class OrderDetailsPage extends StorefrontBasePage {
 
     @Step("User Clicks On Random Status Box.")
     public void userClicksOnRandomStatusBox() {
+        waitUntilPageIsFullyLoaded();
         $$(STATUS_BOXES_XPATH).stream().findAny().ifPresent(this::click);
     }
 
     @Step("User Clicks On All Status Box.")
     public void userClicksOnAllStatusBox() {
+        waitUntilPageIsFullyLoaded();
         click(ALL_STATUS_BOX_XPATH);
     }
 

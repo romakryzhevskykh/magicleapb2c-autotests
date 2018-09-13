@@ -30,9 +30,11 @@ public class ConfigurationPropertiesPage extends HACBasePage {
     @Step("Set new property value.")
     public void setNewPropertyValue(String newPropertyValue) {
         waitUntilPageIsFullyLoaded();
-        $(LESSONLY_ENABLED_PROPERTY_VALUE_FIELD_XPATH).clear();
-        $(LESSONLY_ENABLED_PROPERTY_VALUE_FIELD_XPATH).sendKeys(newPropertyValue);
-        waitUntilPageIsFullyLoaded();
-        click(SAVE_NEW_PROPERTY_VALUE_BUTTON_XPATH);
+        if (!$(LESSONLY_ENABLED_PROPERTY_VALUE_FIELD_XPATH).getAttribute("value").equals("true")) {
+            $(LESSONLY_ENABLED_PROPERTY_VALUE_FIELD_XPATH).clear();
+            $(LESSONLY_ENABLED_PROPERTY_VALUE_FIELD_XPATH).sendKeys(newPropertyValue);
+            waitUntilPageIsFullyLoaded();
+            click(SAVE_NEW_PROPERTY_VALUE_BUTTON_XPATH);
+        }
     }
 }

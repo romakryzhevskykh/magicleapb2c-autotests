@@ -1,13 +1,22 @@
 package com.geempower.cucumber.definition_steps;
 
+import com.geempower.helpers.managers.LessonLyService;
+import com.geempower.helpers.models.LessonLy;
+import com.geempower.helpers.user_engine.HACUserRoles;
 import com.geempower.helpers.user_engine.StorefrontUserRoles;
+import com.geempower.helpers.web_engine.WebDriverSessions;
+import com.geempower.hybris.hac.models.HacActiveNode;
+import com.geempower.hybris.hac.models.TemplateHAC;
+import com.geempower.hybris.hac.pages.ConfigurationPropertiesPage;
 import com.geempower.hybris.hac.pages.HacLoginPage;
+import com.geempower.hybris.hac.pages.HacMainPage;
 import com.geempower.storefront.page_blocks.HeaderBlock;
 import com.geempower.storefront.pages.*;
 import com.geempower.storefront.pages.order.OrdersPage;
 import com.geempower.storefront.pages.product.ProductsPage;
 import com.geempower.storefront.pages.rebate.RebatesPage;
 import com.geempower.storefront.pages.returns.ReturnsPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +60,17 @@ public class PreconditionStepDefs extends AbstractStepDefs {
     private NotificationCenterPage notificationCenterPage;
     @Autowired
     private HacLoginPage hacLoginPage;
+    @Autowired
+    protected WebDriverSessions webDriverPool;
+    @Autowired
+    private TemplateHAC templateHAC;
+    @Autowired
+    private HacMainPage hacMainPage;
+    @Autowired
+    private ConfigurationPropertiesPage configurationPropertiesPage;
+    @Autowired
+    private
+    LessonLyService lessonLyService;
 
     @Given("^User is logged in to Storefront.$")
     public void userIsLoggedInToStorefront() {
@@ -194,10 +214,29 @@ public class PreconditionStepDefs extends AbstractStepDefs {
     }
 
     @And("^Notification Center page is opened.$")
-    public void NotificationCenterPageIsOpened() {
+    public void notificationCenterPageIsOpened() {
         notificationCenterPage.waitUntilPageIsFullyLoaded();
         if (!notificationCenterPage.isOpened()) {
             notificationCenterPage.open();
         }
+    }
+
+    @Given("^Set (.*) value for (.*) property on HAC (.*), HAC (.*).$")
+    public void setTrueValueForLessonLyEnabledProperty(String propertyValue, String propertyName, String node1, String node2) {
+        if(!lessonLyService.getInstance().getLessonLyEnabled()) {
+            enableLessonLyOnHacForNode(node1, propertyValue, propertyName);
+            enableLessonLyOnHacForNode(node2, propertyValue, propertyName);
+            lessonLyService.getInstance().setLessonLyEnabled(true);
+            System.out.println("setLessonLyEnabled(true)");
+        }
+    }
+
+    private void enableLessonLyOnHacForNode(String node, String propertyValue, String propertyName) {
+        templateHAC.setHacActiveNode(HacActiveNode.valueOf(node));
+        webDriverPool.setDriverActive(HACUserRoles.ADMIN);
+        adminIsLoggedInToHAC();
+        hacMainPage.openConfigurationSection();
+        configurationPropertiesPage.searchPropertyByPropertyName(propertyName);
+        configurationPropertiesPage.setNewPropertyValue(propertyValue);
     }
 }

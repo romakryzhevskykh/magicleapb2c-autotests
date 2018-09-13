@@ -9,6 +9,10 @@ Feature: Some actions on Profile page
     Then Modify Profile title is displayed on Profile page.
 
   Scenario Outline: Check that user is able deactivate his user ID in the profile.
+    Given Set true value for lessonly.enabled property on HAC f1, HAC f2.
+    Given Switch to Storefront as rmAdmin.
+    And User is logged in to Storefront.
+    And Profile page is opened.
     Then Unregister section with Unregister title is displayed.
     Then Deactivate description <description> is displayed.
     When User clicks on Deactivate my ID button.

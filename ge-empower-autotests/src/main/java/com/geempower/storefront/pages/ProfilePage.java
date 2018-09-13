@@ -62,11 +62,14 @@ public class ProfilePage extends StorefrontBasePage {
     @Step("Click On Deactivate My User ID Button.")
     public void clickOnDeactivateMyUserIDButton() {
         click(DEACTIVATE_BUTTON_XPATH);
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Get Confirmation Text From Confirmation Pop-Up.")
     public String getConfirmationTextFromConfirmationPopUp() {
         waitUntilPageIsFullyLoaded();
+        String confirmationPopUp = getDriver().getWindowHandle();
+        getDriver().switchTo().window(confirmationPopUp);
         return $(CONFIRMATION_TEXT_DEACTIVATE_ACTION_POP_UP_XPATH).getText();
     }
 

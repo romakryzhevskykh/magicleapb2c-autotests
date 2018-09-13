@@ -13,5 +13,6 @@ public class OrderDetailsPageElements {
     public final static String ALL_EXTENDED_PRICE_BY_ROW_XPATH = "//tr[contains(@class, 'order-line show-item')]['%s']//td[@class = 'create-summary-ext-total text-center']/input";
     public final static String REORDER_BUTTON_XPATH = "//a[@class='re-order-btn']";
     public final static String STATUS_BOXES_XPATH = "//div[@class='order-item']";
-    public final static String ALL_STATUS_BOX_XPATH = "//div[@class='order-item orders-item-all']";
+    public final static String ALL_STATUS_BOX_XPATH = "//div[@class='order-item orders-item-all']/a";
+    public final static String SELECTED_ALL_STATUS_BOX_XPATH = "//div[@class='order-item orders-item-all']/a[@class='selected']";
 }
