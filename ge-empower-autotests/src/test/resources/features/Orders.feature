@@ -52,12 +52,14 @@ Feature: Some actions on Orders page
 
   Scenario: Check that user can place order via Re-Order functionality
     And Account management page is opened.
-    When Choose North_America region.
+    When Choose EMEA region.
     And Search random account for chosen region.
     And Click on chosen account.
     And Orders page is opened.
     When User clicks on random order No.
     Then Orders Details page is opened.
+    Then Is Table with products displayed.
+    And Focus on browser.
     When User selects random catalog No checkbox on Orders Details page.
     And User clicks on Reorder button on Order Details page.
     When User clicks on My Cart icon in Header block.
@@ -71,6 +73,25 @@ Feature: Some actions on Orders page
     When User clicks on Place Order button at the OE 3 page.
     And Terms and Conditions pop-up is confirmed.
     Then Order Successful pop-up appears at the OE 3 page.
+
+  Scenario Outline: Check that Total Net Price value is correctly after changing status boxes - DE95700
+    And Account management page is opened.
+    When Choose <region> region.
+    And Search random account for chosen region.
+    And Click on chosen account.
+    And Orders page is opened.
+    When User clicks on random order No.
+    Then Orders Details page is opened.
+    And User clicks on random status box.
+    And User clicks on All status box.
+    Then Is Table with products displayed.
+    Then Is Total Net Price value correct after changing status boxes.
+
+    Examples:
+      | region        |
+      | North_America |
+      | ASIA          |
+      | Latin_America |
 
   Scenario Outline: Check that user is able to request open order report with pricing/ without pricing.
     And Orders page is opened.

@@ -180,6 +180,51 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
       | userId         | account |
       | externaluser01 | 9012306 |
 
+  Scenario Outline: Check that user can request accounts on /userNotActive page and verify main elements on the second screen.
+    And Profile page is opened.
+    And Admin's name is stored to threadVars.
+    And Manage Users page is opened.
+    When Admin opens Users tab.
+    And Sets <userId> email to the email field.
+    And Clicks on the Search button.
+    When Clicks on the user name in the table.
+    Then User details block for chosen user with <userId> userId is opened.
+    When Admin opens Actions list.
+    And Chooses Wipe All Accounts option from the actions list.
+    Given Switch to Storefront as externalUser1.
+    And User is logged in to Storefront.
+    And Refresh page.
+    Then User sees User not active page.
+    When User sets <account> to the Account Number field.
+    And Click on Submit for Approval button.
+    Then Requested account fields contains <account> account.
+    Then Is Appropriate text displayed in the main block on the second screen.
+    When User clicks on Yes pre authorization code button.
+    Then Is Pre Authorization Code title displayed in Pre Authorization Code pop-up.
+    And User closes Pre Authorization Code pop-up.
+    Given Switch to Storefront as admin.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    And Refresh page.
+    And Focus on browser.
+    When Admin opens Users tab.
+    And Sets externaluser1 email to the email field.
+    And Clicks on the Search button.
+    When Clicks on the user name in the table with pending accounts.
+    Then Approve Pending Accounts section is displayed with appropriate count of accounts.
+    When User expand the Approve Pending Accounts section.
+    Then Appropriate count of pending requests are displayed in Pending accounts table.
+    When Admin clicks on All accounts checkbox.
+    And Click on Accept accounts button.
+    And Accept the action in Accept Account pop-up.
+    Then Pending accounts table became empty.
+    And Expand Modify an Account tab in I Want To Block.
+    Then Is account <account> displayed in the All Accounts tab.
+
+    Examples:
+      | userId         | account |
+      | externaluser01 | 9012306 |
+
   Scenario Outline: Check that admin is able Wipe All Accounts & Deactivate to user and user will see /userNotActive page
     Given Set true value for lessonly.enabled property on HAC f1, HAC f2.
     Given Switch to Storefront as admin.

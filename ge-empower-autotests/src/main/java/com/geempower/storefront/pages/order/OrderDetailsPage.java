@@ -168,4 +168,9 @@ public class OrderDetailsPage extends StorefrontBasePage {
     public String getDescriptionByRow(String rowNo) {
         return $(ALL_DESCRIPTION_BY_ROW_XPATH, rowNo).getText();
     }
+
+    @Step("Is Table With Products Displayed.")
+    public boolean isTableWithProductsDisplayed() {
+        return isDisplayed(TABLE_WITH_PRODUCTS_XPATH);
+    }
 }
