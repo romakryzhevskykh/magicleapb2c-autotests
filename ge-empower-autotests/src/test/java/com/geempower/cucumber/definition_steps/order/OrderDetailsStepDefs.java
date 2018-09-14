@@ -10,11 +10,9 @@ import com.geempower.storefront.pages.order.OrderDetailsPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
-import java.util.stream.Stream;
 
 import static com.geempower.cucumber.definition_steps.TestKeyword.GE_ORDER_NO;
 import static org.testng.Assert.assertEquals;
@@ -155,5 +153,10 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     public void isTotalNetPriceValueCorrectAfterChangingStatusBoxes() {
         double totalNetPrice = orderManager.getOrderById(Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO))).getTotalNetPrice();
         assertEquals(totalNetPrice, Double.parseDouble(orderDetailsPage.getTotalNetPrice()));
+    }
+
+    @Then("^Is Table with products displayed.$")
+    public void isTableWithProductsDisplayed() {
+        assertTrue(orderDetailsPage.isTableWithProductsDisplayed());
     }
 }
