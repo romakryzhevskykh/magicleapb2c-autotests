@@ -46,6 +46,11 @@ public class UserSwitchStepDefs {
         webDriverPool.setDriverActive(StorefrontUserRoles.RMADMIN);
     }
 
+    @Given("Switch to Storefront as second internalUser.")
+    public void switchToStorefrontAsInternalUser1() {
+        webDriverPool.setDriverActive(StorefrontUserRoles.INTERNALUSER1);
+    }
+
     @Given("Switch to Storefront as internalUser.")
     public void switchToStorefrontAsInternalUser() {
         webDriverPool.setDriverActive(StorefrontUserRoles.INTERNALUSER);

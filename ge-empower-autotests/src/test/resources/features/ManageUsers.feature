@@ -348,6 +348,8 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     And Refresh page.
     When User switch to Approved Accounts tab on Account management page.
     Then All the requested accounts are displayed in the tab.
+    And Refresh page.
+    When User switch to Approved Accounts tab on Account management page.
     And User deletes all requested accounts from his profile.
 
   Scenario: Check that admin is able to reject some requested accounts from external user
@@ -356,6 +358,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     And Account management page is opened.
     When User switch to Approved Accounts tab on Account management page.
     And User deletes all unnecessary accounts from his profile except 9012306.
+    When Refresh page.
     When Request account popup is opened.
     And Popup is filled by North_America, Latin_America, EMEA, ASIA accounts.
     And User send this requests for approval.

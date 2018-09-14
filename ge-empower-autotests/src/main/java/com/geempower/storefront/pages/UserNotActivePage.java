@@ -137,7 +137,7 @@ public class UserNotActivePage extends StorefrontBasePage {
         click(YES_PRE_AUTH_BUTTON_XPATH);
     }
 
-    @Step("Get Pre Auth Title PopUp")
+    @Step("Get Pre Auth Title PopUp.")
     public String getPreAuthTitlePopUp() {
         waitUntilPageIsFullyLoaded();
         return $(PRE_AUTHORIZATION_CODE_TITLE_IN_POP_UP_XPATH).getText();
