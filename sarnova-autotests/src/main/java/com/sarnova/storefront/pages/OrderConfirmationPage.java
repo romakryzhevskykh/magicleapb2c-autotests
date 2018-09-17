@@ -45,13 +45,13 @@ public class OrderConfirmationPage extends StorefrontBasePage {
 
     @Step("Get delivery method name from page.")
     public String getDeliveryMethodName() {
-        return getShippingMethod().split("\n")[0].trim();
+        return getShippingMethod().trim();
     }
-
-    @Step("Get delivery method explanation from page.")
-    public String getDeliveryMethodExplanation() {
-        return getShippingMethod().split("\n")[1].trim();
-    }
+//
+//    @Step("Get delivery method explanation from page.")
+//    public String getDeliveryMethodExplanation() {
+//        return getShippingMethod().split("\n")[1].trim();
+//    }
 
     @Step("Get Shipping method.")
     private String getShippingMethod() {
