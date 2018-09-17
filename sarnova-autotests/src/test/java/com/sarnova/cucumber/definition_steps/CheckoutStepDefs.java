@@ -32,11 +32,11 @@ public class CheckoutStepDefs extends AbstractStepDefs {
     @When("^Click on Next button on Checkout Shipping address step.$")
     public void clickOnNextButtonOnShippingAddressStep() {
         checkoutPage.clickOnNextButtonOnShippingAddressStep();
-        try {
-            Thread.sleep(6000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(6000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @When("^Click on Next button on Checkout Shipping method step.$")

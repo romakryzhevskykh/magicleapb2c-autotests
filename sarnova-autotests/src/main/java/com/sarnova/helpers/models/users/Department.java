@@ -1,15 +1,15 @@
 package com.sarnova.helpers.models.users;
 
-public class Organization {
+public class Department {
     private final String id;
 
-    public Organization(String id) {
+    public Department(String id) {
         this.id = id;
     }
 
     @Override
     public String toString() {
-        return "Organization: id - " + this.id;
+        return "Department: id - " + this.id;
     }
 
     public String getId() {

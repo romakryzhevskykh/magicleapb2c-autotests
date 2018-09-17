@@ -1,6 +1,6 @@
 package com.sarnova.helpers.managers;
 
-import com.sarnova.helpers.models.users.Organization;
+import com.sarnova.helpers.models.users.Department;
 import com.sarnova.helpers.models.users.UserGroup;
 import com.sarnova.helpers.request_engine.API;
 import com.sarnova.helpers.request_engine.GETRequest;
@@ -38,7 +38,7 @@ public class UserGroupsManager {
 //        String groupUID = RandomStringUtils.randomAlphabetic(10);
         String csrfToken = getCreateGroupPageCsrfToken(activeUserSession);
         String groupName = RandomStringUtils.randomAlphabetic(10);
-        Organization organization = activeUserSession.getUser().getOrganization();
+        Department organization = activeUserSession.getUser().getDepartment();
         POSTRequest createUserGroup = CREATE_USER_GROUP.getClone();
         createUserGroup.addPostParameterAndValue(new API.PostParameterAndValue("originalUid", ""));
         createUserGroup.addPostParameterAndValue(new API.PostParameterAndValue("uid", "uid"));

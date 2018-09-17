@@ -46,6 +46,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     @Autowired private RandomUtils randomUtils;
     @Autowired private PayFabricLeftBarBlock payFabricLeftBarBlock;
     @Autowired private PayFabricHeaderBlock payFabricHeaderBlock;
+    @Autowired private QuickOrderManager quickOrderManager;
 
     @Given("^User is logged in to Storefront.$")
     public void userIsLoggedInToStorefront() {
@@ -427,7 +428,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
         return (ParentCustomCategory) customCategoriesManager.getCustomCategories().stream()
                 .filter(ParentCustomCategory.class::isInstance)
                 .filter(parentCustomCategory -> parentCustomCategory.getOrganization()
-                        .equals(userSessions.getActiveUserSession().getUser().getOrganization()))
+                        .equals(userSessions.getActiveUserSession().getUser().getDepartment()))
                 .findAny().orElseGet(() -> {
                     String ccName = RandomStringUtils.randomAlphabetic(8);
                     return customCategoriesManager.createNewParentCustomCategoryByApi(userSessions.getActiveUserSession(), ccName);
@@ -449,7 +450,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
         return ((ParentCustomCategory) customCategoriesManager.getCustomCategories().stream()
                 .filter(ParentCustomCategory.class::isInstance)
                 .filter(parentCustomCategory -> parentCustomCategory.getOrganization()
-                        .equals(userSessions.getActiveUserSession().getUser().getOrganization()))
+                        .equals(userSessions.getActiveUserSession().getUser().getDepartment()))
                 .filter(parentCategory -> !((ParentCustomCategory) parentCategory).getChildCustomCategories().isEmpty())
                 .findAny()
                 .orElseGet(() -> {
@@ -489,5 +490,13 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     public void findAnyRandomValidCreditCard() {
         CreditCard creditCard = randomUtils.getRandomCreditCard();
         threadVarsHashMap.put(TestKeyword.CREDIT_CARD, creditCard);
+    }
+
+    @And("^Quick order list is empty.$")
+    public void quickOrderListIsEmpty() {
+        Map<UnitOfMeasure, Integer> uomsInQO = quickOrderManager.getUOMs(userSessions.getActiveUserSession());
+        if(!uomsInQO.isEmpty()) {
+            quickOrderManager.removeAllProductsFromList(userSessions.getActiveUserSession());
+        }
     }
 }

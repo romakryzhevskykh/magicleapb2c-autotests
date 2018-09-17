@@ -3,7 +3,9 @@ package com.sarnova.helpers.web_engine;
 import com.sarnova.helpers.user_engine.UserRole;
 import com.sarnova.helpers.user_engine.UserSessions;
 import com.sarnova.helpers.user_engine.UsersManager;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +26,20 @@ public class WebDriverSessions {
 
     private InheritableThreadLocal<WebDriverPool> tlWebDriverPool = new InheritableThreadLocal<>();
 
-    public synchronized void setDriver(URL hubUrl, String browserName, UserRole userRole) {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setBrowserName(browserName);
-        capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+    public synchronized void setDriver(URL hubUrl, String browserName, boolean headless, UserRole userRole) {
+        Capabilities capabilities;
+        if (browserName.equals("chrome")) {
+            capabilities = new ChromeOptions();
+            ((ChromeOptions) capabilities).setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+            ((ChromeOptions) capabilities).setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
+            if (headless) {
+                ((ChromeOptions) capabilities).addArguments("--headless");
+                ((ChromeOptions) capabilities).addArguments("window-size=1920x1080");
+            }
+        } else {
+            capabilities = new DesiredCapabilities();
+            ((DesiredCapabilities) capabilities).setBrowserName(browserName);
+        }
         WebDriver webDriver;
         if (tlWebDriverPool.get() == null) {
             tlWebDriverPool.set(new LooseWebDriverPool());
@@ -50,6 +62,7 @@ public class WebDriverSessions {
             tlDriversMap.set(new HashMap<>());
             setDriver(webDriverThreadTestSetups.getWebDriverSetups().getHubUrl(),
                     webDriverThreadTestSetups.getWebDriverSetups().getBrowserName(),
+                    webDriverThreadTestSetups.getWebDriverSetups().isHeadless(),
                     userRole);
             tlDriversMap.get().get(userRole).setActive(true);
             userSessions.setActiveUserSession(userRole);
@@ -59,6 +72,7 @@ public class WebDriverSessions {
             if (tlDriversMap.get().get(userRole) == null)
                 setDriver(webDriverThreadTestSetups.getWebDriverSetups().getHubUrl(),
                         webDriverThreadTestSetups.getWebDriverSetups().getBrowserName(),
+                        webDriverThreadTestSetups.getWebDriverSetups().isHeadless(),
                         userRole);
             tlDriversMap.get().get(userRole).setActive(true);
             userSessions.setActiveUserSession(userRole);
