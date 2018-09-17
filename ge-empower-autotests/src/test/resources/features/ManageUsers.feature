@@ -348,7 +348,6 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     And Refresh page.
     When User switch to Approved Accounts tab on Account management page.
     Then All the requested accounts are displayed in the tab.
-    And Refresh page.
     When User switch to Approved Accounts tab on Account management page.
     And User deletes all requested accounts from his profile.
 
