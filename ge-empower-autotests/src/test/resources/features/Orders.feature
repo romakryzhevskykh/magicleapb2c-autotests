@@ -73,7 +73,7 @@ Feature: Some actions on Orders page
 #    When User clicks on Place Order button at the OE 3 page.
 #    And Terms and Conditions pop-up is confirmed.
 #    Then Order Successful pop-up appears at the OE 3 page.
-#
+
 #  Scenario Outline: Check that Total Net Price value is correctly after changing status boxes - DE95700
 #    And Account management page is opened.
 #    When Choose <region> region.

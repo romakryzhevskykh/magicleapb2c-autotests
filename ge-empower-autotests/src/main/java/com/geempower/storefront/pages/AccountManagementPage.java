@@ -196,7 +196,6 @@ public class AccountManagementPage extends StorefrontBasePage {
     @Step("Remove All Active Requested Accounts.")
     public void removeAllRequestedAccounts(ArrayList<String> approvedAccounts) {
         waitUntilPageIsFullyLoaded();
-        waitForElementToDisappear(By.xpath(MODAL_DIALOG_XPATH));
         approvedAccounts.forEach(this::removeAccountByAccountNo);
     }
 
@@ -241,7 +240,7 @@ public class AccountManagementPage extends StorefrontBasePage {
         click(THREE_DOT_ICON_REMOVE_ACCOUNT_XPATH, account);
         waitUntilPageIsFullyLoaded();
         click(CONFIRMATION_FOR_REMOVE_ACTIVE_ACCOUNT_BUTTON_XPATH);
-        waitUntilPageIsFullyLoaded();
+        getDriver().navigate().refresh();
     }
 
     @Step("Mark appropriate account as favourite.")
