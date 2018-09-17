@@ -10,6 +10,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,14 +24,14 @@ public class QuickOrderStepDefs extends AbstractStepDefs {
 
     @Given("^Quick order page is opened.$")
     public void quickOrderPageIsOpened() {
-        if(!quickOrderPage.isOpened()) {
+        if (!quickOrderPage.isOpened()) {
             quickOrderPage.open();
         }
     }
 
     @When("^Open Quick order page.$")
     public void openQOPage() {
-        if(!quickOrderPage.isOpened()) {
+        if (!quickOrderPage.isOpened()) {
             quickOrderPage.open();
         }
     }
@@ -50,11 +51,13 @@ public class QuickOrderStepDefs extends AbstractStepDefs {
         assertFalse(quickOrderPage.isAddToSupplyListButtonVisible());
     }
 
-    @When("^Add (.*) product to Quick order list on Quick order page.$")
-    public void addVALIDINDIVIDUALProductToQuickOrderListOnQuickOrderPage(List<String> productType) {
-        Product product = productsManager.getProductByProductTestTypes(productType);
-        quickOrderPage.fillProductIdToNextEmptySKURow(product);
-        product.getUnitsOfMeasurement().forEach(unitOfMeasure -> getSelectedUOMS().put(unitOfMeasure, 0));
+    @When("^Add (\\d+) (.*) product to Quick order list on Quick order page.$")
+    public void addVALIDINDIVIDUALProductToQuickOrderListOnQuickOrderPage(int numberOfProductsToAdd, List<String> productType) {
+        ArrayList<Product> products = productsManager.getUniqueProductsByProductsQuantityAndTestTypes(numberOfProductsToAdd, productType);
+        products.forEach(product -> {
+            quickOrderPage.fillProductIdToNextEmptySKURow(product);
+            product.getUnitsOfMeasurement().forEach(unitOfMeasure -> getSelectedUOMS().put(unitOfMeasure, 0));
+        });
     }
 
     @Then("^Check that only added UOMs displayed on Quick order page.$")

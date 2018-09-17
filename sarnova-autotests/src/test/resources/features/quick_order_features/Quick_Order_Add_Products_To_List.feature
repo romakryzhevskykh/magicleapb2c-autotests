@@ -7,6 +7,37 @@ Feature: Quick order can add and save products in the list.
     And Open Quick order page.
 
   Scenario: Check that user can add valid product on Quick order page.
-    When Add VALID, INDIVIDUAL product to Quick order list on Quick order page.
+    When Add 1 VALID, INDIVIDUAL product to Quick order list on Quick order page.
     Then Check that only added UOMs displayed on Quick order page.
     And Check that all products have corresponding QTY(zero by default) values.
+
+  Scenario: Check that user can add at least two valid products on Quick order page.
+    When Add 2 VALID, INDIVIDUAL product to Quick order list on Quick order page.
+    Then Check that only added UOMs displayed on Quick order page.
+    And Check that all products have corresponding QTY(zero by default) values.
+
+  Scenario: Check that user can not add group products on Quick order page.
+    When Add 1 GROUP product to Quick order list on Quick order page.
+    Then Check that <string> error message is displayed for used row.
+
+  Scenario: Check that user can not add existed products on Quick order page.
+    When Add 1 VALID, INDIVIDUAL product to Quick order list on Quick order page.
+    And Add already existed product to Quick order list on Quick order page.
+    Then Check that <string> error message is displayed for used row.
+
+  Scenario: Check that user can change product QTY on Quick order page.
+    When Add 2 VALID, INDIVIDUAL product to Quick order list on Quick order page.
+    And Set QTY 2 to any UOM on Quick order page.
+    Then Check that all products have corresponding QTY(zero by default) values.
+
+  Scenario: Check that user can change product QTY and it will be saved after refresh on Quick order page.
+    When Add 2 VALID, INDIVIDUAL product to Quick order list on Quick order page.
+    And Set QTY 2 to any UOM on Quick order page.
+    And Refresh page.
+    Then Check that all products have corresponding QTY(zero by default) values.
+
+  Scenario: Check that user can change product QTY using +/- buttons and it will be saved after refresh on Quick order page.
+    When Add 2 VALID, INDIVIDUAL product to Quick order list on Quick order page.
+    And Set QTY 2 to any UOM using plus/minus buttons on Quick order page.
+    And Refresh page.
+    Then Check that all products have corresponding QTY(zero by default) values.
