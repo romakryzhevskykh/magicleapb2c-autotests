@@ -33,7 +33,6 @@ public class QuickOrderPage extends StorefrontBasePage {
     public boolean isAddToSupplyListButtonEnabled() {
         return $(ADD_TO_SUPPLY_LIST_BUTTONS_XPATH).isEnabled();
     }
-
     @Step("Add product: {0} to Quick order list.")
     public void fillProductIdToNextEmptySKURow(Product product) {
         enterText(product.getSku(), EMPTY_PRODUCTS_SKU_ROW_XPATH);
