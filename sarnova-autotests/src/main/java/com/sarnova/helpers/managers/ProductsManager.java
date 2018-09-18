@@ -59,10 +59,14 @@ public class ProductsManager {
                 });
     }
 
-    public ArrayList<Product> getUniqueProductsByProductsQuantityAndTestTypes(int numberOfProductsToReturn, List<String> productTypes) {
+    public ArrayList<Product> getUniqueProductsByProductsQuantityTestTypesAndExcludeProductList(int numberOfProductsToReturn, List<String> productTypes, List<? extends Product> excludeProducts) {
         ArrayList<Product> selectedProducts = new ArrayList<>();
+        ArrayList<Product> productsToSearchIn = new ArrayList<Product>() {{
+            addAll(getTestProducts());
+            removeAll(excludeProducts);
+        }};
         for (int i = 0; i < numberOfProductsToReturn; i++) {
-            selectedProducts.add(getTestProducts().stream()
+            selectedProducts.add(productsToSearchIn.stream()
                     .filter(product -> product.getProductTestTypes().containsAll(productTypes.stream()
                             .map(ProductTestType::valueOf)
                             .collect(Collectors.toCollection(ArrayList::new)))

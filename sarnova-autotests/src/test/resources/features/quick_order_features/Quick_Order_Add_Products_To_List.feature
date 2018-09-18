@@ -18,12 +18,16 @@ Feature: Quick order can add and save products in the list.
 
   Scenario: Check that user can not add group products on Quick order page.
     When Add 1 GROUP product to Quick order list on Quick order page.
-    Then Check that <string> error message is displayed for used row.
+    Then Check that Entered SKU belongs to group product. Please use SKU of individual product. error message is displayed for used row on Quick order page.
 
   Scenario: Check that user can not add existed products on Quick order page.
     When Add 1 VALID, INDIVIDUAL product to Quick order list on Quick order page.
     And Add already existed product to Quick order list on Quick order page.
-    Then Check that <string> error message is displayed for used row.
+    Then Check that Sku already exists in the form error message is displayed for used row on Quick order page.
+
+  Scenario: Check that user can not add not existed product id to the list on Quick order page.
+    When Enter random text to any empty row on Quick order page.
+    Then Check that Product not found error message is displayed for used row on Quick order page.
 
   Scenario: Check that user can change product QTY on Quick order page.
     When Add 2 VALID, INDIVIDUAL product to Quick order list on Quick order page.
