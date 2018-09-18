@@ -151,4 +151,31 @@ public class OrdersPage extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
         click(OPEN_ORDER_REPORT_WINDOW_CLOSE_ICON_XPATH);
     }
+
+    @Step("Open filter on Orders page.")
+    public void clickOnFilterOrderIcon() {
+        click(FILTER_ORDERS_ICON_XPATH);
+    }
+
+    @Step("Set Order No To The Search Field For Filtering.")
+    public void setOrderNoToTheSearchFieldForFiltering(String orderNo) {
+        waitUntilPageIsFullyLoaded();
+        $(ORDER_NO_FIELD_FILTER_SLIDER_XPATH).clear();
+        $(ORDER_NO_FIELD_FILTER_SLIDER_XPATH).sendKeys(orderNo);
+    }
+
+    @Step("Click On Apply Filter Button.")
+    public void clickOnApplyFilterButton() {
+        click(APPLY_FILTER_BUTTON_XPATH);
+    }
+
+    @Step("Get First Order Number From Orders List.")
+    public String getFirstOrderNumberFromOrdersList() {
+        return $(FIRST_ORDER_NUMBER_FROM_ORDERS_LIST_XPATH).getText();
+    }
+
+    @Step("Click On First Order Number.")
+    public void clickOnFirstOrderNumber() {
+        click(FIRST_ORDER_NUMBER_FROM_ORDERS_LIST_XPATH);
+    }
 }

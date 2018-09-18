@@ -113,3 +113,31 @@ Feature: Some actions on Orders page
       | openOrderReportMessage                   | pricingOption   | userEmail            |
       | New! Download your open orders report -> | With Pricing    | rmautotest@gmail.com |
       | New! Download your open orders report -> | Without Pricing | rmautotest@gmail.com |
+
+  Scenario Outline: Check that tracking info slider contains all necessary information.
+    And Account management page is opened.
+    When Choose North_America region.
+    And Select account 5093868.
+    And Click on account with USS1 sales division.
+    And Orders page is opened.
+    When User clicks on filter order icon.
+    And Set order number <orderNo> to the order number field.
+    And Click on apply filter button.
+    Then Appropriate order with order number <orderNo> is appeared on orders page.
+    When User clicks on found order.
+    Then Tracking information has MULTIPLE values.
+    When User clicks on tracking info hyperlink.
+    Then BOL and Tracking Numbers pop-up appears.
+    When User click on random tracking number.
+    Then Tracking details slider appears.
+    Then Tracking details slider contains all necessary texts and icons <sliderTitle>, <trackingErrorMessage>, <shipmentInfoSentStatus>, <inTransitStatus>, <deliveredStatus>.
+    When User goes to the next Tracking Details.
+    Then Tracking details slider appears.
+    Then Tracking details slider contains all necessary texts and icons <sliderTitle>, <trackingErrorMessage>, <shipmentInfoSentStatus>, <inTransitStatus>, <deliveredStatus>.
+    When User goes to the previous Tracking Details.
+    Then Tracking details slider appears.
+    Then Tracking details slider contains all necessary texts and icons <sliderTitle>, <trackingErrorMessage>, <shipmentInfoSentStatus>, <inTransitStatus>, <deliveredStatus>.
+
+    Examples:
+      | orderNo   | sliderTitle      | trackingErrorMessage                                                 | shipmentInfoSentStatus | inTransitStatus | deliveredStatus |
+      | 150775814 | Tracking Details | This tracking number has expired and details are no longer available | Shipment Info sent     | In Transit      | Delivered       |

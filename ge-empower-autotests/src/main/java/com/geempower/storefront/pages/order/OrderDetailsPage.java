@@ -75,6 +75,7 @@ public class OrderDetailsPage extends StorefrontBasePage {
 
     @Step("Get Tracking Information Data.")
     public String getTrackingInformationData() {
+        waitUntilPageIsFullyLoaded();
         return $(TRACKING_INFO_DATA_XPATH).getText();
     }
 
@@ -161,7 +162,7 @@ public class OrderDetailsPage extends StorefrontBasePage {
 
     @Step("Get Catalog No By Row.")
     public String getCatalogNoByRow(String rowNo) {
-       return $(ALL_CATALOG_NO_BY_ROW_XPATH, rowNo).getText();
+        return $(ALL_CATALOG_NO_BY_ROW_XPATH, rowNo).getText();
     }
 
     @Step("Get Description By Row.")
@@ -172,5 +173,73 @@ public class OrderDetailsPage extends StorefrontBasePage {
     @Step("Is Table With Products Displayed.")
     public boolean isTableWithProductsDisplayed() {
         return isDisplayed(TABLE_WITH_PRODUCTS_XPATH);
+    }
+
+    @Step("Click On Tracking Info Hyper Link.")
+    public void clickOnTrackingInfoHyperLink() {
+        click(TRACKING_INFO_HYPERLINK_XPATH);
+    }
+
+    @Step("Click On Random Tracking Number.")
+    public void clickOnRandomTrackingNumber() {
+        $$(LIST_OF_TRACKING_NUMBERS_XPATH).stream().findAny().orElse(null).click();
+    }
+
+    @Step("Is Tracking Slider Displayed.")
+    public boolean isTrackingSliderDisplayed() {
+        waitUntilPageIsFullyLoaded();
+        return isDisplayed(TRACKING_DETAILS_SLIDER_XPATH);
+    }
+
+    @Step("Get Slider Title.")
+    public String getSliderTitle() {
+        waitUntilPageIsFullyLoaded();
+        return $(TRACKING_DETAILS_SLIDER_HEADER_XPATH).getText();
+    }
+
+    @Step("Get Tracking Error Message.")
+    public String getTrackingErrorMessage() {
+        return $(TRACKING_DETAILS_ERROR_MESSAGE_XPATH).getText();
+    }
+
+    @Step("Get Line No Details.")
+    public String getLineNoDetails() {
+        return $(LINE_NO_AND_CATALOG_NO_DETAILS_XPATH).getText();
+    }
+
+    @Step("Are All Progress Bars Displayed.")
+    public boolean areAllProgressBarsDisplayed() {
+        return isDisplayed(DELIVERED_PROGRESS_BAR_XPATH) && isDisplayed(IN_TRANSIT_PROGRESS_BAR_XPATH)
+                && isDisplayed(SHIPMENT_INFO_SENT_PROGRESS_BAR_XPATH);
+    }
+
+    @Step("Is Exclamation Mark Icon Displayed.")
+    public boolean isExclamationMarkIconDisplayed() {
+        return isDisplayed(ERROR_EXCLAMATION_MARK_ICON_XPATH);
+    }
+
+    @Step("Get Shipment Info Sent Status Text.")
+    public String getShipmentInfoSentStatusText() {
+        return $(SHIPMENT_INFO_SENT_STATUS_NAME_XPATH).getText();
+    }
+
+    @Step("Get Delivered Status Text.")
+    public String getDeliveredStatusText() {
+        return $(DELIVERED_STATUS_NAME_XPATH).getText();
+    }
+
+    @Step("Get In Transit Status Text.")
+    public String getInTransitStatusText() {
+        return $(IN_TRANSIT_STATUS_NAME_XPATH).getText();
+    }
+
+    @Step("Go To The Next Tracking Info.")
+    public void goToTheNextTrackingInfo() {
+        click(NEXT_TRACKING_INFO_BUTTON_XPATH);
+    }
+
+    @Step("Go To The Previous Tracking Info.")
+    public void goToThePreviousTrackingInfo() {
+        click(PREVIOUS_TRACKING_INFO_BUTTON_XPATH);
     }
 }

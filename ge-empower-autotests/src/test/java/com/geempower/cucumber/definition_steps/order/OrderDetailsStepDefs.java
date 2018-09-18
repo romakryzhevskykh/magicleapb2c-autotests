@@ -159,4 +159,47 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     public void isTableWithProductsDisplayed() {
         assertTrue(orderDetailsPage.isTableWithProductsDisplayed());
     }
+
+    @Then("^Tracking information has (.*) values.$")
+    public void trackingInformationHasMULTIPLEValues(String trackingInfoValue) {
+        assertEquals(trackingInfoValue, orderDetailsPage.getTrackingInformationData());
+    }
+
+    @When("^User clicks on tracking info hyperlink.$")
+    public void userClicksOnTrackingInfoHyperlink() {
+        orderDetailsPage.clickOnTrackingInfoHyperLink();
+    }
+
+    @When("^User click on random tracking number.$")
+    public void userClickOnRandomTrackingNumber() {
+        orderDetailsPage.clickOnRandomTrackingNumber();
+    }
+
+    @Then("^Tracking details slider appears.$")
+    public void trackingDetailsSliderAppears() {
+        assertTrue(orderDetailsPage.isTrackingSliderDisplayed());
+    }
+
+    @Then("^Tracking details slider contains all necessary texts and icons (.*), (.*), (.*), (.*), (.*).$")
+    public void trackingDetailsSliderContainsAllNecessaryTextsAndIcons(String title, String errorMessage, String status1, String status2, String status3) {
+        assertEquals(title, orderDetailsPage.getSliderTitle());
+        assertEquals(errorMessage, orderDetailsPage.getTrackingErrorMessage());
+        assertTrue(orderDetailsPage.getLineNoDetails().contains("Line No."));
+        assertTrue(orderDetailsPage.getLineNoDetails().contains(orderDetailsPage.getRandomCatalogNo()));
+        assertTrue(orderDetailsPage.areAllProgressBarsDisplayed());
+        assertTrue(orderDetailsPage.isExclamationMarkIconDisplayed());
+        assertEquals(orderDetailsPage.getShipmentInfoSentStatusText(), status1);
+        assertEquals(orderDetailsPage.getDeliveredStatusText(), status3);
+        assertEquals(orderDetailsPage.getInTransitStatusText(), status2);
+    }
+
+    @When("^User goes to the next Tracking Details.$")
+    public void userGoesToTheNextTrackingDetails() {
+        orderDetailsPage.goToTheNextTrackingInfo();
+    }
+
+    @When("^User goes to the previous Tracking Details.$")
+    public void userGoesToThePreviousTrackingDetails() {
+        orderDetailsPage.goToThePreviousTrackingInfo();
+    }
 }
