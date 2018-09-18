@@ -105,4 +105,30 @@ public class OrdersStepDefs extends AbstractStepDefs {
     public void openOrderReportIsDisplayedWithAppropriateDateAndTime() {
         assertEquals(threadVarsHashMap.get(TestKeyword.OPEN_ORDER_REPORT_DATE_CREATION), ordersPage.getPostReportDate());
     }
+
+    @When("^User clicks on filter order icon.$")
+    public void userClicksOnFilterOrderIcon() {
+        ordersPage.clickOnFilterOrderIcon();
+    }
+
+    @And("^Set order number (.*) to the order number field.$")
+    public void setOrderNumberOrderNoToTheOrderNumberField(String orderNo) {
+        ordersPage.setOrderNoToTheSearchFieldForFiltering(orderNo);
+    }
+
+    @And("^Click on apply filter button.$")
+    public void clickOnApplyFilterButton() {
+        ordersPage.clickOnApplyFilterButton();
+    }
+
+    @Then("^Appropriate order with order number (.*) is appeared on orders page.$")
+    public void appropriateOrderWithOrderNumberIsAppearedOnOrdersPage(String orderNo) {
+        assertTrue(ordersPage.getActualCountOfOrders() == 1);
+        assertEquals(orderNo, ordersPage.getFirstOrderNumberFromOrdersList());
+    }
+
+    @When("^User clicks on found order.$")
+    public void userClicksOnFoundOrder() {
+        ordersPage.clickOnFirstOrderNumber();
+    }
 }

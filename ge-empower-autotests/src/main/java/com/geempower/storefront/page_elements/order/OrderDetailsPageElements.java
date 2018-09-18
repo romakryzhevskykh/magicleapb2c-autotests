@@ -16,4 +16,22 @@ public class OrderDetailsPageElements {
     public final static String ALL_STATUS_BOX_XPATH = "//div[@class='order-item orders-item-all']/a";
     public final static String SELECTED_ALL_STATUS_BOX_XPATH = "//div[@class='order-item orders-item-all']/a[@class='selected']";
     public final static String TABLE_WITH_PRODUCTS_XPATH = "//table[@id='order-description-table']//tr[contains(@class,'show-item')]";
+    public final static String TRACKING_INFO_HYPERLINK_XPATH = "//td[@class='create-summary-restock-amount ']/a";
+    public final static String LIST_OF_TRACKING_NUMBERS_XPATH = "//table[@id='DataTables_Table_0']//tr/td[@class='po-track-link']/a";
+    //TRACKING DETAILS SLIDER ELEMENTS
+    public final static String TRACKING_DETAILS_SLIDER_XPATH = "//tbody//div[@class='filter-setting-overlay filter-canvas order-filter order-tracking-info-panel-multiple open']";
+    public final static String TRACKING_DETAILS_SLIDER_HEADER_XPATH = TRACKING_DETAILS_SLIDER_XPATH + "/div[@class='filter-header']/h4";
+    public final static String TRACKING_DETAILS_ERROR_MESSAGE_XPATH = TRACKING_DETAILS_SLIDER_XPATH + "//span[@class='warning-text']";
+    public final static String ERROR_EXCLAMATION_MARK_ICON_XPATH = TRACKING_DETAILS_SLIDER_XPATH + "//i[@class='fa fa-exclamation fa-stack-1x fa-inverse']";
+    public final static String LINE_NO_AND_CATALOG_NO_DETAILS_XPATH = TRACKING_DETAILS_SLIDER_XPATH + "//div[@class='shippment-details-body active']/h5";
+    public final static String SHIPMENT_INFO_SENT_PROGRESS_BAR_XPATH = TRACKING_DETAILS_SLIDER_XPATH + "//div[@class='tracking-bar']//div[contains(@class, 'Dispatched')]";
+    public final static String IN_TRANSIT_PROGRESS_BAR_XPATH = TRACKING_DETAILS_SLIDER_XPATH + "//div[@class='tracking-bar']//div[contains(@class, 'InTransit')]";
+    public final static String DELIVERED_PROGRESS_BAR_XPATH = TRACKING_DETAILS_SLIDER_XPATH + "//div[@class='tracking-bar']//div[contains(@class, 'Delivered')]";
+    public final static String SHIPMENT_INFO_SENT_STATUS_NAME_XPATH = SHIPMENT_INFO_SENT_PROGRESS_BAR_XPATH + "/span";
+    public final static String IN_TRANSIT_STATUS_NAME_XPATH = IN_TRANSIT_PROGRESS_BAR_XPATH + "/span";
+    public final static String DELIVERED_STATUS_NAME_XPATH = DELIVERED_PROGRESS_BAR_XPATH + "/span";
+    public final static String NEXT_TRACKING_INFO_BUTTON_XPATH = "//a[@class='text-blue track-next ']";
+    public final static String PREVIOUS_TRACKING_INFO_BUTTON_XPATH = "//a[@class='text-blue track-prev ']";
+
+
 }
