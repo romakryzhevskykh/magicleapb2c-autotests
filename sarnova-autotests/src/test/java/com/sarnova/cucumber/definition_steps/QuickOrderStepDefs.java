@@ -1,6 +1,8 @@
 package com.sarnova.cucumber.definition_steps;
 
 import com.sarnova.helpers.managers.ProductsManager;
+import com.sarnova.helpers.managers.SupplyListsManager;
+import com.sarnova.helpers.models.products.IndividualProduct;
 import com.sarnova.helpers.models.products.Product;
 import com.sarnova.helpers.models.products.UnitOfMeasure;
 import com.sarnova.storefront.pages.QuickOrderPage;
@@ -22,6 +24,7 @@ import static org.testng.Assert.*;
 public class QuickOrderStepDefs extends AbstractStepDefs {
     @Autowired QuickOrderPage quickOrderPage;
     @Autowired ProductsManager productsManager;
+    @Autowired SupplyListsManager supplyListsManager;
 
     @Given("^Quick order page is opened.$")
     public void quickOrderPageIsOpened() {
@@ -43,6 +46,11 @@ public class QuickOrderStepDefs extends AbstractStepDefs {
     @Then("^Check that Add to Supply list button is enabled on Quick order page.$")
     public void checkThatAddToSupplyListButtonIsEnabled() {
         assertTrue(quickOrderPage.isAddToSupplyListButtonEnabled());
+    }
+
+    @Then("^Check that Add to Supply list button is unable on Quick order page.$")
+    public void checkThatAddToSupplyListButtonIsUnable() {
+        assertFalse(quickOrderPage.isAddToSupplyListButtonEnabled());
     }
 
     @Then("^Check that Add to Supply list button is not visible on Quick order page.$")
@@ -73,7 +81,7 @@ public class QuickOrderStepDefs extends AbstractStepDefs {
         assertTrue(getSelectedUOMS().keySet().containsAll(uoms.keySet()));
     }
 
-    @And("^Check that all products have corresponding QTY\\(zero by default\\) values.$")
+    @And("^Check that all products have corresponding QTY\\(zero by default\\) values on Quick order page.$")
     public void checkThatAllProductsHaveCorrespondingQTYZeroByDefaultValues() {
         Map<UnitOfMeasure, Integer> uoms = quickOrderPage.getUomsWithQTYs();
         uoms.forEach((key, value) -> assertEquals(getSelectedUOMS().get(key), value));
@@ -116,6 +124,15 @@ public class QuickOrderStepDefs extends AbstractStepDefs {
         });
     }
 
+    @And("^Set QTY (\\d+) to all UOM on Quick order page.$")
+    public void setQTYToAllUOMOnQuickOrderPage(int qtyToAnyProduct) {
+        HashMap<UnitOfMeasure, Integer> selectedUOMs = getSelectedUOMS();
+        selectedUOMs.entrySet().forEach(unitOfMeasureIntegerEntry -> {
+            quickOrderPage.setQTYToUOM(qtyToAnyProduct, unitOfMeasureIntegerEntry.getKey());
+            unitOfMeasureIntegerEntry.setValue(qtyToAnyProduct);
+        });
+    }
+
     @And("^Set QTY (\\d+) to any UOM using plus/minus buttons on Quick order page.$")
     public void setQTYToAnyUOMUsingPlusMinusButtonsOnQuickOrderPage(int qtyToAnyProduct) {
         HashMap<UnitOfMeasure, Integer> selectedUOMs = getSelectedUOMS();
@@ -125,5 +142,109 @@ public class QuickOrderStepDefs extends AbstractStepDefs {
             quickOrderPage.setQTYToUOMUsingPlusMinus(qtyToAnyProduct, unitOfMeasureIntegerEntry);
             unitOfMeasureIntegerEntry.setValue(qtyToAnyProduct);
         });
+    }
+
+    @And("^Click on Add to Supply list button on Quick order page.$")
+    public void clickOnAddToSupplyListButtonOnQuickOrderPage() {
+        quickOrderPage.clickOnAddToSupplyListButton();
+    }
+
+    @And("^Select Create a Supply list radio button in Add to Supply list pop-up on Quick order page.$")
+    public void selectCreateASupplyListRadioButtonInAddToSupplyListPopUp() {
+        quickOrderPage.clickOnCreateNewSupplyListInAddToSupplyListPopUp();
+    }
+
+    @And("^Select Select a Supply list radio button in Add to Supply list pop-up on Quick order page.$")
+    public void selectSelectASupplyListRadioButtonInAddToSupplyListPopUp() {
+        quickOrderPage.clickOnSelectSupplyListInAddToSupplyListPopUp();
+    }
+
+    @And("^Enter alphanumeric text to name field in Add to Supply list pop-up on Quick order page.$")
+    public void enterAlphanumericTextToNameFieldInAddToSupplyListPopUp() {
+        String newSupplyListName = RandomStringUtils.randomAlphanumeric(10);
+        threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, newSupplyListName);
+        quickOrderPage.enterNewSupplyListNameText(newSupplyListName);
+    }
+
+    @SuppressWarnings("unchecked")
+    @And("^Click on Add to Supply list in Add to Supply list pop-up on Quick order page.$")
+    public void clickOnAddToSupplyListInAddToSupplyListPopUp() {
+        quickOrderPage.clickOnAddToSupplyListButtonInAddToSupplyListPopUp();
+        String supplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
+        if (supplyListName != null && !supplyListName.isEmpty() && supplyListsManager.getSupplyListByName(supplyListName) == null) {
+            String supplyListId = quickOrderPage.getSupplyListId();
+            HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = getSelectedUOMS();
+            ArrayList<IndividualProduct> selectedIndividualProducts = selectedUnitsOfMeasurement.keySet()
+                    .stream()
+                    .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
+                    .collect(Collectors.toCollection(ArrayList::new));
+            supplyListsManager.createInstance(userSessions.getActiveUserSession().getUser(), supplyListName, supplyListId, selectedIndividualProducts);
+        } else if (supplyListsManager.getSupplyListByName(supplyListName) != null) {
+            HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = getSelectedUOMS();
+            ArrayList<IndividualProduct> selectedIndividualProducts = selectedUnitsOfMeasurement.keySet()
+                    .stream()
+                    .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
+                    .collect(Collectors.toCollection(ArrayList::new));
+            supplyListsManager.getSupplyListByName(supplyListName)
+                    .addSupplyProductsToList(selectedIndividualProducts
+                            .stream()
+                            .map(selectedIndividualProduct -> supplyListsManager.createSupplyProductInstance(selectedIndividualProduct))
+                            .collect(Collectors.toList()));
+        }
+    }
+
+    @And("^Click on View Supply list in Add to Supply list pop-up on Quick order page.$")
+    public void clickOnViewSupplyListInAddToSupplyListPopUp() {
+        quickOrderPage.clickOnViewSupplyListButtonInAddToSupplyListPopUp();
+    }
+
+    @And("^Select existing Supply list in Add to Supply list pop-up on Quick order page.$")
+    public void selectExistingSupplyListInAddToSupplyListPopUp() {
+        String existingSupplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);
+        quickOrderPage.clickOnSelectExistingSupplyListDropDown();
+        if (existingSupplyListName == null) {
+            existingSupplyListName = quickOrderPage.getAnyExistingSupplyListNameFromDropDown();
+            if (existingSupplyListName != null) {
+                threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, existingSupplyListName);
+            } else {
+                throw new NullPointerException("Existing supply lists haven't been found for user: " + userSessions.getActiveUserSession().getUser());
+            }
+        }
+        quickOrderPage.selectExistingSupplyListFromDropDownBySupplyListName(existingSupplyListName);
+    }
+
+    @And("^Click on Continue button in Add to Supply list pop-up on Quick order page.$")
+    public void clickOnContinueButtonInAddToSupplyListPopUpOnQuickOrderPage() {
+        quickOrderPage.clickOnContinueButtonInAddToSupplyListPopUpOnQuickOrderPage();
+    }
+
+    @Then("^Check that Add to cart button is unable on Quick order page.$")
+    public void checkThatAddToCartButtonIsUnableOnQuickOrderPage() {
+        assertFalse(quickOrderPage.isAddToCartButtonEnabled());
+    }
+
+    @And("^Click on Add to cart button on Quick order page.$")
+    public void clickOnAddToCartButtonOnQuickOrderPage() {
+        quickOrderPage.clickOnAddToCartButton();
+    }
+
+    @And("^Click on Checkout button in Add to cart pop-up on Quick order page.$")
+    public void clickOnCheckoutButtonInAddToCartPopUpOnQuickOrderPage() {
+        quickOrderPage.clickOnCheckoutButtonInAddToCartPopUp();
+    }
+
+    @And("^Click on Continue shopping button in Add to cart pop-up on Quick order page.$")
+    public void clickOnContinueShoppingButtonInAddToCartPopUpOnQuickOrderPage() {
+        quickOrderPage.clickOnContinueShoppingButtonInAddToCartPopUp();
+    }
+
+    @Then("^Check that Quick order list is empty on Quick order page.$")
+    public void checkThatQuickOrderListIsEmptyOnQuickOrderPage() {
+        assertTrue(quickOrderPage.getUomsWithQTYs().isEmpty());
+    }
+
+    @And("^Click on Reset form button on Quick order page.$")
+    public void clickOnResetFormButtonOnQuickOrderPage() {
+        quickOrderPage.clickOnResetFormButton();
     }
 }

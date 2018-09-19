@@ -43,9 +43,10 @@ public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
     @Then("^Check that selected product\\(s\\) is\\(are\\) displayed on the Supply list details page.$")
     public void checkThatSelectedProductsAreDisplayedOnTheSupplyListDetailsPage() {
         Set<IndividualProduct> addedIndividualProducts = getSelectedUOMS()
-                .keySet()
+                .entrySet()
                 .stream()
-                .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
+                .filter(unitOfMeasureIntegerEntry -> unitOfMeasureIntegerEntry.getValue() > 0)
+                .map(unitOfMeasureIntegerEntry -> productsManager.getProductByUOM(unitOfMeasureIntegerEntry.getKey()))
                 .collect(Collectors.toSet());
         SupplyList supplyList = supplyListDetailsPage.getSupplyListFromPage(userSessions.getActiveUserSession().getUser());
         addedIndividualProducts.forEach(individualProduct ->

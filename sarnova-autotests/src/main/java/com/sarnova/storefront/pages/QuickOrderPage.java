@@ -3,6 +3,9 @@ package com.sarnova.storefront.pages;
 import com.sarnova.helpers.managers.ProductsManager;
 import com.sarnova.helpers.models.products.Product;
 import com.sarnova.helpers.models.products.UnitOfMeasure;
+import com.sarnova.storefront.page_blocks.AddToCartPopUpBlock;
+import com.sarnova.storefront.page_blocks.AddToSupplyListPopUpBlock;
+import org.openqa.selenium.By;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
@@ -17,6 +20,8 @@ import static com.sarnova.storefront.page_elements.QuickOrderPageElements.*;
 public class QuickOrderPage extends StorefrontBasePage {
 
     @Autowired ProductsManager productsManager;
+    @Autowired AddToSupplyListPopUpBlock addToSupplyListPopUpBlock;
+    @Autowired AddToCartPopUpBlock addToCartPopUpBlock;
 
     private String pageUrlMethod = "quickOrder";
 
@@ -33,6 +38,11 @@ public class QuickOrderPage extends StorefrontBasePage {
     @Step("Is Add to Supply list button enabled?")
     public boolean isAddToSupplyListButtonEnabled() {
         return $(ADD_TO_SUPPLY_LIST_BUTTONS_XPATH).isEnabled();
+    }
+
+    @Step("Is Add to cart button enabled?")
+    public boolean isAddToCartButtonEnabled() {
+        return $(ADD_TO_CART_BUTTONS_XPATH).isEnabled();
     }
 
     @Step("Add product: {0} to Quick order list.")
@@ -102,5 +112,84 @@ public class QuickOrderPage extends StorefrontBasePage {
     @Step("Click minus button for UOM: {0}.")
     private void clickMinusFor(UnitOfMeasure unitOfMeasure) {
         click(MINUS_BUTTON_BY_SKU_AND_UOM_XPATH, productsManager.getProductByUOM(unitOfMeasure).getSku(), unitOfMeasure.getUomType().name());
+    }
+
+    @Step("Click on Add to Supply list button.")
+    public void clickOnAddToSupplyListButton() {
+        click(ADD_TO_SUPPLY_LIST_BUTTONS_XPATH);
+        waitUntilPageIsFullyLoaded();
+        addToSupplyListPopUpBlock.waitUntilProductImagesAreVisible();
+        addToSupplyListPopUpBlock.waitUntilBannerImageIsVisible();
+    }
+
+    @Step("Click on Add to cart button.")
+    public void clickOnAddToCartButton() {
+        click(ADD_TO_CART_BUTTONS_XPATH);
+        waitUntilPageIsFullyLoaded();
+        waitUntilElementIsVisible(By.id(POP_UP_ID));
+        addToCartPopUpBlock.waitUntilProductImagesAreVisible();
+        addToCartPopUpBlock.waitUntilBannerImageIsVisible();
+    }
+
+    @Step("Click on Reset form button.")
+    public void clickOnResetFormButton() {
+        click(RESET_FORM_BUTTONS_XPATH);
+        waitUntilPageIsFullyLoaded();
+    }
+
+    public String getAddToSupplyListPopUpContent() {
+        return addToSupplyListPopUpBlock.getAddToSupplyListPopUpContent();
+    }
+
+    public void clickOnCreateNewSupplyListInAddToSupplyListPopUp() {
+        addToSupplyListPopUpBlock.clickOnCreateNewSupplyListInAddToSupplyListPopUp();
+    }
+
+    public void clickOnSelectSupplyListInAddToSupplyListPopUp() {
+        addToSupplyListPopUpBlock.clickOnSelectSupplyListInAddToSupplyListPopUp();
+    }
+
+    public void enterNewSupplyListNameText(String newSupplyListName) {
+        addToSupplyListPopUpBlock.enterNewSupplyListNameText(newSupplyListName);
+    }
+
+    public void clickOnAddToSupplyListButtonInAddToSupplyListPopUp() {
+        addToSupplyListPopUpBlock.clickOnAddToSupplyListButtonInAddToSupplyListPopUp();
+    }
+
+    public void clickOnViewSupplyListButtonInAddToSupplyListPopUp() {
+        addToSupplyListPopUpBlock.clickOnViewSupplyListButtonInAddToSupplyListPopUp();
+    }
+
+    public void clickOnSelectExistingSupplyListDropDown() {
+        addToSupplyListPopUpBlock.clickOnSelectExistingSupplyListDropDown();
+    }
+
+    public void selectExistingSupplyListFromDropDownBySupplyListName(String existingSupplyListName) {
+        addToSupplyListPopUpBlock.selectExistingSupplyListFromDropDownBySupplyListName(existingSupplyListName);
+    }
+
+    public String getAnyExistingSupplyListNameFromDropDown() {
+        return addToSupplyListPopUpBlock.getAnyExistingSupplyListNameFromDropDown();
+    }
+
+    public String getSupplyListId() {
+        return addToSupplyListPopUpBlock.getSupplyListId();
+    }
+
+    public void clickOnContinueButtonInAddToSupplyListPopUpOnQuickOrderPage() {
+        addToSupplyListPopUpBlock.clickOnContinueButton();
+    }
+
+    public void clickOnCheckoutButtonInAddToCartPopUp() {
+        addToCartPopUpBlock.clickOnCheckoutButtonInAddToCartPopUp();
+    }
+
+    public void clickOnContinueShoppingButtonInAddToCartPopUp() {
+        addToCartPopUpBlock.clickOnContinueShoppingButtonInAddToCartPopUp();
+    }
+
+    public String getAddToCartPopUpContent() {
+        return addToCartPopUpBlock.getAddToCartPopUpContent();
     }
 }

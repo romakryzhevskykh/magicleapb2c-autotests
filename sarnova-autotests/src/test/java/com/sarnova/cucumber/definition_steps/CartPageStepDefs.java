@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.testng.Assert.*;
@@ -27,7 +28,9 @@ public class CartPageStepDefs extends AbstractStepDefs {
     @SuppressWarnings("unchecked")
     @Then("^Check that only selected UOMs exist on Cart page.$")
     public void checkThatSelectedUOMsExistOnCartPage() {
-        HashMap<UnitOfMeasure, Integer> addedToCartUnitsOfMeasurement = getSelectedUOMS();
+        Map<UnitOfMeasure, Integer> addedToCartUnitsOfMeasurement = getSelectedUOMS().entrySet().stream()
+                .filter(unitOfMeasureIntegerEntry -> unitOfMeasureIntegerEntry.getValue() > 0)
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         List<UnitOfMeasure> unitsOfMeasurementInCart = cartPage.getUnitsOfMeasurementInCart();
         addedToCartUnitsOfMeasurement.keySet().forEach(addedUOM ->
                 assertTrue(unitsOfMeasurementInCart.contains(addedUOM))
@@ -38,7 +41,9 @@ public class CartPageStepDefs extends AbstractStepDefs {
     @SuppressWarnings("unchecked")
     @And("^Check that selected UOMs have corresponding quantities on Cart page.$")
     public void checkThatSelectedUOMsHaveCorrespondingQuantitiesOnCartPage() {
-        HashMap<UnitOfMeasure, Integer> addedToCartUnitsOfMeasurement = getSelectedUOMS();
+        Map<UnitOfMeasure, Integer> addedToCartUnitsOfMeasurement = getSelectedUOMS().entrySet().stream()
+                .filter(unitOfMeasureIntegerEntry -> unitOfMeasureIntegerEntry.getValue() > 0)
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         addedToCartUnitsOfMeasurement.forEach((unitOfMeasure, qtyOfUOM) ->
                 assertEquals(cartPage.getQTYOfUOM(unitOfMeasure), qtyOfUOM.intValue())
         );

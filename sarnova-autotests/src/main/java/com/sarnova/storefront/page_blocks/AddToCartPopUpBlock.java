@@ -15,6 +15,12 @@ public class AddToCartPopUpBlock extends UIComponent {
         waitUntilPageIsFullyLoaded();
     }
 
+    @Step("Click on Continue shopping in Add to cart pop-up.")
+    public void clickOnContinueShoppingButtonInAddToCartPopUp() {
+        click(CONTINUE_SHOPPING_BUTTON_XPATH);
+        waitUntilPageIsFullyLoaded();
+    }
+
     @Step("Get Add to cart pop-up's text content.")
     public String getAddToCartPopUpContent() {
         return $(CONTENT_MESSAGE_TEXT_XPATH).getText().trim();
