@@ -12,8 +12,26 @@ public class OrderDetailsPageElements {
     public final static String ALL_DESCRIPTION_BY_ROW_XPATH = "//tr[contains(@class,'show-item')]['%s']//td[@class = 'create-summary-invoice']/span";
     public final static String ALL_EXTENDED_PRICE_BY_ROW_XPATH = "//tr[contains(@class, 'order-line show-item')]['%s']//td[@class = 'create-summary-ext-total text-center']/input";
     public final static String REORDER_BUTTON_XPATH = "//a[@class='re-order-btn']";
+    public final static String REORDER_BUTTON_TEXT_FIRST_PART_XPATH = "//a[contains(@class,'re-order-btn')]/../..//span[@class='hidden-xs']";
+    public final static String REORDER_BUTTON_TEXT_SECOND_PART_XPATH = "//a[contains(@class,'re-order-btn')]/../..//span[@class='text-red hidden-xs']";
     public final static String STATUS_BOXES_XPATH = "//div[@class='order-item']";
     public final static String ALL_STATUS_BOX_XPATH = "//div[@class='order-item orders-item-all']/a";
     public final static String SELECTED_ALL_STATUS_BOX_XPATH = "//div[@class='order-item orders-item-all']/a[@class='selected']";
     public final static String TABLE_WITH_PRODUCTS_XPATH = "//table[@id='order-description-table']//tr[contains(@class,'show-item')]";
+
+    public final static String BOTTOM_ROW_IN_DETAILS_QUOTES_BLOCK_XPATH = "//ul[@class ='quote-bottom-section row m-0']";
+    public final static String EXPAND_QUOTES_BLOCK_ARROW_BUTTON_XPATH = "//i[@class='fa fa-angle-down']";
+    public final static String HIDE_QUOTES_BLOCK_ARROW_BUTTON_XPATH = "//i[@class='fa fa-angle-up']";
+
+    public final static String EXPAND_CLOSE_STATUS_BOXES_ARROW_BUTTON_XPATH = "//i[@class = 'fa fa-chevron-down']";
+
+    public final static String LABEL_VALUES_IN_QUOTES_BLOCK_XPATH = "//label[contains(text(),'%s')]/following-sibling::p";
+    public final static String LABELS_IN_QUOTES_BLOCK_XPATH = "//label[contains(text(),'%s')]";
+    public final static String SHIP_TO_LABEL_VALUE_XPATH = "//div[@class='quote-details clearfix']//label[contains(text(),'%s')]/following-sibling::p";
+
+    public final static String EXPANDED_STATUS_BOXES_LINE_XPATH = "//div[@class='details-graphical clearfix active']";
+    public final static String STATUS_BOX_TITLES_XPATH = "//div[@class='order-item']//span[@class = 'item-name']";
+
+
+
 }

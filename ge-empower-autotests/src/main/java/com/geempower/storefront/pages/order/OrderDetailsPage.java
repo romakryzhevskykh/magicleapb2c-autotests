@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.geempower.storefront.page_block_elements.InvoiceDetailsPopUpElements.*;
@@ -161,7 +162,7 @@ public class OrderDetailsPage extends StorefrontBasePage {
 
     @Step("Get Catalog No By Row.")
     public String getCatalogNoByRow(String rowNo) {
-       return $(ALL_CATALOG_NO_BY_ROW_XPATH, rowNo).getText();
+        return $(ALL_CATALOG_NO_BY_ROW_XPATH, rowNo).getText();
     }
 
     @Step("Get Description By Row.")
@@ -172,5 +173,85 @@ public class OrderDetailsPage extends StorefrontBasePage {
     @Step("Is Table With Products Displayed.")
     public boolean isTableWithProductsDisplayed() {
         return isDisplayed(TABLE_WITH_PRODUCTS_XPATH);
+    }
+
+    @Step("User Expands Quote Details Block.")
+    public void userExpandsQuoteDetailsBlock() {
+        click(EXPAND_QUOTES_BLOCK_ARROW_BUTTON_XPATH);
+    }
+
+    @Step("Get Ordered No Date.")
+    public String getOrderedNoDate(String label) {
+        waitUntilPageIsFullyLoaded();
+        return $(LABEL_VALUES_IN_QUOTES_BLOCK_XPATH, label).getText();
+    }
+
+    @Step("Get Order Value and Tax Total Data.")
+    public String getOrderValueAndTaxTotalData(String label) {
+        return $(LABEL_VALUES_IN_QUOTES_BLOCK_XPATH, label).getText();
+    }
+
+    @Step("Get Ship To Address Value.")
+    public String getShipToAddressValue(String label) {
+        return $(SHIP_TO_LABEL_VALUE_XPATH, label).getText();
+    }
+
+    @Step("Get Created By Value.")
+    public String getCreatedByValue(String label) {
+        return $(LABEL_VALUES_IN_QUOTES_BLOCK_XPATH, label).getText();
+    }
+
+    @Step("Get Ship Method Value.")
+    public String getShipMethodValue(String label) {
+        return $(LABEL_VALUES_IN_QUOTES_BLOCK_XPATH, label).getText();
+    }
+
+    @Step("Is User No Label Displayed.")
+    public boolean isUserNoLabelDisplayed(String userNoLabel) {
+        return isDisplayed(LABELS_IN_QUOTES_BLOCK_XPATH, userNoLabel);
+    }
+
+    @Step("Is Quote No Label Displayed.")
+    public boolean isQuoteNoLabelDisplayed(String quoteNoLabel) {
+        return isDisplayed(LABELS_IN_QUOTES_BLOCK_XPATH, quoteNoLabel);
+    }
+
+    @Step("User Closes Quote Details Block.")
+    public void userClosesQuoteDetailsBlock() {
+        click(HIDE_QUOTES_BLOCK_ARROW_BUTTON_XPATH);
+    }
+
+    @Step("User expands/closes status boxes")
+    public void userExpandsClosesStatusBoxes() {
+        click(EXPAND_CLOSE_STATUS_BOXES_ARROW_BUTTON_XPATH);
+    }
+
+    @Step("Get Select Items Text First Part.")
+    public String getSelectItemsTextFirstPart() {
+        return $(REORDER_BUTTON_TEXT_FIRST_PART_XPATH).getText().trim();
+    }
+
+    @Step("Get Select Items Text Second Part.")
+    public String getSelectItemsTextSecondPart() {
+        return $(REORDER_BUTTON_TEXT_SECOND_PART_XPATH).getText();
+    }
+
+    @Step("Is Opened Quote Details Block Is Displayed.")
+    public WebElement isOpenedQuoteDetailsBlockIsDisplayed() {
+        waitUntilPageIsFullyLoaded();
+        return $(BOTTOM_ROW_IN_DETAILS_QUOTES_BLOCK_XPATH);
+    }
+
+    @Step("Is Expanded Status Box Line Displayed.")
+    public boolean isExpandedStatusBoxLineDisplayed() {
+        waitUntilPageIsFullyLoaded();
+        return isDisplayed(EXPANDED_STATUS_BOXES_LINE_XPATH);
+    }
+
+    @Step("Get All Statuses In Status Boxes.")
+    public List<String> getAllStatusesInStatusBoxes() {
+        List<String> statusList = new ArrayList<>();
+        $$(STATUS_BOX_TITLES_XPATH).forEach(status -> statusList.add(status.getText()));
+        return statusList;
     }
 }

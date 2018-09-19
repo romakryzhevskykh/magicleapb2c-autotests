@@ -40,7 +40,9 @@ public class ProductManager {
 
     public Product getProductWithAllDataByRegion(UserSession userSession, Region region) {
         return productsList.stream().filter(product -> product.getRegion().equals(region))
-                .filter(product -> product.getListPrice() != null).findAny()
+                .filter(product -> product.getListPrice() != null)
+                .peek(System.out::println)
+                .findAny()
                 .orElseGet(() -> {
                     Product product = getProductByRegion(region);
                     try {

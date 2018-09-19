@@ -22,4 +22,9 @@ public class Product {
         this.catalogNo = catalogNo;
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Product: " + id;
+    }
 }
