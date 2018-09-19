@@ -11,4 +11,5 @@ public class PreviouslyOrderedItemsPage extends StorefrontBasePage {
     public String getPageUrl() {
         return storefrontProject.getBaseUrl() + pageUrlMethod;
     }
+
 }
