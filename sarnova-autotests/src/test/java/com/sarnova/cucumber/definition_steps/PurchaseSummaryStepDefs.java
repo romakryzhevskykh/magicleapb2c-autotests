@@ -29,7 +29,7 @@ public class PurchaseSummaryStepDefs extends AbstractStepDefs {
     }
 
     @Then("^Check that checkBox is expanded on purchase summary page.$")
-    public void checkisFieldAddProductsBySkuInQuickAddProductVisible() {
+    public void checkThatFieldAddProductsBySkuInQuickAddProductIsVisible() {
         assertTrue(purchaseSummaryPage.isFieldAddProductsBySkuInQuickAddProductVisible());
     }
 }
