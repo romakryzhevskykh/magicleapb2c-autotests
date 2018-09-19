@@ -3,8 +3,12 @@ package com.geempower.storefront.pages.order;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
+
+import java.util.Optional;
+import java.util.stream.Stream;
 
 import static com.geempower.storefront.page_elements.order.OrdersPageElements.*;
 
@@ -177,5 +181,61 @@ public class OrdersPage extends StorefrontBasePage {
     @Step("Click On First Order Number.")
     public void clickOnFirstOrderNumber() {
         click(FIRST_ORDER_NUMBER_FROM_ORDERS_LIST_XPATH);
+    }
+
+    @Step("Get Random Po Number From Orders List.")
+    public String getRandomPoNumberFromOrdersList() {
+        waitUntilPageIsFullyLoaded();
+        return $$(ALL_PO_NUMBERS_PER_PAGE_XPATH).stream().findAny().get().getText();
+    }
+
+    @Step("Click On Apply Filter Button.")
+    public void setPoNumberToTheSearchFieldForFiltering(String poNo) {
+        waitUntilPageIsFullyLoaded();
+        $(PO_NO_FIELD_FILTER_SLIDER_XPATH).clear();
+        $(PO_NO_FIELD_FILTER_SLIDER_XPATH).sendKeys(poNo);
+    }
+
+    @Step("Click On Apply Filter Button.")
+    public Stream<WebElement> getAllPoNumbersFromOrdersList() {
+        waitUntilPageIsFullyLoaded();
+        return $$(ALL_PO_NUMBERS_PER_PAGE_XPATH).stream();
+    }
+
+    @Step("Click On Apply Filter Button.")
+    public String getRandomJobNameFromOrdersList() {
+        return $$(ALL_JOB_NAMES_PER_PAGE_XPATH).stream().filter(jobName ->
+                !jobName.getText().equals("")).findFirst().get().getText();
+    }
+
+    @Step("Click On Apply Filter Button.")
+    public void setJobNameToTheSearchFieldForFiltering(String jobName) {
+        waitUntilPageIsFullyLoaded();
+        $(JOB_NAME_FIELD_FILTER_SLIDER_XPATH).clear();
+        $(JOB_NAME_FIELD_FILTER_SLIDER_XPATH).sendKeys(jobName);
+    }
+
+    @Step("Click On Apply Filter Button.")
+    public Stream<WebElement> getAllJobNamesFromOrdersList() {
+        waitUntilPageIsFullyLoaded();
+        return $$(ALL_JOB_NAMES_PER_PAGE_XPATH).stream();
+    }
+
+    @Step("Click On Apply Filter Button.")
+    public String getRandomDateNameFromOrdersList() {
+        return $$(ALL_DATES_PER_PAGE_XPATH).stream().findAny().get().getText();
+    }
+
+    @Step("Click On Apply Filter Button.")
+    public void setDateFromToTheSearchFieldForFiltering(String date) {
+        waitUntilPageIsFullyLoaded();
+        $(DATE_FROM_FIELD_FILTER_SLIDER_XPATH).clear();
+        $(DATE_FROM_FIELD_FILTER_SLIDER_XPATH).sendKeys(date);
+    }
+
+    @Step("Click On Apply Filter Button.")
+    public Stream<WebElement> getAllDatesFromOrdersList() {
+        waitUntilPageIsFullyLoaded();
+        return $$(ALL_DATES_PER_PAGE_XPATH).stream();
     }
 }

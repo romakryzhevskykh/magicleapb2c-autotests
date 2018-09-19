@@ -24,12 +24,15 @@ public class OrdersPageElements {
     public final static String OPEN_ORDER_REPORT_WINDOW_CLOSE_ICON_XPATH = "//button[@class='btn btn-link close-order-report-icon']/i";
     public final static String FILTER_ORDERS_ICON_XPATH = "//i[@class='fa fa-filter']";
     public final static String FIRST_ORDER_NUMBER_FROM_ORDERS_LIST_XPATH = "//table[@id='DataTables_Table_0']/tbody/tr/td[1]/a";
+    public final static String ALL_PO_NUMBERS_PER_PAGE_XPATH = "//table[contains(@class, 'table info-table all-order-list-table dataTable')]/tbody/tr/td[2]/a";
+    public final static String ALL_JOB_NAMES_PER_PAGE_XPATH = "//table[contains(@class, 'table info-table all-order-list-table dataTable')]/tbody/tr/td[3]";
+    public final static String ALL_DATES_PER_PAGE_XPATH = "//table[contains(@class, 'table info-table all-order-list-table dataTable')]/tbody/tr/td[4]";
     //FILTER SLIDER ELEMENTS
     public final static String ORDER_NO_FIELD_FILTER_SLIDER_XPATH = "//input[@id='order-filter-by-order-number']";
     public final static String PO_NO_FIELD_FILTER_SLIDER_XPATH = "//input[@id='order-filter-by-po-number']";
     public final static String JOB_NAME_FIELD_FILTER_SLIDER_XPATH = "//input[@id='order-filter-by-job-name']";
     public final static String APPLY_FILTER_BUTTON_XPATH = "//button[@id='order-filter-go-button']";
     public final static String CANCEL_FILTER_BUTTON_XPATH = "//button[@class='btn primary-btn border filter-canvas-close'][2]";
-
+    public final static String DATE_FROM_FIELD_FILTER_SLIDER_XPATH = "//input[@id='order-filter-date-from']";
 
 }
