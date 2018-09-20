@@ -34,5 +34,8 @@ public class OrdersPageElements {
     public final static String APPLY_FILTER_BUTTON_XPATH = "//button[@id='order-filter-go-button']";
     public final static String CANCEL_FILTER_BUTTON_XPATH = "//button[@class='btn primary-btn border filter-canvas-close'][2]";
     public final static String DATE_FROM_FIELD_FILTER_SLIDER_XPATH = "//input[@id='order-filter-date-from']";
-
+    private final static String DATE_RANGE_PICKER_XPATH = "//div[@class='datepicker-days']";
+    public final static String PREVIOUS_MONTH_ICON_XPATH = DATE_RANGE_PICKER_XPATH + "//th[@class='prev']";
+    public final static String CURRENT_MONTH_AND_YEAR_XPATH = DATE_RANGE_PICKER_XPATH + "//th[@class='datepicker-switch']";
+    public final static String NEEDED_DAY_XPATH = DATE_RANGE_PICKER_XPATH + "//tbody/tr/td[text()='%s']";
 }
