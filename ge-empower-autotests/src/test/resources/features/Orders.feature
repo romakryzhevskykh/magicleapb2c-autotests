@@ -141,3 +141,36 @@ Feature: Some actions on Orders page
     Examples:
       | orderNo   | sliderTitle      | trackingErrorMessage                                                 | shipmentInfoSentStatus | inTransitStatus | deliveredStatus |
       | 150775814 | Tracking Details | This tracking number has expired and details are no longer available | Shipment Info sent     | In Transit      | Delivered       |
+
+  Scenario: Check that orders filtering by PO number works properly.
+    And Account management page is opened.
+    When Choose North_America region.
+    And Select account 5093868.
+    And Click on account with USS1 sales division.
+    And Orders page is opened.
+    When User clicks on filter order icon.
+    And Set random PO number to the po number field.
+    And Click on apply filter button.
+    Then Appropriate order with po number is appeared on orders page.
+
+  Scenario: Check that orders filtering by Job name works properly.
+    And Account management page is opened.
+    When Choose North_America region.
+    And Select account 5093868.
+    And Click on account with USS1 sales division.
+    And Orders page is opened.
+    When User clicks on filter order icon.
+    And Set random Job name number to the job name field.
+    And Click on apply filter button.
+    Then Appropriate orders with job names are appeared on orders page.
+
+  Scenario: Check that orders filtering by Date works properly.
+    And Account management page is opened.
+    When Choose North_America region.
+    And Select account 5093868.
+    And Click on account with USS1 sales division.
+    And Orders page is opened.
+    When User clicks on filter order icon.
+    And Set random Date to the date from field.
+    And Click on apply filter button.
+    Then Appropriate orders with equal date or greater date are appeared on orders page.
