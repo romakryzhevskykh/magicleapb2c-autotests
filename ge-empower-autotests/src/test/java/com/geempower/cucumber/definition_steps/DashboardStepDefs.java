@@ -5,6 +5,7 @@ import com.geempower.storefront.page_blocks.OrderStatusWidget;
 import com.geempower.storefront.page_blocks.PriceAndAvailabilityBlock;
 import com.geempower.storefront.pages.DashboardPage;
 import com.geempower.storefront.pages.order.OrdersPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -211,5 +212,26 @@ public class DashboardStepDefs extends AbstractStepDefs {
     @Then("^T&B Access widget is not displayed.")
     public void tBAccessWidgetIsNotDisplayed() {
         assertFalse(dashboardPage.isTnBWidgetDisplayed());
+    }
+
+    @Then("^(.*) title is displayed in the Featured Updates widget.$")
+    public void featuredUpdatesTitleIsDisplayedInTheFeaturedUpdatesWidget(String featuredUpdatesTitle) {
+        assertEquals(featuredUpdatesTitle, dashboardPage.getTitleFromFeaturesWidget());
+    }
+
+    @Then("^(.*) link is displayed with correct url (.*).$")
+    public void viewAllLinkIsDisplayedWithCorrectUrlViewAllUrl(String viewAllLinkName, String viewAllUrl) {
+        assertEquals(viewAllLinkName, dashboardPage.getViewAllLinkName());
+        assertEquals(viewAllUrl, dashboardPage.getViewAllUrl());
+    }
+
+    @Then("^(\\d+) features are available in the Featured Updates widget.$")
+    public void featuresAreAvailableInTheFeaturedUpdatesWidget(int countOfFeatures) {
+        assertTrue(dashboardPage.getCountOfFeatures() == countOfFeatures);
+    }
+
+    @Then("^Each feature has valid link and valid image source.$")
+    public void eachFeatureHasValidLinkAndValidImageSource() {
+
     }
 }
