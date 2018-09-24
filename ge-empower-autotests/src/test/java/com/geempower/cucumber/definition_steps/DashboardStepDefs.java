@@ -5,7 +5,6 @@ import com.geempower.storefront.page_blocks.OrderStatusWidget;
 import com.geempower.storefront.page_blocks.PriceAndAvailabilityBlock;
 import com.geempower.storefront.pages.DashboardPage;
 import com.geempower.storefront.pages.order.OrdersPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -13,9 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class DashboardStepDefs extends AbstractStepDefs {
     @Autowired
@@ -228,10 +225,5 @@ public class DashboardStepDefs extends AbstractStepDefs {
     @Then("^(\\d+) features are available in the Featured Updates widget.$")
     public void featuresAreAvailableInTheFeaturedUpdatesWidget(int countOfFeatures) {
         assertTrue(dashboardPage.getCountOfFeatures() == countOfFeatures);
-    }
-
-    @Then("^Each feature has valid link and valid image source.$")
-    public void eachFeatureHasValidLinkAndValidImageSource() {
-
     }
 }
