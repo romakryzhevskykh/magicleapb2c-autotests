@@ -183,12 +183,11 @@ public class PreConditionStepDefs extends AbstractStepDefs {
                 .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
                 .distinct()
                 .collect(Collectors.toList());
-        IndividualProduct selectedProduct = productsManager.getUniqueProductsByProductsQuantityAndTestTypes(
-                selectedProducts.size() + 1,
-                productTypes)
+        IndividualProduct selectedProduct = productsManager.getUniqueProductsByProductsQuantityTestTypesAndExcludeProductList(
+                1,
+                productTypes, selectedProducts)
                 .stream()
                 .map(product -> (IndividualProduct) product)
-                .filter(product -> !selectedProducts.contains(product))
                 .findAny()
                 .orElse(null);
         UnitOfMeasure selectedUOM = selectedProduct.getUnitsOfMeasurement().stream().findAny().orElse(null);
@@ -441,7 +440,11 @@ public class PreConditionStepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.TEST_PARENT_CUSTOM_CATEGORY_ID, category.getParentCustomCategory().getId());
         threadVarsHashMap.put(TestKeyword.TEST_CHILD_CUSTOM_CATEGORY_ID, category.getId());
         if (category.getProducts().size() < productsInChildCC) {
-            ArrayList<Product> productsToAdd = productsManager.getUniqueProductsByProductsQuantityAndTestTypes(productsInChildCC, new ArrayList<>());
+            ArrayList<Product> productsToAdd = productsManager.getUniqueProductsByProductsQuantityTestTypesAndExcludeProductList(productsInChildCC,
+                    new ArrayList<String>() {{
+                        add("INDIVIDUAL_PRODUCT");
+                    }},
+                    new ArrayList<>());
             customCategoriesManager.addProductsToCategoryByApi(userSessions.getActiveUserSession(), category, productsToAdd);
         }
     }
@@ -495,7 +498,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     @And("^Quick order list is empty.$")
     public void quickOrderListIsEmpty() {
         Map<UnitOfMeasure, Integer> uomsInQO = quickOrderManager.getUOMs(userSessions.getActiveUserSession());
-        if(!uomsInQO.isEmpty()) {
+        if (!uomsInQO.isEmpty()) {
             quickOrderManager.removeAllProductsFromList(userSessions.getActiveUserSession());
         }
     }

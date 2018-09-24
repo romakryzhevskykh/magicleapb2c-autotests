@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
 <suite name="Suite1" parallel="tests">
     <test name="LoginSuite">
         <parameter name="browserName" value="chrome"/>
@@ -27,7 +28,6 @@
             <class name="com.sarnova.cucumber.SupplyListsFunctionalitySuit"/>
             <class name="com.sarnova.cucumber.AddToCartSuite"/>
             <class name="com.sarnova.cucumber.CheckoutSuite"/>
-            <class name="com.sarnova.cucumber.AddToSupplyListFromCartSuit"/>
         </classes>
     </test>
     <test name="Guest user suit">

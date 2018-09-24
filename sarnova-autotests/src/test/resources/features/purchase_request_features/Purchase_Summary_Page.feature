@@ -1,10 +1,8 @@
 Feature: Purchase request page functionality
 
-
   Background:
     Given Switch to Storefront owner.
     And User is logged in to Storefront.
-
 
   Scenario: Check default position of Quick Add product block.
     Given Purchase summary page is open.
