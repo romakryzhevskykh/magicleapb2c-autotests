@@ -425,3 +425,26 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Examples:
       | userId  | tNbTitle                       | tNbUrl                             |
       | rost.sm | Click here to enter T&B Access | https://tnbaccess.tnb.com/sps/tbx/ |
+
+  Scenario: Check that Help button works correctly on the Dashboard page.
+    And Dashboard page is opened.
+    When Click on Skip button.
+    When Close cookies pop-up.
+    And Help button is displayed.
+    When User clicks on Help button.
+    And Click on Sign in with your GE SSO Account button on Lessonly page.
+    Then Check that Dashboard page is opened.
+    When User clicks on Help button.
+    Then Getting Started: empower Flow tip is displayed on Lessonly widget.
+
+  Scenario Outline: Check that Featured updates widget is displayed correctly with all necessary data.
+    And Dashboard page is opened.
+    When Click on Skip button.
+    When Close cookies pop-up.
+    Then Featured Updates title is displayed in the Featured Updates widget.
+    Then View All link is displayed with correct url <viewAllUrl>.
+    Then 8 features are available in the Featured Updates widget.
+
+    Examples:
+      | viewAllUrl                       |
+      | http://www.geindustrial.com/news |
