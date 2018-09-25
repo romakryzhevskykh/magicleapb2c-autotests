@@ -11,6 +11,7 @@ import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.geempower.cucumber.definition_steps.TestKeyword.GE_ORDER_NO;
+import static com.geempower.cucumber.definition_steps.TestKeyword.PO_NO;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -171,5 +172,10 @@ public class OrdersStepDefs extends AbstractStepDefs {
                 utils.isGottenDateGreaterThanOtherDate(dateEntered.getText(), defaultDate) ||
                         utils.isGottenDateEqualsToOtherDate(dateEntered.getText(), defaultDate))
         );
+    }
+
+    @When("^User clicks on random PO no.$")
+    public void userClickOnRandomPONo() {
+        threadVarsHashMap.put(PO_NO, ordersPage.userClickOnRandomPONo());
     }
 }
