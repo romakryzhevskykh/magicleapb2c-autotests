@@ -210,7 +210,7 @@ public class OrderDetailsPage extends StorefrontBasePage {
 
     @Step("Get Select Items Text Second Part.")
     public String getSelectItemsTextSecondPart() {
-        return $(REORDER_BUTTON_TEXT_SECOND_PART_XPATH).getText();
+        return $(REORDER_BUTTON_TEXT_SECOND_PART_XPATH).getText().trim();
     }
 
     @Step("Get Bottom Row In Details Quotes Block.")
