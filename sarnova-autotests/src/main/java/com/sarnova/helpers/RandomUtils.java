@@ -4,8 +4,7 @@ import com.sarnova.helpers.managers.CreditCardsManager;
 import com.sarnova.helpers.managers.ShippingAddressesManager;
 import com.sarnova.helpers.models.credit_cards.CreditCard;
 import com.sarnova.helpers.models.shipping_addresses.*;
-import com.sarnova.helpers.models.users.FirstName;
-import com.sarnova.helpers.models.users.LastName;
+import com.sarnova.helpers.models.users.*;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,5 +63,39 @@ public class RandomUtils {
         String expiryMonth = String.valueOf(getRandomIntInRange(1,12));
         String expiryYear = String.valueOf(getRandomIntInRange(2019,2024));
         return creditCardsManager.createInstance(cardNumber, expiryMonth, expiryYear, nameOnCard, cvv);
+    }
+
+    public UserInformation getRandomUserInformation() {
+        String username = getRandomUsername();
+        String password = RandomStringUtils.randomAlphabetic(10);
+        String firstName = getRandomTestFirstName();
+        String lastName = getRandomTestLastName();
+        Title title = Title.getAny();
+        String phoneNumber = RandomStringUtils.randomNumeric(10);
+        String email = randomEmail();
+        SecurityQuestion securityQuestion = SecurityQuestion.getAny();
+        String securityAnswer = RandomStringUtils.randomAlphabetic(10);
+        AccountType accountType = AccountType.getAny();
+        ProfileRole profileRole = ProfileRole.getAny();
+        boolean someoneToMakePurchase = false;
+        boolean receiveEmails = false;
+
+        UserInformation userInformation = new UserInformation();
+        userInformation.setUsername(username);
+        userInformation.setPassword(password);
+        userInformation.setFirstName(firstName);
+        userInformation.setLastName(lastName);
+        userInformation.setTitle(title);
+        userInformation.setAccountLabel(username);
+        userInformation.setPhoneNumber(phoneNumber);
+        userInformation.setEmail(email);
+        userInformation.setSecurityQuestion(securityQuestion);
+        userInformation.setSecurityAnswer(securityAnswer);
+        userInformation.setAccountType(accountType);
+        userInformation.setProfileRole(profileRole);
+        userInformation.setSomeoneToMakePurchase(someoneToMakePurchase);
+        userInformation.setReceiveEmails(receiveEmails);
+
+        return userInformation;
     }
 }

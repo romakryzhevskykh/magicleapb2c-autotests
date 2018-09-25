@@ -6,8 +6,7 @@ import cucumber.api.CucumberOptions;
 @CucumberOptions(
         format={"pretty"},
         features = {
-                "src/test/resources/features/purchase_request_features/instances_crud_features/Purchase_Summary_Page.feature",
-
+                "src/test/resources/features/purchase_request_features/instances_crud_features/Purchase_Summary_Page.feature"
         }
 )
 
