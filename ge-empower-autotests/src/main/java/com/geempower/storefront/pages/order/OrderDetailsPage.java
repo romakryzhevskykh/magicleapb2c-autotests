@@ -213,8 +213,8 @@ public class OrderDetailsPage extends StorefrontBasePage {
         return $(REORDER_BUTTON_TEXT_SECOND_PART_XPATH).getText();
     }
 
-    @Step("Is Bottom Row In Details Quotes Block Displayed.")
-    public WebElement isBottomRowInDetailsQuotesBlockBlockDisplayed() {
+    @Step("Get Bottom Row In Details Quotes Block.")
+    public WebElement getBottomRowInDetailsQuotesBlock() {
         waitUntilPageIsFullyLoaded();
         return $(BOTTOM_ROW_IN_DETAILS_QUOTES_BLOCK_XPATH);
     }

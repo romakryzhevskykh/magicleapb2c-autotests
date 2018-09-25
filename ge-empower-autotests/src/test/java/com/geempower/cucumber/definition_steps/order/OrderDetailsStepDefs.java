@@ -212,12 +212,12 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
 
     @Then("^Is Opened Quote Details (.*) is displayed.$")
     public void isOpenedQuoteDetailsBlockIsDisplayed(String block) {
-        assertTrue(orderDetailsPage.isBottomRowInDetailsQuotesBlockBlockDisplayed().getAttribute("style").contains(block));
+        assertTrue(orderDetailsPage.getBottomRowInDetailsQuotesBlock().getAttribute("style").contains(block));
     }
 
     @Then("^Is Opened Quote Details (.*) is not displayed.$")
     public void isOpenedQuoteDetailsBlockIsNotDisplayed(String block) {
-        assertFalse(orderDetailsPage.isBottomRowInDetailsQuotesBlockBlockDisplayed().getAttribute("style").contains(block));
+        assertFalse(orderDetailsPage.getBottomRowInDetailsQuotesBlock().getAttribute("style").contains(block));
     }
 
     @Then("^Is Expanded status box line displayed.$")
