@@ -8,8 +8,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.geempower.storefront.page_block_elements.InvoiceDetailsPopUpElements.*;
 import static com.geempower.storefront.page_elements.order.OrderDetailsPageElements.*;
@@ -180,8 +181,8 @@ public class OrderDetailsPage extends StorefrontBasePage {
         click(EXPAND_QUOTES_BLOCK_ARROW_BUTTON_XPATH);
     }
 
-    @Step("Get Ordered No Date.")
-    public String getOrderedNoDate(String label) {
+    @Step("Get Ordered On Date.")
+    public String getOrderedOnDate(String label) {
         waitUntilPageIsFullyLoaded();
         return $(LABEL_VALUES_IN_QUOTES_BLOCK_XPATH, label).getText();
     }
@@ -191,18 +192,13 @@ public class OrderDetailsPage extends StorefrontBasePage {
         return $(LABEL_VALUES_IN_QUOTES_BLOCK_XPATH, label).getText();
     }
 
-    @Step("Get Ship To Address Value.")
-    public String getShipToAddressValue(String label) {
-        return $(SHIP_TO_LABEL_VALUE_XPATH, label).getText();
-    }
-
-    @Step("Get Created By Value.")
-    public String getCreatedByValue(String label) {
+    @Step("Get Label Value in Quote Details block.")
+    public String getLabelValueInQuoteDetailsBlock(String label) {
         return $(LABEL_VALUES_IN_QUOTES_BLOCK_XPATH, label).getText();
     }
 
-    @Step("Get Ship Method Value.")
-    public String getShipMethodValue(String label) {
+    @Step("Get Created By Label Value.")
+    public String getCreatedByLabelValue(String label) {
         return $(LABEL_VALUES_IN_QUOTES_BLOCK_XPATH, label).getText();
     }
 
@@ -250,8 +246,60 @@ public class OrderDetailsPage extends StorefrontBasePage {
 
     @Step("Get All Statuses In Status Boxes.")
     public List<String> getAllStatusesInStatusBoxes() {
-        List<String> statusList = new ArrayList<>();
-        $$(STATUS_BOX_TITLES_XPATH).forEach(status -> statusList.add(status.getText()));
-        return statusList;
+        return $$(STATUS_BOX_TITLES_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    @Step("Get All Time Statuses Near Color Icons.")
+    public List<String> getAllTimeStatusNearColorIcons() {
+        return $$(TIME_STATUSES_NEAR_COLOR_ICON_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    @Step("UserClickOnTimeStatusDropDownField")
+    public void userClickOnTimeStatusDropDownField() {
+        click(TIME_STATUSES_DROP_DOWN_FIELD_XPATH);
+    }
+
+    @Step("Get All Time Statuses In Time Status Drop Down.")
+    public Stream<WebElement> getAllTimeStatusesInTimeStatusDropDown() {
+        waitUntilPageIsFullyLoaded();
+        return $$(TIME_STATUSES_VALUES_IN_DROP_DOWN_XPATH).stream();
+    }
+
+    @Step("Get All Detail Order Table Headers.")
+    public List<String> getAllDetailOrderTableHeaders() {
+        return $$(ORDER_DETAILS_TABLE_HEADERS_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    @Step("User Opens Random Product Detail Block.")
+    public void userOpensRandomProductDetailBlock() {
+        $$(EXPAND_DETAIL_PRODUCT_BLOCK_ARROW_XPATH).stream().findAny().ifPresent(this::click);
+    }
+
+    @Step("User Closes Opened Product Detail Block.")
+    public void userClosesOpenedProductDetailBlock() {
+        $(CLOSE_DETAIL_PRODUCT_BLOCK_ARROW_XPATH).click();
+    }
+
+    @Step("Get Label Value In Product Details Block.")
+    public String getLabelValueInProductDetailsBlock(String label) {
+        waitUntilPageIsFullyLoaded();
+        return $(LABEL_VALUES_IN_PRODUCT_DETAILS_BLOCK_XPATH, label).getText();
+    }
+
+    @Step("Get Request Date value.")
+    public String getRequestDateValue(String label) {
+        return $(LABEL_VALUES_IN_PRODUCT_DETAILS_BLOCK_XPATH, label).getText();
+    }
+
+    @Step("Get All Product Detail Labels.")
+    public List<String> getAllProductDetailLabels() {
+        return $$(LABELS_IN_PRODUCT_DETAILS_BLOCK_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    @Step("Get Sum Of All Ext Price.")
+    public double getSumOfAllExtPrice() {
+        return $$(ALL_EXT_PRICES_IN_PRODUCT_DETAILS_BLOCK_XPATH).stream()
+                .map(s -> Double.parseDouble(s.getAttribute("value").replace(",", "")))
+                .mapToDouble(Double::doubleValue).sum();
     }
 }

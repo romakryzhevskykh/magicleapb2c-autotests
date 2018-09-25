@@ -8,7 +8,6 @@ import com.geempower.helpers.managers.ProductManager;
 import com.geempower.helpers.models.Order;
 import com.geempower.helpers.models.Product;
 import com.geempower.storefront.pages.order.OrderDetailsPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -18,9 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.geempower.cucumber.definition_steps.TestKeyword.GE_ORDER_NO;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class OrderDetailsStepDefs extends AbstractStepDefs {
     @Autowired
@@ -134,9 +131,9 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
 
     private ArrayList<Product> createProductsListInstance() {
         int productListSize = orderDetailsPage.getListOfCatalogNo().size();
-        for (int i = 1; i <= productListSize; i++){
+        for (int i = 1; i <= productListSize; i++) {
             String catalogNo = orderDetailsPage.getCatalogNoByRow(String.valueOf(i));
-            String description  = orderDetailsPage.getDescriptionByRow(String.valueOf(i));
+            String description = orderDetailsPage.getDescriptionByRow(String.valueOf(i));
             productManager.createInstance(catalogNo, description);
         }
         return productManager.getProductsList();
@@ -167,37 +164,32 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     }
 
     @When("^User expands Quote Details block.$")
-    public void userExpandsQuoteDetailsBlock()  {
+    public void userExpandsQuoteDetailsBlock() {
         orderDetailsPage.userExpandsQuoteDetailsBlock();
     }
 
-    @Then("^Is (.*) label contains date.$")
-    public void isOrderedOnLabelContainsDate(String label) {
-        assertTrue(utils.isValidDate(orderDetailsPage.getOrderedNoDate(label)));
+    @Then("^Is (.*) label contains date in Quote Details block.$")
+    public void isOrderedRequestedOnLabelContainsDate(String label) {
+        assertTrue(utils.isValidDate(orderDetailsPage.getOrderedOnDate(label)));
     }
 
-    @Then("^Is (.*) label contains (.*) value.$")
+    @Then("^Is (.*) label contains (.*) value in Quote Details block.$")
     public void isOrderValueAndTaxTotalContainsUSDValue(String label, String currency) {
         assertTrue(orderDetailsPage.getOrderValueAndTaxTotalData(label).contains(currency));
     }
 
-    @Then("^Is (.*) label contains address.$")
-    public void isShipToLabelContainsAddressValue(String label) {
-        assertFalse(orderDetailsPage.getShipToAddressValue(label).isEmpty());
+    @Then("^Is (.*) label contains value in Quote Details block.$")
+    public void isLabelContainsValue(String label) {
+        assertFalse(orderDetailsPage.getLabelValueInQuoteDetailsBlock(label).isEmpty());
     }
 
-    @Then("^Is (.*) label contains (.*) email character.$")
+    @Then("^Is (.*) label contains (.*) email character in Quote Details block.$")
     public void isCreatedByLabelContainsEmailCharacter(String label, String emailCharacter) {
-        assertTrue(orderDetailsPage.getCreatedByValue(label).contains(emailCharacter));
+        assertTrue(orderDetailsPage.getCreatedByLabelValue(label).contains(emailCharacter));
     }
 
-    @Then("^Is (.*) label contains text.$")
-    public void isShipMethodLabelContainsText(String label) {
-        assertFalse(orderDetailsPage.getShipMethodValue(label).isEmpty());
-    }
-
-    @Then("^Is (.*) and (.*) labels displayed.$")
-    public void isUserNoAndQuoteNoLabelsDisplayed(String userNoLabel, String quoteNoLabel){
+    @Then("^Is (.*) and (.*) labels displayed in Quote Details block.$")
+    public void isUserNoAndQuoteNoLabelsDisplayed(String userNoLabel, String quoteNoLabel) {
         assertTrue(orderDetailsPage.isUserNoLabelDisplayed(userNoLabel));
         assertTrue(orderDetailsPage.isQuoteNoLabelDisplayed(quoteNoLabel));
     }
@@ -208,7 +200,7 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     }
 
     @When("^User expands/closes status boxes.$")
-    public void userExpandsClosesStatusBoxes(){
+    public void userExpandsClosesStatusBoxes() {
         orderDetailsPage.userExpandsClosesStatusBoxes();
     }
 
@@ -239,8 +231,61 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     }
 
     @Then("Is Correct (.*) statuses displayed in the status boxes.")
-    public void isCorrectStatusesDisplayedInTheStatusBoxes(List<String> statuses){
-        List<String> statusList = orderDetailsPage.getAllStatusesInStatusBoxes();
-        assertTrue(statusList.containsAll(statuses));
+    public void isCorrectStatusesDisplayedInTheStatusBoxes(List<String> statuses) {
+        assertTrue(orderDetailsPage.getAllStatusesInStatusBoxes().containsAll(statuses));
+    }
+
+    @Then("^Is Correct time statuses (.*) displayed near color status icons.$")
+    public void isCorrectTimeStatusesListDisplayedNearColorStatusIcons(List<String> timeStatuses) {
+        assertTrue(orderDetailsPage.getAllTimeStatusNearColorIcons().containsAll(timeStatuses));
+    }
+
+    @When("^User click on time status drop down field.$")
+    public void userClickOnTimeStatusDropDownField() {
+        orderDetailsPage.userClickOnTimeStatusDropDownField();
+    }
+
+    @Then("^Is Correct time statuses (.*) displayed in the time status drop down field.$")
+    public void isCorrectTimeStatusesDisplayedInTheTimeStatusDropDownField(List<String> timeStatuses) {
+        assertTrue(orderDetailsPage.getAllTimeStatusesInTimeStatusDropDown()
+                .allMatch(statuses ->
+                        timeStatuses.stream().anyMatch(timeStatus -> statuses.getText().contains(timeStatus))));
+
+
+    }
+
+    @Then("^Is Detail Order table contains correct header (.*) titles.$")
+    public void isDetailOrderTableContainsCorrectHeaderTableTitlesTitles(List<String> tableTitles) {
+        orderDetailsPage.getAllDetailOrderTableHeaders().containsAll(tableTitles);
+    }
+
+    @When("^User opens random product detail block.$")
+    public void userOpensRandomProductDetailBlock() {
+        orderDetailsPage.userOpensRandomProductDetailBlock();
+    }
+
+    @When("^User closes opened product detail block.$")
+    public void userClosesOpenedProductDetailBlock() {
+        orderDetailsPage.userClosesOpenedProductDetailBlock();
+    }
+
+    @Then("^Is (.*) label contains value in Product Details block.$")
+    public void isLabelContainsValueInProductDetailsBlock(String label) {
+        assertFalse(orderDetailsPage.getLabelValueInProductDetailsBlock(label).isEmpty());
+    }
+
+    @Then("^Is (.*) label contains date in Product Details block.$")
+    public void isRequestedDateLabelContainsDateInProductDetailsBlock(String label) {
+        assertTrue(utils.isValidDate(orderDetailsPage.getRequestDateValue(label)));
+    }
+
+    @Then("^Is Correct (.*) labels displayed in Product Details block.$")
+    public void isCorrectProductDetailLabelsDisplayedInProductDetailsBlock(List<String> productDetailLabels) {
+        orderDetailsPage.getAllProductDetailLabels().containsAll(productDetailLabels);
+    }
+
+    @Then("^Is Total Net Price value is equal to sum of all ext. price in table.$")
+    public void isTotalNetPriceValueIsEqualToSumOfAllExtPriceInTable() {
+        assertEquals(Double.parseDouble(orderDetailsPage.getTotalNetPrice()), orderDetailsPage.getSumOfAllExtPrice());
     }
 }

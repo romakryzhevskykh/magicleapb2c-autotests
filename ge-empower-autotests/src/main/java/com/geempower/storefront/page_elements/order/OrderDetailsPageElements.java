@@ -18,20 +18,21 @@ public class OrderDetailsPageElements {
     public final static String ALL_STATUS_BOX_XPATH = "//div[@class='order-item orders-item-all']/a";
     public final static String SELECTED_ALL_STATUS_BOX_XPATH = "//div[@class='order-item orders-item-all']/a[@class='selected']";
     public final static String TABLE_WITH_PRODUCTS_XPATH = "//table[@id='order-description-table']//tr[contains(@class,'show-item')]";
-
     public final static String BOTTOM_ROW_IN_DETAILS_QUOTES_BLOCK_XPATH = "//ul[@class ='quote-bottom-section row m-0']";
     public final static String EXPAND_QUOTES_BLOCK_ARROW_BUTTON_XPATH = "//i[@class='fa fa-angle-down']";
     public final static String HIDE_QUOTES_BLOCK_ARROW_BUTTON_XPATH = "//i[@class='fa fa-angle-up']";
-
     public final static String EXPAND_CLOSE_STATUS_BOXES_ARROW_BUTTON_XPATH = "//i[@class = 'fa fa-chevron-down']";
-
     public final static String LABEL_VALUES_IN_QUOTES_BLOCK_XPATH = "//label[contains(text(),'%s')]/following-sibling::p";
     public final static String LABELS_IN_QUOTES_BLOCK_XPATH = "//label[contains(text(),'%s')]";
-    public final static String SHIP_TO_LABEL_VALUE_XPATH = "//div[@class='quote-details clearfix']//label[contains(text(),'%s')]/following-sibling::p";
-
     public final static String EXPANDED_STATUS_BOXES_LINE_XPATH = "//div[@class='details-graphical clearfix active']";
     public final static String STATUS_BOX_TITLES_XPATH = "//div[@class='order-item']//span[@class = 'item-name']";
-
-
-
+    public final static String TIME_STATUSES_NEAR_COLOR_ICON_XPATH = "//ul[@class='status-legend-list clearfix']//span[contains(@class ,'status-icon')]/following-sibling::span";
+    public final static String TIME_STATUSES_DROP_DOWN_FIELD_XPATH = "//span[@class='select2-selection__arrow']";
+    public final static String TIME_STATUSES_VALUES_IN_DROP_DOWN_XPATH = "//li[contains(@class,'select2-results__option') and not(contains(@class,'highlight'))]";
+    public final static String ORDER_DETAILS_TABLE_HEADERS_XPATH = "//th[contains(@class,'create-summary')]";
+    public final static String EXPAND_DETAIL_PRODUCT_BLOCK_ARROW_XPATH = "//i[contains(@class,'fa fa-angle-down table-collpase display-inline-block collapsed')]";
+    public final static String CLOSE_DETAIL_PRODUCT_BLOCK_ARROW_XPATH = "//i[contains(@class,'fa fa-angle-down table-collpase display-inline-block open')]";
+    public final static String LABEL_VALUES_IN_PRODUCT_DETAILS_BLOCK_XPATH = "//div[contains(@id,'description-1') and contains(@aria-expanded, 'true')]//label[contains(text(),'%s')]/following-sibling::p";
+    public final static String LABELS_IN_PRODUCT_DETAILS_BLOCK_XPATH = "//div[contains(@id,'description-1') and contains(@aria-expanded, 'true')]//label";
+    public final static String ALL_EXT_PRICES_IN_PRODUCT_DETAILS_BLOCK_XPATH = "//td[@class='create-summary-ext-total text-center']/input";
 }
