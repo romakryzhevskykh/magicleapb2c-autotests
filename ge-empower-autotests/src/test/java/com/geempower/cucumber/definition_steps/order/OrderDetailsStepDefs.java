@@ -212,12 +212,12 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
 
     @Then("^Is Opened Quote Details (.*) is displayed.$")
     public void isOpenedQuoteDetailsBlockIsDisplayed(String block) {
-        assertTrue(orderDetailsPage.isOpenedQuoteDetailsBlockIsDisplayed().getAttribute("style").contains(block));
+        assertTrue(orderDetailsPage.isBottomRowInDetailsQuotesBlockBlockDisplayed().getAttribute("style").contains(block));
     }
 
     @Then("^Is Opened Quote Details (.*) is not displayed.$")
     public void isOpenedQuoteDetailsBlockIsNotDisplayed(String block) {
-        assertFalse(orderDetailsPage.isOpenedQuoteDetailsBlockIsDisplayed().getAttribute("style").contains(block));
+        assertFalse(orderDetailsPage.isBottomRowInDetailsQuotesBlockBlockDisplayed().getAttribute("style").contains(block));
     }
 
     @Then("^Is Expanded status box line displayed.$")
@@ -240,18 +240,15 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
         assertTrue(orderDetailsPage.getAllTimeStatusNearColorIcons().containsAll(timeStatuses));
     }
 
-    @When("^User click on time status drop down field.$")
-    public void userClickOnTimeStatusDropDownField() {
-        orderDetailsPage.userClickOnTimeStatusDropDownField();
+    @When("^User clicks on time status drop down field.$")
+    public void userClicksOnTimeStatusDropDownField() {
+        orderDetailsPage.userClicksOnTimeStatusDropDownField();
     }
 
     @Then("^Is Correct time statuses (.*) displayed in the time status drop down field.$")
     public void isCorrectTimeStatusesDisplayedInTheTimeStatusDropDownField(List<String> timeStatuses) {
         assertTrue(orderDetailsPage.getAllTimeStatusesInTimeStatusDropDown()
-                .allMatch(statuses ->
-                        timeStatuses.stream().anyMatch(timeStatus -> statuses.getText().contains(timeStatus))));
-
-
+                .allMatch(statuses -> timeStatuses.stream().anyMatch(timeStatus -> statuses.getText().contains(timeStatus))));
     }
 
     @Then("^Is Detail Order table contains correct header (.*) titles.$")
@@ -286,7 +283,7 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
 
     @Then("^Is Total Net Price value is equal to sum of all ext. price in table.$")
     public void isTotalNetPriceValueIsEqualToSumOfAllExtPriceInTable() {
-        assertEquals(Double.parseDouble(orderDetailsPage.getTotalNetPrice()), orderDetailsPage.getSumOfAllExtPrice());
+        assertEquals(Double.parseDouble(orderDetailsPage.getTotalNetPrice()), orderDetailsPage.getSumOfAllExtPrice(), delta);
     }
 
     @Then("^Tracking information has (.*) values.$")

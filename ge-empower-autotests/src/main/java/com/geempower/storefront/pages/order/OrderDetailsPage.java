@@ -198,7 +198,7 @@ public class OrderDetailsPage extends StorefrontBasePage {
         click(HIDE_QUOTES_BLOCK_ARROW_BUTTON_XPATH);
     }
 
-    @Step("User Expands/Closes status boxes")
+    @Step("User Expands/Closes status boxes.")
     public void userExpandsClosesStatusBoxes() {
         click(EXPAND_CLOSE_STATUS_BOXES_ARROW_BUTTON_XPATH);
     }
@@ -213,8 +213,8 @@ public class OrderDetailsPage extends StorefrontBasePage {
         return $(REORDER_BUTTON_TEXT_SECOND_PART_XPATH).getText();
     }
 
-    @Step("Is Opened Quote Details Block Is Displayed.")
-    public WebElement isOpenedQuoteDetailsBlockIsDisplayed() {
+    @Step("Is Bottom Row In Details Quotes Block Displayed.")
+    public WebElement isBottomRowInDetailsQuotesBlockBlockDisplayed() {
         waitUntilPageIsFullyLoaded();
         return $(BOTTOM_ROW_IN_DETAILS_QUOTES_BLOCK_XPATH);
     }
@@ -235,8 +235,8 @@ public class OrderDetailsPage extends StorefrontBasePage {
         return $$(TIME_STATUSES_NEAR_COLOR_ICON_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
-    @Step("User Click On Time Status Drop Down Field.")
-    public void userClickOnTimeStatusDropDownField() {
+    @Step("User Clicks On Time Status Drop Down Field.")
+    public void userClicksOnTimeStatusDropDownField() {
         click(TIME_STATUSES_DROP_DOWN_FIELD_XPATH);
     }
 

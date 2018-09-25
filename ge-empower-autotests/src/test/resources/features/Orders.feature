@@ -75,24 +75,24 @@ Feature: Some actions on Orders page
     And Terms and Conditions pop-up is confirmed.
     Then Order Successful pop-up appears at the OE 3 page.
 
-  Scenario Outline: Check that Total Net Price value is correctly after changing status boxes - DE95700
-    And Account management page is opened.
-    When Choose <region> region.
-    And Search random account for chosen region.
-    And Click on chosen account.
-    And Orders page is opened.
-    When User clicks on random order No.
-    Then Orders Details page is opened.
-    And User clicks on random status box.
-    And User clicks on All status box.
-    Then Is Table with products displayed.
-    Then Is Total Net Price value correct after changing status boxes.
-
-    Examples:
-      | region        |
-      | North_America |
-      | ASIA          |
-      | Latin_America |
+#  Scenario Outline: Check that Total Net Price value is correctly after changing status boxes - DE95700
+#    And Account management page is opened.
+#    When Choose <region> region.
+#    And Search random account for chosen region.
+#    And Click on chosen account.
+#    And Orders page is opened.
+#    When User clicks on random order No.
+#    Then Orders Details page is opened.
+#    And User clicks on random status box.
+#    And User clicks on All status box.
+#    Then Is Table with products displayed.
+#    Then Is Total Net Price value correct after changing status boxes.
+#
+#    Examples:
+#      | region        |
+#      | North_America |
+#      | ASIA          |
+#      | Latin_America |
 
   Scenario Outline: Check that user is able to request open order report with pricing/ without pricing.
     And Orders page is opened.
@@ -140,7 +140,7 @@ Feature: Some actions on Orders page
     When User expands/closes status boxes.
     Then Is Expanded status box line not displayed.
     Then Is Correct time statuses <timeStatusesList> displayed near color status icons.
-    When User click on time status drop down field.
+    When User clicks on time status drop down field.
     Then Is Correct time statuses <timeStatusesList> displayed in the time status drop down field.
     Then Is Detail Order table contains correct header <tableTitles> titles.
     When User opens random product detail block.
