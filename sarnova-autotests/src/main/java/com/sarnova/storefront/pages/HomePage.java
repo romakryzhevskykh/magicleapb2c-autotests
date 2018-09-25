@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
 @Component
-public class HomePage extends StorefrontBasePage {
+public class HomePage extends StorefrontBasePage implements DefaultHomePage {
     private final String pageUrlMethod = "";
 
     public boolean isOpened() {

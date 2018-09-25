@@ -3,8 +3,8 @@
 .DS_Store
 .idea/
 target
-src/test/resources/META-INF/dev.properties
-src/test/resources/META-INF/qa.properties
-src/test/resources/META-INF/stage.properties
-src/test/resources/META-INF/selenium_grid.properties
+# src/test/resources/META-INF/dev.properties
+# src/test/resources/META-INF/qa.properties
+# src/test/resources/META-INF/stage.properties
+# src/test/resources/META-INF/selenium_grid.properties
 sarnova-automatedtests.iml

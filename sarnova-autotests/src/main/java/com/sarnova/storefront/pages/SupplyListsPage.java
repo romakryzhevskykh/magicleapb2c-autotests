@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 import static com.sarnova.storefront.page_elements.SupplyListsPageElements.*;
 
 @Component
-public class SupplyListsPage extends StorefrontBasePage {
+public class SupplyListsPage extends StorefrontBasePage implements DefaultHomePage {
     @Autowired private SupplyListsManager supplyListsManager;
 
     private final String pageUrlMethod = "my-account/supply-lists";

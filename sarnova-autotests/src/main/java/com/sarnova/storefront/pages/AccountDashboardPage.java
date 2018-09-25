@@ -7,7 +7,7 @@ import ru.yandex.qatools.allure.annotations.Step;
 import static com.sarnova.storefront.page_elements.AccountDashboardPageElements.*;
 
 @Component
-public class AccountDashboardPage extends StorefrontBasePage {
+public class AccountDashboardPage extends StorefrontBasePage implements DefaultHomePage {
 
     private String pageUrlMethod = "my-account/account-dashboard";
 

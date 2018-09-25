@@ -84,7 +84,7 @@ public class EditUsersPageStepDefs extends AbstractStepDefs {
             user.setLastName(threadVarsHashMap.getString(TestKeyword.EDIT_USER_LAST_NAME));
             user.getUserRoles().clear();
             user.getUserRoles().addAll(getSelectedUserRoles());
-            user.getUserRoles().add(StorefrontUserRole.TEST_USER);
+            user.getUserRoles().add(StorefrontUserRole.ORGANIZATION_TEST_USER);
             threadVarsHashMap.put(TestKeyword.TEST_USER_USERNAME, threadVarsHashMap.getString(TestKeyword.EDIT_USER_USERNAME));
         }
     }

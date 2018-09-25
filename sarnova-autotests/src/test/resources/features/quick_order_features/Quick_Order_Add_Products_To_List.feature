@@ -46,7 +46,7 @@ Feature: Quick order can add and save products in the list.
     And Refresh page.
     Then Check that all products have corresponding QTY(zero by default) values on Quick order page.
 
-  Scenario Check that Reset Form button empties Quick order list
+  Scenario: Check that Reset Form button empties Quick order list
     When Add 3 VALID, INDIVIDUAL product to Quick order list on Quick order page.
     And Set QTY 2 to any UOM on Quick order page.
     And Click on Reset form button on Quick order page.
@@ -54,4 +54,4 @@ Feature: Quick order can add and save products in the list.
     When Refresh page.
     Then Check that Quick order list is empty on Quick order page.
 
-#    Scenario Check that items order is saved after refreshing
+#    Scenario: Check that items order is saved after refreshing
