@@ -180,17 +180,7 @@ public class OrderDetailsPage extends StorefrontBasePage {
     @Step("User Expands Quote Details Block.")
     public void userExpandsQuoteDetailsBlock() {
         click(EXPAND_QUOTES_BLOCK_ARROW_BUTTON_XPATH);
-    }
-
-    @Step("Get Ordered On Date.")
-    public String getOrderedOnDate(String label) {
         waitUntilPageIsFullyLoaded();
-        return $(LABEL_VALUES_IN_QUOTES_BLOCK_XPATH, label).getText();
-    }
-
-    @Step("Get Order Value and Tax Total Data.")
-    public String getOrderValueAndTaxTotalData(String label) {
-        return $(LABEL_VALUES_IN_QUOTES_BLOCK_XPATH, label).getText();
     }
 
     @Step("Get Label Value in Quote Details block.")
@@ -198,19 +188,9 @@ public class OrderDetailsPage extends StorefrontBasePage {
         return $(LABEL_VALUES_IN_QUOTES_BLOCK_XPATH, label).getText();
     }
 
-    @Step("Get Created By Label Value.")
-    public String getCreatedByLabelValue(String label) {
-        return $(LABEL_VALUES_IN_QUOTES_BLOCK_XPATH, label).getText();
-    }
-
-    @Step("Is User No Label Displayed.")
-    public boolean isUserNoLabelDisplayed(String userNoLabel) {
+    @Step("Is Label in Quote Details Block Displayed.")
+    public boolean isLabelInQuoteDetailsBlockDisplayed(String userNoLabel) {
         return isDisplayed(LABELS_IN_QUOTES_BLOCK_XPATH, userNoLabel);
-    }
-
-    @Step("Is Quote No Label Displayed.")
-    public boolean isQuoteNoLabelDisplayed(String quoteNoLabel) {
-        return isDisplayed(LABELS_IN_QUOTES_BLOCK_XPATH, quoteNoLabel);
     }
 
     @Step("User Closes Quote Details Block.")
@@ -218,7 +198,7 @@ public class OrderDetailsPage extends StorefrontBasePage {
         click(HIDE_QUOTES_BLOCK_ARROW_BUTTON_XPATH);
     }
 
-    @Step("User expands/closes status boxes")
+    @Step("User Expands/Closes status boxes")
     public void userExpandsClosesStatusBoxes() {
         click(EXPAND_CLOSE_STATUS_BOXES_ARROW_BUTTON_XPATH);
     }
@@ -255,7 +235,7 @@ public class OrderDetailsPage extends StorefrontBasePage {
         return $$(TIME_STATUSES_NEAR_COLOR_ICON_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
-    @Step("UserClickOnTimeStatusDropDownField")
+    @Step("User Click On Time Status Drop Down Field.")
     public void userClickOnTimeStatusDropDownField() {
         click(TIME_STATUSES_DROP_DOWN_FIELD_XPATH);
     }
@@ -274,6 +254,7 @@ public class OrderDetailsPage extends StorefrontBasePage {
     @Step("User Opens Random Product Detail Block.")
     public void userOpensRandomProductDetailBlock() {
         $$(EXPAND_DETAIL_PRODUCT_BLOCK_ARROW_XPATH).stream().findAny().ifPresent(this::click);
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("User Closes Opened Product Detail Block.")
@@ -284,11 +265,6 @@ public class OrderDetailsPage extends StorefrontBasePage {
     @Step("Get Label Value In Product Details Block.")
     public String getLabelValueInProductDetailsBlock(String label) {
         waitUntilPageIsFullyLoaded();
-        return $(LABEL_VALUES_IN_PRODUCT_DETAILS_BLOCK_XPATH, label).getText();
-    }
-
-    @Step("Get Request Date value.")
-    public String getRequestDateValue(String label) {
         return $(LABEL_VALUES_IN_PRODUCT_DETAILS_BLOCK_XPATH, label).getText();
     }
 

@@ -170,12 +170,12 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
 
     @Then("^Is (.*) label contains date in Quote Details block.$")
     public void isOrderedRequestedOnLabelContainsDate(String label) {
-        assertTrue(utils.isValidDate(orderDetailsPage.getOrderedOnDate(label)));
+        assertTrue(utils.isValidDate(orderDetailsPage.getLabelValueInQuoteDetailsBlock(label)));
     }
 
     @Then("^Is (.*) label contains (.*) value in Quote Details block.$")
     public void isOrderValueAndTaxTotalContainsUSDValue(String label, String currency) {
-        assertTrue(orderDetailsPage.getOrderValueAndTaxTotalData(label).contains(currency));
+        assertTrue(orderDetailsPage.getLabelValueInQuoteDetailsBlock(label).contains(currency));
     }
 
     @Then("^Is (.*) label contains value in Quote Details block.$")
@@ -185,13 +185,13 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
 
     @Then("^Is (.*) label contains (.*) email character in Quote Details block.$")
     public void isCreatedByLabelContainsEmailCharacter(String label, String emailCharacter) {
-        assertTrue(orderDetailsPage.getCreatedByLabelValue(label).contains(emailCharacter));
+        assertTrue(orderDetailsPage.getLabelValueInQuoteDetailsBlock(label).contains(emailCharacter));
     }
 
     @Then("^Is (.*) and (.*) labels displayed in Quote Details block.$")
     public void isUserNoAndQuoteNoLabelsDisplayed(String userNoLabel, String quoteNoLabel) {
-        assertTrue(orderDetailsPage.isUserNoLabelDisplayed(userNoLabel));
-        assertTrue(orderDetailsPage.isQuoteNoLabelDisplayed(quoteNoLabel));
+        assertTrue(orderDetailsPage.isLabelInQuoteDetailsBlockDisplayed(userNoLabel));
+        assertTrue(orderDetailsPage.isLabelInQuoteDetailsBlockDisplayed(quoteNoLabel));
     }
 
     @And("^User closes Quote Details block.$")
@@ -276,7 +276,7 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
 
     @Then("^Is (.*) label contains date in Product Details block.$")
     public void isRequestedDateLabelContainsDateInProductDetailsBlock(String label) {
-        assertTrue(utils.isValidDate(orderDetailsPage.getRequestDateValue(label)));
+        assertTrue(utils.isValidDate(orderDetailsPage.getLabelValueInProductDetailsBlock(label)));
     }
 
     @Then("^Is Correct (.*) labels displayed in Product Details block.$")
