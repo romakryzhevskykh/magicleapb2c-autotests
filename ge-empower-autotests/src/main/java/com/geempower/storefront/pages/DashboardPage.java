@@ -127,4 +127,23 @@ public class DashboardPage extends StorefrontBasePage {
         return currentUrl;
     }
 
+    @Step("Get Title From Features Widget.")
+    public String getTitleFromFeaturesWidget() {
+        return $(FEATURED_UPDATES_WIDGET_TITLE_XPATH).getText();
+    }
+
+    @Step("Get View All Link Name.")
+    public String getViewAllLinkName() {
+        return $(FEATURED_UPDATES_WIDGET_VIEW_ALL_LINK_XPATH).getText();
+    }
+
+    @Step("Get View All Url.")
+    public String getViewAllUrl() {
+        return $(FEATURED_UPDATES_WIDGET_VIEW_ALL_LINK_XPATH).getAttribute("href");
+    }
+
+    @Step("Get count of features on the Dashboard page.")
+    public int getCountOfFeatures() {
+        return $$(COUNT_OF_AVAILABLE_FEATURES_XPATH).size();
+    }
 }

@@ -12,9 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class DashboardStepDefs extends AbstractStepDefs {
     @Autowired
@@ -211,5 +209,21 @@ public class DashboardStepDefs extends AbstractStepDefs {
     @Then("^T&B Access widget is not displayed.")
     public void tBAccessWidgetIsNotDisplayed() {
         assertFalse(dashboardPage.isTnBWidgetDisplayed());
+    }
+
+    @Then("^(.*) title is displayed in the Featured Updates widget.$")
+    public void featuredUpdatesTitleIsDisplayedInTheFeaturedUpdatesWidget(String featuredUpdatesTitle) {
+        assertEquals(featuredUpdatesTitle, dashboardPage.getTitleFromFeaturesWidget());
+    }
+
+    @Then("^(.*) link is displayed with correct url (.*).$")
+    public void viewAllLinkIsDisplayedWithCorrectUrlViewAllUrl(String viewAllLinkName, String viewAllUrl) {
+        assertEquals(viewAllLinkName, dashboardPage.getViewAllLinkName());
+        assertEquals(viewAllUrl, dashboardPage.getViewAllUrl());
+    }
+
+    @Then("^(\\d+) features are available in the Featured Updates widget.$")
+    public void featuresAreAvailableInTheFeaturedUpdatesWidget(int countOfFeatures) {
+        assertTrue(dashboardPage.getCountOfFeatures() == countOfFeatures);
     }
 }

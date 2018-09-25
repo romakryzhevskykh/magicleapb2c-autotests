@@ -105,4 +105,71 @@ public class OrdersStepDefs extends AbstractStepDefs {
     public void openOrderReportIsDisplayedWithAppropriateDateAndTime() {
         assertEquals(threadVarsHashMap.get(TestKeyword.OPEN_ORDER_REPORT_DATE_CREATION), ordersPage.getPostReportDate());
     }
+
+    @When("^User clicks on filter order icon.$")
+    public void userClicksOnFilterOrderIcon() {
+        ordersPage.clickOnFilterOrderIcon();
+    }
+
+    @And("^Set order number (.*) to the order number field.$")
+    public void setOrderNumberOrderNoToTheOrderNumberField(String orderNo) {
+        ordersPage.setOrderNoToTheSearchFieldForFiltering(orderNo);
+    }
+
+    @And("^Click on apply filter button.$")
+    public void clickOnApplyFilterButton() {
+        ordersPage.clickOnApplyFilterButton();
+    }
+
+    @Then("^Appropriate order with order number (.*) is appeared on orders page.$")
+    public void appropriateOrderWithOrderNumberIsAppearedOnOrdersPage(String orderNo) {
+        assertTrue(ordersPage.getActualCountOfOrders() == 1);
+        assertEquals(orderNo, ordersPage.getFirstOrderNumberFromOrdersList());
+    }
+
+    @When("^User clicks on found order.$")
+    public void userClicksOnFoundOrder() {
+        ordersPage.clickOnFirstOrderNumber();
+    }
+
+    @And("^Set random PO number to the po number field.$")
+    public void setRandomPONumberToThePoNumberField() {
+        threadVarsHashMap.put(TestKeyword.RANDOM_PO_NUMBER_ORDERS_PAGE, ordersPage.getRandomPoNumberFromOrdersList());
+        ordersPage.setPoNumberToTheSearchFieldForFiltering(threadVarsHashMap.getString(TestKeyword.RANDOM_PO_NUMBER_ORDERS_PAGE));
+    }
+
+    @Then("^Appropriate order with po number is appeared on orders page.$")
+    public void appropriateOrderWithPoNumberIsAppearedOnOrdersPage() {
+        String poNo = threadVarsHashMap.getString(TestKeyword.RANDOM_PO_NUMBER_ORDERS_PAGE);
+        assertTrue(ordersPage.getAllPoNumbersFromOrdersList().allMatch(poNumber ->
+                poNumber.getText().equals(poNo)));
+    }
+
+    @And("^Set random Job name number to the job name field.$")
+    public void setRandomJobNameNumberToTheJobNameField() {
+        threadVarsHashMap.put(TestKeyword.RANDOM_JOB_NAME_ORDERS_PAGE, ordersPage.getRandomJobNameFromOrdersList());
+        ordersPage.setJobNameToTheSearchFieldForFiltering(threadVarsHashMap.getString(TestKeyword.RANDOM_JOB_NAME_ORDERS_PAGE));
+    }
+
+    @Then("^Appropriate orders with job names are appeared on orders page.$")
+    public void appropriateOrdersWithJobNamesAreAppearedOnOrdersPage() {
+        String jobName = threadVarsHashMap.getString(TestKeyword.RANDOM_JOB_NAME_ORDERS_PAGE);
+        assertTrue(ordersPage.getAllJobNamesFromOrdersList().allMatch(job ->
+                job.getText().equals(jobName)));
+    }
+
+    @And("^Set random Date to the date from field.$")
+    public void setRandomDateToTheDateFromField() {
+        threadVarsHashMap.put(TestKeyword.RANDOM_DATE_ORDERS_PAGE, ordersPage.getRandomDateNameFromOrdersList());
+        ordersPage.setDateFromToTheSearchFieldForFiltering(threadVarsHashMap.getString(TestKeyword.RANDOM_DATE_ORDERS_PAGE));
+    }
+
+    @Then("^Appropriate orders with equal date or greater date are appeared on orders page.$")
+    public void appropriateOrdersWithEqualDateOrGreaterDateAreAppearedOnOrdersPage() {
+        String defaultDate = threadVarsHashMap.getString(TestKeyword.RANDOM_DATE_ORDERS_PAGE);
+        assertTrue(ordersPage.getAllDatesFromOrdersList().allMatch(dateEntered ->
+                utils.isGottenDateGreaterThanOtherDate(dateEntered.getText(), defaultDate) ||
+                        utils.isGottenDateEqualsToOtherDate(dateEntered.getText(), defaultDate))
+        );
+    }
 }
