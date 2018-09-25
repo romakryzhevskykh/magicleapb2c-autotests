@@ -5,10 +5,10 @@ import org.openqa.selenium.By;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import static com.geempower.storefront.page_elements.order.PONumberDetailsPageElements.*;
+import static com.geempower.storefront.page_elements.order.PODetailsPageElements.*;
 
 @Component
-public class PONumberDetailsPage extends StorefrontBasePage {
+public class PODetailsPage extends StorefrontBasePage {
     private final String pageUri = "orders/details/";
 
     @Override
@@ -31,5 +31,21 @@ public class PONumberDetailsPage extends StorefrontBasePage {
         } else {
             return $(PURCHASE_ORDER_TITLE_XPATH).getText();
         }
+    }
+
+
+    @Step("Get PO No Title Number.")
+    public String getPONoTitleNumber() {
+        return $(PO_NO_TITLE_NUMBER_XPATH).getAttribute("value");
+    }
+
+    @Step("Is Email Download Icon Displayed In Right Corner.")
+    public boolean isEmailDownloadIconDisplayedInRightCorner() {
+        return isDisplayed(EMAIL_DOWNLOAD_ICON_XPATH);
+    }
+
+    @Step("User Expands/Closes status boxes on PO Details page")
+    public void userExpandsClosesStatusBoxesOnPODetailsPage() {
+        click(EXPAND_CLOSE_STATUS_BOXES_ARROW_BUTTON_XPATH);
     }
 }
