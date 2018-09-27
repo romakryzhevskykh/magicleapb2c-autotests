@@ -39,7 +39,7 @@ public class OrderConfirmationPageStepDefs extends AbstractStepDefs {
         ShippingAddress billingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_BILLING_ADDRESS);
         assertEquals(orderConfirmationPage.getBillingFirstLastName(), billingAddress.getFirstNameText() + " " + billingAddress.getLastNameText());
         assertEquals(orderConfirmationPage.getBillingStreet(), billingAddress.getAddressLine1());
-        assertEquals(orderConfirmationPage.getBillingCityState(), billingAddress.getTown().getFullName() + " " + billingAddress.getState().getFullName());
+        assertEquals(orderConfirmationPage.getBillingCityState(), billingAddress.getTown().getFullName() + ", " + billingAddress.getState().getFullName());
         assertEquals(orderConfirmationPage.getBillingCountryAndZipCode(), billingAddress.getCountry().getName() + " " + billingAddress.getPostcode());
     }
 
