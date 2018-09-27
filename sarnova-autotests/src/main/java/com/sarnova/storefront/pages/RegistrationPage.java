@@ -111,14 +111,14 @@ public class RegistrationPage extends StorefrontBasePage {
 
     @Step("Set SOMEONE TO MAKE PURCHASE checkbox: {0}.")
     public void setSomeoneToMakePurchase(boolean someoneToMakePurchase) {
-        if(isSomeoneToMakePurchaseCheckboxSelected() != someoneToMakePurchase) {
+        if (isSomeoneToMakePurchaseCheckboxSelected() != someoneToMakePurchase) {
             clickOnSomeoneToMakePurchaseCheckbox();
         }
     }
 
     @Step("Set RECEIVE EMAILS checkbox: {0}.")
     public void setReceiveEmails(boolean receiveEmails) {
-        if(isReceiveEmailsCheckboxSelected() != receiveEmails) {
+        if (isReceiveEmailsCheckboxSelected() != receiveEmails) {
             clickOnReceiveEmailsCheckbox();
         }
     }
@@ -145,82 +145,126 @@ public class RegistrationPage extends StorefrontBasePage {
 
     @Step("Fill Billing address first name field: {0}")
     public void fillBillingAddressFirstName(String firstName) {
-
+        enterText(firstName, By.id(BILLING_ADDRESS_FIRST_NAME_FIELD_ID));
     }
 
     @Step("Fill Billing address last name field: {0}")
     public void fillBillingAddressLastName(String lastName) {
-
+        enterText(lastName, By.id(BILLING_ADDRESS_LAST_NAME_FIELD_ID));
     }
 
     @Step("Select Billing address Country drop-down: {0}")
     public void selectBillingAddressCountry(String country) {
+        clickOnBillingCountryDropDown();
+        selectBillingAddressCountryFromDropDown(country);
+    }
 
+    @Step("Click on Billing Country drop-down.")
+    private void clickOnBillingCountryDropDown() {
+        click(By.id(BILLING_ADDRESS_COUNTRY_DROP_DOWN_ID));
+    }
+
+    @Step("Select Billing address country from drop-down: {0}.")
+    private void selectBillingAddressCountryFromDropDown(String country) {
+        click(BILLING_ADDRESS_COUNTRY_ITEM_BY_VALUE_XPATH, country);
     }
 
     @Step("Fill Billing address address line 1 field: {0}")
     public void fillBillingAddressAddressLine1(String addressLine1) {
-
+        enterText(addressLine1, By.id(BILLING_ADDRESS_ADDRESS_LINE_1_FIELD_ID));
     }
 
     @Step("Fill Billing address town field: {0}")
     public void fillBillingAddressTown(String town) {
-
+        enterText(town, By.id(BILLING_ADDRESS_CITY_FIELD_ID));
     }
 
     @Step("Select Billing address State drop-down: {0}")
     public void selectBillingAddressState(String state) {
+        clickOnBillingStateDropDown();
+        selectBillingAddressStateFromDropDown(state);
+    }
 
+    @Step("Click on Billing State drop-down.")
+    private void clickOnBillingStateDropDown() {
+        click(By.id(BILLING_ADDRESS_STATE_DROP_DOWN_ID));
+    }
+
+    @Step("Select Billing address State from drop-down: {0}.")
+    private void selectBillingAddressStateFromDropDown(String state) {
+        click(BILLING_ADDRESS_STATE_ITEM_BY_VALUE_XPATH, state);
     }
 
     @Step("Fill Billing address zip field: {0}")
     public void fillBillingAddressZip(String zip) {
-
+        enterText(zip, By.id(BILLING_ADDRESS_ZIP_FIELD_ID));
     }
 
     @Step("Fill Billing address phone1 field: {0}")
     public void fillBillingAddressPhone1(String phone1) {
-
+        enterText(phone1, By.id(BILLING_ADDRESS_PHONE_1_FIELD_ID));
     }
 
     @Step("Fill Shipping address first name field: {0}")
     public void fillShippingAddressFirstName(String firstName) {
-
+        enterText(firstName, By.id(SHIPPING_ADDRESS_FIRST_NAME_FIELD_ID));
     }
 
     @Step("Fill Shipping address last name field: {0}")
     public void fillShippingAddressLastName(String lastName) {
-
+        enterText(lastName, By.id(SHIPPING_ADDRESS_LAST_NAME_FIELD_ID));
     }
 
     @Step("Select Shipping address Country drop-down: {0}")
     public void selectShippingAddressCountry(String country) {
+        clickOnShippingCountryDropDown();
+        selectShippingAddressCountryFromDropDown(country);
+    }
 
+    @Step("Click on Shipping Country drop-down.")
+    private void clickOnShippingCountryDropDown() {
+        click(By.id(SHIPPING_ADDRESS_COUNTRY_DROP_DOWN_ID));
+    }
+
+    @Step("Select Shipping address Country from drop-down: {0}.")
+    private void selectShippingAddressCountryFromDropDown(String country) {
+        click(SHIPPING_ADDRESS_COUNTRY_ITEM_BY_VALUE_XPATH, country);
     }
 
     @Step("Fill Shipping address address line 1 field: {0}")
     public void fillShippingAddressAddressLine1(String addressLine1) {
-
+        enterText(addressLine1, By.id(SHIPPING_ADDRESS_ADDRESS_LINE_1_FIELD_ID));
     }
 
     @Step("Fill Shipping address town field: {0}")
     public void fillShippingAddressTown(String town) {
-
+        enterText(town, By.id(SHIPPING_ADDRESS_CITY_FIELD_ID));
     }
 
     @Step("Select Shipping address State drop-down: {0}")
     public void selectShippingAddressState(String state) {
+        clickOnShippingStateDropDown();
+        selectShippingAddressStateFromDropDown(state);
+    }
 
+    @Step("Click on Shipping State drop-down.")
+    private void clickOnShippingStateDropDown() {
+        click(By.id(SHIPPING_ADDRESS_STATE_DROP_DOWN_ID));
+    }
+
+    @Step("Select Shipping address State from drop-down: {0}.")
+    private void selectShippingAddressStateFromDropDown(String state) {
+        click(SHIPPING_ADDRESS_STATE_ITEM_BY_VALUE_XPATH, state);
     }
 
     @Step("Fill Shipping address zip field: {0}")
     public void fillShippingAddressZip(String zip) {
-
+        enterText(zip, By.id(SHIPPING_ADDRESS_ZIP_FIELD_ID));
     }
 
     @Step("Fill Shipping address phone1 field: {0}")
     public void fillShippingAddressPhone1(String phone1) {
-
+        enterText(phone1, By.id(SHIPPING_ADDRESS_PHONE_1_FIELD_ID));
     }
 
     @Step("Click on Register button.")

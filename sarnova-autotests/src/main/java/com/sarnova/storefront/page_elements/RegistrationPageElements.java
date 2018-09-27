@@ -23,5 +23,27 @@ public class RegistrationPageElements {
     public static final String SOMEONE_TO_MAKE_PURCHASES_CHECKBOX_ID = "registeragencyBehalfAuthority";
     public static final String RECEIVE_EMAILS_CHECKBOX_ID = "registeremailSubscription";
 
+    public static final String BILLING_ADDRESS_FIRST_NAME_FIELD_ID = "firstNameBillingAddAddress";
+    public static final String BILLING_ADDRESS_LAST_NAME_FIELD_ID = "lastNameBillingAddAddress";
+    public static final String BILLING_ADDRESS_COUNTRY_DROP_DOWN_ID = "countryBillingAddAddress";
+    public static final String BILLING_ADDRESS_COUNTRY_ITEM_BY_VALUE_XPATH = "//select[@id='countryBillingAddAddress']/option[@value='%s']";
+    public static final String BILLING_ADDRESS_ADDRESS_LINE_1_FIELD_ID = "streetBillingAddAddress";
+    public static final String BILLING_ADDRESS_CITY_FIELD_ID = "cityBillingAddAddress";
+    public static final String BILLING_ADDRESS_STATE_DROP_DOWN_ID = "stateBillingAddAddress";
+    public static final String BILLING_ADDRESS_STATE_ITEM_BY_VALUE_XPATH = "//select[@id='stateBillingAddAddress']/option[@value='%s']";
+    public static final String BILLING_ADDRESS_ZIP_FIELD_ID = "zipBillingAddAddress";
+    public static final String BILLING_ADDRESS_PHONE_1_FIELD_ID = "phoneBillingAddAddress";
+
+    public static final String SHIPPING_ADDRESS_FIRST_NAME_FIELD_ID = "firstNameShippingAddAddress";
+    public static final String SHIPPING_ADDRESS_LAST_NAME_FIELD_ID = "lastNameShippingAddAddress";
+    public static final String SHIPPING_ADDRESS_COUNTRY_DROP_DOWN_ID = "countryShippingAddAddress";
+    public static final String SHIPPING_ADDRESS_COUNTRY_ITEM_BY_VALUE_XPATH = "//select[@id='countryShippingAddAddress']/option[@value='%s']";
+    public static final String SHIPPING_ADDRESS_ADDRESS_LINE_1_FIELD_ID = "streetShippingAddAddress";
+    public static final String SHIPPING_ADDRESS_CITY_FIELD_ID = "cityShippingAddAddress";
+    public static final String SHIPPING_ADDRESS_STATE_DROP_DOWN_ID = "stateShippingAddAddress";
+    public static final String SHIPPING_ADDRESS_STATE_ITEM_BY_VALUE_XPATH = "//select[@id='stateShippingAddAddress']/option[@value='%s']";
+    public static final String SHIPPING_ADDRESS_ZIP_FIELD_ID = "zipShippingAddAddress";
+    public static final String SHIPPING_ADDRESS_PHONE_1_FIELD_ID = "phoneShippingAddAddress";
+
     public static final String REGISTER_BUTTON_XPATH = "//form[@id='customRegisterForm']//button[@type='submit']";
 }
