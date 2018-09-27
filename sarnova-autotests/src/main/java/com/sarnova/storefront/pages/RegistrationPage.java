@@ -3,9 +3,9 @@ package com.sarnova.storefront.pages;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ReportsPage extends StorefrontBasePage implements DefaultHomePage {
+public class RegistrationPage extends StorefrontBasePage {
 
-    private String pageUrlMethod = "reports";
+    private String pageUrlMethod = "register";
 
     @Override
     public String getPageUrl() {

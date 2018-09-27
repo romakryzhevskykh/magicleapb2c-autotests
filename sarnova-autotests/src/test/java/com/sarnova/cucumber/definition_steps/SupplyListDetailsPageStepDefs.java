@@ -43,9 +43,10 @@ public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
     @Then("^Check that selected product\\(s\\) is\\(are\\) displayed on the Supply list details page.$")
     public void checkThatSelectedProductsAreDisplayedOnTheSupplyListDetailsPage() {
         Set<IndividualProduct> addedIndividualProducts = getSelectedUOMS()
-                .keySet()
+                .entrySet()
                 .stream()
-                .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
+                .filter(unitOfMeasureIntegerEntry -> unitOfMeasureIntegerEntry.getValue() > 0)
+                .map(unitOfMeasureIntegerEntry -> productsManager.getProductByUOM(unitOfMeasureIntegerEntry.getKey()))
                 .collect(Collectors.toSet());
         SupplyList supplyList = supplyListDetailsPage.getSupplyListFromPage(userSessions.getActiveUserSession().getUser());
         addedIndividualProducts.forEach(individualProduct ->
@@ -268,9 +269,8 @@ public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
                         .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
                         .distinct()
         ).distinct().collect(Collectors.toList());
-        Product newProduct = productsManager.getUniqueProductsByProductsQuantityAndTestTypes(
-                selectedProducts.size() + 1, productTypes).stream()
-                .filter(product -> !selectedProducts.contains(product))
+        Product newProduct = productsManager.getUniqueProductsByProductsQuantityTestTypesAndExcludeProductList(
+                1, productTypes, selectedProducts).stream()
                 .findAny().orElseGet(() -> {
                     throw new NullPointerException("No products for this condition!");
                 });
@@ -317,7 +317,7 @@ public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
                 .collect(Collectors.toList()));
     }
 
-    @Then("^Check that (.*) error message is displayed for used row.$")
+    @Then("^Check that (.*) error message is displayed for used row on Supply list details page.$")
     public void checkThatErrorMessageErrorMessageIsDisplayedForUsedRow(String expectedErrorMessage) {
         String enteredText = threadVarsHashMap.getString(TestKeyword.QUICK_ADD_TEXT);
         String rowErrorMessage;

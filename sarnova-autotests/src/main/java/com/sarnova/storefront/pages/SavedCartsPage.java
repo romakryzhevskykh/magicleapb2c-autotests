@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import static com.sarnova.storefront.page_elements.SavedCartsPageElements.*;
 
 @Component
-public class SavedCartsPage extends StorefrontBasePage {
+public class SavedCartsPage extends StorefrontBasePage implements DefaultHomePage {
 
     private String pageUrlMethod = "my-account/saved-carts";
 

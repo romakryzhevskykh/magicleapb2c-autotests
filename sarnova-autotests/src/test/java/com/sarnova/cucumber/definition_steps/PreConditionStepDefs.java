@@ -14,15 +14,18 @@ import com.sarnova.helpers.models.shipping_addresses.ShippingAddress;
 import com.sarnova.helpers.models.supply_lists.SupplyList;
 import com.sarnova.helpers.models.supply_lists.SupplyListProduct;
 import com.sarnova.helpers.models.users.UserGroup;
+import com.sarnova.helpers.models.users.UserInformation;
 import com.sarnova.helpers.user_engine.*;
 import com.sarnova.pay_fabric.page_blocks.PayFabricHeaderBlock;
 import com.sarnova.pay_fabric.page_blocks.PayFabricLeftBarBlock;
 import com.sarnova.pay_fabric.pages.PayFabricLoginPage;
+import com.sarnova.storefront.models.SarnovaStorefront;
 import com.sarnova.storefront.page_blocks.HeaderRowPageBlock;
 import com.sarnova.storefront.pages.HomePage;
 import com.sarnova.storefront.pages.LoginPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -35,6 +38,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     @Autowired LoginPage loginPage;
     @Autowired PayFabricLoginPage payFabricLoginPage;
     @Autowired HomePage homePage;
+    @Autowired SarnovaStorefront sarnovaStorefront;
 
     @Autowired private SupplyListsManager supplyListsManager;
     @Autowired private UserGroupsManager userGroupsManager;
@@ -58,6 +62,18 @@ public class PreConditionStepDefs extends AbstractStepDefs {
             if (headerRowPageBlock.isUserLoggedOut()) {
                 loginPage.open();
                 loginPage.loginToStorefront(userSessions.getActiveUserSession());
+            }
+        }
+    }
+
+    @And("^User is logged out from Storefront.$")
+    public void userIsLoggedOutFromStorefront() {
+        if (headerRowPageBlock.isUserLoggedIn()) {
+            headerRowPageBlock.logoutFromStorefront(userSessions.getActiveUserSession());
+        } else if (!headerRowPageBlock.isUserLoggedOut() && !headerRowPageBlock.isUserLoggedIn()) {
+            homePage.open();
+            if (headerRowPageBlock.isUserLoggedIn()) {
+                headerRowPageBlock.logoutFromStorefront(userSessions.getActiveUserSession());
             }
         }
     }
@@ -183,12 +199,11 @@ public class PreConditionStepDefs extends AbstractStepDefs {
                 .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
                 .distinct()
                 .collect(Collectors.toList());
-        IndividualProduct selectedProduct = productsManager.getUniqueProductsByProductsQuantityAndTestTypes(
-                selectedProducts.size() + 1,
-                productTypes)
+        IndividualProduct selectedProduct = productsManager.getUniqueProductsByProductsQuantityTestTypesAndExcludeProductList(
+                1,
+                productTypes, selectedProducts)
                 .stream()
                 .map(product -> (IndividualProduct) product)
-                .filter(product -> !selectedProducts.contains(product))
                 .findAny()
                 .orElse(null);
         UnitOfMeasure selectedUOM = selectedProduct.getUnitsOfMeasurement().stream().findAny().orElse(null);
@@ -322,11 +337,11 @@ public class PreConditionStepDefs extends AbstractStepDefs {
 
     @And("^Test user is present.$")
     public void testUserIsPresent() {
-        User testUser = usersManager.getTestUser();
-        System.out.println(usersManager.getTestUser());
+        User testUser = usersManager.getTestUser(sarnovaStorefront);
+        System.out.println(usersManager.getTestUser(sarnovaStorefront));
         if (testUser == null) {
             usersManager.createTestUserByApi(userSessions.getActiveUserSession());
-            testUser = usersManager.getTestUser();
+            testUser = usersManager.getTestUser(sarnovaStorefront);
         }
         threadVarsHashMap.put(TestKeyword.TEST_USER_USERNAME, testUser.getUsername());
     }
@@ -334,10 +349,10 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     //    Test user with set password
     @And("^Valid test user is present.$")
     public void validTestUserIsPresent() {
-        User testUser = usersManager.getTestUser();
+        User testUser = usersManager.getTestUser(sarnovaStorefront);
         if (testUser == null) {
             usersManager.createTestUserByApi(userSessions.getActiveUserSession());
-            testUser = usersManager.getTestUser();
+            testUser = usersManager.getTestUser(sarnovaStorefront);
             usersManager.resetPassword(userSessions.getActiveUserSession(), testUser);
         } else if (testUser.getPassword().isEmpty()) {
             usersManager.resetPassword(userSessions.getActiveUserSession(), testUser);
@@ -369,7 +384,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
         User testUser = usersManager.getUserByUsername(threadVarsHashMap.getString(TestKeyword.TEST_USER_USERNAME));
         if (!testUser.isInitialized())
             usersManager.initUserGroups(userSessions.getActiveUserSession(), testUser);
-        if (!testUser.getUserRoles().isEmpty() && !(testUser.getUserRoles().size() == 1 && testUser.getUserRoles().contains(StorefrontUserRole.TEST_USER))) {
+        if (!testUser.getUserRoles().isEmpty() && !(testUser.getUserRoles().size() == 1 && testUser.getUserRoles().contains(StorefrontUserRole.ORGANIZATION_TEST_USER))) {
             usersManager.removeAllUserRolesForUser(userSessions.getActiveUserSession(), testUser);
         }
     }
@@ -441,7 +456,11 @@ public class PreConditionStepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.TEST_PARENT_CUSTOM_CATEGORY_ID, category.getParentCustomCategory().getId());
         threadVarsHashMap.put(TestKeyword.TEST_CHILD_CUSTOM_CATEGORY_ID, category.getId());
         if (category.getProducts().size() < productsInChildCC) {
-            ArrayList<Product> productsToAdd = productsManager.getUniqueProductsByProductsQuantityAndTestTypes(productsInChildCC, new ArrayList<>());
+            ArrayList<Product> productsToAdd = productsManager.getUniqueProductsByProductsQuantityTestTypesAndExcludeProductList(productsInChildCC,
+                    new ArrayList<String>() {{
+                        add("INDIVIDUAL_PRODUCT");
+                    }},
+                    new ArrayList<>());
             customCategoriesManager.addProductsToCategoryByApi(userSessions.getActiveUserSession(), category, productsToAdd);
         }
     }
@@ -495,8 +514,14 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     @And("^Quick order list is empty.$")
     public void quickOrderListIsEmpty() {
         Map<UnitOfMeasure, Integer> uomsInQO = quickOrderManager.getUOMs(userSessions.getActiveUserSession());
-        if(!uomsInQO.isEmpty()) {
+        if (!uomsInQO.isEmpty()) {
             quickOrderManager.removeAllProductsFromList(userSessions.getActiveUserSession());
         }
+    }
+
+    @When("^Generate any random User information.$")
+    public void generateAnyRandomUserInformation() {
+        UserInformation userInformation = randomUtils.getRandomUserInformation();
+        threadVarsHashMap.put(TestKeyword.USER_INFORMATION, userInformation);
     }
 }

@@ -104,7 +104,7 @@ public class UsersManager {
         String lastName = RandomStringUtils.randomAlphabetic(10);
         String email = RandomStringUtils.randomAlphabetic(10) + "@" + RandomStringUtils.randomAlphabetic(5) + ".com";
         String username = RandomStringUtils.randomAlphabetic(10);
-        StorefrontUserRole role = StorefrontUserRole.TEST_USER;
+        StorefrontUserRole role = StorefrontUserRole.ORGANIZATION_TEST_USER;
 //        StorefrontUserRole adminRole = StorefrontUserRole.ADMIN;
         Department organization = userSession.getUser().getDepartment();
         ArrayList<StorefrontUserRole> userRoles = new ArrayList() {{
@@ -195,13 +195,16 @@ public class UsersManager {
         return users;
     }
 
-    public User getTestUser() {
-        return users.stream().filter(user -> user.getUserRoles().stream().anyMatch(UserRole::isTest)).findFirst().orElse(null);
+    public User getTestUser(Cockpit cockpit) {
+        return users.stream()
+                .filter(user -> user.getUserRoles().stream().anyMatch(UserRole::isTest))
+                .filter(user -> user.getUserRoles().stream().anyMatch(userRole -> userRole.equals(getTestRole(cockpit))))
+                .findFirst().orElse(null);
     }
 
     private UserRole getTestRole(Cockpit userCockpit) {
         if (userCockpit instanceof SarnovaStorefront) {
-            return StorefrontUserRole.TEST_USER;
+            return StorefrontUserRole.ORGANIZATION_TEST_USER;
         } else return null;
     }
 
@@ -223,6 +226,9 @@ public class UsersManager {
                         break;
                     case "guest":
                         userRole = StorefrontUserRole.GUEST_CONSUMER;
+                        break;
+                    case "independent_test":
+                        userRole = StorefrontUserRole.INDEPENDENT_TEST_USER;
                         break;
                     default:
                         break;
@@ -296,7 +302,7 @@ public class UsersManager {
     @SuppressWarnings("unchecked")
     public void removeAllUserRolesForUser(UserSession activeUserSession, User user) {
         user.getUserRoles().forEach(userRole -> {
-            if (!userRole.equals(StorefrontUserRole.TEST_USER)) {
+            if (!userRole.equals(StorefrontUserRole.ORGANIZATION_TEST_USER)) {
                 String csrfToken = getCreateUserPageCsrfToken(activeUserSession);
                 POSTRequest removeGroup = REMOVE_ROLE_FROM_USER.getClone();
                 removeGroup.setGetParameterAndValue("user", user.getUsername());
@@ -311,12 +317,12 @@ public class UsersManager {
             }
         });
         boolean isTestRolePresent = false;
-        if (user.getUserRoles().contains(StorefrontUserRole.TEST_USER)) {
+        if (user.getUserRoles().contains(StorefrontUserRole.ORGANIZATION_TEST_USER)) {
             isTestRolePresent = true;
         }
         user.getUserRoles().clear();
         if (isTestRolePresent) {
-            user.getUserRoles().add(StorefrontUserRole.TEST_USER);
+            user.getUserRoles().add(StorefrontUserRole.ORGANIZATION_TEST_USER);
         }
     }
 

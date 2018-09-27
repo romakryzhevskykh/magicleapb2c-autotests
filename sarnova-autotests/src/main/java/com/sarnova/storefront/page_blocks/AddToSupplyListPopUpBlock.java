@@ -99,4 +99,9 @@ public class AddToSupplyListPopUpBlock extends UIComponent {
     public boolean isBannerPresent() {
         return isPresent(SUPPLY_POP_UP_BANNER_IMAGE_XPATH);
     }
+
+    @Step("Click on Continue button.")
+    public void clickOnContinueButton() {
+        click(ADD_TO_SUPPLY_LIST_POP_UP_CONTINUE_BUTTON_XPATH);
+    }
 }

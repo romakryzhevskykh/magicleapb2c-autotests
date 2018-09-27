@@ -6,6 +6,7 @@ import com.sarnova.helpers.user_engine.UserSession;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.yandex.qatools.allure.annotations.Step;
 import us.codecraft.xsoup.Xsoup;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ public class QuickOrderManager {
 
     @Autowired ProductsManager productsManager;
 
+    @Step("Clear products list.")
     public void removeAllProductsFromList(UserSession userSession) {
         GETRequest clearProductsList = RESTORE_FORM.getClone();
         try {
