@@ -7,5 +7,5 @@ Feature: Registration functionality
 
   Scenario: Check that user can register to Storefront.
     When Generate any random User information.
-#    And Fill all User information fields with generated values on Registration page.
+    And Fill all User information fields with generated values on Registration page.
 
