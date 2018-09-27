@@ -14,4 +14,3 @@ Feature: Registration functionality
     And Fill all mandatory Billing address fields with generated values on Registration page.
     And Click on Register button on Registration page.
     Then Check that user is logged in.
-

@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class RegistrationStepDefs extends AbstractStepDefs {
 
-    @Autowired RegistrationPage registrationPage;
+    @Autowired private RegistrationPage registrationPage;
 
     @When("^Open Registration page.$")
     public void openHomePage() {
