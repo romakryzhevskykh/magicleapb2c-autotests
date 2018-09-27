@@ -23,7 +23,7 @@ public class OrderConfirmationPageStepDefs extends AbstractStepDefs {
         ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_SHIPPING_ADDRESS);
         assertEquals(orderConfirmationPage.getFirstLastName(), shippingAddress.getFirstNameText() + " " + shippingAddress.getLastNameText());
         assertEquals(orderConfirmationPage.getStreet(), shippingAddress.getAddressLine1());
-        assertEquals(orderConfirmationPage.getCityState(), shippingAddress.getTown().getFullName() + " " + shippingAddress.getState().getFullName());
+        assertEquals(orderConfirmationPage.getCityState(), shippingAddress.getTown().getFullName() + ", " + shippingAddress.getState().getFullName());
         assertEquals(orderConfirmationPage.getCountryAndZipCode(), shippingAddress.getCountry().getName() + " " + shippingAddress.getPostcode());
     }
 
