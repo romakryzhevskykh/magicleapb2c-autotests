@@ -4,10 +4,10 @@ Feature: My Account menu items visibility and ordering.
     Given Switch to Storefront owner.
     And User is logged in to Storefront.
     And My Account menu is opened.
-
+  @SmokeTest
   Scenario: Check that My Account menu has only 10 items.
     Then Check that My Account menu has only 10 items.
-
+  @SmokeTest
   Scenario: Check that Account Dashboard item is present in My Account menu.
     Then Check that Account Dashboard item is present in My Account menu.
 

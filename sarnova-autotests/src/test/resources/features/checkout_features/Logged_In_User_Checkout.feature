@@ -4,13 +4,13 @@ Feature: Logged in user checkout functionality
     Given Switch to Storefront owner.
     And User is logged in to Storefront.
     And Empty Cart.
-
+  @SmokeTest
   Scenario: Check that User has access to Checkout Shipping address step.
     Given Add to cart INDIVIDUAL, VALID product with quantity 1.
     And Open cart page.
     When Click on Checkout button on Cart page.
     Then Check that Checkout Shipping address step is opened.
-
+  @SmokeTest
   Scenario: Check that User can create new Shipping address and proceed to Checkout Shipping method step.
     Given Add to cart INDIVIDUAL, VALID product with quantity 1.
     And Open cart page.
@@ -30,7 +30,7 @@ Feature: Logged in user checkout functionality
     And Fill Phone number field on Checkout Shipping address step.
     And Click on Next button on Checkout Shipping address step.
     Then Check that Checkout Shipping method step is opened.
-
+  @SmokeTest
   Scenario: Check that User can place order with default department Shipping address.
     Given Add to cart INDIVIDUAL, VALID product with quantity 1.
     And Open cart page.
@@ -45,7 +45,7 @@ Feature: Logged in user checkout functionality
     Then Check that Order confirmation page is opened.
 
 #    Scenario: Check that User can place order with selecting another department Shipping address from drop-down.
-
+  @SmokeTest
   Scenario: Check that User can place order with new Shipping address.
     Given Add to cart INDIVIDUAL, VALID product with quantity 1.
     And Open cart page.
@@ -76,7 +76,7 @@ Feature: Logged in user checkout functionality
 #    GROUND Check that shipping price was added to total
 #    DAY_2ND Check that shipping price was not added to total
 #    OVERNIGHT Check that shipping price was not added to total
-
+  @SmokeTest
   Scenario: Check that User can place order with 2-DAY Shipping method.
     Given Add to cart INDIVIDUAL, VALID product with quantity 1.
     And Open cart page.
@@ -91,7 +91,7 @@ Feature: Logged in user checkout functionality
     And Click on Place order on Checkout Final Review step.
     Then Check that Order confirmation page is opened.
     And Check that delivery method is correct on Order confirmation page.
-
+  @SmokeTest
   Scenario: Check that User can place order with GROUND Shipping method.
     Given Add to cart INDIVIDUAL, VALID product with quantity 1.
     And Open cart page.
@@ -106,7 +106,7 @@ Feature: Logged in user checkout functionality
     And Click on Place order on Checkout Final Review step.
     Then Check that Order confirmation page is opened.
     And Check that delivery method is correct on Order confirmation page.
-
+  @SmokeTest
   Scenario: Check that User can place order with OVERNIGHT Shipping method.
     Given Add to cart INDIVIDUAL, VALID product with quantity 1.
     And Open cart page.
@@ -121,7 +121,7 @@ Feature: Logged in user checkout functionality
     And Click on Place order on Checkout Final Review step.
     Then Check that Order confirmation page is opened.
     And Check that delivery method is correct on Order confirmation page.
-
+  @SmokeTest
   Scenario: Check that User can place order with Credit card payment.
     Given Add to cart INDIVIDUAL, VALID product with quantity 1.
     And Open cart page.
@@ -140,7 +140,7 @@ Feature: Logged in user checkout functionality
     And Click on Place order on Checkout Final Review step.
     Then Check that Order confirmation page is opened.
     And Check that credit card data is correct on Order confirmation page.
-
+  @SmokeTest
   Scenario: Check that User can place order with Invoice payment.
     Given Add to cart INDIVIDUAL, VALID product with quantity 1.
     And Open cart page.
@@ -154,7 +154,7 @@ Feature: Logged in user checkout functionality
     And Click on Place order on Checkout Final Review step.
     Then Check that Order confirmation page is opened.
 #    Check invoice on Confirmation page
-
+  @SmokeTest
   Scenario: Check that user can place order with Billing address that differs from Shipping address.
     Given Add to cart INDIVIDUAL, VALID product with quantity 1.
     And Open cart page.
@@ -186,7 +186,7 @@ Feature: Logged in user checkout functionality
     And Click on Place order on Checkout Final Review step.
     Then Check that Order confirmation page is opened.
     Then Check that Billing Address is correct on Order confirmation page.
-
+  @SmokeTest
   Scenario: Check that Place order button is unable if Terms checkbox is not selected.
     Given Add to cart INDIVIDUAL, VALID product with quantity 1.
     And Open cart page.
@@ -246,7 +246,7 @@ Feature: Logged in user checkout functionality
 #    Then Check that Order confirmation page is opened.
 #    When Open Saved Credit cards page.
 #    Then Check that saved card is present in the list of Saved cards on Saved credit cards page.
-
+  @SmokeTest
   Scenario: Check Credit card is present in PayFabric after adding card on Checkout Payment method step.
     Given Add to cart INDIVIDUAL, VALID product with quantity 1.
     And Open cart page.
@@ -266,7 +266,7 @@ Feature: Logged in user checkout functionality
     And Set Sandbox to non live key.
     And Open Customer Wallets page in Pay Fabric.
     Then Check that Credit card is displayed on Pay Fabric Wallets page.
-
+  @SmokeTest
   Scenario: Check placed payment is present in PayFabric.
     Given Add to cart INDIVIDUAL, VALID product with quantity 1.
     And Open cart page.
