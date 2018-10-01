@@ -121,6 +121,7 @@ public class DashboardPage extends StorefrontBasePage {
         ArrayList<String> newTab = new ArrayList<>(getDriver().getWindowHandles());
         newTab.remove(oldTab);
         getDriver().switchTo().window(newTab.get(0));
+        waitUntilPageIsFullyLoaded();
         String currentUrl = getDriver().getCurrentUrl();
         getDriver().close();
         getDriver().switchTo().window(oldTab);
