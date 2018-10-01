@@ -12,7 +12,27 @@ Feature: Some actions on Shipments page
     And Help button is displayed.
     Then Feedback button is displayed.
 
-# @todo Continue from this place
-#  Scenario: Check that download pop-up can be opened and basic elements are present
-#    When Click on Download button on Shipments page.
-#    And Check that Download header title is displayed in the Download pop-up on Shipments page.
+  Scenario: Check that default Last 50 shipments filter works correctly.
+    Then Last 50 shipments filter is displayed by default.
+    Then All 50 shipments are available on the Shipments page.
+    Then Sum of all shipments in status boxes are equal to 50.
+
+  Scenario: Check that Last 100 shipments filter works correctly.
+    When User opens lastNFilters dropdown.
+    And Select Last 100 shipments filter.
+    Then All 100 shipments are available on the Shipments page.
+    Then Sum of all shipments in status boxes are equal to 100.
+
+  Scenario: Check that Last 100 shipments filter works correctly.
+    When User opens lastNFilters dropdown.
+    And Select Last 200 shipments filter.
+    Then Sum of all shipments in status boxes is more than 100 and less or equals to 200.
+    Then Paging for shipment dashboard is displayed.
+    Then Appropriate count of shipments is available on the Shipments page.
+
+  Scenario: Check that Last week shipment filter works correctly.
+    When User opens lastNFilters dropdown.
+    And Select Last week shipments filter.
+    Then Sum of all shipments in status boxes is more than 1 and less or equals to 200.
+    Then Appropriate count of shipments is available on the Shipments page.
+    Then Ship date is from week range.
