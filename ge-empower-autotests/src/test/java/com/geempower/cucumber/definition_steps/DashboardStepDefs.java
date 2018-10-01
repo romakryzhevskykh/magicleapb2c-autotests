@@ -203,7 +203,7 @@ public class DashboardStepDefs extends AbstractStepDefs {
 
     @Then("^User clicks on T&B Access button and T&B Access web site is successfully opened in new tab with correct url (.*).$")
     public void tBAccessWebSiteIsSuccessfullyOpenedInNewTabWithCorrectUrl(String tNbUrl) {
-        assertEquals(tNbUrl, dashboardPage.clickOnTandBAccessButtonAndGetSiteUrl());
+        assertTrue(dashboardPage.clickOnTandBAccessButtonAndGetSiteUrl().contains(tNbUrl));
     }
 
     @Then("^T&B Access widget is not displayed.")
