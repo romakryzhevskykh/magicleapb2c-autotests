@@ -10,4 +10,8 @@ public class InvoiceStepDefs extends AbstractStepDefs{
     @Autowired
     private InvoicePage invoicePage;
 
+    @Then("^(.*) title is displayed on Invoice page.$")
+    public void checkAllInvoicesTitle(String allInvoicesTitle) {
+        assertEquals(allInvoicesTitle, invoicePage.getInvoicesTitle());
+    }
 }

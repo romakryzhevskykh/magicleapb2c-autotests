@@ -27,4 +27,9 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
     public void checkThatAccountManagementPageIsOpened() {
         assertTrue(accountManagementPage.isOpened());
     }
+
+    @Then("^Is Favorites tab displayed by Default on Account Management page.$")
+    public void isFavoritesTabDisplayedByDefaultOnAccountManagementPage() {
+        assertTrue(accountManagementPage.isActiveFavoriteTabDisplayed());
+    }
 }

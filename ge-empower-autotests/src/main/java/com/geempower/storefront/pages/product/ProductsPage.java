@@ -21,4 +21,8 @@ public class ProductsPage extends StorefrontBasePage {
         return getCurrentUrl().equals(getPageUrl());
     }
 
+    @Step("Get Products title")
+    public String getProductsTitle() {
+        return $(ALL_PRODUCTS_TITLE_XPATH).getText();
+    }
 }

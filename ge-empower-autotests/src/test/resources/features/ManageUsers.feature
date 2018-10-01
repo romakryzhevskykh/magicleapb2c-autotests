@@ -4,3 +4,4 @@ Feature: Open Manage users page
     Given Switch to Storefront as admin.
     And User is logged in to Storefront.
     And Manage Users page is opened.
+    Then Manage Users title is displayed on Manage Users page.

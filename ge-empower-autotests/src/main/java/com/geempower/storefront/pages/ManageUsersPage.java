@@ -24,4 +24,10 @@ public class ManageUsersPage extends StorefrontBasePage {
         return getCurrentUrl().equals(getPageUrl());
     }
 
+    @Step("Get Manage Users title.")
+    public String getManageUsersTitle() {
+        waitUntilPageIsFullyLoaded();
+        return $(MANAGE_USERS_TITLE_XPATH).getText();
+    }
+
 }

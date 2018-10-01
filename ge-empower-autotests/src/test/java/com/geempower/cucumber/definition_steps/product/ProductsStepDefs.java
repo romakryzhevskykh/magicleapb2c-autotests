@@ -22,5 +22,9 @@ public class ProductsStepDefs extends AbstractStepDefs {
     @Autowired
     private RegionsManager regionsManager;
 
+    @Then("^(.*) title is displayed on Products page.$")
+    public void checkAllProductsTitle(String allProductsTitle) {
+        assertEquals(productsPage.getProductsTitle(), allProductsTitle);
+    }
 
 }

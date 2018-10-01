@@ -19,4 +19,49 @@ public class DashboardPage extends StorefrontBasePage {
     public boolean isOpened() {
         return getCurrentUrl().equals(getPageUrl());
     }
+
+    @Step("Check that order Status widget is displayed.")
+    public boolean orderStatusWidgetIsDisplayed() {
+        return isDisplayed(ORDER_STATUS_WIDGET_XPATH);
+    }
+
+    @Step("Check that Featured Updates widget is displayed.")
+    public boolean featuredUpdatesWidgetIsDisplayed() {
+        return isDisplayed(FEATURED_UPDATES_WIDGET_XPATH);
+    }
+
+    @Step("Check that order Search widget is displayed.")
+    public boolean orderSearchWidgetIsDisplayed() {
+        return isDisplayed(ORDER_SEARCH_WIDGET_XPATH);
+    }
+
+    @Step("Check that Price and Availability widget is displayed.")
+    public boolean priceAndAvailabilityWidgetIsDisplayed() {
+        return isDisplayed(PRICE_AND_AVAILABILITY_WIDGET_XPATH);
+    }
+
+    @Step("Check that Recent Orders widget is displayed.")
+    public boolean recentOrdersWidgetIsDisplayed() {
+        return isDisplayed(RECENT_ORDERS_WIDGET_XPATH);
+    }
+
+    @Step("Check that Recent List widget is displayed.")
+    public boolean recentListWidgetIsDisplayed() {
+        return isDisplayed(RECENT_LIST_WIDGET_XPATH);
+    }
+
+    @Step("Click on Skip training button.")
+    public void skipTrainingLevel() {
+        waitUntilPageIsFullyLoaded();
+        if (isDisplayed(SKIP_BUTTON_XPATH)) {
+            click(SKIP_BUTTON_XPATH);
+        }
+    }
+
+    @Step("Click on Close Cookies button.")
+    public void closeCookiesPopUp() {
+        if (isDisplayed(By.id(CLOSE_COOKIES_BUTTON_ID))) {
+            click(By.id(CLOSE_COOKIES_BUTTON_ID));
+        }
+    }
 }

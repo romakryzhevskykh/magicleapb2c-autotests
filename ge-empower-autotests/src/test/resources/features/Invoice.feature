@@ -4,3 +4,4 @@ Feature: Open Invoice page
     Given Switch to Storefront as rmAdmin.
     And User is logged in to Storefront.
     And Invoice page is opened.
+    Then Invoices title is displayed on Invoice page.
