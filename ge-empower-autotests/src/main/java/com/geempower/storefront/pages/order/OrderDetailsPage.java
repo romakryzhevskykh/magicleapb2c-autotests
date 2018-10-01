@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.geempower.storefront.page_block_elements.InvoiceDetailsPopUpElements.*;
 import static com.geempower.storefront.page_elements.order.OrderDetailsPageElements.*;
@@ -173,6 +175,109 @@ public class OrderDetailsPage extends StorefrontBasePage {
     @Step("Is Table With Products Displayed.")
     public boolean isTableWithProductsDisplayed() {
         return isDisplayed(TABLE_WITH_PRODUCTS_XPATH);
+    }
+
+    @Step("User Expands Quote Details Block.")
+    public void userExpandsQuoteDetailsBlock() {
+        click(EXPAND_QUOTES_BLOCK_ARROW_BUTTON_XPATH);
+        waitUntilPageIsFullyLoaded();
+    }
+
+    @Step("Get Label Value in Quote Details block.")
+    public String getLabelValueInQuoteDetailsBlock(String label) {
+        return $(LABEL_VALUES_IN_QUOTES_BLOCK_XPATH, label).getText();
+    }
+
+    @Step("Is Label in Quote Details Block Displayed.")
+    public boolean isLabelInQuoteDetailsBlockDisplayed(String userNoLabel) {
+        return isDisplayed(LABELS_IN_QUOTES_BLOCK_XPATH, userNoLabel);
+    }
+
+    @Step("User Closes Quote Details Block.")
+    public void userClosesQuoteDetailsBlock() {
+        click(HIDE_QUOTES_BLOCK_ARROW_BUTTON_XPATH);
+    }
+
+    @Step("User Expands/Closes status boxes.")
+    public void userExpandsClosesStatusBoxes() {
+        click(EXPAND_CLOSE_STATUS_BOXES_ARROW_BUTTON_XPATH);
+    }
+
+    @Step("Get Select Items Text First Part.")
+    public String getSelectItemsTextFirstPart() {
+        return $(REORDER_BUTTON_TEXT_FIRST_PART_XPATH).getText().trim();
+    }
+
+    @Step("Get Select Items Text Second Part.")
+    public String getSelectItemsTextSecondPart() {
+        return $(REORDER_BUTTON_TEXT_SECOND_PART_XPATH).getText().trim();
+    }
+
+    @Step("Get Bottom Row In Details Quotes Block.")
+    public WebElement getBottomRowInDetailsQuotesBlock() {
+        waitUntilPageIsFullyLoaded();
+        return $(BOTTOM_ROW_IN_DETAILS_QUOTES_BLOCK_XPATH);
+    }
+
+    @Step("Is Expanded Status Box Line Displayed.")
+    public boolean isExpandedStatusBoxLineDisplayed() {
+        waitUntilPageIsFullyLoaded();
+        return isDisplayed(EXPANDED_STATUS_BOXES_LINE_XPATH);
+    }
+
+    @Step("Get All Statuses In Status Boxes.")
+    public List<String> getAllStatusesInStatusBoxes() {
+        return $$(STATUS_BOX_TITLES_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    @Step("Get All Time Statuses Near Color Icons.")
+    public List<String> getAllTimeStatusNearColorIcons() {
+        return $$(TIME_STATUSES_NEAR_COLOR_ICON_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    @Step("User Clicks On Time Status Drop Down Field.")
+    public void userClicksOnTimeStatusDropDownField() {
+        click(TIME_STATUSES_DROP_DOWN_FIELD_XPATH);
+    }
+
+    @Step("Get All Time Statuses In Time Status Drop Down.")
+    public Stream<WebElement> getAllTimeStatusesInTimeStatusDropDown() {
+        waitUntilPageIsFullyLoaded();
+        return $$(TIME_STATUSES_VALUES_IN_DROP_DOWN_XPATH).stream();
+    }
+
+    @Step("Get All Detail Order Table Headers.")
+    public List<String> getAllDetailOrderTableHeaders() {
+        return $$(ORDER_DETAILS_TABLE_HEADERS_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    @Step("User Opens Random Product Detail Block.")
+    public void userOpensRandomProductDetailBlock() {
+        $$(EXPAND_DETAIL_PRODUCT_BLOCK_ARROW_XPATH).stream().findAny().ifPresent(this::click);
+        waitUntilPageIsFullyLoaded();
+    }
+
+    @Step("User Closes Opened Product Detail Block.")
+    public void userClosesOpenedProductDetailBlock() {
+        $(CLOSE_DETAIL_PRODUCT_BLOCK_ARROW_XPATH).click();
+    }
+
+    @Step("Get Label Value In Product Details Block.")
+    public String getLabelValueInProductDetailsBlock(String label) {
+        waitUntilPageIsFullyLoaded();
+        return $(LABEL_VALUES_IN_PRODUCT_DETAILS_BLOCK_XPATH, label).getText();
+    }
+
+    @Step("Get All Product Detail Labels.")
+    public List<String> getAllProductDetailLabels() {
+        return $$(LABELS_IN_PRODUCT_DETAILS_BLOCK_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    @Step("Get Sum Of All Ext Price.")
+    public double getSumOfAllExtPrice() {
+        return $$(ALL_EXT_PRICES_IN_PRODUCT_DETAILS_BLOCK_XPATH).stream()
+                .map(s -> Double.parseDouble(s.getAttribute("value").replace(",", "")))
+                .mapToDouble(Double::doubleValue).sum();
     }
 
     @Step("Click On Tracking Info Hyper Link.")

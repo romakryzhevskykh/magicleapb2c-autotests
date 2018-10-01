@@ -1,6 +1,7 @@
 package com.geempower.storefront.pages;
 
 import com.geempower.storefront.StorefrontBasePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
@@ -46,7 +47,7 @@ public class ShipmentsPage extends StorefrontBasePage {
 
     @Step("Get Chosen Filter by date value.")
     public String getChosenFilterValue() {
-        return $(ACTIVE_N_SHIPMENTS_VALUE_XPATH).getText();
+        return $(By.id(ACTIVE_N_SHIPMENTS_VALUE_ID)).getText();
     }
 
     @Step("Get Count Of Shipments From Status Boxes.")
