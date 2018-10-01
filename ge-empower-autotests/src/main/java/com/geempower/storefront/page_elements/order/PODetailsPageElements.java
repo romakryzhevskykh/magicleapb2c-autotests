@@ -8,5 +8,7 @@ public class PODetailsPageElements {
     public final static String PO_NO_TITLE_NUMBER_XPATH = "//input[@id='po-number']";
     public final static String EMAIL_DOWNLOAD_ICON_XPATH = "//i[@class='fa fa-download']";
     public final static String EXPAND_CLOSE_STATUS_BOXES_ARROW_BUTTON_XPATH = "//i[@class = 'fa fa-chevron-down']";
+    public final static String EXPANDED_STATUS_BOXES_LINE_XPATH = "//div[@class='details-graphical clearfix active']";
+    public final static String STATUS_BOX_TITLES_XPATH = "//div[@class='order-item']//span[@class = 'item-name']";
 }
 

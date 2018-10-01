@@ -2,8 +2,12 @@ package com.geempower.storefront.pages.order;
 
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.geempower.storefront.page_elements.order.PODetailsPageElements.*;
 
@@ -47,5 +51,16 @@ public class PODetailsPage extends StorefrontBasePage {
     @Step("User Expands/Closes status boxes on PO Details page")
     public void userExpandsClosesStatusBoxesOnPODetailsPage() {
         click(EXPAND_CLOSE_STATUS_BOXES_ARROW_BUTTON_XPATH);
+    }
+
+    @Step("Is Expanded Status Box Line Displayed.")
+    public boolean isExpandedStatusBoxLineDisplayedOnPODetailsPage() {
+        waitUntilPageIsFullyLoaded();
+        return isDisplayed(EXPANDED_STATUS_BOXES_LINE_XPATH);
+    }
+
+    @Step("Get All Statuses In Status Boxes On PO Details Page.")
+    public List<String> getAllStatusesInStatusBoxesOnPODetailsPage() {
+        return $$(STATUS_BOX_TITLES_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
     }
 }
