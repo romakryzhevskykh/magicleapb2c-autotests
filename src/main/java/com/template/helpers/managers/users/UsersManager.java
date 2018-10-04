@@ -1,13 +1,16 @@
-package com.template.helpers.user_engine;
+package com.template.helpers.managers.users;
 
+import com.template.helpers.models.users.*;
 import com.template.hybris.Cockpit;
 import com.template.hybris.backoffice.models.TemplateBackoffice;
 import com.template.hybris.hac.models.TemplateHAC;
 import com.template.hybris.import_cockpit.models.TemplateImportCockpit;
 import com.template.storefront.models.TemplateStorefront;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 
+@Component
 public class UsersManager {
     ArrayList<User> users = new ArrayList<>();
 

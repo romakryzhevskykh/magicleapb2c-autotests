@@ -1,5 +1,9 @@
-package com.template.helpers.user_engine;
+package com.template.helpers.managers.users;
 
+import com.template.helpers.models.users.User;
+import com.template.helpers.models.users.UserRole;
+import com.template.helpers.models.users.UserSession;
+import com.template.helpers.models.users.UserSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

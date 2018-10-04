@@ -4,7 +4,7 @@ import com.template.helpers.UIComponent;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import static com.template.storefront.page_elements.LoggedOutHeaderRowBlockElements.SIGN_IN_BUTTON_XPATH;
+import static com.template.storefront.page_block_elements.LoggedOutHeaderRowBlockElements.SIGN_IN_BUTTON_XPATH;
 
 @Component
 public class LoggedOutHeaderRowBlock extends UIComponent {

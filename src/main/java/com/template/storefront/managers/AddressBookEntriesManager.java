@@ -1,6 +1,6 @@
 package com.template.storefront.managers;
 
-import com.template.helpers.user_engine.User;
+import com.template.helpers.models.users.User;
 import com.template.storefront.models.AddressBookEntry;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

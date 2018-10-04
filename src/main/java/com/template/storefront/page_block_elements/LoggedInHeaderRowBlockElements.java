@@ -1,4 +1,4 @@
-package com.template.storefront.page_elements;
+package com.template.storefront.page_block_elements;
 
 public class LoggedInHeaderRowBlockElements {
 

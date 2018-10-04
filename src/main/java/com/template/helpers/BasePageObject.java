@@ -1,5 +1,8 @@
 package com.template.helpers;
 
+import org.openqa.selenium.UnhandledAlertException;
+import ru.yandex.qatools.allure.annotations.Step;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
@@ -24,11 +27,23 @@ public abstract class BasePageObject extends UIComponent {
 
     public void open() {
         open(getPageUrl());
+    }
+
+    @Step("Open page {0}.")
+    protected void open(String url) {
+        try {
+            getDriver().get(url);
+        } catch (UnhandledAlertException ex) {
+            System.out.println("WARNING: Unexpected alert: " + ex);
+            alertHandling();
+            open(url);
+        }
         waitUntilPageIsFullyLoaded();
     }
 
     public abstract String getPageUrl();
 
+    @Step("Refresh page.")
     public void refreshPage() {
         getDriver().navigate().refresh();
         waitUntilPageIsFullyLoaded();

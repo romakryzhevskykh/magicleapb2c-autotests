@@ -1,6 +1,6 @@
 package com.template.storefront.pages;
 
-import com.template.helpers.user_engine.UserSession;
+import com.template.helpers.models.users.UserSession;
 import com.template.storefront.managers.AddressBookEntriesManager;
 import com.template.storefront.models.AddressBookEntry;
 import com.template.storefront.page_blocks.AddressBookAddUpdateEntryBlock;

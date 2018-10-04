@@ -1,6 +1,6 @@
 package com.template.helpers.request_engine;
 
-import com.template.helpers.user_engine.UserSession;
+import com.template.helpers.models.users.UserSession;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;

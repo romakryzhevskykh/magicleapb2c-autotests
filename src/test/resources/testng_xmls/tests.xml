@@ -4,12 +4,14 @@
 <suite name="Suite1" parallel="tests">
     <test name="LoginSuite">
         <parameter name="browserName" value="chrome" />
+        <parameter name="headless" value="true"/>
         <classes>
             <class name="com.template.cucumber.LoginSuite"/>
         </classes>
     </test>
     <test name="AddressBookSuite">
         <parameter name="browserName" value="chrome" />
+        <parameter name="headless" value="true"/>
         <classes>
             <class name="com.template.cucumber.AddressBookSuite"/>
         </classes>

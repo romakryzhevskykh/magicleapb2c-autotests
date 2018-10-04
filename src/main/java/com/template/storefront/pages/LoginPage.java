@@ -1,6 +1,6 @@
 package com.template.storefront.pages;
 
-import com.template.helpers.user_engine.UserSession;
+import com.template.helpers.models.users.UserSession;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 

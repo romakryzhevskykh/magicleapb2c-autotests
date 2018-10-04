@@ -1,6 +1,6 @@
 package com.template.cucumber.definition_steps;
 
-import com.template.helpers.user_engine.UserSessions;
+import com.template.helpers.managers.users.UserSessions;
 import com.template.storefront.page_blocks.HeaderRowPageBlock;
 import com.template.storefront.pages.LoginPage;
 import com.template.storefront.pages.StartPage;

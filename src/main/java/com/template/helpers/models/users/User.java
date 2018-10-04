@@ -1,4 +1,4 @@
-package com.template.helpers.user_engine;
+package com.template.helpers.models.users;
 
 import com.template.hybris.Cockpit;
 

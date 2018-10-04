@@ -1,6 +1,6 @@
 package com.template.storefront.models;
 
-import com.template.helpers.user_engine.User;
+import com.template.helpers.models.users.User;
 
 public class AddressBookEntry {
     private String country;

@@ -1,6 +1,6 @@
 package com.template.helpers.request_engine;
 
-import com.template.helpers.user_engine.UserSession;
+import com.template.helpers.models.users.UserSession;
 
 import java.io.DataOutputStream;
 import java.io.IOException;

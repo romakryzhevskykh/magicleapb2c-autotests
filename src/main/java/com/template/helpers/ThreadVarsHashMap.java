@@ -27,4 +27,9 @@ public class ThreadVarsHashMap {
     public void clear() {
         if (tlHashMapList.get() != null) tlHashMapList.get().clear();
     }
+
+    @Override
+    public String toString() {
+        return tlHashMapList.get().entrySet().toString();
+    }
 }

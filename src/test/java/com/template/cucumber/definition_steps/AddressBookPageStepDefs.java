@@ -1,6 +1,6 @@
 package com.template.cucumber.definition_steps;
 
-import com.template.helpers.user_engine.UserSessions;
+import com.template.helpers.managers.users.UserSessions;
 import com.template.storefront.managers.AddressBookEntriesManager;
 import com.template.storefront.models.AddressBookEntry;
 import com.template.storefront.page_blocks.HeaderRowPageBlock;

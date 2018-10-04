@@ -1,6 +1,6 @@
 package com.template.hybris.import_cockpit.pages;
 
-import com.template.helpers.user_engine.UserSession;
+import com.template.helpers.models.users.UserSession;
 import com.template.hybris.import_cockpit.ImportCockpitBasePage;
 import org.openqa.selenium.By;
 import org.springframework.stereotype.Component;

@@ -19,12 +19,12 @@ public class CucumberTestsRunner extends AbstractTestNGSpringContextTests {
 
     private TestNGCucumberRunner testNGCucumberRunner;
 
-    @Parameters("browserName")
+    @Parameters({"browserName", "headless"})
     @BeforeTest
-    public void initSuite(String browserName) throws Exception {
+    public void initSuite(String browserName, String headless) throws Exception {
         super.springTestContextBeforeTestClass();
         super.springTestContextPrepareTestInstance();
-        webDriverThreadTestSetups.setTlDriverSetups(new WebDriverSetups(seleniumGridSettings.getHubUrl(), browserName));
+        webDriverThreadTestSetups.setTlDriverSetups(new WebDriverSetups(seleniumGridSettings.getHubUrl(), browserName, headless));
     }
 
     @BeforeClass

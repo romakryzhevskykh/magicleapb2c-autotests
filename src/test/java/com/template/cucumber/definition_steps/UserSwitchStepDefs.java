@@ -1,8 +1,8 @@
 package com.template.cucumber.definition_steps;
 
-import com.template.helpers.user_engine.BackofficeUserRole;
-import com.template.helpers.user_engine.ImportCockpitUserRole;
-import com.template.helpers.user_engine.StorefrontUserRole;
+import com.template.helpers.models.users.BackofficeUserRole;
+import com.template.helpers.models.users.ImportCockpitUserRole;
+import com.template.helpers.models.users.StorefrontUserRole;
 import com.template.helpers.web_engine.WebDriverSessions;
 import com.template.storefront.pages.StartPage;
 import cucumber.api.java.en.Given;

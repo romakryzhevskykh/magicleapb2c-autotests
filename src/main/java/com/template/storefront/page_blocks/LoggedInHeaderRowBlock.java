@@ -4,7 +4,7 @@ import com.template.helpers.UIComponent;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import static com.template.storefront.page_elements.LoggedInHeaderRowBlockElements.*;
+import static com.template.storefront.page_block_elements.LoggedInHeaderRowBlockElements.*;
 
 @Component
 public class LoggedInHeaderRowBlock extends UIComponent {
