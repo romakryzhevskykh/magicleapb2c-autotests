@@ -3,6 +3,4 @@
 .idea/
 target
 #src/test/resources/META-INF
-com.template.template-automatedtests.iml
-sarnova-autotests
-ge-empower-autotests
+com.hearth.song.b2b-automatedtests.iml
