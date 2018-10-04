@@ -65,3 +65,5 @@ SARNOVA TEST AUTOMATION PROJECT
 - by default Spring will run stage profile with stage properties, to run other(f.e. production) profiles, use additional command:
     - -Dspring.profiles.active=production :
         - _mvn clean test site jetty:run -Dspring.profiles.active=environmentToUse
+- To launch by tags: 
+    -Dcucumber.options="--tags @TagName"

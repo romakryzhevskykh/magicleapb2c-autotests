@@ -4,6 +4,7 @@ Feature: Registration functionality
     Given Switch to Storefront cockpit independent test user.
     And User is logged out from Storefront.
     And Open Registration page.
+
   @SmokeTest
   Scenario: Check that user can register to Storefront.
     When Generate any random User information.
