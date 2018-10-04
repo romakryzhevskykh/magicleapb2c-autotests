@@ -8,7 +8,7 @@ public class ManageUsersPageElements {
     public final static String PENDING_REQUEST_TAB_XPATH = "//a[@aria-controls='pending-requests']";
 
     //USERS TAB
-    public final static String USERS_TAB_XPATH = "//a[@aria-controls='users']";
+    public final static String USERS_TAB_XPATH = "//a[@href='#users']";
     public final static String USER_TERM_INPUT_XPATH = "//input[@id='userterm']";
     public final static String ACCOUNT_DETAIL_SEARCH_INPUT_XPATH = "//input[@class='form-control account-detail-search ui-autocomplete-input']";
     public final static String SEARCH_USER_BY_PARAMS_BUTTON_XPATH = "//button[@class='btn primary-btn user-search-btn']";
