@@ -423,8 +423,8 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then T&B Access widget is not displayed.
 
     Examples:
-      | userId  | tNbTitle                       | tNbUrl                             |
-      | rost.sm | Click here to enter T&B Access | https://tnbaccess.tnb.com/sps/tbx/ |
+      | userId  | tNbTitle                       | tNbUrl                     |
+      | rost.sm | Click here to enter T&B Access | https://tnbaccess.tnb.com/ |
 
   Scenario: Check that Help button works correctly on the Dashboard page.
     And Dashboard page is opened.
