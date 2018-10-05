@@ -1,19 +1,22 @@
 Feature: Quick order add to Cart functionality.
 
-  Background:
+   Background:
     Given Switch to Storefront owner.
     And User is logged in to Storefront.
     And Quick order list is empty.
     And Open Quick order page.
 
+  @SmokeTest
   Scenario: Check that Add to Cart button is unable if Quick order list is empty.
     Then Check that Add to cart button is unable on Quick order page.
 
+  @SmokeTest
   Scenario: Check that Add to Cart button is unable if Quick order list has only products with QTY 0.
     When Add 1 VALID, INDIVIDUAL product to Quick order list on Quick order page.
     And Set QTY 0 to all UOM on Quick order page.
     Then Check that Add to cart button is unable on Quick order page.
 
+  @SmokeTest
   Scenario: Check that user can add single product to cart.
     Given Empty Cart.
     When Add 1 VALID, INDIVIDUAL product to Quick order list on Quick order page.

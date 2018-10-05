@@ -7,4 +7,6 @@ target
 # src/test/resources/META-INF/qa.properties
 # src/test/resources/META-INF/stage.properties
 # src/test/resources/META-INF/selenium_grid.properties
+# src/test/java/cucumber/SmokeTestSuite
+# src/test/resources/testng_xmls/smokeTests.xml
 sarnova-automatedtests.iml

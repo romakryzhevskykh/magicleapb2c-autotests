@@ -29,7 +29,8 @@ Feature: Cart page Add to Supply list functionality.
 #    Then Check that entered name is the name of Supply list on the Supply list details page.
 #    Then Check that selected product(s) is(are) displayed on the Supply list details page.
 
-  Scenario: Check that shopper can add a single product from cart to existing Supply list.
+  @SmokeTest
+    Scenario: Check that shopper can add a single product from cart to existing Supply list.
     Given Active Supply list that doesn't contain this products exists.
     And Open cart page.
     And Click on add to Supply list button on Cart page.
@@ -41,6 +42,7 @@ Feature: Cart page Add to Supply list functionality.
     Then Check that entered name is the name of Supply list on the Supply list details page.
     Then Check that selected product(s) is(are) displayed on the Supply list details page.
 
+  @SmokeTest
   Scenario: Check that shopper can add a single product to new(with action of creating) Supply list.
     Given Open cart page.
     And Click on add to Supply list button on Cart page.
@@ -52,6 +54,7 @@ Feature: Cart page Add to Supply list functionality.
     Then Check that entered name is the name of Supply list on the Supply list details page.
     Then Check that selected product(s) is(are) displayed on the Supply list details page.
 
+  @SmokeTest
   Scenario: Check that shopper can add few product from cart to existing Supply list.
     Given Add to cart INDIVIDUAL, VALID product with quantity 1 that hasn't been added before.
     And Active Supply list that doesn't contain this products exists.
