@@ -222,8 +222,8 @@ public class DashboardStepDefs extends AbstractStepDefs {
         assertEquals(viewAllUrl, dashboardPage.getViewAllUrl());
     }
 
-    @Then("^(\\d+) features are available in the Featured Updates widget.$")
+    @Then("^More than (\\d+) features are available in the Featured Updates widget.$")
     public void featuresAreAvailableInTheFeaturedUpdatesWidget(int countOfFeatures) {
-        assertTrue(dashboardPage.getCountOfFeatures() == countOfFeatures);
+        assertTrue(dashboardPage.getCountOfFeatures() > countOfFeatures);
     }
 }

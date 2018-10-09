@@ -443,7 +443,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     When Close cookies pop-up.
     Then Featured Updates title is displayed in the Featured Updates widget.
     Then View All link is displayed with correct url <viewAllUrl>.
-    Then 8 features are available in the Featured Updates widget.
+    Then More than 5 features are available in the Featured Updates widget.
 
     Examples:
       | viewAllUrl                       |
