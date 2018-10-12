@@ -25,7 +25,7 @@ public class ManageUsersPageElements {
     public final static String USER_STATUS_FIELD_XPATH = USERS_TABLE_XPATH + FIRST_USER_XPATH + "/td[8]";
 
     public final static String USER_DETAILS_BLOCK_XPATH = "//div[@class='info-wrapper no-info-wrapper-link p-0']";
-    public final static String USER_DELAILS_USER_ID_XPATH = USER_DETAILS_BLOCK_XPATH + "//li[@class='col-xs-6 col-sm-3']//label[contains(.,'User ID')]/following::p[1]";
+    public final static String USER_DETAILS_USER_ID_XPATH = USER_DETAILS_BLOCK_XPATH + "//li[@class='col-xs-6 col-sm-3']//label[contains(.,'User ID')]/following::p[1]";
     public final static String ACTIVE_USER_STATUS_LABEL_XPATH = "//span[@class='ml-10 manage-user-revalidate']/span";
     public final static String FULL_USER_SUB_STATUS_XPATH = "//span[@class='ml-10 manage-user-revalidate']";
     public final static String USER_ACTIONS_LIST_OPEN_ICON_XPATH = "//button[@class='btn btn-blue dropdown-toggle']/span";
@@ -34,8 +34,14 @@ public class ManageUsersPageElements {
     //REVALIDATION TAB
     public final static String REVALIDATION_TAB_XPATH = "//a[@aria-controls='revalidation']";
 
-    //USER DETAIL BLOCK
+    //USER DETAILS BLOCK
     public final static String ADD_ACCOUNT_BUTTON_XPATH = "//i[@data-original-title='Add Account']";
+    public final static String USER_FULL_NAME_IN_USER_DETAILS_BLOCK_XPATH = "//div[@class='name-text']//h4/span[1]";
+    public final static String EXPAND_USER_DETAILS_BLOCK_BUTTON_XPATH = "//i[@class='fa fa-angle-down']";
+    public final static String CLOSE_USER_DETAILS_BLOCK_BUTTON_XPATH = "//i[@class='fa fa-angle-up']";
+    public final static String BOTTOM_ROW_IN__USER_DETAILS_BLOCK_XPATH = "//ul[@class='quote-bottom-section row m-0']";
+    public final static String ALL_LABEL_VALUES_IN_USER_DETAILS_BLOCK_XPATH = "//div[@class='quote-right-section clearfix']//p";
+    public final static String LABEL_VALUE_IN_USER_DETAILS_BLOCK_XPATH = "//label[contains(text(),'%s')]/following-sibling::p";
 
     //Add Account pop-up
     public final static String ADD_ACCOUNT_TITLE_XPATH = ".//*[@id='add-account-modal']//h4[@class='modal-title']";

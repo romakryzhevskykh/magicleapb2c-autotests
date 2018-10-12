@@ -1,5 +1,6 @@
 package com.geempower.cucumber.definition_steps;
 
+import com.geempower.helpers.managers.UserManager;
 import com.geempower.storefront.pages.ProfilePage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
@@ -14,6 +15,8 @@ import static org.testng.Assert.assertTrue;
 public class ProfileStepDefs extends AbstractStepDefs {
     @Autowired
     private ProfilePage profilePage;
+    @Autowired
+    private UserManager userManager;
 
     @Then("^(.*) title is displayed on Profile page.$")
     public void checkProfileTitle(String profileTitle) {
@@ -76,5 +79,12 @@ public class ProfileStepDefs extends AbstractStepDefs {
     @And("^User clicks on Deactivate my User ID button.$")
     public void userClicksOnDeactivateMyUserIDButton() {
         profilePage.clickOnDeactivateMyUserIdButton();
+    }
+
+    @And("^Create User instance.$")
+    public void createUserInstance() {
+        userManager.createUserInstance(profilePage.getUserName(), profilePage.getUserLastName(), profilePage.getUserId(),
+                profilePage.getUserRole(), profilePage.getCompanyName(), profilePage.getEmail(), profilePage.getPhoneNumber(),
+                profilePage.getLanguage(), profilePage.getRelationship());
     }
 }
