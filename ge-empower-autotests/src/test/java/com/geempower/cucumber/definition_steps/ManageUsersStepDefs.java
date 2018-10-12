@@ -520,7 +520,6 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         String userFullName = user.getFirstName() + " " + user.getLastName();
         List<String> labelValues = Stream.of(user.getUserRole(), user.getEmail(), user.getUserId(),
                 user.getCompanyName(), user.getPhoneNumber(), user.getLanguage()).collect(Collectors.toList());
-
         assertEquals(userFullName, manageUsersPage.getUserFullNameInDetailsBlock());
         assertTrue(manageUsersPage.getAllLabelValuesInUserDetailsBlock().containsAll(labelValues));
     }
