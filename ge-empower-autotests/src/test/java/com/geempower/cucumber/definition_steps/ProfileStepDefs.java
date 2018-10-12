@@ -85,6 +85,6 @@ public class ProfileStepDefs extends AbstractStepDefs {
     public void createUserInstanceOnProfilePage() {
         userManager.createUserInstance(profilePage.getUserName(), profilePage.getUserLastName(), profilePage.getUserId(),
                 profilePage.getUserRole(), profilePage.getCompanyName(), profilePage.getEmail(), profilePage.getPhoneNumber(),
-                profilePage.getLanguage());
+                profilePage.getLanguage(), profilePage.getRelationship());
     }
 }

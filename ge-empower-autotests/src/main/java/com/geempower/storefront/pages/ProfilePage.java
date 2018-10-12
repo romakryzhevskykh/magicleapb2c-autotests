@@ -71,6 +71,11 @@ public class ProfilePage extends StorefrontBasePage {
         return $(USER_LANGUAGE_XPATH).getText();
     }
 
+    @Step("Get Relationship user's profile.")
+    public String getRelationship() {
+        return $(USER_RELATIONSHIP_XPATH).getText();
+    }
+
     @Step("Get Role For Each Region in user Profile")
     public HashMap<String, String> getRoleForEachRegion() {
         waitUntilPageIsFullyLoaded();

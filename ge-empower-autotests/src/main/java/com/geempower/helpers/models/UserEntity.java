@@ -20,10 +20,11 @@ public class UserEntity {
     String phoneNumber;
     @Getter
     String language;
+    @Getter
+    String relationship;
 
-    //relationship to GE
-
-    public UserEntity(String firstName, String lastName, String userId, String userRole, String companyName, String email, String phoneNumber, String language) {
+    public UserEntity(String firstName, String lastName, String userId, String userRole, String companyName,
+                      String email, String phoneNumber, String language, String relationship) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userId = userId;
@@ -32,5 +33,6 @@ public class UserEntity {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.language = language;
+        this.relationship = relationship;
     }
 }

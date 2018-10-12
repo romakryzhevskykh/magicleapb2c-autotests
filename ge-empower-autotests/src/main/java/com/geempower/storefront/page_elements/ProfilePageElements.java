@@ -10,6 +10,7 @@ public class ProfilePageElements {
     public final static String USER_PHONE_NUMBER_XPATH = "//input[@name='phoneNumber']";
     public final static String USER_LANGUAGE_XPATH = "//span[contains(@id,'select2-defaultLanguage')]";
     public final static String USER_ROLE_XPATH = "//span[contains(@id,'select2-role')]";
+    public final static String USER_RELATIONSHIP_XPATH = "//span[contains(@id,'select2-relationship')]";
     public final static String USER_ROLE_IN_EACH_REGION_XPATH = "//div[@class='form-group']/div/label[text()='%s']/../p";
     public final static String UNREGISTER_SECTION_TITLE_XPATH = "//div[@class='row unregister']//p";
     public final static String DEACTIVATE_BUTTON_XPATH = "//button[@data-target='#deactivate-my-account-modal']";
