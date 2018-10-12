@@ -13,15 +13,15 @@ public class WebDriverSetups {
         this.headless = Boolean.valueOf(headless);
     }
 
-    public URL getHubUrl() {
+    URL getHubUrl() {
         return hubUrl;
     }
 
-    public String getBrowserName() {
+    String getBrowserName() {
         return browserName;
     }
 
-    public boolean isHeadless() {
+    boolean isHeadless() {
         return headless;
     }
 }

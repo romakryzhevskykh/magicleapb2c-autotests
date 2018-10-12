@@ -164,27 +164,27 @@ public class UsersManager {
         Document htmlResponse = userDetailsPage.getResponse().getHTMLResponseDocument();
         Elements elements = Xsoup.select(htmlResponse, "//div[@class=account-list]/div[@class=account-cards]/div[@class=row]/div[contains(@class,card)]").getElements();
         elements.stream()
+                .filter(element -> Xsoup.select(element, "div[@class=account-cards-actions]/span/a/@data-action-confirmation-modal-id").get() != null)
                 .filter(element ->
                         Xsoup.select(element, "div[@class=account-cards-actions]/span/a/@data-action-confirmation-modal-id")
                                 .get()
                                 .contains("removeUserGroup"))
                 .filter(element -> StorefrontUserRole.getRoleByRoleCode(Xsoup.select(element, "ul/li").getElements().get(0).text()) == null)
                 .forEach(element -> {
-                    System.out.println("TEXT ON ELEMENT GROUP: " + StorefrontUserRole.getRoleByRoleCode(Xsoup.select(element, "ul/li").getElements().get(0).text()));
-                    String groupName = Xsoup.select(element, "ul/li").getElements().get(0).text().trim();
+                    String groupName = Xsoup.select(element, "ul/li/a").getElements().get(0).text().trim();
                     if (userGroupsManager.getUserGroupByUid(groupName) == null) {
                         userGroupsManager.createInstance(groupName);
                     }
                     user.getUserGroups().add(userGroupsManager.getUserGroupByUid(groupName));
                 });
         elements.stream()
+                .filter(element -> Xsoup.select(element, "div[@class=account-cards-actions]/span/a/@data-action-confirmation-modal-id").get() != null)
                 .filter(element ->
                         Xsoup.select(element, "div[@class=account-cards-actions]/span/a/@data-action-confirmation-modal-id")
                                 .get()
                                 .contains("removeUserGroup"))
                 .filter(element -> StorefrontUserRole.getRoleByRoleCode(Xsoup.select(element, "ul/li").getElements().get(0).text()) != null)
                 .forEach(element -> {
-                    System.out.println("TEXT ON ELEMENT ROLE: " + StorefrontUserRole.getRoleByRoleCode(Xsoup.select(element, "ul/li").getElements().get(0).text()));
                     String roleName = Xsoup.select(element, "ul/li").getElements().get(0).text().trim();
                     user.getUserRoles().add(StorefrontUserRole.getRoleByRoleCode(roleName));
                 });

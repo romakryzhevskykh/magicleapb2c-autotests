@@ -11,7 +11,7 @@ public class WebDriverThreadTestSetups {
         tlDriverSetups.set(webDriverSetups);
     }
 
-    public synchronized WebDriverSetups getWebDriverSetups() {
+    synchronized WebDriverSetups getWebDriverSetups() {
         return tlDriverSetups.get();
     }
 }
