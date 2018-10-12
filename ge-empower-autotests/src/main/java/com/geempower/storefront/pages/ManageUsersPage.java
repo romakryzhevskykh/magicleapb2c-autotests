@@ -4,8 +4,12 @@ import com.geempower.helpers.models.Region;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.geempower.storefront.page_block_elements.IwantToBlockElements.*;
 import static com.geempower.storefront.page_elements.manageUsers.ManageUsersPageElements.*;
@@ -169,7 +173,7 @@ public class ManageUsersPage extends StorefrontBasePage {
 
     @Step("Getting user's id from the user's details block.")
     public String getUserIdFromUserDetailsBlock() {
-        return $(USER_DELAILS_USER_ID_XPATH).getText();
+        return $(USER_DETAILS_USER_ID_XPATH).getText();
     }
 
     @Step("Open Actions list.")
@@ -220,4 +224,34 @@ public class ManageUsersPage extends StorefrontBasePage {
         click(By.id(ADD_BUTTON_ID));
     }
 
+    @Step("Get User Full Name In Details Block.")
+    public String getUserFullNameInDetailsBlock() {
+        return $(USER_FULL_NAME_IN_USER_DETAILS_BLOCK_XPATH).getText();
+    }
+
+    @Step("Admin Expands User Details Block.")
+    public void adminExpandsUserDetailsBlock() {
+        click(EXPAND_USER_DETAILS_BLOCK_BUTTON_XPATH);
+    }
+
+    @Step("Get Bottom Row In User Details Block.")
+    public WebElement getBottomRowInUserDetailsBlock() {
+        waitUntilPageIsFullyLoaded();
+        return $(BOTTOM_ROW_IN__USER_DETAILS_BLOCK_XPATH);
+    }
+
+    @Step("Get Label Value In User Details Block.")
+    public List<String> getAllLabelValuesInUserDetailsBlock() {
+        return $$(ALL_LABEL_VALUES_IN_USER_DETAILS_BLOCK_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    @Step("Get Label Value In User Details Block.")
+    public String getLabelValueInUserDetailsBlock(String label) {
+       return $(LABEL_VALUE_IN_USER_DETAILS_BLOCK_XPATH, label).getText();
+    }
+
+    @Step("Admin Closes User Details Block.")
+    public void adminClosesUserDetailsBlock() {
+        click(CLOSE_USER_DETAILS_BLOCK_BUTTON_XPATH);
+    }
 }

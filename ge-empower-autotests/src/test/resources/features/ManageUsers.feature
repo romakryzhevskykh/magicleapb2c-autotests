@@ -547,3 +547,27 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
       | testRoleUser | emp RM (empower Reg. Mgr.) | CS (Customer Ser.)         |
       | testRoleUser | CS (Customer Ser.)         | HD (Help Desk)             |
       | testRoleUser | HD (Help Desk)             | User                       |
+
+  Scenario Outline: Check that admin can open user details page and check appropriate data
+    Given Switch to Storefront as internalUser.
+    And User is logged in to Storefront.
+    And Profile page is opened.
+    And Create User instance on Profile page.
+    Given Switch to Storefront as admin.
+    And Focus on browser.
+    And Refresh page.
+    When Admin opens Users tab.
+    And Sets <email> email to the email field.
+    And Clicks on the Search button.
+    Then Appropriate user with appropriate <email> email is displayed in the users list.
+    When Clicks on the user name in the table.
+    When Admin expands user details block.
+    Then Is opened user details block displayed.
+    Then Is Appropriate data from user profile displayed in user details block for user <email>.
+    Then Is Appropriate year 2030 displayed under Revalidation Date label.
+    When Admin closes user details block.
+    Then Is open user details block not displayed.
+
+    Examples:
+      | email                     |
+      | roman.kryzhevskykh@ge.com |
