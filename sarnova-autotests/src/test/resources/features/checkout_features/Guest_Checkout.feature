@@ -1,5 +1,4 @@
 Feature: Guest checkout functionality
-
   Background:
     Given Switch to Storefront guest.
     And Empty Cart.

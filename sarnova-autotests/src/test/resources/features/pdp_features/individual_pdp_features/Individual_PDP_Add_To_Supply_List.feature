@@ -5,12 +5,14 @@ Feature: Individual PDP add to Supply list functionality
     And User is logged in to Storefront.
     And PDP for INDIVIDUAL, VALID product.
 
+  @SmokeTest
   Scenario: Check info message for Adding to supply list with empty selection.
     When Set QTY values for products to 0 on PDP.
     Then Check that Add to Supply list button is unable on PDP.
 #    And Click on add to Supply list button on PDP.
 #    Then Check that Add to Supply list pop-up displays Please set non-zero quantity to products you wish to add message on PDP.
 
+  @SmokeTest
   Scenario: Check that shopper can add product to new(with action of creating) Supply list.
     When Set QTY 1 to any product(UOM) on the PDP.
     And Click on add to Supply list button on PDP.
@@ -22,6 +24,7 @@ Feature: Individual PDP add to Supply list functionality
     Then Check that entered name is the name of Supply list on the Supply list details page.
     Then Check that selected product(s) is(are) displayed on the Supply list details page.
 
+  @SmokeTest
   Scenario: Check that shopper can add product to existing(already created) Supply list.
     When Set QTY 1 to any product(UOM) on the PDP.
     And Active Supply list that doesn't contain this products exists.
