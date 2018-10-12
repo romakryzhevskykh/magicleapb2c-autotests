@@ -17,6 +17,8 @@ public class UserEntity {
     @Getter
     String email;
     @Getter
+    String alternateEmail;
+    @Getter
     String phoneNumber;
     @Getter
     String language;

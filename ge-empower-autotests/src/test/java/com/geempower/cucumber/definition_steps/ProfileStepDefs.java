@@ -81,8 +81,8 @@ public class ProfileStepDefs extends AbstractStepDefs {
         profilePage.clickOnDeactivateMyUserIdButton();
     }
 
-    @And("^Create User instance on Profile page.$")
-    public void createUserInstanceOnProfilePage() {
+    @And("^Create User instance.$")
+    public void createUserInstance() {
         userManager.createUserInstance(profilePage.getUserName(), profilePage.getUserLastName(), profilePage.getUserId(),
                 profilePage.getUserRole(), profilePage.getCompanyName(), profilePage.getEmail(), profilePage.getPhoneNumber(),
                 profilePage.getLanguage(), profilePage.getRelationship());

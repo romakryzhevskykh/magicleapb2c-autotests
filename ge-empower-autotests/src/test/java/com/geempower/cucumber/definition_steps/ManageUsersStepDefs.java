@@ -518,13 +518,9 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     public void isAppropriateFullNameDisplayedDetailBlockHeader(String email) {
         UserEntity user = userManager.getUserByEmail(email);
         String userFullName = user.getFirstName() + " " + user.getLastName();
-        String userEmail = user.getEmail();
-        String userRole = user.getUserRole();
-        String userId = user.getUserId();
-        String companyName = user.getCompanyName();
-        String phoneNumber = user.getPhoneNumber();
-        String language = user.getLanguage();
-        List<String> labelValues = Stream.of(userRole, userEmail, userId, companyName, phoneNumber, language).collect(Collectors.toList());
+        List<String> labelValues = Stream.of(user.getUserRole(), user.getEmail(), user.getUserId(),
+                user.getCompanyName(), user.getPhoneNumber(), user.getLanguage()).collect(Collectors.toList());
+
         assertEquals(userFullName, manageUsersPage.getUserFullNameInDetailsBlock());
         assertTrue(manageUsersPage.getAllLabelValuesInUserDetailsBlock().containsAll(labelValues));
     }

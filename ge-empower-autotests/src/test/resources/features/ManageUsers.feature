@@ -552,7 +552,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Given Switch to Storefront as internalUser.
     And User is logged in to Storefront.
     And Profile page is opened.
-    And Create User instance on Profile page.
+    And Create User instance.
     Given Switch to Storefront as admin.
     And Focus on browser.
     And Refresh page.
