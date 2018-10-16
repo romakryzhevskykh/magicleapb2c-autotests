@@ -224,6 +224,9 @@ public class UsersManager {
                     case "buyer":
                         userRole = StorefrontUserRole.BUYER;
                         break;
+                    case "purchase_approver":
+                        userRole = StorefrontUserRole.PURCHASE_APPROVER;
+                        break;
                     case "guest":
                         userRole = StorefrontUserRole.GUEST_CONSUMER;
                         break;

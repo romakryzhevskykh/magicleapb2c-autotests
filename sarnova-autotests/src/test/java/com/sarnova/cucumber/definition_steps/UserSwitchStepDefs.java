@@ -28,6 +28,11 @@ public class UserSwitchStepDefs extends AbstractStepDefs {
         webDriverPool.setDriverActive(StorefrontUserRole.BUYER);
     }
 
+    @Given("Switch to Storefront approver.")
+    public void switchToStorefrontAsApprover() {
+        webDriverPool.setDriverActive(StorefrontUserRole.PURCHASE_APPROVER);
+    }
+
     @Given("Switch to Storefront guest.")
     public void switchToStorefrontAsGuest() {
         webDriverPool.setDriverActive(StorefrontUserRole.GUEST_CONSUMER);

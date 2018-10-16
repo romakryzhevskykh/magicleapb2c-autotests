@@ -7,7 +7,10 @@ import com.sarnova.helpers.models.delivery_methods.DeliveryMethod;
 import com.sarnova.helpers.models.products.IndividualProduct;
 import com.sarnova.helpers.models.products.UnitOfMeasure;
 import com.sarnova.helpers.models.shipping_addresses.ShippingAddress;
+import com.sarnova.helpers.user_engine.StorefrontUserRole;
+import com.sarnova.helpers.user_engine.User;
 import com.sarnova.helpers.user_engine.UserTitle;
+import com.sarnova.helpers.user_engine.UsersManager;
 import com.sarnova.storefront.pages.CheckoutPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
@@ -28,15 +31,12 @@ public class CheckoutStepDefs extends AbstractStepDefs {
 
     @Autowired private ProductsManager productsManager;
     @Autowired private RandomUtils randomUtils;
+    @Autowired private UsersManager usersManager;
 
     @When("^Click on Next button on Checkout Shipping address step.$")
     public void clickOnNextButtonOnShippingAddressStep() {
         checkoutPage.clickOnNextButtonOnShippingAddressStep();
-//        try {
-//            Thread.sleep(6000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+
     }
 
     @When("^Click on Next button on Checkout Shipping method step.$")
@@ -390,6 +390,14 @@ public class CheckoutStepDefs extends AbstractStepDefs {
 
     @And("^Deselect BILLING ADDRESS IS THE SAME AS SHIPPING ADDRESS on Guest Checkout Payment method step.$")
     public void clickOnChangeBillingAddressOnGuestCheckoutPaymentMethodStep() {
+        checkoutPage.deselectGuestBillingAddressCheckbox();
+    }
+    @And("^Select valid approver to approve purchase request")
+    public void clickOnChangeBillingAddressOnGuestCheckoutPaymentMethodStep() {
+        User approver = usersManager.getUserByRole(StorefrontUserRole.PURCHASE_APPROVER);
+        checkoutPage.openApproverDropdown();
+        checkoutPage.selectApproverFromList(approver.getUsername());
+        threadVarsHashMap.put(TestKeyword.APPROVER, approver);
         checkoutPage.deselectGuestBillingAddressCheckbox();
     }
 }

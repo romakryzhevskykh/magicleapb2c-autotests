@@ -5,8 +5,7 @@ import org.openqa.selenium.By;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import static com.sarnova.storefront.page_block_elements.CheckoutFinalReviewStepBlockElements.ACCEPT_TERMS_CHECKBOX_ID;
-import static com.sarnova.storefront.page_block_elements.CheckoutFinalReviewStepBlockElements.PLACE_ORDER_BUTTON_ID;
+import static com.sarnova.storefront.page_block_elements.CheckoutFinalReviewStepBlockElements.*;
 
 @Component
 public class CheckoutFinalReviewStepBlock extends UIComponent {
@@ -42,6 +41,16 @@ public class CheckoutFinalReviewStepBlock extends UIComponent {
     @Step("Click on Place order button.")
     public void placeOrder() {
         click(By.id(PLACE_ORDER_BUTTON_ID));
+    }
+
+    @Step("Open approver dropdown list")
+    public void  openApproverDropdown() {
+        click(SELECT_APPROVER_DROPDOWN_ID);
+    }
+
+    @Step("Select approver from list")
+    public void  selectApproverFromList(String approverName) {
+        click(APPROVER_DROPDOWN_ITEM_XPATH,approverName);
     }
 
     public boolean isPlaceOrderButtonEnabled() {

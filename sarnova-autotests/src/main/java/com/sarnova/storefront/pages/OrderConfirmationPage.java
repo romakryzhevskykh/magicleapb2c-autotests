@@ -1,7 +1,10 @@
 package com.sarnova.storefront.pages;
 
+import org.openqa.selenium.By;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
+import org.openqa.selenium.support.ui.Select;
+
 
 import static com.sarnova.storefront.page_elements.OrderConfirmationPageElements.*;
 

@@ -67,3 +67,17 @@ Feature: Cart page Add to Supply list functionality.
     Then Check that Supply list details page is opened.
     Then Check that entered name is the name of Supply list on the Supply list details page.
     Then Check that selected product(s) is(are) displayed on the Supply list details page.
+
+  @SmokeTest
+  Scenario: Check that shopper can add few product from cart to existing Supply list.
+    Given Add to cart INDIVIDUAL, VALID product with quantity 1 that hasn't been added before.
+    And Active Supply list that doesn't contain this products exists.
+    And Open cart page.
+    And Click on add to Supply list button on Cart page.
+    And Select Select a Supply list radio button in Add to Supply list pop-up on Cart page.
+    And Select existing Supply list in Add to Supply list pop-up on Cart page.
+    And Click on Add to Supply list in Add to Supply list pop-up on Cart page.
+    And Click on View Supply list in Add to Supply list pop-up on Cart page.
+    Then Check that Supply list details page is opened.
+    Then Check that entered name is the name of Supply list on the Supply list details page.
+    Then Check that selected product(s) is(are) displayed on the Supply list details page.

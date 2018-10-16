@@ -155,4 +155,10 @@ public class CartPage extends StorefrontBasePage {
     public boolean isPopUpSaveCartDescriptionVisible() {
         return saveCartPopUpBlock.isSaveCartDescriptionFieldVisible();
     }
+    @Step ("Click on Submit purchase request")
+    public void clickOnSubmitPurchaseRequestButton(){
+        click(SUBMIT_PURCHASE_REQUEST_BUTTON_XPATH);
+        waitUntilPageIsFullyLoaded();
+    }
+
 }

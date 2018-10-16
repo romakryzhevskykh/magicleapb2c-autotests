@@ -147,6 +147,11 @@ public class CartPageStepDefs extends AbstractStepDefs {
         cartPage.enterNewSupplyListNameText(newSupplyListName);
     }
 
+    @And("^Click on Submit purchase request button on Cart page.$")
+    public void clickOnSubmitPurchaseRequestButton() {
+        cartPage.clickOnSubmitPurchaseRequestButton();
+    }
+
     @Then("^Check that Add to Supply list button is not visible on Cart page.$")
     public void checkThatAddToSupplyListButtonIsNotVisibleOnCartPage() {
         assertFalse(cartPage.isAddToSupplyListButtonVisible());

@@ -25,4 +25,5 @@ public enum TestKeyword {
     TEST_BILLING_ADDRESS,
     LOCAL_DATE_TIME_OF_ACTION,
     USER_INFORMATION,
+    APPROVER,
 }
