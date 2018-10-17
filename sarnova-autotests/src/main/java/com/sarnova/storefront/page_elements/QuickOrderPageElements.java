@@ -5,7 +5,7 @@ public class QuickOrderPageElements {
 
     public static final String ADD_TO_SUPPLY_LIST_BUTTONS_XPATH = "//button[contains(@class, 'add-to-supply-list')]";
     public static final String ADD_TO_CART_BUTTONS_XPATH = "//button[contains(@id, 'add-to-cart')]";
-    public static final String RESET_FORM_BUTTONS_XPATH = "//button[contains(@id, 'reset-quick-order')]";
+    public static final String RESET_FORM_BUTTONS_XPATH = "//a[contains(@id, 'reset-quick-order')]/button";
 
     private static final String QUICK_ORDER_TABLE_XPATH = "//div[contains(@class, 'quick-order-form-component')]";
     public static final String QUICK_ADD_ROW_XPATH = QUICK_ORDER_TABLE_XPATH + "//li[contains(@class,'item__list--ite')]";

@@ -3,6 +3,7 @@ package com.sarnova.helpers.models.products;
 public enum UOMType {
     CS("Case"),
     BX("Box"),
+    PK("Pack"),
     EA("Each");
 
     final String fullName;
