@@ -8,6 +8,7 @@ import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.geempower.storefront.page_elements.order.PODetailsPageElements.*;
 
@@ -50,6 +51,7 @@ public class PODetailsPage extends StorefrontBasePage {
 
     @Step("User Expands/Closes status boxes on PO Details page")
     public void userExpandsClosesStatusBoxesOnPODetailsPage() {
+        waitUntilPageIsFullyLoaded();
         click(EXPAND_CLOSE_STATUS_BOXES_ARROW_BUTTON_XPATH);
     }
 
@@ -62,5 +64,21 @@ public class PODetailsPage extends StorefrontBasePage {
     @Step("Get All Statuses In Status Boxes On PO Details Page.")
     public List<String> getAllStatusesInStatusBoxesOnPODetailsPage() {
         return $$(STATUS_BOX_TITLES_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    @Step("Get Label Value in PO Details block.")
+    public String getLabelValueInPODetailsBlock(String label) {
+        return $(LABEL_VALUES_IN_PO_DETAILS_BLOCK_XPATH, label).getText();
+    }
+
+    @Step("User Click On Time Status Drop Down Field.")
+    public void userClickOnTimeStatusDropDownField() {
+        click(TIME_STATUSES_DROP_DOWN_FIELD_XPATH);
+    }
+
+    @Step("Get All Time Statuses In Time Status Drop Down.")
+    public Stream<WebElement> getAllTimeStatusesInTimeStatusDropDown() {
+        waitUntilPageIsFullyLoaded();
+        return $$(TIME_STATUSES_VALUES_IN_DROP_DOWN_XPATH).stream();
     }
 }

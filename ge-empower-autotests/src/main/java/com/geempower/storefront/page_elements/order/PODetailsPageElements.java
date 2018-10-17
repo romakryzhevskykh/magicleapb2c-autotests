@@ -10,5 +10,9 @@ public class PODetailsPageElements {
     public final static String EXPAND_CLOSE_STATUS_BOXES_ARROW_BUTTON_XPATH = "//i[@class = 'fa fa-chevron-down']";
     public final static String EXPANDED_STATUS_BOXES_LINE_XPATH = "//div[@class='details-graphical clearfix active']";
     public final static String STATUS_BOX_TITLES_XPATH = "//div[@class='order-item']//span[@class = 'item-name']";
+    public final static String LABEL_VALUES_IN_PO_DETAILS_BLOCK_XPATH = "//label[contains(text(),'%s')]/following-sibling::p";
+    public final static String TIME_STATUSES_DROP_DOWN_FIELD_XPATH = "//span[@class='select2-selection__arrow']";
+    public final static String TIME_STATUSES_VALUES_IN_DROP_DOWN_XPATH = "//li[contains(@class,'select2-results__option') and not(contains(@class,'highlight'))]";
+
 }
 

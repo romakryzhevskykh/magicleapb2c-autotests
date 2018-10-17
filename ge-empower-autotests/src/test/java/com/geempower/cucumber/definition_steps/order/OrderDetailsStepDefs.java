@@ -240,18 +240,16 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
         assertTrue(orderDetailsPage.getAllTimeStatusNearColorIcons().containsAll(timeStatuses));
     }
 
-    @When("^User click on time status drop down field.$")
-    public void userClickOnTimeStatusDropDownField() {
+    @When("^User clicks on time status drop down field on Order Details page.$")
+    public void userClickOnTimeStatusDropDownFieldOnOrderDetailsPage() {
         orderDetailsPage.userClickOnTimeStatusDropDownField();
     }
 
-    @Then("^Is Correct time statuses (.*) displayed in the time status drop down field.$")
+    @Then("^Is Correct time statuses (.*) displayed in the time status drop down field on Order Details page.$")
     public void isCorrectTimeStatusesDisplayedInTheTimeStatusDropDownField(List<String> timeStatuses) {
         assertTrue(orderDetailsPage.getAllTimeStatusesInTimeStatusDropDown()
                 .allMatch(statuses ->
                         timeStatuses.stream().anyMatch(timeStatus -> statuses.getText().contains(timeStatus))));
-
-
     }
 
     @Then("^Is Detail Order table contains correct header (.*) titles.$")

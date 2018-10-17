@@ -140,8 +140,8 @@ Feature: Some actions on Orders page
 #    When User expands/closes status boxes.
 #    Then Is Expanded status box line not displayed.
 #    Then Is Correct time statuses <timeStatusesList> displayed near color status icons.
-#    When User click on time status drop down field.
-#    Then Is Correct time statuses <timeStatusesList> displayed in the time status drop down field.
+#    When User clicks on time status drop down field on Order Details page.
+#    Then Is Correct time statuses <timeStatusesList> displayed in the time status drop down field on Order Details page.
 #    Then Is Detail Order table contains correct header <tableTitles> titles.
 #    When User opens random product detail block.
 #    Then Is Agreement Number label contains value in Product Details block.
@@ -172,21 +172,23 @@ Feature: Some actions on Orders page
 
     When User expands/closes status boxes on PO Details page.
     Then Is Expanded status box line displayed on PO Details page.
-    Then Is Correct <statusesList> statuses displayed in the status boxes on PO Details page.
+    Then Is appropriate <statusesList> statuses displayed in the status boxes on PO Details page.
     When User expands/closes status boxes on PO Details page.
     Then Is Expanded status box line not displayed on PO Details page.
 
-#    Then Is Ordered On label contains date in PO Details block.
-#    Then Is Order Value label contains USD value in Quote Details block.
-#    Then Is Ship To label contains value in Quote Details block.
-#    Then Is Ship Method label contains value in Quote Details block.
-#    Then Is Created by label contains @ email character in Quote Details block.
-#    Then Is Tax Total label contains USD value in Quote Details block.
-#    Then Is User No. and Quote No. labels displayed in Quote Details block.
+    Then Is Ordered On label contains date in PO Details block.
+    Then Is Order Value label contains USD value in PO Details block.
+    Then Is Ship To label contains value in PO Details block.
+    Then Is Ship Method label contains value in PO Details block.
+    Then Is Created by label contains @ email character in PO Details block.
+    Then Is Tax Total label contains USD value in PO Details block.
+
+    When User clicks on time status drop down field on PO Details page.
+    Then Is Correct time statuses <timeStatusesList> displayed in the time status drop down field on PO Details page.
 
     Examples:
-      | statusesList                                                         |
-      | To be Scheduled, Open, Prepared to Ship, On Hold, Shipped, Cancelled |
+      | statusesList                                                         | timeStatusesList                                                 |
+      | To be Scheduled, Open, Prepared to Ship, On Hold, Shipped, Cancelled | On Time, Within 3 days of project deliverable, Late, Closed Late |
 
 
 #  Scenario Outline: Check that tracking info slider contains all necessary information.
