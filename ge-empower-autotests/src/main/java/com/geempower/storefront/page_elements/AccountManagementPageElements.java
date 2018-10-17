@@ -47,7 +47,9 @@ public class AccountManagementPageElements {
     public final static String PRE_AUTH_ACCOUNTS_TABLE_BODY_XPATH = "//table[@id='preauthorizedAccountsTbl']/tbody";
     public final static String PRE_AUTH_SEND_REQUEST_BUTTON_XPATH = "//button[@id='sendPreauthorizeRequestBtn']";
     public final static String MODAL_DIALOG_XPATH = "//div[@class='modal-dialog']";
-
+    public final static String COUNT_OF_FAVORITE_ACCOUNTS_ON_FAVORITES_TAB_ID = "favoritesTable_info";
+    public final static String LIST_OF_NOT_FAVORITES_ACCOUNTS_XPATH = "//tr[td[@class=' table-visible-lg-block']//i[@class='fa-star far']]/td[2]/a";
+    public final static String NOT_FAVORITE_ACCOUNT_STAR_ICON_XPATH = "//tr/td[2]/a[contains(@href, '%s')]/../../td[@class=' table-visible-lg-block']/ul//i[@class='fa-star far']";
     //Request Account pop-up
     public final static String SALES_OFFICE_CODE_FIELD_ID = "requestSalesOfficeCode";
     public final static String SALES_ENGINEER_CODE_FIELD_ID = "requestSalesEngCode";

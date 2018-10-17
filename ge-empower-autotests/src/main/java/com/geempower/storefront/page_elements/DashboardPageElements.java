@@ -24,5 +24,7 @@ public class DashboardPageElements {
     public final static String SELECT_SHIP_ADDRESS_MODAL_XPATH = "//*[@id='select-ship-address-modal']//*[@class='modal-dialog']";
     public final static String SELECT_SHIP_ADDRESS_FIELD_ID = "select2-shippingAddress-container";
     public final static String SUBMIT_SHIP_ADDRESS_BUTTON_XPATH = "//button[@class='btn primary-btn js-submit-modal']";
-
+    public final static String ACCOUNT_INFO_DROPDOWN_XPATH = "//span[@class='fa fa-caret-down collapse-icon']";
+    public final static String COUNT_OF_FAVORITE_ACCOUNTS_XPATH = "//ul/li[@class='text-line-heading']";
+    public final static String LIST_OF_FAVORITE_ACCOUNTS_XPATH = "//ul[@class='dropdown-item-link-list']/li/a";
 }

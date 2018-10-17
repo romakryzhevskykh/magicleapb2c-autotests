@@ -255,4 +255,26 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
     public void checkThatAccountManagementPageIsOpened() {
         assertTrue(accountManagementPage.isOpened());
     }
+
+    @And("^Count of Favorites accounts is stored to the threadVarsHashMap.$")
+    public void countOfFavoriteAccountsIsStoredToTheThreadVarsHashMap() {
+        threadVarsHashMap.put(TestKeyword.FAVORITE_ACCOUNTS_COUNT_FAVORITES_TAB, accountManagementPage.getCountOfFavoriteAccounts());
+    }
+
+    @When("^User marks some account as favorite.$")
+    public void userMarksSomeAccountAsFavorite() {
+        String accountFullInfo = accountManagementPage.getListOfNotFavoritesAccounts().stream().findAny().get().getAttribute("href").split("/select-account/")[1];
+        accountManagementPage.markAppropriateAccountAsFavorite(accountFullInfo);
+        threadVarsHashMap.put(TestKeyword.JUST_MARKED_FAVORITE_ACCOUNT, accountFullInfo);
+    }
+
+    @And("^Previously marked account is unmarked by user.$")
+    public void previouslyMarkedAccountIsUnmarkedByUser() {
+        accountManagementPage.unmarkAsFavoriteAppropriateAccountOnFavoritesTab(threadVarsHashMap.getString(TestKeyword.JUST_MARKED_FAVORITE_ACCOUNT));
+    }
+
+    @Then("^Correct count of favorite account is displayed in Favorites tab.$")
+    public void correctCountOfFavoriteAccountIsDisplayedInFavoritesTab() {
+        assertTrue(accountManagementPage.getCountOfFavoriteAccounts() == (int) threadVarsHashMap.get(TestKeyword.FAVORITE_ACCOUNTS_COUNT_FAVORITES_TAB));
+    }
 }

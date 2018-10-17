@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import java.util.Random;
-
 import static com.geempower.storefront.page_elements.rebate.RebateCreation1PageElements.*;
 
 @Component
@@ -93,20 +91,17 @@ public class RebateCreation1Page extends StorefrontBasePage {
 
     @Step("Set Random Distributor Invoice No")
     public String setRandomDistributorInvoiceNo() {
-        String randomDistributorInvoiceNo = String.valueOf(generateRandomNumber(10000, 1000000));
+        String randomDistributorInvoiceNo = String.valueOf(utils.generateRandomNumber(10000, 1000000));
         $(DISTRIBUTOR_INVOICE_NO_INPUT_XPATH).clear();
         $(DISTRIBUTOR_INVOICE_NO_INPUT_XPATH).sendKeys(randomDistributorInvoiceNo);
         return randomDistributorInvoiceNo;
     }
 
-    private int generateRandomNumber(int min, int max) {
-        Random random = new Random();
-        return min + random.nextInt((max - min) + 1);
-    }
+
 
     @Step("Set Random Qty Sold")
     public int setRandomQtySold() {
-        int randomQtySold = generateRandomNumber(2, 40);
+        int randomQtySold = utils.generateRandomNumber(2, 40);
         $(QTY_SOLD_INPUT_XPATH).clear();
         $(QTY_SOLD_INPUT_XPATH).sendKeys(String.valueOf(randomQtySold));
         return randomQtySold;

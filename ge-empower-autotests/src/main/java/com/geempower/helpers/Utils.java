@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -59,6 +60,12 @@ public class Utils extends UIComponent {
             return false;
         }
         return true;
+    }
+
+    @Step("Generate random number using min/max values.")
+    public int generateRandomNumber(int min, int max) {
+        Random random = new Random();
+        return min + random.nextInt((max - min) + 1);
     }
 
     @Step("Check if one date greater than Other Date.")

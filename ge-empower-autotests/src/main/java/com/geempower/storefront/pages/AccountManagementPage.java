@@ -245,7 +245,8 @@ public class AccountManagementPage extends StorefrontBasePage {
 
     @Step("Mark appropriate account as favourite.")
     public void markAppropriateAccountAsFavorite(String accountDetails) {
-        click(STAR_ICON_FOR_APPROPRIATE_ACCOUNT_ON_APPROVED_ACCOUNT_TAB_XPATH, accountDetails);
+        waitUntilPageIsFullyLoaded();
+        click(NOT_FAVORITE_ACCOUNT_STAR_ICON_XPATH, accountDetails);
     }
 
     @Step("Get All favorites accounts.")
@@ -294,5 +295,18 @@ public class AccountManagementPage extends StorefrontBasePage {
     @Step("Click On Send Pre Auth Code.")
     public void clickOnSendPreAuthCode() {
         click(PRE_AUTH_SEND_REQUEST_BUTTON_XPATH);
+    }
+
+    @Step("Get Count Of Favorite Accounts.")
+    public int getCountOfFavoriteAccounts() {
+        waitUntilPageIsFullyLoaded();
+        String countOfEntries = $(By.id(COUNT_OF_FAVORITE_ACCOUNTS_ON_FAVORITES_TAB_ID)).getText();
+        String[] countOfFavorites = countOfEntries.split(" ");
+        return Integer.parseInt(countOfFavorites[5]);
+    }
+
+    @Step("Get List Of Not Favorite Accounts.")
+    public List<WebElement> getListOfNotFavoritesAccounts() {
+        return $$(LIST_OF_NOT_FAVORITES_ACCOUNTS_XPATH);
     }
 }

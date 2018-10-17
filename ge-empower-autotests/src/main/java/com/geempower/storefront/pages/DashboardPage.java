@@ -2,10 +2,12 @@ package com.geempower.storefront.pages;
 
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.geempower.storefront.page_elements.DashboardPageElements.*;
 
@@ -146,5 +148,21 @@ public class DashboardPage extends StorefrontBasePage {
     @Step("Get count of features on the Dashboard page.")
     public int getCountOfFeatures() {
         return $$(COUNT_OF_AVAILABLE_FEATURES_XPATH).size();
+    }
+
+    @Step("Open Account Info Dropdown.")
+    public void openAccountInfoDropdown() {
+        waitUntilPageIsFullyLoaded();
+        click(ACCOUNT_INFO_DROPDOWN_XPATH);
+    }
+
+    @Step("Get Count Of Favorite Accounts In Account Info Dropdown.")
+    public int getCountOfFavoriteAccountsInAccountInfoDropdown() {
+        return Integer.parseInt($(COUNT_OF_FAVORITE_ACCOUNTS_XPATH).getText().replace("Favorites (", "").replace(")", ""));
+    }
+
+    @Step("Get List Of Favorite Accounts From Account Info Dropdown.")
+    public List<WebElement> getListOfFavoriteAccountsFromAccountInfoDropdown() {
+        return $$(LIST_OF_FAVORITE_ACCOUNTS_XPATH);
     }
 }

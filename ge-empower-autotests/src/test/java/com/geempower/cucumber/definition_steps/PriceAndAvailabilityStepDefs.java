@@ -1,5 +1,6 @@
 package com.geempower.cucumber.definition_steps;
 
+import com.geempower.helpers.Utils;
 import com.geempower.helpers.models.Product;
 import com.geempower.storefront.page_blocks.FullProductDetailsPopUpBlock;
 import com.geempower.storefront.page_blocks.HeaderBlock;
@@ -20,6 +21,8 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
     private FullProductDetailsPopUpBlock fullProductDetailsPopUpBlock;
     @Autowired
     private HeaderBlock headerBlock;
+    @Autowired
+    private Utils utils;
 
     private final double delta = 0.000001;
 
@@ -28,8 +31,7 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
     public void setRandomQuantityOfProduct() {
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         selectedProducts.keySet().forEach(product -> {
-            Random random = new Random();
-            int randomQuantity = 400 + random.nextInt((1000 - 400) + 1);
+            int randomQuantity = utils.generateRandomNumber(400, 1000);
             priceAndAvailabilityPage.setQuantityForProduct(product, randomQuantity);
             selectedProducts.put(product, randomQuantity);
         });
