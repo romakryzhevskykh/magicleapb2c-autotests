@@ -5,6 +5,7 @@ import com.geempower.storefront.page_blocks.OrderStatusWidget;
 import com.geempower.storefront.page_blocks.PriceAndAvailabilityBlock;
 import com.geempower.storefront.pages.DashboardPage;
 import com.geempower.storefront.pages.order.OrdersPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -225,5 +226,23 @@ public class DashboardStepDefs extends AbstractStepDefs {
     @Then("^More than (\\d+) features are available in the Featured Updates widget.$")
     public void featuresAreAvailableInTheFeaturedUpdatesWidget(int countOfFeatures) {
         assertTrue(dashboardPage.getCountOfFeatures() > countOfFeatures);
+    }
+
+    @When("^User opens account info dropdown.$")
+    public void userOpensAccountInfoDropdown() {
+        dashboardPage.openAccountInfoDropdown();
+    }
+
+    @Then("^Correct count of favorite accounts is displayed in the account info dropdown.$")
+    public void correctCountOfFavoriteAccountsIsDisplayedInTheAccountInfoDropdown() {
+        int actualFavAccounts = (int) threadVarsHashMap.get(TestKeyword.FAVORITE_ACCOUNTS_COUNT_FAVORITES_TAB);
+        assertTrue(dashboardPage.getCountOfFavoriteAccountsInAccountInfoDropdown() == actualFavAccounts + 1);
+    }
+
+    @Then("^Previously marked account is displayed in account info dropdown.$")
+    public void previouslyMarkedAccountIsDisplayedInAccountInfoDropdown() {
+        String previouslyMarkedFavAccount = threadVarsHashMap.getString(TestKeyword.JUST_MARKED_FAVORITE_ACCOUNT);
+        assertTrue(dashboardPage.getListOfFavoriteAccountsFromAccountInfoDropdown().stream().anyMatch(account ->
+        account.getAttribute("href").contains(previouslyMarkedFavAccount)));
     }
 }
