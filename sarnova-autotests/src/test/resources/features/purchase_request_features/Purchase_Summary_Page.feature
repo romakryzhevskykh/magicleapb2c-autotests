@@ -11,5 +11,3 @@ Feature: Purchase request page functionality
   Scenario: Check quick add product check-Box.
     When Click on quick add product checkbox on purchase summary page.
     Then Check that checkBox is expanded on purchase summary page.
-
-

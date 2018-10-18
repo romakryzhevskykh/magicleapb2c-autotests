@@ -393,7 +393,7 @@ public class CheckoutStepDefs extends AbstractStepDefs {
         checkoutPage.deselectGuestBillingAddressCheckbox();
     }
     @And("^Select valid approver to approve purchase request")
-    public void clickOnChangeBillingAddressOnGuestCheckoutPaymentMethodStep() {
+    public void selectApproverToApprovePurchaseRequest() {
         User approver = usersManager.getUserByRole(StorefrontUserRole.PURCHASE_APPROVER);
         checkoutPage.openApproverDropdown();
         checkoutPage.selectApproverFromList(approver.getUsername());
