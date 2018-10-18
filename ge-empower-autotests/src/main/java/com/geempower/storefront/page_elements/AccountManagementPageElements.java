@@ -9,7 +9,7 @@ public class AccountManagementPageElements {
     public final static String SEARCH_BUTTON_XPATH = ".//button[.='Search'and@class='btn primary-btn account-search-btn']";
     public final static String FIRST_ACCOUNT_FROM_LIST_OF_ACCOUNTS_XPATH = ".//div[@id='recently-viewed']//tr[@class='odd'or@class='even']/*[2]/a[1]";
     public final static String ACCOUNT_WITH_APPROPRIATE_SALES_DIVISION_FROM_LIST_OF_ACCOUNTS_XPATH = ".//div[@id='recently-viewed']//tr[@class='odd'or@class='even']/*[2]/a[contains(@href, '%s')]";
-    public final static String REQUEST_ACCOUNT_BUTTON = "//button[@class='btn btn-white request-account-btn']";
+    public final static String REQUEST_ACCOUNT_BUTTON_XPATH = "//button[@class='btn btn-white request-account-btn']";
     private final static String ACCOUNT_ROW_IN_POP_UP_XPATH = "//div[@class='request-account-form-body']/div[@class='row']";
     private final static String ACCOUNT_ROW_IN_POP_UP_BY_COUNTER_XPATH = ACCOUNT_ROW_IN_POP_UP_XPATH + "[%s]";
     public final static String REGIONS_DROP_DOWN_BY_COUNTER_IN_POPUP_XPATH = ACCOUNT_ROW_IN_POP_UP_BY_COUNTER_XPATH + "//span[contains(@class,'select2-container')]";
@@ -36,6 +36,7 @@ public class AccountManagementPageElements {
     public final static String CONFIRMATION_FOR_REMOVE_ACTIVE_ACCOUNT_BUTTON_XPATH = "//button[@id='removeActiveBtn']";
     public final static String FAVORITES_ACTIVE_TAB_XPATH = "//li[contains(@class,'active') and contains(@tab-id ,'1')]";
     public final static String APPROVED_ACCOUNTS_LIST_XPATH = "//table[@id='activeRequestsTable']/tbody/tr/td[2]/a";
+    public final static String APPROVED_ACCOUNTS_TABLE_XPATH = "//table[@id='activeRequestsTable']/tbody/tr/td[1]";
     public final static String FAVORITES_ACCOUNTS_TABLE_ID = "favoritesTable";
     public final static String LIST_OF_FAVORITES_ACCOUNTS_FULL_INFO_XPATH = "//table[@id='favoritesTable']/tbody/tr/td[2]/a";
     public final static String WE_ARE_NOW_ABB_POP_UP_XPATH = "//img[contains(@src, 'WEAREABB')]";

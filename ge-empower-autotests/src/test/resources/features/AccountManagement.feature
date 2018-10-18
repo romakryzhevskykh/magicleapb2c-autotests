@@ -28,3 +28,5 @@ Feature: Some actions on Account Management page as admin
     And Account management page is opened.
     And Previously marked account is unmarked by user.
     Then Correct count of favorite account is displayed in Favorites tab.
+
+

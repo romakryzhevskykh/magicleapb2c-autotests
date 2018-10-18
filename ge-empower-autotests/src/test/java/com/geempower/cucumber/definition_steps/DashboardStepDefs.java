@@ -5,7 +5,6 @@ import com.geempower.storefront.page_blocks.OrderStatusWidget;
 import com.geempower.storefront.page_blocks.PriceAndAvailabilityBlock;
 import com.geempower.storefront.pages.DashboardPage;
 import com.geempower.storefront.pages.order.OrdersPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -244,5 +243,10 @@ public class DashboardStepDefs extends AbstractStepDefs {
         String previouslyMarkedFavAccount = threadVarsHashMap.getString(TestKeyword.JUST_MARKED_FAVORITE_ACCOUNT);
         assertTrue(dashboardPage.getListOfFavoriteAccountsFromAccountInfoDropdown().stream().anyMatch(account ->
         account.getAttribute("href").contains(previouslyMarkedFavAccount)));
+    }
+
+    @Then("^There is no favorite accounts in the account info dropdown.$")
+    public void thereIsNoFavoriteAccountsInTheAccountInfoDropdown() {
+        assertTrue(dashboardPage.getCountOfFavoriteAccountsInAccountInfoDropdown() == 0);
     }
 }
