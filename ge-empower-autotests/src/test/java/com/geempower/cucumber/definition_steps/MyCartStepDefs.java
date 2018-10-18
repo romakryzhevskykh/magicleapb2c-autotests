@@ -67,7 +67,7 @@ public class MyCartStepDefs extends AbstractStepDefs {
     public void setRandomQuantityOfProductOnTheMyCartPage() {
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         selectedProducts.keySet().forEach(product -> {
-            int randomQuantity = utils.generateRandomNumber(10, 20);
+            int randomQuantity = (utils.generateRandomNumber(10, 20) * 10);
             myCartPage.setQuantityForProduct(product, randomQuantity);
             selectedProducts.put(product, randomQuantity);
         });
@@ -119,7 +119,7 @@ public class MyCartStepDefs extends AbstractStepDefs {
     }
 
     @Then("^Is Qty value equal to value on the Order page.$")
-    public void isQtyValueEqualToValueOnTheOrderPage(){
+    public void isQtyValueEqualToValueOnTheOrderPage() {
         Order randomOrder = orderManager.getOrderById(Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO)));
         assertTrue(randomOrder.getQuantity() == myCartPage.getQtyValue(randomOrder.getCatalogNo()));
     }

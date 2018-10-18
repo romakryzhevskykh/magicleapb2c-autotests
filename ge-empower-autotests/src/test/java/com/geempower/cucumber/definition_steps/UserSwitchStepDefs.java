@@ -70,5 +70,4 @@ public class UserSwitchStepDefs {
     public void switchToStorefrontAsMfgRepUser() {
         webDriverPool.setDriverActive(StorefrontUserRoles.MFGREPUSER);
     }
-
 }

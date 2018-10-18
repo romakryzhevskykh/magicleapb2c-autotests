@@ -307,6 +307,5 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
             assertEquals(accountManagementPage.getNoDataTitleFromAccountsTable(), "No data available in table");
         else
             assertTrue(accountManagementPage.getApprovedAccountsTableSize() > 1);
-
     }
 }

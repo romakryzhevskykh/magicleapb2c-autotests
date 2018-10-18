@@ -44,7 +44,4 @@ Feature: Some actions on Saved Items page
     And Saved Items page is opened.
     And Help button is displayed.
     When User clicks on Help button.
-    And Click on Sign in with your GE SSO Account button on Lessonly page.
-    Then Check that Saved Items page is opened.
-    When User clicks on Help button.
     Then Saved Lists & Shopping Carts tip is displayed on Lessonly widget.
