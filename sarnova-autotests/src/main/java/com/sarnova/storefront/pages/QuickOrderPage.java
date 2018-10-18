@@ -136,6 +136,12 @@ public class QuickOrderPage extends StorefrontBasePage {
         click(RESET_FORM_BUTTONS_XPATH);
         waitUntilPageIsFullyLoaded();
     }
+    @Step("Click on Pop-up Reset form button")
+    public void clickOnPopUpResetFormButton() {
+        waitUntilElementIsVisible(RESET_FORM_POP_UP_ID);
+        click(RESET_FORM_BUTTON_POP_UP_XPATH);
+        waitUntilPageIsFullyLoaded();
+    }
 
     public String getAddToSupplyListPopUpContent() {
         return addToSupplyListPopUpBlock.getAddToSupplyListPopUpContent();
