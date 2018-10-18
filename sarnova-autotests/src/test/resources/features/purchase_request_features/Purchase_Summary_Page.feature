@@ -4,8 +4,9 @@ Feature: Purchase request page functionality
     Given Switch to Storefront owner.
     And User is logged in to Storefront.
 
+
   Scenario: Check default position of Quick Add product block.
-    Given Purchase summary page is open.
+    When Check that Purchase Summary page is opened.
     Then Add quick Order block is collapsed on purchase summary page.
 
   Scenario: Check quick add product check-Box.

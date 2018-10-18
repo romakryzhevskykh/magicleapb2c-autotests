@@ -1,5 +1,6 @@
 package com.sarnova.cucumber.definition_steps;
 
+
 import com.sarnova.storefront.pages.PurchaseSummaryPage;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -12,6 +13,7 @@ import static org.testng.Assert.assertTrue;
 public class PurchaseSummaryStepDefs extends AbstractStepDefs {
 
     @Autowired private PurchaseSummaryPage purchaseSummaryPage;
+
 
     @Given("^Check that Purchase Summary page is opened.$")
     public void checkThatPurchaseRequestsPageIsOpened() {
