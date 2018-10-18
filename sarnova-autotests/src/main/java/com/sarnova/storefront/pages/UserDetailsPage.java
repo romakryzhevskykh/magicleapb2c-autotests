@@ -27,12 +27,12 @@ public class UserDetailsPage extends StorefrontBasePage {
 
     @Step("Get first name field text.")
     public String getFirstName() {
-        return $(NAME_FIELD_VALUE_XPATH).getText().replaceAll("  ", " ").split(" ")[1].trim();
+        return $(NAME_FIELD_VALUE_XPATH).getText().replaceAll("  ", " ").split(" ")[0].trim();
     }
 
     @Step("Get last name field text.")
     public String getLastName() {
-        return $(NAME_FIELD_VALUE_XPATH).getText().replaceAll("  ", " ").split(" ")[2].trim();
+        return $(NAME_FIELD_VALUE_XPATH).getText().replaceAll("  ", " ").split(" ")[1].trim();
     }
 
     @Step("Get email field text.")
