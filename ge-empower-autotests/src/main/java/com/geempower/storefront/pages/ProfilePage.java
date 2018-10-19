@@ -2,6 +2,7 @@ package com.geempower.storefront.pages;
 
 import com.geempower.helpers.models.RegionType;
 import com.geempower.storefront.StorefrontBasePage;
+import org.openqa.selenium.By;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -34,9 +35,45 @@ public class ProfilePage extends StorefrontBasePage {
     public String getUserName() {
         return $(USER_FIRST_NAME_XPATH).getText();
     }
+
     @Step("Get user last name from user's profile.")
     public String getUserLastName() {
         return $(USER_LAST_NAME_XPATH).getText();
+    }
+
+    @Step("Get User Id from user's profile.")
+    public String getUserId() {
+        return $(USER_ID_XPATH).getText();
+    }
+
+    @Step("Get User Role from user's profile.")
+    public String getUserRole() {
+        return $(USER_ROLE_XPATH).getText().trim();
+    }
+
+    @Step("Get Company Name from user's profile.")
+    public String getCompanyName() {
+        return $(USER_COMPANY_NAME_XPATH).getAttribute("value");
+    }
+
+    @Step("Get Email from user's profile.")
+    public String getEmail() {
+        return $(USER_EMAIL_ADDRESS_XPATH).getText();
+    }
+
+    @Step("Get Phone Number from user's profile.")
+    public String getPhoneNumber() {
+        return $(USER_PHONE_NUMBER_XPATH).getAttribute("value");
+    }
+
+    @Step("Get Default Language from user's profile.")
+    public String getLanguage() {
+        return $(USER_LANGUAGE_XPATH).getText();
+    }
+
+    @Step("Get Relationship user's profile.")
+    public String getRelationship() {
+        return $(USER_RELATIONSHIP_XPATH).getText();
     }
 
     @Step("Get Role For Each Region in user Profile")

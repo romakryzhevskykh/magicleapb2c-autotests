@@ -2,7 +2,9 @@ package com.geempower.cucumber.definition_steps;
 
 import com.geempower.helpers.managers.LessonLyService;
 import com.geempower.helpers.managers.RegionsManager;
+import com.geempower.helpers.managers.UserManager;
 import com.geempower.helpers.models.Region;
+import com.geempower.helpers.models.UserEntity;
 import com.geempower.storefront.page_blocks.IwantToBlock;
 import com.geempower.storefront.pages.ManageUsersPage;
 import cucumber.api.java.en.And;
@@ -14,6 +16,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.geempower.helpers.models.RegionType.getRegionTypes;
 import static org.testng.Assert.*;
@@ -27,6 +32,8 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     private RegionsManager regionsManager;
     @Autowired
     private LessonLyService lessonLyService;
+    @Autowired
+    private UserManager userManager;
 
     @Then("^(.*) title is displayed on Manage Users page.$")
     public void checkManageUsersTitle(String manageUsersTitle) {
@@ -379,7 +386,6 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     @And("^Click on Add button in the Add Account pop-up.$")
     public void clickOnAddButtonInTheAddAccountPopUp() {
         manageUsersPage.clickOnAddButtonInTheAddAccountPopUp();
-
     }
 
     @When("^Click on (.*) checkbox in I Want To Block in All Accounts tab.$")
@@ -414,7 +420,6 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     public void appropriateAccountsAreNotDisplayedInAllApprovedAccountsTable() {
         ArrayList<String> requestedAccounts = (ArrayList<String>) threadVarsHashMap.get(TestKeyword.LIST_OF_REQUESTED_ACCOUNTS);
         assertFalse(iWantToBlock.getActiveAccountForUserInModifyAnAccountSection().containsAll(requestedAccounts));
-
     }
 
     @And("^Expand Change an empower Privilege/Role in I want to block.$")
@@ -467,7 +472,6 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
                 .anyMatch(account -> account.getText().equals(accountNo)));
     }
 
-
     @And("^Get user status in lessonly service for user by email (.*).$")
     public void getUserStatusInLessonlyResponseForUserByEmailEmail(String email) {
         String lessonLyUserId = lessonLyService.getUserIdByEmailFromLessonLy(email);
@@ -508,5 +512,40 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     @When("^Admin turn off T&B Access toggle.$")
     public void adminTurnOffTBAccessToggle() {
         iWantToBlock.turnTnBToggleOff();
+    }
+
+    @Then("^Is Appropriate data from user profile displayed in user details block for user (.*).$")
+    public void isAppropriateFullNameDisplayedDetailBlockHeader(String email) {
+        UserEntity user = userManager.getUserByEmail(email);
+        String userFullName = user.getFirstName() + " " + user.getLastName();
+        List<String> labelValues = Stream.of(user.getUserRole(), user.getEmail(), user.getUserId(),
+                user.getCompanyName(), user.getPhoneNumber(), user.getLanguage()).collect(Collectors.toList());
+        assertEquals(userFullName, manageUsersPage.getUserFullNameInDetailsBlock());
+        assertTrue(manageUsersPage.getAllLabelValuesInUserDetailsBlock().containsAll(labelValues));
+    }
+
+    @When("^Admin expands user details block.$")
+    public void adminExpandsUserDetailsBlock() {
+        manageUsersPage.adminExpandsUserDetailsBlock();
+    }
+
+    @Then("^Is opened user details (.*) displayed.$")
+    public void isOpenedUserDetailsBlockDisplayed(String block) {
+        assertTrue(manageUsersPage.getBottomRowInUserDetailsBlock().getAttribute("style").contains(block));
+    }
+
+    @Then("^Is open user details (.*) not displayed.$")
+    public void isOpenUserDetailsBlockNotDisplayed(String block) {
+        assertFalse(manageUsersPage.getBottomRowInUserDetailsBlock().getAttribute("style").contains(block));
+    }
+
+    @Then("^Is Appropriate year (\\d+) displayed under (.*) label.$")
+    public void isAppropriateYearDisplayedUnderRevalidationDateLabel(int year, String label) {
+        assertTrue(manageUsersPage.getLabelValueInUserDetailsBlock(label).contains(String.valueOf(year)));
+    }
+
+    @When("^Admin closes user details block.$")
+    public void adminClosesUserDetailsBlock() {
+        manageUsersPage.adminClosesUserDetailsBlock();
     }
 }

@@ -203,7 +203,7 @@ public class DashboardStepDefs extends AbstractStepDefs {
 
     @Then("^User clicks on T&B Access button and T&B Access web site is successfully opened in new tab with correct url (.*).$")
     public void tBAccessWebSiteIsSuccessfullyOpenedInNewTabWithCorrectUrl(String tNbUrl) {
-        assertEquals(tNbUrl, dashboardPage.clickOnTandBAccessButtonAndGetSiteUrl());
+        assertTrue(dashboardPage.clickOnTandBAccessButtonAndGetSiteUrl().contains(tNbUrl));
     }
 
     @Then("^T&B Access widget is not displayed.")
@@ -222,8 +222,31 @@ public class DashboardStepDefs extends AbstractStepDefs {
         assertEquals(viewAllUrl, dashboardPage.getViewAllUrl());
     }
 
-    @Then("^(\\d+) features are available in the Featured Updates widget.$")
+    @Then("^More than (\\d+) features are available in the Featured Updates widget.$")
     public void featuresAreAvailableInTheFeaturedUpdatesWidget(int countOfFeatures) {
-        assertTrue(dashboardPage.getCountOfFeatures() == countOfFeatures);
+        assertTrue(dashboardPage.getCountOfFeatures() > countOfFeatures);
+    }
+
+    @When("^User opens account info dropdown.$")
+    public void userOpensAccountInfoDropdown() {
+        dashboardPage.openAccountInfoDropdown();
+    }
+
+    @Then("^Correct count of favorite accounts is displayed in the account info dropdown.$")
+    public void correctCountOfFavoriteAccountsIsDisplayedInTheAccountInfoDropdown() {
+        int actualFavAccounts = (int) threadVarsHashMap.get(TestKeyword.FAVORITE_ACCOUNTS_COUNT_FAVORITES_TAB);
+        assertTrue(dashboardPage.getCountOfFavoriteAccountsInAccountInfoDropdown() == actualFavAccounts + 1);
+    }
+
+    @Then("^Previously marked account is displayed in account info dropdown.$")
+    public void previouslyMarkedAccountIsDisplayedInAccountInfoDropdown() {
+        String previouslyMarkedFavAccount = threadVarsHashMap.getString(TestKeyword.JUST_MARKED_FAVORITE_ACCOUNT);
+        assertTrue(dashboardPage.getListOfFavoriteAccountsFromAccountInfoDropdown().stream().anyMatch(account ->
+        account.getAttribute("href").contains(previouslyMarkedFavAccount)));
+    }
+
+    @Then("^There is no favorite accounts in the account info dropdown.$")
+    public void thereIsNoFavoriteAccountsInTheAccountInfoDropdown() {
+        assertTrue(dashboardPage.getCountOfFavoriteAccountsInAccountInfoDropdown() == 0);
     }
 }

@@ -212,12 +212,12 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
 
     @Then("^Is Opened Quote Details (.*) is displayed.$")
     public void isOpenedQuoteDetailsBlockIsDisplayed(String block) {
-        assertTrue(orderDetailsPage.isOpenedQuoteDetailsBlockIsDisplayed().getAttribute("style").contains(block));
+        assertTrue(orderDetailsPage.getBottomRowInDetailsQuotesBlock().getAttribute("style").contains(block));
     }
 
     @Then("^Is Opened Quote Details (.*) is not displayed.$")
     public void isOpenedQuoteDetailsBlockIsNotDisplayed(String block) {
-        assertFalse(orderDetailsPage.isOpenedQuoteDetailsBlockIsDisplayed().getAttribute("style").contains(block));
+        assertFalse(orderDetailsPage.getBottomRowInDetailsQuotesBlock().getAttribute("style").contains(block));
     }
 
     @Then("^Is Expanded status box line displayed.$")
@@ -242,7 +242,7 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
 
     @When("^User clicks on time status drop down field on Order Details page.$")
     public void userClickOnTimeStatusDropDownFieldOnOrderDetailsPage() {
-        orderDetailsPage.userClickOnTimeStatusDropDownField();
+        orderDetailsPage.userClicksOnTimeStatusDropDownField();
     }
 
     @Then("^Is Correct time statuses (.*) displayed in the time status drop down field on Order Details page.$")
@@ -284,7 +284,7 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
 
     @Then("^Is Total Net Price value is equal to sum of all ext. price in table.$")
     public void isTotalNetPriceValueIsEqualToSumOfAllExtPriceInTable() {
-        assertEquals(Double.parseDouble(orderDetailsPage.getTotalNetPrice()), orderDetailsPage.getSumOfAllExtPrice());
+        assertEquals(Double.parseDouble(orderDetailsPage.getTotalNetPrice()), orderDetailsPage.getSumOfAllExtPrice(), delta);
     }
 
     @Then("^Tracking information has (.*) values.$")

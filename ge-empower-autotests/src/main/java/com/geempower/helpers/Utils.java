@@ -10,7 +10,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Locale;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 @Component
 public class Utils extends UIComponent {
@@ -59,6 +62,12 @@ public class Utils extends UIComponent {
         return true;
     }
 
+    @Step("Generate random number using min/max values.")
+    public int generateRandomNumber(int min, int max) {
+        Random random = new Random();
+        return min + random.nextInt((max - min) + 1);
+    }
+
     @Step("Check if one date greater than Other Date.")
     public boolean isGottenDateGreaterThanOtherDate(String date1, String date2) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -94,5 +103,20 @@ public class Utils extends UIComponent {
             e.printStackTrace();
         }
         return newDateInString;
+    }
+
+    @Step("Get current date in MM/dd/yyyy format.")
+    public String getCurrentDate() {
+        DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        return formatter.format(new Date());
+    }
+
+    @Step("Get difference in Days between two days.")
+    public long getDifferenceBetweenTwoDays(String currentDate, String comparableDate) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        Date maxDate = sdf.parse(currentDate);
+        Date date = sdf.parse(comparableDate);
+        long diffInMillies = Math.abs(maxDate.getTime() - date.getTime());
+        return TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
     }
 }

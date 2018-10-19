@@ -1,5 +1,6 @@
 package com.geempower.cucumber.definition_steps;
 
+import com.geempower.helpers.Utils;
 import com.geempower.helpers.managers.OrderManager;
 import com.geempower.helpers.models.Order;
 import com.geempower.helpers.models.Product;
@@ -10,7 +11,6 @@ import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
-import java.util.Random;
 
 import static com.geempower.cucumber.definition_steps.TestKeyword.GE_ORDER_NO;
 import static org.testng.Assert.assertEquals;
@@ -21,6 +21,8 @@ public class MyCartStepDefs extends AbstractStepDefs {
     private MyCartPage myCartPage;
     @Autowired
     private OrderManager orderManager;
+    @Autowired
+    private Utils utils;
 
     private final double delta = 0.00001;
 
@@ -65,8 +67,7 @@ public class MyCartStepDefs extends AbstractStepDefs {
     public void setRandomQuantityOfProductOnTheMyCartPage() {
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         selectedProducts.keySet().forEach(product -> {
-            Random random = new Random();
-            int randomQuantity = (10 + random.nextInt((20 - 10) + 1)) * 10;
+            int randomQuantity = (utils.generateRandomNumber(10, 20) * 10);
             myCartPage.setQuantityForProduct(product, randomQuantity);
             selectedProducts.put(product, randomQuantity);
         });
@@ -118,7 +119,7 @@ public class MyCartStepDefs extends AbstractStepDefs {
     }
 
     @Then("^Is Qty value equal to value on the Order page.$")
-    public void isQtyValueEqualToValueOnTheOrderPage(){
+    public void isQtyValueEqualToValueOnTheOrderPage() {
         Order randomOrder = orderManager.getOrderById(Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO)));
         assertTrue(randomOrder.getQuantity() == myCartPage.getQtyValue(randomOrder.getCatalogNo()));
     }

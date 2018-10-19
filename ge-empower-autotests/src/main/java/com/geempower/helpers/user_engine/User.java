@@ -45,6 +45,9 @@ public class User {
                 case "caadmin":
                     userRole = StorefrontUserRoles.CAADMIN;
                     break;
+                case "mfgrepuser":
+                    userRole = StorefrontUserRoles.MFGREPUSER;
+                    break;
                 default:
                     userRole = null;
                     break;

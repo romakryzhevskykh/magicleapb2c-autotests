@@ -5,10 +5,10 @@ import cucumber.api.CucumberOptions;
 
 @CucumberOptions(
         format = {"pretty"},
-        features =
-                {
+        features = {
                 "src/test/resources/features/AccountManagement.feature",
-                "src/test/resources/features/AccountManagementForExternalUser.feature"}
+                "src/test/resources/features/AccountManagementForExternalUser.feature",
+                "src/test/resources/features/AccountManagementForMfgRepUser.feature"}
 )
 public class AccountManagementSuite extends CucumberTestsRunner {
 }

@@ -9,6 +9,7 @@ public enum StorefrontUserRoles implements UserRole {
     REGIONALVIEW,
     SMADMIN,
     RMADMIN,
+    MFGREPUSER,
     TESTROLEUSER;
 
     @Override

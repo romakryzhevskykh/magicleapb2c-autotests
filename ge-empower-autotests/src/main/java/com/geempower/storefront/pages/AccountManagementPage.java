@@ -72,7 +72,7 @@ public class AccountManagementPage extends StorefrontBasePage {
     }
 
     @Step("Click on Search account button.")
-    private void clickOnSearchButton() {
+    public void clickOnSearchButton() {
         click(SEARCH_BUTTON_XPATH);
         waitUntilPageIsFullyLoaded();
     }
@@ -98,7 +98,7 @@ public class AccountManagementPage extends StorefrontBasePage {
     public void openRequestAccountPopup() {
         waitUntilPageIsFullyLoaded();
         waitForElementToDisappear(By.xpath(MODAL_DIALOG_XPATH));
-        click(REQUEST_ACCOUNT_BUTTON);
+        click(REQUEST_ACCOUNT_BUTTON_XPATH);
     }
 
     @Step("Select region from regions list in request account popup by counter.")
@@ -245,7 +245,8 @@ public class AccountManagementPage extends StorefrontBasePage {
 
     @Step("Mark appropriate account as favourite.")
     public void markAppropriateAccountAsFavorite(String accountDetails) {
-        click(STAR_ICON_FOR_APPROPRIATE_ACCOUNT_ON_APPROVED_ACCOUNT_TAB_XPATH, accountDetails);
+        waitUntilPageIsFullyLoaded();
+        click(NOT_FAVORITE_ACCOUNT_STAR_ICON_XPATH, accountDetails);
     }
 
     @Step("Get All favorites accounts.")
@@ -294,5 +295,49 @@ public class AccountManagementPage extends StorefrontBasePage {
     @Step("Click On Send Pre Auth Code.")
     public void clickOnSendPreAuthCode() {
         click(PRE_AUTH_SEND_REQUEST_BUTTON_XPATH);
+    }
+
+    @Step("Get Count Of Favorite Accounts.")
+    public int getCountOfFavoriteAccounts() {
+        waitUntilPageIsFullyLoaded();
+        String countOfEntries = $(By.id(COUNT_OF_FAVORITE_ACCOUNTS_ON_FAVORITES_TAB_ID)).getText();
+        String[] countOfFavorites = countOfEntries.split(" ");
+        return Integer.parseInt(countOfFavorites[5]);
+    }
+
+    @Step("Get List Of Not Favorite Accounts.")
+    public List<WebElement> getListOfNotFavoritesAccounts() {
+        return $$(LIST_OF_NOT_FAVORITES_ACCOUNTS_XPATH);
+    }
+
+    @Step("Is Request Account Button Displayed.")
+    public boolean isRequestAccountButtonDisplayed() {
+        waitUntilPageIsFullyLoaded();
+        return isDisplayed(REQUEST_ACCOUNT_BUTTON_XPATH);
+    }
+
+    @Step("Is Favorite Accounts Tab Displayed.")
+    public boolean isFavoriteAccountsTabDisplayed() {
+        return isDisplayed(FAVORITES_ACCOUNTS_TAB_XPATH);
+    }
+
+    @Step("Is Pending For Approval Tab Displayed.")
+    public boolean isPendingForApprovalTabDisplayed() {
+        return isDisplayed(PENDING_FOR_APPROVAL_TAB_XPATH);
+    }
+
+    @Step("Is Accounts Tab Displayed.")
+    public boolean isAccountsTabDisplayed() {
+        return isDisplayed(APPROVED_ACCOUNTS_TAB_XPATH);
+    }
+
+    @Step("Get Approved Accounts Table Size.")
+    public int getApprovedAccountsTableSize() {
+        return $$(APPROVED_ACCOUNTS_TABLE_XPATH).size();
+    }
+
+    @Step("Get No Data Title From Accounts Table.")
+    public String getNoDataTitleFromAccountsTable() {
+        return $(APPROVED_ACCOUNTS_TABLE_XPATH).getText();
     }
 }
