@@ -138,6 +138,8 @@ public class QuickOrderPage extends StorefrontBasePage {
     }
     @Step("Click on Pop-up Reset form button")
     public void clickOnPopUpResetFormButton() {
+        waitUntilPageIsFullyLoaded();
+        waitUntilElementIsVisible(RESET_FORM_BUTTON_POP_UP_XPATH);
         click(RESET_FORM_BUTTON_POP_UP_XPATH);
         waitUntilPageIsFullyLoaded();
     }
