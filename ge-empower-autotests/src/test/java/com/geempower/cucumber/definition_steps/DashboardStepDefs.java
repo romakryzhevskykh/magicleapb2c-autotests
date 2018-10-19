@@ -75,7 +75,7 @@ public class DashboardStepDefs extends AbstractStepDefs {
     @Then("^Chosen account is displayed in account box on Dashboard page.$")
     public void chosenAccountIsDisplayedInAccountsBoxOnDashboardPage() {
         String chosenAccount = threadVarsHashMap.getString(TestKeyword.CHOSEN_ACCOUNT);
-        assertTrue(dashboardPage.isSelectedAccountIsDisplayed().contains(chosenAccount));
+        assertTrue(dashboardPage.getAccountInfo().contains(chosenAccount));
     }
 
     @And("^Click on P&A button.$")
@@ -248,5 +248,10 @@ public class DashboardStepDefs extends AbstractStepDefs {
     @Then("^There is no favorite accounts in the account info dropdown.$")
     public void thereIsNoFavoriteAccountsInTheAccountInfoDropdown() {
         assertTrue(dashboardPage.getCountOfFavoriteAccountsInAccountInfoDropdown() == 0);
+    }
+
+    @Then("^Previously chosen account is displayed on the account info dropdown.$")
+    public void previouslyChosenAccountIsDisplayedOnTheAccountInfoDropdown() {
+        assertTrue(dashboardPage.getAccountInfo().contains(String.valueOf(threadVarsHashMap.get(TestKeyword.CHOSEN_FAVORITE_ACCOUNT))));
     }
 }

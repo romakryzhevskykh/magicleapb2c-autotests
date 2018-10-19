@@ -69,8 +69,8 @@ public class DashboardPage extends StorefrontBasePage {
         }
     }
 
-    @Step("Check selected account is displayed.")
-    public String isSelectedAccountIsDisplayed() {
+    @Step("Get account info.")
+    public String getAccountInfo() {
         waitUntilPageIsFullyLoaded();
         return $(ACCOUNT_INFO_XPATH).getText();
 
