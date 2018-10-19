@@ -14,7 +14,7 @@ import static com.geempower.storefront.page_elements.order.PODetailsPageElements
 
 @Component
 public class PODetailsPage extends StorefrontBasePage {
-    private final String pageUri = "orders/details/";
+    private final String pageUri = "orders/po/";
 
     @Override
     public String getPageUrl() {
@@ -22,13 +22,13 @@ public class PODetailsPage extends StorefrontBasePage {
     }
 
     @Step("PO Details page is opened.")
-    public boolean isOpened(String orderNo) {
+    public boolean isOpened(String poNo) {
         if (isDisplayed(By.id(PO_NUMBERS_ORDER_TABLE_ID))) {
             click(PO_NUMBERS_ORDER_TABLE_SELECT_ALL_CHECKBOX_XPATH);
             click(ACTIVE_NEXT_BUTTON_ABOVE_PO_NUMBERS_ORDER_TABLE_XPATH);
         }
         waitUntilPageIsFullyLoaded();
-        return getCurrentUrl().contains(orderNo);
+        return getCurrentUrl().contains(getPageUrl())&& getCurrentUrl().endsWith("?poNumber=" + poNo);
     }
 
     @Step("Is Purchase Order Title Displayed On Details PO Number Page.")

@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-import static com.geempower.cucumber.definition_steps.TestKeyword.DETAILS_PO_PAGE_CATALOG_NO;
+import static com.geempower.cucumber.definition_steps.TestKeyword.*;
 import static org.testng.Assert.*;
 
 public class PODetailsStepDefs extends AbstractStepDefs {
@@ -21,7 +21,7 @@ public class PODetailsStepDefs extends AbstractStepDefs {
 
     @Then("^PO Details page is opened.$")
     public void orderDetailsPageIsOpened() {
-        assertTrue(poDetailsPage.isOpened(threadVarsHashMap.get(TestKeyword.PO_NO).toString()));
+        assertTrue(poDetailsPage.isOpened(threadVarsHashMap.getString(TestKeyword.PO_NO)));
     }
 
     @Then("^Is (.*) title displayed on Details PO Number page.$")

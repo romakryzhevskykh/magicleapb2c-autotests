@@ -26,7 +26,7 @@ public class OrderDetailsPage extends StorefrontBasePage {
 
     @Step("Orders Details page is opened.")
     public boolean isOpened(String orderNo) {
-        return getCurrentUrl().contains(orderNo);
+        return getCurrentUrl().contains(pageUri) && getCurrentUrl().endsWith(orderNo);
     }
 
     @Step("Get GE order NO.")
