@@ -66,4 +66,8 @@ public class UserSwitchStepDefs {
         webDriverPool.setDriverActive(StorefrontUserRoles.TESTROLEUSER);
     }
 
+    @Given("Switch to Storefront as mfgRepUser.")
+    public void switchToStorefrontAsMfgRepUser() {
+        webDriverPool.setDriverActive(StorefrontUserRoles.MFGREPUSER);
+    }
 }

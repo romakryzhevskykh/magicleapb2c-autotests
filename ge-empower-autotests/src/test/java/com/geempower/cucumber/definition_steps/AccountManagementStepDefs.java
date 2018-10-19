@@ -277,4 +277,35 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
     public void correctCountOfFavoriteAccountIsDisplayedInFavoritesTab() {
         assertTrue(accountManagementPage.getCountOfFavoriteAccounts() == (int) threadVarsHashMap.get(TestKeyword.FAVORITE_ACCOUNTS_COUNT_FAVORITES_TAB));
     }
+
+    @Then("^Request account button is not displayed on the page.$")
+    public void requestAccountButtonIsNotDisplayedOnThePage() {
+        assertFalse(accountManagementPage.isRequestAccountButtonDisplayed());
+    }
+
+    @Then("^Favorite accounts tab is not displayed on the page.$")
+    public void favoriteAccountsTabIsNotDisplayedOnThePage() {
+        assertFalse(accountManagementPage.isFavoriteAccountsTabDisplayed());
+    }
+
+    @Then("^Pending for approval tab is not displayed on the page.$")
+    public void pendingForApprovalTabIsNotDisplayedOnThePage() {
+        assertFalse(accountManagementPage.isPendingForApprovalTabDisplayed());
+    }
+
+    @Then("^Accounts tab is displayed on the page.$")
+    public void accountsTabIsDisplayedOnThePage() {
+        assertTrue(accountManagementPage.isAccountsTabDisplayed());
+    }
+
+    @Then("^User is able to find all accounts in (.*) region.$")
+    public void userIsAbleToFindAllAccountsInNorth_AmericaRegion(String regionName) {
+        Region chosenRegion = regionsManager.getRegionByName(regionName);
+        accountManagementPage.selectAppropriateRegionFromRegionList(chosenRegion);
+        accountManagementPage.clickOnSearchButton();
+        if (regionName.equals("EMEA") || regionName.equals("ASIA") || regionName.equals("Latin_America"))
+            assertEquals(accountManagementPage.getNoDataTitleFromAccountsTable(), "No data available in table");
+        else
+            assertTrue(accountManagementPage.getApprovedAccountsTableSize() > 1);
+    }
 }

@@ -432,9 +432,6 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     When Close cookies pop-up.
     And Help button is displayed.
     When User clicks on Help button.
-    And Click on Sign in with your GE SSO Account button on Lessonly page.
-    Then Check that Dashboard page is opened.
-    When User clicks on Help button.
     Then Getting Started: empower Flow tip is displayed on Lessonly widget.
 
   Scenario Outline: Check that Featured updates widget is displayed correctly with all necessary data.
