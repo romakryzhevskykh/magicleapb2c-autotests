@@ -32,6 +32,7 @@ Feature: Return creation tests
     And Set color of shrink field on Return Creation 3 page.
     And Set Additional Information field on Return Creation 3 page.
     And Click on Save button on Return Creation 3 page.
+    Then Is green Additional Info button displayed.
     And Click on Next button on Return Creation 3 page.
     Then Return Creation 4 page is opened.
     Then Correct Catalog No, Reason for request and Requested action are displayed on Return Creation 4 page.
@@ -107,6 +108,7 @@ Feature: Return creation tests
     And Set Additional Information field on Return Creation 3 page.
     And Upload request2.xlsx file to the Optional Attach file field on Return Creation 3 page.
     And Click on Save button on Return Creation 3 page.
+    Then Is green Additional Info button displayed.
     And Click on Next button on Return Creation 3 page.
     Then Return Creation 4 page is opened.
     When Click on Submit Request button on Return Creation 4 page.

@@ -90,4 +90,9 @@ public class ReturnCreation3StepDefs extends AbstractStepDefs {
     public void uploadTestFileToTheOptionalAttachFileFieldOnReturnCreationPage(String fileName) {
         returnCreation3Page.uploadAdditionalInfoFile(fileName);
     }
+
+    @Then("^Is green Additional Info button displayed.$")
+    public void isGreenAdditionalInfoButtonDisplayed() {
+        assertTrue(returnCreation3Page.isGreenAdditionalInfoButtonDisplayed());
+    }
 }

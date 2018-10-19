@@ -131,4 +131,9 @@ public class ReturnCreation3Page extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
         utils.uploadFileByName(fileName, ADDITIONAL_INFO_PATH_INPUT_XPATH);
     }
+
+    @Step("Is Green Additional Info Button Displayed.")
+    public boolean isGreenAdditionalInfoButtonDisplayed() {
+        return isDisplayed(GREEN_ADDITIONAL_INFO_BUTTON_XPATH);
+    }
 }
