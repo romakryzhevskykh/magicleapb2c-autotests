@@ -241,7 +241,7 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     }
 
     @When("^User clicks on time status drop down field on Order Details page.$")
-    public void userClickOnTimeStatusDropDownFieldOnOrderDetailsPage() {
+    public void userClicksOnTimeStatusDropDownFieldOnOrderDetailsPage() {
         orderDetailsPage.userClicksOnTimeStatusDropDownField();
     }
 

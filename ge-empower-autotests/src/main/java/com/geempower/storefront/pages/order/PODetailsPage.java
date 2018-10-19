@@ -84,12 +84,8 @@ public class PODetailsPage extends StorefrontBasePage {
     }
 
     @Step("Get Random Catalog No In Opened Order No. Details Block.")
-    public StringBuilder getRandomCatalogNoInOpenedOrderNoDetailBlock() {
-        StringBuilder catalogNo = new StringBuilder("");
-        $$(ALL_CATALOG_NO_IN_OPENED_ORDER_NO_DETAILS_BLOCK_XPATH).stream().findAny().ifPresent(webElement -> {
-            catalogNo.append(webElement.getText());
-        });
-        return catalogNo;
+    public String getRandomCatalogNoInOpenedOrderNoDetailBlock() {
+        return $$(ALL_CATALOG_NO_IN_OPENED_ORDER_NO_DETAILS_BLOCK_XPATH).stream().findAny().get().getText();
     }
 
     @Step("Click On Expand Closes Arrow In Opened Order No. Details Block.")
