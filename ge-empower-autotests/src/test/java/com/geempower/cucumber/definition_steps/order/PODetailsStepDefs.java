@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
+import static com.geempower.cucumber.definition_steps.TestKeyword.DETAILS_PO_PAGE_CATALOG_NO;
 import static org.testng.Assert.*;
 
 public class PODetailsStepDefs extends AbstractStepDefs {
@@ -58,24 +59,24 @@ public class PODetailsStepDefs extends AbstractStepDefs {
         assertTrue(poDetailsPage.getAllStatusesInStatusBoxesOnPODetailsPage().containsAll(statuses));
     }
 
-    @Then("^Is (.*) label contains date in PO Details block.$")
+    @Then("^Is (.*) label contains date in opened Order No. Details block.$")
     public void isOrderedRequestedOnLabelContainsDate(String label) {
-        assertTrue(utils.isValidDate(poDetailsPage.getLabelValueInPODetailsBlock(label)));
+        assertTrue(utils.isValidDate(poDetailsPage.getLabelValueInOpenedOrderNoDetailsBlock(label)));
     }
 
-    @Then("^Is (.*) label contains (.*) value in PO Details block.$")
+    @Then("^Is (.*) label contains (.*) value in opened Order No. Details block.$")
     public void isOrderValueAndTaxTotalContainsUSDValue(String label, String currency) {
-        assertTrue(poDetailsPage.getLabelValueInPODetailsBlock(label).contains(currency));
+        assertTrue(poDetailsPage.getLabelValueInOpenedOrderNoDetailsBlock(label).contains(currency));
     }
 
-    @Then("^Is (.*) label contains value in PO Details block.$")
+    @Then("^Is (.*) label contains value in opened Order No. Details block.$")
     public void isLabelContainsValue(String label) {
-        assertFalse(poDetailsPage.getLabelValueInPODetailsBlock(label).isEmpty());
+        assertFalse(poDetailsPage.getLabelValueInOpenedOrderNoDetailsBlock(label).isEmpty());
     }
 
-    @Then("^Is (.*) label contains (.*) email character in PO Details block.$")
+    @Then("^Is (.*) label contains (.*) email character in opened Order No. Details block.$")
     public void isCreatedByLabelContainsEmailCharacter(String label, String emailCharacter) {
-        assertTrue(poDetailsPage.getLabelValueInPODetailsBlock(label).contains(emailCharacter));
+        assertTrue(poDetailsPage.getLabelValueInOpenedOrderNoDetailsBlock(label).contains(emailCharacter));
     }
 
     @When("^User clicks on time status drop down field on PO Details page.$")
@@ -88,5 +89,35 @@ public class PODetailsStepDefs extends AbstractStepDefs {
         assertTrue(poDetailsPage.getAllTimeStatusesInTimeStatusDropDown()
                 .allMatch(statuses ->
                         timeStatuses.stream().anyMatch(timeStatus -> statuses.getText().contains(timeStatus))));
+    }
+
+    @Then("^Is Opened PO Details block table contains correct header (.*) titles.$")
+    public void isOpenedPODetailsBlockTableContainsCorrectHeaderTableTitles(List<String> tableTitles) {
+        poDetailsPage.getAllPOOrderTableHeaders().containsAll(tableTitles);
+    }
+
+    @When("Put random catalog no to the thredVarsHaspMap.")
+    public void putRandomCatalogNoToTheThredVarsHaspMap() {
+        threadVarsHashMap.put(DETAILS_PO_PAGE_CATALOG_NO, poDetailsPage.getRandomCatalogNoInOpenedOrderNoDetailBlock());
+    }
+
+    @When("^User expands/closes random catalog No block in opened Order No. Details block.$")
+    public void userExpandsClosesRandomCatalogNoBlockInOpenedOrderNoDetailsBlock() {
+        poDetailsPage.clickOnExpandClosesArrowInOpenedOrderNoDetailsBlock(threadVarsHashMap.getString(DETAILS_PO_PAGE_CATALOG_NO));
+    }
+
+    @Then("^Is (.*) label contains date in Product Details block in opened Order No. Details block.$")
+    public void isRequestedDateLabelContainsDateInProductDetailsBlockInOpenedPODetailsBlock(String label) {
+        assertTrue(utils.isValidDate(poDetailsPage.getLabelValueInProductDetailsBlockInOpenedOrderNoDetailsBlock(label)));
+    }
+
+    @Then("^Is (.*) label contains value in Product Details block in opened Order No. Details block.$")
+    public void isLabelContainsValueInProductDetailsBlock(String label) {
+        assertFalse(poDetailsPage.getLabelValueInProductDetailsBlockInOpenedOrderNoDetailsBlock(label).isEmpty());
+    }
+
+    @Then("^Is Correct (.*) labels displayed in Product Details block in opened Order No. Details block.$")
+    public void isCorrectProductDetailLabelsDisplayedInProductDetailsBlockInOpenedPODetailsBlock(List<String> productDetailLabels) {
+        poDetailsPage.getAllProductDetailLabels().containsAll(productDetailLabels);
     }
 }

@@ -253,7 +253,7 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     }
 
     @Then("^Is Detail Order table contains correct header (.*) titles.$")
-    public void isDetailOrderTableContainsCorrectHeaderTableTitlesTitles(List<String> tableTitles) {
+    public void isDetailOrderTableContainsCorrectHeaderTableTitles(List<String> tableTitles) {
         orderDetailsPage.getAllDetailOrderTableHeaders().containsAll(tableTitles);
     }
 

@@ -23,21 +23,18 @@ public class PODetailsPage extends StorefrontBasePage {
 
     @Step("PO Details page is opened.")
     public boolean isOpened(String orderNo) {
+        if (isDisplayed(By.id(PO_NUMBERS_ORDER_TABLE_ID))) {
+            click(PO_NUMBERS_ORDER_TABLE_SELECT_ALL_CHECKBOX_XPATH);
+            click(ACTIVE_NEXT_BUTTON_ABOVE_PO_NUMBERS_ORDER_TABLE_XPATH);
+        }
+        waitUntilPageIsFullyLoaded();
         return getCurrentUrl().contains(orderNo);
     }
 
     @Step("Is Purchase Order Title Displayed On Details PO Number Page.")
-    public String  getPurchaseOrderTitleOnDetailsPONumberPage() {
-        if (isDisplayed (By.id(PO_NUMBERS_ORDER_TABLE_ID))){
-            click(PO_NUMBERS_ORDER_TABLE_SELECT_ALL_CHECKBOX_XPATH);
-            click(ACTIVE_NEXT_BUTTON_ABOVE_PO_NUMBERS_ORDER_TABLE_XPATH);
-            waitUntilPageIsFullyLoaded();
-            return $(PURCHASE_ORDER_TITLE_XPATH).getText();
-        } else {
-            return $(PURCHASE_ORDER_TITLE_XPATH).getText();
-        }
+    public String getPurchaseOrderTitleOnDetailsPONumberPage() {
+        return $(PURCHASE_ORDER_TITLE_XPATH).getText();
     }
-
 
     @Step("Get PO No Title Number.")
     public String getPONoTitleNumber() {
@@ -57,7 +54,6 @@ public class PODetailsPage extends StorefrontBasePage {
 
     @Step("Is Expanded Status Box Line Displayed.")
     public boolean isExpandedStatusBoxLineDisplayedOnPODetailsPage() {
-        waitUntilPageIsFullyLoaded();
         return isDisplayed(EXPANDED_STATUS_BOXES_LINE_XPATH);
     }
 
@@ -66,9 +62,9 @@ public class PODetailsPage extends StorefrontBasePage {
         return $$(STATUS_BOX_TITLES_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
-    @Step("Get Label Value in PO Details block.")
-    public String getLabelValueInPODetailsBlock(String label) {
-        return $(LABEL_VALUES_IN_PO_DETAILS_BLOCK_XPATH, label).getText();
+    @Step("Get Label Value in Opened Order No. Details block.")
+    public String getLabelValueInOpenedOrderNoDetailsBlock(String label) {
+        return $(LABEL_VALUES_IN_OPENED_ORDER_NO_DETAILS_BLOCK_XPATH, label).getText();
     }
 
     @Step("User Click On Time Status Drop Down Field.")
@@ -80,5 +76,35 @@ public class PODetailsPage extends StorefrontBasePage {
     public Stream<WebElement> getAllTimeStatusesInTimeStatusDropDown() {
         waitUntilPageIsFullyLoaded();
         return $$(TIME_STATUSES_VALUES_IN_DROP_DOWN_XPATH).stream();
+    }
+
+    @Step("Get All Detail Order Table Headers.")
+    public List<String> getAllPOOrderTableHeaders() {
+        return $$(PO_DETAILS_TABLE_HEADERS_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    @Step("Get Random Catalog No In Opened Order No. Details Block.")
+    public StringBuilder getRandomCatalogNoInOpenedOrderNoDetailBlock() {
+        StringBuilder catalogNo = new StringBuilder("");
+        $$(ALL_CATALOG_NO_IN_OPENED_ORDER_NO_DETAILS_BLOCK_XPATH).stream().findAny().ifPresent(webElement -> {
+            catalogNo.append(webElement.getText());
+        });
+        return catalogNo;
+    }
+
+    @Step("Click On Expand Closes Arrow In Opened Order No. Details Block.")
+    public void clickOnExpandClosesArrowInOpenedOrderNoDetailsBlock(String catalogNo) {
+        click(EXPAND_CLOSE_ARROW_IN_OPENED_ORDER_NO_DETAILS_BLOCK_XPATH, catalogNo);
+    }
+
+    @Step("Get Label Value In Product Details Block In Opened Order No. Details Block.")
+    public String getLabelValueInProductDetailsBlockInOpenedOrderNoDetailsBlock(String label) {
+        waitUntilPageIsFullyLoaded();
+        return $(LABEL_VALUES_IN_PRODUCT_DETAILS_BLOCK_IN_OPENED_ORDER_NO_DETAILS_BLOCK_XPATH, label).getText();
+    }
+
+    @Step("Get All Product Detail Labels.")
+    public List<String> getAllProductDetailLabels() {
+        return $$(LABELS_IN_PRODUCT_DETAILS_BLOCK_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
     }
 }

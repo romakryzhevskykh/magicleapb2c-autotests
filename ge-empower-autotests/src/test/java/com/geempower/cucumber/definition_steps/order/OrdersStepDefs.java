@@ -10,8 +10,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static com.geempower.cucumber.definition_steps.TestKeyword.GE_ORDER_NO;
-import static com.geempower.cucumber.definition_steps.TestKeyword.PO_NO;
+import static com.geempower.cucumber.definition_steps.TestKeyword.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
