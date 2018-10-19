@@ -308,4 +308,14 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
         else
             assertTrue(accountManagementPage.getApprovedAccountsTableSize() > 1);
     }
+
+    @When("^User selects random favorites account.$")
+    public void userSelectsRandomFavoritesAccount() {
+        StringBuilder chosenAccount = new StringBuilder();
+        accountManagementPage.getAllFavoriteAccounts().findAny().ifPresent(acc -> {
+            chosenAccount.append(acc.getText());
+            acc.click();
+        });
+        threadVarsHashMap.put(TestKeyword.CHOSEN_FAVORITE_ACCOUNT, chosenAccount);
+    }
 }
