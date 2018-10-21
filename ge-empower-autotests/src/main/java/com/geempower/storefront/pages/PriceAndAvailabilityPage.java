@@ -154,7 +154,7 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
         return countryOrigin;
     }
 
-    @Step("Ss Country Of Origin Sort Column Header Displayed.")
+    @Step("Is Country Of Origin Sort Column Header Displayed.")
     public boolean isCountryOfOriginSortColumnHeaderDisplayed() {
         return isDisplayed(COUNTRY_OF_ORIGIN_SORT_COLUMN_HEADER_XPATH);
     }

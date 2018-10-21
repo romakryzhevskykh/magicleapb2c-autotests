@@ -61,15 +61,6 @@ public class ProductManager {
             e.printStackTrace();
         }
         return selectedProduct;
-//                .orElseGet(() -> {
-//                    Product product = getProductByRegion(region);
-//                    try {
-//                        setAllDataFromPDP(userSession, product);
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                    return product;
-//                });
     }
 
     private void setAllDataFromPDP(UserSession userSession, Product product) throws IOException {

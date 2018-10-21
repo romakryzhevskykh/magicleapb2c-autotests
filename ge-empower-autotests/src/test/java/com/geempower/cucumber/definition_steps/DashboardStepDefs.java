@@ -268,6 +268,5 @@ public class DashboardStepDefs extends AbstractStepDefs {
         HashMap<Product, Integer> selectedProducts = getSelectedProducts();
         selectedProducts.put(productManager.getProductWithAllDataByRegionAndCatalogNo(userSessions.getActiveUserSession(), chosenRegion, catalogNo), 0);
         threadVarsHashMap.put(TestKeyword.SELECTED_PRODUCTS, selectedProducts);
-
     }
 }
