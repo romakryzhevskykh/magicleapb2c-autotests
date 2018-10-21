@@ -154,8 +154,34 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
         return countryOrigin;
     }
 
-    @Step("is Country Of Origin Sort Column Header Displayed.")
+    @Step("Ss Country Of Origin Sort Column Header Displayed.")
     public boolean isCountryOfOriginSortColumnHeaderDisplayed() {
         return isDisplayed(COUNTRY_OF_ORIGIN_SORT_COLUMN_HEADER_XPATH);
+    }
+
+    @Step("Get Warning Message below catalogue no.")
+    public String getWarningMessage() {
+        return $(P_AND_A_WARNING_MESSAGE_XPATH).getText();
+    }
+
+    @Step("Get No Data Title In Products Table.")
+    public String getNoDataTitleInProductsTable() {
+        return $(EMPTY_PRODUCT_TABLE_TITLE_XPATH).getText();
+    }
+
+    @Step("Get Catalog Error Message.")
+    public String getCatalogErrorMessage() {
+        return $(CATALOG_ERROR_MESSAGE_XPATH).getText();
+    }
+
+    @Step("Is Error Red Icon Displayed.")
+    public boolean isErrorRedIconDisplayed() {
+        return isDisplayed(ERROR_RED_ICON_XPATH);
+    }
+
+    @Step("Get error message below Agreement No field.")
+    public String getErrorMessageBelowAgreementNoField() {
+        waitUntilPageIsFullyLoaded();
+        return $(ERROR_MESSAGE_BELOW_AGREEMENT_NO_FIELD_XPATH).getText();
     }
 }

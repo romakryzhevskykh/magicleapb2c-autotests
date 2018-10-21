@@ -35,8 +35,9 @@
     </test>
     <test name="Suite4">
         <parameter name="browserName" value="chrome"/>
-        <parameter name="headless" value="true"/>
+        <parameter name="headless" value="false"/>
         <classes>
+            <class name="com.geempower.cucumber.PriceAvailabilityErrorsSuite"/>
             <class name="com.geempower.cucumber.ManageUsersSuite"/>
         </classes>
     </test>

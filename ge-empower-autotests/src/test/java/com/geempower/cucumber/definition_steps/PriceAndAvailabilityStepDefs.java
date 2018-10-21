@@ -5,12 +5,13 @@ import com.geempower.helpers.models.Product;
 import com.geempower.storefront.page_blocks.FullProductDetailsPopUpBlock;
 import com.geempower.storefront.page_blocks.HeaderBlock;
 import com.geempower.storefront.pages.PriceAndAvailabilityPage;
-import cucumber.api.java.en.*;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
 import static org.testng.Assert.*;
 
@@ -122,6 +123,15 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
     }
 
     @SuppressWarnings("unchecked")
+    @Then("^Check that list price, final net price are equal to data from PDP.$")
+    public void checkThatListPriceAndFinalNetPriceAreEqualToDataFromPDP() {
+        String listPrice = getSelectedProducts().keySet().stream().findAny().get().getListPrice().trim();
+        String finalNetPrice = getSelectedProducts().keySet().stream().findAny().get().getFinalNetPrice();
+        assertEquals(listPrice, priceAndAvailabilityPage.getListPrice());
+        assertEquals(finalNetPrice, priceAndAvailabilityPage.getFinalNetPrice());
+    }
+
+    @SuppressWarnings("unchecked")
     @And("^Put (.*) to the hashmap on P&A page.$")
     public void putDefaultQuantityToTheHashmap(int defaultQuantity) {
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
@@ -192,12 +202,42 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
     @When("^Select Country of origin on Price&Availability page.$")
     public void selectCountryOfOriginOnPriceAvailabilityPage() {
         String countryOfOrigin = priceAndAvailabilityPage.clickOnCountryOfOriginDropDownField();
-        threadVarsHashMap.put(TestKeyword.COUNTRY_OF_ORIGIN_CELA_PRODUCT,countryOfOrigin);
+        threadVarsHashMap.put(TestKeyword.COUNTRY_OF_ORIGIN_CELA_PRODUCT, countryOfOrigin);
         assertFalse(countryOfOrigin.isEmpty());
     }
 
     @Then("^Is Country of Origin sort column header displayed.$")
     public void isCountryOfOriginSortColumnHeaderDisplayed() {
         assertTrue(priceAndAvailabilityPage.isCountryOfOriginSortColumnHeaderDisplayed());
+    }
+
+    @Then("^(.*) message is displayed under catalogNo.$")
+    public void oldProductIsReplacedByNewProductMessageIsDisplayed(String warningMessage) {
+        assertEquals(warningMessage, priceAndAvailabilityPage.getWarningMessage());
+    }
+
+    @Then("^(.*) title is displayed in products table.$")
+    public void noDataAvailableInTableTitleIsDisplayedInProductsTable(String noDataTitle) {
+        assertEquals(noDataTitle, priceAndAvailabilityPage.getNoDataTitleInProductsTable());
+    }
+
+    @Then("^Error message (.*) is displayed in the left top.$")
+    public void errorMessageCatalogNotFoundIsDisplayed(String errorMessage) {
+        assertEquals(errorMessage, priceAndAvailabilityPage.getCatalogErrorMessage());
+    }
+
+    @Then("^Red exclamation mark icon is displayed near the error message.$")
+    public void redExclamationMarkIconIsDisplayedNearTheErrorMessage() {
+        assertTrue(priceAndAvailabilityPage.isErrorRedIconDisplayed());
+    }
+
+    @Then("^Error message (.*) is displayed below Agreement No field.$")
+    public void errorMessageIsDisplayedBelowAgreementNoField(String errorMessage) {
+        assertEquals(errorMessage, priceAndAvailabilityPage.getErrorMessageBelowAgreementNoField());
+    }
+
+    @Then("^Is (.*) pricing error below Pricing Details title displayed in Full Product Details pop-up.$")
+    public void isPricingErrorBelowPricingDetailsDisplayed(String error) {
+        assertEquals(error, fullProductDetailsPopUpBlock.getPricingErrorMessageBelowPricingDetailsTitleField());
     }
 }

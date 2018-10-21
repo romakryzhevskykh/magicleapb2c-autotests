@@ -54,4 +54,10 @@ public class FullProductDetailsPopUpBlock extends UIComponent {
         waitUntilPageIsFullyLoaded();
         return isDisplayed(ACTIVE_AVAILABILITY_PRODUCT_DETAILS_TAB_XPATH);
     }
+
+    @Step("Get pricing error message below Pricing Details title field.")
+    public String getPricingErrorMessageBelowPricingDetailsTitleField() {
+        waitUntilPageIsFullyLoaded();
+        return $(PRICING_ERROR_BELOW_PRICING_DETAILS_TITLE_XPATH).getText();
+    }
 }

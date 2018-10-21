@@ -13,7 +13,7 @@ public class PriceAndAvailabilityPageElements {
     public final static String PRODUCT_ERROR_MESSAGES_XPATH = "//div[@class='warning-message catalog-error-message mt-10 mb-10']/span[@class='warning-text']";
     public final static String CLAIMBACK_MESSAGE_BELOW_AGREEMENT_NO_FIELD_XPATH = "//*[@class = 'error-text-spa error-spa  visible text-blue']";
     public final static String SEARCH_AGREEMENT_NO_ICON_XPATH = "//table[@id='priceTable']//tr[1]//td[@class='special-pricing-input-col']//i[@class='fa fa-search']";
-    public final static String PRODUCT_LINK_ON_PA_PAGE_XPATH = "//div[@id='priceTable_wrapper']//*[contains(@class,'catalog-name-input modal-toggle product-popup') and contains(text(),'%s')]";
+    public final static String PRODUCT_LINK_ON_PA_PAGE_XPATH = "//div[@id='priceTable_wrapper']//a[contains(text(),'%s')]";
     public final static String SEARCH_AGREEMENT_NO_INPUT_XPATH = "//div[@class='special-pricing-form-body']//input[@id='searchSpaInp']";
     public final static String SEARCH_AGREEMENT_NO_ICON_SPECIAL_PRICING_POP_UP_XPATH = "//div[@class='special-pricing-form-body']//i[@class='fa fa-search']";
     public final static String FIRST_AGREEMENT_ON_THE_SPECIAL_PRICING_POP_UP_XPATH = "//table[@id='DataTables_Table_0']/tbody/tr[1]/td[1]";
@@ -28,4 +28,11 @@ public class PriceAndAvailabilityPageElements {
     public final static String COUNTRY_OF_ORIGIN_ALL_DROP_DOWN_ITEMS_XPATH = "//li[contains(@id,'select2-celaCustDetail-result')]";
     public final static String COUNTRY_OF_ORIGIN_SINGLE_SOURCE_VALUE_XPATH = "//td[@class='data-table-value-col celaCust']";
     public final static String COUNTRY_OF_ORIGIN_SORT_COLUMN_HEADER_XPATH = "//th[@class='cela-col sorting']";
+    public final static String P_AND_A_WARNING_MESSAGE_XPATH = "//div[@id='priceTable_wrapper']//p[contains(@class,'error-text-product visible')]";
+    public final static String EMPTY_PRODUCT_TABLE_TITLE_XPATH = "//td[@class='dataTables_empty']";
+    private final static String LEFT_TOP_ERROR_SECTION_XPATH = "//div[contains(@class, 'catalog-error-message')]";
+    public final static String CATALOG_ERROR_MESSAGE_XPATH = LEFT_TOP_ERROR_SECTION_XPATH + "//span[@class='warning-text']";
+    public final static String ERROR_RED_ICON_XPATH = LEFT_TOP_ERROR_SECTION_XPATH + "//i[@class='fa fa-exclamation fa-stack-1x fa-inverse']";
+    public final static String ERROR_MESSAGE_BELOW_AGREEMENT_NO_FIELD_XPATH = "//*[@class = 'error-text-spa error-spa  visible']";
+
 }

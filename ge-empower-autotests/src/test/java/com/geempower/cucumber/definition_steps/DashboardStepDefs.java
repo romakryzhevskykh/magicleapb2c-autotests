@@ -1,15 +1,20 @@
 package com.geempower.cucumber.definition_steps;
 
+import com.geempower.helpers.managers.ProductManager;
+import com.geempower.helpers.models.Product;
+import com.geempower.helpers.models.Region;
 import com.geempower.storefront.page_blocks.HeaderBlock;
 import com.geempower.storefront.page_blocks.OrderStatusWidget;
 import com.geempower.storefront.page_blocks.PriceAndAvailabilityBlock;
 import com.geempower.storefront.pages.DashboardPage;
 import com.geempower.storefront.pages.order.OrdersPage;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashMap;
 import java.util.List;
 
 import static org.testng.Assert.*;
@@ -25,6 +30,8 @@ public class DashboardStepDefs extends AbstractStepDefs {
     private OrdersPage ordersPage;
     @Autowired
     private HeaderBlock headerBlock;
+    @Autowired
+    private ProductManager productManager;
 
     @And("^Order Status widget is displayed.$")
     public void orderStatusWidgetIsDisplayed() {
@@ -242,7 +249,7 @@ public class DashboardStepDefs extends AbstractStepDefs {
     public void previouslyMarkedAccountIsDisplayedInAccountInfoDropdown() {
         String previouslyMarkedFavAccount = threadVarsHashMap.getString(TestKeyword.JUST_MARKED_FAVORITE_ACCOUNT);
         assertTrue(dashboardPage.getListOfFavoriteAccountsFromAccountInfoDropdown().stream().anyMatch(account ->
-        account.getAttribute("href").contains(previouslyMarkedFavAccount)));
+                account.getAttribute("href").contains(previouslyMarkedFavAccount)));
     }
 
     @Then("^There is no favorite accounts in the account info dropdown.$")
@@ -253,5 +260,14 @@ public class DashboardStepDefs extends AbstractStepDefs {
     @Then("^Previously chosen account is displayed on the account info dropdown.$")
     public void previouslyChosenAccountIsDisplayedOnTheAccountInfoDropdown() {
         assertTrue(dashboardPage.getAccountInfo().contains(String.valueOf(threadVarsHashMap.get(TestKeyword.CHOSEN_FAVORITE_ACCOUNT))));
+    }
+
+    @Given("^Select test product for chosen region by catalogNo (.*).$")
+    public void selectTestProductForChosenRegionByCatalogNo(String catalogNo) {
+        Region chosenRegion = (Region) threadVarsHashMap.get(TestKeyword.CHOSEN_REGION);
+        HashMap<Product, Integer> selectedProducts = getSelectedProducts();
+        selectedProducts.put(productManager.getProductWithAllDataByRegionAndCatalogNo(userSessions.getActiveUserSession(), chosenRegion, catalogNo), 0);
+        threadVarsHashMap.put(TestKeyword.SELECTED_PRODUCTS, selectedProducts);
+
     }
 }
