@@ -18,4 +18,5 @@ public class ReturnCreation3PageElements {
     public final static String ALL_REASONS_FOR_REQUEST_XPATH = "//td[contains(@class,'create-reason-request-col')]";
     public final static String ALL_REQUESTED_ACTION_XPATH = "//td[contains(@class,'create-requested-action')]";
     public final static String ADDITIONAL_INFO_PATH_INPUT_XPATH = "//td[@colspan='7']//label/span//input[@class='upload-file-input']";
+    public final static String GREEN_ADDITIONAL_INFO_BUTTON_XPATH = "//div[@class='info-table-wrapper visible-lg-block']//a[@class='return-info-table-flyout'][@style]";
 }
