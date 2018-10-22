@@ -251,4 +251,14 @@ public class OrdersPage extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
         return $$(ALL_DATES_PER_PAGE_XPATH).stream();
     }
+
+    @Step("User click on random PO No.")
+    public StringBuilder userClickOnRandomPONo() {
+        StringBuilder orderNo = new StringBuilder("");
+        $$(ALL_PO_NUMBERS_PER_PAGE_XPATH).stream().findAny().ifPresent(webElement -> {
+            orderNo.append(webElement.getText());
+            click(webElement);
+        });
+        return orderNo;
+    }
 }

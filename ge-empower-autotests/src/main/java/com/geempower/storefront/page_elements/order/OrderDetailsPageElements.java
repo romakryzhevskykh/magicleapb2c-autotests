@@ -23,7 +23,7 @@ public class OrderDetailsPageElements {
     public final static String HIDE_QUOTES_BLOCK_ARROW_BUTTON_XPATH = "//i[@class='fa fa-angle-up']";
     public final static String EXPAND_CLOSE_STATUS_BOXES_ARROW_BUTTON_XPATH = "//i[@class = 'fa fa-chevron-down']";
     public final static String LABEL_VALUES_IN_QUOTES_BLOCK_XPATH = "//label[contains(text(),'%s')]/following-sibling::p";
-    public final static String LABELS_IN_QUOTES_BLOCK_XPATH = "//label[contains(text(),'%s')]";
+    public final static String LABELS_IN_QUOTES_BLOCK_XPATH = "//div[@class='quote-details clearfix']//label";
     public final static String EXPANDED_STATUS_BOXES_LINE_XPATH = "//div[@class='details-graphical clearfix active']";
     public final static String STATUS_BOX_TITLES_XPATH = "//div[@class='order-item']//span[@class = 'item-name']";
     public final static String TIME_STATUSES_NEAR_COLOR_ICON_XPATH = "//ul[@class='status-legend-list clearfix']//span[contains(@class ,'status-icon')]/following-sibling::span";

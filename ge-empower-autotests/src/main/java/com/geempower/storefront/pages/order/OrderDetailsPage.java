@@ -26,7 +26,7 @@ public class OrderDetailsPage extends StorefrontBasePage {
 
     @Step("Orders Details page is opened.")
     public boolean isOpened(String orderNo) {
-        return getCurrentUrl().contains(orderNo);
+        return getCurrentUrl().contains(pageUri) && getCurrentUrl().endsWith(orderNo);
     }
 
     @Step("Get GE order NO.")
@@ -188,9 +188,9 @@ public class OrderDetailsPage extends StorefrontBasePage {
         return $(LABEL_VALUES_IN_QUOTES_BLOCK_XPATH, label).getText();
     }
 
-    @Step("Is Label in Quote Details Block Displayed.")
-    public boolean isLabelInQuoteDetailsBlockDisplayed(String userNoLabel) {
-        return isDisplayed(LABELS_IN_QUOTES_BLOCK_XPATH, userNoLabel);
+    @Step("Get All Labels in Quote Details Block.")
+    public List<String> getAllLabelsInQuoteDetailsBlock() {
+        return $$(LABELS_IN_QUOTES_BLOCK_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
     @Step("User Closes Quote Details Block.")

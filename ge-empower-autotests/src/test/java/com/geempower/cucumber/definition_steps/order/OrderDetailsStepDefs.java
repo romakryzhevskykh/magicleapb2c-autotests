@@ -188,10 +188,9 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
         assertTrue(orderDetailsPage.getLabelValueInQuoteDetailsBlock(label).contains(emailCharacter));
     }
 
-    @Then("^Is (.*) and (.*) labels displayed in Quote Details block.$")
-    public void isUserNoAndQuoteNoLabelsDisplayed(String userNoLabel, String quoteNoLabel) {
-        assertTrue(orderDetailsPage.isLabelInQuoteDetailsBlockDisplayed(userNoLabel));
-        assertTrue(orderDetailsPage.isLabelInQuoteDetailsBlockDisplayed(quoteNoLabel));
+    @Then("Is Correct remaining (.*) labels displayed in Quote Details block.$")
+    public void isCorrectRemainingLabelsDisplayedInQuoteDetailsBlock(List<String> labels) {
+        assertTrue(orderDetailsPage.getAllLabelsInQuoteDetailsBlock().containsAll(labels));
     }
 
     @And("^User closes Quote Details block.$")
@@ -240,19 +239,20 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
         assertTrue(orderDetailsPage.getAllTimeStatusNearColorIcons().containsAll(timeStatuses));
     }
 
-    @When("^User clicks on time status drop down field.$")
-    public void userClicksOnTimeStatusDropDownField() {
+    @When("^User clicks on time status drop down field on Order Details page.$")
+    public void userClicksOnTimeStatusDropDownFieldOnOrderDetailsPage() {
         orderDetailsPage.userClicksOnTimeStatusDropDownField();
     }
 
-    @Then("^Is Correct time statuses (.*) displayed in the time status drop down field.$")
+    @Then("^Is Correct time statuses (.*) displayed in the time status drop down field on Order Details page.$")
     public void isCorrectTimeStatusesDisplayedInTheTimeStatusDropDownField(List<String> timeStatuses) {
         assertTrue(orderDetailsPage.getAllTimeStatusesInTimeStatusDropDown()
-                .allMatch(statuses -> timeStatuses.stream().anyMatch(timeStatus -> statuses.getText().contains(timeStatus))));
+                .allMatch(statuses ->
+                        timeStatuses.stream().anyMatch(timeStatus -> statuses.getText().contains(timeStatus))));
     }
 
     @Then("^Is Detail Order table contains correct header (.*) titles.$")
-    public void isDetailOrderTableContainsCorrectHeaderTableTitlesTitles(List<String> tableTitles) {
+    public void isDetailOrderTableContainsCorrectHeaderTableTitles(List<String> tableTitles) {
         orderDetailsPage.getAllDetailOrderTableHeaders().containsAll(tableTitles);
     }
 

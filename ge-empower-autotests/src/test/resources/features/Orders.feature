@@ -117,7 +117,7 @@ Feature: Some actions on Orders page
 
   Scenario Outline: Check that user can open Detail Orders page and verify main elements
     And Account management page is opened.
-    When Choose North_America region.
+    When Choose <region> region.
     And Search random account for chosen region.
     And Click on chosen account.
     And Orders page is opened.
@@ -126,12 +126,11 @@ Feature: Some actions on Orders page
     When User expands Quote Details block.
     Then Is Opened Quote Details block is displayed.
     Then Is Ordered On label contains date in Quote Details block.
-    Then Is Order Value label contains USD value in Quote Details block.
+    Then Is Order Value label contains <currency> value in Quote Details block.
     Then Is Ship To label contains value in Quote Details block.
-    Then Is Ship Method label contains value in Quote Details block.
     Then Is Created by label contains @ email character in Quote Details block.
-    Then Is Tax Total label contains USD value in Quote Details block.
-    Then Is User No. and Quote No. labels displayed in Quote Details block.
+    Then Is Tax Total label contains <currency> value in Quote Details block.
+    Then Is Correct remaining <labels> labels displayed in Quote Details block.
     And User closes Quote Details block.
     Then Is Opened Quote Details block is not displayed.
     When User expands/closes status boxes.
@@ -140,13 +139,12 @@ Feature: Some actions on Orders page
     When User expands/closes status boxes.
     Then Is Expanded status box line not displayed.
     Then Is Correct time statuses <timeStatusesList> displayed near color status icons.
-    When User clicks on time status drop down field.
-    Then Is Correct time statuses <timeStatusesList> displayed in the time status drop down field.
+    When User clicks on time status drop down field on Order Details page.
+    Then Is Correct time statuses <timeStatusesList> displayed in the time status drop down field on Order Details page.
     Then Is Detail Order table contains correct header <tableTitles> titles.
     When User opens random product detail block.
     Then Is Agreement Number label contains value in Product Details block.
     Then Is Request Date label contains date in Product Details block.
-    Then Is Ship Method label contains value in Product Details block.
     Then Is Ship Location label contains value in Product Details block.
     Then Is Ship To label contains value in Product Details block.
     Then Is Correct <productDetailLabels> labels displayed in Product Details block.
@@ -154,8 +152,49 @@ Feature: Some actions on Orders page
     Then Is Total Net Price value is equal to sum of all ext. price in table.
 
     Examples:
-      | statusesList                                                         | timeStatusesList                                                 | tableTitles                                                                                                             | productDetailLabels                                                         |
-      | To be Scheduled, Open, Prepared to Ship, On Hold, Shipped, Cancelled | On Time, Within 3 days of project deliverable, Late, Closed Late | Catalog No., Description & Marks, Orig. Scheduled Ship Date, Tracking Information, Qty., Unit Price, Ext. Price, Status | Carrier, Bill of Lading, Contact Name, Promotion Code, Invoice, Contact No. |
+      | region        | currency | labels                                           | statusesList                                                         | timeStatusesList                                                 | tableTitles                                                                                                             | productDetailLabels                                                                                      |
+      | North_America | USD      | User No., Quote No., Ship Method, Shipping notes | To be Scheduled, Open, Prepared to Ship, On Hold, Shipped, Cancelled | On Time, Within 3 days of project deliverable, Late, Closed Late | Catalog No., Description & Marks, Orig. Scheduled Ship Date, Tracking Information, Qty., Unit Price, Ext. Price, Status | Carrier, Bill of Lading, Contact Name, Promotion Code, Invoice, Contact No., Shipping notes, Ship Method |
+      | EMEA          | EUR      | User No., Quote No., Ship Method, Shipping notes | To be Scheduled, Open, Prepared to Ship, On Hold, Shipped, Cancelled | On Time, Within 3 days of project deliverable, Late, Closed Late | Catalog No., Description & Marks, Orig. Scheduled Ship Date, Tracking Information, Qty., Unit Price, Ext. Price, Status | Carrier, Bill of Lading, Contact Name, Promotion Code, Invoice, Contact No., Shipping notes, Ship Method |
+
+  Scenario Outline: Check that user can open Details PO page and verify main elements
+    And Account management page is opened.
+    When Choose <region> region.
+    And Search random account for chosen region.
+    And Click on chosen account.
+    And Orders page is opened.
+    When User clicks on random PO no.
+    Then PO Details page is opened.
+    Then Is Purchase Order title displayed on Details PO Number page.
+    Then Is PO title contains appropriate PO number.
+    Then Is Email/Download icon displayed in right corner.
+    When User expands/closes status boxes on PO Details page.
+    Then Is Expanded status box line displayed on PO Details page.
+    Then Is appropriate <statusesList> statuses displayed in the status boxes on PO Details page.
+    When User expands/closes status boxes on PO Details page.
+    Then Is Expanded status box line not displayed on PO Details page.
+    Then Is Ordered On label contains date in opened Order No. Details block.
+    Then Is Order Value label contains <currency> value in opened Order No. Details block.
+    Then Is Ship To label contains value in opened Order No. Details block.
+    Then Is Created by label contains @ email character in opened Order No. Details block.
+    Then Is Tax Total label contains <currency> value in opened Order No. Details block.
+    Then Is Correct remaining <labels> labels displayed in opened Order No. Details block.
+    When User clicks on time status drop down field on PO Details page.
+    Then Is Correct time statuses <timeStatusesList> displayed in the time status drop down field on PO Details page.
+    When User clicks on time status drop down field on PO Details page.
+    Then Is Opened PO Details block table contains correct header <tableTitles> titles.
+    When Put random catalog no to the thredVarsHaspMap.
+    When User expands/closes random catalog No block in opened Order No. Details block.
+    Then Is Agreement Number label contains value in Product Details block in opened Order No. Details block.
+    Then Is Request Date label contains date in Product Details block in opened Order No. Details block.
+    Then Is Ship Location label contains value in Product Details block in opened Order No. Details block.
+    Then Is Ship To label contains value in Product Details block in opened Order No. Details block.
+    Then Is Correct <productDetailLabels> labels displayed in Product Details block in opened Order No. Details block.
+    When User expands/closes random catalog No block in opened Order No. Details block.
+
+    Examples:
+      | region        | currency | labels                 | statusesList                                                         | timeStatusesList                                                 | tableTitles                                                                                                             | productDetailLabels                                                                                      |
+      | North_America | USD      | Quote No., Ship Method | To be Scheduled, Open, Prepared to Ship, On Hold, Shipped, Cancelled | On Time, Within 3 days of project deliverable, Late, Closed Late | Catalog No., Description & Marks, Orig. Scheduled Ship Date, Tracking Information, Qty., Unit Price, Ext. Price, Status | Carrier, Bill of Lading, Contact Name, Promotion Code, Invoice, Contact No., Shipping notes, Ship Method |
+      | EMEA          | EUR      | Quote No., Ship Method | To be Scheduled, Open, Prepared to Ship, On Hold, Shipped, Cancelled | On Time, Within 3 days of project deliverable, Late, Closed Late | Catalog No., Description & Marks, Orig. Scheduled Ship Date, Tracking Information, Qty., Unit Price, Ext. Price, Status | Carrier, Bill of Lading, Contact Name, Promotion Code, Invoice, Contact No., Shipping notes, Ship Method |
 
   Scenario Outline: Check that tracking info slider contains all necessary information.
     And Account management page is opened.

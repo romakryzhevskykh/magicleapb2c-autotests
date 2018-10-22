@@ -172,4 +172,9 @@ public class OrdersStepDefs extends AbstractStepDefs {
                         utils.isGottenDateEqualsToOtherDate(dateEntered.getText(), defaultDate))
         );
     }
+
+    @When("^User clicks on random PO no.$")
+    public void userClickOnRandomPONo() {
+        threadVarsHashMap.put(TestKeyword.PO_NO, ordersPage.userClickOnRandomPONo());
+    }
 }
