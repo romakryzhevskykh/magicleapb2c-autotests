@@ -30,7 +30,7 @@ public class ProductManager {
         productsList.add(new Product(catalogNo, description));
     }
 
-    public ArrayList<Product> getProductsList(){
+    public ArrayList<Product> getProductsList() {
         return productsList;
     }
 
@@ -52,6 +52,17 @@ public class ProductManager {
                 });
     }
 
+    public Product getProductWithAllDataByRegionAndCatalogNo(UserSession userSession, Region region, String catalogNo) {
+        Product selectedProduct = productsList.stream().filter(product -> product.getRegion().equals(region))
+                .filter(product -> product.getCatalogNo().equals(catalogNo)).findAny().get();
+        try {
+            setAllDataFromPDP(userSession, selectedProduct);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return selectedProduct;
+    }
+
     private void setAllDataFromPDP(UserSession userSession, Product product) throws IOException {
         GETRequest getProductDetailsByProductId = GET_PRODUCT_DETAILS_FROM_PDP.getClone();
         getProductDetailsByProductId.setValue(product.getId());
@@ -62,10 +73,14 @@ public class ProductManager {
         product.setListPrice(Xsoup.select(response, PRODUCT_DETAIL_TABLE_XPATH)
                 .getElements().stream()
                 .filter(element -> Xsoup.select(element, PRICE_CELL_XPATH).get().equals("List Price"))
-                .findAny().orElseGet(()->{throw new NullPointerException("");}).child(1).text());
+                .findAny().orElseGet(() -> {
+                    throw new NullPointerException("");
+                }).child(1).text());
         product.setFinalNetPrice(Xsoup.select(response, PRODUCT_DETAIL_TABLE_XPATH)
                 .getElements().stream()
                 .filter(element -> Xsoup.select(element, PRICE_CELL_XPATH).get().equals("Final Net Price"))
-                .findAny().orElseGet(()->{throw new NullPointerException("");}).child(1).text());
+                .findAny().orElseGet(() -> {
+                    throw new NullPointerException("");
+                }).child(1).text());
     }
 }
