@@ -28,3 +28,10 @@ Feature: Some actions on Account Management page as admin
     And Account management page is opened.
     And Previously marked account is unmarked by user.
     Then Correct count of favorite account is displayed in Favorites tab.
+
+  Scenario: Check that user is able to go into the favorite account.
+    And Account management page is opened.
+    And User switch to Favorites Accounts tab on Account management page.
+    When User selects random favorites account.
+    Then Dashboard page is opened.
+    Then Previously chosen account is displayed on the account info dropdown.

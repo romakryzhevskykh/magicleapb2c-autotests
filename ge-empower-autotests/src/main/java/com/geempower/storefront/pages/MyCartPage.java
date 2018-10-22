@@ -82,7 +82,7 @@ public class MyCartPage extends StorefrontBasePage {
 
     @Step("Cancel the order by clicking on the Cancel button.")
     public void clickOnCancelButton() {
-        $(CANCEL_BUTTON_XPATH).click();
+        click(CANCEL_BUTTON_XPATH);
         waitUntilPageIsFullyLoaded();
         click(DISCARD_ORDER_BUTTON_XPATH);
     }
