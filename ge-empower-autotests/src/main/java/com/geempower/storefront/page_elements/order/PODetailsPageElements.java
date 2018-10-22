@@ -11,6 +11,7 @@ public class PODetailsPageElements {
     public final static String EXPANDED_STATUS_BOXES_LINE_XPATH = "//div[@class='details-graphical clearfix active']";
     public final static String STATUS_BOX_TITLES_XPATH = "//div[@class='order-item']//span[@class = 'item-name']";
     public final static String LABEL_VALUES_IN_OPENED_ORDER_NO_DETAILS_BLOCK_XPATH = "//div[@class='panel-collapse collapse in']//label[contains(text(),'%s')]/following-sibling::p";
+    public final static String ALL_LABELS_IN_OPENED_ORDER_NO_DETAILS_BLOCK_XPATH = "//div[@class='panel-body']//label";
     public final static String TIME_STATUSES_DROP_DOWN_FIELD_XPATH = "//span[@class='select2-selection__arrow']";
     public final static String TIME_STATUSES_VALUES_IN_DROP_DOWN_XPATH = "//li[contains(@class,'select2-results__option') and not(contains(@class,'highlight'))]";
     public final static String PO_DETAILS_TABLE_HEADERS_XPATH = "//div[@class='panel-collapse collapse in']//th[contains(@class,'create-summary')]";

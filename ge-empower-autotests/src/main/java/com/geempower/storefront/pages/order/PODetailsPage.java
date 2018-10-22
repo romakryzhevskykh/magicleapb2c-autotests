@@ -46,7 +46,7 @@ public class PODetailsPage extends StorefrontBasePage {
         return isDisplayed(EMAIL_DOWNLOAD_ICON_XPATH);
     }
 
-    @Step("User Expands/Closes status boxes on PO Details page")
+    @Step("User Expands/Closes status boxes on PO Details page.")
     public void userExpandsClosesStatusBoxesOnPODetailsPage() {
         waitUntilPageIsFullyLoaded();
         click(EXPAND_CLOSE_STATUS_BOXES_ARROW_BUTTON_XPATH);
@@ -65,6 +65,11 @@ public class PODetailsPage extends StorefrontBasePage {
     @Step("Get Label Value in Opened Order No. Details block.")
     public String getLabelValueInOpenedOrderNoDetailsBlock(String label) {
         return $(LABEL_VALUES_IN_OPENED_ORDER_NO_DETAILS_BLOCK_XPATH, label).getText();
+    }
+
+    @Step("Get All Labels in Opened Order No. Details block.")
+    public List<String> getAllLabelsInOpenedOrderNoDetailsBlock() {
+        return $$(ALL_LABELS_IN_OPENED_ORDER_NO_DETAILS_BLOCK_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
     @Step("User Click On Time Status Drop Down Field.")

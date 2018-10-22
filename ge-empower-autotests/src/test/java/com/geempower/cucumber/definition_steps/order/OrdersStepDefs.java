@@ -10,7 +10,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static com.geempower.cucumber.definition_steps.TestKeyword.*;
+import static com.geempower.cucumber.definition_steps.TestKeyword.GE_ORDER_NO;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -175,6 +175,6 @@ public class OrdersStepDefs extends AbstractStepDefs {
 
     @When("^User clicks on random PO no.$")
     public void userClickOnRandomPONo() {
-        threadVarsHashMap.put(PO_NO, ordersPage.userClickOnRandomPONo());
+        threadVarsHashMap.put(TestKeyword.PO_NO, ordersPage.userClickOnRandomPONo());
     }
 }

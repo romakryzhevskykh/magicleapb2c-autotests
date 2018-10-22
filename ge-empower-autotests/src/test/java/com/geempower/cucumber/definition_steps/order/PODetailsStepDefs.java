@@ -69,6 +69,11 @@ public class PODetailsStepDefs extends AbstractStepDefs {
         assertTrue(poDetailsPage.getLabelValueInOpenedOrderNoDetailsBlock(label).contains(currency));
     }
 
+    @Then("Is Correct remaining (.*) labels displayed in opened Order No. Details block.$")
+    public void isCorrectRemainingLabelsDisplayedInOpenedOrderNoDetailsBlock(List<String> labels) {
+        assertTrue(poDetailsPage.getAllLabelsInOpenedOrderNoDetailsBlock().containsAll(labels));
+    }
+
     @Then("^Is (.*) label contains value in opened Order No. Details block.$")
     public void isLabelContainsValue(String label) {
         assertFalse(poDetailsPage.getLabelValueInOpenedOrderNoDetailsBlock(label).isEmpty());

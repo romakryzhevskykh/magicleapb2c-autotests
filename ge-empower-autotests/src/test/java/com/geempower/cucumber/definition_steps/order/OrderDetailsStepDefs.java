@@ -188,10 +188,9 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
         assertTrue(orderDetailsPage.getLabelValueInQuoteDetailsBlock(label).contains(emailCharacter));
     }
 
-    @Then("^Is (.*) and (.*) labels displayed in Quote Details block.$")
-    public void isUserNoAndQuoteNoLabelsDisplayed(String userNoLabel, String quoteNoLabel) {
-        assertTrue(orderDetailsPage.isLabelInQuoteDetailsBlockDisplayed(userNoLabel));
-        assertTrue(orderDetailsPage.isLabelInQuoteDetailsBlockDisplayed(quoteNoLabel));
+    @Then("Is Correct remaining (.*) labels displayed in Quote Details block.$")
+    public void isCorrectRemainingLabelsDisplayedInQuoteDetailsBlock(List<String> labels) {
+        assertTrue(orderDetailsPage.getAllLabelsInQuoteDetailsBlock().containsAll(labels));
     }
 
     @And("^User closes Quote Details block.$")
