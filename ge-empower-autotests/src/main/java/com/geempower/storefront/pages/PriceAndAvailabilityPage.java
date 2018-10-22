@@ -160,8 +160,8 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
     }
 
     @Step("Get Warning Message below catalogue no.")
-    public String getWarningMessage() {
-        return $(P_AND_A_WARNING_MESSAGE_XPATH).getText();
+    public String getWarningMessageBelowCatalogNo() {
+        return $(P_AND_A_WARNING_MESSAGE_BELOW_CATALOG_NO_XPATH).getText();
     }
 
     @Step("Get No Data Title In Products Table.")

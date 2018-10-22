@@ -28,7 +28,7 @@ public class PriceAndAvailabilityPageElements {
     public final static String COUNTRY_OF_ORIGIN_ALL_DROP_DOWN_ITEMS_XPATH = "//li[contains(@id,'select2-celaCustDetail-result')]";
     public final static String COUNTRY_OF_ORIGIN_SINGLE_SOURCE_VALUE_XPATH = "//td[@class='data-table-value-col celaCust']";
     public final static String COUNTRY_OF_ORIGIN_SORT_COLUMN_HEADER_XPATH = "//th[@class='cela-col sorting']";
-    public final static String P_AND_A_WARNING_MESSAGE_XPATH = "//div[@id='priceTable_wrapper']//p[contains(@class,'error-text-product visible')]";
+    public final static String P_AND_A_WARNING_MESSAGE_BELOW_CATALOG_NO_XPATH = "//div[@id='priceTable_wrapper']//p[contains(@class,'error-text-product visible')]";
     public final static String EMPTY_PRODUCT_TABLE_TITLE_XPATH = "//td[@class='dataTables_empty']";
     private final static String LEFT_TOP_ERROR_SECTION_XPATH = "//div[contains(@class, 'catalog-error-message')]";
     public final static String CATALOG_ERROR_MESSAGE_XPATH = LEFT_TOP_ERROR_SECTION_XPATH + "//span[@class='warning-text']";

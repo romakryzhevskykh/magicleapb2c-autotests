@@ -213,7 +213,7 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
 
     @Then("^(.*) message is displayed under catalogNo.$")
     public void oldProductIsReplacedByNewProductMessageIsDisplayed(String warningMessage) {
-        assertEquals(warningMessage, priceAndAvailabilityPage.getWarningMessage());
+        assertEquals(warningMessage, priceAndAvailabilityPage.getWarningMessageBelowCatalogNo());
     }
 
     @Then("^(.*) title is displayed in products table.$")
