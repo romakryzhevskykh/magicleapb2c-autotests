@@ -30,11 +30,15 @@ public class GeneralStepDefs extends AbstractStepDefs {
     @And("^Help button is displayed.$")
     public void helpButtonIsDisplayed() {
         assertTrue(helpFeedbackBlock.helpButtonIsDisplayed());
+        assertEquals("Help", helpFeedbackBlock.getHelpButtonName());
+        assertTrue(helpFeedbackBlock.getDataClientIdFromHelpButton().length()==7);
+        assertTrue(helpFeedbackBlock.getDataTokenFromHelpButton().length()>1);
     }
 
     @Then("^Feedback button is displayed.$")
     public void feedbackButtonIsDisplayed() {
         assertTrue(helpFeedbackBlock.feedbackButtonIsDisplayed());
+        assertEquals("Feedback", helpFeedbackBlock.getFeedbackButtonName());
     }
 
     @When("^Admin clicks on the feedback button.$")
