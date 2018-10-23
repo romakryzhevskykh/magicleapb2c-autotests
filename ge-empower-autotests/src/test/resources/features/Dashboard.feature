@@ -262,6 +262,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     And Dashboard page is opened.
     When Click on Skip button.
     When Close cookies pop-up.
+    Then Feedback button is displayed.
     When Admin clicks on the feedback button.
     Then Help Us Improve title is displayed in the feedback pop-up.
     Then Great, ok, confusing, frustrating labels are present in the feedback pop-up.
