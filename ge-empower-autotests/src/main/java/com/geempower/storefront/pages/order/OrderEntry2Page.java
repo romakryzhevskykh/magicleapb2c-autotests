@@ -44,6 +44,15 @@ public class OrderEntry2Page extends StorefrontBasePage {
         return uniquePoNo;
     }
 
+    @Step("User fills unique Shipping Note on the OE 2 page.")
+    public String fillUniqueShippingNote() {
+        waitUntilPageIsFullyLoaded();
+        String uniqueShippingNote = Long.toString(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().getEpochSecond());
+//        $(By.id(PO_NO_FIELD_ID)).clear();
+//        $(By.id(PO_NO_FIELD_ID)).sendKeys(uniquePoNo);
+//        return uniquePoNo;
+    }
+
     @Step("User chooses first shipping address from the addresses list on the OE 2 page.")
     public String chooseAppropriateAddressFromTheShippingAddressList() {
         waitUntilPageIsFullyLoaded();

@@ -10,7 +10,7 @@
             <class name="com.geempower.cucumber.SpecialPricingSuite"/>
             <class name="com.geempower.cucumber.NotificationCenterSuite"/>
             <class name="com.geempower.cucumber.RebatesSuite"/>
-            <!--<class name="com.geempower.cucumber.ReturnsSuite"/>-->
+            <class name="com.geempower.cucumber.ReturnsSuite"/>
         </classes>
     </test>
     <test name="Suite2">

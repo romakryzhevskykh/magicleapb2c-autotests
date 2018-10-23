@@ -30,6 +30,11 @@ public class OrderEntry2StepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.PO_NO, orderEntry2Page.fillUniquePoNo());
     }
 
+    @And ("User fills Shipping Note text to the Shipping Note field.")
+    public void userFillsShippingNoteTextToTheShippingNoteField(){
+        threadVarsHashMap.put(TestKeyword.SHIPPING_NOTE, orderEntry2Page.fillUniqueShippingNote());
+    }
+
     @And("^Select Shipment Address from the existing addresses on the OE 2 page.$")
     public void selectShipmentAddressOnOE2Page() {
         threadVarsHashMap.put(TestKeyword.SHIPPING_ADDRESS, orderEntry2Page.chooseAppropriateAddressFromTheShippingAddressList());
