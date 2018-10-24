@@ -257,7 +257,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
 #    Examples:
 #      | region        | salesDivision | account |
 #      | North_America | USS1_10_10    | 8192306 |
-#
+##
 #  Scenario: Check that user is able to send feedback successfully
 #    And Dashboard page is opened.
 #    When Click on Skip button.
@@ -454,10 +454,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then Dashboard page is opened.
     When Click on Skip button.
     When Close cookies pop-up.
-
-
     When User add list of <products> products to the Copy&Paste block.
-
     And Click on P&A button.
     Then Price&Availability page is opened.
     Then All the products from <products> are displayed on the P&A page.
@@ -471,7 +468,17 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     When User fills PO no. to the PO no. field on the OE 2 page.
     And Select Shipment Address from the existing addresses on the OE 2 page.
     And User fills Shipping Note text to the Shipping Note field.
+    And Add Shipping Note to the catalog no <catalogNo1> and put note to the Hashmap.
+    And Add Shipping Note to the catalog no <catalogNo2> and put note1 to the Hashmap.
+    When User clicks on the Bottom Next button on the OE 2 page.
+    Then Order Summary step is opened.
+    Then Is Correct Shipping note displayed in Shipments Details block.
+    Then Is Correct Shipping note displayed for the catalog No. <catalogNo1>.
+#    And User change Old Shipping note to the new one.
+#    Then Is Correct Shipping note displayed for the catalog No.
+
+
 
     Examples:
-      | region        | account | salesDivision | products             |
-      | North_America | 1318501 | USS1_10_10    | THHQB1120AF2, TEY150 |
+      | region        | account | salesDivision | products             | catalogNo1   | catalogNo2 |
+      | North_America | 1318501 | USS1_10_10    | THHQB1120AF2, TEY150 | THHQB1120AF2 | TEY150     |

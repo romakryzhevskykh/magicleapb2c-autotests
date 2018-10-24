@@ -9,6 +9,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
@@ -66,6 +67,11 @@ public class Utils extends UIComponent {
     public int generateRandomNumber(int min, int max) {
         Random random = new Random();
         return min + random.nextInt((max - min) + 1);
+    }
+
+    @Step("Generate timestamp.")
+    public String generateTimestamp(){
+        return Long.toString(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().getEpochSecond());
     }
 
     @Step("Check if one date greater than Other Date.")

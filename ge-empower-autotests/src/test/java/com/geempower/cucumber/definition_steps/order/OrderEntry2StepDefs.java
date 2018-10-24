@@ -2,6 +2,7 @@ package com.geempower.cucumber.definition_steps.order;
 
 import com.geempower.cucumber.definition_steps.AbstractStepDefs;
 import com.geempower.cucumber.definition_steps.TestKeyword;
+import com.geempower.helpers.Utils;
 import com.geempower.helpers.models.Product;
 import com.geempower.helpers.models.Region;
 import com.geempower.storefront.page_blocks.ShortProductDetailsPopUpBlock;
@@ -23,16 +24,23 @@ public class OrderEntry2StepDefs extends AbstractStepDefs {
     @Autowired
     private ShortProductDetailsPopUpBlock shortProductDetailsPopUpBlock;
 
+    @Autowired
+    private Utils utils;
+
     private final double delta = 0.0001;
+
+    HashMap<String, String> shippingNotes = new HashMap<>();
 
     @When("^User fills PO no. to the PO no. field on the OE 2 page.$")
     public void userFillsPONoOnOE2Page() {
-        threadVarsHashMap.put(TestKeyword.PO_NO, orderEntry2Page.fillUniquePoNo());
+        threadVarsHashMap.put(TestKeyword.PO_NO, orderEntry2Page.fillUniquePoNo(utils.generateTimestamp()));
     }
 
-    @And ("User fills Shipping Note text to the Shipping Note field.")
-    public void userFillsShippingNoteTextToTheShippingNoteField(){
-        threadVarsHashMap.put(TestKeyword.SHIPPING_NOTE, orderEntry2Page.fillUniqueShippingNote());
+    @And("User fills Shipping Note text to the Shipping Note field.")
+    public void userFillsShippingNoteTextToTheShippingNoteField() {
+        String timestamp = utils.generateTimestamp();
+        orderEntry2Page.fillUniqueShippingNote(timestamp);
+        shippingNotes.put("shipDetails", timestamp);
     }
 
     @And("^Select Shipment Address from the existing addresses on the OE 2 page.$")
@@ -151,4 +159,14 @@ public class OrderEntry2StepDefs extends AbstractStepDefs {
         shortProductDetailsPopUpBlock.closeShortProductsDetailPopUp();
     }
 
+    @And("^Add Shipping Note to the catalog no (.*) and put (.*) to the Hashmap.$")
+    public void addShippingNoteToTheCatalogNo(String catalogNo, String note) {
+        orderEntry2Page.clickOnThreeDotIcon(catalogNo);
+        orderEntry2Page.clickOnAddEditShippingNotePopUpButton();
+        String timestamp = utils.generateTimestamp();
+        orderEntry2Page.setTextToTheAddEditShippingNotePopUpField(timestamp);
+        orderEntry2Page.clickOnSaveButtonInAddEditShipNotePopUp();
+        shippingNotes.put(note, timestamp);
+        threadVarsHashMap.replace(TestKeyword.SHIPPING_NOTE, shippingNotes);
+    }
 }

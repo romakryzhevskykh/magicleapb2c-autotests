@@ -205,4 +205,25 @@ public class OrderEntry3Page extends StorefrontBasePage {
     public String getCountryOfOriginValueOnOE3Page() {
         return $(COUNTRY_OF_ORIGIN_VALUE_3_OE_PAGE_XPATH).getText();
     }
+
+    @Step("Get Shipping Note Value In Shipment Details Block.")
+    public String getShippingNoteValueInShipmentDetailsBlock() {
+        return $(SHIPPING_NOTE_VALUE_IN_SHIPPING_DETAILS_BLOCK_XPATH).getText();
+    }
+
+    @Step("Click On Three Dot Icon.")
+    public void clickOnThreeDotIcon(String catalogNo) {
+        waitUntilPageIsFullyLoaded();
+        click(THREE_DOT_ICON_BASED_ON_CATALOG_NO_XPATH, catalogNo);
+    }
+
+    @Step("Click On Add Edit Shipping Note Pop Up Button.")
+    public void clickOnAddEditShippingNotePopUpButton() {
+        click(ADD_EDIT_SHIPPING_NOTE_POP_UP_BUTTON_XPATH);
+    }
+
+    @Step("Get Value From Add Edit Shipping Note Pop Up Field.")
+    public String getValueFromAddEditShippingNotePopUpField() {
+        return $();
+    }
 }

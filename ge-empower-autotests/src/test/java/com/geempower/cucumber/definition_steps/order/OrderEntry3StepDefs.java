@@ -22,6 +22,8 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
     private OrderEntry3Page orderEntry3Page;
     @Autowired
     private OrderManager orderManager;
+    @SuppressWarnings("unchecked")
+    private HashMap<String, String> shippingNotes = (HashMap<String, String>) threadVarsHashMap.get(TestKeyword.SHIPPING_NOTE);
 
     private static double delta = 0.0001;
 
@@ -145,7 +147,21 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
 
     @Then("^Is Correct Country of Origin value is displayed on the OE 3 page.$")
     public void isCorrectCountryOfOriginValueIsDisplayedOnTheOEPage() {
-        String countryHashmap = String.valueOf(threadVarsHashMap.get(TestKeyword.COUNTRY_OF_ORIGIN_CELA_PRODUCT));
+        String countryHashmap = threadVarsHashMap.getString(TestKeyword.COUNTRY_OF_ORIGIN_CELA_PRODUCT);
         assertEquals(countryHashmap, orderEntry3Page.getCountryOfOriginValueOnOE3Page());
+    }
+
+    @Then("^Is Correct Shipping note displayed in Shipments Details block.$")
+    public void isCorrectShippingNoteDisplayedInShipmentsDetailsBlock() {
+        String shipNote = shippingNotes.get("shipDetails");
+        assertEquals(shipNote, orderEntry3Page.getShippingNoteValueInShipmentDetailsBlock());
+    }
+
+    @Then("^Is Correct Shipping note displayed for the catalog No. (.*).$")
+    public void isCorrectShippingNoteDisplayedForTheCatalogNoCatalogNo(String catalogNo) {
+        orderEntry3Page.clickOnThreeDotIcon(catalogNo);
+        orderEntry3Page.clickOnAddEditShippingNotePopUpButton();
+        String note = shippingNotes.get("note");
+        orderEntry3Page.getValueFromAddEditShippingNotePopUpField();
     }
 }
