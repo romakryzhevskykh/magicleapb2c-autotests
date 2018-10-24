@@ -135,7 +135,7 @@ public class QuickOrderPage extends StorefrontBasePage {
     public void clickOnResetFormButton() {
         click(RESET_FORM_BUTTONS_XPATH);
         waitUntilPageIsFullyLoaded();
-           }
+    }
 
     public void clickOnPopUpResetFormButton() {
         waitUntilElementIsVisible(By.id(RESET_FORM_POP_UP_ID));

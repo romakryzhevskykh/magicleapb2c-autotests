@@ -248,7 +248,7 @@ public class QuickOrderStepDefs extends AbstractStepDefs {
         quickOrderPage.clickOnResetFormButton();
     }
 
-    @And("^Click on Reset form button on Pop-up.$")
+    @And("^Click on Reset form button on Pop-up on Quick order page.$")
     public void clickOnResetFormButtonOnPopUp() {
         quickOrderPage.clickOnPopUpResetFormButton();
     }

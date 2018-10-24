@@ -50,7 +50,7 @@ Feature: Quick order can add and save products in the list.
     When Add 3 VALID, INDIVIDUAL product to Quick order list on Quick order page.
     And Set QTY 2 to any UOM on Quick order page.
     And Click on Reset form button on Quick order page.
-    And Click on Reset form button on Pop-up.
+    And Click on Reset form button on Pop-up on Quick order page.
     Then Check that Quick order list is empty on Quick order page.
     When Refresh page.
     Then Check that Quick order list is empty on Quick order page.
