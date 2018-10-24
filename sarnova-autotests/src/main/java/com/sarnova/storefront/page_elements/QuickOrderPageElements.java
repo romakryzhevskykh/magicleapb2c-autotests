@@ -17,4 +17,7 @@ public class QuickOrderPageElements {
     public static final String QTY_FIELD_BY_SKU_AND_UOM_XPATH = QUICK_ORDER_TABLE_XPATH + "//li[contains(@class,'item__list--item')]//div[contains(@class,'qty-selector')]/input[@type='text'][@data-product-code='%s'][@data-unit='%s']";
     public static final String MINUS_BUTTON_BY_SKU_AND_UOM_XPATH = QUICK_ORDER_TABLE_XPATH + "//li[contains(@class,'item__list--item')]//div[contains(@class,'qty-selector')][input[@type='text'][@data-product-code='%s'][@data-unit='%s']]//button[contains(@class,'dec-quantity')]";
     public static final String PLUS_BUTTON_BY_SKU_AND_UOM_XPATH = QUICK_ORDER_TABLE_XPATH + "//li[contains(@class,'item__list--item')]//div[contains(@class,'qty-selector')][input[@type='text'][@data-product-code='%s'][@data-unit='%s']]//button[contains(@class,'inc-quantity')]";
+
+    public static final String RESET_FORM_BUTTON_POP_UP_XPATH = "//div[@id='cboxContent']//div[@class='row']/div[1]/button";
+    public static final String RESET_FORM_POP_UP_ID = "cboxContent";
 }
