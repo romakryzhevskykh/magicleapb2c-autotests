@@ -14,8 +14,9 @@ Feature: Submit purchase request  functionality
     And Select Invoice payment type on Checkout Payment method step.
     And Set any Purchase order number on Checkout Payment method step.
     And Click on Next button on Checkout Payment method step.
+    And Click on select approver dropdown on checkout page.
+    And Select valid approver to approve purchase request on checkout page.
     And Confirm Terms and Conditions on Checkout Final Review step.
-    And Select valid approver to approve purchase request
     And Click on Place order on Checkout Final Review step.
     Then Check that Order confirmation page is opened.
 

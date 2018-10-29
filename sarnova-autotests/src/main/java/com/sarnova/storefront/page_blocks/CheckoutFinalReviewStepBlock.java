@@ -45,7 +45,7 @@ public class CheckoutFinalReviewStepBlock extends UIComponent {
 
     @Step("Open approver dropdown list")
     public void  openApproverDropdown() {
-        click(SELECT_APPROVER_DROPDOWN_ID);
+        click(By.id(SELECT_APPROVER_DROPDOWN_ID));
     }
 
     @Step("Select approver from list")

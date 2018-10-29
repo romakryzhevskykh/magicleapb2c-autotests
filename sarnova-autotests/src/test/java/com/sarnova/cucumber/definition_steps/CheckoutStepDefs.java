@@ -392,12 +392,17 @@ public class CheckoutStepDefs extends AbstractStepDefs {
     public void clickOnChangeBillingAddressOnGuestCheckoutPaymentMethodStep() {
         checkoutPage.deselectGuestBillingAddressCheckbox();
     }
-    @And("^Select valid approver to approve purchase request")
+
+    @And("^Click on select approver dropdown on checkout page.$")
+    public void clickOnSelectApproverDropdownStep() {
+        checkoutPage.openApproverDropdown();
+    }
+
+    @And("^Select valid approver to approve purchase request on checkout page.$")
     public void selectApproverToApprovePurchaseRequest() {
         User approver = usersManager.getUserByRole(StorefrontUserRole.PURCHASE_APPROVER);
         checkoutPage.openApproverDropdown();
         checkoutPage.selectApproverFromList(approver.getUsername());
         threadVarsHashMap.put(TestKeyword.APPROVER, approver);
-        checkoutPage.deselectGuestBillingAddressCheckbox();
     }
 }

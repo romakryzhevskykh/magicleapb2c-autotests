@@ -309,7 +309,6 @@ public class CheckoutPage extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
         shippingAddressStepBlock.waitUntilCountryCheckboxIsDisappeared();
     }
-
     public void openApproverDropdown() {
         finalReviewStepBlock.openApproverDropdown();
     }
