@@ -219,11 +219,20 @@ public class OrderEntry3Page extends StorefrontBasePage {
 
     @Step("Click On Add Edit Shipping Note Pop Up Button.")
     public void clickOnAddEditShippingNotePopUpButton() {
+        waitUntilPageIsFullyLoaded();
         click(ADD_EDIT_SHIPPING_NOTE_POP_UP_BUTTON_XPATH);
     }
 
     @Step("Get Value From Add Edit Shipping Note Pop Up Field.")
-    public String getValueFromAddEditShippingNotePopUpField() {
-        return $();
+    public void changeShippingNoteValue(String timestamp) {
+        waitUntilPageIsFullyLoaded();
+         $(ADD_EDIT_SHIPPING_NOTE_FIELD_IN_POP_UP_XPATH).clear();
+        $(ADD_EDIT_SHIPPING_NOTE_FIELD_IN_POP_UP_XPATH).sendKeys(timestamp);
+    }
+
+    @Step("Click On Save Button In Add EditShipNotePopUp")
+    public void clickOnSaveButtonInAddEditShipNotePopUp() {
+        waitUntilPageIsFullyLoaded();
+        click(SAVE_BUTTON_IN_ADD_EDIT_SHIPPING_NOTE_POP_UP);
     }
 }

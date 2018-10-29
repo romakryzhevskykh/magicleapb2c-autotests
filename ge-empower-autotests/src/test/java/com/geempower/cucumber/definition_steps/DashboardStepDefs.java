@@ -130,6 +130,14 @@ public class DashboardStepDefs extends AbstractStepDefs {
         priceAndAvailabilityBlock.addItemsToTheCopyPasteBlock(products);
     }
 
+    @When("^User selected products to the Copy&Paste block.$")
+    public void userListOfSelectedProductsToTheCopyPasteBlock() {
+        threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
+        String catalogueNo1 = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
+        String catalogueNo2 = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
+        priceAndAvailabilityBlock.addSelectedProductsToTheCopyPasteBlock(catalogueNo1, catalogueNo2);
+    }
+
     @Then("^(.*) title is displayed in the Order status widget.$")
     public void orderStatusTitleIsDisplayedInTheOrderStatusWidget(String title) {
         assertEquals(title, orderStatusWidget.getWidgetTitle());

@@ -2,6 +2,7 @@ package com.geempower.cucumber.definition_steps.order;
 
 import com.geempower.cucumber.definition_steps.AbstractStepDefs;
 import com.geempower.cucumber.definition_steps.TestKeyword;
+import com.geempower.helpers.Utils;
 import com.geempower.helpers.managers.OrderManager;
 import com.geempower.helpers.models.Order;
 import com.geempower.helpers.models.Product;
@@ -22,10 +23,12 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
     private OrderEntry3Page orderEntry3Page;
     @Autowired
     private OrderManager orderManager;
-    @SuppressWarnings("unchecked")
-    private HashMap<String, String> shippingNotes = (HashMap<String, String>) threadVarsHashMap.get(TestKeyword.SHIPPING_NOTE);
+    @Autowired
+    private Utils utils;
 
     private static double delta = 0.0001;
+
+    HashMap<String, String> shippingNotes;
 
     @Then("^Order Summary step is opened.$")
     public void orderSummaryStepIsOpened() {
@@ -54,7 +57,7 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
         HashMap<Product, Integer> selectedProducts = getSelectedProducts();
         if (!selectedProducts.isEmpty()) {
             createOrderInstance(orderNo);
-        } else {
+        } else if(!threadVarsHashMap.getString(GE_ORDER_NO).isEmpty()) {
             Order randomOrder = orderManager.getOrderById(Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO)));
             createOrderInstance(orderNo, randomOrder.getCatalogNo(), randomOrder.getQuantity());
         }
@@ -153,15 +156,20 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
 
     @Then("^Is Correct Shipping note displayed in Shipments Details block.$")
     public void isCorrectShippingNoteDisplayedInShipmentsDetailsBlock() {
+        shippingNotes = (HashMap<String, String>) threadVarsHashMap.get(TestKeyword.SHIPPING_NOTE);
         String shipNote = shippingNotes.get("shipDetails");
         assertEquals(shipNote, orderEntry3Page.getShippingNoteValueInShipmentDetailsBlock());
     }
 
-    @Then("^Is Correct Shipping note displayed for the catalog No. (.*).$")
+    @Then("^Change Shipping note for the catalog No. (.*).$")
     public void isCorrectShippingNoteDisplayedForTheCatalogNoCatalogNo(String catalogNo) {
         orderEntry3Page.clickOnThreeDotIcon(catalogNo);
         orderEntry3Page.clickOnAddEditShippingNotePopUpButton();
-        String note = shippingNotes.get("note");
-        orderEntry3Page.getValueFromAddEditShippingNotePopUpField();
+        String timestamp = utils.generateTimestamp();
+        orderEntry3Page.changeShippingNoteValue(timestamp);
+        orderEntry3Page.clickOnSaveButtonInAddEditShipNotePopUp();
+        shippingNotes = (HashMap<String, String>) threadVarsHashMap.get(TestKeyword.SHIPPING_NOTE);
+        System.out.println(shippingNotes);
+        shippingNotes.put("note1", timestamp);
     }
 }

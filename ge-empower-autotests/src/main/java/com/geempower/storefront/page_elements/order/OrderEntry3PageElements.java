@@ -49,7 +49,8 @@ public class OrderEntry3PageElements {
     public final static String CLAIMBACK_ICON_IN_EXTND_PRICE_CELL_3_OE_PAGE_XPATH = "//*[@id='DataTables_Table_1']//i[@class = 'fa fa-exclamation-triangle text-blue pull-left ml-5']";
     public final static String PRODUCT_LINK_3_OE_PAGE_XPATH = "//*[@id='DataTables_Table_1']//a[contains(@href,'#product-details-1') and contains(text(),'%s')]";
     public final static String COUNTRY_OF_ORIGIN_VALUE_3_OE_PAGE_XPATH = "//span[@class='countryOrigin-span']";
-    public final static String THREE_DOT_ICON_BASED_ON_CATALOG_NO_XPATH = "//table[@id='DataTables_Table_0']//a[contains(text(),'%s')]/../..//i[@class='fa fa-ellipsis-v']";
-    public final static String ADD_EDIT_SHIPPING_NOTE_POP_UP_BUTTON_XPATH = "//li[@class='action-detail open']//a[contains(@data-target,'note-modal')]";
+    public final static String THREE_DOT_ICON_BASED_ON_CATALOG_NO_XPATH = "//table[@id='DataTables_Table_1']//a[contains(text(),'%s')]/../..//i[@class='fa fa-ellipsis-v']";
+    public final static String ADD_EDIT_SHIPPING_NOTE_POP_UP_BUTTON_XPATH = "//li[@class='action-detail open']//a[contains(@data-target,'add-shipping-note-modal')]";
     public final static String ADD_EDIT_SHIPPING_NOTE_FIELD_IN_POP_UP_XPATH = "//div[contains(@id, 'add-shipping-note') and contains(@style, 'display: block')]//textarea";
+    public final static String SAVE_BUTTON_IN_ADD_EDIT_SHIPPING_NOTE_POP_UP = "//div[contains(@id,'add-shipping-note-modal') and contains(@style,'display: block')]//button[@class='btn primary-btn saveShipNoteBtn']";
 }

@@ -449,33 +449,42 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
   Scenario Outline: Check that user can place order with shipping notes and verify it on Order Details an PO pages
     And Account management page is opened.
     When Choose <region> region.
-    And Select account <account>.
-    And Click on account with <salesDivision> sales division.
-    Then Dashboard page is opened.
+    And Search random account for chosen region.
+    And Click on chosen account.
+    And Dashboard page is opened.
     When Click on Skip button.
     When Close cookies pop-up.
-    When User add list of <products> products to the Copy&Paste block.
-    And Click on P&A button.
-    Then Price&Availability page is opened.
-    Then All the products from <products> are displayed on the P&A page.
-    And All products are selected on P&A page.
-    When User clicks on Add to Cart button.
-    Then Check that count of added items is displayed on My Cart icon in Header block.
-    When User clicks on My Cart icon in Header block.
-    When User clicks on Checkout button in Header block.
-    Then My Cart page is opened.
-    When User clicks on the Next top button on the My Cart page.
-    When User fills PO no. to the PO no. field on the OE 2 page.
-    And Select Shipment Address from the existing addresses on the OE 2 page.
-    And User fills Shipping Note text to the Shipping Note field.
-    And Add Shipping Note to the catalog no <catalogNo1> and put note to the Hashmap.
-    And Add Shipping Note to the catalog no <catalogNo2> and put note1 to the Hashmap.
-    When User clicks on the Bottom Next button on the OE 2 page.
-    Then Order Summary step is opened.
-    Then Is Correct Shipping note displayed in Shipments Details block.
-    Then Is Correct Shipping note displayed for the catalog No. <catalogNo1>.
-#    And User change Old Shipping note to the new one.
-#    Then Is Correct Shipping note displayed for the catalog No.
+    Given Select test product for chosen region.
+    Given Select test product for chosen region.
+    When User selected products to the Copy&Paste block.
+
+#    And Click on P&A button.
+#    Then Price&Availability page is opened.
+#    Then All the products from <products> are displayed on the P&A page.
+#    And All products are selected on P&A page.
+#    When User clicks on Add to Cart button.
+#    Then Check that count of added items is displayed on My Cart icon in Header block.
+#    When User clicks on My Cart icon in Header block.
+#    When User clicks on Checkout button in Header block.
+#    Then My Cart page is opened.
+#    When User clicks on the Next top button on the My Cart page.
+#    When User fills PO no. to the PO no. field on the OE 2 page.
+#    And Select Shipment Address from the existing addresses on the OE 2 page.
+#    And User fills Shipping Note text to the Shipping Note field.
+#    And Add Shipping Note to the catalog no <catalogNo1> and put note to the Hashmap.
+#    And Add Shipping Note to the catalog no <catalogNo2> and put note1 to the Hashmap.
+#    When User clicks on the Bottom Next button on the OE 2 page.
+#    Then Order Summary step is opened.
+#    Then Is Correct Shipping note displayed in Shipments Details block.
+#    Then Change Shipping note for the catalog No. <catalogNo1>.
+#    When User clicks on Place Order button at the OE 3 page.
+#    And Terms and Conditions pop-up is confirmed.
+#
+#    Then Order Successful pop-up appears at the OE 3 page.
+#    When User closes the pop-up.
+#    Then Orders Details page is opened.
+#    Then GE Order No. is correct.
+
 
 
 

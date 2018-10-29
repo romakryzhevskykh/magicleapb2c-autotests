@@ -36,4 +36,9 @@ public class PriceAndAvailabilityBlock extends UIComponent {
     public void addItemsToTheCopyPasteBlock(List<String> products) {
         products.forEach(product -> $(By.id(COPY_AND_PASTE_FIELD_ID)).sendKeys(product + "\n"));
     }
+
+    @Step("Add the list of Items to the Copy&Paste block.")
+    public void addSelectedProductsToTheCopyPasteBlock(String catalogNo1, String catalogNo2) {
+        $(By.id(COPY_AND_PASTE_FIELD_ID)).sendKeys(catalogNo1 + "\n" + catalogNo2);
+    }
 }

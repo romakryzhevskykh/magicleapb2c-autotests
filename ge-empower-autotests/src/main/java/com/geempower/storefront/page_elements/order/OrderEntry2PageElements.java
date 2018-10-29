@@ -59,6 +59,4 @@ public class OrderEntry2PageElements {
     public final static String ADD_EDIT_SHIPPING_NOTE_POP_UP_BUTTON_XPATH = "//li[@class='action-detail open']//a[contains(@data-target,'note-modal')]";
     public final static String ADD_EDIT_SHIPPING_NOTE_FIELD_IN_POP_UP_XPATH = "//div[contains(@id, 'add-shipping-note') and contains(@style, 'display: block')]//textarea";
     public final static String SAVE_BUTTON_IN_ADD_EDIT_SHIPPING_NOTE_POP_UP = "//div[contains(@id,'add-shipping-note-modal') and contains(@style,'display: block')]//button[@class='btn primary-btn saveShipNoteBtn']";
-
-
 }
