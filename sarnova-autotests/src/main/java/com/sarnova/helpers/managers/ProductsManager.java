@@ -158,6 +158,7 @@ public class ProductsManager {
 
     String getCSRFTokenFromPDPOf(UserSession userSession, List<IndividualProduct> products) {
         GETRequest pageSourceToGetCSRF = GET_PDP_SOURCE.getClone();
+        pageSourceToGetCSRF.setIsShortLogResponse(true);
         pageSourceToGetCSRF.setValue(products.stream().map(Product::getSku).findAny().orElse(null));
         try {
             pageSourceToGetCSRF.sendGetRequest(userSession);

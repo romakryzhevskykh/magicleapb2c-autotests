@@ -18,13 +18,13 @@ import java.util.ArrayList;
 
 @Component
 public class UserGroupsManager {
-    GETRequest PERMISSIONS_PAGE_FOR_GROUP = new GETRequest("User group permissions page", "my-company/organization-management/manage-usergroups/permissions/?usergroup=%s");
-    GETRequest CREATE_USER_GROUP_PAGE = new GETRequest("Create new user group page", "my-company/organization-management/manage-usergroups/create");
-    POSTRequest ADD_PERMISSION = new POSTRequest("Add permission to user", "my-company/organization-management/manage-usergroups/permissions/select/");
-    POSTRequest REMOVE_PERMISSION = new POSTRequest("Remove permission to user", "my-company/organization-management/manage-usergroups/permissions/deselect/");
-    POSTRequest CREATE_USER_GROUP = new POSTRequest("Create new user group", "my-company/organization-management/manage-usergroups/create/");
-    POSTRequest DELETE_USER_GROUP = new POSTRequest("Delete user group", "my-company/organization-management/manage-usergroups/remove/");
-    GETRequest PERMISSIONS_PAGE = new GETRequest("User group Permissions page", "my-company/organization-management/manage-usergroups/permissions/");
+    private GETRequest PERMISSIONS_PAGE_FOR_GROUP = new GETRequest("User group permissions page", "my-company/organization-management/manage-usergroups/permissions/?usergroup=%s");
+    private GETRequest CREATE_USER_GROUP_PAGE = new GETRequest("Create new user group page", "my-company/organization-management/manage-usergroups/create");
+    private POSTRequest ADD_PERMISSION = new POSTRequest("Add permission to user", "my-company/organization-management/manage-usergroups/permissions/select/");
+    private POSTRequest REMOVE_PERMISSION = new POSTRequest("Remove permission to user", "my-company/organization-management/manage-usergroups/permissions/deselect/");
+    private POSTRequest CREATE_USER_GROUP = new POSTRequest("Create new user group", "my-company/organization-management/manage-usergroups/create/");
+    private POSTRequest DELETE_USER_GROUP = new POSTRequest("Delete user group", "my-company/organization-management/manage-usergroups/remove/");
+    private GETRequest PERMISSIONS_PAGE = new GETRequest("User group Permissions page", "my-company/organization-management/manage-usergroups/permissions/");
 
     private ArrayList<UserGroup> userGroups = new ArrayList<>();
 
@@ -153,6 +153,7 @@ public class UserGroupsManager {
 
     public String getCreateGroupPageCsrfToken(UserSession userSession) {
         GETRequest getCartPageSource = CREATE_USER_GROUP_PAGE.getClone();
+        getCartPageSource.setIsShortLogResponse(true);
         try {
             getCartPageSource.sendGetRequest(userSession);
         } catch (IOException e) {

@@ -70,6 +70,7 @@ public class CartManager {
 
     public String getCartPageCsrfToken(UserSession userSession) {
         GETRequest getCartPageSource = GET_CART_PAGE_SOURCE.getClone();
+        getCartPageSource.setIsShortLogResponse(true);
         try {
             getCartPageSource.sendGetRequest(userSession);
         } catch (IOException e) {
@@ -82,6 +83,7 @@ public class CartManager {
     @Step("Get current cart ID.")
     public String getCurrentCartId(UserSession userSession) {
         GETRequest getCartPageSource = GET_CART_PAGE_SOURCE.getClone();
+        getCartPageSource.setIsShortLogResponse(true);
         try {
             getCartPageSource.sendGetRequest(userSession);
         } catch (IOException e) {
@@ -94,6 +96,7 @@ public class CartManager {
     @Step("Get UOMs from active cart.")
     private List<UnitOfMeasure> getUOMsFromCartPage(UserSession userSession) {
         GETRequest getCartPageSource = GET_CART_PAGE_SOURCE.getClone();
+        getCartPageSource.setIsShortLogResponse(true);
         try {
             getCartPageSource.sendGetRequest(userSession);
         } catch (IOException e) {
