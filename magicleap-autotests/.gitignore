@@ -6,3 +6,5 @@ com.magicleap-automatedtests.iml
 sarnova-autotests
 ge-empower-autotests
 .DS_Store
+../
+!../magicleap-autotests
