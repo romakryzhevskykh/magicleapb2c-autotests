@@ -133,9 +133,6 @@ public class APIResponse implements API {
     }
 
     public void getResponseWithActualObjectType(String RESPONSE_STRING) {
-//        if(RESPONSE_STRING == null) {
-//            return;
-//        }
         if (RESPONSE_CONTENT_TYPES.JSON.contains(contentType))
             try {
                 this.responseBody = new JSONObject(RESPONSE_STRING);
@@ -179,7 +176,6 @@ public class APIResponse implements API {
     }
 
     public Document getHTMLResponseDocument() {
-//        System.out.println("RESPONSE1: " + this.responseBody);
         return (Document) this.responseBody;
     }
 }

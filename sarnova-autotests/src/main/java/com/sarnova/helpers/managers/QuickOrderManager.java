@@ -33,6 +33,7 @@ public class QuickOrderManager {
 
     public Map<UnitOfMeasure, Integer> getUOMs(UserSession userSession) {
         GETRequest qoPageSource = QUICK_ORDER_PAGE_SOURCE.getClone();
+        qoPageSource.setIsShortLogResponse(true);
         try {
             qoPageSource.sendGetRequest(userSession);
         } catch (IOException e) {

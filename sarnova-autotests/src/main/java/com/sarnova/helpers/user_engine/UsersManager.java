@@ -52,6 +52,7 @@ public class UsersManager {
 
     public String getCreateUserPageCsrfToken(UserSession userSession) {
         GETRequest getCartPageSource = CREATE_PAGE.getClone();
+        getCartPageSource.setIsShortLogResponse(true);
         try {
             getCartPageSource.sendGetRequest(userSession);
         } catch (IOException e) {
@@ -63,6 +64,7 @@ public class UsersManager {
 
     public String getResetPasswordPageCsrfToken(UserSession userSession, User userToResetPassword) {
         GETRequest getResetPasswordPageSource = RESET_PASSWORD_PAGE.getClone();
+        getResetPasswordPageSource.setIsShortLogResponse(true);
         getResetPasswordPageSource.setValue(userToResetPassword.getUsername());
         try {
             getResetPasswordPageSource.sendGetRequest(userSession);

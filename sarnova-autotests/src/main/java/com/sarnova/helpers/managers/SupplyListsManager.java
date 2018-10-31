@@ -159,6 +159,7 @@ public class SupplyListsManager {
 
     private String getCsrfTokenFromSLDP(UserSession userSession, SupplyList supplyList) {
         GETRequest supplyListDetailsPage = SUPPLY_LIST_DETAILS_PAGE.getClone();
+        supplyListDetailsPage.setIsShortLogResponse(true);
         supplyListDetailsPage.setValue(supplyList.getId());
 
         try {

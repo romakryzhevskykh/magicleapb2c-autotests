@@ -56,6 +56,43 @@ public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
                         .anyMatch(suppliedIndividualProduct -> suppliedIndividualProduct.equals(individualProduct))));
     }
 
+    @SuppressWarnings("unchecked")
+    @Then("^Check that only selected product\\(s\\) is\\(are\\) displayed on the Supply list details page.$")
+    public void checkThatOnlySelectedProductsAreDisplayedOnTheSupplyListDetailsPage() {
+        Set<IndividualProduct> addedIndividualProducts = getSelectedUOMS()
+                .entrySet()
+                .stream()
+                .filter(unitOfMeasureIntegerEntry -> unitOfMeasureIntegerEntry.getValue() > 0)
+                .map(unitOfMeasureIntegerEntry -> productsManager.getProductByUOM(unitOfMeasureIntegerEntry.getKey()))
+                .collect(Collectors.toSet());
+        SupplyList supplyList = supplyListDetailsPage.getSupplyListFromPage(userSessions.getActiveUserSession().getUser());
+        List<IndividualProduct> productsInSL = supplyList.getSupplyProductsInList().stream()
+                .filter(SupplyListProduct::isActive)
+                .map(SupplyListProduct::getIndividualProduct)
+                .collect(Collectors.toList());
+        assertTrue(productsInSL.containsAll(addedIndividualProducts),
+                "Supply list products: " + productsInSL + " don't contain all added: " + addedIndividualProducts);
+        assertEquals(productsInSL.size(), addedIndividualProducts.size());
+    }
+
+    @SuppressWarnings("unchecked")
+    @Then("^Check that all product\\(s\\) from Quick order list is\\(are\\) displayed on the Supply list details page.$")
+    public void checkThatAllQOProductsAreDisplayedOnTheSupplyListDetailsPage() {
+        Set<IndividualProduct> addedIndividualProducts = getSelectedUOMS()
+                .entrySet()
+                .stream()
+                .map(unitOfMeasureIntegerEntry -> productsManager.getProductByUOM(unitOfMeasureIntegerEntry.getKey()))
+                .collect(Collectors.toSet());
+        SupplyList supplyList = supplyListDetailsPage.getSupplyListFromPage(userSessions.getActiveUserSession().getUser());
+        List<IndividualProduct> productsInSL = supplyList.getSupplyProductsInList().stream()
+                .filter(SupplyListProduct::isActive)
+                .map(SupplyListProduct::getIndividualProduct)
+                .collect(Collectors.toList());
+        assertTrue(productsInSL.containsAll(addedIndividualProducts),
+                "Supply list products: " + productsInSL + " don't contain all added: " + addedIndividualProducts);
+        assertEquals(productsInSL.size(), addedIndividualProducts.size());
+    }
+
     @Given("^Opened Supply list details page.$")
     public void openedSupplyListDetailsPage() {
         String supplyListName = threadVarsHashMap.getString(TestKeyword.SUPPLY_LIST_NAME);

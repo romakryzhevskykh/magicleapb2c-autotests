@@ -9,10 +9,10 @@ Feature: Quick order add to Supply list functionality.
   Scenario: Check that Add to Supply list button is unable if Quick order list is empty.
     Then Check that Add to Supply list button is unable on Quick order page.
 
-  Scenario: Check that Add to Supply list button is unable if Quick order list has only products with QTY 0.
+  Scenario: Check that Add to Supply list button is able if Quick order list has at least one product.
     When Add 1 VALID, INDIVIDUAL product to Quick order list on Quick order page.
     And Set QTY 0 to all UOM on Quick order page.
-    Then Check that Add to Supply list button is unable on Quick order page.
+    Then Check that Add to Supply list button is enable on Quick order page.
 
   Scenario: Check that user can add product to new(action of creation) Supply list.
     When Add 1 VALID, INDIVIDUAL product to Quick order list on Quick order page.
@@ -24,7 +24,7 @@ Feature: Quick order add to Supply list functionality.
     And Click on View Supply list in Add to Supply list pop-up on Quick order page.
     Then Check that Supply list details page is opened.
     Then Check that entered name is the name of Supply list on the Supply list details page.
-    Then Check that selected product(s) is(are) displayed on the Supply list details page.
+    Then Check that all product(s) from Quick order list is(are) displayed on the Supply list details page.
 
   Scenario: Check that user can add products(>1) to new(action of creation) Supply list.
     When Add 2 VALID, INDIVIDUAL product to Quick order list on Quick order page.
@@ -36,9 +36,9 @@ Feature: Quick order add to Supply list functionality.
     And Click on View Supply list in Add to Supply list pop-up on Quick order page.
     Then Check that Supply list details page is opened.
     Then Check that entered name is the name of Supply list on the Supply list details page.
-    Then Check that selected product(s) is(are) displayed on the Supply list details page.
+    Then Check that all product(s) from Quick order list is(are) displayed on the Supply list details page.
 
-  Scenario: Check that only products with QTYs >0 added to new(action of creation) Supply list.
+  Scenario: Check that all products from list added to new(action of creation) Supply list.
     When Add 2 VALID, INDIVIDUAL product to Quick order list on Quick order page.
     And Set QTY 1 to any UOM on Quick order page.
     And Click on Add to Supply list button on Quick order page.
@@ -48,7 +48,7 @@ Feature: Quick order add to Supply list functionality.
     And Click on View Supply list in Add to Supply list pop-up on Quick order page.
     Then Check that Supply list details page is opened.
     Then Check that entered name is the name of Supply list on the Supply list details page.
-    Then Check that selected product(s) is(are) displayed on the Supply list details page.
+    Then Check that all product(s) from Quick order list is(are) displayed on the Supply list details page.
 
   Scenario: Check that user can add product to existed(action of update) Supply list.
     When Add 1 VALID, INDIVIDUAL product to Quick order list on Quick order page.
