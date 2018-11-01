@@ -12,7 +12,7 @@ Feature: Submit purchase request  functionality
     And Click on Next button on Checkout Shipping address step.
     And Click on Next button on Checkout Shipping method step.
     And Select Invoice payment type on Checkout Payment method step.
-    And Set any Purchase order number on Checkout Payment method step.
+    And Set any Purchase Request order number on Checkout Payment method step.
     And Click on Next button on Checkout Payment method step.
     And Click on select approver dropdown on checkout page.
     And Select valid approver to approve purchase request on checkout page.
