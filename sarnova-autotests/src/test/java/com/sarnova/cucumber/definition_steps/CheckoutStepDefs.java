@@ -174,6 +174,13 @@ public class CheckoutStepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.PURCHASE_ORDER_NUMBER, randomPON);
     }
 
+    @And("^Set any Purchase Request order number on Checkout Payment method step.$")
+    public void setAnyPurchaseRequestOrderNumberOnCheckoutPaymentMethodStep() {
+        String randomPON = RandomStringUtils.randomNumeric(9);
+        checkoutPage.fillPurchaseOrderNumberWithText(randomPON);
+        threadVarsHashMap.put(TestKeyword.PURCHASE_REQUEST_ORDER_NUMBER, randomPON);
+    }
+
     @And("^Check that Place order button is visible on Checkout Final Review step.$")
     public void checkThatPlaceOrderButtonVisible() {
         assertTrue(checkoutPage.isPlaceOrderButtonVisible());
@@ -401,7 +408,6 @@ public class CheckoutStepDefs extends AbstractStepDefs {
     @And("^Select valid approver to approve purchase request on checkout page.$")
     public void selectApproverToApprovePurchaseRequest() {
         User approver = usersManager.getUserByRole(StorefrontUserRole.PURCHASE_APPROVER);
-        checkoutPage.openApproverDropdown();
         checkoutPage.selectApproverFromList(approver.getUsername());
         threadVarsHashMap.put(TestKeyword.APPROVER, approver);
     }
