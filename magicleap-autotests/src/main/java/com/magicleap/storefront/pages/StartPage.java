@@ -10,7 +10,7 @@ public class StartPage extends StorefrontBasePage {
 
     @Autowired LoggedOutHeaderRowBlock loggedOutHeaderRowBlock;
 
-    private final String pageUrlMethod = "powertools/en/USD/";
+    private final String pageUrlMethod = "/";
 
     @Step("Check that Start page is opened.")
     public boolean isOpened() {

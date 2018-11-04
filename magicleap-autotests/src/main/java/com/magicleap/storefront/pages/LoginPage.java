@@ -8,7 +8,7 @@ import static com.magicleap.storefront.page_elements.LoginPageElements.*;
 
 @Component
 public class LoginPage extends StorefrontBasePage {
-    private final String pageUrlMethod = "powertools/en/USD/login";
+    private final String pageUrlMethod = "/#/login";
 
     public boolean isOpened() {
         return isCurrentURLEqualsToLoginPageURL() && isUserLoggedOut();

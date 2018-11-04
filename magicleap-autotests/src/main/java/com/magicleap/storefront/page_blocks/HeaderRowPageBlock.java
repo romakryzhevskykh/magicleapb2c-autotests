@@ -29,4 +29,12 @@ public class HeaderRowPageBlock {
     public void clickOnAddressBookItemInMyAccount() {
         loggedInHeaderRowBlock.clickOnAddressBookItemInMyAccount();
     }
+
+    public void hoverOnUserAccountIcon() {
+        loggedInHeaderRowBlock.hoverOnUserAccountMenu();
+    }
+
+    public void clickOnAccountSettingsItemInMyAccountDropDown() {
+        loggedInHeaderRowBlock.clickOnAccountSettingsItemInMyAccount();
+    }
 }

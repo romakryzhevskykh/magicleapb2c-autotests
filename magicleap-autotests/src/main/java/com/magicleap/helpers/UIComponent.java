@@ -2,6 +2,7 @@ package com.magicleap.helpers;
 
 import com.magicleap.helpers.web_engine.WebDriverSessions;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -133,6 +134,36 @@ public abstract class UIComponent {
         } finally {
             webDriverPool.getActiveDriverSession().restoreDefaultImplicitWait();
         }
+    }
+
+    protected void mouseover(String xpath, String... args){
+        WebElement webElement = $(xpath, args);
+        Actions action = new Actions(getDriver());
+        webDriverPool.getActiveDriverSession().setShortImplicitWait();
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getShortTimeOut());
+            wait.until(ExpectedConditions.elementToBeClickable(webElement));
+            try {
+                action.moveToElement(webElement).perform();
+            } catch (UnhandledAlertException exception) {
+                System.out.println("WARNING: Unexpected alert!");
+                alertHandling();
+                action.moveToElement(webElement).perform();
+            }
+        } catch (WebDriverException ex) {
+            ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", webElement);
+            try {
+                action.moveToElement(webElement).perform();
+            } catch (UnhandledAlertException exception) {
+                System.out.println("WARNING: Unexpected alert!");
+                alertHandling();
+                action.moveToElement(webElement).perform();
+            }
+        } finally {
+            webDriverPool.getActiveDriverSession().restoreDefaultImplicitWait();
+        }
+
+
     }
 
     protected void enterText(String text, By by) {
@@ -322,4 +353,5 @@ public abstract class UIComponent {
             e.printStackTrace();
         }
     }
+
 }

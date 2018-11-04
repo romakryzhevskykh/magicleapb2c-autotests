@@ -4,6 +4,7 @@ import com.magicleap.helpers.managers.users.UserSessions;
 import com.magicleap.storefront.page_blocks.HeaderRowPageBlock;
 import com.magicleap.storefront.pages.HomePage;
 import com.magicleap.storefront.pages.LoginPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -23,7 +24,7 @@ public class HomePageStepDefs extends AbstractStepDefs {
     public void openHomePage() {
         if (!homePage.isOpened()) {
             if (headerRowPageBlock.isUserLoggedOut()) {
-                loginPage.open();
+                //loginPage.open();
                 loginPage.loginToStorefront(userSessions.getActiveUserSession());
             } else {
                 homePage.open();
@@ -36,6 +37,8 @@ public class HomePageStepDefs extends AbstractStepDefs {
         headerRowPageBlock.clickOnMyAccountMenu();
     }
 
+
+
     @And("Click on Address Book item in My Account drop down.")
     public void clickOnAddressBookItemInMyAccountDropDown() {
         headerRowPageBlock.clickOnAddressBookItemInMyAccount();
@@ -44,5 +47,15 @@ public class HomePageStepDefs extends AbstractStepDefs {
     @Then("Check that Home page is opened.")
     public void checkThatHomePageIsOpened() {
         assertTrue(homePage.isOpened());
+    }
+
+    @When("^Hover on User Account icon.")
+    public void hoverOnUserAccountIcon() throws Throwable {
+        headerRowPageBlock.hoverOnUserAccountIcon();
+    }
+
+    @And("^Click on Account Settings item in My Account dropdown.")
+    public void clickOnAccountSettingsItemInMyAccountDropdown() throws Throwable {
+        headerRowPageBlock.clickOnAccountSettingsItemInMyAccountDropDown();
     }
 }

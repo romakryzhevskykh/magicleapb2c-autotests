@@ -10,7 +10,7 @@
     <name>Magic Leap Automation Tests</name>
 
     <properties>
-        <testEnv>stage</testEnv>
+        <testEnv>local</testEnv>
         <selenium.version>3.6.0</selenium.version>
         <testng.version>6.11</testng.version>
         <cucumber.java.version>1.2.5</cucumber.java.version>
