@@ -10,7 +10,7 @@ public class HelpFeedbackBlockElements {
     public final static String EMOJI_LABEL_XPATH = "//label[@class='emoji-label mood-selector mood-%s']";
     public final static String CHECKBOX_INCLUDE_SCREENSHOT_ID = "include-screenshot";
 
-    public final static String HELP_BUTTON_XPATH = ".//*[@id='help_button']";
+    public final static String HELP_BUTTON_XPATH = "//div[@id='help_button']";
     public final static String SIGN_IN_TO_LESSONLY_BUTTON_XPATH = "//a[contains(@class,'NewButton--blue')]";
     public final static String TIP_FOR_APPROPRIATE_PAGE_XPATH = "//div[contains(@style,'align-items: flex-start')]/div";
 }

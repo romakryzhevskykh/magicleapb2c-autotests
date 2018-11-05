@@ -1,7 +1,7 @@
 Feature: Test scenarios for all possible P&A validation error messages.
 
   Background:
-    Given Switch to Storefront as admin.
+    Given Switch to Storefront as rmAdmin.
     And User is logged in to Storefront.
 
   Scenario Outline: Check that Is replaced by error message is displayed for appropriate product.

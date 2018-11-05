@@ -81,4 +81,23 @@ public class HelpFeedbackBlock extends UIComponent {
         getDriver().switchTo().frame($("//iframe[@id='lessonlyWidget']"));
         return $(TIP_FOR_APPROPRIATE_PAGE_XPATH).getText();
     }
+
+    @Step("Get Help Button Name.")
+    public String getHelpButtonName() {
+        return $(HELP_BUTTON_XPATH).getText();
+    }
+
+    @Step("Get Data Client Id From Help Button.")
+    public String getDataClientIdFromHelpButton() {
+        return $(HELP_BUTTON_XPATH).getAttribute("data-client-id");
+    }
+
+    @Step("Get Data Token From Help Button.")
+    public String getDataTokenFromHelpButton() {
+        return $(HELP_BUTTON_XPATH).getAttribute("data-token");
+    }
+
+    public String getFeedbackButtonName() {
+        return $(FEEDBACK_BUTTON_XPATH).getText();
+    }
 }
