@@ -257,7 +257,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Examples:
       | region        | salesDivision | account |
       | North_America | USS1_10_10    | 8192306 |
-#
+
   Scenario: Check that user is able to send feedback successfully
     And Dashboard page is opened.
     When Click on Skip button.

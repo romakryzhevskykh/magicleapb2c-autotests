@@ -227,13 +227,13 @@ public class OrderEntry2Page extends StorefrontBasePage {
         click(ADD_EDIT_SHIPPING_NOTE_POP_UP_BUTTON_XPATH);
     }
 
-    @Step("Set Text To The Add Edit Shipping Note Pop Up field")
+    @Step("Set Text To The Add Edit Shipping Note Pop Up field.")
     public void setTextToTheAddEditShippingNotePopUpField(String timestamp) {
         $(ADD_EDIT_SHIPPING_NOTE_FIELD_IN_POP_UP_XPATH).clear();
         $(ADD_EDIT_SHIPPING_NOTE_FIELD_IN_POP_UP_XPATH).sendKeys(timestamp);
     }
 
-    @Step("Click On Save Button In Add EditShipNotePopUp")
+    @Step("Click On Save Button In Add Edit Ship Note Pop Up.")
     public void clickOnSaveButtonInAddEditShipNotePopUp() {
         waitUntilPageIsFullyLoaded();
         click(SAVE_BUTTON_IN_ADD_EDIT_SHIPPING_NOTE_POP_UP);

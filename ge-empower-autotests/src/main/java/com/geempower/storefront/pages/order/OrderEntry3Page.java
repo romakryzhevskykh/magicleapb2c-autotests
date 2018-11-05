@@ -230,7 +230,7 @@ public class OrderEntry3Page extends StorefrontBasePage {
         $(ADD_EDIT_SHIPPING_NOTE_FIELD_IN_POP_UP_XPATH).sendKeys(timestamp);
     }
 
-    @Step("Click On Save Button In Add EditShipNotePopUp")
+    @Step("Click On Save Button In Add Edit Ship Note Pop Up.")
     public void clickOnSaveButtonInAddEditShipNotePopUp() {
         waitUntilPageIsFullyLoaded();
         click(SAVE_BUTTON_IN_ADD_EDIT_SHIPPING_NOTE_POP_UP);
