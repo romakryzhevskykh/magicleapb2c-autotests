@@ -14,6 +14,7 @@ import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static com.geempower.cucumber.definition_steps.TestKeyword.GE_ORDER_NO;
@@ -73,7 +74,6 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     public void trackingInformationIsMultiple(String fieldName) {
         assertEquals(fieldName, orderDetailsPage.getTrackingInformationData());
     }
-
 
     @When("^User clicks on Multiple hyperlink.$")
     public void userClicksOnMultipleHyperlink() {
@@ -183,6 +183,13 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
         assertFalse(orderDetailsPage.getLabelValueInQuoteDetailsBlock(label).isEmpty());
     }
 
+    @Then("^Is (.*) label contains correct value from OE steps in Quote Details block.$")
+    @SuppressWarnings("unchecked")
+    public void isShippingNotesLabelContainsValueFromOESteps(String label) {
+        HashMap<String, String> shippingNotes = (HashMap<String, String>) threadVarsHashMap.get(TestKeyword.SHIPPING_NOTE);
+        assertEquals(orderDetailsPage.getLabelValueInQuoteDetailsBlock(label), shippingNotes.get("shipDetails"));
+    }
+
     @Then("^Is (.*) label contains (.*) email character in Quote Details block.$")
     public void isCreatedByLabelContainsEmailCharacter(String label, String emailCharacter) {
         assertTrue(orderDetailsPage.getLabelValueInQuoteDetailsBlock(label).contains(emailCharacter));
@@ -269,6 +276,13 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     @Then("^Is (.*) label contains value in Product Details block.$")
     public void isLabelContainsValueInProductDetailsBlock(String label) {
         assertFalse(orderDetailsPage.getLabelValueInProductDetailsBlock(label).isEmpty());
+    }
+
+    @Then("^Is (.*) label contains Shipping Notes value from OE Steps in Product Details block.$")
+    @SuppressWarnings("unchecked")
+    public void isShippingNotesLabelContainsValueFromOEStepsInProductDetailsBlock(String label) {
+        HashMap<String, String> shippingNotes = (HashMap<String, String>) threadVarsHashMap.get(TestKeyword.SHIPPING_NOTE);
+        assertEquals(orderDetailsPage.getLabelValueInProductDetailsBlock(label), shippingNotes.get("note"));
     }
 
     @Then("^Is (.*) label contains date in Product Details block.$")

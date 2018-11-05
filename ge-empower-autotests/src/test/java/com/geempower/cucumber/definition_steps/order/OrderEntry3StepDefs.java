@@ -155,21 +155,20 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
     }
 
     @Then("^Is Correct Shipping note displayed in Shipments Details block.$")
+    @SuppressWarnings("unchecked")
     public void isCorrectShippingNoteDisplayedInShipmentsDetailsBlock() {
         shippingNotes = (HashMap<String, String>) threadVarsHashMap.get(TestKeyword.SHIPPING_NOTE);
-        String shipNote = shippingNotes.get("shipDetails");
-        assertEquals(shipNote, orderEntry3Page.getShippingNoteValueInShipmentDetailsBlock());
+        assertEquals(shippingNotes.get("shipDetails"), orderEntry3Page.getShippingNoteValueInShipmentDetailsBlock());
     }
 
-    @Then("^Change Shipping note for the catalog No. (.*).$")
-    public void isCorrectShippingNoteDisplayedForTheCatalogNoCatalogNo(String catalogNo) {
+    @Then("^Change Shipping note for the catalog No.$")
+    public void isCorrectShippingNoteDisplayedForTheCatalogNoCatalogNo() {
+        String catalogNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
         orderEntry3Page.clickOnThreeDotIcon(catalogNo);
         orderEntry3Page.clickOnAddEditShippingNotePopUpButton();
         String timestamp = utils.generateTimestamp();
         orderEntry3Page.changeShippingNoteValue(timestamp);
         orderEntry3Page.clickOnSaveButtonInAddEditShipNotePopUp();
-        shippingNotes = (HashMap<String, String>) threadVarsHashMap.get(TestKeyword.SHIPPING_NOTE);
-        System.out.println(shippingNotes);
-        shippingNotes.put("note1", timestamp);
+        shippingNotes.put("note", timestamp);
     }
 }

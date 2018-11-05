@@ -36,13 +36,6 @@ public class OrderEntry2StepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.PO_NO, orderEntry2Page.fillUniquePoNo(utils.generateTimestamp()));
     }
 
-    @And("User fills Shipping Note text to the Shipping Note field.")
-    public void userFillsShippingNoteTextToTheShippingNoteField() {
-        String timestamp = utils.generateTimestamp();
-        orderEntry2Page.fillUniqueShippingNote(timestamp);
-        shippingNotes.put("shipDetails", timestamp);
-    }
-
     @And("^Select Shipment Address from the existing addresses on the OE 2 page.$")
     public void selectShipmentAddressOnOE2Page() {
         threadVarsHashMap.put(TestKeyword.SHIPPING_ADDRESS, orderEntry2Page.chooseAppropriateAddressFromTheShippingAddressList());
@@ -159,14 +152,22 @@ public class OrderEntry2StepDefs extends AbstractStepDefs {
         shortProductDetailsPopUpBlock.closeShortProductsDetailPopUp();
     }
 
-    @And("^Add Shipping Note to the catalog no (.*) and put (.*) to the Hashmap.$")
-    public void addShippingNoteToTheCatalogNo(String catalogNo, String note) {
+    @And("^Add Shipping Note to the catalog no and put (.*) to the Hashmap.$")
+    public void  addShippingNoteToTheCatalogNo(String note) {
+        String catalogNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
         orderEntry2Page.clickOnThreeDotIcon(catalogNo);
         orderEntry2Page.clickOnAddEditShippingNotePopUpButton();
         String timestamp = utils.generateTimestamp();
         orderEntry2Page.setTextToTheAddEditShippingNotePopUpField(timestamp);
         orderEntry2Page.clickOnSaveButtonInAddEditShipNotePopUp();
         shippingNotes.put(note, timestamp);
-        threadVarsHashMap.replace(TestKeyword.SHIPPING_NOTE, shippingNotes);
+        threadVarsHashMap.put(TestKeyword.SHIPPING_NOTE, shippingNotes);
+    }
+
+    @And("User fills Shipping Note text to the Shipping Note field and put (.*) to the Hashmap.")
+    public void userFillsShippingNoteTextToTheShippingNoteField(String shipDetails) {
+        String timestamp = utils.generateTimestamp();
+        orderEntry2Page.fillUniqueShippingNote(timestamp);
+        shippingNotes.put(shipDetails, timestamp);
     }
 }
