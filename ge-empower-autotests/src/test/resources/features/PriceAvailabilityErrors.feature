@@ -20,7 +20,7 @@ Feature: Test scenarios for all possible P&A validation error messages.
 
     Examples:
       | region        | account | salesDivision | oldProduct | newProduct |
-      | North_America | 1318501 | USS1_10_10    | AB55       | AB55K      |
+      | North_America | 2244411 | USS1_10_10    | AB55       | AB55K      |
 
   Scenario Outline: Check that Unable to price error message is displayed for appropriate product.
     And Account management page is opened.
@@ -39,7 +39,7 @@ Feature: Test scenarios for all possible P&A validation error messages.
 
     Examples:
       | region        | account | salesDivision | product    |
-      | North_America | 1318501 | USS1_10_10    | AC3P3C4EBB |
+      | North_America | 2244411 | USS1_10_10    | AC3P3C4EBB |
 
   Scenario Outline: Check that Catalog No. not found message is displayed for incorrect product.
     And Dashboard page is opened.
@@ -77,4 +77,4 @@ Feature: Test scenarios for all possible P&A validation error messages.
 
     Examples:
       | region        | account | salesDivision | product | agreementNo | pricingError                                               |
-      | North_America | 1318501 | USS1_10_10    | TH2221J | 45001743    | Pricing agreement is invalid. Standard price is displayed. |
+      | North_America | 2244411 | USS1_10_10    | TH2221J | 45000514    | Pricing agreement is invalid. Standard price is displayed. |

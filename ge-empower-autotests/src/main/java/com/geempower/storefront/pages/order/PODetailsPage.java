@@ -64,6 +64,7 @@ public class PODetailsPage extends StorefrontBasePage {
 
     @Step("Get Label Value in Opened Order No. Details block.")
     public String getLabelValueInOpenedOrderNoDetailsBlock(String label) {
+        waitUntilPageIsFullyLoaded();
         return $(LABEL_VALUES_IN_OPENED_ORDER_NO_DETAILS_BLOCK_XPATH, label).getText();
     }
 
