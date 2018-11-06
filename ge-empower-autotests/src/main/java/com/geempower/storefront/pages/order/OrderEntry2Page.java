@@ -56,7 +56,7 @@ public class OrderEntry2Page extends StorefrontBasePage {
         $(SHIPPING_ADDRESS_LIST_OPEN_XPATH).click();
         Select addressDropdown = new Select($(SHIPPING_ADDRESS_DROPDOWN_XPATH));
         addressDropdown.selectByIndex(1);
-        $(SHIPPING_ADDRESS_LIST_OPEN_XPATH).click();
+        click(SHIPPING_ADDRESS_LIST_OPEN_XPATH);
         return addressDropdown.getOptions().get(1).getText();
     }
 
@@ -216,8 +216,8 @@ public class OrderEntry2Page extends StorefrontBasePage {
         click(PRODUCT_LINK_2_OE_PAGE_XPATH, products);
     }
 
-    @Step("Click On Three Dot Icon.")
-    public void clickOnThreeDotIcon(String catalogNo) {
+    @Step("Click On Three Dot Icon on OE 2 Page.")
+    public void clickOnThreeDotIconOnOE2Page(String catalogNo) {
         waitUntilPageIsFullyLoaded();
         click(THREE_DOT_ICON_BASED_ON_CATALOG_NO_XPATH, catalogNo);
     }
@@ -236,6 +236,6 @@ public class OrderEntry2Page extends StorefrontBasePage {
     @Step("Click On Save Button In Add Edit Ship Note Pop Up.")
     public void clickOnSaveButtonInAddEditShipNotePopUp() {
         waitUntilPageIsFullyLoaded();
-        click(SAVE_BUTTON_IN_ADD_EDIT_SHIPPING_NOTE_POP_UP);
+        click(SAVE_BUTTON_IN_ADD_EDIT_SHIPPING_NOTE_POP_UP_XPATH);
     }
 }

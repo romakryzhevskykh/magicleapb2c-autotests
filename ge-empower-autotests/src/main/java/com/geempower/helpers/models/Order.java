@@ -20,6 +20,8 @@ public class Order {
     double totalNetPrice;
     @Getter
     ArrayList<Product> allProducts = new ArrayList<>();
+    @Getter
+    HashMap<String, String> shippingNotes = new HashMap<>();
 
 
     public Order(long orderId, HashMap<Product, Integer> products) {
@@ -28,6 +30,15 @@ public class Order {
         this.finalOrderPrice = products.keySet().stream()
                 .mapToDouble(product -> Double.parseDouble(product.getFinalNetPrice()) * products.get(product))
                 .sum();
+    }
+
+    public Order(long orderId, HashMap<Product, Integer> products, HashMap<String, String> shippingNotes) {
+        this.orderId = orderId;
+        this.products.putAll(products);
+        this.finalOrderPrice = products.keySet().stream()
+                .mapToDouble(product -> Double.parseDouble(product.getFinalNetPrice()) * products.get(product))
+                .sum();
+        this.shippingNotes.putAll(shippingNotes);
     }
 
     public Order(long orderId, String catalogNo, int quantity) {

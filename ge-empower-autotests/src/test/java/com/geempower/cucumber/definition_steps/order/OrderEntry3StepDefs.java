@@ -28,7 +28,7 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
 
     private static double delta = 0.0001;
 
-    HashMap<String, String> shippingNotes;
+    private HashMap<String, String> shippingNotes = new HashMap<>();
 
     @Then("^Order Summary step is opened.$")
     public void orderSummaryStepIsOpened() {
@@ -55,19 +55,26 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
     public void orderSuccessfulPopUpAppears(String title) {
         String orderNo = orderEntry3Page.getGEOrderNoFromOrderSuccessPopUp(title);
         HashMap<Product, Integer> selectedProducts = getSelectedProducts();
-        if (!selectedProducts.isEmpty()) {
+
+        if (!shippingNotes.isEmpty() && !selectedProducts.isEmpty()) {
+            createOrderInstance(orderNo, shippingNotes);
+        } else if (!selectedProducts.isEmpty()) {
             createOrderInstance(orderNo);
-        } else if(!threadVarsHashMap.getString(GE_ORDER_NO).isEmpty()) {
+        } else if (!threadVarsHashMap.getString(GE_ORDER_NO).isEmpty()) {
             Order randomOrder = orderManager.getOrderById(Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO)));
             createOrderInstance(orderNo, randomOrder.getCatalogNo(), randomOrder.getQuantity());
         }
-
         threadVarsHashMap.put(TestKeyword.GE_ORDER_NO, orderNo);
     }
 
     private void createOrderInstance(String orderNo) {
         HashMap<Product, Integer> selectedProducts = getSelectedProducts();
         orderManager.createOrderInstance(Long.parseLong(orderNo), selectedProducts);
+    }
+
+    private void createOrderInstance(String orderNo, HashMap<String, String> shippingNotes) {
+        HashMap<Product, Integer> selectedProducts = getSelectedProducts();
+        orderManager.createOrderInstance(Long.parseLong(orderNo), selectedProducts, shippingNotes);
     }
 
     private void createOrderInstance(String orderNo, String catalogNo, int quantity) {
@@ -163,12 +170,16 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
 
     @Then("^Change Shipping note for the catalog No.$")
     public void isCorrectShippingNoteDisplayedForTheCatalogNoCatalogNo() {
+        String timestamp = utils.generateUniqueTimestamp();
+        setShippingNoteValueToTheCatalogNoOnOE3Step(timestamp);
+        shippingNotes.put("note", timestamp);
+    }
+
+    private void setShippingNoteValueToTheCatalogNoOnOE3Step(String timestamp) {
         String catalogNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
-        orderEntry3Page.clickOnThreeDotIcon(catalogNo);
+        orderEntry3Page.clickOnThreeDotIconOnOE3Page(catalogNo);
         orderEntry3Page.clickOnAddEditShippingNotePopUpButton();
-        String timestamp = utils.generateTimestamp();
         orderEntry3Page.changeShippingNoteValue(timestamp);
         orderEntry3Page.clickOnSaveButtonInAddEditShipNotePopUp();
-        shippingNotes.put("note", timestamp);
     }
 }

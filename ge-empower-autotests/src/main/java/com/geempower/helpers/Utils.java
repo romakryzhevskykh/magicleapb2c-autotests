@@ -69,8 +69,9 @@ public class Utils extends UIComponent {
         return min + random.nextInt((max - min) + 1);
     }
 
-    @Step("Generate timestamp.")
-    public String generateTimestamp(){
+    //Output example: 1541494179
+    @Step("Generate unique timestamp.")
+    public String generateUniqueTimestamp() {
         return Long.toString(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().getEpochSecond());
     }
 

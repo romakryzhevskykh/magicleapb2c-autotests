@@ -14,7 +14,6 @@ import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import static com.geempower.cucumber.definition_steps.TestKeyword.GE_ORDER_NO;
@@ -186,8 +185,8 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     @Then("^Is (.*) label contains correct value from OE steps in Quote Details block.$")
     @SuppressWarnings("unchecked")
     public void isShippingNotesLabelContainsValueFromOESteps(String label) {
-        HashMap<String, String> shippingNotes = (HashMap<String, String>) threadVarsHashMap.get(TestKeyword.SHIPPING_NOTE);
-        assertEquals(orderDetailsPage.getLabelValueInQuoteDetailsBlock(label), shippingNotes.get("shipDetails"));
+        Order order = orderManager.getOrderById(Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO)));
+        assertEquals(orderDetailsPage.getLabelValueInQuoteDetailsBlock(label), order.getShippingNotes().get("shipDetails"));
     }
 
     @Then("^Is (.*) label contains (.*) email character in Quote Details block.$")
@@ -281,8 +280,8 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     @Then("^Is (.*) label contains Shipping Notes value from OE Steps in Product Details block.$")
     @SuppressWarnings("unchecked")
     public void isShippingNotesLabelContainsValueFromOEStepsInProductDetailsBlock(String label) {
-        HashMap<String, String> shippingNotes = (HashMap<String, String>) threadVarsHashMap.get(TestKeyword.SHIPPING_NOTE);
-        assertEquals(orderDetailsPage.getLabelValueInProductDetailsBlock(label), shippingNotes.get("note"));
+        Order order = orderManager.getOrderById(Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO)));
+        assertEquals(orderDetailsPage.getLabelValueInProductDetailsBlock(label), order.getShippingNotes().get("note"));
     }
 
     @Then("^Is (.*) label contains date in Product Details block.$")

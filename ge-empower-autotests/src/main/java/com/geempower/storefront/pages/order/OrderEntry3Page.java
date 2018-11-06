@@ -211,8 +211,8 @@ public class OrderEntry3Page extends StorefrontBasePage {
         return $(SHIPPING_NOTE_VALUE_IN_SHIPPING_DETAILS_BLOCK_XPATH).getText();
     }
 
-    @Step("Click On Three Dot Icon.")
-    public void clickOnThreeDotIcon(String catalogNo) {
+    @Step("Click On Three Dot Icon on OE 3 Page.")
+    public void clickOnThreeDotIconOnOE3Page(String catalogNo) {
         waitUntilPageIsFullyLoaded();
         click(THREE_DOT_ICON_BASED_ON_CATALOG_NO_XPATH, catalogNo);
     }
@@ -226,13 +226,13 @@ public class OrderEntry3Page extends StorefrontBasePage {
     @Step("Get Value From Add Edit Shipping Note Pop Up Field.")
     public void changeShippingNoteValue(String timestamp) {
         waitUntilPageIsFullyLoaded();
-         $(ADD_EDIT_SHIPPING_NOTE_FIELD_IN_POP_UP_XPATH).clear();
+        $(ADD_EDIT_SHIPPING_NOTE_FIELD_IN_POP_UP_XPATH).clear();
         $(ADD_EDIT_SHIPPING_NOTE_FIELD_IN_POP_UP_XPATH).sendKeys(timestamp);
     }
 
     @Step("Click On Save Button In Add Edit Ship Note Pop Up.")
     public void clickOnSaveButtonInAddEditShipNotePopUp() {
         waitUntilPageIsFullyLoaded();
-        click(SAVE_BUTTON_IN_ADD_EDIT_SHIPPING_NOTE_POP_UP);
+        click(SAVE_BUTTON_IN_ADD_EDIT_SHIPPING_NOTE_POP_UP_XPATH);
     }
 }
