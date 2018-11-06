@@ -5,38 +5,38 @@
     <test name="LoginSuite">
         <parameter name="browserName" value="chrome"/>
         <parameter name="headless" value="true"/>
-        <!--<classes>-->
-            <!--<class name="com.sarnova.cucumber.LoginSuite"/>-->
-            <!--<class name="com.sarnova.cucumber.RegistrationSuite"/>-->
-        <!--</classes>-->
+        <classes>
+            <class name="com.sarnova.cucumber.LoginSuite"/>
+            <class name="com.sarnova.cucumber.RegistrationSuite"/>
+        </classes>
     </test>
     <test name="MyAccountMenu">
         <parameter name="browserName" value="chrome"/>
         <parameter name="headless" value="true"/>
-        <!--<classes>-->
-            <!--<class name="com.sarnova.cucumber.MyAccountMenuSuit"/>-->
-            <!--<class name="com.sarnova.cucumber.AccountDashboardSuit"/>-->
-        <!--</classes>-->
+        <classes>
+            <class name="com.sarnova.cucumber.MyAccountMenuSuit"/>
+            <class name="com.sarnova.cucumber.AccountDashboardSuit"/>
+        </classes>
     </test>
     <test name="Supply lists, user management, add to cart and checkout functionality">
         <parameter name="browserName" value="chrome"/>
         <parameter name="headless" value="false"/>
         <classes>
-            <!--<class name="com.sarnova.cucumber.QuickOrderSuit"/>-->
-            <!--<class name="com.sarnova.cucumber.UserManagementSuite"/>-->
-            <!--<class name="com.sarnova.cucumber.PermissionsSuite"/>-->
-            <!--<class name="com.sarnova.cucumber.AddToSupplyListSuite"/>-->
-            <!--<class name="com.sarnova.cucumber.SupplyListsFunctionalitySuit"/>-->
-            <!--<class name="com.sarnova.cucumber.AddToCartSuite"/>-->
-            <!--<class name="com.sarnova.cucumber.CheckoutSuite"/>-->
+            <class name="com.sarnova.cucumber.QuickOrderSuit"/>
+            <class name="com.sarnova.cucumber.UserManagementSuite"/>
+            <class name="com.sarnova.cucumber.PermissionsSuite"/>
+            <class name="com.sarnova.cucumber.AddToSupplyListSuite"/>
+            <class name="com.sarnova.cucumber.SupplyListsFunctionalitySuit"/>
+            <class name="com.sarnova.cucumber.AddToCartSuite"/>
+            <class name="com.sarnova.cucumber.CheckoutSuite"/>
             <class name="com.sarnova.cucumber.PurchaseRequestSuite"/>
         </classes>
     </test>
-    <!--<test name="Guest user suit">-->
-        <!--<parameter name="browserName" value="chrome"/>-->
-        <!--<parameter name="headless" value="true"/>-->
-        <!--<classes>-->
-            <!--<class name="com.sarnova.cucumber.GuestUserSuit"/>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="Guest user suit">
+        <parameter name="browserName" value="chrome"/>
+        <parameter name="headless" value="true"/>
+        <classes>
+            <class name="com.sarnova.cucumber.GuestUserSuit"/>
+        </classes>
+    </test>
 </suite>
