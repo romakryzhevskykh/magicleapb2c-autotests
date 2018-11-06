@@ -164,8 +164,8 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then All the products have <standardAgreementNo> agreement no in the Agreement No field.
 
     Examples:
-      | region        | products                        | agreementNo | salesDivision | standardAgreementNo | account |
-      | North_America | THHQB1120AF2, TEY150, 9T21B9103 | 45003985    | USS1_10_10    | STANDARD            | 1318501 |
+      | region        | products     | agreementNo | salesDivision | standardAgreementNo | account |
+      | North_America | THHQB1120AF2 | 45003866    | USS1_10_10    | STANDARD            | 3394020 |
 
   Scenario Outline: Check that Claimback icon and message are displayed on P&A and Order Entry pages - US294329
     And Account management page is opened.
