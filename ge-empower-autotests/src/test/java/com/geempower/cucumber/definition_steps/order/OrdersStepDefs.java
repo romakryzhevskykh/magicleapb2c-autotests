@@ -116,6 +116,12 @@ public class OrdersStepDefs extends AbstractStepDefs {
         ordersPage.setOrderNoToTheSearchFieldForFiltering(orderNo);
     }
 
+    @And("^Set Order number from created order to the order number field.$")
+    public void setOrderNumberFromCreatedOrderToTheOrderNumberField() {
+        String orderNo = threadVarsHashMap.getString(TestKeyword.GE_ORDER_NO);
+        ordersPage.setOrderNoToTheSearchFieldForFiltering(orderNo);
+    }
+
     @And("^Click on apply filter button.$")
     public void clickOnApplyFilterButton() {
         ordersPage.clickOnApplyFilterButton();

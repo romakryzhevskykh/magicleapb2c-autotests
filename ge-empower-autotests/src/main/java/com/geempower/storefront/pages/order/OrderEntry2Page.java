@@ -36,12 +36,18 @@ public class OrderEntry2Page extends StorefrontBasePage {
     }
 
     @Step("User fills unique Po No on the OE 2 page.")
-    public String fillUniquePoNo() {
+    public String fillUniquePoNo(String uniquePoNo) {
         waitUntilPageIsFullyLoaded();
-        String uniquePoNo = Long.toString(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().getEpochSecond());
         $(By.id(PO_NO_FIELD_ID)).clear();
         $(By.id(PO_NO_FIELD_ID)).sendKeys(uniquePoNo);
         return uniquePoNo;
+    }
+
+    @Step("User fills unique Shipping Note on the OE 2 page.")
+    public void fillUniqueShippingNote(String timestamp) {
+        waitUntilPageIsFullyLoaded();
+        $(By.id(SHIPPING_NOTE_FIELD_ID)).clear();
+        $(By.id(SHIPPING_NOTE_FIELD_ID)).sendKeys(timestamp);
     }
 
     @Step("User chooses first shipping address from the addresses list on the OE 2 page.")
@@ -50,6 +56,7 @@ public class OrderEntry2Page extends StorefrontBasePage {
         $(SHIPPING_ADDRESS_LIST_OPEN_XPATH).click();
         Select addressDropdown = new Select($(SHIPPING_ADDRESS_DROPDOWN_XPATH));
         addressDropdown.selectByIndex(1);
+        click(SHIPPING_ADDRESS_LIST_OPEN_XPATH);
         return addressDropdown.getOptions().get(1).getText();
     }
 
@@ -207,5 +214,28 @@ public class OrderEntry2Page extends StorefrontBasePage {
     public void clickOnProductLinkOnOE2Page(String products) {
         waitUntilPageIsFullyLoaded();
         click(PRODUCT_LINK_2_OE_PAGE_XPATH, products);
+    }
+
+    @Step("Click On Three Dot Icon on OE 2 Page.")
+    public void clickOnThreeDotIconOnOE2Page(String catalogNo) {
+        waitUntilPageIsFullyLoaded();
+        click(THREE_DOT_ICON_BASED_ON_CATALOG_NO_XPATH, catalogNo);
+    }
+
+    @Step("Click On Add Edit Shipping Note Pop Up Button.")
+    public void clickOnAddEditShippingNotePopUpButton() {
+        click(ADD_EDIT_SHIPPING_NOTE_POP_UP_BUTTON_XPATH);
+    }
+
+    @Step("Set Text To The Add Edit Shipping Note Pop Up field.")
+    public void setTextToTheAddEditShippingNotePopUpField(String timestamp) {
+        $(ADD_EDIT_SHIPPING_NOTE_FIELD_IN_POP_UP_XPATH).clear();
+        $(ADD_EDIT_SHIPPING_NOTE_FIELD_IN_POP_UP_XPATH).sendKeys(timestamp);
+    }
+
+    @Step("Click On Save Button In Add Edit Ship Note Pop Up.")
+    public void clickOnSaveButtonInAddEditShipNotePopUp() {
+        waitUntilPageIsFullyLoaded();
+        click(SAVE_BUTTON_IN_ADD_EDIT_SHIPPING_NOTE_POP_UP_XPATH);
     }
 }

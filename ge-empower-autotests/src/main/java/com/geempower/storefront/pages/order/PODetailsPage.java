@@ -98,6 +98,11 @@ public class PODetailsPage extends StorefrontBasePage {
         click(EXPAND_CLOSE_ARROW_IN_OPENED_ORDER_NO_DETAILS_BLOCK_XPATH, catalogNo);
     }
 
+    @Step("Click On Expand Closes Random Arrow In Opened Order No. Details Block.")
+    public void clickOnExpandClosesRandomArrowInOpenedOrderNoDetailsBlock() {
+        $$(EXPAND_CLOSE_ARROWS_IN_OPENED_ORDER_NO_DETAILS_BLOCK_XPATH).stream().findAny().ifPresent(this::click);
+    }
+
     @Step("Get Label Value In Product Details Block In Opened Order No. Details Block.")
     public String getLabelValueInProductDetailsBlockInOpenedOrderNoDetailsBlock(String label) {
         waitUntilPageIsFullyLoaded();

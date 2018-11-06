@@ -16,6 +16,10 @@ public class OrderManager {
         ordersList.add(new Order(orderId, products));
     }
 
+    public void createOrderInstance(long orderId, HashMap<Product, Integer> products, HashMap<String, String> shippingNotes) {
+        ordersList.add(new Order(orderId, products, shippingNotes));
+    }
+
     public void createOrderInstance(long orderId, String catalogNo, int quantity) {
         ordersList.add(new Order(orderId, catalogNo, quantity));
     }

@@ -164,8 +164,8 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then All the products have <standardAgreementNo> agreement no in the Agreement No field.
 
     Examples:
-      | region        | products                        | agreementNo | salesDivision | standardAgreementNo | account |
-      | North_America | THHQB1120AF2, TEY150, 9T21B9103 | 45003985    | USS1_10_10    | STANDARD            | 1318501 |
+      | region        | products     | agreementNo | salesDivision | standardAgreementNo | account |
+      | North_America | THHQB1120AF2 | 45003866    | USS1_10_10    | STANDARD            | 3394020 |
 
   Scenario Outline: Check that Claimback icon and message are displayed on P&A and Order Entry pages - US294329
     And Account management page is opened.
@@ -446,3 +446,50 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Examples:
       | viewAllUrl                       |
       | http://www.geindustrial.com/news |
+
+  Scenario: Check that user can place order with shipping notes and verify it on Order Details an PO pages
+    And Account management page is opened.
+    When Choose North_America region.
+    And Search random account for chosen region.
+    And Click on chosen account.
+    And Dashboard page is opened.
+    When Click on Skip button.
+    When Close cookies pop-up.
+    Given Select test product for chosen region.
+    When User set chosen catalogueNo to the Product Number field.
+    And Click on P&A button.
+    Then Price&Availability page is opened.
+    And All products are selected on P&A page.
+    When User clicks on Add to Cart button.
+    Then Check that count of added items is displayed on My Cart icon in Header block.
+    When User clicks on My Cart icon in Header block.
+    When User clicks on Checkout button in Header block.
+    Then My Cart page is opened.
+    When User clicks on the Next top button on the My Cart page.
+    When User fills PO no. to the PO no. field on the OE 2 page.
+    And Select Shipment Address from the existing addresses on the OE 2 page.
+    And User fills Shipping Note text to the Shipping Note field and put shipDetails to the Hashmap.
+    And Add Shipping Note to the catalog no and put note to the Hashmap.
+    When User clicks on the Bottom Next button on the OE 2 page.
+    Then Order Summary step is opened.
+    Then Is Correct Shipping note displayed in Shipments Details block.
+    Then Change Shipping note for the catalog No.
+    When User clicks on Place Order button at the OE 3 page.
+    And Terms and Conditions pop-up is confirmed.
+    Then Order Successful pop-up appears at the OE 3 page.
+    When User closes the pop-up.
+    Then Orders Details page is opened.
+    Then GE Order No. is correct.
+    When User expands Quote Details block.
+    Then Is Opened Quote Details block is displayed.
+    Then Is Shipping notes label contains correct value from OE steps in Quote Details block.
+    When User opens random product detail block.
+    Then Is Shipping notes label contains Shipping Notes value from OE Steps in Product Details block.
+    And Orders page is opened.
+    When User clicks on filter order icon.
+    And Set Order number from created order to the order number field.
+    And Click on apply filter button.
+    When User clicks on random PO no.
+    Then Is Shipping notes label contains correct value from OE steps in opened Order No. Details block.
+    When User expands/closes random catalog No block in opened Order No. Details block.
+    Then Is Shipping notes label contains correct value from OE steps in Product Details block in opened Order No. Details block.
