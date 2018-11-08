@@ -228,16 +228,6 @@ public class QuickOrderStepDefs extends AbstractStepDefs {
         quickOrderPage.clickOnAddToCartButton();
     }
 
-    @And("^Click on Checkout button in Add to cart pop-up on Quick order page.$")
-    public void clickOnCheckoutButtonInAddToCartPopUpOnQuickOrderPage() {
-        quickOrderPage.clickOnCheckoutButtonInAddToCartPopUp();
-    }
-
-    @And("^Click on Continue shopping button in Add to cart pop-up on Quick order page.$")
-    public void clickOnContinueShoppingButtonInAddToCartPopUpOnQuickOrderPage() {
-        quickOrderPage.clickOnContinueShoppingButtonInAddToCartPopUp();
-    }
-
     @Then("^Check that Quick order list is empty on Quick order page.$")
     public void checkThatQuickOrderListIsEmptyOnQuickOrderPage() {
         assertTrue(quickOrderPage.getUomsWithQTYs().isEmpty());

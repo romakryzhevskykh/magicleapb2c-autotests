@@ -56,11 +56,6 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
         assertEquals(productDetailsPage.getAddToSupplyListPopUpContent(), message);
     }
 
-    @Then("^Check that Add to cart pop-up displays (.*) message on PDP.$")
-    public void checkThatAddToCartPopUpIsOpenedWithMessage(String message) {
-        assertEquals(productDetailsPage.getAddToCartPopUpContent(), message);
-    }
-
     @SuppressWarnings("unchecked")
     @And("^Set QTY (\\d+) to any product\\(UOM\\) on the PDP.$")
     public void selectAnyProductUOMFromTheList(int qtyValueForAnyProductOnPDP) {
@@ -171,11 +166,6 @@ public class ProductDetailsPageStepDefs extends AbstractStepDefs {
     @And("^Click on Add to cart button on PDP.$")
     public void clickOnAddToCartButtonOnPDP() {
         productDetailsPage.clickOnAddToCartButton();
-    }
-
-    @And("^Click on Checkout button in Add to cart pop-up on PDP.$")
-    public void clickOnCheckoutButtonInAddToCartPopUpOnPDP() {
-        productDetailsPage.clickOnCheckoutButtonInAddToCartPopUp();
     }
 
     @Then("^Check that Add to Supply list button is not visible on PDP.$")

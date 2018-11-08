@@ -3,7 +3,6 @@ package com.sarnova.storefront.pages;
 import com.sarnova.helpers.managers.ProductsManager;
 import com.sarnova.helpers.models.products.Product;
 import com.sarnova.helpers.models.products.UnitOfMeasure;
-import com.sarnova.storefront.page_blocks.AddToCartPopUpBlock;
 import com.sarnova.storefront.page_blocks.AddToSupplyListPopUpBlock;
 import org.openqa.selenium.By;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,6 @@ public class QuickOrderPage extends StorefrontBasePage {
 
     @Autowired ProductsManager productsManager;
     @Autowired AddToSupplyListPopUpBlock addToSupplyListPopUpBlock;
-    @Autowired AddToCartPopUpBlock addToCartPopUpBlock;
 
     private String pageUrlMethod = "quickOrder";
 
@@ -126,9 +124,6 @@ public class QuickOrderPage extends StorefrontBasePage {
     public void clickOnAddToCartButton() {
         click(ADD_TO_CART_BUTTONS_XPATH);
         waitUntilPageIsFullyLoaded();
-        waitUntilElementIsVisible(By.id(POP_UP_ID));
-        addToCartPopUpBlock.waitUntilProductImagesAreVisible();
-        addToCartPopUpBlock.waitUntilBannerImageIsVisible();
     }
 
     @Step("Click on Reset form button.")
@@ -185,17 +180,5 @@ public class QuickOrderPage extends StorefrontBasePage {
 
     public void clickOnContinueButtonInAddToSupplyListPopUpOnQuickOrderPage() {
         addToSupplyListPopUpBlock.clickOnContinueButton();
-    }
-
-    public void clickOnCheckoutButtonInAddToCartPopUp() {
-        addToCartPopUpBlock.clickOnCheckoutButtonInAddToCartPopUp();
-    }
-
-    public void clickOnContinueShoppingButtonInAddToCartPopUp() {
-        addToCartPopUpBlock.clickOnContinueShoppingButtonInAddToCartPopUp();
-    }
-
-    public String getAddToCartPopUpContent() {
-        return addToCartPopUpBlock.getAddToCartPopUpContent();
     }
 }

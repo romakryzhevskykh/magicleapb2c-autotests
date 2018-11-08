@@ -10,8 +10,6 @@ Feature: Add to cart from Supply list details page functionality
     And Opened Supply list details page.
     When Set QTY 0 to all products(UOMs) on the Supply list details page.
     Then Check that Add to cart button is unable on Supply list details page.
-#    And Click on Add to cart button on Supply list details page.
-#    Then Check that Add to cart pop-up displays Please provide a positive number to update the quantity of an item. message on Supply list details page.
     And Open cart page.
     And Check that there are no products on Cart page.
 
@@ -20,7 +18,7 @@ Feature: Add to cart from Supply list details page functionality
     And Opened Supply list details page.
     When Set QTY 1 to any product(UOM) on the Supply list details page.
     And Click on Add to cart button on Supply list details page.
-    And Click on Checkout button in Add to cart pop-up on Supply list details page.
+    And Open cart page.
     Then Check that only selected UOMs exist on Cart page.
     And Check that selected UOMs have corresponding quantities on Cart page.
 
@@ -30,6 +28,6 @@ Feature: Add to cart from Supply list details page functionality
     When Set QTY 1 to any product(UOM) on the Supply list details page.
     And Set QTY 2 to any product(UOM) that hasn't been selected on the Supply list details page.
     And Click on Add to cart button on Supply list details page.
-    And Click on Checkout button in Add to cart pop-up on Supply list details page.
+    And Open cart page.
     Then Check that only selected UOMs exist on Cart page.
     And Check that selected UOMs have corresponding quantities on Cart page.

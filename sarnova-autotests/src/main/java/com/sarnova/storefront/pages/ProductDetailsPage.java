@@ -3,9 +3,7 @@ package com.sarnova.storefront.pages;
 import com.sarnova.helpers.managers.ProductsManager;
 import com.sarnova.helpers.models.products.Product;
 import com.sarnova.helpers.models.products.UnitOfMeasure;
-import com.sarnova.storefront.page_blocks.AddToCartPopUpBlock;
 import com.sarnova.storefront.page_blocks.AddToSupplyListPopUpBlock;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,10 +13,9 @@ import static com.sarnova.storefront.page_elements.ProductDetailsPageElements.*;
 
 @Component
 public class ProductDetailsPage extends StorefrontBasePage {
-    @Autowired private ProductsManager productsManager;
 
+    @Autowired private ProductsManager productsManager;
     @Autowired private AddToSupplyListPopUpBlock addToSupplyListPopUpBlock;
-    @Autowired private AddToCartPopUpBlock addToCartPopUpBlock;
 
     private final String pageUrlMethod = "p/%s";
 
@@ -88,10 +85,6 @@ public class ProductDetailsPage extends StorefrontBasePage {
         return addToSupplyListPopUpBlock.getAnyExistingSupplyListNameFromDropDown();
     }
 
-    public void clickOnCheckoutButtonInAddToCartPopUp() {
-        addToCartPopUpBlock.clickOnCheckoutButtonInAddToCartPopUp();
-    }
-
     public String getSupplyListId() {
         return addToSupplyListPopUpBlock.getSupplyListId();
     }
@@ -101,16 +94,9 @@ public class ProductDetailsPage extends StorefrontBasePage {
         return storefrontProject.getBaseUrl() + pageUrlMethod;
     }
 
-    public String getAddToCartPopUpContent() {
-        return addToCartPopUpBlock.getAddToCartPopUpContent();
-    }
-
     public void clickOnAddToCartButton() {
         click(ADD_TO_CART_BUTTONS_XPATH);
         waitUntilPageIsFullyLoaded();
-        waitUntilElementIsVisible(By.id(POP_UP_ID));
-        addToCartPopUpBlock.waitUntilProductImagesAreVisible();
-        addToCartPopUpBlock.waitUntilBannerImageIsVisible();
     }
 
     @Step("Is Add to Supply list button visible?")

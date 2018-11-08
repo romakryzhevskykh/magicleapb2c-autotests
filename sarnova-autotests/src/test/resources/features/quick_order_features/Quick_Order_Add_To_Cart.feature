@@ -22,7 +22,7 @@ Feature: Quick order add to Cart functionality.
     When Add 1 VALID, INDIVIDUAL product to Quick order list on Quick order page.
     And Set QTY 1 to any UOM on Quick order page.
     And Click on Add to cart button on Quick order page.
-    And Click on Checkout button in Add to cart pop-up on Quick order page.
+    And Open cart page.
     Then Check that only selected UOMs exist on Cart page.
     And Check that selected UOMs have corresponding quantities on Cart page.
 
@@ -31,7 +31,7 @@ Feature: Quick order add to Cart functionality.
     When Add 2 VALID, INDIVIDUAL product to Quick order list on Quick order page.
     And Set QTY 1 to all UOM on Quick order page.
     And Click on Add to cart button on Quick order page.
-    And Click on Checkout button in Add to cart pop-up on Quick order page.
+    And Open cart page.
     Then Check that only selected UOMs exist on Cart page.
     And Check that selected UOMs have corresponding quantities on Cart page.
 
@@ -40,7 +40,7 @@ Feature: Quick order add to Cart functionality.
     When Add 3 VALID, INDIVIDUAL product to Quick order list on Quick order page.
     And Set QTY 3 to any UOM on Quick order page.
     And Click on Add to cart button on Quick order page.
-    And Click on Checkout button in Add to cart pop-up on Quick order page.
+    And Open cart page.
     Then Check that only selected UOMs exist on Cart page.
     And Check that selected UOMs have corresponding quantities on Cart page.
 
@@ -49,6 +49,5 @@ Feature: Quick order add to Cart functionality.
     When Add 3 VALID, INDIVIDUAL product to Quick order list on Quick order page.
     And Set QTY 2 to any UOM on Quick order page.
     And Click on Add to cart button on Quick order page.
-    And Click on Continue shopping button in Add to cart pop-up on Quick order page.
     And Refresh page.
     Then Check that Quick order list is empty on Quick order page.

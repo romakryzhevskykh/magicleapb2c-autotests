@@ -7,7 +7,6 @@ import com.sarnova.helpers.models.products.UnitOfMeasure;
 import com.sarnova.helpers.models.supply_lists.SupplyList;
 import com.sarnova.helpers.models.supply_lists.SupplyListProduct;
 import com.sarnova.helpers.user_engine.User;
-import com.sarnova.storefront.page_blocks.AddToCartPopUpBlock;
 import com.sarnova.storefront.page_blocks.LoggedInHeaderRowBlock;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -28,7 +27,6 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
     @Autowired private ProductsManager productsManager;
     @Autowired private LoggedInHeaderRowBlock loggedInHeaderRowBlock;
 
-    @Autowired private AddToCartPopUpBlock addToCartPopUpBlock;
     private final String pageUrlMethod = "my-account/supply-lists/%s";
 
     @Step("Get Supply list name from Supply list details page.")
@@ -124,21 +122,11 @@ public class SupplyListDetailsPage extends StorefrontBasePage {
     public void clickOnAddToCartButton() {
         click(ADD_TO_CART_BUTTON_XPATH);
         waitUntilPageIsFullyLoaded();
-        addToCartPopUpBlock.waitUntilProductImagesAreVisible();
-        addToCartPopUpBlock.waitUntilBannerImageIsVisible();
     }
 
     @Step("Is Add to cart button visible?")
     public boolean isAddToCartButtonVisible() {
         return isDisplayed(ADD_TO_CART_BUTTON_XPATH);
-    }
-
-    public void clickOnCheckoutButtonInAddToCartPopUp() {
-        addToCartPopUpBlock.clickOnCheckoutButtonInAddToCartPopUp();
-    }
-
-    public String getAddToCartPopUpMessage() {
-        return addToCartPopUpBlock.getAddToCartPopUpContent();
     }
 
     @Step("Check that Supply list is active.")

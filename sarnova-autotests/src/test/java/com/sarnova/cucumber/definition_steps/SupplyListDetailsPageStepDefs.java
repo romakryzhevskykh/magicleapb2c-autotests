@@ -152,16 +152,6 @@ public class SupplyListDetailsPageStepDefs extends AbstractStepDefs {
         supplyListDetailsPage.clickOnAddToCartButton();
     }
 
-    @And("^Click on Checkout button in Add to cart pop-up on Supply list details page.$")
-    public void clickOnCheckoutButtonInAddToCartPopUpOnSupplyListDetailsPage() {
-        supplyListDetailsPage.clickOnCheckoutButtonInAddToCartPopUp();
-    }
-
-    @Then("^Check that Add to cart pop-up displays (.*) message on Supply list details page.$")
-    public void checkThatAddToCartPopUpDisplaysMessage(String message) {
-        assertEquals(supplyListDetailsPage.getAddToCartPopUpMessage(), message);
-    }
-
     @When("^Click on deactivate button on Supply list details page.$")
     public void deactivateSupplyList() {
         if (supplyListDetailsPage.isSupplyListActive()) {
