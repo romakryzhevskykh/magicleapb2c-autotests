@@ -2,11 +2,15 @@ package com.geempower.cucumber.definition_steps.product;
 
 import com.geempower.cucumber.definition_steps.AbstractStepDefs;
 import com.geempower.cucumber.definition_steps.TestKeyword;
+import com.geempower.helpers.models.Product;
 import com.geempower.helpers.models.Region;
 import com.geempower.storefront.page_blocks.FullProductDetailsPopUpBlock;
 import com.geempower.storefront.pages.product.ProductSearchPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.*;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Set;
 
 import static org.testng.Assert.*;
 
@@ -98,5 +102,13 @@ public class ProductSearchStepDefs extends AbstractStepDefs {
     @And("^User clicks on Add to Cart button on Product Search page.$")
     public void userClicksOnAddToCartButtonOnProductSearchPage(){
         productSearchPage.clickOnAddToCartButtonOnProductSearchPage();
+    }
+
+    @When("^User ha.$")
+    public void userListOfSelectedProductsToTheCopyPasteBlock() {
+        Set<Product> catNo = getSelectedProducts().keySet();
+        for (int i = 0; i < catNo.size(); i++) {
+            System.out.println(catNo.size());
+        }
     }
 }

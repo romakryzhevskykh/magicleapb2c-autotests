@@ -22,6 +22,7 @@ public class HacLoginPage extends HACBasePage {
 
     @Step("Login to HAC.")
     public void loginToHac(UserSession userSession) {
+        waitUntilPageIsFullyLoaded();
         fillUsername(userSession.getUsername());
         fillPassword(userSession.getPassword());
         clickOnLoginButton();

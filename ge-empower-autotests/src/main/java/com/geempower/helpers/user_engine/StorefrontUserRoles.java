@@ -10,7 +10,8 @@ public enum StorefrontUserRoles implements UserRole {
     SMADMIN,
     RMADMIN,
     MFGREPUSER,
-    TESTROLEUSER;
+    TESTROLEUSER,
+    NEWUSER;
 
     @Override
     public String toString() {

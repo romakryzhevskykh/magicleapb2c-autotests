@@ -254,4 +254,12 @@ public class ManageUsersPage extends StorefrontBasePage {
     public void adminClosesUserDetailsBlock() {
         click(CLOSE_USER_DETAILS_BLOCK_BUTTON_XPATH);
     }
+
+    public boolean isPendingRequestTabActive() {
+        return $(ACTIVE_PENDING_REQUESTS_TAB_XPATH).getAttribute("class").equals("active");
+    }
+
+    public int getPagesCountOfPendingRequests() {
+        return Integer.parseInt($(COUNT_OF_PAGES_PENDING_REQUESTS_TAB_XPATH).getText().replace(" of ", ""));
+    }
 }

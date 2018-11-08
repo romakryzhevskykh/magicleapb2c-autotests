@@ -35,7 +35,7 @@ public abstract class AbstractStepDefs {
         if (threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS) == null) {
             selectedProducts = new HashMap<>();
         } else {
-            selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
+            selectedProducts = (HashMap<Product, Integer>)threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         }
         return selectedProducts;
     }

@@ -6,7 +6,8 @@ public class ManageUsersPageElements {
 
     //PENDING REQUESTS TAB
     public final static String PENDING_REQUEST_TAB_XPATH = "//a[@aria-controls='pending-requests']";
-
+    public final static String ACTIVE_PENDING_REQUESTS_TAB_XPATH = "//ul[@class='my-pending-account-list']/li[1]";
+    public final static String COUNT_OF_PAGES_PENDING_REQUESTS_TAB_XPATH = "//div[@id='pending-requests-table_paginate']//span[@class='paginate_of']";
     //USERS TAB
     public final static String USERS_TAB_XPATH = "//a[@href='#users']";
     public final static String USER_TERM_INPUT_XPATH = "//input[@id='userterm']";

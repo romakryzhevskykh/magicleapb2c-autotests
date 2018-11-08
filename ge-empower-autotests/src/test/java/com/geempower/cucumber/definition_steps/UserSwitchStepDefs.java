@@ -70,4 +70,9 @@ public class UserSwitchStepDefs {
     public void switchToStorefrontAsMfgRepUser() {
         webDriverPool.setDriverActive(StorefrontUserRoles.MFGREPUSER);
     }
+
+    @Given("Switch to Storefront as newUser.")
+    public void switchToStorefrontAsNewUser() {
+        webDriverPool.setDriverActive(StorefrontUserRoles.NEWUSER);
+    }
 }

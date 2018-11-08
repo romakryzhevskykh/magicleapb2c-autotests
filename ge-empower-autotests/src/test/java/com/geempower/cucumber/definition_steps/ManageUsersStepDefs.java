@@ -7,6 +7,7 @@ import com.geempower.helpers.models.Region;
 import com.geempower.helpers.models.UserEntity;
 import com.geempower.storefront.page_blocks.IwantToBlock;
 import com.geempower.storefront.pages.ManageUsersPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -547,5 +548,16 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     @When("^Admin closes user details block.$")
     public void adminClosesUserDetailsBlock() {
         manageUsersPage.adminClosesUserDetailsBlock();
+    }
+
+    @Then("^Pending requests tab is active.$")
+    public void pendingRequestsTabIsActive() {
+        assertTrue(manageUsersPage.isPendingRequestTabActive());
+    }
+
+    @Then("^Admin is able to see user (.*) on the Pending requests tab with (.*) label.$")
+    public void adminIsAbleToSeeUserUserIdOnThePendingRequestsTabWithNoAccountLabel(String userId, String noAccLabel) {
+        manageUsersPage.getPagesCountOfPendingRequests();
+
     }
 }
