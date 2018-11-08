@@ -279,6 +279,11 @@ public abstract class UIComponent {
         waitUntil(driver1 -> isDisplayed(by));
     }
 
+    @Step("Wait until element is not visible {0}")
+    public void waitUntilElementNotPresent(String xpath, String... args){
+        waitUntil(driver1 -> !isPresent(xpath, args));
+    }
+
     public void waitUntil(ExpectedCondition<Boolean> expectedCondition) {
         WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getTimeOut());
         try {

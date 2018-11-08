@@ -2,7 +2,7 @@ package com.magicleap.storefront.pages;
 
 import com.magicleap.helpers.managers.products.ProductsManager;
 import com.magicleap.helpers.models.products.Product;
-import com.magicleap.storefront.page_blocks.AddToCartPopUpBlock;
+import com.magicleap.storefront.page_blocks.MiniCartSidebarBlock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
@@ -13,7 +13,7 @@ import static com.magicleap.storefront.page_elements.ProductDetailsPageElements.
 public class ProductDetailsPage extends StorefrontBasePage {
     @Autowired private ProductsManager productsManager;
 
-    @Autowired private AddToCartPopUpBlock addToCartPopUpBlock;
+    @Autowired private MiniCartSidebarBlock addToCartPopUpBlock;
 
     private final String pageUrlMethod = "p/%s";
 

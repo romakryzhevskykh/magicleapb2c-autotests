@@ -9,4 +9,11 @@
             <class name="com.magicleap.cucumber.AccountManagementSuite"/>
         </classes>
     </test>
+    <test name="ShoppingCartSuite">
+        <parameter name="browserName" value="chrome" />
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="com.magicleap.cucumber.ShoppingCartSuite"/>
+        </classes>
+    </test>
 </suite>

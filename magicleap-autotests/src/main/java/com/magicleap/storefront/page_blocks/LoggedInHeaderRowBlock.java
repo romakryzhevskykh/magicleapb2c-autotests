@@ -34,7 +34,11 @@ public class LoggedInHeaderRowBlock extends UIComponent {
         click(MY_ACCOUNT_ADDRESS_BOOK_XPATH);
     }
 
+    @Step("Click on Account Settings item in My Account dropdown.")
     public void clickOnAccountSettingsItemInMyAccount() {
         click(MY_ACCOUNT_SETTINGS_XPATH);
     }
+
+    @Step("Click on Shopping Cart icon in header.")
+    public void clickOnShoppingCartIcon() {click(CART_ICON_XPATH);}
 }
