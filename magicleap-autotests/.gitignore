@@ -6,3 +6,4 @@ com.magicleap-automatedtests.iml
 .DS_Store
 ../
 !../magicleap-autotests
+!/src/test/resources/META-INF/local.properties

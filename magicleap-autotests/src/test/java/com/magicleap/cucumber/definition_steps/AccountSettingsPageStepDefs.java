@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.testng.AssertJUnit.assertTrue;
 
-public class AccountSettingsStepDefs extends AbstractStepDefs{
+public class AccountSettingsPageStepDefs extends AbstractStepDefs{
     @Autowired
     AccountSettingsPage accountSettingsPage;
 

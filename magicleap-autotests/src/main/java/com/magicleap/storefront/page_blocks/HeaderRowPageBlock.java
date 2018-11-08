@@ -37,4 +37,8 @@ public class HeaderRowPageBlock {
     public void clickOnAccountSettingsItemInMyAccountDropDown() {
         loggedInHeaderRowBlock.clickOnAccountSettingsItemInMyAccount();
     }
+
+    public void clickOnShoppingCartIcon(){
+        loggedInHeaderRowBlock.clickOnShoppingCartIcon();
+    }
 }
