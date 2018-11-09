@@ -1,7 +1,7 @@
 Feature: Return creation tests
 
   Background:
-    Given Switch to Storefront as admin.
+    Given Switch to Storefront as empAdmin.
     And User is logged in to Storefront.
 
   Scenario: Check that user able to open Returns page and correct header title is displayed

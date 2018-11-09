@@ -186,7 +186,7 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     @SuppressWarnings("unchecked")
     public void isShippingNotesLabelContainsValueFromOESteps(String label) {
         Order order = orderManager.getOrderById(Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO)));
-        assertEquals(orderDetailsPage.getLabelValueInQuoteDetailsBlock(label), order.getShippingNotes().get("shipDetails"));
+        assertEquals(orderDetailsPage.getLabelValueInQuoteDetailsBlock(label), order.getShippingNotes().get("shipDetails"), "HashMap size is " + order.getShippingNotes().size());
     }
 
     @Then("^Is (.*) label contains (.*) email character in Quote Details block.$")

@@ -21,6 +21,9 @@ public class User {
                 case "externaluser1":
                     userRole = StorefrontUserRoles.EXTERNALUSER1;
                     break;
+                case "externaluser2":
+                    userRole = StorefrontUserRoles.EXTERNALUSER2;
+                    break;
                 case "empoweradmin":
                     userRole = StorefrontUserRoles.EMPOWERADMIN;
                     break;
@@ -29,6 +32,9 @@ public class User {
                     break;
                 case "internaluser1":
                     userRole = StorefrontUserRoles.INTERNALUSER1;
+                    break;
+                case "internaluser2":
+                    userRole = StorefrontUserRoles.INTERNALUSER2;
                     break;
                 case "regionalview":
                     userRole = StorefrontUserRoles.REGIONALVIEW;
@@ -47,6 +53,21 @@ public class User {
                     break;
                 case "mfgrepuser":
                     userRole = StorefrontUserRoles.MFGREPUSER;
+                    break;
+                case "mfgrepuser1":
+                    userRole = StorefrontUserRoles.MFGREPUSER1;
+                    break;
+                case "empadmin":
+                    userRole = StorefrontUserRoles.EMPADMIN;
+                    break;
+                case "firstempadmin":
+                    userRole = StorefrontUserRoles.FIRSTEMPADMIN;
+                    break;
+                case "secondempadmin":
+                    userRole = StorefrontUserRoles.SECONDEMPADMIN;
+                    break;
+                case "helpdesc":
+                    userRole = StorefrontUserRoles.HELPDESC;
                     break;
                 default:
                     userRole = null;
