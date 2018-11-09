@@ -35,6 +35,11 @@ public class LoginPage extends StorefrontBasePage {
         clickOnLoginButton();
     }
 
+    @Step("Click on Sign Up button.")
+    public void clickOnSignUpButton() {
+        $(SIGN_UP_BUTTON_XPATH).click();
+    }
+
     @Step("Check that current url is Login page url.")
     private boolean isCurrentURLEqualsToLoginPageURL() {
         return getPageUrl().equals(getCurrentUrl());

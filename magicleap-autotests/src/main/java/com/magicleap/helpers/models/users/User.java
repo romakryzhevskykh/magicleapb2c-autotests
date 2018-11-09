@@ -7,6 +7,18 @@ import java.util.ArrayList;
 public class User {
 
     private UserTitle userTitle;
+    private String legalCompanyName;
+    private String dba;
+    private String website;
+    private String yearsInBusiness;
+    private String fullName;
+    private String title;
+    private String phoneNumber;
+    private String streetAddress1;
+    private String streetAddress2;
+    private String city;
+    private String zipCode;
+    private String emailToSendInvoice;
     private String firstName;
     private String lastName;
     private String email;
@@ -91,4 +103,107 @@ public class User {
     public void setUserTitle(UserTitle userTitle) {
         this.userTitle = userTitle;
     }
+    public String getLegalCompanyName() {
+        return legalCompanyName;
+    }
+    public void setLegalCompanyName(String legalCompanyName) {
+        this.legalCompanyName = legalCompanyName;
+    }
+    public String getDba() {
+        return dba;
+    }
+
+    public void setDba(String dba) {
+        this.dba = dba;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getYearsInBusiness() {
+        return yearsInBusiness;
+    }
+
+    public void setYearsInBusiness(String yearsInBusiness) {
+        this.yearsInBusiness = yearsInBusiness;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getStreetAdress1() {
+        return streetAddress1;
+    }
+
+    public void setStreetAdress1(String streetAdress1) {
+        this.streetAddress1 = streetAdress1;
+    }
+
+    public String getStreetAdress2() {
+        return streetAddress2;
+    }
+
+    public void setStreetAdress2(String streetAdress2) {
+        this.streetAddress2 = streetAdress2;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public String getEmailToSendInvoice() {
+        return emailToSendInvoice;
+    }
+
+    public void setEmailToSendInvoice(String emailToSendInvoice) {
+        this.emailToSendInvoice = emailToSendInvoice;
+    }
+
+    public void setUserRoles(ArrayList<UserRole> userRoles) {
+        this.userRoles = userRoles;
+    }
+
+    public void setUserCockpit(Cockpit userCockpit) {
+        this.userCockpit = userCockpit;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String name) {
+        this.fullName = name;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+
 }
