@@ -87,4 +87,14 @@ public class ProfileStepDefs extends AbstractStepDefs {
                 profilePage.getUserRole(), profilePage.getCompanyName(), profilePage.getEmail(), profilePage.getPhoneNumber(),
                 profilePage.getLanguage(), profilePage.getRelationship());
     }
+
+    @When("^User clicks on Permanently delete button.$")
+    public void userClicksOnPermanentlyDeleteButton() {
+        profilePage.clickOnPermanentlyDeleteButton();
+    }
+
+    @And("^Confirm delete action in the Permanently delete user ID pop-up.$")
+    public void confirmDeleteActionInThePermanentlyDeleteUserIDPopUp() {
+        profilePage.confirmDeleteActionInThePopUp();
+    }
 }

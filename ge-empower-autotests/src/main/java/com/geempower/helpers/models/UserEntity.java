@@ -1,6 +1,5 @@
 package com.geempower.helpers.models;
 
-
 import lombok.Getter;
 
 public class UserEntity {

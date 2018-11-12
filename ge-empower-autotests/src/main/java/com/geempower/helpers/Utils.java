@@ -1,6 +1,7 @@
 package com.geempower.helpers;
 
 import com.geempower.helpers.web_engine.WebDriverSessions;
+import org.openqa.selenium.JavascriptExecutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
@@ -125,5 +126,15 @@ public class Utils extends UIComponent {
         Date date = sdf.parse(comparableDate);
         long diffInMillies = Math.abs(maxDate.getTime() - date.getTime());
         return TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+    }
+
+    @Step("Page scroll down.")
+    public void pageScrollDown() {
+        ((JavascriptExecutor) getDriver()).executeScript("window.scrollTo(0, document.body.scrollHeight);");
+    }
+
+    @Step("Page scroll up.")
+    public void pageScrollUp() {
+        ((JavascriptExecutor) getDriver()).executeScript("scroll(0,0)");
     }
 }

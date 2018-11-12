@@ -147,4 +147,10 @@ public class UserNotActivePage extends StorefrontBasePage {
     public void userClosesPreAuthorizationCodePopUp() {
         click(CANCEL_BUTTON_IN_PRE_AUTH_CODE_POP_UP_XPATH);
     }
+
+    @Step("User Clicks On Abb Logo To Activate Himself.")
+    public void userClicksOnAbbLogoToActivateHimself() {
+        waitUntilPageIsFullyLoaded();
+        click(ABB_LOGO_XPATH);
+    }
 }

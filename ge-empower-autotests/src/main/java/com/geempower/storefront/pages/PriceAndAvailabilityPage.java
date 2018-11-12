@@ -44,32 +44,38 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
 
     @Step("Get Description")
     public String getDescription() {
+        waitUntilPageIsFullyLoaded();
         return $(DESCRIPTION_FIELD_XPATH).getText();
     }
 
     @Step("Get List Price")
     public String getListPrice() {
+        waitUntilPageIsFullyLoaded();
         return $(LIST_PRICE_FIELD_XPATH).getText();
     }
 
     @Step("Get Final Net Price")
     public String getFinalNetPrice() {
+        waitUntilPageIsFullyLoaded();
         return $(FINAL_NET_PRICE_FIELD_XPATH).getText();
     }
 
     @Step("Get Availability")
     public String getAvailability(Product product) {
+        waitUntilPageIsFullyLoaded();
         return $(AVAILABILITY_FIELD_XPATH, product.getCatalogNo().toUpperCase()).getText();
     }
 
     @Step("Set quantity to quantity field")
     public void setQuantityForProduct(Product product, int quantity) {
+        waitUntilPageIsFullyLoaded();
         $(QUANTITY_INPUT_XPATH, product.getCatalogNo().toUpperCase()).clear();
         $(QUANTITY_INPUT_XPATH, product.getCatalogNo().toUpperCase()).sendKeys(Integer.toString(quantity));
     }
 
     @Step("Click on Update Price and Availability button")
     public void clickOnUpdatePAButton() {
+        waitUntilPageIsFullyLoaded();
         click(UPDATE_PRICE_AND_AVAILABILITY_BUTTON_XPATH);
         waitUntilPageIsFullyLoaded();
     }

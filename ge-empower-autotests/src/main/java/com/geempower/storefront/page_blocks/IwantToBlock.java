@@ -1,11 +1,13 @@
 package com.geempower.storefront.page_blocks;
 
 import com.geempower.helpers.UIComponent;
+import com.geempower.helpers.Utils;
 import com.geempower.helpers.models.RegionType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -19,6 +21,8 @@ import static com.geempower.storefront.page_block_elements.IwantToBlockElements.
 
 @Component
 public class IwantToBlock extends UIComponent {
+    @Autowired
+    private Utils utils;
 
     @Step("Expand Modify An Account Tab In I Want To Block.")
     public void expandModifyAnAccountTabInIWantToBlock() {
@@ -373,7 +377,7 @@ public class IwantToBlock extends UIComponent {
 
     private void removeAccInAccountTab(String accountNo) {
         click(ACCOUNT_CHECKBOX_XPATH, accountNo);
-        ((JavascriptExecutor) getDriver()).executeScript("scroll(0,0)");
+        utils.pageScrollUp();
         click(REMOVE_BUTTON_IN_ALL_ACCOUNTS_TAB_XPATH);
         click(REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_IN_ALL_ACCOUNTS_TAB_XPATH);
     }

@@ -548,4 +548,34 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     public void adminClosesUserDetailsBlock() {
         manageUsersPage.adminClosesUserDetailsBlock();
     }
+
+    @Then("^Pending requests tab is active.$")
+    public void pendingRequestsTabIsActive() {
+        assertTrue(manageUsersPage.isPendingRequestTabActive());
+    }
+
+    @Then("^Admin is able to see user (.*) on the Pending requests tab with (.*) label.$")
+    public void adminIsAbleToSeeUserIdOnThePendingRequestsTabWithNoAccountLabel(String userId, String noAccLabel) {
+        assertEquals(noAccLabel, manageUsersPage.getNoAccountsLabelForUser(userId, manageUsersPage.getPagesCountOfPendingRequests()));
+    }
+
+    @When("^Admin clicks on envelope icon near the user (.*).$")
+    public void adminClicksOnEnvelopeIconNearTheUser(String userId) {
+        manageUsersPage.clickOnEnvelopeForAppropriateUser(userId);
+    }
+
+    @Then("^Confirmation Email sent pop-up is appeared.$")
+    public void confirmationEmailSentPopUpIsAppeared() {
+        assertEquals("Email Sent", manageUsersPage.getConfirmationPopUpTitle());
+    }
+
+    @And("^Close Confirmation Email sent pop-up.$")
+    public void closeConfirmationEmailSentPopUp() {
+        manageUsersPage.closeConfirmationPopUp();
+    }
+
+    @Then("^There is no user in the users list table.$")
+    public void thereIsNoUserInTheUsersListTable() {
+        assertEquals("No data available in table", manageUsersPage.getFoundUsersList());
+    }
 }

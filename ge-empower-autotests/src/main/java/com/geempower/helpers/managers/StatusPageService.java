@@ -21,5 +21,4 @@ public class StatusPageService {
         statusPage.sendGetRequest(statusPageToken);
         return (JSONArray) statusPage.getResponse().getResponseBody();
     }
-
 }

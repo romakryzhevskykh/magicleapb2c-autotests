@@ -54,6 +54,9 @@ public class User {
                 case "mfgrepuser":
                     userRole = StorefrontUserRoles.MFGREPUSER;
                     break;
+                case "newuser":
+                    userRole = StorefrontUserRoles.NEWUSER;
+                    break;
                 case "mfgrepuser1":
                     userRole = StorefrontUserRoles.MFGREPUSER1;
                     break;

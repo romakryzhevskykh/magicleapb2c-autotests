@@ -1,6 +1,7 @@
 package com.geempower.cucumber.definition_steps;
 
 import com.geempower.storefront.pages.LoginPage;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,7 +12,12 @@ public class LoginStepDefs extends AbstractStepDefs {
     private LoginPage loginPage;
 
     @Then("^Login page is opened.$")
-    public void checkManageUsersTitle() {
+    public void isLoginPageOpened() {
         assertTrue(loginPage.isOpened());
+    }
+
+    @And("^Wait for index_html login page is loaded.$")
+    public void waitForIndexLoginPage() {
+        loginPage.waitForIndexHtmlLoginPage();
     }
 }
