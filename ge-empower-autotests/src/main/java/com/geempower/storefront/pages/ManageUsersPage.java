@@ -1,10 +1,12 @@
 package com.geempower.storefront.pages;
 
+import com.geempower.helpers.Utils;
 import com.geempower.helpers.models.Region;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -16,6 +18,9 @@ import static com.geempower.storefront.page_elements.manageUsers.ManageUsersPage
 
 @Component
 public class ManageUsersPage extends StorefrontBasePage {
+    @Autowired
+    private Utils utils;
+
     private final String pageUri = "user/admin/my-account/manage-users";
 
     @Override
@@ -37,7 +42,7 @@ public class ManageUsersPage extends StorefrontBasePage {
     @Step("Open Users tab.")
     public void openUsersTab() {
         waitUntilPageIsFullyLoaded();
-        ((JavascriptExecutor) getDriver()).executeScript("scroll(0,0)");
+        utils.pageScrollUp();
         click(USERS_TAB_XPATH);
         waitUntilPageIsFullyLoaded();
     }
@@ -64,14 +69,14 @@ public class ManageUsersPage extends StorefrontBasePage {
     @Step("Click on Add Account Button In User Detail Block.")
     public void clickOnAddAccountButtonInUserDetailBlock() {
         waitUntilPageIsFullyLoaded();
-        ((JavascriptExecutor) getDriver()).executeScript("scroll(0,0)");
+        utils.pageScrollUp();
         click(ADD_ACCOUNT_BUTTON_XPATH);
     }
 
     @Step("Get Add Account Pop Up Title.")
     public String getAddAccPopUpTitle() {
         waitUntilPageIsFullyLoaded();
-        ((JavascriptExecutor) getDriver()).executeScript("scroll(0,0)");
+        utils.pageScrollUp();
         return $(ADD_ACCOUNT_TITLE_XPATH).getText();
     }
 
@@ -168,7 +173,7 @@ public class ManageUsersPage extends StorefrontBasePage {
     @Step("Check that user details block is opened.")
     public boolean isUserDetailsBlockOpened() {
         waitUntilPageIsFullyLoaded();
-        ((JavascriptExecutor) getDriver()).executeScript("scroll(0,0)");
+        utils.pageScrollUp();
         return isDisplayed(USER_DETAILS_BLOCK_XPATH);
     }
 

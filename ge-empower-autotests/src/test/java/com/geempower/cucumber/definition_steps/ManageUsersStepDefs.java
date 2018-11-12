@@ -555,7 +555,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     }
 
     @Then("^Admin is able to see user (.*) on the Pending requests tab with (.*) label.$")
-    public void adminIsAbleToSeeUserUserIdOnThePendingRequestsTabWithNoAccountLabel(String userId, String noAccLabel) {
+    public void adminIsAbleToSeeUserIdOnThePendingRequestsTabWithNoAccountLabel(String userId, String noAccLabel) {
         assertEquals(noAccLabel, manageUsersPage.getNoAccountsLabelForUser(userId, manageUsersPage.getPagesCountOfPendingRequests()));
     }
 

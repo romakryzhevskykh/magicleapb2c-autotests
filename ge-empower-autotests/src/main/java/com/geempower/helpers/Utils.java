@@ -24,7 +24,6 @@ public class Utils extends UIComponent {
 
     @Step("Refresh the page.")
     public void refreshCurrentPage() {
-        ((JavascriptExecutor) getDriver()).executeScript("scroll(0,0)");
         webDriverPool.getActiveDriver().navigate().refresh();
     }
 
@@ -132,5 +131,10 @@ public class Utils extends UIComponent {
     @Step("Page scroll down.")
     public void pageScrollDown() {
         ((JavascriptExecutor) getDriver()).executeScript("window.scrollTo(0, document.body.scrollHeight);");
+    }
+
+    @Step("Page scroll up.")
+    public void pageScrollUp() {
+        ((JavascriptExecutor) getDriver()).executeScript("scroll(0,0)");
     }
 }

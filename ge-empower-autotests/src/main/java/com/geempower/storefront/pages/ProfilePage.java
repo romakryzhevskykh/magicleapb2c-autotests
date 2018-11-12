@@ -146,8 +146,7 @@ public class ProfilePage extends StorefrontBasePage {
 
     public void confirmDeleteActionInThePopUp() {
         waitUntilPageIsFullyLoaded();
-        WebElement el = $(CHECKBOX_PERMANENTLY_DELETE_ACTION_POP_UP_XPATH);
-        click(el);
+        click(CHECKBOX_PERMANENTLY_DELETE_ACTION_POP_UP_XPATH);
         waitUntilPageIsFullyLoaded();
         click(By.id(CONFIRM_PERMANENTLY_DELETE_ACTION_BUTTON_IN_POP_UP_ID));
     }

@@ -31,7 +31,6 @@ Feature: Registration flow for external, mfgrep users.
     And Clicks on the Search button.
     When Clicks on the user name in the table.
     Then User details block for chosen user with <userId> userId is opened.
-    When Admin opens Actions list.
     And Expand Modify an Account tab in I Want To Block.
     When Click on Add account button in User Detail block.
     And Select ASIA in the Region field in the Add Account pop-up.

@@ -104,12 +104,4 @@ public class ProductSearchStepDefs extends AbstractStepDefs {
     public void userClicksOnAddToCartButtonOnProductSearchPage() {
         productSearchPage.clickOnAddToCartButtonOnProductSearchPage();
     }
-
-    @When("^User ha.$")
-    public void userListOfSelectedProductsToTheCopyPasteBlock() {
-        Set<Product> catNo = getSelectedProducts().keySet();
-        for (int i = 0; i < catNo.size(); i++) {
-            System.out.println(catNo.size());
-        }
-    }
 }
