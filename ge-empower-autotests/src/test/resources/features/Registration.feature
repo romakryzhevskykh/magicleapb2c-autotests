@@ -1,4 +1,4 @@
-Feature: Registration flow for external, mfg.rep. users.
+Feature: Registration flow for external, mfgrep users.
 
   Scenario Outline:
     Given Switch to Storefront as newUser.
@@ -18,7 +18,7 @@ Feature: Registration flow for external, mfg.rep. users.
     And Click on register button.
     Then Registration successful pop-up is appeared with appropriate header Registration Successful.
     Then User sees User not active page.
-    Given Switch to Storefront as admin.
+    Given Switch to Storefront as secondEmpAdmin.
     And User is logged in to Storefront.
     And Manage Users page is opened.
     Then Pending requests tab is active.
@@ -46,7 +46,7 @@ Feature: Registration flow for external, mfg.rep. users.
     And Confirm delete action in the Permanently delete user ID pop-up.
     And Wait for index_html login page is loaded.
     Then Login page is opened.
-    Given Switch to Storefront as admin.
+    Given Switch to Storefront as secondEmpAdmin.
     And Manage Users page is opened.
     And Refresh page.
     When Admin opens Users tab.

@@ -6,6 +6,7 @@
         <parameter name="browserName" value="chrome"/>
         <parameter name="headless" value="true"/>
         <classes>
+            <!--empAdmin, externalUser2, mfgRepUser, internalUser, regionalView-->
             <class name="com.geempower.cucumber.AccountManagementSuite"/>
             <class name="com.geempower.cucumber.SpecialPricingSuite"/>
             <class name="com.geempower.cucumber.NotificationCenterSuite"/>
@@ -17,6 +18,7 @@
         <parameter name="browserName" value="chrome"/>
         <parameter name="headless" value="true"/>
         <classes>
+            <!--rmAdmin, firstEmpAdmin, secondInternalUser, newUser-->
             <class name="com.geempower.cucumber.ShipmentSuite"/>
             <class name="com.geempower.cucumber.OrdersSuite"/>
             <class name="com.geempower.cucumber.SavedItemsSuite"/>
@@ -24,12 +26,14 @@
             <class name="com.geempower.cucumber.ProfileSuite"/>
             <class name="com.geempower.cucumber.MyCartSuite"/>
             <class name="com.geempower.cucumber.PriceAvailabilityErrorsSuite"/>
+            <class name="com.geempower.cucumber.RegistrationSuite"/>
         </classes>
     </test>
     <test name="Suite3">
         <parameter name="browserName" value="chrome"/>
         <parameter name="headless" value="true"/>
         <classes>
+            <!--admin, smAdmin-->
             <class name="com.geempower.cucumber.DashboardSuite"/>
             <class name="com.geempower.cucumber.ProductsSuite"/>
         </classes>
@@ -38,8 +42,8 @@
         <parameter name="browserName" value="chrome"/>
         <parameter name="headless" value="true"/>
         <classes>
+            <!--secondEmpAdmin, thirdInternalUser, externalUser1 -->
             <class name="com.geempower.cucumber.ManageUsersSuite"/>
-            <class name="com.geempower.cucumber.RegistrationSuite"/>
         </classes>
     </test>
 </suite>

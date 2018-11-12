@@ -66,6 +66,7 @@ public class RebatesStepDefs extends AbstractStepDefs {
         rebatesPage.deleteJustSavedRebate();
     }
 
+    //@TODO Change assertion if there are no table
     @Then("^The rebate with appropriate name is not displayed on the Saved credit request tab.$")
     public void theRebateWithAppropriateNameIsNotDisplayedOnTheSavedCreditRequestTab() {
         assertNotEquals(threadVarsHashMap.get(TestKeyword.REBATE_SAVE_FOR_LATER_LIST_NAME), rebatesPage.getLastSavedRebateName());

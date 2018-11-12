@@ -1,7 +1,7 @@
 Feature: Some actions on Profile page
 
   Background:
-    Given Switch to Storefront as second internalUser.
+    Given Switch to Storefront as secondInternalUser.
     And User is logged in to Storefront.
     And Profile page is opened.
 
@@ -10,7 +10,7 @@ Feature: Some actions on Profile page
 
   Scenario Outline: Check that user is able deactivate his user ID in the profile.
     Given Set true value for lessonly.enabled property on HAC f1, HAC f2.
-    Given Switch to Storefront as second internalUser.
+    Given Switch to Storefront as secondInternalUser.
     And User is logged in to Storefront.
     And Profile page is opened.
     Then Unregister section with Unregister title is displayed.
@@ -24,7 +24,7 @@ Feature: Some actions on Profile page
     Then Login page is opened.
     And Get user status in lessonly service for user by email <email>.
     Then Is INACTIVE user status displayed in lessonly service.
-    Given Switch to Storefront as admin.
+    Given Switch to Storefront as firstEmpAdmin.
     And User is logged in to Storefront.
     And Manage Users page is opened.
     When Admin opens Users tab.
@@ -40,5 +40,5 @@ Feature: Some actions on Profile page
     Then Is ACTIVE user status displayed in lessonly service.
 
     Examples:
-      | email                       | description                               | confirmation                                                       | confirmation2                          | userId    |
-      | diana.sanzharevskaya@ge.com | If you want to deactivate your empower ID | Are you sure you want to deactivate your user? (No data is erased) | I confirm I want to deactivate my user | 503030803 |
+      | email                      | description                               | confirmation                                                       | confirmation2                          | userId          |
+      | romanforcaadmin@zaelab.com | If you want to deactivate your empower ID | Are you sure you want to deactivate your user? (No data is erased) | I confirm I want to deactivate my user | romanforcaadmin |

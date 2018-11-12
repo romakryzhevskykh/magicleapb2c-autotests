@@ -37,8 +37,8 @@ Feature: Some actions with toggles, UI components on the Notification Center pag
     Then Lessonly status corresponds to lessonly toggle position.
 
     Examples:
-      | email                     |
-      | roman.kryzhevskykh@ge.com |
+      | email                   |
+      | romanlessonly@gmail.com |
 
   Scenario Outline: Check that admin is able to switch OFF the System Status toggle and then switch ON.
     Given Set true value for lessonly.enabled property on HAC f1, HAC f2.
@@ -59,5 +59,5 @@ Feature: Some actions with toggles, UI components on the Notification Center pag
     Then System Status toggle is switched to previously chosen state.
 
     Examples:
-      | email                     |
-      | roman.kryzhevskykh@ge.com |
+      | email                   |
+      | romanlessonly@gmail.com |

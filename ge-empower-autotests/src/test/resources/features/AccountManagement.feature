@@ -1,7 +1,7 @@
 Feature: Some actions on Account Management page as admin
 
   Background:
-    Given Switch to Storefront as admin.
+    Given Switch to Storefront as empAdmin.
     And User is logged in to Storefront.
 
   Scenario: Check that user able to choose appropriate account
