@@ -25,7 +25,6 @@ public class CartPageStepDefs extends AbstractStepDefs {
     @Autowired private ProductsManager productsManager;
     @Autowired private SupplyListsManager supplyListsManager;
 
-    @SuppressWarnings("unchecked")
     @Then("^Check that only selected UOMs exist on Cart page.$")
     public void checkThatSelectedUOMsExistOnCartPage() {
         Map<UnitOfMeasure, Integer> addedToCartUnitsOfMeasurement = getSelectedUOMS().entrySet().stream()
@@ -33,9 +32,9 @@ public class CartPageStepDefs extends AbstractStepDefs {
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         List<UnitOfMeasure> unitsOfMeasurementInCart = cartPage.getUnitsOfMeasurementInCart();
         addedToCartUnitsOfMeasurement.keySet().forEach(addedUOM ->
-                assertTrue(unitsOfMeasurementInCart.contains(addedUOM))
+                assertTrue(unitsOfMeasurementInCart.contains(addedUOM),"Selected products aren't equal to products on the Cart page")
         );
-        assertEquals(addedToCartUnitsOfMeasurement.size(), unitsOfMeasurementInCart.size());
+        assertEquals(addedToCartUnitsOfMeasurement.size(), unitsOfMeasurementInCart.size(),"The number of product items that user added to the cart aren’t equals to product items on the Cart page");
     }
 
     @SuppressWarnings("unchecked")
@@ -45,7 +44,7 @@ public class CartPageStepDefs extends AbstractStepDefs {
                 .filter(unitOfMeasureIntegerEntry -> unitOfMeasureIntegerEntry.getValue() > 0)
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         addedToCartUnitsOfMeasurement.forEach((unitOfMeasure, qtyOfUOM) ->
-                assertEquals(cartPage.getQTYOfUOM(unitOfMeasure), qtyOfUOM.intValue())
+                assertEquals(cartPage.getQTYOfUOM(unitOfMeasure), qtyOfUOM.intValue(),"Products quantity in the Cart page aren't equals to selected products quantity")
         );
     }
 
@@ -97,7 +96,7 @@ public class CartPageStepDefs extends AbstractStepDefs {
             if (existingSupplyListName != null) {
                 threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, existingSupplyListName);
             } else {
-                throw new NullPointerException("Existing supply lists haven't been found for user: " + userSessions.getActiveUserSession().getUser());
+                throw new IllegalStateException("Existing supply lists haven't been found for user: " + userSessions.getActiveUserSession().getUser());
             }
         }
         cartPage.selectExistingSupplyListFromDropDownBySupplyListName(existingSupplyListName);

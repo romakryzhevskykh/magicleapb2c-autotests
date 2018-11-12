@@ -159,7 +159,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
                         .stream()
                         .findAny()
                         .orElseGet(() -> {
-                            throw new NullPointerException("No user groups: " + userSession.getUser().getUserGroups()
+                            throw new IllegalStateException("No user groups: " + userSession.getUser().getUserGroups()
                                     + " for user: " + userSession.getUser());
                         });
                 userGroupsManager.addPermissionToUserGroup(userSessions.getAnyUserSessionForUser(usersManager.getUserByRole(StorefrontUserRole.ADMIN)),
