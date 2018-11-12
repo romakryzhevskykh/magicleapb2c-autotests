@@ -40,7 +40,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then Account from Add Account pop-up is displayed in the All Accounts tab.
     When Click on Sales Office Codes tab In Modify an Account Tab.
     Then Is <soCode> Sales Office Code displayed in the Approved SO Codes table.
-    Given Switch to Storefront as third internalUser.
+    Given Switch to Storefront as thirdInternalUser.
     And User is logged in to Storefront.
     And Refresh page.
     And Account management page is opened.
@@ -89,7 +89,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then Is account from add account pop-up displayed in the all accounts tab.
     When Click on Sales Engineer Codes tab In Modify an Account Tab.
     Then <seCode> Sales Engineer Code is displayed in the Approved SE Codes table.
-    Given Switch to Storefront as third internalUser.
+    Given Switch to Storefront as thirdInternalUser.
     And User is logged in to Storefront.
     And Refresh page.
     And Account management page is opened.
@@ -407,7 +407,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     When Click on Select All checkbox in the Add Account pop-up.
     And Click on Add button in the Add Account pop-up.
     Then Is account <account> displayed in the All Accounts tab.
-    Given Switch to Storefront as third internalUser.
+    Given Switch to Storefront as thirdInternalUser.
     And User is logged in to Storefront.
     And Refresh page.
     And Account management page is opened.
@@ -439,7 +439,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then No data available in table title is displayed in Sales Office Code table.
     And Refresh page.
     And Focus on browser.
-    Given Switch to Storefront as third internalUser.
+    Given Switch to Storefront as thirdInternalUser.
     And User is logged in to Storefront.
     And Refresh page.
     And Account management page is opened.
@@ -491,7 +491,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then No data available in table title is displayed in Sales Office Code table.
     And Refresh page.
     And Focus on browser.
-    Given Switch to Storefront as third internalUser.
+    Given Switch to Storefront as thirdInternalUser.
     And User is logged in to Storefront.
     And Refresh page.
     And Account management page is opened.
@@ -550,7 +550,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
       | testRoleUser | HD (Help Desk)             | User                       |
 
   Scenario Outline: Check that admin can open user details page and check appropriate data
-    Given Switch to Storefront as third internalUser.
+    Given Switch to Storefront as thirdInternalUser.
     And User is logged in to Storefront.
     And Profile page is opened.
     And Create User instance.
