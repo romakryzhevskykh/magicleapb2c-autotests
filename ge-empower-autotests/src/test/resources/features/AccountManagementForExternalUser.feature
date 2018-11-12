@@ -1,7 +1,7 @@
 Feature: Some actions on Account Management page as external user
 
   Background:
-    Given Switch to Storefront as externalUser1.
+    Given Switch to Storefront as externalUser2.
     And User is logged in to Storefront.
     And Account management page is opened.
 

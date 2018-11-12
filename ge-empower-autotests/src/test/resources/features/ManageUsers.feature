@@ -1,7 +1,7 @@
 Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
 
   Background:
-    Given Switch to Storefront as admin.
+    Given Switch to Storefront as secondEmpAdmin.
     And User is logged in to Storefront.
     And Manage Users page is opened.
 
@@ -40,14 +40,14 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then Account from Add Account pop-up is displayed in the All Accounts tab.
     When Click on Sales Office Codes tab In Modify an Account Tab.
     Then Is <soCode> Sales Office Code displayed in the Approved SO Codes table.
-    Given Switch to Storefront as internalUser.
+    Given Switch to Storefront as thirdInternalUser.
     And User is logged in to Storefront.
     And Refresh page.
     And Account management page is opened.
     When Choose <region> region.
     And Search account from Add Account pop-up.
     Then Appropriate account is displayed in the table on Account Management Page.
-    Given Switch to Storefront as admin.
+    Given Switch to Storefront as secondEmpAdmin.
     And Select All Sales Office Codes checkbox in SO Codes tab.
     And Click on SO Codes Remove button in SO Codes tab.
     And Focus on browser.
@@ -89,14 +89,14 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then Is account from add account pop-up displayed in the all accounts tab.
     When Click on Sales Engineer Codes tab In Modify an Account Tab.
     Then <seCode> Sales Engineer Code is displayed in the Approved SE Codes table.
-    Given Switch to Storefront as internalUser.
+    Given Switch to Storefront as thirdInternalUser.
     And User is logged in to Storefront.
     And Refresh page.
     And Account management page is opened.
     When Choose North_America region.
     And Search account from Add Account pop-up.
     Then Appropriate account is displayed in the table on Account Management Page.
-    Given Switch to Storefront as admin.
+    Given Switch to Storefront as secondEmpAdmin.
     And Select All Sales Engineer Codes checkbox in SE Codes tab.
     And Click on SE Codes Remove button in SE Codes tab.
     And Focus on browser.
@@ -140,7 +140,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     And Refresh page.
     Then User sees User not valid page.
     Then Appropriate text is displayed on the page.
-    Given Switch to Storefront as admin.
+    Given Switch to Storefront as secondEmpAdmin.
     When Admin opens Actions list.
     And Chooses Reactivate User option from the actions list.
     Then Chosen user has Active user status.
@@ -164,7 +164,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     And User is logged in to Storefront.
     And Refresh page.
     Then User sees User not active page.
-    Given Switch to Storefront as admin.
+    Given Switch to Storefront as secondEmpAdmin.
     When Admin opens Actions list.
     And Expand Modify an Account tab in I Want To Block.
     Then No data available in table title is displayed in All Accounts table.
@@ -203,7 +203,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     When User clicks on Yes pre authorization code button.
     Then Is Pre Authorization Code title displayed in Pre Authorization Code pop-up.
     And User closes Pre Authorization Code pop-up.
-    Given Switch to Storefront as admin.
+    Given Switch to Storefront as secondEmpAdmin.
     And User is logged in to Storefront.
     And Manage Users page is opened.
     And Refresh page.
@@ -228,7 +228,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
 
   Scenario Outline: Check that admin is able Wipe All Accounts & Deactivate to user and user will see /userNotActive page
     Given Set true value for lessonly.enabled property on HAC f1, HAC f2.
-    Given Switch to Storefront as admin.
+    Given Switch to Storefront as secondEmpAdmin.
     And User is logged in to Storefront.
     And Profile page is opened.
     And Admin's name and last name are stored to threadVars.
@@ -248,7 +248,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     And User is logged in to Storefront.
     And Refresh page.
     Then User sees User not active page.
-    Given Switch to Storefront as admin.
+    Given Switch to Storefront as secondEmpAdmin.
     When Admin opens Actions list.
     And Expand Modify an Account tab in I Want To Block.
     Then No data available in table title is displayed in All Accounts table.
@@ -295,7 +295,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     And User closes Request Account pop-up.
     When User clicks on Add New Account field button.
     Then Is Appropriate 2 account No fields displayed.
-    Given Switch to Storefront as admin.
+    Given Switch to Storefront as secondEmpAdmin.
     When Admin opens Actions list.
     And Expand Modify an Account tab in I Want To Block.
     Then No data available in table title is displayed in All Accounts table.
@@ -321,17 +321,17 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     When User switch to Approved Accounts tab on Account management page.
     And User deletes all unnecessary accounts from his profile except 9012306.
     When Request account popup is opened.
-    And Popup is filled by North_America, Latin_America, EMEA, ASIA accounts.
+    And Popup is filled by North_America, ASIA accounts.
     And User send this requests for approval.
     When User switch to Pending for approval tab on Account management page.
     And All requested accounts are stored to the thread vars hashmap.
-    Given Switch to Storefront as admin.
+    Given Switch to Storefront as secondEmpAdmin.
     And User is logged in to Storefront.
     And Manage Users page is opened.
     And Refresh page.
     And Focus on browser.
     When Admin opens Users tab.
-    And Sets externaluser1 email to the email field.
+    And Sets externaluser01 email to the email field.
     And Clicks on the Search button.
     When Clicks on the user name in the table with pending accounts.
     Then Approve Pending Accounts section is displayed with appropriate count of accounts.
@@ -360,16 +360,16 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     And User deletes all unnecessary accounts from his profile except 9012306.
     When Refresh page.
     When Request account popup is opened.
-    And Popup is filled by North_America, Latin_America, EMEA, ASIA accounts.
+    And Popup is filled by North_America, ASIA accounts.
     And User send this requests for approval.
     When User switch to Pending for approval tab on Account management page.
     And All requested accounts are stored to the thread vars hashmap.
-    Given Switch to Storefront as admin.
+    Given Switch to Storefront as secondEmpAdmin.
     And User is logged in to Storefront.
     And Manage Users page is opened.
     And Refresh page.
     When Admin opens Users tab.
-    And Sets externaluser1 email to the email field.
+    And Sets externaluser01 email to the email field.
     And Clicks on the Search button.
     When Clicks on the user name in the table with pending accounts.
     Then Approve Pending Accounts section is displayed with appropriate count of accounts.
@@ -407,14 +407,14 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     When Click on Select All checkbox in the Add Account pop-up.
     And Click on Add button in the Add Account pop-up.
     Then Is account <account> displayed in the All Accounts tab.
-    Given Switch to Storefront as internalUser.
+    Given Switch to Storefront as thirdInternalUser.
     And User is logged in to Storefront.
     And Refresh page.
     And Account management page is opened.
     When Choose EMEA region.
     And Search an account <account> on Account Management Page.
     Then Is account <account> displayed in the table on Account Management Page.
-    Given Switch to Storefront as admin.
+    Given Switch to Storefront as secondEmpAdmin.
     And Focus on browser.
     When Click on <account> checkbox in I Want To Block in All Accounts tab.
     And Click on Remove button in All Accounts tab.
@@ -439,14 +439,14 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then No data available in table title is displayed in Sales Office Code table.
     And Refresh page.
     And Focus on browser.
-    Given Switch to Storefront as internalUser.
+    Given Switch to Storefront as thirdInternalUser.
     And User is logged in to Storefront.
     And Refresh page.
     And Account management page is opened.
     When Request account popup is opened.
     When Set <soCode> SO code to the First Sales Office Code field in the Request Account pop-up.
     And Click on Modify button in the Request Account pop-up.
-    Given Switch to Storefront as admin.
+    Given Switch to Storefront as secondEmpAdmin.
     And Manage Users page is opened.
     And Focus on browser.
     And Refresh page.
@@ -491,14 +491,14 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then No data available in table title is displayed in Sales Office Code table.
     And Refresh page.
     And Focus on browser.
-    Given Switch to Storefront as internalUser.
+    Given Switch to Storefront as thirdInternalUser.
     And User is logged in to Storefront.
     And Refresh page.
     And Account management page is opened.
     When Request account popup is opened.
     When Set <soCode> SO code to the First Sales Office Code field in the Request Account pop-up.
     And Click on Modify button in the Request Account pop-up.
-    Given Switch to Storefront as admin.
+    Given Switch to Storefront as secondEmpAdmin.
     And Manage Users page is opened.
     And Focus on browser.
     And Refresh page.
@@ -550,11 +550,11 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
       | testRoleUser | HD (Help Desk)             | User                       |
 
   Scenario Outline: Check that admin can open user details page and check appropriate data
-    Given Switch to Storefront as internalUser.
+    Given Switch to Storefront as thirdInternalUser.
     And User is logged in to Storefront.
     And Profile page is opened.
     And Create User instance.
-    Given Switch to Storefront as admin.
+    Given Switch to Storefront as secondEmpAdmin.
     And Focus on browser.
     And Refresh page.
     When Admin opens Users tab.
