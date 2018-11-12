@@ -2,6 +2,7 @@ package com.geempower.cucumber.definition_steps.order;
 
 import com.geempower.cucumber.definition_steps.AbstractStepDefs;
 import com.geempower.cucumber.definition_steps.TestKeyword;
+import com.geempower.helpers.Utils;
 import com.geempower.helpers.managers.OrderManager;
 import com.geempower.helpers.models.Order;
 import com.geempower.helpers.models.Product;
@@ -22,8 +23,12 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
     private OrderEntry3Page orderEntry3Page;
     @Autowired
     private OrderManager orderManager;
+    @Autowired
+    private Utils utils;
 
     private static double delta = 0.0001;
+
+    private HashMap<String, String> shippingNotes = new HashMap<>();
 
     @Then("^Order Summary step is opened.$")
     public void orderSummaryStepIsOpened() {
@@ -50,19 +55,26 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
     public void orderSuccessfulPopUpAppears(String title) {
         String orderNo = orderEntry3Page.getGEOrderNoFromOrderSuccessPopUp(title);
         HashMap<Product, Integer> selectedProducts = getSelectedProducts();
-        if (!selectedProducts.isEmpty()) {
+
+        if (!shippingNotes.isEmpty() && !selectedProducts.isEmpty()) {
+            createOrderInstance(orderNo, shippingNotes);
+        } else if (!selectedProducts.isEmpty()) {
             createOrderInstance(orderNo);
-        } else {
+        } else if (!threadVarsHashMap.getString(GE_ORDER_NO).isEmpty()) {
             Order randomOrder = orderManager.getOrderById(Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO)));
             createOrderInstance(orderNo, randomOrder.getCatalogNo(), randomOrder.getQuantity());
         }
-
         threadVarsHashMap.put(TestKeyword.GE_ORDER_NO, orderNo);
     }
 
     private void createOrderInstance(String orderNo) {
         HashMap<Product, Integer> selectedProducts = getSelectedProducts();
         orderManager.createOrderInstance(Long.parseLong(orderNo), selectedProducts);
+    }
+
+    private void createOrderInstance(String orderNo, HashMap<String, String> shippingNotes) {
+        HashMap<Product, Integer> selectedProducts = getSelectedProducts();
+        orderManager.createOrderInstance(Long.parseLong(orderNo), selectedProducts, shippingNotes);
     }
 
     private void createOrderInstance(String orderNo, String catalogNo, int quantity) {
@@ -145,7 +157,29 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
 
     @Then("^Is Correct Country of Origin value is displayed on the OE 3 page.$")
     public void isCorrectCountryOfOriginValueIsDisplayedOnTheOEPage() {
-        String countryHashmap = String.valueOf(threadVarsHashMap.get(TestKeyword.COUNTRY_OF_ORIGIN_CELA_PRODUCT));
+        String countryHashmap = threadVarsHashMap.getString(TestKeyword.COUNTRY_OF_ORIGIN_CELA_PRODUCT);
         assertEquals(countryHashmap, orderEntry3Page.getCountryOfOriginValueOnOE3Page());
+    }
+
+    @Then("^Is Correct Shipping note displayed in Shipments Details block.$")
+    @SuppressWarnings("unchecked")
+    public void isCorrectShippingNoteDisplayedInShipmentsDetailsBlock() {
+        shippingNotes = (HashMap<String, String>) threadVarsHashMap.get(TestKeyword.SHIPPING_NOTE);
+        assertEquals(shippingNotes.get("shipDetails"), orderEntry3Page.getShippingNoteValueInShipmentDetailsBlock());
+    }
+
+    @Then("^Change Shipping note for the catalog No.$")
+    public void isCorrectShippingNoteDisplayedForTheCatalogNoCatalogNo() {
+        String timestamp = utils.generateUniqueTimestamp();
+        setShippingNoteValueToTheCatalogNoOnOE3Step(timestamp);
+        shippingNotes.put("note", timestamp);
+    }
+
+    private void setShippingNoteValueToTheCatalogNoOnOE3Step(String timestamp) {
+        String catalogNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
+        orderEntry3Page.clickOnThreeDotIconOnOE3Page(catalogNo);
+        orderEntry3Page.clickOnAddEditShippingNotePopUpButton();
+        orderEntry3Page.changeShippingNoteValue(timestamp);
+        orderEntry3Page.clickOnSaveButtonInAddEditShipNotePopUp();
     }
 }

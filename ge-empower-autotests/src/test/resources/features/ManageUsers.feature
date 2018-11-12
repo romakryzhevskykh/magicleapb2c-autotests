@@ -9,6 +9,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then Manage Users title is displayed on Manage Users page.
 
   Scenario Outline: Check that admin is able to find user by email
+    And Refresh page.
     When Admin opens Users tab.
     And Sets <email> email to the email field.
     And Clicks on the Search button.

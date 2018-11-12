@@ -125,7 +125,6 @@ public class MyCartPage extends StorefrontBasePage {
     public String getNewExtendPrice(Product product) {
         waitUntilPageIsFullyLoaded();
         return $(EXTENDED_PRICE_ON_MY_CART_XPATH, product.getCatalogNo().toUpperCase()).getText();
-
     }
 
     @Step("Get Claimback Message Below Agreement No Field On My Cart Page.")
@@ -146,12 +145,12 @@ public class MyCartPage extends StorefrontBasePage {
 
     @Step("Get Country Of Origin Value On My Cart Page.")
     public String getCountryOfOriginValueOnMyCartPage() {
-        String contryOriginMyCartPage = "";
+        String countryOriginMyCartPage = "";
         if (isDisplayed(COUNTRY_OF_ORIGIN_DROP_DOWN_FIELD_ON_MY_CART_PAGE_XPATH)) {
-            contryOriginMyCartPage = $(COUNTRY_OF_ORIGIN_DROP_DOWN_FIELD_ON_MY_CART_PAGE_XPATH).getText();
+            countryOriginMyCartPage = $(COUNTRY_OF_ORIGIN_DROP_DOWN_FIELD_ON_MY_CART_PAGE_XPATH).getText();
         } else if (isDisplayed(COUNTRY_OF_ORIGIN_SINGLE_SOURCE_VALUE_ON_MY_CART_PAGE_XPATH)) {
-            contryOriginMyCartPage = $(COUNTRY_OF_ORIGIN_SINGLE_SOURCE_VALUE_ON_MY_CART_PAGE_XPATH).getText();
+            countryOriginMyCartPage = $(COUNTRY_OF_ORIGIN_SINGLE_SOURCE_VALUE_ON_MY_CART_PAGE_XPATH).getText();
         }
-        return contryOriginMyCartPage;
+        return countryOriginMyCartPage;
     }
 }

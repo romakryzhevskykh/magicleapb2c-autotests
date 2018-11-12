@@ -185,6 +185,7 @@ public class OrderDetailsPage extends StorefrontBasePage {
 
     @Step("Get Label Value in Quote Details block.")
     public String getLabelValueInQuoteDetailsBlock(String label) {
+        waitUntilPageIsFullyLoaded();
         return $(LABEL_VALUES_IN_QUOTES_BLOCK_XPATH, label).getText();
     }
 

@@ -74,7 +74,6 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
         assertEquals(fieldName, orderDetailsPage.getTrackingInformationData());
     }
 
-
     @When("^User clicks on Multiple hyperlink.$")
     public void userClicksOnMultipleHyperlink() {
         orderDetailsPage.clickOnMultipleHyperlink();
@@ -183,6 +182,13 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
         assertFalse(orderDetailsPage.getLabelValueInQuoteDetailsBlock(label).isEmpty());
     }
 
+    @Then("^Is (.*) label contains correct value from OE steps in Quote Details block.$")
+    @SuppressWarnings("unchecked")
+    public void isShippingNotesLabelContainsValueFromOESteps(String label) {
+        Order order = orderManager.getOrderById(Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO)));
+        assertEquals(orderDetailsPage.getLabelValueInQuoteDetailsBlock(label), order.getShippingNotes().get("shipDetails"));
+    }
+
     @Then("^Is (.*) label contains (.*) email character in Quote Details block.$")
     public void isCreatedByLabelContainsEmailCharacter(String label, String emailCharacter) {
         assertTrue(orderDetailsPage.getLabelValueInQuoteDetailsBlock(label).contains(emailCharacter));
@@ -269,6 +275,13 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     @Then("^Is (.*) label contains value in Product Details block.$")
     public void isLabelContainsValueInProductDetailsBlock(String label) {
         assertFalse(orderDetailsPage.getLabelValueInProductDetailsBlock(label).isEmpty());
+    }
+
+    @Then("^Is (.*) label contains Shipping Notes value from OE Steps in Product Details block.$")
+    @SuppressWarnings("unchecked")
+    public void isShippingNotesLabelContainsValueFromOEStepsInProductDetailsBlock(String label) {
+        Order order = orderManager.getOrderById(Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO)));
+        assertEquals(orderDetailsPage.getLabelValueInProductDetailsBlock(label), order.getShippingNotes().get("note"));
     }
 
     @Then("^Is (.*) label contains date in Product Details block.$")

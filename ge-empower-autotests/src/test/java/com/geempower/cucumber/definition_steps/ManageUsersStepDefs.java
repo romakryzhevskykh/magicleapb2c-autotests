@@ -7,7 +7,6 @@ import com.geempower.helpers.models.Region;
 import com.geempower.helpers.models.UserEntity;
 import com.geempower.storefront.page_blocks.IwantToBlock;
 import com.geempower.storefront.pages.ManageUsersPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -557,7 +556,26 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
 
     @Then("^Admin is able to see user (.*) on the Pending requests tab with (.*) label.$")
     public void adminIsAbleToSeeUserUserIdOnThePendingRequestsTabWithNoAccountLabel(String userId, String noAccLabel) {
-        manageUsersPage.getPagesCountOfPendingRequests();
+        assertEquals(noAccLabel, manageUsersPage.getNoAccountsLabelForUser(userId, manageUsersPage.getPagesCountOfPendingRequests()));
+    }
 
+    @When("^Admin clicks on envelope icon near the user (.*).$")
+    public void adminClicksOnEnvelopeIconNearTheUser(String userId) {
+        manageUsersPage.clickOnEnvelopeForAppropriateUser(userId);
+    }
+
+    @Then("^Confirmation Email sent pop-up is appeared.$")
+    public void confirmationEmailSentPopUpIsAppeared() {
+        assertEquals("Email Sent", manageUsersPage.getConfirmationPopUpTitle());
+    }
+
+    @And("^Close Confirmation Email sent pop-up.$")
+    public void closeConfirmationEmailSentPopUp() {
+        manageUsersPage.closeConfirmationPopUp();
+    }
+
+    @Then("^There is no user in the users list table.$")
+    public void thereIsNoUserInTheUsersListTable() {
+        assertEquals("No data available in table", manageUsersPage.getFoundUsersList());
     }
 }

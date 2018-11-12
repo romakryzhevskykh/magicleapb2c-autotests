@@ -24,4 +24,5 @@ public class UserNotActivePageElements {
     public final static String MAIN_BLOCK_AUTHORIZATION_CODE_TEXT_SCREEN_2_XPATH = "//div[@class = 'accRequestPage_haveAcc']/p";
     public final static String MAIN_BLOCK_PLEASE_ALLOW_US_TEXT_SCREEN_2_XPATH = "//div[@class = 'accRequestPage_haveAcc']/div[5]";
     public final static String YES_PRE_AUTH_BUTTON_XPATH = "//button[@class = 'btn primary-btn pre-authorization-btn-popup-js']";
+    public final static String ABB_LOGO_XPATH = "//div[@class='header-container clearfix']//a";
 }

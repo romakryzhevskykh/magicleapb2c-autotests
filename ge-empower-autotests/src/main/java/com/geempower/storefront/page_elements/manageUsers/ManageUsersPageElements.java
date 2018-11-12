@@ -8,6 +8,13 @@ public class ManageUsersPageElements {
     public final static String PENDING_REQUEST_TAB_XPATH = "//a[@aria-controls='pending-requests']";
     public final static String ACTIVE_PENDING_REQUESTS_TAB_XPATH = "//ul[@class='my-pending-account-list']/li[1]";
     public final static String COUNT_OF_PAGES_PENDING_REQUESTS_TAB_XPATH = "//div[@id='pending-requests-table_paginate']//span[@class='paginate_of']";
+    private final static String PENDING_USERS_TABLE_XPATH = "//table[@id='pending-requests-table']";
+    public final static String PENDING_USERS_SSO_LIST_XPATH = PENDING_USERS_TABLE_XPATH + "//td[2]";
+    public final static String NO_ACCOUNTS_LABEL_FOR_APPROPRIATE_USER_XPATH = PENDING_USERS_TABLE_XPATH + "//td[text()='%s']//..//td[6]";
+    public final static String NEXT_PAGINATION_BUTTON_PENDING_TAB_ID = "pending-requests-table_next";
+    public final static String ENVELOPE_ICON_FOR_APPROPRIATE_USER_XPATH = PENDING_USERS_TABLE_XPATH + "//td[text()='%s']//..//td[7]/a/i";
+    public final static String CONFIRMATION_POP_UP_TITLE_XPATH = "//div[@id='additional-registration-notification-modal']/div//span[2]";
+    public final static String CONFIRMATION_POP_UP_CLOSE_BUTTON_XPATH = "//div[@id='additional-registration-notification-modal']/div//button";
     //USERS TAB
     public final static String USERS_TAB_XPATH = "//a[@href='#users']";
     public final static String USER_TERM_INPUT_XPATH = "//input[@id='userterm']";
@@ -16,6 +23,7 @@ public class ManageUsersPageElements {
     public final static String USERS_TABLE_XPATH = "//table[@id='examl']/tbody/";
     public final static String FIRST_USER_XPATH = "tr[1]";
     public final static String USER_NAME_FIELD_XPATH = USERS_TABLE_XPATH + FIRST_USER_XPATH + "/td[2]";
+    public final static String NO_DATA_AVAILABLE_IN_THE_USERS_LIST_XPATH = "//table[@id='examl']/tbody/tr/td";
 
     public final static String FIRST_NAME_LINK_XPATH = USER_NAME_FIELD_XPATH + "/a";
     public final static String USER_EMAIL_FIELD_XPATH = USERS_TABLE_XPATH + FIRST_USER_XPATH + "/td[5]";

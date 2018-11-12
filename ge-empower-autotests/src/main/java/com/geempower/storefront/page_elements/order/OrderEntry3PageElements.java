@@ -12,7 +12,7 @@ public class OrderEntry3PageElements {
     public final static String GE_ORDER_NUMBER_ON_THE_CONFIRMATION_POP_UP_XPATH = "//div[@id='order-confirmation-modal']//span[@class='orderNumber']";
     public final static String CLOSE_ORDER_CONFIRMATION_POP_UP_XPATH = "//*[@id='order-confirmation-modal']//button[@type='button']";
 
-    public final static String PRODUCT_DETAILS_BLOCK_XPATH = ".//table[@id='DataTables_Table_1']";
+    private final static String PRODUCT_DETAILS_BLOCK_XPATH = ".//table[@id='DataTables_Table_1']";
     public final static String PRODUCT_DETAILS_BLOCK_CATALOG_NO_XPATH = PRODUCT_DETAILS_BLOCK_XPATH + "//a[@data-target='#product-detail-modal-1']";
     public final static String PRODUCT_DETAILS_BLOCK_DESCRIPTION_XPATH = PRODUCT_DETAILS_BLOCK_XPATH + "//td[@class='product-col']";
     public final static String PRODUCT_DETAILS_BLOCK_QUANTITY_XPATH = PRODUCT_DETAILS_BLOCK_XPATH + "//td[@class='order-qty-input-col']";
@@ -21,16 +21,17 @@ public class OrderEntry3PageElements {
     public final static String PRODUCT_DETAILS_BLOCK_EST_DELIVERY_DATE_XPATH = PRODUCT_DETAILS_BLOCK_XPATH + "//span[@class='est_del_date_1']";
     public final static String PRODUCT_DETAILS_BLOCK_REQ_DELIVERY_DATE_XPATH = PRODUCT_DETAILS_BLOCK_XPATH + "//td[@class='req-date-input-col']/p";
 
-    public final static String ORDER_SUMMARY_PAGE_XPATH = "//div[@id='order-summary']";
+    private final static String ORDER_SUMMARY_PAGE_XPATH = "//div[@id='order-summary']";
     public final static String ADDRESS_DETAILS_HEADER_XPATH = ORDER_SUMMARY_PAGE_XPATH + "//h4[contains (text(),'Address Details')]";
     public final static String SHIPMENT_ADDRESS_TITLE_XPATH = ORDER_SUMMARY_PAGE_XPATH + "//label[contains (text(),'Shipment Address')]";
     public final static String SHIPMENT_ADDRESS_DATA_XPATH = ORDER_SUMMARY_PAGE_XPATH + "//p[@class='shipmentAddressSummary']";
 
-    public final static String ORDER_SUMMARY_FORM_XPATH = "//div[@class='add-new-order-form-wrapper checkout-summary']";
+    private final static String ORDER_SUMMARY_FORM_XPATH = "//div[@class='add-new-order-form-wrapper checkout-summary']";
     public final static String SHIPPING_DETAILS_HEADER_XPATH = ORDER_SUMMARY_FORM_XPATH + "//h4[contains (text(),'Shipment Details')]";
     public final static String SHIP_PAYMENT_METHOD_TITLE_XPATH = ORDER_SUMMARY_FORM_XPATH + "//label[contains (text(),'Ship Payment Method')]";
     public final static String SHIP_METHOD_TITLE_XPATH = ORDER_SUMMARY_FORM_XPATH + "//label[contains (text(),'Ship Method')]";
     public final static String SHIPPING_NOTE_TITLE_XPATH = ORDER_SUMMARY_FORM_XPATH + "//label[contains (text(),'Shipping Note')]";
+    public final static String SHIPPING_NOTE_VALUE_IN_SHIPPING_DETAILS_BLOCK_XPATH = "//p[@class='shippingNoteSummary']";
     public final static String REQUESTED_DELIVERY_DATE_TITLE_XPATH = "//label[contains (text(),'Req. Date')]";
     public final static String PARTIAL_SHIPMENT_ACCEPTED_TITLE_XPATH = "//label[contains (text(),'Partial shipment accepted')]";
     public final static String ACCEPT_EARLY_DELIVERY_TITLE_XPATH = "//label[contains (text(),'Accept early delivery')]";
@@ -48,4 +49,8 @@ public class OrderEntry3PageElements {
     public final static String CLAIMBACK_ICON_IN_EXTND_PRICE_CELL_3_OE_PAGE_XPATH = "//*[@id='DataTables_Table_1']//i[@class = 'fa fa-exclamation-triangle text-blue pull-left ml-5']";
     public final static String PRODUCT_LINK_3_OE_PAGE_XPATH = "//*[@id='DataTables_Table_1']//a[contains(@href,'#product-details-1') and contains(text(),'%s')]";
     public final static String COUNTRY_OF_ORIGIN_VALUE_3_OE_PAGE_XPATH = "//span[@class='countryOrigin-span']";
+    public final static String THREE_DOT_ICON_BASED_ON_CATALOG_NO_XPATH = "//table[@id='DataTables_Table_1']//a[contains(text(),'%s')]/../..//i[@class='fa fa-ellipsis-v']";
+    public final static String ADD_EDIT_SHIPPING_NOTE_POP_UP_BUTTON_XPATH = "//li[@class='action-detail open']//a[contains(@data-target,'add-shipping-note-modal')]";
+    public final static String ADD_EDIT_SHIPPING_NOTE_FIELD_IN_POP_UP_XPATH = "//div[contains(@id, 'add-shipping-note') and contains(@style, 'display: block')]//textarea";
+    public final static String SAVE_BUTTON_IN_ADD_EDIT_SHIPPING_NOTE_POP_UP_XPATH = "//div[contains(@id,'add-shipping-note-modal') and contains(@style,'display: block')]//button[@class='btn primary-btn saveShipNoteBtn']";
 }

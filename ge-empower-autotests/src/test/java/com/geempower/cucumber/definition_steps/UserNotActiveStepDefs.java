@@ -114,7 +114,12 @@ public class UserNotActiveStepDefs extends AbstractStepDefs {
     }
 
     @And("^User closes Pre Authorization Code pop-up.$")
-    public void userClosesPreAuthorizationCodePopUp()  {
+    public void userClosesPreAuthorizationCodePopUp() {
         userNotActivePage.userClosesPreAuthorizationCodePopUp();
+    }
+
+    @When("^User clicks on the ABB logo on the userNotActive page.$")
+    public void userClicksOnTheABBLogoOnTheUserNotActivePage() {
+        userNotActivePage.userClicksOnAbbLogoToActivateHimself();
     }
 }

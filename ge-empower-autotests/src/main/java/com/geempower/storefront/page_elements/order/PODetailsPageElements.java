@@ -17,6 +17,7 @@ public class PODetailsPageElements {
     public final static String PO_DETAILS_TABLE_HEADERS_XPATH = "//div[@class='panel-collapse collapse in']//th[contains(@class,'create-summary')]";
     public final static String ALL_CATALOG_NO_IN_OPENED_ORDER_NO_DETAILS_BLOCK_XPATH = "//div[@class='panel-collapse collapse in']//div[@class='info-table-wrapper visible-lg-block']//a[@class='catalog-name-input modal-toggle product-popup']";
     public final static String EXPAND_CLOSE_ARROW_IN_OPENED_ORDER_NO_DETAILS_BLOCK_XPATH = "//div[@class='info-table-wrapper visible-lg-block']//a[@data-code-view='%s']/../../..//i[contains(@class, 'fa-angle-down')]";
+    public final static String EXPAND_CLOSE_ARROWS_IN_OPENED_ORDER_NO_DETAILS_BLOCK_XPATH = "//div[@class='info-table-wrapper visible-lg-block']//i[contains(@class, 'fa-angle-down')]";
     public final static String LABEL_VALUES_IN_PRODUCT_DETAILS_BLOCK_IN_OPENED_ORDER_NO_DETAILS_BLOCK_XPATH = "//div[contains(@id,'description-1') and contains(@aria-expanded, 'true')]//label[contains(text(),'%s')]/following-sibling::p";
     public final static String LABELS_IN_PRODUCT_DETAILS_BLOCK_XPATH = "//div[contains(@id,'description-1') and contains(@aria-expanded, 'true')]//label";
 }

@@ -37,6 +37,7 @@ public class ManageUsersPage extends StorefrontBasePage {
     @Step("Open Users tab.")
     public void openUsersTab() {
         waitUntilPageIsFullyLoaded();
+        ((JavascriptExecutor) getDriver()).executeScript("scroll(0,0)");
         click(USERS_TAB_XPATH);
         waitUntilPageIsFullyLoaded();
     }
@@ -167,7 +168,7 @@ public class ManageUsersPage extends StorefrontBasePage {
     @Step("Check that user details block is opened.")
     public boolean isUserDetailsBlockOpened() {
         waitUntilPageIsFullyLoaded();
-        ((JavascriptExecutor)getDriver()).executeScript("scroll(0,0)");
+        ((JavascriptExecutor) getDriver()).executeScript("scroll(0,0)");
         return isDisplayed(USER_DETAILS_BLOCK_XPATH);
     }
 
@@ -216,6 +217,7 @@ public class ManageUsersPage extends StorefrontBasePage {
 
     @Step("Click On Select All Checkbox In The Add Account Pop-Up.")
     public void clickOnSelectAllCheckboxInTheAddAccountPopUp() {
+        waitUntilPageIsFullyLoaded();
         click(SELECT_ALL_CHECKBOX_XPATH);
     }
 
@@ -247,7 +249,7 @@ public class ManageUsersPage extends StorefrontBasePage {
 
     @Step("Get Label Value In User Details Block.")
     public String getLabelValueInUserDetailsBlock(String label) {
-       return $(LABEL_VALUE_IN_USER_DETAILS_BLOCK_XPATH, label).getText();
+        return $(LABEL_VALUE_IN_USER_DETAILS_BLOCK_XPATH, label).getText();
     }
 
     @Step("Admin Closes User Details Block.")
@@ -255,11 +257,50 @@ public class ManageUsersPage extends StorefrontBasePage {
         click(CLOSE_USER_DETAILS_BLOCK_BUTTON_XPATH);
     }
 
+    @Step("Is Pending Request Tab Active.")
     public boolean isPendingRequestTabActive() {
         return $(ACTIVE_PENDING_REQUESTS_TAB_XPATH).getAttribute("class").equals("active");
     }
 
+    @Step("Get Pages Count Of Pending Requests.")
     public int getPagesCountOfPendingRequests() {
-        return Integer.parseInt($(COUNT_OF_PAGES_PENDING_REQUESTS_TAB_XPATH).getText().replace(" of ", ""));
+        return Integer.parseInt($(COUNT_OF_PAGES_PENDING_REQUESTS_TAB_XPATH).getText().replace("of ", ""));
+    }
+
+    @Step("Get No Accounts Label For User.")
+    public String getNoAccountsLabelForUser(String userId, int pagesCount) {
+        for (int i = 0; i < pagesCount; i++) {
+            if ($$(PENDING_USERS_SSO_LIST_XPATH).stream().anyMatch(userSso -> userSso.getText().equals(userId))) {
+                waitUntilPageIsFullyLoaded();
+                return $(NO_ACCOUNTS_LABEL_FOR_APPROPRIATE_USER_XPATH, userId).getText();
+            } else {
+                waitUntilPageIsFullyLoaded();
+                click(By.id(NEXT_PAGINATION_BUTTON_PENDING_TAB_ID));
+            }
+        }
+        throw new NullPointerException("There is no user " + userId + " in Pending requests tab.");
+    }
+
+    @Step("Click On Envelope For Appropriate User.")
+    public void clickOnEnvelopeForAppropriateUser(String userId) {
+        waitUntilPageIsFullyLoaded();
+        click(ENVELOPE_ICON_FOR_APPROPRIATE_USER_XPATH, userId);
+    }
+
+    @Step("Get Confirmation Pop-Up Title.")
+    public String getConfirmationPopUpTitle() {
+        waitUntilPageIsFullyLoaded();
+        return $(CONFIRMATION_POP_UP_TITLE_XPATH).getText();
+    }
+
+    @Step("Close Confirmation Pop-Up.")
+    public void closeConfirmationPopUp() {
+        waitUntilPageIsFullyLoaded();
+        click(CONFIRMATION_POP_UP_CLOSE_BUTTON_XPATH);
+    }
+
+    @Step("Get Found Users List.")
+    public String getFoundUsersList() {
+        return $(NO_DATA_AVAILABLE_IN_THE_USERS_LIST_XPATH).getText();
     }
 }

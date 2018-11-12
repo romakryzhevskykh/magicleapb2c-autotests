@@ -22,12 +22,38 @@ Feature: Registration flow for external, mfg.rep. users.
     And User is logged in to Storefront.
     And Manage Users page is opened.
     Then Pending requests tab is active.
-    Then Admin is able to see user <userId> on the Pending requests tab with No account label.
-    When Admin clicks on envelope icon near the user.
+    Then Admin is able to see user <userId> on the Pending requests tab with No Account label.
+    When Admin clicks on envelope icon near the user <userId>.
     Then Confirmation Email sent pop-up is appeared.
+    And Close Confirmation Email sent pop-up.
+    When Admin opens Users tab.
+    And Sets <userId> email to the email field.
+    And Clicks on the Search button.
+    When Clicks on the user name in the table.
+    Then User details block for chosen user with <userId> userId is opened.
+    When Admin opens Actions list.
+    And Expand Modify an Account tab in I Want To Block.
+    When Click on Add account button in User Detail block.
+    And Select ASIA in the Region field in the Add Account pop-up.
+    And Set <account> to the Account field in the Add Account pop-up.
+    And Click on the Search button in the Add Account pop-up.
+    When Click on Select All checkbox in the Add Account pop-up.
+    And Click on Add button in the Add Account pop-up.
+    Given Switch to Storefront as newUser.
+    When User clicks on the ABB logo on the userNotActive page.
+    And Profile page is opened.
+    When User clicks on Permanently delete button.
+    And Confirm delete action in the Permanently delete user ID pop-up.
+    And Wait for index_html login page is loaded.
+    Then Login page is opened.
+    Given Switch to Storefront as admin.
+    And Manage Users page is opened.
+    And Refresh page.
+    When Admin opens Users tab.
+    And Sets <userId> email to the email field.
+    And Clicks on the Search button.
+    Then There is no user in the users list table.
 
     Examples:
-      | userName | userLastName | userId          | userEmail                 | companyName      | phoneNo         | relationship |
-      | Autotest | NewUser      | autotestNewUser | autotestnewuser@gmail.com | ABB test company | 645284-31234-32 | distributor  |
-
-
+      | userName | userLastName | userId          | userEmail                 | companyName      | phoneNo         | relationship | account |
+      | Autotest | NewUser      | autotestnewuser | autotestnewuser@gmail.com | ABB test company | 645284-31234-32 | distributor  | 9012306 |

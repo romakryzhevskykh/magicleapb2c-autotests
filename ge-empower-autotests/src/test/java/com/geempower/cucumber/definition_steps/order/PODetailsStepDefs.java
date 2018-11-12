@@ -3,14 +3,18 @@ package com.geempower.cucumber.definition_steps.order;
 import com.geempower.cucumber.definition_steps.AbstractStepDefs;
 import com.geempower.cucumber.definition_steps.TestKeyword;
 import com.geempower.helpers.Utils;
+import com.geempower.helpers.managers.OrderManager;
+import com.geempower.helpers.models.Order;
 import com.geempower.storefront.pages.order.PODetailsPage;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashMap;
 import java.util.List;
 
-import static com.geempower.cucumber.definition_steps.TestKeyword.*;
+import static com.geempower.cucumber.definition_steps.TestKeyword.DETAILS_PO_PAGE_CATALOG_NO;
+import static com.geempower.cucumber.definition_steps.TestKeyword.GE_ORDER_NO;
 import static org.testng.Assert.*;
 
 public class PODetailsStepDefs extends AbstractStepDefs {
@@ -18,6 +22,8 @@ public class PODetailsStepDefs extends AbstractStepDefs {
     private PODetailsPage poDetailsPage;
     @Autowired
     private Utils utils;
+    @Autowired
+    private OrderManager orderManager;
 
     @Then("^PO Details page is opened.$")
     public void orderDetailsPageIsOpened() {
@@ -79,6 +85,13 @@ public class PODetailsStepDefs extends AbstractStepDefs {
         assertFalse(poDetailsPage.getLabelValueInOpenedOrderNoDetailsBlock(label).isEmpty());
     }
 
+    @Then("^Is (.*) label contains correct value from OE steps in opened Order No. Details block.$")
+    @SuppressWarnings("unchecked")
+    public void isShippingNotesLabelContainsValueFromOESteps(String label) {
+        Order order = orderManager.getOrderById(Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO)));
+        assertEquals(poDetailsPage.getLabelValueInOpenedOrderNoDetailsBlock(label), order.getShippingNotes().get("shipDetails"));
+    }
+
     @Then("^Is (.*) label contains (.*) email character in opened Order No. Details block.$")
     public void isCreatedByLabelContainsEmailCharacter(String label, String emailCharacter) {
         assertTrue(poDetailsPage.getLabelValueInOpenedOrderNoDetailsBlock(label).contains(emailCharacter));
@@ -106,9 +119,14 @@ public class PODetailsStepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(DETAILS_PO_PAGE_CATALOG_NO, poDetailsPage.getRandomCatalogNoInOpenedOrderNoDetailBlock());
     }
 
+    @When("^User expands/closes appropriate catalog No block in opened Order No. Details block.$")
+    public void userExpandsClosesAppropriateCatalogNoBlockInOpenedOrderNoDetailsBlock() {
+        poDetailsPage.clickOnExpandClosesArrowInOpenedOrderNoDetailsBlock(threadVarsHashMap.getString(DETAILS_PO_PAGE_CATALOG_NO));
+    }
+
     @When("^User expands/closes random catalog No block in opened Order No. Details block.$")
     public void userExpandsClosesRandomCatalogNoBlockInOpenedOrderNoDetailsBlock() {
-        poDetailsPage.clickOnExpandClosesArrowInOpenedOrderNoDetailsBlock(threadVarsHashMap.getString(DETAILS_PO_PAGE_CATALOG_NO));
+        poDetailsPage.clickOnExpandClosesRandomArrowInOpenedOrderNoDetailsBlock();
     }
 
     @Then("^Is (.*) label contains date in Product Details block in opened Order No. Details block.$")
@@ -119,6 +137,13 @@ public class PODetailsStepDefs extends AbstractStepDefs {
     @Then("^Is (.*) label contains value in Product Details block in opened Order No. Details block.$")
     public void isLabelContainsValueInProductDetailsBlock(String label) {
         assertFalse(poDetailsPage.getLabelValueInProductDetailsBlockInOpenedOrderNoDetailsBlock(label).isEmpty());
+    }
+
+    @Then("^Is (.*) label contains correct value from OE steps in Product Details block in opened Order No. Details block.$")
+    @SuppressWarnings("unchecked")
+    public void isShippingNotesLabelContainsValueFromOEStepsInProductDetailsBlock(String label) {
+        Order order = orderManager.getOrderById(Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO)));
+        assertEquals(poDetailsPage.getLabelValueInProductDetailsBlockInOpenedOrderNoDetailsBlock(label), order.getShippingNotes().get("note"));
     }
 
     @Then("^Is Correct (.*) labels displayed in Product Details block in opened Order No. Details block.$")

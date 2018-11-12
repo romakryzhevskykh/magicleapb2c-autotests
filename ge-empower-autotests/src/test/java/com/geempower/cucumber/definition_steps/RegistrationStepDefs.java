@@ -24,22 +24,22 @@ public class RegistrationStepDefs extends AbstractStepDefs {
 
     @Then("^First name is equal to (.*).$")
     public void firstNameIsEqualToUserName(String userName) {
-        registrationPage.getUserNameValue();
+        assertEquals(userName, registrationPage.getUserNameValue());
     }
 
     @Then("^Last name is equal to (.*).$")
     public void lastNameIsEqualToUserLastName(String userLastName) {
-        registrationPage.getUserLastNameValue();
+        assertEquals(userLastName, registrationPage.getUserLastNameValue());
     }
 
     @Then("^User ID is equal to (.*).$")
-    public void userIDIsEqualToUserId() {
-        registrationPage.getUserIdValue();
+    public void userIDIsEqualToUserId(String userId) {
+        assertEquals(userId, registrationPage.getUserIdValue().toLowerCase());
     }
 
     @Then("^User email is equal to (.*).$")
-    public void userEmailIsEqualToUserEmail() {
-        registrationPage.getUserEmailValue();
+    public void userEmailIsEqualToUserEmail(String userEmail) {
+        assertEquals(userEmail, registrationPage.getUserEmailValue());
     }
 
     @When("^User fills Company Name (.*).$")
@@ -80,6 +80,7 @@ public class RegistrationStepDefs extends AbstractStepDefs {
     @Then("^Registration successful pop-up is appeared with appropriate header (.*).$")
     public void registrationSuccessfulPopUpIsAppeared(String popUpHeader) {
         assertEquals(popUpHeader, registrationPage.getSuccessRegistrationPopUpHeader());
+        registrationPage.closeSuccessRegistrationPopUp();
     }
 
     @And("^Create User instance on registration page with values (.*), (.*), (.*).$")
