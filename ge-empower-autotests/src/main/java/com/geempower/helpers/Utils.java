@@ -24,7 +24,6 @@ public class Utils extends UIComponent {
 
     @Step("Refresh the page.")
     public void refreshCurrentPage() {
-        ((JavascriptExecutor) getDriver()).executeScript("scroll(0,0)");
         webDriverPool.getActiveDriver().navigate().refresh();
     }
 

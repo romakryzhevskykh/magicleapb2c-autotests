@@ -1,6 +1,6 @@
 Feature: Registration flow for external, mfgrep users.
 
-  Scenario Outline:
+  Scenario Outline: Check that user is able to register as external user and then delete himself from the user's profile.
     Given Switch to Storefront as newUser.
     And User is logged in to Storefront.
     Then Registration page is opened.
@@ -31,7 +31,6 @@ Feature: Registration flow for external, mfgrep users.
     And Clicks on the Search button.
     When Clicks on the user name in the table.
     Then User details block for chosen user with <userId> userId is opened.
-    When Admin opens Actions list.
     And Expand Modify an Account tab in I Want To Block.
     When Click on Add account button in User Detail block.
     And Select ASIA in the Region field in the Add Account pop-up.
@@ -57,3 +56,26 @@ Feature: Registration flow for external, mfgrep users.
     Examples:
       | userName | userLastName | userId          | userEmail                 | companyName      | phoneNo         | relationship | account |
       | Autotest | NewUser      | autotestnewuser | autotestnewuser@gmail.com | ABB test company | 645284-31234-32 | distributor  | 9012306 |
+
+  Scenario Outline: Check that user is able to register as manufacturer representative user and then admin will delete the user via manage users.
+    Given Switch to Storefront as mfgRepUser1.
+    And User is logged in to Storefront.
+    Then Registration page is opened.
+    Then First name is equal to <userName>.
+    Then Last name is equal to <userLastName>.
+    Then User ID is equal to <userId>.
+    Then User email is equal to <userEmail>.
+    When User fills Company Name <companyName>.
+    When User fills Phone No <phoneNo>.
+    When User selects random Region from regions list.
+    When User selects random Country from countries list.
+    When User selects <relationship> Relationship to Industrial Solutions.
+    When User selects appropriate Role <userRole>.
+    Then Account information section is not displayed on the Registration page.
+    And Create User instance on registration page with values <companyName>, <userEmail>, <phoneNo>.
+
+
+
+    Examples:
+      | userName | userLastName | userId      | userEmail             | companyName      | phoneNo         | relationship | userRole             |
+      | autotest | mfgrep       | newmfguser1 | mfgrepuser@zaelab.com | ABB test company | 645284-31234-32 | manufacturer | zenithrepresentative |
