@@ -3,7 +3,6 @@ package com.magicleap.storefront.pages;
 import com.magicleap.helpers.models.users.UserSession;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
-
 import static com.magicleap.storefront.page_elements.LoginPageElements.*;
 import static com.magicleap.storefront.page_elements.QualificationPageElements.*;
 
@@ -12,7 +11,7 @@ public class QualificationPage extends StorefrontBasePage {
     private final String pageUrlMethod = "/#/signup";
 
     public boolean isOpened() {
-        return isCurrentURLEqualsToLoginPageURL() && isUserLoggedOut();
+        return isCurrentURLEqualsToLoginPageURL();
     }
 
     @Step("Fill legal company name.")
@@ -75,17 +74,14 @@ public class QualificationPage extends StorefrontBasePage {
     public void fillAddress2 (String streetAddress2) {
         $(STREET2_FIELD_XPATH).sendKeys(streetAddress2);
     }
-
     @Step("Fill zip code in the zip code field.")
     public void fillZipcode (String zipCode) {
         $(ZIP_CODE_FIELD_XPATH).sendKeys(zipCode);
     }
-
     @Step("Fill city in the city field.")
     public void fillCity (String city) {
         $(CITY_FIELD_XPATH).sendKeys(city);
     }
-
     @Step("Click on the 'state' dropdown")
     public void clickOnStateDropdown () {
         $(STATE_DROPDOWN_FIELD_XPATH).click();
@@ -94,22 +90,18 @@ public class QualificationPage extends StorefrontBasePage {
     public void clickTaxExemptRadioButton() {
         $(SIGN_UP_BUTTON_XPATH).click();
     }
-
     @Step("Fill password field.")
     public void fillPasswordFieldWith(String password) {
         $(PASSWORD_FIELD_XPATH).sendKeys(password);
     }
-
     @Step("Click on Login button.")
     public void clickOnLoginButton() {
         $(LOG_IN_BUTTON_XPATH).click();
     }
-
     @Step("Fill email address to send invoice field.")
     public void emailAddressToSendInvoice (String emailToSendInvoice) {
         $(EMAIL_TO_SEND_INVOICE_FIELD_XPATH).sendKeys(emailToSendInvoice);
     }
-
     @Step("Click on 'TaxExempt' yes radio-button")
     public void clickOnTaxExemptYesRadioButton () {
         $(TAX_EXEMPT_YES_RADIO_BUTTON_XPATH).click();
@@ -118,7 +110,6 @@ public class QualificationPage extends StorefrontBasePage {
     public void clickOnYourAddressIsDifferentYesRadioButton () {
         $(BILLING_ADRESS_DIFFERENT_NO_RADIO_BUTTON_XPATH).click();
     }
-
     @Step("Click on 'Is your shipping address  yes radio-button")
     public void clickOnIsyourYesRadioButton () {
         $(SHIPPING_ADRESS_YES_RADIO_BUTTON_XPATH).click();
@@ -131,12 +122,10 @@ public class QualificationPage extends StorefrontBasePage {
     public void clickOnSignUpButton() {
         $(SIGN_UP_BUTTON_XPATH).click();
     }
-
     @Step("Check that current url is Login page url.")
     private boolean isCurrentURLEqualsToLoginPageURL() {
         return getPageUrl().equals(getCurrentUrl());
     }
-
     @Override
     public String getPageUrl() {
         return storefrontProject.getBaseUrl() + pageUrlMethod;
