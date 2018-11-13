@@ -2,6 +2,7 @@ package com.geempower.storefront.page_blocks;
 
 import com.geempower.helpers.UIComponent;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -22,8 +23,11 @@ public class HeaderBlock extends UIComponent {
 
     @Step("Click on My Cart button.")
     public void clickOnMyCartIcon() {
-        waitUntilPageIsFullyLoaded();
-        waitForElementToDisappear(By.id(GREEN_CONFIRMATION_POP_UP_ID));
+        try {
+            waitForElementToDisappear(By.id(GREEN_CONFIRMATION_POP_UP_ID));
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        }
         click(CART_ICON_XPATH);
         waitUntilPageIsFullyLoaded();
     }
