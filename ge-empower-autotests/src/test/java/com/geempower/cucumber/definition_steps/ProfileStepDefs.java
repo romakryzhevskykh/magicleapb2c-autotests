@@ -1,5 +1,6 @@
 package com.geempower.cucumber.definition_steps;
 
+import com.geempower.helpers.managers.QmsService;
 import com.geempower.helpers.managers.UserManager;
 import com.geempower.storefront.pages.ProfilePage;
 import cucumber.api.java.en.And;
@@ -17,6 +18,8 @@ public class ProfileStepDefs extends AbstractStepDefs {
     private ProfilePage profilePage;
     @Autowired
     private UserManager userManager;
+    @Autowired
+    private QmsService qmsService;
 
     @Then("^(.*) title is displayed on Profile page.$")
     public void checkProfileTitle(String profileTitle) {
@@ -96,5 +99,10 @@ public class ProfileStepDefs extends AbstractStepDefs {
     @And("^Confirm delete action in the Permanently delete user ID pop-up.$")
     public void confirmDeleteActionInThePermanentlyDeleteUserIDPopUp() {
         profilePage.confirmDeleteActionInThePopUp();
+    }
+
+    @And("^Get QMS response for user (.*).$")
+    public void getQMSResponseForUser(String sso) {
+        qmsService.getQmsUserInfo(sso);
     }
 }

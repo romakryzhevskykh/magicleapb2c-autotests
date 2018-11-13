@@ -42,3 +42,8 @@ Feature: Some actions on Profile page
     Examples:
       | email                      | description                               | confirmation                                                       | confirmation2                          | userId          |
       | romanforcaadmin@zaelab.com | If you want to deactivate your empower ID | Are you sure you want to deactivate your user? (No data is erased) | I confirm I want to deactivate my user | romanforcaadmin |
+
+    Scenario:
+      And Profile page is opened.
+      And Create User instance.
+      And Get QMS response for user romanforcaadmin.
