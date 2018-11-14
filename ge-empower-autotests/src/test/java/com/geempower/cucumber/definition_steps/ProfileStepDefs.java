@@ -2,6 +2,7 @@ package com.geempower.cucumber.definition_steps;
 
 import com.geempower.helpers.managers.QmsService;
 import com.geempower.helpers.managers.UserManager;
+import com.geempower.helpers.models.UserEntity;
 import com.geempower.storefront.pages.ProfilePage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
@@ -87,8 +88,9 @@ public class ProfileStepDefs extends AbstractStepDefs {
     @And("^Create User instance.$")
     public void createUserInstance() {
         userManager.createUserInstance(profilePage.getUserName(), profilePage.getUserLastName(), profilePage.getUserId(),
-                profilePage.getUserRole(), profilePage.getCompanyName(), profilePage.getEmail(), profilePage.getPhoneNumber(),
-                profilePage.getLanguage(), profilePage.getRelationship());
+                profilePage.getUserRole(), profilePage.getCompanyName(), profilePage.getEmailForInternal(), profilePage.getPhoneNumber(),
+                profilePage.getLanguage(), profilePage.getRelationship(), profilePage.getRegion(), profilePage.setIsInternalUser(),
+                profilePage.getAltEmail());
     }
 
     @When("^User clicks on Permanently delete button.$")
@@ -101,8 +103,30 @@ public class ProfileStepDefs extends AbstractStepDefs {
         profilePage.confirmDeleteActionInThePopUp();
     }
 
-    @And("^Get QMS response for user (.*).$")
+    @And("^Get QMS response for user (.*) and save it to the hashmap.$")
     public void getQMSResponseForUser(String sso) {
-        qmsService.getQmsUserInfo(sso);
+        threadVarsHashMap.put(TestKeyword.QMS_USER_INFO, qmsService.getQmsUserInfo(sso));
+    }
+
+    @Then("^Check that the values in response are equals to the values on Profile page for user (.*).$")
+    @SuppressWarnings("unchecked")
+    public void checkThatTheValuesInResponseAreEqualsToTheValuesOnProfilePage(String sso) {
+        UserEntity user = userManager.getUserBySso(sso);
+        HashMap<String, String> qmsUserResponse = (HashMap) threadVarsHashMap.get(TestKeyword.QMS_USER_INFO);
+        assertEquals(user.getEmail(), qmsUserResponse.get("email"));
+        assertEquals(user.getAlternateEmail(), qmsUserResponse.get("altEmail"));
+        assertEquals(user.getCompanyName(), qmsUserResponse.get("company"));
+        assertEquals(user.getFirstName(), qmsUserResponse.get("firstName"));
+        assertEquals(user.getLastName(), qmsUserResponse.get("lastName"));
+        assertTrue(user.isInternalUser(), qmsUserResponse.get("isInternalUser"));
+        assertEquals("1", qmsUserResponse.get("isInternal"));
+        assertEquals("en-US", qmsUserResponse.get("language"));
+        assertEquals(user.getPhoneNumber(), qmsUserResponse.get("telephone"));
+        assertEquals(user.getRegion().replaceAll(" ", "").toLowerCase(), qmsUserResponse.get("region").toLowerCase());
+        assertTrue(user.getRelationship().toLowerCase().contains(qmsUserResponse.get("relationshipToGe")));
+        assertEquals(user.getUserId(), qmsUserResponse.get("sso"));
+        assertEquals("false", qmsUserResponse.get("qmsEnabled"));
+        assertEquals("false", qmsUserResponse.get("qualityPrice"));
+        assertEquals("false", qmsUserResponse.get("tinderBoxNode"));
     }
 }

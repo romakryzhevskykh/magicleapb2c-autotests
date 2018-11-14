@@ -4,14 +4,11 @@ import com.geempower.helpers.Utils;
 import com.geempower.helpers.models.RegionType;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.geempower.helpers.models.RegionType.getRegionTypes;
@@ -63,9 +60,14 @@ public class ProfilePage extends StorefrontBasePage {
         return $(USER_COMPANY_NAME_XPATH).getAttribute("value");
     }
 
-    @Step("Get Email from user's profile.")
+    @Step("Get Email for External and Alternate email for internal user from external user's profile.")
     public String getEmail() {
-        return $(USER_EMAIL_ADDRESS_XPATH).getText();
+        return $(USER_EMAIL_FOR_EXTERNAL_AND_ALT_EMAIL_FOR_INTERNAL_ADDRESS_XPATH).getText();
+    }
+
+    @Step("Get Email from internal user's profile.")
+    public String getEmailForInternal() {
+        return $(INTERNAL_USER_EMAIL_ADDRESS_XPATH).getText();
     }
 
     @Step("Get Phone Number from user's profile.")
@@ -81,6 +83,21 @@ public class ProfilePage extends StorefrontBasePage {
     @Step("Get Relationship user's profile.")
     public String getRelationship() {
         return $(USER_RELATIONSHIP_XPATH).getText();
+    }
+
+    @Step("Get Region user's profile.")
+    public String getRegion() {
+        return $(USER_REGION_XPATH).getText();
+    }
+
+    @Step("Get Alt Email from user's profile.")
+    public String getAltEmail() {
+        return $(USER_EMAIL_FOR_EXTERNAL_AND_ALT_EMAIL_FOR_INTERNAL_ADDRESS_XPATH).getText();
+    }
+
+    @Step("Get Is Internal status to user's profile.")
+    public boolean setIsInternalUser() {
+        return true;
     }
 
     @Step("Get Role For Each Region in user Profile")
