@@ -31,6 +31,7 @@ public class QualificationPage extends StorefrontBasePage {
         $(WEBSITE_FIELD_XPATH).sendKeys(website);
     }
     @Step("Fill years in business field.")
+
     public void fillYearsInBusiness (String yearsInBusiness) {
         $(YEARS_IN_BUSINESS_FIELD_XPATH).sendKeys(yearsInBusiness);
     }

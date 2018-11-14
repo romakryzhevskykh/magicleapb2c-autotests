@@ -44,6 +44,7 @@ public class QualificationPageStepDefs extends AbstractStepDefs {
     public void fillWebsite (String website) {
         qualificationPage.fillWebsite(website);
     }
+
     @And("^Fill years in business (.*) on the Qualification page.$")
     public void fillYearsInBusiness (String years) {
         qualificationPage.fillYearsInBusiness(years);

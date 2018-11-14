@@ -2,20 +2,20 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Suite1" parallel="tests">
-    <test name="AccountManagementSuite">
-        <parameter name="browserName" value="chrome" />
-        <parameter name="headless" value="false"/>
-        <classes>
-            <class name="com.magicleap.cucumber.AccountManagementSuite"/>
-        </classes>
-    </test>
-    <test name="ShoppingCartSuite">
-        <parameter name="browserName" value="chrome" />
-        <parameter name="headless" value="false"/>
-        <classes>
-            <class name="com.magicleap.cucumber.ShoppingCartSuite"/>
-        </classes>
-    </test>
+    <!--<test name="AccountManagementSuite">-->
+        <!--<parameter name="browserName" value="chrome" />-->
+        <!--<parameter name="headless" value="false"/>-->
+        <!--<classes>-->
+            <!--<class name="com.magicleap.cucumber.AccountManagementSuite"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+    <!--<test name="ShoppingCartSuite">-->
+        <!--<parameter name="browserName" value="chrome" />-->
+        <!--<parameter name="headless" value="false"/>-->
+        <!--<classes>-->
+            <!--<class name="com.magicleap.cucumber.ShoppingCartSuite"/>-->
+        <!--</classes>-->
+    <!--</test>-->
     <test name="QualificationSuite">
         <parameter name="browserName" value="chrome" />
         <parameter name="headless" value="false"/>

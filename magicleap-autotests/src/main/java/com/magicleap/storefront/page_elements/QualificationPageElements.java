@@ -5,7 +5,7 @@ public class QualificationPageElements {
     public static final String COMPANY_NAME_FIELD_XPATH = SIGN_UP_FORM + "/input[@placeholder = 'Legal Company Name']";
     public static final String DBA_FIELD_XPATH = SIGN_UP_FORM + "/input[@placeholder = 'DBA']";
     public static final String WEBSITE_FIELD_XPATH = SIGN_UP_FORM + "/input[@placeholder = 'Website']";
-    public static final String YEARS_IN_BUSINESS_FIELD_XPATH = SIGN_UP_FORM + "/input[@placeholder = 'Website']";
+    public static final String YEARS_IN_BUSINESS_FIELD_XPATH = SIGN_UP_FORM + "/input[@placeholder = 'Years In Business']";
 
     public static final String BUSINESS_TYPE_DROPDOWN_XPATH = "//*[text()='What type of business are you?']//following::div[@class='select-style']";
     public static final String BUSINESS_TYPE_ELEMENT_DROPDOWN_XPATH = "//*[text()='What type of business are you?']//following::div[@class='select-style']/select/option[text()='%s']";
@@ -20,9 +20,9 @@ public class QualificationPageElements {
     public static final String LOGIN_PAGE_BUTTON_XPATH = "//a[@href='#/login']";
 
     //Second page, Your Contact Info
-    public static final String NAME_FIELD_XPATH = SIGN_UP_FORM + "/input[@placeholder='Name']";
-    public static final String TITLE_FIELD_XPATH = SIGN_UP_FORM + "/input[@placeholder='Title']";
-    public static final String EMAIL_FIELD_XPATH = SIGN_UP_FORM + "/input[@placeholder='Email']";
+    public static final String NAME_FIELD_XPATH = SIGN_UP_FORM + "/input[@placeholder='Contact Name']";
+    public static final String TITLE_FIELD_XPATH = SIGN_UP_FORM + "/input[@placeholder='Contact Title']";
+    public static final String EMAIL_FIELD_XPATH = SIGN_UP_FORM + "/input[@placeholder='Contact Email']";
     public static final String PHONE_FIELD_XPATH = SIGN_UP_FORM + "/input[@placeholder='Phone']";
     public static final String STREET1_FIELD_XPATH = "//div[@class='form-row']/input[@id='street1']";
     public static final String STREET2_FIELD_XPATH = "//div[@class='form-row no-space']/input[@id='street2']";
