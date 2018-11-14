@@ -60,7 +60,7 @@ public class ProfilePage extends StorefrontBasePage {
         return $(USER_COMPANY_NAME_XPATH).getAttribute("value");
     }
 
-    @Step("Get Email for External and Alternate email for internal user from external user's profile.")
+    @Step("Get Email for External user and Alternate email for internal user from user's profile.")
     public String getEmail() {
         return $(USER_EMAIL_FOR_EXTERNAL_AND_ALT_EMAIL_FOR_INTERNAL_ADDRESS_XPATH).getText();
     }
