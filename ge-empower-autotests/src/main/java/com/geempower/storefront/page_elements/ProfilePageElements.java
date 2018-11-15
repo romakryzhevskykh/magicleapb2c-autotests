@@ -5,8 +5,8 @@ public class ProfilePageElements {
     public final static String USER_FIRST_NAME_XPATH = "//label[contains(.,'First Name')]/following::p[1]";
     public final static String USER_LAST_NAME_XPATH = "//label[contains(.,'Last Name')]/following::p[1]";
     public final static String USER_ID_XPATH = "//label[contains(.,'User ID')]/following::p[1]";
-    public final static String USER_EMAIL_FOR_EXTERNAL_AND_ALT_EMAIL_FOR_INTERNAL_ADDRESS_XPATH = "//label[contains(.,'Email')]/following::p[1]";
-    public final static String INTERNAL_USER_EMAIL_ADDRESS_XPATH = "//label[contains(.,'Email')]/following::p[2]";
+    public final static String USER_EMAIL_ADDRESS_XPATH = "//label[contains(.,'Email')]/following::p[1]";
+    public final static String USER_ALT_EMAIL_ADDRESS_XPATH = "//label[contains(.,'Email')]/following::p[2]";
     public final static String USER_COMPANY_NAME_XPATH = "//input[@name='companyName']";
     public final static String USER_PHONE_NUMBER_XPATH = "//input[@name='phoneNumber']";
     public final static String USER_LANGUAGE_XPATH = "//span[contains(@id,'select2-defaultLanguage')]";

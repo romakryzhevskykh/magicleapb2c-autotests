@@ -30,7 +30,7 @@ public class UserEntity {
 
     public UserEntity(String firstName, String lastName, String userId, String userRole, String companyName,
                       String email, String phoneNumber, String language, String relationship, String region,
-                      boolean isInternal, String alternateEmail) {
+                      String alternateEmail) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userId = userId;
@@ -41,7 +41,7 @@ public class UserEntity {
         this.language = language;
         this.relationship = relationship;
         this.region = region;
-        this.isInternalUser = isInternal;
+        this.isInternalUser = true;
         this.alternateEmail = alternateEmail;
     }
 
@@ -56,5 +56,6 @@ public class UserEntity {
         this.phoneNumber = phoneNumber;
         this.language = language;
         this.relationship = relationship;
+        this.isInternalUser = false;
     }
 }

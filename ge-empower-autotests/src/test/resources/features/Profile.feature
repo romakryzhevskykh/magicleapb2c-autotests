@@ -47,4 +47,4 @@ Feature: Some actions on Profile page
       And Profile page is opened.
       And Create User instance.
       And Get QMS response for user romanforcaadmin and save it to the hashmap.
-      Then Check that the values in response are equals to the values on Profile page for user romanforcaadmin.
+      Then Check that QMS user info are equals to the user info on Profile page for user romanforcaadmin.

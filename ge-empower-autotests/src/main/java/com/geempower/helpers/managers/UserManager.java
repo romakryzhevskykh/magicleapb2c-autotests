@@ -10,8 +10,8 @@ public class UserManager {
     private ArrayList<UserEntity> userList = new ArrayList<>();
 
     public void createUserInstance(String firstName, String lastName, String userId, String userRole, String companyName, String email,
-                                   String phoneNumber, String language, String relationship, String region, boolean isInternalUser, String alternateEmail) {
-        userList.add(new UserEntity(firstName, lastName, userId, userRole, companyName, email, phoneNumber, language, relationship, region, isInternalUser, alternateEmail));
+                                   String phoneNumber, String language, String relationship, String region, String alternateEmail) {
+        userList.add(new UserEntity(firstName, lastName, userId, userRole, companyName, email, phoneNumber, language, relationship, region, alternateEmail));
     }
 
     public void createUserInstance(String firstName, String lastName, String userId, String userRole, String companyName, String email,

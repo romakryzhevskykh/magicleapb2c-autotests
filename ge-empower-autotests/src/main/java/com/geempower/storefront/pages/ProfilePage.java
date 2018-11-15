@@ -60,14 +60,9 @@ public class ProfilePage extends StorefrontBasePage {
         return $(USER_COMPANY_NAME_XPATH).getAttribute("value");
     }
 
-    @Step("Get Email for External user and Alternate email for internal user from user's profile.")
+    @Step("Get Email from user's profile.")
     public String getEmail() {
-        return $(USER_EMAIL_FOR_EXTERNAL_AND_ALT_EMAIL_FOR_INTERNAL_ADDRESS_XPATH).getText();
-    }
-
-    @Step("Get Email from internal user's profile.")
-    public String getEmailForInternal() {
-        return $(INTERNAL_USER_EMAIL_ADDRESS_XPATH).getText();
+        return $(USER_EMAIL_ADDRESS_XPATH).getText();
     }
 
     @Step("Get Phone Number from user's profile.")
@@ -92,12 +87,7 @@ public class ProfilePage extends StorefrontBasePage {
 
     @Step("Get Alt Email from user's profile.")
     public String getAltEmail() {
-        return $(USER_EMAIL_FOR_EXTERNAL_AND_ALT_EMAIL_FOR_INTERNAL_ADDRESS_XPATH).getText();
-    }
-
-    @Step("Get Is Internal status to user's profile.")
-    public boolean setIsInternalUser() {
-        return true;
+        return $(USER_ALT_EMAIL_ADDRESS_XPATH).getText();
     }
 
     @Step("Get Role For Each Region in user Profile")

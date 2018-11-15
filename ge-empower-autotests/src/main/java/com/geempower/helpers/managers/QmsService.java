@@ -27,7 +27,6 @@ public class QmsService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         Document doc = (Document) userInfoRequest.getResponse().getResponseBody();
         HashMap<String, String> qmsUserInfo = new HashMap<>();
         qmsUserInfo.put("email", doc.selectSingleNode("/UserProfile/Email").getText());

@@ -88,8 +88,8 @@ public class ProfileStepDefs extends AbstractStepDefs {
     @And("^Create User instance.$")
     public void createUserInstance() {
         userManager.createUserInstance(profilePage.getUserName(), profilePage.getUserLastName(), profilePage.getUserId(),
-                profilePage.getUserRole(), profilePage.getCompanyName(), profilePage.getEmailForInternal(), profilePage.getPhoneNumber(),
-                profilePage.getLanguage(), profilePage.getRelationship(), profilePage.getRegion(), profilePage.setIsInternalUser(),
+                profilePage.getUserRole(), profilePage.getCompanyName(), profilePage.getEmail(), profilePage.getPhoneNumber(),
+                profilePage.getLanguage(), profilePage.getRelationship(), profilePage.getRegion(),
                 profilePage.getAltEmail());
     }
 
@@ -108,13 +108,13 @@ public class ProfileStepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.QMS_USER_INFO, qmsService.getQmsUserInfo(sso));
     }
 
-    @Then("^Check that the values in response are equals to the values on Profile page for user (.*).$")
+    @Then("^Check that QMS user info are equals to the user info on Profile page for user (.*).$")
     @SuppressWarnings("unchecked")
-    public void checkThatTheValuesInResponseAreEqualsToTheValuesOnProfilePage(String sso) {
+    public void checkThatQmsUserInfoAreEqualsToTheUserInfoOnProfilePage(String sso) {
         UserEntity user = userManager.getUserBySso(sso);
         HashMap<String, String> qmsUserResponse = (HashMap) threadVarsHashMap.get(TestKeyword.QMS_USER_INFO);
-        assertEquals(user.getEmail(), qmsUserResponse.get("email"));
-        assertEquals(user.getAlternateEmail(), qmsUserResponse.get("altEmail"));
+        assertEquals(user.getEmail(), qmsUserResponse.get("altEmail"));
+        assertEquals(user.getAlternateEmail(), qmsUserResponse.get("email"));
         assertEquals(user.getCompanyName(), qmsUserResponse.get("company"));
         assertEquals(user.getFirstName(), qmsUserResponse.get("firstName"));
         assertEquals(user.getLastName(), qmsUserResponse.get("lastName"));
