@@ -56,8 +56,8 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then No data available in table title is displayed in Sales Office Code table.
 
     Examples:
-      | email                     | soCode | region        |
-      | roman.kryzhevskykh@ge.com | USG2   | North_America |
+      | email                         | soCode | region        |
+      | roman.kryzhevskykh@in.abb.com | USG2   | North_America |
 
   Scenario Outline: Check that admin is able to add/remove SE code to the internal user
     And Refresh page.
@@ -105,8 +105,8 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then No data available in table title is displayed in Sales Engineer Code table.
 
     Examples:
-      | email                     | seCode    |
-      | roman.kryzhevskykh@ge.com | 220028351 |
+      | email                         | seCode    |
+      | roman.kryzhevskykh@in.abb.com | 220028351 |
 
   Scenario Outline: Check that admin is able to find user by some account from each region
     And Refresh page.
@@ -423,8 +423,8 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then Is <account> account not displayed in the All Accounts tab.
 
     Examples:
-      | email                     | account |
-      | roman.kryzhevskykh@ge.com | 1000827 |
+      | email                         | account |
+      | roman.kryzhevskykh@in.abb.com | 1000827 |
 
   Scenario Outline: Check that admin is able to accept SO codes to the internal user
     And Refresh page.
@@ -474,8 +474,8 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then No data available in table title is displayed in Sales Office Code table.
 
     Examples:
-      | email                     | soCode |
-      | roman.kryzhevskykh@ge.com | USG4   |
+      | email                         | soCode |
+      | roman.kryzhevskykh@in.abb.com | USG4   |
 
 
   Scenario Outline: Check that admin is able to reject SO codes to the internal user
@@ -516,8 +516,8 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then No data available in table title is displayed in Pending Sales Office Code table.
 
     Examples:
-      | email                     | soCode |
-      | roman.kryzhevskykh@ge.com | USG5   |
+      | email                         | soCode |
+      | roman.kryzhevskykh@in.abb.com | USG5   |
 
   Scenario Outline: Check that admin is able to change admin privileges for external user and the user
   will see appropriate role in his profile and appropriate permissions will be available
@@ -570,5 +570,5 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then Is open user details block not displayed.
 
     Examples:
-      | email                     |
-      | roman.kryzhevskykh@ge.com |
+      | email                         |
+      | roman.kryzhevskykh@in.abb.com |
