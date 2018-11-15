@@ -41,8 +41,7 @@ public class LessonLyService {
         JSONArray users = new JSONArray();
         try {
             users = (JSONArray) userInfo.getResponse().getValueOf("users");
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             System.err.println(userInfo.getResponse());
             e.printStackTrace();
         }

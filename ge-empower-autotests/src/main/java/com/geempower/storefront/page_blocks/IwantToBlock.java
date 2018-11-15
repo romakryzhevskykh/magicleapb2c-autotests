@@ -378,7 +378,7 @@ public class IwantToBlock extends UIComponent {
 
     private void removeAccInAccountTab(String accountNo) {
         click(ACCOUNT_CHECKBOX_XPATH, accountNo);
-        ((JavascriptExecutor) getDriver()).executeScript("scroll(0,0)");
+        utils.pageScrollUp();
         click(REMOVE_BUTTON_IN_ALL_ACCOUNTS_TAB_XPATH);
         click(REMOVE_BUTTON_IN_REMOVE_ACC_POP_UP_IN_ALL_ACCOUNTS_TAB_XPATH);
     }

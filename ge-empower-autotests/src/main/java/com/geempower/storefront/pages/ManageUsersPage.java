@@ -42,7 +42,7 @@ public class ManageUsersPage extends StorefrontBasePage {
     @Step("Open Users tab.")
     public void openUsersTab() {
         waitUntilPageIsFullyLoaded();
-        ((JavascriptExecutor) getDriver()).executeScript("scroll(0,0)");
+        utils.pageScrollUp();
         click(USERS_TAB_XPATH);
         waitUntilPageIsFullyLoaded();
     }
@@ -76,7 +76,7 @@ public class ManageUsersPage extends StorefrontBasePage {
     @Step("Get Add Account Pop Up Title.")
     public String getAddAccPopUpTitle() {
         waitUntilPageIsFullyLoaded();
-        ((JavascriptExecutor) getDriver()).executeScript("scroll(0,0)");
+        utils.pageScrollUp();
         return $(ADD_ACCOUNT_TITLE_XPATH).getText();
     }
 
@@ -179,7 +179,7 @@ public class ManageUsersPage extends StorefrontBasePage {
     @Step("Check that user details block is opened.")
     public boolean isUserDetailsBlockOpened() {
         waitUntilPageIsFullyLoaded();
-        ((JavascriptExecutor) getDriver()).executeScript("scroll(0,0)");
+        utils.pageScrollUp();
         return isDisplayed(USER_DETAILS_BLOCK_XPATH);
     }
 

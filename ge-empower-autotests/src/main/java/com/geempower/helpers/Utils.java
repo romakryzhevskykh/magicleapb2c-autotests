@@ -132,4 +132,9 @@ public class Utils extends UIComponent {
     public void pageScrollDown() {
         ((JavascriptExecutor) getDriver()).executeScript("window.scrollTo(0, document.body.scrollHeight);");
     }
+
+    @Step("Page scroll up.")
+    public void pageScrollUp() {
+        ((JavascriptExecutor) getDriver()).executeScript("scroll(0,0)");
+    }
 }

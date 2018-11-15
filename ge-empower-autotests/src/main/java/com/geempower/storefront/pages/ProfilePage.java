@@ -3,7 +3,6 @@ package com.geempower.storefront.pages;
 import com.geempower.helpers.models.RegionType;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -77,6 +76,16 @@ public class ProfilePage extends StorefrontBasePage {
         return $(USER_RELATIONSHIP_XPATH).getText();
     }
 
+    @Step("Get Region user's profile.")
+    public String getRegion() {
+        return $(USER_REGION_XPATH).getText();
+    }
+
+    @Step("Get Alt Email from user's profile.")
+    public String getAltEmail() {
+        return $(USER_ALT_EMAIL_ADDRESS_XPATH).getText();
+    }
+
     @Step("Get Role For Each Region in user Profile")
     public HashMap<String, String> getRoleForEachRegion() {
         waitUntilPageIsFullyLoaded();
@@ -142,14 +151,8 @@ public class ProfilePage extends StorefrontBasePage {
     @Step("Confirm Delete Action In The Pop-Up.")
     public void confirmDeleteActionInThePopUp() {
         waitUntilPageIsFullyLoaded();
-        WebElement el = $(CHECKBOX_PERMANENTLY_DELETE_ACTION_POP_UP_XPATH);
-        click(el);
+        click(CHECKBOX_PERMANENTLY_DELETE_ACTION_POP_UP_XPATH);
         waitUntilPageIsFullyLoaded();
         click(By.id(CONFIRM_PERMANENTLY_DELETE_ACTION_BUTTON_IN_POP_UP_ID));
-    }
-
-    @Step("Get Region user’s profile.")
-    public String getRegion() {
-        return $(USER_REGION_XPATH).getText();
     }
 }
