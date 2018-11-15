@@ -23,4 +23,5 @@ public class ProfilePageElements {
     public final static String PERMANENTLY_DELETE_MY_USER_ID_XPATH = "//button[@data-target='#delete-my-account-modal']";
     public final static String CHECKBOX_PERMANENTLY_DELETE_ACTION_POP_UP_XPATH = "//div[@id='delete-my-account-modal']//div[@class='icheckbox_minimal-purple']";
     public final static String CONFIRM_PERMANENTLY_DELETE_ACTION_BUTTON_IN_POP_UP_ID = "delete-my-account";
+    public final static String USER_REGION_XPATH = "//span[contains(@id,‘select2-region’)]";
 }

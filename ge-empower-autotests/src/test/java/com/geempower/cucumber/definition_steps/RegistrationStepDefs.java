@@ -86,7 +86,7 @@ public class RegistrationStepDefs extends AbstractStepDefs {
     public void createUserInstanceOnRegistrationPage(String companyName, String userEmail, String phoneNo) {
         userManager.createUserInstance(registrationPage.getUserNameValue(), registrationPage.getUserLastNameValue(), registrationPage.getUserIdValue(),
                 threadVarsHashMap.getString(TestKeyword.CHOSEN_USER_ROLE_ON_REGISTRATION_PAGE), companyName, userEmail, phoneNo,
-                registrationPage.getDefaultLanguage(), registrationPage.getRelationshipValue());
+                registrationPage.getDefaultLanguage(), registrationPage.getRelationshipValue(), registrationPage.getChosenRegion());
     }
 
     @When("^User selects appropriate Role (.*).$")

@@ -138,4 +138,9 @@ public class RegistrationPage extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
         return isDisplayed(ACCOUNT_INFORMATION_SECTION_XPATH);
     }
+
+    @Step("Get chosen region value.")
+    public String getChosenRegion() {
+        return $(By.id(CHOSEN_REGION_VALUE_ID)).getText();
+    }
 }

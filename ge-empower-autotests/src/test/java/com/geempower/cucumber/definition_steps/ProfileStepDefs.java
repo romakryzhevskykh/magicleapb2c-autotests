@@ -85,7 +85,7 @@ public class ProfileStepDefs extends AbstractStepDefs {
     public void createUserInstance() {
         userManager.createUserInstance(profilePage.getUserName(), profilePage.getUserLastName(), profilePage.getUserId(),
                 profilePage.getUserRole(), profilePage.getCompanyName(), profilePage.getEmail(), profilePage.getPhoneNumber(),
-                profilePage.getLanguage(), profilePage.getRelationship());
+                profilePage.getLanguage(), profilePage.getRelationship(), profilePage.getRegion());
     }
 
     @When("^User clicks on Permanently delete button.$")

@@ -11,6 +11,7 @@ public class RegistrationPageElements {
     public final static String DEFAULT_LANGUAGE_VALUE_ID = "select2-language-container";
     public final static String OPEN_REGIONS_LIST_ICON_XPATH = "//span[@aria-labelledby='select2-region-container']//b";
     public final static String ALL_REGION_VALUES_IN_REGIONS_LIST_XPATH = "//li[contains(@id, 'select2-region-result')]";
+    public final static String CHOSEN_REGION_VALUE_ID = "select2-region-container";
     public final static String OPEN_COUNTRIES_LIST_ICON_XPATH = "//span[@aria-labelledby='select2-country-container']//b";
     public final static String ALL_COUNTRY_VALUES_IN_COUNTRIES_LIST_XPATH = "//li[contains(@id, 'select2-country-result')]";
     public final static String OPEN_RELATIONSHIP_LIST_ICON_XPATH = "//span[@aria-labelledby='select2-userRelationType-container']//b";

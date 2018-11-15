@@ -23,9 +23,11 @@ public class UserEntity {
     String language;
     @Getter
     String relationship;
+    @Getter
+    String region;
 
     public UserEntity(String firstName, String lastName, String userId, String userRole, String companyName,
-                      String email, String phoneNumber, String language, String relationship) {
+                      String email, String phoneNumber, String language, String relationship, String region) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userId = userId;
@@ -35,5 +37,6 @@ public class UserEntity {
         this.phoneNumber = phoneNumber;
         this.language = language;
         this.relationship = relationship;
+        this.region = region;
     }
 }

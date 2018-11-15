@@ -1,17 +1,13 @@
 package com.geempower.storefront.pages;
 
-import com.geempower.helpers.Utils;
 import com.geempower.helpers.models.RegionType;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.geempower.helpers.models.RegionType.getRegionTypes;
@@ -20,8 +16,6 @@ import static com.geempower.storefront.page_elements.ProfilePageElements.*;
 @Component
 public class ProfilePage extends StorefrontBasePage {
     private final String pageUri = "my-account/profile";
-    @Autowired
-    private Utils utils;
 
     @Override
     public String getPageUrl() {
@@ -139,16 +133,23 @@ public class ProfilePage extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
     }
 
+    @Step("Click On Permanently Delete Button.")
     public void clickOnPermanentlyDeleteButton() {
         waitUntilPageIsFullyLoaded();
         click(PERMANENTLY_DELETE_MY_USER_ID_XPATH);
     }
 
+    @Step("Confirm Delete Action In The Pop-Up.")
     public void confirmDeleteActionInThePopUp() {
         waitUntilPageIsFullyLoaded();
         WebElement el = $(CHECKBOX_PERMANENTLY_DELETE_ACTION_POP_UP_XPATH);
         click(el);
         waitUntilPageIsFullyLoaded();
         click(By.id(CONFIRM_PERMANENTLY_DELETE_ACTION_BUTTON_IN_POP_UP_ID));
+    }
+
+    @Step("Get Region user’s profile.")
+    public String getRegion() {
+        return $(USER_REGION_XPATH).getText();
     }
 }
