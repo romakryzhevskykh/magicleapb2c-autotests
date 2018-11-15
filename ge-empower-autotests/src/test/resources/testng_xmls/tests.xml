@@ -30,14 +30,14 @@
         </classes>
     </test>
     <test name="Suite3">
-    <parameter name="browserName" value="chrome"/>
-    <parameter name="headless" value="true"/>
-    <classes>
-        <!--admin, smAdmin-->
-        <class name="com.geempower.cucumber.DashboardSuite"/>
-        <class name="com.geempower.cucumber.ProductsSuite"/>
-    </classes>
-</test>
+        <parameter name="browserName" value="chrome"/>
+        <parameter name="headless" value="true"/>
+        <classes>
+            <!--admin, smAdmin-->
+            <class name="com.geempower.cucumber.DashboardSuite"/>
+            <class name="com.geempower.cucumber.ProductsSuite"/>
+        </classes>
+    </test>
     <test name="Suite4">
         <parameter name="browserName" value="chrome"/>
         <parameter name="headless" value="true"/>

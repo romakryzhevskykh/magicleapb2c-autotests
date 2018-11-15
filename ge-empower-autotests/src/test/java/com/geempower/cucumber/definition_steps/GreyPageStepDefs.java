@@ -34,12 +34,12 @@ public class GreyPageStepDefs extends AbstractStepDefs {
     }
 
     @Then("^Correct change Role&Relationship header (.*) is displayed on the Grey page.$")
-    public void correctChangeRoleRelationshipHeaderHeaderIsDisplayedOnTheGreyPage(String header) {
+    public void correctChangeRoleRelationshipHeaderIsDisplayedOnTheGreyPage(String header) {
         assertEquals(header, greyPage.getChangeRoleAndRelationshipHeader());
     }
 
     @Then("^Account request page footer title (.*) is displayed on the Grey page.$")
-    public void accountRequestPageFooterTitleTitleIsDisplayedOnTheGreyPage(String title) {
+    public void accountRequestPageFooterTitleIsDisplayedOnTheGreyPage(String title) {
         assertEquals(title, greyPage.getGreyPageFooterTitle());
     }
 

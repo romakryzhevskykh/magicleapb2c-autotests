@@ -585,18 +585,13 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     }
 
     @When("^Admin adds rep code (.*) to the user.$")
-    public void adminAddsRepCodeZToTheUser(String repCode) {
+    public void adminAddsRepCodeToTheUser(String repCode) {
         manageUsersPage.assignRepCodeToUser(repCode);
     }
 
     @And("^Confirm delete action on manage users page.$")
     public void confirmDeleteActionOnManageUsersPage() {
         manageUsersPage.confirmDeleteUserAction();
-    }
-
-    @And("^Expand Accounts tab in I Want To Block.$")
-    public void expandAccountsTabInIWantToBlock() {
-        iWantToBlock.expandAccountsTabInIWantToBlock();
     }
 
     @When("^Click on Add Rep Code button in User Detail block.$")

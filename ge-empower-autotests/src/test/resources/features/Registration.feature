@@ -95,7 +95,7 @@ Feature: Registration flow for external, mfgrep users.
     And Clicks on the Search button.
     When Clicks on the user name in the table.
     Then User details block for chosen user with <userId> userId is opened.
-    And Expand Accounts tab in I Want To Block.
+    And Expand Modify an Account tab in I Want To Block.
     When Click on Add Rep Code button in User Detail block.
     Then Assign/Modify rep code pop-up is displayed on the Manage Users page.
     When Admin adds rep code Z540 to the user.

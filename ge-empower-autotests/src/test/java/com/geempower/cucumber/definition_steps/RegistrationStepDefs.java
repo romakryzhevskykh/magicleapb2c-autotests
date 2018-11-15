@@ -82,7 +82,6 @@ public class RegistrationStepDefs extends AbstractStepDefs {
         registrationPage.closeSuccessRegistrationPopUp();
     }
 
-    //@TODO need to add region to the constructor
     @And("^Create User instance on registration page with values (.*), (.*), (.*).$")
     public void createUserInstanceOnRegistrationPage(String companyName, String userEmail, String phoneNo) {
         userManager.createUserInstance(registrationPage.getUserNameValue(), registrationPage.getUserLastNameValue(), registrationPage.getUserIdValue(),
@@ -91,7 +90,7 @@ public class RegistrationStepDefs extends AbstractStepDefs {
     }
 
     @When("^User selects appropriate Role (.*).$")
-    public void userSelectsAppropriateRoleUserRole(String userRole) {
+    public void userSelectsAppropriateUserRole(String userRole) {
         registrationPage.selectAppropriateUserRole(userRole);
     }
 

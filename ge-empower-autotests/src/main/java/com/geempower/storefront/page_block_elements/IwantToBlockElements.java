@@ -2,7 +2,7 @@ package com.geempower.storefront.page_block_elements;
 
 public class IwantToBlockElements {
     //MODIFY AN ACCOUNT TAB
-    public final static String MODIFY_AN_ACCOUNT_TAB_XPATH = "//span[contains (text(), 'Modify an Account')]";
+    public final static String MODIFY_AN_ACCOUNT_TAB_XPATH = "//a[@href='#sending-quotes1']";
     public final static String SALES_OFFICE_CODES_TAB_IN_MODIFY_ACC_TAB_XPATH = "//*[@href='#approved-salesofficecode']";
     public final static String SALES_ENGINEER_CODES_TAB_IN_MODIFY_ACC_TAB_XPATH = "//*[@href='#approved-salesengineer']";
     public final static String ALL_SO_CODES_CHECKBOX_IN_MODIFY_AN_ACC_TAB_XPATH = "//div[@id='approved-salesofficecode']//*[contains(@class, 'select-all-user-accounts')]/label";

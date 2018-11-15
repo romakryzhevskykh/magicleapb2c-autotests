@@ -4,7 +4,6 @@ import com.geempower.helpers.Utils;
 import com.geempower.helpers.models.Region;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -136,7 +135,7 @@ public class ManageUsersPage extends StorefrontBasePage {
     @Step("Is Assign/Modify Rep.Code Pop-up displayed.")
     public boolean isAssignModifyRepCodePopUpDisplayed() {
         waitUntilPageIsFullyLoaded();
-        return isDisplayed(By.id(ASSIGN_MODIFY_REP_COODE_POP_UP_ID));
+        return isDisplayed(By.id(ASSIGN_MODIFY_REP_CODE_POP_UP_ID));
     }
 
     @Step("Set Account To The Account Search Field.")

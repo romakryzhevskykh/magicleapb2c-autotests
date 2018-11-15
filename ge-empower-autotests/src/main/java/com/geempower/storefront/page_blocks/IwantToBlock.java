@@ -428,11 +428,4 @@ public class IwantToBlock extends UIComponent {
         waitUntilPageIsFullyLoaded();
         click(T_AND_B_TOGGLE_CHANGE_POSITION_XPATH);
     }
-
-    @Step("Expand Accounts tab in I want to block for Mfg. rep. user")
-    public void expandAccountsTabInIWantToBlock() {
-        waitUntilPageIsFullyLoaded();
-        utils.pageScrollDown();
-        click(MODIFY_ACCOUNTS_TAB_XPATH);
-    }
 }
