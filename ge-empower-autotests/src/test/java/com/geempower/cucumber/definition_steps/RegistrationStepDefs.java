@@ -7,8 +7,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class RegistrationStepDefs extends AbstractStepDefs {
 
@@ -83,11 +82,20 @@ public class RegistrationStepDefs extends AbstractStepDefs {
         registrationPage.closeSuccessRegistrationPopUp();
     }
 
-    //@TODO need to add region to the constructor
     @And("^Create User instance on registration page with values (.*), (.*), (.*).$")
     public void createUserInstanceOnRegistrationPage(String companyName, String userEmail, String phoneNo) {
         userManager.createUserInstance(registrationPage.getUserNameValue(), registrationPage.getUserLastNameValue(), registrationPage.getUserIdValue(),
                 threadVarsHashMap.getString(TestKeyword.CHOSEN_USER_ROLE_ON_REGISTRATION_PAGE), companyName, userEmail, phoneNo,
-                registrationPage.getDefaultLanguage(), registrationPage.getRelationshipValue());
+                registrationPage.getDefaultLanguage(), registrationPage.getRelationshipValue(), registrationPage.getChosenRegion());
+    }
+
+    @When("^User selects appropriate Role (.*).$")
+    public void userSelectsAppropriateUserRole(String userRole) {
+        registrationPage.selectAppropriateUserRole(userRole);
+    }
+
+    @Then("^Account information section is not displayed on the Registration page.$")
+    public void accountInformationSectionIsNotDisplayedOnTheRegistrationPage() {
+        assertFalse(registrationPage.isAccountInformationSectionDisplayed());
     }
 }

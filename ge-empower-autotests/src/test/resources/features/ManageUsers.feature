@@ -163,7 +163,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Given Switch to Storefront as externalUser1.
     And User is logged in to Storefront.
     And Refresh page.
-    Then User sees User not active page.
+    Then User not active page is opened.
     Given Switch to Storefront as secondEmpAdmin.
     When Admin opens Actions list.
     And Expand Modify an Account tab in I Want To Block.
@@ -195,7 +195,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Given Switch to Storefront as externalUser1.
     And User is logged in to Storefront.
     And Refresh page.
-    Then User sees User not active page.
+    Then User not active page is opened.
     When User sets <account> to the Account Number field.
     And Click on Submit for Approval button.
     Then Requested account fields contains <account> account.
@@ -247,7 +247,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Given Switch to Storefront as caAdmin.
     And User is logged in to Storefront.
     And Refresh page.
-    Then User sees User not active page.
+    Then User not active page is opened.
     Given Switch to Storefront as secondEmpAdmin.
     When Admin opens Actions list.
     And Expand Modify an Account tab in I Want To Block.
@@ -286,7 +286,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Given Switch to Storefront as externalUser1.
     And User is logged in to Storefront.
     And Refresh page.
-    Then User sees User not active page.
+    Then User not active page is opened.
     Then Is Account Management title displayed.
     Then Is Appropriate text displayed in the main block.
     Then Is Appropriate text displayed in the footer block.

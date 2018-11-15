@@ -1,10 +1,8 @@
 package com.geempower.storefront.pages;
 
-import com.geempower.helpers.Utils;
 import com.geempower.helpers.models.RegionType;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -17,8 +15,6 @@ import static com.geempower.storefront.page_elements.ProfilePageElements.*;
 @Component
 public class ProfilePage extends StorefrontBasePage {
     private final String pageUri = "my-account/profile";
-    @Autowired
-    private Utils utils;
 
     @Override
     public String getPageUrl() {
@@ -146,11 +142,13 @@ public class ProfilePage extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
     }
 
+    @Step("Click On Permanently Delete Button.")
     public void clickOnPermanentlyDeleteButton() {
         waitUntilPageIsFullyLoaded();
         click(PERMANENTLY_DELETE_MY_USER_ID_XPATH);
     }
 
+    @Step("Confirm Delete Action In The Pop-Up.")
     public void confirmDeleteActionInThePopUp() {
         waitUntilPageIsFullyLoaded();
         click(CHECKBOX_PERMANENTLY_DELETE_ACTION_POP_UP_XPATH);

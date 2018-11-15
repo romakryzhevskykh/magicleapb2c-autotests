@@ -46,7 +46,7 @@ public class UserEntity {
     }
 
     public UserEntity(String firstName, String lastName, String userId, String userRole, String companyName,
-                      String email, String phoneNumber, String language, String relationship) {
+                      String email, String phoneNumber, String language, String relationship, String region) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userId = userId;
@@ -56,6 +56,7 @@ public class UserEntity {
         this.phoneNumber = phoneNumber;
         this.language = language;
         this.relationship = relationship;
+        this.region = region;
         this.isInternalUser = false;
     }
 }
