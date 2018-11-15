@@ -1,10 +1,12 @@
 package com.geempower.storefront.pages;
 
+import com.geempower.helpers.Utils;
 import com.geempower.helpers.models.Region;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -16,6 +18,9 @@ import static com.geempower.storefront.page_elements.manageUsers.ManageUsersPage
 
 @Component
 public class ManageUsersPage extends StorefrontBasePage {
+    @Autowired
+    private Utils utils;
+
     private final String pageUri = "user/admin/my-account/manage-users";
 
     @Override
@@ -64,7 +69,7 @@ public class ManageUsersPage extends StorefrontBasePage {
     @Step("Click on Add Account Button In User Detail Block.")
     public void clickOnAddAccountButtonInUserDetailBlock() {
         waitUntilPageIsFullyLoaded();
-        ((JavascriptExecutor) getDriver()).executeScript("scroll(0,0)");
+        utils.pageScrollDown();
         click(ADD_ACCOUNT_BUTTON_XPATH);
     }
 
@@ -122,10 +127,16 @@ public class ManageUsersPage extends StorefrontBasePage {
         return isDisplayed(By.id(ADD_NEW_ACCOUNTS_TABLE_ID));
     }
 
-    @Step("Is Add Account Pop-up is displayed.")
+    @Step("Is Add Account Pop-up displayed.")
     public boolean isAddAccountPopUpDisplayed() {
         waitUntilPageIsFullyLoaded();
         return isDisplayed(ADD_ACCOUNT_POP_UP_XPATH);
+    }
+
+    @Step("Is Assign/Modify Rep.Code Pop-up displayed.")
+    public boolean isAssignModifyRepCodePopUpDisplayed() {
+        waitUntilPageIsFullyLoaded();
+        return isDisplayed(By.id(ASSIGN_MODIFY_REP_COODE_POP_UP_ID));
     }
 
     @Step("Set Account To The Account Search Field.")
@@ -179,6 +190,7 @@ public class ManageUsersPage extends StorefrontBasePage {
 
     @Step("Open Actions list.")
     public void openActionsList() {
+        waitUntilPageIsFullyLoaded();
         click(USER_ACTIONS_LIST_OPEN_ICON_XPATH);
     }
 
@@ -302,5 +314,26 @@ public class ManageUsersPage extends StorefrontBasePage {
     @Step("Get Found Users List.")
     public String getFoundUsersList() {
         return $(NO_DATA_AVAILABLE_IN_THE_USERS_LIST_XPATH).getText();
+    }
+
+    @Step("Assign Rep Code To User.")
+    public void assignRepCodeToUser(String repCode) {
+        waitUntilPageIsFullyLoaded();
+        $(By.id(ATS_REP_CODE_FIELD_ID)).clear();
+        $(By.id(ATS_REP_CODE_FIELD_ID)).sendKeys(repCode);
+        click(By.id(ASSIGN_REP_CODE_BUTTON_ID));
+        waitUntilPageIsFullyLoaded();
+    }
+
+    @Step("Confirm Delete User Action.")
+    public void confirmDeleteUserAction() {
+        waitUntilPageIsFullyLoaded();
+        click(By.id(CONFIRM_DELETE_ACTION_BUTTON_ID));
+    }
+
+    @Step("Click On Add Rep Code Button In User Detail Block.")
+    public void clickOnAddRepCodeButtonInUserDetailBlock() {
+        waitUntilPageIsFullyLoaded();
+        click(ADD_REP_CODE_BUTTON_XPATH);
     }
 }

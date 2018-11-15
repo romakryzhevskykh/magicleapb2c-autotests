@@ -1,11 +1,13 @@
 package com.geempower.storefront.page_blocks;
 
 import com.geempower.helpers.UIComponent;
+import com.geempower.helpers.Utils;
 import com.geempower.helpers.models.RegionType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -19,10 +21,13 @@ import static com.geempower.storefront.page_block_elements.IwantToBlockElements.
 
 @Component
 public class IwantToBlock extends UIComponent {
+    @Autowired
+    private Utils utils;
 
     @Step("Expand Modify An Account Tab In I Want To Block.")
     public void expandModifyAnAccountTabInIWantToBlock() {
         waitUntilPageIsFullyLoaded();
+        utils.pageScrollDown();
         click(MODIFY_AN_ACCOUNT_TAB_XPATH);
     }
 
@@ -422,5 +427,12 @@ public class IwantToBlock extends UIComponent {
     public void turnTnBToggleOff() {
         waitUntilPageIsFullyLoaded();
         click(T_AND_B_TOGGLE_CHANGE_POSITION_XPATH);
+    }
+
+    @Step("Expand Accounts tab in I want to block for Mfg. rep. user")
+    public void expandAccountsTabInIWantToBlock() {
+        waitUntilPageIsFullyLoaded();
+        utils.pageScrollDown();
+        click(MODIFY_ACCOUNTS_TAB_XPATH);
     }
 }

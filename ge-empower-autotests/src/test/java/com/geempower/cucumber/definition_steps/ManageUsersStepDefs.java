@@ -71,6 +71,11 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         assertEquals(popUpTitle, manageUsersPage.getAddAccPopUpTitle());
     }
 
+    @Then("^Assign/Modify rep code pop-up is displayed on the Manage Users page.$")
+    public void isAssignModifyRepCodePopUpDisplayed() {
+        assertTrue(manageUsersPage.isAssignModifyRepCodePopUpDisplayed());
+    }
+
     @When("^Set (.*) SO code to the First Sales Office Code field in the Add Account pop-up.$")
     public void setSoCodeToFirstTheSalesOfficeCodeField(String code) {
         manageUsersPage.setSoCodeToTheFirstSalesOfficeCodeField(code);
@@ -577,5 +582,25 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     @Then("^There is no user in the users list table.$")
     public void thereIsNoUserInTheUsersListTable() {
         assertEquals("No data available in table", manageUsersPage.getFoundUsersList());
+    }
+
+    @When("^Admin adds rep code (.*) to the user.$")
+    public void adminAddsRepCodeZToTheUser(String repCode) {
+        manageUsersPage.assignRepCodeToUser(repCode);
+    }
+
+    @And("^Confirm delete action on manage users page.$")
+    public void confirmDeleteActionOnManageUsersPage() {
+        manageUsersPage.confirmDeleteUserAction();
+    }
+
+    @And("^Expand Accounts tab in I Want To Block.$")
+    public void expandAccountsTabInIWantToBlock() {
+        iWantToBlock.expandAccountsTabInIWantToBlock();
+    }
+
+    @When("^Click on Add Rep Code button in User Detail block.$")
+    public void clickOnAddRepCodeButtonInUserDetailBlock() {
+        manageUsersPage.clickOnAddRepCodeButtonInUserDetailBlock();
     }
 }

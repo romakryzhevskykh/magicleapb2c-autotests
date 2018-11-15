@@ -38,7 +38,14 @@ public class LessonLyService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        JSONArray users = (JSONArray) userInfo.getResponse().getValueOf("users");
+        JSONArray users = new JSONArray();
+        try {
+            users = (JSONArray) userInfo.getResponse().getValueOf("users");
+        }
+        catch (NullPointerException e) {
+            System.err.println(userInfo.getResponse());
+            e.printStackTrace();
+        }
         JSONObject user = users.getJSONObject(0);
         return user.get("id").toString();
     }

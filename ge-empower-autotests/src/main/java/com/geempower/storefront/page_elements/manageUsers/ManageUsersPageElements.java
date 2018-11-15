@@ -39,12 +39,13 @@ public class ManageUsersPageElements {
     public final static String FULL_USER_SUB_STATUS_XPATH = "//span[@class='ml-10 manage-user-revalidate']";
     public final static String USER_ACTIONS_LIST_OPEN_ICON_XPATH = "//button[@class='btn btn-blue dropdown-toggle']/span";
     public final static String APPROPRIATE_USER_OPTION_XPATH = "//a[text()='%s']";
-
+    public final static String CONFIRM_DELETE_ACTION_BUTTON_ID = "userDetailsPageDelete";
     //REVALIDATION TAB
     public final static String REVALIDATION_TAB_XPATH = "//a[@aria-controls='revalidation']";
 
     //USER DETAILS BLOCK
     public final static String ADD_ACCOUNT_BUTTON_XPATH = "//i[@data-original-title='Add Account']";
+    public final static String ADD_REP_CODE_BUTTON_XPATH = "//i[@data-original-title='Assign/Modify Code']";
     public final static String USER_FULL_NAME_IN_USER_DETAILS_BLOCK_XPATH = "//div[@class='name-text']//h4/span[1]";
     public final static String EXPAND_USER_DETAILS_BLOCK_BUTTON_XPATH = "//i[@class='fa fa-angle-down']";
     public final static String CLOSE_USER_DETAILS_BLOCK_BUTTON_XPATH = "//i[@class='fa fa-angle-up']";
@@ -55,6 +56,7 @@ public class ManageUsersPageElements {
     //Add Account pop-up
     public final static String ADD_ACCOUNT_TITLE_XPATH = ".//*[@id='add-account-modal']//h4[@class='modal-title']";
     public final static String ADD_ACCOUNT_POP_UP_XPATH = "//*[@id='add-account-modal']//div[@class='modal-content']";
+    public final static String ASSIGN_MODIFY_REP_COODE_POP_UP_ID = "repCodeForm";
     public final static String SALES_OFFICE_CODE_FIELD_ID = "requestSalesOfficeCode";
     public final static String SALES_ENGINEER_CODE_FIELD_ID = "requestSalesEngCode";
     public final static String MODIFY_ACTIVE_BUTTON_XPATH = ".//*[@class='btn primary-btn request-account-search-btn sales-update add-sales-btn' and not(@disabled)]";
@@ -69,4 +71,6 @@ public class ManageUsersPageElements {
     public final static String SELECT_ALL_CHECKBOX_XPATH = ".//*[@id='add-account-modal']//li[@class='select-all-link']//ins[@class='iCheck-helper']";
     public final static String ADD_BUTTON_ID = "addAccountBtn";
     public final static String APPROPRIATE_REGION_BY_NAME_IN_ADD_ACC_POP_UP_XPATH = ".//*[@id='select2-searchRegion-results']/li[text()='%s']";
+    public final static String ATS_REP_CODE_FIELD_ID = "atsRepCode";
+    public final static String ASSIGN_REP_CODE_BUTTON_ID = "assignRepCodesBtn";
 }
