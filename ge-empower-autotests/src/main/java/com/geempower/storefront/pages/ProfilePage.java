@@ -4,14 +4,11 @@ import com.geempower.helpers.Utils;
 import com.geempower.helpers.models.RegionType;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.geempower.helpers.models.RegionType.getRegionTypes;
@@ -81,6 +78,16 @@ public class ProfilePage extends StorefrontBasePage {
     @Step("Get Relationship user's profile.")
     public String getRelationship() {
         return $(USER_RELATIONSHIP_XPATH).getText();
+    }
+
+    @Step("Get Region user's profile.")
+    public String getRegion() {
+        return $(USER_REGION_XPATH).getText();
+    }
+
+    @Step("Get Alt Email from user's profile.")
+    public String getAltEmail() {
+        return $(USER_ALT_EMAIL_ADDRESS_XPATH).getText();
     }
 
     @Step("Get Role For Each Region in user Profile")

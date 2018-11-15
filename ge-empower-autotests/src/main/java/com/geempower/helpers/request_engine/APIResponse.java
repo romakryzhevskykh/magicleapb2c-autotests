@@ -1,5 +1,7 @@
 package com.geempower.helpers.request_engine;
 
+import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -136,9 +138,13 @@ public class APIResponse implements API {
             }
         else if (RESPONSE_CONTENT_TYPES.HTML.contains(contentType)) {
             this.responseBody = Jsoup.parse(RESPONSE_STRING);
-        } else if (RESPONSE_CONTENT_TYPES.XML.contains(contentType))
-            this.responseBody = RESPONSE_STRING;
-        else {
+        } else if (RESPONSE_CONTENT_TYPES.XML.contains(contentType)) {
+            try {
+                this.responseBody = DocumentHelper.parseText(RESPONSE_STRING);
+            } catch (DocumentException e) {
+                e.printStackTrace();
+            }
+        } else {
             this.responseBody = RESPONSE_STRING;
             System.out.println("[WARNING] Unknowing response type, please add it to test framework - " + contentType);
         }
@@ -159,5 +165,9 @@ public class APIResponse implements API {
 
     public Document getHTMLResponseDocument() {
         return (Document) this.responseBody;
+    }
+
+    public org.dom4j.Document getXMLResponseDocument() {
+        return (org.dom4j.Document) this.responseBody;
     }
 }

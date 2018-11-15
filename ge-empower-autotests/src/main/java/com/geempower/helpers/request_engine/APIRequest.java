@@ -22,7 +22,7 @@ public abstract class APIRequest implements API {
     protected String name;
     protected String systemAddress;
     protected ArrayList<String> value = new ArrayList<>();
-    protected int connectionTimeout = 60000;
+    protected int connectionTimeout = 100000;
     protected StringBuilder stringOfPostParameters = new StringBuilder();
     protected URL requestURL;
     //    protected HttpURLConnection connection = null;
