@@ -34,7 +34,7 @@ public class CartPageStepDefs extends AbstractStepDefs {
         addedToCartUnitsOfMeasurement.keySet().forEach(addedUOM ->
                 assertTrue(unitsOfMeasurementInCart.contains(addedUOM),"Selected products aren't equal to products on the Cart page")
         );
-        assertEquals(addedToCartUnitsOfMeasurement.size(), unitsOfMeasurementInCart.size(),"The number of product items that user added to the cart aren’t equals to product items on the Cart page");
+        assertEquals(addedToCartUnitsOfMeasurement.size(), unitsOfMeasurementInCart.size(),"The number of product items that user added to the cart aren't equals to product items on the Cart page");
     }
 
     @SuppressWarnings("unchecked")

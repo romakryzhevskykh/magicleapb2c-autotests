@@ -24,15 +24,7 @@ public abstract class UIComponent {
     }
 
     protected WebElement $(String xpath, String... args) {
-        try {
             return getDriver().findElement(By.xpath(String.format(xpath, args)));
-        } catch (UnhandledAlertException ex) {
-            System.out.println("WARNING: Unexpected alert: " + ex);
-            alertHandling();
-            return $(xpath, args);
-        } catch (NoSuchElementException ex) {
-            return null;
-        }
     }
 
     protected WebElement $(By by) {

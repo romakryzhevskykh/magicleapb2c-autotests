@@ -19,9 +19,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static com.sarnova.RegexUtils.matchPattern;
+
 @Component
 public class CartManager {
-    @Autowired ProductsManager productsManager;
+
+    private static final String CSRFTOKEN_REGEX_PATTERN = "CSRFToken\\s*=\\s*\"(.+)\";";
+
+    @Autowired
+    private ProductsManager productsManager;
 
     private POSTRequest REMOVE_ENTRY_FROM_CART = new POSTRequest("Remove entry from active cart", "cart/entry/execute/REMOVE");
     private GETRequest GET_CART_PAGE_SOURCE = new GETRequest("Get cart page source", "cart");
@@ -31,27 +37,13 @@ public class CartManager {
     @Step("Clear active cart.")
     @SuppressWarnings("unchecked")
     public void clearActiveCart(UserSession userSession) {
-        List<UnitOfMeasure> unitsOfMeasurementInCart = getUOMsFromCartPage(userSession);
-        if (!unitsOfMeasurementInCart.isEmpty()) {
-            String csrfToken = getCartPageCsrfToken(userSession);
-            POSTRequest clearCart = CLEAR_CART.getClone();
-            try {
-                clearCart.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", csrfToken));
-                clearCart.sendPostRequest(userSession);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    @Deprecated
-    @Step("Empty active cart.")
-    public void emptyActiveCart(UserSession userSession) {
-        //Use clearActiveCart instead
-        List<UnitOfMeasure> unitsOfMeasurementInCart = getUOMsFromCartPage(userSession);
         String csrfToken = getCartPageCsrfToken(userSession);
-        for (int i = 0; i < unitsOfMeasurementInCart.size(); i++) {
-            removeUOMFromCart(userSession, csrfToken);
+        POSTRequest clearCart = CLEAR_CART.getClone();
+        try {
+            clearCart.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", csrfToken));
+            clearCart.sendPostRequest(userSession);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -76,8 +68,9 @@ public class CartManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Document htmlResponse = getCartPageSource.getResponse().getHTMLResponseDocument();
-        return Xsoup.select(htmlResponse, "//input[@name=CSRFToken]/@value").list().stream().findAny().orElse(null);
+
+        String htmlResponse = getCartPageSource.getResponse().getHTMLResponseDocument().outerHtml();
+        return matchPattern(htmlResponse, CSRFTOKEN_REGEX_PATTERN, 1);
     }
 
     @Step("Get current cart ID.")

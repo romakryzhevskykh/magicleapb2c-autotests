@@ -52,7 +52,7 @@ public class WebDriverSessions {
                 .filter(user -> user.getUserRoles().contains(userRole))
                 .findFirst()
                 .orElseGet(() -> {
-                    throw new NullPointerException("No created users with this role: " + userRole.toString());
+                    throw new IllegalStateException("No created users with this role: " + userRole.toString());
                 })
                 .getUserCockpit().getBaseUrl());
     }
