@@ -4,6 +4,7 @@ import com.sarnova.helpers.user_engine.UserRole;
 import com.sarnova.helpers.user_engine.UserSessions;
 import com.sarnova.helpers.user_engine.UsersManager;
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
@@ -32,6 +33,8 @@ public class WebDriverSessions {
             capabilities = new ChromeOptions();
             ((ChromeOptions) capabilities).setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
             ((ChromeOptions) capabilities).setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
+            ((ChromeOptions) capabilities).setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
+
             if (headless) {
                 ((ChromeOptions) capabilities).addArguments("--headless");
                 ((ChromeOptions) capabilities).addArguments("window-size=1920x1080");
