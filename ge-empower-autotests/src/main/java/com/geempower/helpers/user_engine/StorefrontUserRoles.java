@@ -8,6 +8,7 @@ public enum StorefrontUserRoles implements UserRole {
     INTERNALUSER,
     INTERNALUSER1,
     INTERNALUSER2,
+    NEWINTERNALUSER,
     REGIONALVIEW,
     SMADMIN,
     RMADMIN,

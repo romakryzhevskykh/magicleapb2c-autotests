@@ -36,6 +36,9 @@ public class User {
                 case "internaluser2":
                     userRole = StorefrontUserRoles.INTERNALUSER2;
                     break;
+                case "newinternaluser":
+                    userRole = StorefrontUserRoles.NEWINTERNALUSER;
+                    break;
                 case "regionalview":
                     userRole = StorefrontUserRoles.REGIONALVIEW;
                     break;
