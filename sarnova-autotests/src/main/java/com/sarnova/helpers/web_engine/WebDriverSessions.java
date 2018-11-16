@@ -33,8 +33,7 @@ public class WebDriverSessions {
             capabilities = new ChromeOptions();
             ((ChromeOptions) capabilities).setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
             ((ChromeOptions) capabilities).setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
-            ((ChromeOptions) capabilities).setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
-
+            ((ChromeOptions) capabilities).setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
             if (headless) {
                 ((ChromeOptions) capabilities).addArguments("--headless");
                 ((ChromeOptions) capabilities).addArguments("window-size=1920x1080");
