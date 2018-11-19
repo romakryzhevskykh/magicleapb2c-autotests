@@ -70,7 +70,9 @@ Feature: Registration flow for external, internal, mfgrep users.
     When User selects random Region from regions list.
     When User selects random Country from countries list.
     When User selects random Role.
+    And User fills ABB email address <abbEmail>.
+    Then Sales Office Code and Sales Engineer Code titles and fields are displayed.
 
     Examples:
-      | userId    | userEmail                    | companyName      | phoneNo         | relationship | account |
-      | 503021114 | oleksandr.nikolaienko@ge.com | ABB test company | 645284-31234-32 | distributor  | 9012306 |
+      | userId    | userEmail                    | abbEmail                         | companyName      | phoneNo         | relationship                    | account |
+      | 503021114 | oleksandr.nikolaienko@ge.com | oleksandr.nikolaienko@in.abb.com | ABB test company | 645284-31234-32 | Industrial Solutions Contractor | 9012306 |

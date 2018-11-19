@@ -52,6 +52,12 @@ public class RegistrationStepDefs extends AbstractStepDefs {
         registrationPage.setPhoneNo(phoneNo);
     }
 
+    @When("^User fills ABB email address (.*).$")
+    public void userFillsAbbEmailAddress(String abbEmail) {
+        registrationPage.setAbbEmail(abbEmail);
+
+    }
+
     @When("^User selects random Region from regions list.$")
     public void userSelectsRandomRegionFromRegionsList() {
         registrationPage.selectRandomRegionFromRegionsList();
@@ -89,5 +95,16 @@ public class RegistrationStepDefs extends AbstractStepDefs {
         userManager.createUserInstance(registrationPage.getUserNameValue(), registrationPage.getUserLastNameValue(), registrationPage.getUserIdValue(),
                 threadVarsHashMap.getString(TestKeyword.CHOSEN_USER_ROLE_ON_REGISTRATION_PAGE), companyName, userEmail, phoneNo,
                 registrationPage.getDefaultLanguage(), registrationPage.getRelationshipValue());
+    }
+
+    @Then("^User relationship to Industrial Solution is equal to (.*).$")
+    public void userRelationshipToIndustrialSolutionIsEqualToRelationship(String relationship) {
+        assertEquals(relationship, registrationPage.getRelationshipValue());
+    }
+
+    @Then("^(.*) and (.*) titles and fields are displayed.$")
+    public void salesOfficeCodeAndSalesEngineerCodeTitlesAndFieldsAreDisplayed(String soCode, String seCode) {
+        assertEquals(soCode, registrationPage.getSoCodeTitle());
+        assertEquals(seCode, registrationPage.getSeCodeTitle());
     }
 }

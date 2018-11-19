@@ -61,6 +61,12 @@ public class RegistrationPage extends StorefrontBasePage {
         $(By.id(PHONE_INPUT_ID)).sendKeys(phoneNo);
     }
 
+    @Step("Set ABB email No.")
+    public void setAbbEmail(String abbEmail) {
+        waitUntilPageIsFullyLoaded();
+        $(By.id(ABB_EMAIL_ADDRESS_INPUT_ID)).sendKeys(abbEmail);
+    }
+
     @Step("Select Random Region From Regions List.")
     public void selectRandomRegionFromRegionsList() {
         waitUntilPageIsFullyLoaded();
@@ -125,4 +131,17 @@ public class RegistrationPage extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
         click(CLOSE_SUCCESS_REGISTRATION_POP_UP_XPATH);
     }
+
+    @Step("Get So Code Title.")
+    public String getSoCodeTitle() {
+        waitUntilPageIsFullyLoaded();
+        return $(SALES_OFFICE_CODE_TITLE_XPATH).getText();
+    }
+
+    @Step("Get Se Code Title.")
+    public String getSeCodeTitle() {
+        waitUntilPageIsFullyLoaded();
+        return $(SALES_ENGINEER_CODE_TITLE_XPATH).getText();
+    }
+
 }
