@@ -61,7 +61,7 @@ Feature: Some actions on Orders page
     Then Is Table with products displayed.
     And Focus on browser.
     When User selects random catalog No checkbox on Orders Details page.
-    Then Is <-  Select items and Add to cart .New! title displayed near reorder button.
+    Then Is <-  Select items and Add to cart title displayed near reorder button.
     And User clicks on Reorder button on Order Details page.
     When User clicks on My Cart icon in Header block.
     When User clicks on Checkout button in Header block.
@@ -75,6 +75,7 @@ Feature: Some actions on Orders page
     And Terms and Conditions pop-up is confirmed.
     Then Order Successful pop-up appears at the OE 3 page.
 
+# @TODO Need to fix
 #  Scenario Outline: Check that Total Net Price value is correctly after changing status boxes - DE95700
 #    And Account management page is opened.
 #    When Choose <region> region.

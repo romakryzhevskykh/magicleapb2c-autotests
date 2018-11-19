@@ -209,11 +209,6 @@ public class OrderDetailsPage extends StorefrontBasePage {
         return $(REORDER_BUTTON_TEXT_FIRST_PART_XPATH).getText().trim();
     }
 
-    @Step("Get Select Items Text Second Part.")
-    public String getSelectItemsTextSecondPart() {
-        return $(REORDER_BUTTON_TEXT_SECOND_PART_XPATH).getText().trim();
-    }
-
     @Step("Get Bottom Row In Details Quotes Block.")
     public WebElement getBottomRowInDetailsQuotesBlock() {
         waitUntilPageIsFullyLoaded();
