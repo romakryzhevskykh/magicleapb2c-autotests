@@ -27,6 +27,7 @@ public class IwantToBlock extends UIComponent {
     @Step("Expand Modify An Account Tab In I Want To Block.")
     public void expandModifyAnAccountTabInIWantToBlock() {
         waitUntilPageIsFullyLoaded();
+        utils.pageScrollDown();
         click(MODIFY_AN_ACCOUNT_TAB_XPATH);
     }
 

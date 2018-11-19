@@ -209,10 +209,9 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
         orderDetailsPage.userExpandsClosesStatusBoxes();
     }
 
-    @Then("^Is (.*) .(.*) title displayed near reorder button.$")
-    public void isSelectItemsAndAddToCartNewTitleDisplayedNearReorderButton(String firstPart, String secondPart) {
+    @Then("^Is (.*) title displayed near reorder button.$")
+    public void isSelectItemsAndAddToCartNewTitleDisplayedNearReorderButton(String firstPart) {
         assertEquals(firstPart, orderDetailsPage.getSelectItemsTextFirstPart());
-        assertEquals(secondPart, orderDetailsPage.getSelectItemsTextSecondPart());
     }
 
     @Then("^Is Opened Quote Details (.*) is displayed.$")

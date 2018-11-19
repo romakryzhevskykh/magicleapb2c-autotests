@@ -50,31 +50,32 @@ Feature: Some actions on Orders page
       | account | salesDivision | orderNo   |
       | 5093868 | USS1          | 150775814 |
 
-#  Scenario: Check that user can place order via Re-Order functionality
-#    And Account management page is opened.
-#    When Choose EMEA region.
-#    And Search random account for chosen region.
-#    And Click on chosen account.
-#    And Orders page is opened.
-#    When User clicks on random order No.
-#    Then Orders Details page is opened.
-#    Then Is Table with products displayed.
-#    And Focus on browser.
-#    When User selects random catalog No checkbox on Orders Details page.
-#    Then Is <-  Select items and Add to cart .New! title displayed near reorder button.
-#    And User clicks on Reorder button on Order Details page.
-#    When User clicks on My Cart icon in Header block.
-#    When User clicks on Checkout button in Header block.
-#    Then My Cart page is opened.
-#    Then Is Qty value equal to value on the Order page.
-#    When User clicks on the Next top button on the My Cart page.
-#    When User fills PO no. to the PO no. field on the OE 2 page.
-#    And Select Shipment Address from the existing addresses on the OE 2 page.
-#    When User clicks on the Bottom Next button on the OE 2 page.
-#    When User clicks on Place Order button at the OE 3 page.
-#    And Terms and Conditions pop-up is confirmed.
-#    Then Order Successful pop-up appears at the OE 3 page.
+  Scenario: Check that user can place order via Re-Order functionality
+    And Account management page is opened.
+    When Choose EMEA region.
+    And Search random account for chosen region.
+    And Click on chosen account.
+    And Orders page is opened.
+    When User clicks on random order No.
+    Then Orders Details page is opened.
+    Then Is Table with products displayed.
+    And Focus on browser.
+    When User selects random catalog No checkbox on Orders Details page.
+    Then Is <-  Select items and Add to cart title displayed near reorder button.
+    And User clicks on Reorder button on Order Details page.
+    When User clicks on My Cart icon in Header block.
+    When User clicks on Checkout button in Header block.
+    Then My Cart page is opened.
+    Then Is Qty value equal to value on the Order page.
+    When User clicks on the Next top button on the My Cart page.
+    When User fills PO no. to the PO no. field on the OE 2 page.
+    And Select Shipment Address from the existing addresses on the OE 2 page.
+    When User clicks on the Bottom Next button on the OE 2 page.
+    When User clicks on Place Order button at the OE 3 page.
+    And Terms and Conditions pop-up is confirmed.
+    Then Order Successful pop-up appears at the OE 3 page.
 
+# @TODO Need to fix
 #  Scenario Outline: Check that Total Net Price value is correctly after changing status boxes - DE95700
 #    And Account management page is opened.
 #    When Choose <region> region.

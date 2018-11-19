@@ -3,7 +3,6 @@ package com.geempower.storefront.pages;
 import com.geempower.helpers.Utils;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -142,6 +141,25 @@ public class RegistrationPage extends StorefrontBasePage {
     public String getSeCodeTitle() {
         waitUntilPageIsFullyLoaded();
         return $(SALES_ENGINEER_CODE_TITLE_XPATH).getText();
+    }
+
+    @Step("Select Appropriate User Role.")
+    public void selectAppropriateUserRole(String userRole) {
+        waitUntilPageIsFullyLoaded();
+        click(OPEN_ROLES_LIST_ICON_XPATH);
+        waitUntilPageIsFullyLoaded();
+        click(APPROPRIATE_USER_ROLE_VALUE_IN_ROLES_LIST_XPATH, userRole);
+    }
+
+    @Step("Check if Account information section displayed on the Registration page.")
+    public boolean isAccountInformationSectionDisplayed() {
+        waitUntilPageIsFullyLoaded();
+        return isDisplayed(ACCOUNT_INFORMATION_SECTION_XPATH);
+    }
+
+    @Step("Get chosen region value.")
+    public String getChosenRegion() {
+        return $(By.id(CHOSEN_REGION_VALUE_ID)).getText();
     }
 
 }

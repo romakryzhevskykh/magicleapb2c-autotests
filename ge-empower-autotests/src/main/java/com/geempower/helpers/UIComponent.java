@@ -54,7 +54,7 @@ public abstract class UIComponent {
         click(webElement);
     }
 
-    protected void moveToElement(WebElement webElement){
+    protected void moveToElement(WebElement webElement) {
         WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getShortTimeOut());
         Actions actions = new Actions(getDriver());
         actions.moveToElement(webElement);
@@ -161,7 +161,17 @@ public abstract class UIComponent {
             wait.until(ExpectedConditions.textToBe(by, text));
         } catch (TimeoutException ex) {
             WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getShortTimeOut());
-            wait.until((WebDriver dr1)-> dr1.findElement(by).getAttribute("innerText").trim().equals(text));
+            wait.until((WebDriver dr1) -> dr1.findElement(by).getAttribute("innerText").trim().equals(text));
         }
+    }
+
+    protected String getTextNode(String xpath, String... args) {
+        WebElement webElement = $(xpath, args);
+        String text = webElement.getText().trim();
+        List<WebElement> children = webElement.findElements(By.xpath("./*"));
+        for (WebElement child : children) {
+            text = text.replaceFirst(child.getText(), "").trim();
+        }
+        return text;
     }
 }

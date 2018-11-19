@@ -17,7 +17,7 @@ public class UserNotActiveStepDefs extends AbstractStepDefs {
     @Autowired
     private UserNotActivePage userNotActivePage;
 
-    @Then("^User sees User not active page.$")
+    @Then("^User not active page is opened.$")
     public void isUserNotActivePageOpened() {
         assertTrue(userNotActivePage.isOpened());
     }
