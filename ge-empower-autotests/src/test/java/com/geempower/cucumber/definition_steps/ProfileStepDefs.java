@@ -4,7 +4,6 @@ import com.geempower.helpers.managers.QmsService;
 import com.geempower.helpers.managers.UserManager;
 import com.geempower.helpers.models.UserEntity;
 import com.geempower.storefront.pages.ProfilePage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;

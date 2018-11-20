@@ -7,7 +7,6 @@ import com.geempower.helpers.models.Region;
 import com.geempower.helpers.models.UserEntity;
 import com.geempower.storefront.page_blocks.IwantToBlock;
 import com.geempower.storefront.pages.ManageUsersPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;

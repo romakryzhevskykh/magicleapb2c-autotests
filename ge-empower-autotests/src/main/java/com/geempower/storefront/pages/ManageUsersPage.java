@@ -13,8 +13,7 @@ import ru.yandex.qatools.allure.annotations.Step;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.geempower.storefront.page_block_elements.IwantToBlockElements.APPROVE_PENDING_ACCOUNTS_SECTION_TITLE_XPATH;
-import static com.geempower.storefront.page_block_elements.IwantToBlockElements.TOTAL_ACCOUNT_REQUESTS_XPATH;
+import static com.geempower.storefront.page_block_elements.IwantToBlockElements.*;
 import static com.geempower.storefront.page_elements.manageUsers.ManageUsersPageElements.*;
 
 @Component
@@ -347,7 +346,7 @@ public class ManageUsersPage extends StorefrontBasePage {
     @Step("Hover Mouse Over Blue Icon For User.")
     public String hoverMouseOverBlueIconForUser(String userId) {
         Actions action = new Actions(getDriver());
-        $(BLUE_INTERNAL_ICON_FOR_APPROPRIATE_USER_XPATH, userId).click();
+        click(BLUE_INTERNAL_ICON_FOR_APPROPRIATE_USER_XPATH, userId);
         action.moveToElement($(BLUE_INTERNAL_ICON_FOR_APPROPRIATE_USER_XPATH, userId));
         waitUntilPageIsFullyLoaded();
         return $(BLUE_INTERNAL_ICON_TOOLTIP_FOR_APPROPRIATE_USER_XPATH, userId).getText();
