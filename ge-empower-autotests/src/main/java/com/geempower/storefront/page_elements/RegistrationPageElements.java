@@ -25,6 +25,8 @@ public class RegistrationPageElements {
     public final static String REGISTRATION_SUCCESSFUL_POP_UP_HEADER_XPATH = "//div[@id='registration-confirmation-modal']//h4";
     public final static String CLOSE_SUCCESS_REGISTRATION_POP_UP_XPATH = "//div[@class='modal-footer']/button[@onclick]";
     public final static String SALES_OFFICE_CODE_TITLE_XPATH = "//a[@class='add-sales-office-code-row-link']/../..//label";
+    public final static String SALES_OFFICE_CODE_INPUT_FIELD_XPATH = "//input[@name='salesOfficeCodes']";
     public final static String SALES_ENGINEER_CODE_TITLE_XPATH = "//a[@class='add-sales-engineer-code-row-link']/../..//label";
     public final static String ACCOUNT_INFORMATION_SECTION_XPATH = "//div[@class='account-info-wrapper']";
+    public final static String SALES_ENGINEER_CODE_INPUT_FIELD_XPATH = "//input[@name='salesEngineerCodes']";
 }

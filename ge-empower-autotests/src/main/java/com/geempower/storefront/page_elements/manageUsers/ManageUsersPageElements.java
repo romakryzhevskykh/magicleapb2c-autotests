@@ -10,6 +10,8 @@ public class ManageUsersPageElements {
     private final static String PENDING_USERS_TABLE_XPATH = "//table[@id='pending-requests-table']";
     public final static String PENDING_USERS_SSO_LIST_XPATH = PENDING_USERS_TABLE_XPATH + "//td[2]";
     public final static String NO_ACCOUNTS_LABEL_FOR_APPROPRIATE_USER_XPATH = PENDING_USERS_TABLE_XPATH + "//td[text()='%s']//..//td[6]";
+    public final static String BLUE_INTERNAL_ICON_FOR_APPROPRIATE_USER_XPATH = PENDING_USERS_TABLE_XPATH + "//td[text()='%s']//..//i[@class='fa fa-user-circle text-blue']";
+    public final static String BLUE_INTERNAL_ICON_TOOLTIP_FOR_APPROPRIATE_USER_XPATH = PENDING_USERS_TABLE_XPATH + "//td[text()='%s']//..//div[@class = 'tooltip-inner']";
     public final static String NEXT_PAGINATION_BUTTON_PENDING_TAB_ID = "pending-requests-table_next";
     public final static String ENVELOPE_ICON_FOR_APPROPRIATE_USER_XPATH = PENDING_USERS_TABLE_XPATH + "//td[text()='%s']//..//td[7]/a/i";
     public final static String CONFIRMATION_POP_UP_TITLE_XPATH = "//div[@id='additional-registration-notification-modal']/div//span[2]";

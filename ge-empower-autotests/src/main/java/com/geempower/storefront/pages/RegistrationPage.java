@@ -162,4 +162,13 @@ public class RegistrationPage extends StorefrontBasePage {
         return $(By.id(CHOSEN_REGION_VALUE_ID)).getText();
     }
 
+    @Step("Is So Code Field Displayed.")
+    public boolean isSoCodeFieldDisplayed() {
+        return isDisplayed(SALES_OFFICE_CODE_INPUT_FIELD_XPATH);
+    }
+
+    @Step("Is Se Code Field Displayed.")
+    public boolean isSeCodeFieldDisplayed() {
+        return isDisplayed(SALES_ENGINEER_CODE_INPUT_FIELD_XPATH);
+    }
 }

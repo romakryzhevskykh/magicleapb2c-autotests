@@ -5,6 +5,7 @@ import com.geempower.helpers.models.Region;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
@@ -12,7 +13,8 @@ import ru.yandex.qatools.allure.annotations.Step;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.geempower.storefront.page_block_elements.IwantToBlockElements.*;
+import static com.geempower.storefront.page_block_elements.IwantToBlockElements.APPROVE_PENDING_ACCOUNTS_SECTION_TITLE_XPATH;
+import static com.geempower.storefront.page_block_elements.IwantToBlockElements.TOTAL_ACCOUNT_REQUESTS_XPATH;
 import static com.geempower.storefront.page_elements.manageUsers.ManageUsersPageElements.*;
 
 @Component
@@ -298,6 +300,12 @@ public class ManageUsersPage extends StorefrontBasePage {
         click(ENVELOPE_ICON_FOR_APPROPRIATE_USER_XPATH, userId);
     }
 
+    @Step("Is Blue Internal User Icon Displayed For User.")
+    public boolean isBlueInternalUserIconDisplayedForUser(String userId) {
+        waitUntilPageIsFullyLoaded();
+        return isDisplayed(BLUE_INTERNAL_ICON_FOR_APPROPRIATE_USER_XPATH, userId);
+    }
+
     @Step("Get Confirmation Pop-Up Title.")
     public String getConfirmationPopUpTitle() {
         waitUntilPageIsFullyLoaded();
@@ -334,5 +342,14 @@ public class ManageUsersPage extends StorefrontBasePage {
     public void clickOnAddRepCodeButtonInUserDetailBlock() {
         waitUntilPageIsFullyLoaded();
         click(ADD_REP_CODE_BUTTON_XPATH);
+    }
+
+    @Step("Hover Mouse Over Blue Icon For User.")
+    public String hoverMouseOverBlueIconForUser(String userId) {
+        Actions action = new Actions(getDriver());
+        $(BLUE_INTERNAL_ICON_FOR_APPROPRIATE_USER_XPATH, userId).click();
+        action.moveToElement($(BLUE_INTERNAL_ICON_FOR_APPROPRIATE_USER_XPATH, userId));
+        waitUntilPageIsFullyLoaded();
+        return $(BLUE_INTERNAL_ICON_TOOLTIP_FOR_APPROPRIATE_USER_XPATH, userId).getText();
     }
 }

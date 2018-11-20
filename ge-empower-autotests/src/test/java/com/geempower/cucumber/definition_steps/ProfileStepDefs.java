@@ -4,6 +4,7 @@ import com.geempower.helpers.managers.QmsService;
 import com.geempower.helpers.managers.UserManager;
 import com.geempower.helpers.models.UserEntity;
 import com.geempower.storefront.pages.ProfilePage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -128,5 +129,34 @@ public class ProfileStepDefs extends AbstractStepDefs {
         assertEquals("false", qmsUserResponse.get("qmsEnabled"));
         assertEquals("false", qmsUserResponse.get("qualityPrice"));
         assertEquals("false", qmsUserResponse.get("tinderBoxNode"));
+    }
+
+    @Then("^Alternate email (.*) and primary email (.*) adresses are displayed on User profile page.$")
+    public void alternateEmailAndPrimaryEmailAdressesAreDisplayedOnUserProfilePage(String altEmail, String primaryEmail){
+        assertEquals(primaryEmail, profilePage.getAltEmail());
+        assertEquals(altEmail, profilePage.getEmail());
+
+    }
+
+    @And("^User clicks on edit alt email pencil button.$")
+    public void userClicksOnEditAltEmailPencilButton() {
+        profilePage.userClicksOnEditAltEmailPencilButton();
+    }
+
+    @Then("^Is (.*) pop-up with text (.*) displayed.$")
+    public void isEmailAddressUpdatePopUpWithTextAbbTextDisplayed(String title, String text) {
+        assertTrue(profilePage.isEmailAddressUpdatePopUpDisplayed());
+        assertEquals(title, profilePage.getEmailAddressUpdatePopUpTitle());
+        assertEquals(text, profilePage.getEmailAddressUpdatePopUpText());
+    }
+
+    @When("^User updates alternate email to (.*).$")
+    public void userUpdatesAlternateEmailToNewAbbEmail(String newEmail) {
+        profilePage.setEmailToTheAltEmailField(newEmail);
+    }
+
+    @Then("^Is email updated to new email (.*) on User profile page.$")
+    public void isEmailUpdatedToNewEmailOnUserProfilePage(String newEmail) {
+        assertEquals(newEmail, profilePage.getEmail());
     }
 }

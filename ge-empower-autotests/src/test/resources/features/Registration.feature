@@ -1,4 +1,4 @@
-Feature: Registration flow for external, mfgrep users.
+Feature: Registration flow for external, internal, mfgrep users.
 
   Scenario Outline: Check that user is able to register as external user and then delete himself from the user's profile.
     Given Switch to Storefront as newUser.
@@ -131,9 +131,52 @@ Feature: Registration flow for external, mfgrep users.
     When User selects random Region from regions list.
     When User selects random Country from countries list.
     When User selects random Role.
+    And User fills ABB email address <abbEmail>.
+    Then Sales Office Code and Sales Engineer Code titles and fields are displayed.
+    And Create Internal User instance on registration page with values <companyName>, <userEmail>, <phoneNo>, <abbEmail>.
+    And Click on register button.
+    Then Registration successful pop-up is appeared with appropriate header Registration Successful.
+    Then User not active page is opened.
+    Given Switch to Storefront as secondEmpAdmin.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    And Refresh page.
+    Then Pending requests tab is active.
+    Then Admin is able to see user <userId> on the Pending requests tab with No Account label.
+    Then Is Blue internal user icon displayed for user <userId>.
+    Then Is ABB Employee text displayed in tooltip after hover on blue internal user icon for user <userId>.
+    When Admin opens Users tab.
+    And Sets <userId> email to the email field.
+    And Clicks on the Search button.
+    When Clicks on the user name in the table.
+    Then User details block for chosen user with <userId> userId is opened.
+    And Expand Modify an Account tab in I Want To Block.
+    When Click on Add account button in User Detail block.
+    And Select ASIA in the Region field in the Add Account pop-up.
+    And Set <account> to the Account field in the Add Account pop-up.
+    And Click on the Search button in the Add Account pop-up.
+    When Click on Select All checkbox in the Add Account pop-up.
+    And Click on Add button in the Add Account pop-up.
+    Given Switch to Storefront as newInternalUser.
+    When User clicks on the ABB logo on the userNotActive page.
+    And Profile page is opened.
+    Then Alternate email <abbEmail> and primary email <userEmail> adresses are displayed on User profile page.
+    And User clicks on edit alt email pencil button.
+    Then Is Email Address Update pop-up with text <abbText> displayed.
+    When User updates alternate email to <newAbbEmail>.
+    Then Is email updated to new email <newAbbEmail> on User profile page.
+    When User clicks on Permanently delete button.
+    And Confirm delete action in the Permanently delete user ID pop-up.
+    And Wait for index_html login page is loaded.
+    Then Login page is opened.
+    Given Switch to Storefront as secondEmpAdmin.
+    And Manage Users page is opened.
+    And Refresh page.
+    When Admin opens Users tab.
+    And Sets <userId> email to the email field.
+    And Clicks on the Search button.
+    Then There is no user in the users list table.
 
     Examples:
-      | userId    | userEmail                    | companyName      | phoneNo         | relationship                    | account |
-      | 503021114 | oleksandr.nikolaienko@ge.com | ABB test company | 645284-31234-32 | Industrial Solutions Contractor | 9012306 |
-
-
+      | userId    | userEmail                    | abbEmail                         | newAbbEmail             | companyName      | phoneNo         | relationship                    | account | abbText                                                                                                        |
+      | 503021114 | oleksandr.nikolaienko@ge.com | oleksandr.nikolaienko@in.abb.com | update.email@in.abb.com | ABB test company | 645284-31234-32 | Industrial Solutions Contractor | 9012306 | In order to better serve you, please perform this profile update by entering your new ABB email address below: |

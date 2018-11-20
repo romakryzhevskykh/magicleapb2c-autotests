@@ -7,10 +7,12 @@ import com.geempower.helpers.models.Region;
 import com.geempower.helpers.models.UserEntity;
 import com.geempower.storefront.page_blocks.IwantToBlock;
 import com.geempower.storefront.pages.ManageUsersPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.Assert;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -597,5 +599,15 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     @When("^Click on Add Rep Code button in User Detail block.$")
     public void clickOnAddRepCodeButtonInUserDetailBlock() {
         manageUsersPage.clickOnAddRepCodeButtonInUserDetailBlock();
+    }
+
+    @Then("^Is Blue internal user icon displayed for user (.*).$")
+    public void isBlueInternalUserIconDisplayedForUser(String userId){
+        assertTrue(manageUsersPage.isBlueInternalUserIconDisplayedForUser(userId));
+    }
+
+    @Then("^Is (.*) text displayed in tooltip after hover on blue internal user icon for user (.*).$")
+    public void isTextDisplayedInTooltipAfterHoverOnBlueInternalUserIconForUser(String text, String userId) {
+        Assert.assertEquals(text, manageUsersPage.hoverMouseOverBlueIconForUser(userId));
     }
 }
