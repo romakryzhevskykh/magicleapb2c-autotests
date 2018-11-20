@@ -6,7 +6,7 @@
         <parameter name="browserName" value="chrome"/>
         <parameter name="headless" value="true"/>
         <classes>
-            <!--empAdmin, externalUser2, mfgRepUser, internalUser, regionalView, caAdmin-->
+            <!--empAdmin, externalUser2, externaluser3, mfgRepUser, internalUser, regionalView-->
             <class name="com.geempower.cucumber.AccountManagementSuite"/>
             <class name="com.geempower.cucumber.SpecialPricingSuite"/>
             <class name="com.geempower.cucumber.NotificationCenterSuite"/>
@@ -42,7 +42,7 @@
         <parameter name="browserName" value="chrome"/>
         <parameter name="headless" value="true"/>
         <classes>
-            <!--secondEmpAdmin, thirdInternalUser, externalUser1 -->
+            <!--secondEmpAdmin, thirdInternalUser, externalUser1, caAdmin-->
             <class name="com.geempower.cucumber.ManageUsersSuite"/>
         </classes>
     </test>
