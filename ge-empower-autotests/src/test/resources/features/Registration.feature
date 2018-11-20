@@ -119,7 +119,7 @@ Feature: Registration flow for external, internal, mfgrep users.
       | userName | userLastName | userId      | userEmail             | companyName      | phoneNo         | relationship | userRole             | helloMessage                                                                                                                              | header                                                      | title                                                                                                                                                                     | item1                                                   | item2                                                                                                        |
       | autotest | mfgrep       | newmfguser1 | mfgrepuser@zaelab.com | ABB test company | 645284-31234-32 | manufacturer | zenithrepresentative | Hey autotest, you are registered as a Zenith Manufacturers Representative. Please allow us 24 hours to process your registration request. | Not a Zenith Rep? Select the correct Relationship and Role: | Note: You must be an existing customer or authorized representative of Industrial Solutions to use empower. If you are en existing customer or authorized representative: | Locate a distributor  near you to purchase our products | Contact us  if you are interested in becoming an Industrial Solutions customer or authorized representative. |
 
-  Scenario Outline:
+  Scenario Outline: Check that user is able to register as internal user and then delete himself from the user's profile.
     Given Switch to Storefront as newInternalUser.
     And User is logged in to Storefront.
     Then Registration page is opened.
