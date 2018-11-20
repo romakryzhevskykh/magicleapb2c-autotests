@@ -113,8 +113,8 @@ Feature: Some actions on Orders page
 
     Examples:
       | openOrderReportMessage                   | pricingOption   | userEmail            |
-      | New! Download your open orders report -> | With Pricing    | rmautotest@gmail.com |
-      | New! Download your open orders report -> | Without Pricing | rmautotest@gmail.com |
+      | Download your open orders report -> | With Pricing    | rmautotest@gmail.com |
+      | Download your open orders report -> | Without Pricing | rmautotest@gmail.com |
 
   Scenario Outline: Check that user can open Detail Orders page and verify main elements
     And Account management page is opened.
