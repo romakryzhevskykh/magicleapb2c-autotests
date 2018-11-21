@@ -1,6 +1,5 @@
 package com.geempower.cucumber.definition_steps;
 
-import com.geempower.helpers.Utils;
 import com.geempower.helpers.user_engine.HACUserRoles;
 import com.geempower.helpers.user_engine.StorefrontUserRoles;
 import com.geempower.helpers.web_engine.WebDriverSessions;
@@ -16,8 +15,6 @@ public class UserSwitchStepDefs {
     protected WebDriverSessions webDriverPool;
     @Autowired
     private TemplateHAC templateHAC;
-    @Autowired
-    private Utils utils;
 
     @Given("Switch to Storefront as externalUser1.")
     public void switchToStorefrontAsExternalUser1() {

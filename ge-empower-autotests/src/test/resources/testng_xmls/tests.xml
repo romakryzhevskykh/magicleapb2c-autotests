@@ -16,7 +16,7 @@
     </test>
     <test name="Suite2">
         <parameter name="browserName" value="chrome"/>
-        <parameter name="headless" value="false"/>
+        <parameter name="headless" value="true"/>
         <classes>
             <!--rmAdmin, firstEmpAdmin, secondInternalUser, newUser, newMfgRepUser1-->
             <class name="com.geempower.cucumber.ShipmentSuite"/>
