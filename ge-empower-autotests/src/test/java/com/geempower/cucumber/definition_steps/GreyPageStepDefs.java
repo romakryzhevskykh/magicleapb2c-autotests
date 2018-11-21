@@ -1,6 +1,8 @@
 package com.geempower.cucumber.definition_steps;
 
 import com.geempower.storefront.pages.GreyPage;
+import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,6 @@ public class GreyPageStepDefs extends AbstractStepDefs {
     public void isGreyPageOpened() {
         assertTrue(greyPage.isOpened());
     }
-
 
     @Then("^Hello message (.*) is displayed on the Grey page.$")
     public void helloHelloMessageIsDisplayedOnTheGreyPage(String helloMessage) {
@@ -56,5 +57,20 @@ public class GreyPageStepDefs extends AbstractStepDefs {
     @When("^User clicks on the ABB logo to activate himself on the Grey page.$")
     public void userClicksOnTheABBLogoToActivateHimselfOnTheGreyPage() {
         greyPage.clickOnAbbLogoToActivateUser();
+    }
+
+    @When("^User selects random relationship type except (.*) from relationship list.$")
+    public void userSelectsRandomRelationshipTypeExceptMfgFromRelationshipList(String relationship) {
+        greyPage.selectRandomRelationshipTypeExceptMfgFromRelationshipList(relationship);
+    }
+
+    @When("^User selects random role from role list.$")
+    public void userSelectsRandomRoleFromRoleList() {
+        greyPage.userSelectsRandomRoleFromRoleList();
+    }
+
+    @And("^User click on Assign button.$")
+    public void userClickOnAssignButton()  {
+        greyPage.userClickOnAssignButton();
     }
 }

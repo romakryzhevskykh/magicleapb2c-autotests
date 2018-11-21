@@ -143,4 +143,5 @@ public class RegistrationPage extends StorefrontBasePage {
     public String getChosenRegion() {
         return $(By.id(CHOSEN_REGION_VALUE_ID)).getText();
     }
+
 }
