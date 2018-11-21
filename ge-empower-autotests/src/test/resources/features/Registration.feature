@@ -176,7 +176,50 @@ Feature: Registration flow for external, internal, mfgrep users.
     And Sets <userId> email to the email field.
     And Clicks on the Search button.
     Then There is no user in the users list table.
-
     Examples:
       | userId    | userEmail                    | abbEmail                         | newAbbEmail             | companyName      | phoneNo         | relationship                    | account | abbText                                                                                                        |
       | 503021114 | oleksandr.nikolaienko@ge.com | oleksandr.nikolaienko@in.abb.com | update.email@in.abb.com | ABB test company | 645284-31234-32 | Industrial Solutions Contractor | 9012306 | In order to better serve you, please perform this profile update by entering your new ABB email address below: |
+
+  Scenario Outline: Check that manufacturer representative user can change role, will become an external user and then admin will delete the user via manage users.
+    And Dismiss sessions.
+    Given Switch to Storefront as newMfgRepUser1.
+    And User is logged in to Storefront.
+    Then Registration page is opened.
+    Then First name is equal to <userName>.
+    Then Last name is equal to <userLastName>.
+    Then User ID is equal to <userId>.
+    Then User email is equal to <userEmail>.
+    When User fills Company Name <companyName>.
+    When User fills Phone No <phoneNo>.
+    When User selects random Region from regions list.
+    When User selects random Country from countries list.
+    When User selects <relationship> Relationship to Industrial Solutions.
+    When User selects appropriate Role <userRole>.
+    Then Account information section is not displayed on the Registration page.
+    And Create User instance on registration page with values <companyName>, <userEmail>, <phoneNo>.
+    And Click on register button.
+    Then Registration successful pop-up is appeared with appropriate header Registration Successful.
+    Then Grey page is opened.
+    When User selects random relationship type except Manufacturer's Representative from relationship list.
+    When User selects random role from role list.
+    And User click on Assign button.
+    When User clicks on the ABB logo on the userNotActive page.
+    Then User not active page is opened.
+    Given Switch to Storefront as secondEmpAdmin.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    When Admin opens Users tab.
+    And Sets <userId> email to the email field.
+    And Clicks on the Search button.
+    When Clicks on the user name in the table.
+    When Admin opens Actions list.
+    And Chooses Delete User option from the actions list.
+    And Confirm delete action on manage users page.
+    And Refresh page.
+    When Admin opens Users tab.
+    And Sets <userId> email to the email field.
+    And Clicks on the Search button.
+    Then There is no user in the users list table.
+    Examples:
+      | userName | userLastName | userId      | userEmail             | companyName      | phoneNo         | relationship | userRole             |
+      | autotest | mfgrep       | newmfguser1 | mfgrepuser@zaelab.com | ABB test company | 645284-31234-32 | manufacturer | zenithrepresentative |

@@ -5,6 +5,7 @@ import com.geempower.helpers.user_engine.StorefrontUserRoles;
 import com.geempower.helpers.web_engine.WebDriverSessions;
 import com.geempower.hybris.hac.models.HacActiveNode;
 import com.geempower.hybris.hac.models.TemplateHAC;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,6 +24,11 @@ public class UserSwitchStepDefs {
     @Given("Switch to Storefront as externalUser2.")
     public void switchToStorefrontAsExternalUser2() {
         webDriverPool.setDriverActive(StorefrontUserRoles.EXTERNALUSER2);
+    }
+
+    @Given("Switch to Storefront as externalUser3.")
+    public void switchToStorefrontAsExternalUser3() {
+        webDriverPool.setDriverActive(StorefrontUserRoles.EXTERNALUSER3);
     }
 
     @Given("Switch to Storefront as caAdmin.")
@@ -114,5 +120,10 @@ public class UserSwitchStepDefs {
     @Given("Switch to Storefront as helpDesc.")
     public void switchToStorefrontAsHelpDesc() {
         webDriverPool.setDriverActive(StorefrontUserRoles.HELPDESC);
+    }
+
+    @And("^Dismiss sessions.$")
+    public void dismissSession() {
+        webDriverPool.dismissAll();
     }
 }

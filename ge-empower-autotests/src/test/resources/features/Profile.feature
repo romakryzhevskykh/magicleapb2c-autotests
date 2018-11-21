@@ -43,7 +43,7 @@ Feature: Some actions on Profile page
       | email                      | description                               | confirmation                                                       | confirmation2                          | userId          |
       | romanforcaadmin@zaelab.com | If you want to deactivate your empower ID | Are you sure you want to deactivate your user? (No data is erased) | I confirm I want to deactivate my user | romanforcaadmin |
 
-    Scenario:
+    Scenario: Check the QMS user info is equals to the info on User Profile page.
       And Profile page is opened.
       And Create User instance.
       And Get QMS response for user romanforcaadmin and save it to the hashmap.

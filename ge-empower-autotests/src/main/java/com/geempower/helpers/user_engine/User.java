@@ -24,6 +24,9 @@ public class User {
                 case "externaluser2":
                     userRole = StorefrontUserRoles.EXTERNALUSER2;
                     break;
+                case "externaluser3":
+                    userRole = StorefrontUserRoles.EXTERNALUSER3;
+                    break;
                 case "empoweradmin":
                     userRole = StorefrontUserRoles.EMPOWERADMIN;
                     break;
