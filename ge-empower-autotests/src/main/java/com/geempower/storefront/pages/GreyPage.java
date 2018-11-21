@@ -1,6 +1,8 @@
 package com.geempower.storefront.pages;
 
 import com.geempower.storefront.StorefrontBasePage;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -61,5 +63,24 @@ public class GreyPage extends StorefrontBasePage {
     public void clickOnAbbLogoToActivateUser() {
         waitUntilPageIsFullyLoaded();
         click(ABB_LOGO_XPATH);
+    }
+
+    @Step("Select Random Relationship Type Except Mfg From Relationship List.")
+    public void selectRandomRelationshipTypeExceptMfgFromRelationshipList(String relationship) {
+        click(RELATIONSHIP_FIELD_XPATH);
+        $$(ALL_RELATIONSHIP_TYPES_IN_DROP_DOWN_XPATH).stream()
+                .filter(relation -> !relation.getText().equals(relationship))
+                .findAny().ifPresent(WebElement::click);
+    }
+
+    @Step("User Selects Random Role From Role List.")
+    public void userSelectsRandomRoleFromRoleList() {
+        click(ROLE_FIELD_XPATH);
+        $$(ALL_ROLE_TYPES_IN_DROP_DOWN_XPATH).stream().findAny().ifPresent(WebElement::click);
+    }
+
+    @Step("User Click On Assign Button.")
+    public void userClickOnAssignButton() {
+        click(By.id(ASSIGN_BUTTON_ID));
     }
 }
