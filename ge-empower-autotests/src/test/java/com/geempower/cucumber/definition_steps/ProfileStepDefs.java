@@ -134,7 +134,6 @@ public class ProfileStepDefs extends AbstractStepDefs {
     public void alternateEmailAndPrimaryEmailAdressesAreDisplayedOnUserProfilePage(String altEmail, String primaryEmail){
         assertEquals(primaryEmail, profilePage.getAltEmail());
         assertEquals(altEmail, profilePage.getEmail());
-
     }
 
     @And("^User clicks on edit alt email pencil button.$")

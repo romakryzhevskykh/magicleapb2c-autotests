@@ -132,7 +132,7 @@ Feature: Registration flow for external, internal, mfgrep users.
     When User selects random Country from countries list.
     When User selects random Role.
     And User fills ABB email address <abbEmail>.
-    Then Sales Office Code and Sales Engineer Code titles and fields are displayed.
+    Then SO code Sales Office Code and SE code Sales Engineer Code titles and fields are displayed.
     And Create Internal User instance on registration page with values <companyName>, <userEmail>, <phoneNo>, <abbEmail>.
     And Click on register button.
     Then Registration successful pop-up is appeared with appropriate header Registration Successful.

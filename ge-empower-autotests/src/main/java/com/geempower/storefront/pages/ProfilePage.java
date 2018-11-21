@@ -181,7 +181,6 @@ public class ProfilePage extends StorefrontBasePage {
     public void setEmailToTheAltEmailField(String newEmail) {
         $(By.id(ALT_EMAIL_INPUT_FIELD_IN_EMAIL_ADDRESS_UPDATE_POP_UP_ID)).clear();
         $(By.id(ALT_EMAIL_INPUT_FIELD_IN_EMAIL_ADDRESS_UPDATE_POP_UP_ID)).sendKeys(newEmail);
-        click(SAVE_UPDATE_BUTTON_IN_EMAIL_ADDRESS_UPDATE_POP_UP_ID);
-
+        click(SAVE_UPDATE_BUTTON_IN_EMAIL_ADDRESS_UPDATE_POP_UP_XPATH);
     }
 }

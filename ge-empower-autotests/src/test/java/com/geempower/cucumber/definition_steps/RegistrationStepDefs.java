@@ -54,7 +54,6 @@ public class RegistrationStepDefs extends AbstractStepDefs {
     @When("^User fills ABB email address (.*).$")
     public void userFillsAbbEmailAddress(String abbEmail) {
         registrationPage.setAbbEmail(abbEmail);
-
     }
 
     @When("^User selects random Region from regions list.$")
@@ -107,7 +106,7 @@ public class RegistrationStepDefs extends AbstractStepDefs {
         assertEquals(relationship, registrationPage.getRelationshipValue());
     }
 
-    @Then("^(.*) and (.*) titles and fields are displayed.$")
+    @Then("^SO code (.*) and SE code (.*) titles and fields are displayed.$")
     public void salesOfficeCodeAndSalesEngineerCodeTitlesAndFieldsAreDisplayed(String soCode, String seCode) {
         assertEquals(soCode, registrationPage.getSoCodeTitle());
         assertEquals(seCode, registrationPage.getSeCodeTitle());

@@ -11,7 +11,6 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.testng.Assert;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -607,6 +606,6 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
 
     @Then("^Is (.*) text displayed in tooltip after hover on blue internal user icon for user (.*).$")
     public void isTextDisplayedInTooltipAfterHoverOnBlueInternalUserIconForUser(String text, String userId) {
-        Assert.assertEquals(text, manageUsersPage.hoverMouseOverBlueIconForUser(userId));
+        assertEquals(text, manageUsersPage.hoverMouseOverBlueIconForUser(userId));
     }
 }
