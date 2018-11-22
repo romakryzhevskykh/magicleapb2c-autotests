@@ -13,9 +13,9 @@ public class BackofficeMainPageStepDefs extends AbstractStepDefs {
     @Autowired
     private BackofficeMainPage backofficeMainPage;
 
-    @Then("^Commerce logo is displayed on the main backoffice page.$")
+    @And("^Commerce logo is displayed on the main backoffice page.$")
     public void checkThatCommerceLogoIsDisplayedOnTheMainBackofficePage() {
-        assertTrue(backofficeMainPage.isCommerceLogoDisplayed(), "Main Backoffice page wasn't opened.");
+        backofficeMainPage.isCommerceLogoDisplayed();
     }
 
     @When("^Admin opens Users tab in Backoffice.$")
