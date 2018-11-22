@@ -107,9 +107,9 @@ public class RegistrationStepDefs extends AbstractStepDefs {
     }
 
     @Then("^SO code (.*) and SE code (.*) titles and fields are displayed.$")
-    public void salesOfficeCodeAndSalesEngineerCodeTitlesAndFieldsAreDisplayed(String soCode, String seCode) {
-        assertEquals(soCode, registrationPage.getSoCodeTitle());
-        assertEquals(seCode, registrationPage.getSeCodeTitle());
+    public void salesOfficeCodeAndSalesEngineerCodeTitlesAndFieldsAreDisplayed(String soCodeTitle, String seCodeTitle) {
+        assertEquals(soCodeTitle, registrationPage.getSoCodeTitle());
+        assertEquals(seCodeTitle, registrationPage.getSeCodeTitle());
         assertTrue(registrationPage.isSoCodeFieldDisplayed());
         assertTrue(registrationPage.isSeCodeFieldDisplayed());
     }
