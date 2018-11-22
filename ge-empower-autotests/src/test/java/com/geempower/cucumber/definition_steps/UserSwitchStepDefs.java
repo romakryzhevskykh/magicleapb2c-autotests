@@ -1,5 +1,6 @@
 package com.geempower.cucumber.definition_steps;
 
+import com.geempower.helpers.user_engine.BackofficeUserRoles;
 import com.geempower.helpers.user_engine.HACUserRoles;
 import com.geempower.helpers.user_engine.StorefrontUserRoles;
 import com.geempower.helpers.web_engine.WebDriverSessions;
@@ -59,6 +60,11 @@ public class UserSwitchStepDefs {
     @Given("Switch to Storefront as thirdInternalUser.")
     public void switchToStorefrontAsThirdInternalUser() {
         webDriverPool.setDriverActive(StorefrontUserRoles.INTERNALUSER2);
+    }
+
+    @Given("Switch to Backoffice as admin.")
+    public void switchToBackofficeAsAdmin() {
+        webDriverPool.setDriverActive(BackofficeUserRoles.ADMIN);
     }
 
     @Given("Switch to Storefront as internalUser.")

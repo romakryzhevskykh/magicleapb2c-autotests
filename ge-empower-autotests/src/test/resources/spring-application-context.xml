@@ -9,6 +9,7 @@
     ">
     <context:component-scan base-package="com.geempower.storefront.pages"/>
     <context:component-scan base-package="com.geempower.hybris.hac.pages"/>
+    <context:component-scan base-package="com.geempower.hybris.backoffice.pages"/>
     <context:component-scan base-package="com.geempower.storefront.page_blocks"/>
     <context:component-scan base-package="com.geempower.helpers"/>
     <!--<context:component-scan base-package="com.geempower.helpers.managers"/>-->

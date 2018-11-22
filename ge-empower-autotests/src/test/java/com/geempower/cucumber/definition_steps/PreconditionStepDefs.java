@@ -1,9 +1,11 @@
 package com.geempower.cucumber.definition_steps;
 
 import com.geempower.helpers.managers.LessonLyService;
+import com.geempower.helpers.user_engine.BackofficeUserRoles;
 import com.geempower.helpers.user_engine.HACUserRoles;
 import com.geempower.helpers.user_engine.StorefrontUserRoles;
 import com.geempower.helpers.web_engine.WebDriverSessions;
+import com.geempower.hybris.backoffice.pages.BackofficeLoginPage;
 import com.geempower.hybris.hac.models.HacActiveNode;
 import com.geempower.hybris.hac.models.TemplateHAC;
 import com.geempower.hybris.hac.pages.ConfigurationPropertiesPage;
@@ -15,6 +17,7 @@ import com.geempower.storefront.pages.order.OrdersPage;
 import com.geempower.storefront.pages.product.ProductsPage;
 import com.geempower.storefront.pages.rebate.RebatesPage;
 import com.geempower.storefront.pages.returns.ReturnsPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +71,8 @@ public class PreconditionStepDefs extends AbstractStepDefs {
     private ConfigurationPropertiesPage configurationPropertiesPage;
     @Autowired
     private LessonLyService lessonLyService;
+    @Autowired
+    private BackofficeLoginPage backofficeLoginPage;
 
     @Given("^User is logged in to Storefront.$")
     public void userIsLoggedInToStorefront() {
@@ -92,6 +97,17 @@ public class PreconditionStepDefs extends AbstractStepDefs {
         hacLoginPage.waitUntilPageIsFullyLoaded();
         if (hacLoginPage.isOpened()) {
             hacLoginPage.loginToHac(userSessions.getActiveUserSession());
+        }
+    }
+
+    @Given("^Admin is logged in to Backoffice.$")
+    public void adminIsLoggedInToBackoffice() {
+        backofficeLoginPage.open();
+        if (ssoLoginPage.isOpened())
+            ssoLoginPage.loginToStorefront(userSessions.getUsersList().stream().filter(user -> user.getUserRole().equals(StorefrontUserRoles.INTERNALUSER2)).findAny().get());
+        backofficeLoginPage.waitUntilPageIsFullyLoaded();
+        if (backofficeLoginPage.isOpened()) {
+            backofficeLoginPage.loginToBackoffice(userSessions.getActiveUserSession());
         }
     }
 
