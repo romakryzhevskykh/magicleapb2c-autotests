@@ -10,12 +10,12 @@ public class ConfigurationPropertiesPageStepDefs extends AbstractStepDefs {
     private ConfigurationPropertiesPage configurationPropertiesPage;
 
     @And("^Search configuration property by name (.*).$")
-    public void searchConfigurationPropertyByName(String propertyName){
+    public void searchConfigurationPropertyByName(String propertyName) {
         configurationPropertiesPage.searchPropertyByPropertyName(propertyName);
     }
 
     @And("^Set new property value (.*).$")
-    public void setNewPropertyValue(String propertyValue){
+    public void setNewPropertyValue(String propertyValue) {
         configurationPropertiesPage.setNewPropertyValue(propertyValue);
     }
 }

@@ -8,7 +8,8 @@ import java.util.ArrayList;
 @Component
 public class UserSessions {
 
-    @Autowired private ArrayList<User> usersList;
+    @Autowired
+    private ArrayList<User> usersList;
     private InheritableThreadLocal<ArrayList<UserSession>> tlUserSession = new InheritableThreadLocal<>();
 
     private UserSessionFactory userFactory = new UserSessionFactory();

@@ -174,4 +174,47 @@ public abstract class UIComponent {
         }
         return text;
     }
+
+    protected void enterText(String text, By by) {
+        waitUntilElementIsVisible(by);
+        $(by).clear();
+        $(by).sendKeys(text);
+        blurElement($(by));
+    }
+
+    protected void enterText(String text, String xpath, String... args) {
+        waitUntilElementIsVisible(xpath, args);
+        $(xpath, args).clear();
+        $(xpath, args).sendKeys(text);
+        blurElement($(xpath, args));
+    }
+
+    @Step("Wait until element is visible {0}.")
+    public void waitUntilElementIsVisible(String xpath, String... args) {
+        waitUntil(driver1 -> isDisplayed(xpath, args));
+    }
+
+    protected void blurElement(WebElement webElement) {
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        js.executeScript("arguments[0].focus(); arguments[0].blur(); return true", webElement);
+    }
+
+    public void waitUntil(ExpectedCondition<Boolean> expectedCondition) {
+        WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getTimeOut());
+        try {
+            wait.until(expectedCondition);
+        } catch (UnhandledAlertException ex) {
+            System.out.println("[ERROR]: " + ex);
+        }
+        try {
+            Thread.sleep((long) (1000 * webDriverPool.getActiveDriverSession().getShortTimeOut() / 10));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Step("Wait until element is visible {0}.")
+    public void waitUntilElementIsVisible(By by) {
+        waitUntil(driver1 -> isDisplayed(by));
+    }
 }

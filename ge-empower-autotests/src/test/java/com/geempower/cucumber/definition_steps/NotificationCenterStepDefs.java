@@ -126,7 +126,7 @@ public class NotificationCenterStepDefs extends AbstractStepDefs {
                     response.has("skip_confirmation_notification") &&
                     response.has("email"));
         } else if (threadVarsHashMap.getString(TestKeyword.SYSTEM_STATUS_TOGGLE_POSITION).equals("OFF")) {
-            assertTrue(statusPageService.getUserByEmailFromStatusPageService(email).length() == 0);
+            assertTrue(statusPageService.getUserByEmailFromStatusPageService(email).length() == 0, "User with email:" + email + " has not been deleted from Status Page service!!");
         }
     }
 }

@@ -87,12 +87,6 @@ public class User {
                 case "admin":
                     userRole = BackofficeUserRoles.ADMIN;
                     break;
-                case "warehouse agent":
-                    userRole = BackofficeUserRoles.WAREHOUSE_AGENT;
-                    break;
-                case "customer support agent":
-                    userRole = BackofficeUserRoles.CUSTOMER_SUPPORT_AGENT;
-                    break;
                 default:
                     userRole = null;
                     break;
