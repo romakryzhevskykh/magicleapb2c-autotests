@@ -598,4 +598,14 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     public void clickOnAddRepCodeButtonInUserDetailBlock() {
         manageUsersPage.clickOnAddRepCodeButtonInUserDetailBlock();
     }
+
+    @Then("^Is Blue internal user icon displayed for user (.*).$")
+    public void isBlueInternalUserIconDisplayedForUser(String userId){
+        assertTrue(manageUsersPage.isBlueInternalUserIconDisplayedForUser(userId));
+    }
+
+    @Then("^Is (.*) text displayed in tooltip after hover on blue internal user icon for user (.*).$")
+    public void isTextDisplayedInTooltipAfterHoverOnBlueInternalUserIconForUser(String text, String userId) {
+        assertEquals(text, manageUsersPage.hoverMouseOverBlueIconForUser(userId));
+    }
 }

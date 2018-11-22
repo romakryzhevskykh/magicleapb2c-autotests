@@ -67,6 +67,11 @@ public class UserSwitchStepDefs {
         webDriverPool.setDriverActive(StorefrontUserRoles.INTERNALUSER2);
     }
 
+    @Given("Switch to Storefront as newInternalUser.")
+    public void switchToStorefrontAsNewInternalUser() {
+        webDriverPool.setDriverActive(StorefrontUserRoles.NEWINTERNALUSER);
+    }
+
     @Given("Switch to Storefront as internalUser.")
     public void switchToStorefrontAsInternalUser() {
         webDriverPool.setDriverActive(StorefrontUserRoles.INTERNALUSER);
