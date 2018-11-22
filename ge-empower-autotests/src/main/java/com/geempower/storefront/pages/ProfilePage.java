@@ -58,6 +58,7 @@ public class ProfilePage extends StorefrontBasePage {
 
     @Step("Get Email from user's profile.")
     public String getEmail() {
+        waitUntilPageIsFullyLoaded();
         return $(USER_EMAIL_ADDRESS_XPATH).getText();
     }
 
@@ -154,5 +155,32 @@ public class ProfilePage extends StorefrontBasePage {
         click(CHECKBOX_PERMANENTLY_DELETE_ACTION_POP_UP_XPATH);
         waitUntilPageIsFullyLoaded();
         click(By.id(CONFIRM_PERMANENTLY_DELETE_ACTION_BUTTON_IN_POP_UP_ID));
+    }
+
+    @Step("User Clicks On Edit Alt Email Pencil Button.")
+    public void userClicksOnEditAltEmailPencilButton() {
+        click(EDIT_ALT_EMAIL_PENCIL_BUTTON_XPATH);
+    }
+
+    @Step("Is Email Address Update PopUp Displayed.")
+    public boolean isEmailAddressUpdatePopUpDisplayed() {
+        return isDisplayed(EMAIL_ADDRESS_UPDATE_POP_UP_TITLE_XPATH);
+    }
+
+    @Step("Get Email Address Update PopUp Title.")
+    public String getEmailAddressUpdatePopUpTitle() {
+        return $(EMAIL_ADDRESS_UPDATE_POP_UP_TITLE_XPATH).getText();
+    }
+
+    @Step("Get Email Address Update PopUp Text.")
+    public String getEmailAddressUpdatePopUpText() {
+        return $(EMAIL_ADDRESS_UPDATE_POP_UP_TEXT_XPATH).getText();
+    }
+
+    @Step("Set Email To The Add Email Field.")
+    public void setEmailToTheAltEmailField(String newEmail) {
+        $(By.id(ALT_EMAIL_INPUT_FIELD_IN_EMAIL_ADDRESS_UPDATE_POP_UP_ID)).clear();
+        $(By.id(ALT_EMAIL_INPUT_FIELD_IN_EMAIL_ADDRESS_UPDATE_POP_UP_ID)).sendKeys(newEmail);
+        click(SAVE_UPDATE_BUTTON_IN_EMAIL_ADDRESS_UPDATE_POP_UP_XPATH);
     }
 }

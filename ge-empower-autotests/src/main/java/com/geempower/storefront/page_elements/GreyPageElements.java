@@ -9,4 +9,9 @@ public class GreyPageElements {
     public static final String FOOTER_TITLE_ITEM1_XPATH = "//div[@class='accRequestPageWrap']/div[2]";
     public static final String FOOTER_TITLE_ITEM2_XPATH = "//div[@class='accRequestPageWrap']/div[3]";
     public static final String ABB_LOGO_XPATH = "//div[@class='navbar-brand']/a";
+    public static final String RELATIONSHIP_FIELD_XPATH = "//span[contains(@id,'userRelationType')]";
+    public static final String ALL_RELATIONSHIP_TYPES_IN_DROP_DOWN_XPATH = "//li[contains(@id,'userRelationType-result')]";
+    public static final String ROLE_FIELD_XPATH = "//span[contains(@id,'role')]";
+    public static final String ALL_ROLE_TYPES_IN_DROP_DOWN_XPATH = "//li[contains(@id,'role')]";
+    public static final String ASSIGN_BUTTON_ID = "page-for-zenith-sub-btn";
 }

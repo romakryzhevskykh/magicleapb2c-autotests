@@ -42,7 +42,7 @@ Feature: Some actions with toggles, UI components on the Notification Center pag
 
   Scenario Outline: Check that admin is able to switch OFF the System Status toggle and then switch ON.
     Given Set true value for lessonly.enabled property on HAC f1, HAC f2.
-    Given Switch to Storefront as internalUser.
+    Given Switch to Storefront as caAdmin.
     And User is logged in to Storefront.
     And Notification Center page is opened.
     And Current System Status toggle position is saved to the threadVarsHashMap.
@@ -60,4 +60,4 @@ Feature: Some actions with toggles, UI components on the Notification Center pag
 
     Examples:
       | email                   |
-      | romanlessonly@gmail.com |
+      | testcaadmin@yopmail.com |

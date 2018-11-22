@@ -24,6 +24,9 @@ public class User {
                 case "externaluser2":
                     userRole = StorefrontUserRoles.EXTERNALUSER2;
                     break;
+                case "externaluser3":
+                    userRole = StorefrontUserRoles.EXTERNALUSER3;
+                    break;
                 case "empoweradmin":
                     userRole = StorefrontUserRoles.EMPOWERADMIN;
                     break;
@@ -35,6 +38,9 @@ public class User {
                     break;
                 case "internaluser2":
                     userRole = StorefrontUserRoles.INTERNALUSER2;
+                    break;
+                case "newinternaluser":
+                    userRole = StorefrontUserRoles.NEWINTERNALUSER;
                     break;
                 case "regionalview":
                     userRole = StorefrontUserRoles.REGIONALVIEW;

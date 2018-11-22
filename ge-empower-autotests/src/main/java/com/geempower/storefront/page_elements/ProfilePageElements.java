@@ -25,4 +25,10 @@ public class ProfilePageElements {
     public final static String PERMANENTLY_DELETE_MY_USER_ID_XPATH = "//button[@data-target='#delete-my-account-modal']";
     public final static String CHECKBOX_PERMANENTLY_DELETE_ACTION_POP_UP_XPATH = "//div[@id='delete-my-account-modal']//div[@class='icheckbox_minimal-purple']";
     public final static String CONFIRM_PERMANENTLY_DELETE_ACTION_BUTTON_IN_POP_UP_ID = "delete-my-account";
+    public final static String EDIT_ALT_EMAIL_PENCIL_BUTTON_XPATH = "//i[@class='fas fa-pencil-alt']";
+    public final static String EMAIL_ADDRESS_UPDATE_POP_UP_XPATH = "//div[@id='change-email-modal']//div[@class= 'modal-content']";
+    public final static String EMAIL_ADDRESS_UPDATE_POP_UP_TITLE_XPATH = "//div[@id='change-email-modal']//h4";
+    public final static String EMAIL_ADDRESS_UPDATE_POP_UP_TEXT_XPATH = "//div[@id='change-email-modal']//div[@class='modal-body']/div/p";
+    public final static String ALT_EMAIL_INPUT_FIELD_IN_EMAIL_ADDRESS_UPDATE_POP_UP_ID = "alternateEmail";
+    public final static String SAVE_UPDATE_BUTTON_IN_EMAIL_ADDRESS_UPDATE_POP_UP_XPATH = "//button[@id='save-alternate-email' and not(@disabled)]";
 }

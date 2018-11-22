@@ -51,6 +51,11 @@ public class RegistrationStepDefs extends AbstractStepDefs {
         registrationPage.setPhoneNo(phoneNo);
     }
 
+    @When("^User fills ABB email address (.*).$")
+    public void userFillsAbbEmailAddress(String abbEmail) {
+        registrationPage.setAbbEmail(abbEmail);
+    }
+
     @When("^User selects random Region from regions list.$")
     public void userSelectsRandomRegionFromRegionsList() {
         registrationPage.selectRandomRegionFromRegionsList();
@@ -87,6 +92,26 @@ public class RegistrationStepDefs extends AbstractStepDefs {
         userManager.createUserInstance(registrationPage.getUserNameValue(), registrationPage.getUserLastNameValue(), registrationPage.getUserIdValue(),
                 threadVarsHashMap.getString(TestKeyword.CHOSEN_USER_ROLE_ON_REGISTRATION_PAGE), companyName, userEmail, phoneNo,
                 registrationPage.getDefaultLanguage(), registrationPage.getRelationshipValue(), registrationPage.getChosenRegion());
+    }
+
+    @And("^Create Internal User instance on registration page with values (.*), (.*), (.*), (.*).$")
+    public void createUserInstanceOnRegistrationPage(String companyName, String userEmail, String phoneNo, String altEmail) {
+        userManager.createUserInstance(registrationPage.getUserNameValue(), registrationPage.getUserLastNameValue(), registrationPage.getUserIdValue(),
+                threadVarsHashMap.getString(TestKeyword.CHOSEN_USER_ROLE_ON_REGISTRATION_PAGE), companyName, userEmail, phoneNo,
+                registrationPage.getDefaultLanguage(), registrationPage.getRelationshipValue(), registrationPage.getChosenRegion(), altEmail);
+    }
+
+    @Then("^User relationship to Industrial Solution is equal to (.*).$")
+    public void userRelationshipToIndustrialSolutionIsEqualToRelationship(String relationship) {
+        assertEquals(relationship, registrationPage.getRelationshipValue());
+    }
+
+    @Then("^SO code (.*) and SE code (.*) titles and fields are displayed.$")
+    public void salesOfficeCodeAndSalesEngineerCodeTitlesAndFieldsAreDisplayed(String soCodeTitle, String seCodeTitle) {
+        assertEquals(soCodeTitle, registrationPage.getSoCodeTitle());
+        assertEquals(seCodeTitle, registrationPage.getSeCodeTitle());
+        assertTrue(registrationPage.isSoCodeFieldDisplayed());
+        assertTrue(registrationPage.isSeCodeFieldDisplayed());
     }
 
     @When("^User selects appropriate Role (.*).$")
