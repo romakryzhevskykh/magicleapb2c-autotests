@@ -35,3 +35,60 @@ Feature: Some actions on Account Management page as admin
     When User selects random favorites account.
     Then Dashboard page is opened.
     Then Previously chosen account is displayed on the account info dropdown.
+
+  Scenario Outline: Check that account with stopbook value Z9 contains correct icon with tooltip and message in account drop-down.
+    And Account management page is opened.
+    When Choose North_America region.
+    And Select account 2057V01.
+    When User hover mouse over red certificate icon.
+    Then Is tooltip text <tooltipText> displayed in stopship/stopbook tooltip.
+    And Click on account with USS1 sales division.
+    And Dashboard page is opened.
+    When Click on Skip button.
+    Then Is red triangle icon displayed near account no.
+    When User opens account info dropdown.
+    Then Is account info drop down message <accountPopUpMessage> displayed in red block.
+    When User clicks on HERE link.
+    Then Is title Expired TAX Certificate in expired tax pop up displayed.
+    Then Is main text <text> displayed in expired TAX Certificate pop up.
+    When User clicks on Dismiss button.
+    Then Is expired tax pop up not displayed.
+
+    Examples:
+      | tooltipText                                | accountPopUpMessage                               | text                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+      | Expired TAX Certificate: Click for details | TAX Certificate expired - Click HERE for details. | A tax exemption certificate is required on your account. Please send a properly signed and dated exemption certificate for every state you ship to (for which you plan to claim exemption status) to US-EPISTaxTeam@abb.com \n For GEIS United States accounts - The certificate should be made out to: \n Industrial Connections & Solutions, LLC. \n For Zenith United States accounts - The certificate should be made out to: \n Zenith Controls, Inc. |
+
+
+  Scenario Outline: Check that account with stopbook any value except Z9 contains correct icon with tooltip and message in account drop-down.
+    And Account management page is opened.
+    When Choose ASIA region.
+    And Select account 1000202.
+    When User hover mouse over red triangle icon.
+    Then Is tooltip text <tooltipText> displayed in stopship/stopbook tooltip.
+    And Click on account with CNS1 sales division.
+    And Dashboard page is opened.
+    When Click on Skip button.
+    Then Is red triangle icon displayed near account no.
+    When User opens account info dropdown.
+    Then Is account info drop down message <accountPopUpMessage> displayed in red block.
+
+    Examples:
+      | tooltipText                                                                                            | accountPopUpMessage                                                                                    |
+      | This account is on Order Block: pricing and ordering are unavailable. Please contact customer service. | This account is on Order Block, pricing and ordering are unavailable. Please contact customer service. |
+
+  Scenario Outline: Check that account with not empty stopship value contains correct icon with tooltip and message in account drop-down.
+    And Account management page is opened.
+    When Choose EMEA region.
+    And Select account 9000131.
+    When User hover mouse over red triangle icon.
+    Then Is tooltip text <tooltipText> displayed in stopship/stopbook tooltip.
+    And Click on account with TRS1 sales division.
+    And Dashboard page is opened.
+    When Click on Skip button.
+    Then Is red triangle icon displayed near account no.
+    When User opens account info dropdown.
+    Then Is account info drop down message <accountPopUpMessage> displayed in red block.
+
+    Examples:
+      | tooltipText                                                                                                                       | accountPopUpMessage                                                                                                               |
+      | This account is on Delivery Block: pricing and ordering are allowed, but shipments will be held. Please contact customer service. | This account is on Delivery Block, pricing and ordering are allowed, but shipments will be held. Please contact customer service. |

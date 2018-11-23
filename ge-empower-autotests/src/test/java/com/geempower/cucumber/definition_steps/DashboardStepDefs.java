@@ -269,4 +269,40 @@ public class DashboardStepDefs extends AbstractStepDefs {
         selectedProducts.put(productManager.getProductWithAllDataByRegionAndCatalogNo(userSessions.getActiveUserSession(), chosenRegion, catalogNo), 0);
         threadVarsHashMap.put(TestKeyword.SELECTED_PRODUCTS, selectedProducts);
     }
+
+    @Then("Is account info drop down message (.*) displayed in red block.")
+    public void isAppropriateAccountInfoDropDownMessageDisplayedInRedBlock(String dropDownMessage) {
+        assertEquals(dropDownMessage, dashboardPage.getAccountInfoDropDownMessageInRedBlock());
+    }
+
+    @Then("^Is red triangle icon displayed near account no.$")
+    public void isRedTriangleIconDisplayedNearAccountNo() {
+        assertTrue(dashboardPage.isRedTriangleIconDisplayedNearAccountNo());
+    }
+
+    @Then("^Is title (.*) in expired tax pop up displayed.$")
+    public void isExpiredTaxCertificateWithTitleDisplayed(String title) {
+        assertTrue(dashboardPage.isExpiredTaxCertPopUpDisplayed());
+        assertEquals(title, dashboardPage.getExpiredTaxCertPopUpTitle());
+    }
+
+    @When("^User clicks on HERE link.$")
+    public void userClicksOnHereLink() {
+        dashboardPage.userClicksOnHereLink();
+    }
+
+    @Then("^Is main text (.*) displayed in expired TAX Certificate pop up.$")
+    public void isMainTextDisplayedInExpiredTAXCertificatePopUp(String mainText) {
+        assertEquals(mainText, dashboardPage.getMainTextInExpiredTAXCertificatePopUp());
+    }
+
+    @When("^User clicks on Dismiss button.$")
+    public void userClicksOnDismissButton() {
+        dashboardPage.userClicksOnDismissButton();
+    }
+
+    @Then("^Is expired tax pop up not displayed.$")
+    public void isExpiredTaxPopUpNotDisplayed() {
+        assertFalse(dashboardPage.isExpiredTaxCertPopUpDisplayed());
+    }
 }

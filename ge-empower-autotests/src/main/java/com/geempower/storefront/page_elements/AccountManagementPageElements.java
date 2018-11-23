@@ -51,6 +51,9 @@ public class AccountManagementPageElements {
     public final static String COUNT_OF_FAVORITE_ACCOUNTS_ON_FAVORITES_TAB_ID = "favoritesTable_info";
     public final static String LIST_OF_NOT_FAVORITES_ACCOUNTS_XPATH = "//tr[td[@class=' table-visible-lg-block']//i[@class='fa-star far']]/td[2]/a";
     public final static String NOT_FAVORITE_ACCOUNT_STAR_ICON_XPATH = "//tr/td[2]/a[contains(@href, '%s')]/../../td[@class=' table-visible-lg-block']/ul//i[@class='fa-star far']";
+    public final static String RED_EXCLAMATION_TRIANGLE_ICON_XPATH = "//*[@id='activeRequestsTable']//i[@class='fas fa-exclamation-triangle']";
+    public final static String RED_CERTIFICATION_ICON_XPATH = "//i[@class='far fa-file-certificate']";
+    public final static String STOP_BOOK_STOP_SHIP_TOOLTIP_TEXT_XPATH = "//div[@class='popover-content']";
     //Request Account pop-up
     public final static String SALES_OFFICE_CODE_FIELD_ID = "requestSalesOfficeCode";
     public final static String SALES_ENGINEER_CODE_FIELD_ID = "requestSalesEngCode";
