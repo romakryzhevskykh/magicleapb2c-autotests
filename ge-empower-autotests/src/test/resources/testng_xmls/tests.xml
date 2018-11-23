@@ -12,7 +12,7 @@
             <class name="com.geempower.cucumber.NotificationCenterSuite"/>
             <class name="com.geempower.cucumber.RebatesSuite"/>
             <class name="com.geempower.cucumber.ReturnsSuite"/>
-            <class name="com.geempower.cucumber.BackofficeSuite"/>
+            <!--<class name="com.geempower.cucumber.BackofficeSuite"/>-->
         </classes>
     </test>
     <test name="Suite2">
