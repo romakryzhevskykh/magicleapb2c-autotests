@@ -4,7 +4,7 @@
 <suite name="Suite1" parallel="tests">
     <test name="Suite1">
         <parameter name="browserName" value="chrome"/>
-        <parameter name="headless" value="false"/>
+        <parameter name="headless" value="true"/>
         <classes>
             <!--empAdmin, caAdmin, externalUser2, mfgRepUser, internalUser, regionalView-->
             <class name="com.geempower.cucumber.AccountManagementSuite"/>
