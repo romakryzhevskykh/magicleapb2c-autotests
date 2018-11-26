@@ -318,4 +318,19 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
         });
         threadVarsHashMap.put(TestKeyword.CHOSEN_FAVORITE_ACCOUNT, chosenAccount);
     }
+
+    @When("^User hover mouse over red triangle icon.$")
+    public void userHoverMouseOverRedTriangleIcon() {
+        accountManagementPage.userHoverMouseOverRedTriangleIcon();
+    }
+
+    @When("^User hover mouse over red certificate icon.$")
+    public void userHoverMouseOverRedCertificateIcon() {
+        accountManagementPage.userHoverMouseOverRedCertificateIcon();
+    }
+
+    @Then("^Is tooltip text (.*) displayed in stopship/stopbook tooltip.$")
+    public void isTooltipTextDisplayedInStopshipStopbookTooltip(String tooltipText) {
+        assertEquals(tooltipText, accountManagementPage.getStopBookStopShipTooltipText());
+    }
 }

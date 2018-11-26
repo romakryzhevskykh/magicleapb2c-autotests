@@ -340,4 +340,21 @@ public class AccountManagementPage extends StorefrontBasePage {
     public String getNoDataTitleFromAccountsTable() {
         return $(APPROVED_ACCOUNTS_TABLE_XPATH).getText();
     }
+
+    @Step("User Hover Mouse Over Red Triangle Icon.")
+    public void userHoverMouseOverRedTriangleIcon() {
+        waitUntilPageIsFullyLoaded();
+        moveToElement($(RED_EXCLAMATION_TRIANGLE_ICON_XPATH));
+    }
+
+    @Step("User Hover Mouse Over Red Certificate Icon.")
+    public void userHoverMouseOverRedCertificateIcon() {
+        waitUntilPageIsFullyLoaded();
+        moveToElement($(RED_CERTIFICATION_ICON_XPATH));
+    }
+
+    @Step("Get Stopbook Stopship Tooltip Text.")
+    public String getStopBookStopShipTooltipText() {
+        return $(STOP_BOOK_STOP_SHIP_TOOLTIP_TEXT_XPATH).getText();
+    }
 }

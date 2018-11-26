@@ -5,7 +5,6 @@ import com.geempower.helpers.models.Region;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
@@ -345,9 +344,8 @@ public class ManageUsersPage extends StorefrontBasePage {
 
     @Step("Hover Mouse Over Blue Icon For User.")
     public String hoverMouseOverBlueIconForUser(String userId) {
-        Actions action = new Actions(getDriver());
         click(BLUE_INTERNAL_ICON_FOR_APPROPRIATE_USER_XPATH, userId);
-        action.moveToElement($(BLUE_INTERNAL_ICON_FOR_APPROPRIATE_USER_XPATH, userId));
+        moveToElement($(BLUE_INTERNAL_ICON_FOR_APPROPRIATE_USER_XPATH, userId));
         waitUntilPageIsFullyLoaded();
         return $(BLUE_INTERNAL_ICON_TOOLTIP_FOR_APPROPRIATE_USER_XPATH, userId).getText();
     }

@@ -165,4 +165,41 @@ public class DashboardPage extends StorefrontBasePage {
     public List<WebElement> getListOfFavoriteAccountsFromAccountInfoDropdown() {
         return $$(LIST_OF_FAVORITE_ACCOUNTS_XPATH);
     }
+
+    @Step("Get Account info drop down message In Red Block.")
+    public String getAccountInfoDropDownMessageInRedBlock() {
+        return $(ACCOUNT_INFO_DROPDOWN_MESSAGE_IN_RED_BLOCK_IN_XPATH).getText();
+    }
+
+    @Step("Is Red Triangle Icon Displayed Near Account No.")
+    public boolean isRedTriangleIconDisplayedNearAccountNo() {
+        waitUntilPageIsFullyLoaded();
+        return isDisplayed(RED_TRIANGLE_ICON_NEAR_ACCOUNT_NO_XPATH);
+    }
+
+    @Step("Get Expired Tax Cert Pop Up Title.")
+    public String getExpiredTaxCertPopUpTitle() {
+        return $(EXPIRED_TAX_CERT_POP_UP_TITLE_XPATH ).getText();
+    }
+
+    @Step("Is Expired Tax Cert Pop Up Displayed.")
+    public boolean isExpiredTaxCertPopUpDisplayed() {
+        waitUntilPageIsFullyLoaded();
+        return isDisplayed(EXPIRED_TAX_CERT_POP_UP_XPATH);
+    }
+
+    @Step("User Clicks On Here Link.")
+    public void userClicksOnHereLink() {
+        click(By.id(HERE_LINK_IN_ACCOUNT_INFO_DROP_DOWN_ID));
+    }
+
+    @Step("Get Main Text In Expired TAX Certificate Pop Up.")
+    public String getMainTextInExpiredTAXCertificatePopUp() {
+        return $(MAIN_TEXT_IN_EXPIRED_TAX_CERT_POP_UP_XPATH).getText();
+    }
+
+    @Step("User Clicks On Dismiss Button.")
+    public void userClicksOnDismissButton() {
+        click(DISMISS_BUTTON_XPATH);
+    }
 }
