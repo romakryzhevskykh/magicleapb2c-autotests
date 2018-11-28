@@ -232,17 +232,16 @@ public class OrdersPage extends StorefrontBasePage {
     @Step("Set Date From To The Search Field For Filtering.")
     public void setDateFromToTheSearchFieldForFiltering(String date) {
         waitUntilPageIsFullyLoaded();
-        String currentMonthAndYearInCalendar;
         String convertedDate = utils.convertStringDateToStringValues(date);
         String month = convertedDate.substring(4, 7).trim();
         String day = convertedDate.substring(8, 10).trim();
         String year = convertedDate.substring(24).trim();
         click(DATE_FROM_FIELD_FILTER_SLIDER_XPATH);
-        do {
+        String currentMonthAndYearInCalendar = $(CURRENT_MONTH_AND_YEAR_XPATH).getText();
+        while (!(currentMonthAndYearInCalendar.startsWith(month) && currentMonthAndYearInCalendar.endsWith(year))) {
             click(PREVIOUS_MONTH_ICON_XPATH);
             currentMonthAndYearInCalendar = $(CURRENT_MONTH_AND_YEAR_XPATH).getText();
         }
-        while (!(currentMonthAndYearInCalendar.startsWith(month) && currentMonthAndYearInCalendar.endsWith(year)));
         click(NEEDED_DAY_XPATH, day);
     }
 
