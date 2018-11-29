@@ -129,4 +129,25 @@ public class NotificationCenterStepDefs extends AbstractStepDefs {
             assertTrue(statusPageService.getUserByEmailFromStatusPageService(email).length() == 0, "User with email:" + email + " has not been deleted from Status Page service!!");
         }
     }
+
+    @And("^Current promo content toggle position is saved to the threadVarsHashMap.$")
+    public void currentPromoContentTogglePositionIsSavedToTheThreadVarsHashMap() {
+        threadVarsHashMap.replace(TestKeyword.PROMO_CONTENT_TOGGLE_POSITION, notificationCenterPage.getPromotionalContentTogglePosition());
+    }
+
+    @When("^Admin switches the promo content toggle to another state.$")
+    public void adminSwitchesThePromoContentToggleToAnotherState() {
+        String currentTogglePosition = threadVarsHashMap.getString(TestKeyword.PROMO_CONTENT_TOGGLE_POSITION);
+        notificationCenterPage.switchThePromoContentToggle();
+        if (currentTogglePosition.equals("ON")) {
+            threadVarsHashMap.replace(TestKeyword.PROMO_CONTENT_TOGGLE_POSITION, "OFF");
+        } else if (currentTogglePosition.equals("OFF")) {
+            threadVarsHashMap.replace(TestKeyword.PROMO_CONTENT_TOGGLE_POSITION, "ON");
+        }
+    }
+
+    @Then("^Promo content toggle is switched to previously chosen state.$")
+    public void promoContentToggleIsSwitchedToPreviouslyChosenState() {
+        assertEquals(threadVarsHashMap.getString(TestKeyword.PROMO_CONTENT_TOGGLE_POSITION), notificationCenterPage.getPromotionalContentTogglePosition());
+    }
 }
