@@ -11,7 +11,6 @@
             <class name="com.geempower.cucumber.NotificationCenterSuite"/>
             <class name="com.geempower.cucumber.RebatesSuite"/>
             <class name="com.geempower.cucumber.ReturnsSuite"/>
-            <class name="com.geempower.cucumber.BackofficeSuite"/>
             <class name="com.geempower.cucumber.ShipmentSuite"/>
             <class name="com.geempower.cucumber.OrdersSuite"/>
             <class name="com.geempower.cucumber.SavedItemsSuite"/>
@@ -21,6 +20,7 @@
             <class name="com.geempower.cucumber.DashboardSuite"/>
             <class name="com.geempower.cucumber.ProductsSuite"/>
             <class name="com.geempower.cucumber.ManageUsersSuite"/>
+            <class name="com.geempower.cucumber.BackofficeSuite"/>
         </classes>
     </test>
 </suite>
