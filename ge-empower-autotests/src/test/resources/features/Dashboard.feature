@@ -468,8 +468,8 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     When User clicks on the Next top button on the My Cart page.
     When User fills PO no. to the PO no. field on the OE 2 page.
     And Select Shipment Address from the existing addresses on the OE 2 page.
-    And User fills Shipping Note text to the Shipping Note field and put shipDetails to the Hashmap.
-    And Add Shipping Note to the catalog no and put note to the Hashmap.
+    And User fills Shipping Note text to the Shipping Note field and put shipping note to the Hashmap.
+    And Add Shipping Note to the catalog no and put shipping note to the Hashmap.
     When User clicks on the Bottom Next button on the OE 2 page.
     Then Order Summary step is opened.
     Then Is Correct Shipping note displayed in Shipments Details block.
