@@ -150,7 +150,7 @@ public class OrderEntry2StepDefs extends AbstractStepDefs {
         shortProductDetailsPopUpBlock.closeShortProductsDetailPopUp();
     }
 
-    @And("^Add Shipping Note to the catalog no and put (.*) to the Hashmap.$")
+    @And("^Add Shipping Note to the catalog no and put shipping note to the Hashmap.$")
     public void addShippingNoteToTheCatalogNo() {
         String uniqueShippingNote = utils.generateUniqueTimestamp();
         String catalogNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
@@ -158,7 +158,7 @@ public class OrderEntry2StepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.SHIPPING_NOTE_FOR_CATALOG_NO, uniqueShippingNote);
     }
 
-    @And("User fills Shipping Note text to the Shipping Note field and put (.*) to the Hashmap.")
+    @And("User fills Shipping Note text to the Shipping Note field and put shipping note to the Hashmap.")
     public void userFillsShippingNoteTextToTheShippingNoteField() {
         String uniqueShippingNotes = utils.generateUniqueTimestamp();
         orderEntry2Page.fillUniqueShippingNote(uniqueShippingNotes);
