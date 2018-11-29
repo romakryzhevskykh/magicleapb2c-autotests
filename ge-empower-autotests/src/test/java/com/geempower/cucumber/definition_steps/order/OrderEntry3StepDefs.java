@@ -12,7 +12,6 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.testng.annotations.Test;
 
 import java.util.HashMap;
 
