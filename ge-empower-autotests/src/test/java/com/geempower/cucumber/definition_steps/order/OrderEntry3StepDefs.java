@@ -50,12 +50,20 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
         orderEntry3Page.submitTermsAndConditions();
     }
 
+    private void collectShippingNotes() {
+        if (threadVarsHashMap.get(TestKeyword.MAIN_SHIPPING_NOTE) != null &&
+                threadVarsHashMap.get(TestKeyword.SHIPPING_NOTE_FOR_CATALOG_NO) != null) {
+            shippingNotes.put("mainShippingNotes", threadVarsHashMap.getString(TestKeyword.MAIN_SHIPPING_NOTE));
+            shippingNotes.put("catalogNoShippingNotes", threadVarsHashMap.getString(TestKeyword.SHIPPING_NOTE_FOR_CATALOG_NO));
+        }
+    }
+
     @SuppressWarnings("unchecked")
     @Then("^(.*) pop-up appears at the OE 3 page.$")
     public void orderSuccessfulPopUpAppears(String title) {
         String orderNo = orderEntry3Page.getGEOrderNoFromOrderSuccessPopUp(title);
         HashMap<Product, Integer> selectedProducts = getSelectedProducts();
-
+        collectShippingNotes();
         if (!shippingNotes.isEmpty() && !selectedProducts.isEmpty()) {
             createOrderInstance(orderNo, shippingNotes);
         } else if (!selectedProducts.isEmpty()) {
@@ -162,24 +170,15 @@ public class OrderEntry3StepDefs extends AbstractStepDefs {
     }
 
     @Then("^Is Correct Shipping note displayed in Shipments Details block.$")
-    @SuppressWarnings("unchecked")
     public void isCorrectShippingNoteDisplayedInShipmentsDetailsBlock() {
-        shippingNotes = (HashMap<String, String>) threadVarsHashMap.get(TestKeyword.SHIPPING_NOTE);
-        assertEquals(shippingNotes.get("shipDetails"), orderEntry3Page.getShippingNoteValueInShipmentDetailsBlock());
+        assertEquals(threadVarsHashMap.get(TestKeyword.MAIN_SHIPPING_NOTE), orderEntry3Page.getShippingNoteValueInShipmentDetailsBlock());
     }
 
     @Then("^Change Shipping note for the catalog No.$")
     public void isCorrectShippingNoteDisplayedForTheCatalogNoCatalogNo() {
-        String timestamp = utils.generateUniqueTimestamp();
-        setShippingNoteValueToTheCatalogNoOnOE3Step(timestamp);
-        shippingNotes.put("note", timestamp);
-    }
-
-    private void setShippingNoteValueToTheCatalogNoOnOE3Step(String timestamp) {
+        String uniqueShippingNote = utils.generateUniqueTimestamp();
         String catalogNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
-        orderEntry3Page.clickOnThreeDotIconOnOE3Page(catalogNo);
-        orderEntry3Page.clickOnAddEditShippingNotePopUpButton();
-        orderEntry3Page.changeShippingNoteValue(timestamp);
-        orderEntry3Page.clickOnSaveButtonInAddEditShipNotePopUp();
+        orderEntry3Page.setShippingNoteValueToTheCatalogNoOnOE3Step(uniqueShippingNote, catalogNo);
+        threadVarsHashMap.replace(TestKeyword.SHIPPING_NOTE_FOR_CATALOG_NO, uniqueShippingNote);
     }
 }

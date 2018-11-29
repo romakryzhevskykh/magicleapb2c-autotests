@@ -44,10 +44,10 @@ public class OrderEntry2Page extends StorefrontBasePage {
     }
 
     @Step("User fills unique Shipping Note on the OE 2 page.")
-    public void fillUniqueShippingNote(String timestamp) {
+    public void fillUniqueShippingNote(String uniqueShippingNote) {
         waitUntilPageIsFullyLoaded();
         $(By.id(SHIPPING_NOTE_FIELD_ID)).clear();
-        $(By.id(SHIPPING_NOTE_FIELD_ID)).sendKeys(timestamp);
+        $(By.id(SHIPPING_NOTE_FIELD_ID)).sendKeys(uniqueShippingNote);
     }
 
     @Step("User chooses first shipping address from the addresses list on the OE 2 page.")
@@ -217,25 +217,35 @@ public class OrderEntry2Page extends StorefrontBasePage {
     }
 
     @Step("Click On Three Dot Icon on OE 2 Page.")
-    public void clickOnThreeDotIconOnOE2Page(String catalogNo) {
+    private void clickOnThreeDotIconOnOE2Page(String catalogNo) {
         waitUntilPageIsFullyLoaded();
         click(THREE_DOT_ICON_BASED_ON_CATALOG_NO_XPATH, catalogNo);
     }
 
     @Step("Click On Add Edit Shipping Note Pop Up Button.")
-    public void clickOnAddEditShippingNotePopUpButton() {
+    private void clickOnAddEditShippingNotePopUpButton() {
+        waitUntilPageIsFullyLoaded();
         click(ADD_EDIT_SHIPPING_NOTE_POP_UP_BUTTON_XPATH);
     }
 
     @Step("Set Text To The Add Edit Shipping Note Pop Up field.")
-    public void setTextToTheAddEditShippingNotePopUpField(String timestamp) {
+    private void setTextToTheAddEditShippingNotePopUpField(String timestamp) {
+        waitUntilPageIsFullyLoaded();
         $(ADD_EDIT_SHIPPING_NOTE_FIELD_IN_POP_UP_XPATH).clear();
         $(ADD_EDIT_SHIPPING_NOTE_FIELD_IN_POP_UP_XPATH).sendKeys(timestamp);
     }
 
     @Step("Click On Save Button In Add Edit Ship Note Pop Up.")
-    public void clickOnSaveButtonInAddEditShipNotePopUp() {
+    private void clickOnSaveButtonInAddEditShipNotePopUp() {
         waitUntilPageIsFullyLoaded();
         click(SAVE_BUTTON_IN_ADD_EDIT_SHIPPING_NOTE_POP_UP_XPATH);
+    }
+
+    @Step("Set Shipping Note Value To The Catalog No On OE2 Step.")
+    public void setShippingNoteValueToTheCatalogNoOnOE2Step(String timestamp, String catalogNo) {
+        clickOnThreeDotIconOnOE2Page(catalogNo);
+        clickOnAddEditShippingNotePopUpButton();
+        setTextToTheAddEditShippingNotePopUpField(timestamp);
+        clickOnSaveButtonInAddEditShipNotePopUp();
     }
 }

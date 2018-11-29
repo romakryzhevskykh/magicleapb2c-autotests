@@ -44,6 +44,7 @@ public class QmsService {
         qmsUserInfo.put("qmsEnabled", doc.selectSingleNode("/UserProfile/QMSEnabled").getText());
         qmsUserInfo.put("qualityPrice", doc.selectSingleNode("/UserProfile/QuotePriceAppealEnabled").getText());
         qmsUserInfo.put("tinderBoxNode", doc.selectSingleNode("/UserProfile/TinderboxEnabled").getText());
+        System.out.println(qmsUserInfo);
         return qmsUserInfo;
     }
 }

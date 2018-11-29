@@ -208,31 +208,40 @@ public class OrderEntry3Page extends StorefrontBasePage {
 
     @Step("Get Shipping Note Value In Shipment Details Block.")
     public String getShippingNoteValueInShipmentDetailsBlock() {
+        waitUntilPageIsFullyLoaded();
         return $(SHIPPING_NOTE_VALUE_IN_SHIPPING_DETAILS_BLOCK_XPATH).getText();
     }
 
     @Step("Click On Three Dot Icon on OE 3 Page.")
-    public void clickOnThreeDotIconOnOE3Page(String catalogNo) {
+    private void clickOnThreeDotIconOnOE3Page(String catalogNo) {
         waitUntilPageIsFullyLoaded();
         click(THREE_DOT_ICON_BASED_ON_CATALOG_NO_XPATH, catalogNo);
     }
 
     @Step("Click On Add Edit Shipping Note Pop Up Button.")
-    public void clickOnAddEditShippingNotePopUpButton() {
+    private void clickOnAddEditShippingNotePopUpButton() {
         waitUntilPageIsFullyLoaded();
         click(ADD_EDIT_SHIPPING_NOTE_POP_UP_BUTTON_XPATH);
     }
 
     @Step("Get Value From Add Edit Shipping Note Pop Up Field.")
-    public void changeShippingNoteValue(String timestamp) {
+    private void changeShippingNoteValue(String timestamp) {
         waitUntilPageIsFullyLoaded();
         $(ADD_EDIT_SHIPPING_NOTE_FIELD_IN_POP_UP_XPATH).clear();
         $(ADD_EDIT_SHIPPING_NOTE_FIELD_IN_POP_UP_XPATH).sendKeys(timestamp);
     }
 
     @Step("Click On Save Button In Add Edit Ship Note Pop Up.")
-    public void clickOnSaveButtonInAddEditShipNotePopUp() {
+    private void clickOnSaveButtonInAddEditShipNotePopUp() {
         waitUntilPageIsFullyLoaded();
         click(SAVE_BUTTON_IN_ADD_EDIT_SHIPPING_NOTE_POP_UP_XPATH);
+    }
+
+    @Step("Set Shipping Note Value To The Catalog No On OE3 Step.")
+    public void setShippingNoteValueToTheCatalogNoOnOE3Step(String uniqueShippingNote, String catalogNo) {
+        clickOnThreeDotIconOnOE3Page(catalogNo);
+        clickOnAddEditShippingNotePopUpButton();
+        changeShippingNoteValue(uniqueShippingNote);
+        clickOnSaveButtonInAddEditShipNotePopUp();
     }
 }
