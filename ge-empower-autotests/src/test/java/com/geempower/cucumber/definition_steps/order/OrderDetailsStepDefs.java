@@ -183,10 +183,9 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     }
 
     @Then("^Is (.*) label contains correct value from OE steps in Quote Details block.$")
-    @SuppressWarnings("unchecked")
     public void isShippingNotesLabelContainsValueFromOESteps(String label) {
         Order order = orderManager.getOrderById(Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO)));
-        assertEquals(orderDetailsPage.getLabelValueInQuoteDetailsBlock(label), order.getShippingNotes().get("shipDetails"), "HashMap size is " + order.getShippingNotes().size());
+        assertEquals(orderDetailsPage.getLabelValueInQuoteDetailsBlock(label), order.getShippingNotes().get("mainShippingNotes"), "HashMap size is " + order.getShippingNotes().size());
     }
 
     @Then("^Is (.*) label contains (.*) email character in Quote Details block.$")
@@ -277,10 +276,9 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     }
 
     @Then("^Is (.*) label contains Shipping Notes value from OE Steps in Product Details block.$")
-    @SuppressWarnings("unchecked")
     public void isShippingNotesLabelContainsValueFromOEStepsInProductDetailsBlock(String label) {
         Order order = orderManager.getOrderById(Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO)));
-        assertEquals(orderDetailsPage.getLabelValueInProductDetailsBlock(label), order.getShippingNotes().get("note"));
+        assertEquals(orderDetailsPage.getLabelValueInProductDetailsBlock(label), order.getShippingNotes().get("catalogNoShippingNotes"));
     }
 
     @Then("^Is (.*) label contains date in Product Details block.$")

@@ -29,8 +29,6 @@ public class OrderEntry2StepDefs extends AbstractStepDefs {
 
     private final double delta = 0.0001;
 
-    private HashMap<String, String> shippingNotes = new HashMap<>();
-
     @When("^User fills PO no. to the PO no. field on the OE 2 page.$")
     public void userFillsPONoOnOE2Page() {
         threadVarsHashMap.put(TestKeyword.PO_NO, orderEntry2Page.fillUniquePoNo(utils.generateUniqueTimestamp()));
@@ -153,25 +151,17 @@ public class OrderEntry2StepDefs extends AbstractStepDefs {
     }
 
     @And("^Add Shipping Note to the catalog no and put (.*) to the Hashmap.$")
-    public void addShippingNoteToTheCatalogNo(String note) {
-        String timestamp = utils.generateUniqueTimestamp();
-        setShippingNoteValueToTheCatalogNoOnOE2Step(timestamp);
-        shippingNotes.put(note, timestamp);
-        threadVarsHashMap.put(TestKeyword.SHIPPING_NOTE, shippingNotes);
-    }
-
-    private void setShippingNoteValueToTheCatalogNoOnOE2Step(String timestamp){
+    public void addShippingNoteToTheCatalogNo() {
+        String uniqueShippingNote = utils.generateUniqueTimestamp();
         String catalogNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
-        orderEntry2Page.clickOnThreeDotIconOnOE2Page(catalogNo);
-        orderEntry2Page.clickOnAddEditShippingNotePopUpButton();
-        orderEntry2Page.setTextToTheAddEditShippingNotePopUpField(timestamp);
-        orderEntry2Page.clickOnSaveButtonInAddEditShipNotePopUp();
+        orderEntry2Page.setShippingNoteValueToTheCatalogNoOnOE2Step(uniqueShippingNote, catalogNo);
+        threadVarsHashMap.put(TestKeyword.SHIPPING_NOTE_FOR_CATALOG_NO, uniqueShippingNote);
     }
 
     @And("User fills Shipping Note text to the Shipping Note field and put (.*) to the Hashmap.")
-    public void userFillsShippingNoteTextToTheShippingNoteField(String shipDetails) {
-        String timestamp = utils.generateUniqueTimestamp();
-        orderEntry2Page.fillUniqueShippingNote(timestamp);
-        shippingNotes.put(shipDetails, timestamp);
+    public void userFillsShippingNoteTextToTheShippingNoteField() {
+        String uniqueShippingNotes = utils.generateUniqueTimestamp();
+        orderEntry2Page.fillUniqueShippingNote(uniqueShippingNotes);
+        threadVarsHashMap.put(TestKeyword.MAIN_SHIPPING_NOTE, uniqueShippingNotes);
     }
 }

@@ -86,10 +86,9 @@ public class PODetailsStepDefs extends AbstractStepDefs {
     }
 
     @Then("^Is (.*) label contains correct value from OE steps in opened Order No. Details block.$")
-    @SuppressWarnings("unchecked")
     public void isShippingNotesLabelContainsValueFromOESteps(String label) {
         Order order = orderManager.getOrderById(Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO)));
-        assertEquals(poDetailsPage.getLabelValueInOpenedOrderNoDetailsBlock(label), order.getShippingNotes().get("shipDetails"));
+        assertEquals(poDetailsPage.getLabelValueInOpenedOrderNoDetailsBlock(label), order.getShippingNotes().get("mainShippingNotes"));
     }
 
     @Then("^Is (.*) label contains (.*) email character in opened Order No. Details block.$")
@@ -140,10 +139,9 @@ public class PODetailsStepDefs extends AbstractStepDefs {
     }
 
     @Then("^Is (.*) label contains correct value from OE steps in Product Details block in opened Order No. Details block.$")
-    @SuppressWarnings("unchecked")
     public void isShippingNotesLabelContainsValueFromOEStepsInProductDetailsBlock(String label) {
         Order order = orderManager.getOrderById(Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO)));
-        assertEquals(poDetailsPage.getLabelValueInProductDetailsBlockInOpenedOrderNoDetailsBlock(label), order.getShippingNotes().get("note"));
+        assertEquals(poDetailsPage.getLabelValueInProductDetailsBlockInOpenedOrderNoDetailsBlock(label), order.getShippingNotes().get("catalogNoShippingNotes"));
     }
 
     @Then("^Is Correct (.*) labels displayed in Product Details block in opened Order No. Details block.$")
