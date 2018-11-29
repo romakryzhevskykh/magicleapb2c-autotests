@@ -291,9 +291,11 @@ public class DashboardStepDefs extends AbstractStepDefs {
         dashboardPage.userClicksOnHereLink();
     }
 
-    @Then("^Is main text (.*) displayed in expired TAX Certificate pop up.$")
-    public void isMainTextDisplayedInExpiredTAXCertificatePopUp(String mainText) {
-        assertEquals(mainText, dashboardPage.getMainTextInExpiredTAXCertificatePopUp());
+    @Then("^Is header text (.*), middle text (.*) and bottom text (.*) displayed in expired TAX Certificate pop up.$")
+    public void isMainTextDisplayedInExpiredTAXCertificatePopUp(String mainText, String middleText, String bottomText) {
+        assertTrue(dashboardPage.getMainTextInExpiredTAXCertificatePopUp().contains(mainText));
+        assertTrue(dashboardPage.getMainTextInExpiredTAXCertificatePopUp().contains(middleText));
+        assertTrue(dashboardPage.getMainTextInExpiredTAXCertificatePopUp().contains(bottomText));
     }
 
     @When("^User clicks on Dismiss button.$")

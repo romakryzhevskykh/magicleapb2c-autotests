@@ -50,14 +50,13 @@ Feature: Some actions on Account Management page as admin
     Then Is account info drop down message <accountPopUpMessage> displayed in red block.
     When User clicks on HERE link.
     Then Is title Expired TAX Certificate in expired tax pop up displayed.
-    Then Is main text <text> displayed in expired TAX Certificate pop up.
+    Then Is header text <headerText>, middle text <middleText> and bottom text <bottomText> displayed in expired TAX Certificate pop up.
     When User clicks on Dismiss button.
     Then Is expired tax pop up not displayed.
 
     Examples:
-      | tooltipText                                | accountPopUpMessage                               | text                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-      | Expired TAX Certificate: Click for details | TAX Certificate expired - Click HERE for details. | A tax exemption certificate is required on your account. Please send a properly signed and dated exemption certificate for every state you ship to (for which you plan to claim exemption status) to US-EPISTaxTeam@abb.com \n For GEIS United States accounts - The certificate should be made out to: \n Industrial Connections & Solutions, LLC. \n For Zenith United States accounts - The certificate should be made out to: \n Zenith Controls, Inc. |
-
+      | tooltipText                                | accountPopUpMessage                               | headerText                                                                                                                                                                                                                  | middleText                                                               | bottomText                                                                 |
+      | Expired TAX Certificate: Click for details | TAX Certificate expired - Click HERE for details. | A tax exemption certificate is required on your account. Please send a properly signed and dated exemption certificate for every state you ship to (for which you plan to claim exemption status) to US-EPISTaxTeam@abb.com | For GEIS United States accounts - The certificate should be made out to: | For Zenith United States accounts - The certificate should be made out to: |
 
   Scenario Outline: Check that account with stopbook any value except Z9 contains correct icon with tooltip and message in account drop-down.
     And Account management page is opened.
