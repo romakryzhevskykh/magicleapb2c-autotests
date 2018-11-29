@@ -13,5 +13,6 @@ public class NotificationCenterPageElements {
     public final static String EMPOWER_U_TOGGLE_XPATH = "//input[@name='lessonlyEnabled']/..//span[@class='onoffswitch-switch']";
     public final static String SAVE_NOTIFICATION_PREFERENCES_BUTTON_XPATH = "//button[@id='notificationPreferences-submit-button']";
     public final static String SYSTEM_STATUS_TOGGLE_XPATH = "//input[@name='statuspageEnabled']/..//span[@class='onoffswitch-switch']";
+    public final static String MARKETING_PROMOTIONAL_CONTENT_TOGGLE_XPATH = "//div[contains(@class, 'notification-preferences-section')]//span[@class='onoffswitch-switch']";
 
 }
