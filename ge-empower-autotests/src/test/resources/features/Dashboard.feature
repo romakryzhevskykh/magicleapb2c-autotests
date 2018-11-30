@@ -409,6 +409,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     And Dashboard page is opened.
     When Click on Skip button.
     When Close cookies pop-up.
+    And Refresh page.
     Then T&B Access widget is displayed.
     Then T&B Access widget title <tNbTitle> is correct.
     Then User clicks on T&B Access button and T&B Access web site is successfully opened in new tab with correct url <tNbUrl>.
