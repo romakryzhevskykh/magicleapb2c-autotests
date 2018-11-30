@@ -117,7 +117,7 @@ Feature: Return creation tests
 #    When Return is created on Return Creation 4 page.
 #    Then Returns title is displayed on Returns page.
 
-  Scenario: Check that user is able to save Return for later and then post it.
+  Scenario Outline: Check that user is able to save Return for later and then post it.
     And Account management page is opened.
     When Choose North_America region.
     And Search random account for chosen region.
@@ -127,10 +127,7 @@ Feature: Return creation tests
     Then Return Creation 1 page is opened.
 
     When User hover mouse over top Next button on Return Creation 1 page.
-    Then Is Required data is missing or is incorrect text displayed in tooltip.
-    When User hover mouse over bottom Next button on Return Creation 1 page.
-    Then Is Required data is missing or is incorrect text displayed in tooltip.
-
+    Then Is <toolTipNextBtn1and2page> text displayed in the Next button tooltip on Return Creation 1 page.
 
     When Search All PO No. in the Search field on Return Creation 1 page.
     And Select First Invoice No. in the Search Result table on Return Creation 1 page.
@@ -138,9 +135,14 @@ Feature: Return creation tests
     And Click on the Next button Return Creation 1 page.
     Then Return Creation 2 page is opened.
 
-    When User hover mouse over top Next button on Return Creation 2 page.
-    Then Is Required data is missing or is incorrect text displayed in tooltip.
     When User hover mouse over bottom Next button on Return Creation 2 page.
-    Then Is Required data is missing or is incorrect text displayed in tooltip .
+    Then Is <toolTipNextBtn1and2page> text displayed in the Next button tooltip on Return Creation 2 page.
 
     When User clicks on Save for later button on Return Creation 2 page.
+
+    Then Save to Return List with title Save to Return List pop-up is appeared.
+
+    Examples:
+      | toolTipNextBtn1and2page           |
+      | Required data is missing or is incorrect |
+

@@ -4,7 +4,6 @@ import com.geempower.cucumber.definition_steps.AbstractStepDefs;
 import com.geempower.cucumber.definition_steps.TestKeyword;
 import com.geempower.helpers.Utils;
 import com.geempower.storefront.pages.returns.ReturnCreation2Page;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -25,7 +24,7 @@ public class ReturnCreation2StepDefs extends AbstractStepDefs {
 
     @Then("^Return Creation 2 page is opened.$")
     public void returnCreation2pageIsOpened() {
-        if(!returnCreation2Page.reasonForRequestTitleIsDisplayed()) {
+        if (!returnCreation2Page.reasonForRequestTitleIsDisplayed()) {
             utils.refreshCurrentPage();
         }
         assertTrue(returnCreation2Page.isOpened() && returnCreation2Page.reasonForRequestTitleIsDisplayed());
@@ -85,5 +84,20 @@ public class ReturnCreation2StepDefs extends AbstractStepDefs {
     @When("^User clicks on Save for later button on Return Creation 2 page.$")
     public void userClicksOnSaveForLaterButtonOnReturnCreationPage() {
         returnCreation2Page.clickOnSaveForLaterButton();
+    }
+
+    @When("^User hover mouse over bottom Next button on Return Creation 2 page.$")
+    public void userHoverMouseOverBottomNextButtonOnReturnCreation2Page() {
+        returnCreation2Page.userHoverMouseOverBottomNextButtonOnReturnCreation2Page();
+    }
+
+    @Then("^Is (.*) text displayed in the Next button tooltip on Return Creation 2 page.$")
+    public void isAppropriateTextDisplayedInTheNextButtonTooltipOnReturnCreation2Page(String toolTipText) {
+        assertEquals(toolTipText, returnCreation2Page.getNextButtonToolTipText2Page());
+    }
+
+    @Then("^Save to Return List with title (.*) pop-up is appeared.$")
+    public void saveForLaterPopUpAppearsWithTitle(String saveForLaterPopUpTitle) {
+        assertEquals(saveForLaterPopUpTitle, returnCreation2Page.getSaveForLaterPopUpTitle());
     }
 }

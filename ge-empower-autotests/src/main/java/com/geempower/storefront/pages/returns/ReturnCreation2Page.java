@@ -33,7 +33,7 @@ public class ReturnCreation2Page extends StorefrontBasePage {
         return isDisplayed(REASON_FOR_REQUEST_ACTIVE_TITLE_XPATH);
     }
 
-    @Step("Select Reason For Request")
+    @Step("Select Reason For Request.")
     public void selectReasonForRequest(String reason) {
         waitUntilPageIsFullyLoaded();
         click(FIRST_ROW_REASON_FOR_REQUEST_FIELD_XPATH);
@@ -41,7 +41,7 @@ public class ReturnCreation2Page extends StorefrontBasePage {
                 .filter(webElement -> webElement.getText().equals(reason)).findAny().ifPresent(WebElement::click);
     }
 
-    @Step("Select Requested Action")
+    @Step("Select Requested Action.")
     public void selectRequestedAction(String action) {
         waitUntilPageIsFullyLoaded();
         click(FIRST_ROW_REQUESTED_ACTION_FIELD_XPATH);
@@ -51,29 +51,29 @@ public class ReturnCreation2Page extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
     }
 
-    @Step("Set value to the Qty field")
+    @Step("Set value to the Qty field.")
     public void setQtyValue(String qty) {
         waitUntilPageIsFullyLoaded();
         $(FIRST_QTY_FIELD_XPATH).sendKeys(qty);
     }
 
-    @Step("Click on bottom Next button")
+    @Step("Click on bottom Next button.")
     public void clickOnNextButton() {
         waitUntilPageIsFullyLoaded();
         click(By.id(BOTTOM_NEXT_BUTTON_ID));
     }
 
-    @Step("Get Reason For Request")
+    @Step("Get Reason For Request.")
     public String getReasonForRequest() {
         return $(FIRST_ROW_REASON_FOR_REQUEST_FIELD_XPATH).getText().trim();
     }
 
-    @Step("Get Requested Action")
+    @Step("Get Requested Action.")
     public String getRequestedAction() {
         return $(SELECTED_FIRST_ROW_REQUESTED_ACTION_FIELD_XPATH).getText();
     }
 
-    @Step("Get Catalog No")
+    @Step("Get Catalog No.")
     public String getCatalogNo() {
         return $(CATALOG_NO_VALUE_XPATH).getText();
     }
@@ -86,7 +86,7 @@ public class ReturnCreation2Page extends StorefrontBasePage {
         return catalogList;
     }
 
-    @Step("Set Random Reasons For list of products in Request")
+    @Step("Set Random Reasons For list of products in Request.")
     public void setRandomReasonsForListOfProductsInRequest(int rowNumber) {
         for (int i = 1; i <= rowNumber; i++) {
             waitUntilPageIsFullyLoaded();
@@ -95,14 +95,14 @@ public class ReturnCreation2Page extends StorefrontBasePage {
         }
     }
 
-    @Step("Set Reasons Type For Request")
+    @Step("Set Reasons Type For Request.")
     public void selectRequestTypeForRequest(String type) {
         waitUntilPageIsFullyLoaded();
         $$(REQUEST_TYPE_LIST_XPATH).stream()
                 .filter(webElement -> webElement.getText().equals(type)).findAny().ifPresent(WebElement::click);
     }
 
-    @Step("Set Reasons SubType For Request")
+    @Step("Set Reasons SubType For Request.")
     public void selectRequestSubTypeForRequest(String subType) {
         waitUntilPageIsFullyLoaded();
         $$(REQUEST_SUB_TYPE_LIST_XPATH).stream()
@@ -112,5 +112,22 @@ public class ReturnCreation2Page extends StorefrontBasePage {
     @Step("Click On Save For Later Button.")
     public void clickOnSaveForLaterButton() {
         click(SAVE_FOR_LATER_BUTTON_XPATH);
+    }
+
+    @Step("User hover mouse over top Next button on Return Creation 2 page.")
+    public void userHoverMouseOverBottomNextButtonOnReturnCreation2Page() {
+        moveToElement((WebElement) By.id(BOTTOM_NEXT_BUTTON_ID));
+    }
+
+    @Step("Get Next Button Tool Tip Text 2 Page.")
+    public String getNextButtonToolTipText2Page() {
+        waitUntilPageIsFullyLoaded();
+        return $(NEXT_BUTTON_TOOLTIP_XPATH).getText();
+    }
+
+    @Step("Get Save For Later Pop-Up Title.")
+    public String getSaveForLaterPopUpTitle() {
+        waitUntilPageIsFullyLoaded();
+        return $(SAVE_FOR_LATER_POP_UP_TITLE_XPATH).getText();
     }
 }
