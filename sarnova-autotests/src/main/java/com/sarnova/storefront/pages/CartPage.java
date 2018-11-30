@@ -16,15 +16,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.sarnova.storefront.page_elements.CartPageElements.*;
+import static java.lang.Integer.valueOf;
 
 @Component
 public class CartPage extends StorefrontBasePage {
+
+    private static final String PAGE_URL_METHOD = "cart";
 
     @Autowired private ProductsManager productsManager;
     @Autowired private AddToSupplyListPopUpBlock addToSupplyListPopUpBlock;
     @Autowired private SaveCartPopUpBlock saveCartPopUpBlock;
 
-    private String pageUrlMethod = "cart";
+    @Override
+    public String getPageUrl() {
+        return storefrontProject.getBaseUrl() + PAGE_URL_METHOD;
+    }
 
     public List<UnitOfMeasure> getUnitsOfMeasurementInCart() {
         List<Document> unitsOfMeasurementRows = isDisplayed(PRODUCTS_ROWS_XPATH) ?
@@ -35,17 +41,21 @@ public class CartPage extends StorefrontBasePage {
         return productsManager.parseUnitsOfMeasurementFromCartPageHTML(unitsOfMeasurementRows);
     }
 
-    @Override
-    public String getPageUrl() {
-        return storefrontProject.getBaseUrl() + pageUrlMethod;
+    public int getQTYOfUOM(UnitOfMeasure unitOfMeasure) {
+        return valueOf($(UOM_QTY_BY_SKU_AND_UOM_TYPE_XPATH, getSku(unitOfMeasure), getUomType(unitOfMeasure))
+                       .getAttribute("value"));
     }
 
-    public int getQTYOfUOM(UnitOfMeasure unitOfMeasure) {
-        return Integer.valueOf(
-                $(UOM_QTY_BY_SKU_AND_UOM_TYPE_XPATH,
-                        productsManager.getProductByUOM(unitOfMeasure).getSku(),
-                        unitOfMeasure.getUomType().name()
-                ).getAttribute("value"));
+    private String getSku(UnitOfMeasure unitOfMeasure) {
+        return productsManager.getProductByUOM(unitOfMeasure).getSku();
+    }
+
+    private String getUomType (UnitOfMeasure unitOfMeasure) {
+        return unitOfMeasure.getUomType().name();
+    }
+
+    public boolean isWarningMessageDisplayedForProduct(String skuId, String uom){
+      return isPresent(UOM_WARNING_MESSAGE_BY_SKU_AND_UOM_TYPE_XPATH, skuId, uom);
     }
 
     @Step("Click on Checkout button on Cart page.")
@@ -58,7 +68,6 @@ public class CartPage extends StorefrontBasePage {
     public void clickOnAddToSupplyListButton() {
         click(ADD_TO_SUPPLY_LIST_BUTTONS_XPATH);
         waitUntilPageIsFullyLoaded();
-//        addToSupplyListPopUpBlock.waitUntilProductImagesAreVisible();
         addToSupplyListPopUpBlock.waitUntilBannerImageIsVisible();
     }
 

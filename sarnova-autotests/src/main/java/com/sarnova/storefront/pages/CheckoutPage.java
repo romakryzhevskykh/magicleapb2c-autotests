@@ -3,10 +3,7 @@ package com.sarnova.storefront.pages;
 import com.sarnova.helpers.managers.ProductsManager;
 import com.sarnova.helpers.models.delivery_methods.DeliveryMethod;
 import com.sarnova.helpers.models.products.IndividualProduct;
-import com.sarnova.storefront.page_blocks.CheckoutFinalReviewStepBlock;
-import com.sarnova.storefront.page_blocks.CheckoutPaymentMethodStepBlock;
-import com.sarnova.storefront.page_blocks.CheckoutShippingAddressStepBlock;
-import com.sarnova.storefront.page_blocks.CheckoutShippingMethodStepBlock;
+import com.sarnova.storefront.page_blocks.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
@@ -16,14 +13,15 @@ import java.util.stream.Collectors;
 
 @Component
 public class CheckoutPage extends StorefrontBasePage {
+
+    private static final String PAGE_URL = "checkout/%s";
+
     @Autowired private CheckoutShippingAddressStepBlock shippingAddressStepBlock;
     @Autowired private CheckoutShippingMethodStepBlock shippingMethodStepBlock;
     @Autowired private CheckoutPaymentMethodStepBlock paymentMethodStepBlock;
     @Autowired private CheckoutFinalReviewStepBlock finalReviewStepBlock;
-
     @Autowired private ProductsManager productsManager;
-
-    private String pageUrlMethod = "checkout/%s";
+    @Autowired private OrderSummaryBlock orderSummaryBlock;
 
     public void clickOnNextButtonOnShippingAddressStep() {
         shippingAddressStepBlock.clickOnNextButton();
@@ -56,34 +54,34 @@ public class CheckoutPage extends StorefrontBasePage {
 
     @Override
     public String getPageUrl() {
-        return storefrontProject.getBaseUrl() + String.format(pageUrlMethod, "");
+        return storefrontProject.getBaseUrl() + String.format(PAGE_URL, "");
     }
 
     @Step("Is Payment method Step opened?")
     public boolean isPaymentMethodStepOpened() {
         return (storefrontProject.getBaseUrl()
-                + String.format(pageUrlMethod, paymentMethodStepBlock.getPageUrlMethod()))
+                + String.format(PAGE_URL, paymentMethodStepBlock.getPageUrlMethod()))
                 .equals(getCurrentUrl());
     }
 
     @Step("Is Shipping method Step opened?")
     public boolean isShippingMethodStepOpened() {
         return (storefrontProject.getBaseUrl()
-                + String.format(pageUrlMethod, shippingMethodStepBlock.getPageUrlMethod()))
+                + String.format(PAGE_URL, shippingMethodStepBlock.getPageUrlMethod()))
                 .equals(getCurrentUrl());
     }
 
     @Step("Is Shipping address Step opened?")
     public boolean isShippingAddressStepOpened() {
         return (storefrontProject.getBaseUrl()
-                + String.format(pageUrlMethod, shippingAddressStepBlock.getPageUrlMethod()))
+                + String.format(PAGE_URL, shippingAddressStepBlock.getPageUrlMethod()))
                 .equals(getCurrentUrl());
     }
 
     @Step("Is Final review Step opened?")
     public boolean isFinalReviewStepOpened() {
         return (storefrontProject.getBaseUrl()
-                + String.format(pageUrlMethod, finalReviewStepBlock.getPageUrlMethod()))
+                + String.format(PAGE_URL, finalReviewStepBlock.getPageUrlMethod()))
                 .equals(getCurrentUrl());
     }
 
@@ -154,7 +152,6 @@ public class CheckoutPage extends StorefrontBasePage {
     public void clickOnPlaceOrder() {
         finalReviewStepBlock.placeOrder();
         if (!isFinalReviewStepOpened()) {
-//            createOrder
         }
     }
 
@@ -221,7 +218,6 @@ public class CheckoutPage extends StorefrontBasePage {
     public void selectShippingMethod(DeliveryMethod deliveryMethod) {
         shippingMethodStepBlock.selectShippingMethod(deliveryMethod);
     }
-
 
     public void fillCardNumberField(String cardNumber) {
         paymentMethodStepBlock.fillCardNumberField(cardNumber);
@@ -308,5 +304,9 @@ public class CheckoutPage extends StorefrontBasePage {
     public void waitUntilShippingAddressPageIsLoaded() {
         waitUntilPageIsFullyLoaded();
         shippingAddressStepBlock.waitUntilCountryCheckboxIsDisappeared();
+    }
+
+    public OrderSummaryBlock getOrderSummary(){
+        return orderSummaryBlock;
     }
 }

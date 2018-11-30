@@ -5,7 +5,7 @@ Feature: Ability to have guest cart merged with active cart when customer logs i
     And User is logged in to Storefront.
     And Empty Cart.
 
-  @SmokeTest
+  @SmokeTest @TestCaseId("SRNV-2504")
   Scenario: Verify that guest cart merged with active cart when customer logs in
     Given PDP for INDIVIDUAL, VALID product.
     And Set QTY 1 to any product(UOM) on the PDP.

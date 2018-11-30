@@ -188,10 +188,6 @@ public abstract class UIComponent {
         try {
             getDriver().findElement(By.xpath(String.format(xpath, args)));
             return true;
-        } catch (UnhandledAlertException ex) {
-            System.out.println("WARNING: Unexpected alert: " + ex);
-            alertHandling();
-            return isPresent(xpath, args);
         } catch (NoSuchElementException ex) {
             return false;
         } finally {
@@ -213,6 +209,14 @@ public abstract class UIComponent {
         } finally {
             webDriverPool.getActiveDriverSession().restoreDefaultImplicitWait();
         }
+    }
+
+    protected boolean isElementPresentInside(WebElement parent, final By locator) {
+        return isElementsFindBy(parent.findElements(locator));
+    }
+
+    private static boolean isElementsFindBy(final List<WebElement> listWebElement) {
+        return listWebElement.size() != 0;
     }
 
     @Step("Wait until page is fully loaded.")

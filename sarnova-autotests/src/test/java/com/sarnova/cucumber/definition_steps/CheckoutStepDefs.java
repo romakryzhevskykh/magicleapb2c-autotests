@@ -1,6 +1,5 @@
 package com.sarnova.cucumber.definition_steps;
 
-import com.sarnova.helpers.RandomUtils;
 import com.sarnova.helpers.managers.ProductsManager;
 import com.sarnova.helpers.models.credit_cards.CreditCard;
 import com.sarnova.helpers.models.delivery_methods.DeliveryMethod;
@@ -21,22 +20,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.testng.Assert.*;
 
 public class CheckoutStepDefs extends AbstractStepDefs {
-    @Autowired CheckoutPage checkoutPage;
 
+    @Autowired private CheckoutPage checkoutPage;
     @Autowired private ProductsManager productsManager;
-    @Autowired private RandomUtils randomUtils;
 
     @When("^Click on Next button on Checkout Shipping address step.$")
     public void clickOnNextButtonOnShippingAddressStep() {
         checkoutPage.clickOnNextButtonOnShippingAddressStep();
-//        try {
-//            Thread.sleep(6000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
     }
 
     @When("^Click on Next button on Checkout Shipping method step.$")
@@ -207,7 +201,6 @@ public class CheckoutStepDefs extends AbstractStepDefs {
 
     @And("^Select Country in drop-down on Checkout Shipping address step.$")
     public void selectCountryInDropDownOnCheckoutShippingAddressStep() {
-//        String randomCountry = checkoutPage.getAnyShippingCountryFromDropDown();
         ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_SHIPPING_ADDRESS);
         checkoutPage.selectShippingCountryFromDropDown(shippingAddress.getCountry().getAbbreviation());
     }
@@ -320,7 +313,6 @@ public class CheckoutStepDefs extends AbstractStepDefs {
 
     @And("^Select Billing Country in drop-down on Checkout Payment method step.$")
     public void selectCountryInDropDownOnCheckoutPaymentMethodStep() {
-//        String randomCountry = checkoutPage.getAnyBillingCountryFromDropDown();
         ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.TEST_BILLING_ADDRESS);
         checkoutPage.selectBillingCountryFromDropDown(shippingAddress.getCountry().getAbbreviation());
     }
@@ -391,5 +383,10 @@ public class CheckoutStepDefs extends AbstractStepDefs {
     @And("^Deselect BILLING ADDRESS IS THE SAME AS SHIPPING ADDRESS on Guest Checkout Payment method step.$")
     public void clickOnChangeBillingAddressOnGuestCheckoutPaymentMethodStep() {
         checkoutPage.deselectGuestBillingAddressCheckbox();
+    }
+
+    @And("^Check that stock warning message for product (.*), (.*) is displayed on Checkout page: (.*).$")
+    public void checkThatStockWarningMessageForProductIsDisplayed(String skuId, String uom, boolean isDisplayed) {
+        assertThat(checkoutPage.getOrderSummary().isWarningMessageDisplayedForProduct(skuId, uom)).as("Issue with displaying stock warning message").isEqualTo(isDisplayed);
     }
 }

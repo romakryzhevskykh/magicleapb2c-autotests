@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.testng.Assert.*;
 
 public class CartPageStepDefs extends AbstractStepDefs {
@@ -204,5 +205,10 @@ public class CartPageStepDefs extends AbstractStepDefs {
     @Then("^Check that Saved Carts button is visible on Cart page.$")
     public void checkThatSavedCartsButtonVisible() {
         assertTrue(cartPage.isSavedCartsButtonVisible());
+    }
+
+    @And("^Check that stock warning message for product (.*), (.*) is displayed on Cart page: (.*).$")
+    public void checkThatStockWarningMessageForProductIsDisplayed(String skuId, String uom, boolean isDisplayed) {
+        assertThat(cartPage.isWarningMessageDisplayedForProduct(skuId, uom)).as("Issue with displaying stock warning message").isEqualTo(isDisplayed);
     }
 }
