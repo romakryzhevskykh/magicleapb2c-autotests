@@ -108,4 +108,9 @@ public class ReturnCreation2Page extends StorefrontBasePage {
         $$(REQUEST_SUB_TYPE_LIST_XPATH).stream()
                 .filter(webElement -> webElement.getText().equals(subType)).findAny().ifPresent(WebElement::click);
     }
+
+    @Step("Click On Save For Later Button.")
+    public void clickOnSaveForLaterButton() {
+        click(SAVE_FOR_LATER_BUTTON_XPATH);
+    }
 }

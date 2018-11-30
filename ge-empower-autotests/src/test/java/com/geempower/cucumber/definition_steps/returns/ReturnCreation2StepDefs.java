@@ -4,8 +4,10 @@ import com.geempower.cucumber.definition_steps.AbstractStepDefs;
 import com.geempower.cucumber.definition_steps.TestKeyword;
 import com.geempower.helpers.Utils;
 import com.geempower.storefront.pages.returns.ReturnCreation2Page;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -78,5 +80,10 @@ public class ReturnCreation2StepDefs extends AbstractStepDefs {
     @And("^Select (.*) Request sub-type on Return Creation 2 page.$")
     public void selectPaintRequestSubTypeOnReturnCreationPage(String subType) {
         returnCreation2Page.selectRequestSubTypeForRequest(subType);
+    }
+
+    @When("^User clicks on Save for later button on Return Creation 2 page.$")
+    public void userClicksOnSaveForLaterButtonOnReturnCreationPage() {
+        returnCreation2Page.clickOnSaveForLaterButton();
     }
 }
