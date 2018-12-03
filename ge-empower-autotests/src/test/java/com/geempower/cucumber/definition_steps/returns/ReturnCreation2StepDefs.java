@@ -51,6 +51,7 @@ public class ReturnCreation2StepDefs extends AbstractStepDefs {
     @And("^Set value (.*) to the Qty. field on Return Creation 2 page.$")
     public void setQtyValue(String qty) {
         returnCreation2Page.setQtyValue(qty);
+        threadVarsHashMap.put(TestKeyword.RETURN_QUANTITY, qty);
     }
 
     @And("^Click on Next button on Return Creation 2 page.$")
@@ -99,5 +100,20 @@ public class ReturnCreation2StepDefs extends AbstractStepDefs {
     @Then("^Save to Return List with title (.*) pop-up is appeared.$")
     public void saveForLaterPopUpAppearsWithTitle(String saveForLaterPopUpTitle) {
         assertEquals(saveForLaterPopUpTitle, returnCreation2Page.getSaveForLaterPopUpTitle());
+    }
+
+    @Then("^Save for later Return pop-up contains (.*) header.$")
+    public void saveForLaterPopUpContainsCorrectHeader(String popUpHeader) {
+        assertEquals(popUpHeader, returnCreation2Page.getSaveForLaterPopUpHeader());
+    }
+
+    @When("^User sets random name to the Return list name input.$")
+    public void userSetsRandomNameToTheReturnListNameInput() {
+        threadVarsHashMap.put(TestKeyword.RETURN_SAVE_FOR_LATER_LIST_NAME, returnCreation2Page.setNameForNewSavedReturnList());
+    }
+
+    @And("^User clicks on Save button in Save for later Return pop-up.$")
+    public void userClicksOnSaveButtonInSaveForLaterReturnPopUp() {
+        returnCreation2Page.clickSaveNewReturnList();
     }
 }

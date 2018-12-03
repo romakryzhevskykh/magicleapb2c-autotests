@@ -2,7 +2,8 @@ package com.geempower.storefront.page_elements.returns;
 
 public class ReturnCreation3PageElements {
     public final static String ADDITIONAL_INFORMATION_ACTIVE_TITLE_XPATH = ".//li[@class='return-additional-info active']";
-    public final static String ADDITIONAL_INFORMATION_BUTTON_XPATH = ".//td[@class='create-reason-request-col ']//i[@class='info-icon']";
+    public final static String ADDITIONAL_INFORMATION_BUTTON_XPATH = "//td[@class='create-reason-request-col ']//i[@class='info-icon']";
+    public final static String ADDITIONAL_INFORMATION_BUTTON_TOOLTIP_XPATH = "//span[@class='return-info-table-flyout-tooltip']";
     private final static String INFO_TABLE_XPATH = "//*[@class='info-table-wrapper visible-lg-block']";
     public final static String COLOR_OF_SHRINK_FIELD_XPATH = INFO_TABLE_XPATH + "//input[@name='colorOfShrinkSharp']";
     public final static String ADDITIONAL_INFO_FIELD_XPATH = INFO_TABLE_XPATH + "//textarea[contains(@name,'AdditionalInformation')]";

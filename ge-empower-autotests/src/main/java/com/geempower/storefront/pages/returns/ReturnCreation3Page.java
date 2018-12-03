@@ -136,4 +136,20 @@ public class ReturnCreation3Page extends StorefrontBasePage {
     public boolean isGreenAdditionalInfoButtonDisplayed() {
         return isDisplayed(GREEN_ADDITIONAL_INFO_BUTTON_XPATH);
     }
+
+    @Step("Hover Mouse Over Additional Button.")
+    public void hoverMouseOverAdditionalButton() {
+        moveToElement($(ADDITIONAL_INFORMATION_BUTTON_XPATH));
+    }
+
+    @Step("Get Additional Button Tool Tip Text.")
+    public String getAdditionalButtonToolTipText() {
+        waitUntilPageIsFullyLoaded();
+        return $(ADDITIONAL_INFORMATION_BUTTON_TOOLTIP_XPATH).getText();
+    }
+
+    @Step("Hover Mouse Over Bottom Next Button On Return Creation 3 Page.")
+    public void hoverMouseOverBottomNextButtonOnReturnCreation3Page() {
+        moveToElement($(BOTTOM_NEXT_BUTTON_XPATH));
+    }
 }

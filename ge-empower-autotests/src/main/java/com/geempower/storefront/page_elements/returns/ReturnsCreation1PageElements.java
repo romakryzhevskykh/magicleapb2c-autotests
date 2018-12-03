@@ -13,5 +13,4 @@ public class ReturnsCreation1PageElements {
     public final static String MANUAL_ENTRY_RETURN_OPTION_XPATH = "//a[@href='#manual-entry']";
     public final static String UPLOAD_FILE_INPUT_XPATH = "//div[@class='upload-file']/label/span/input";
     public final static String NORTH_AMERICA_WARNING_MESSAGE_XPATH = "//div[@class='warning-message catalog-error-message']/span[2]";
-
 }

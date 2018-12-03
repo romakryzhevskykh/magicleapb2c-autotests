@@ -1,8 +1,10 @@
 package com.geempower.storefront.pages.returns;
 
+import com.geempower.helpers.Utils;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -13,6 +15,8 @@ import static com.geempower.storefront.page_elements.returns.ReturnCreation2Page
 
 @Component
 public class ReturnCreation2Page extends StorefrontBasePage {
+    @Autowired
+    private Utils utils;
 
     private final String pageUri = "returnRequest2";
 
@@ -60,7 +64,7 @@ public class ReturnCreation2Page extends StorefrontBasePage {
     @Step("Click on bottom Next button.")
     public void clickOnNextButton() {
         waitUntilPageIsFullyLoaded();
-        click(By.id(BOTTOM_NEXT_BUTTON_ID));
+        click(BOTTOM_NEXT_BUTTON_XPATH);
     }
 
     @Step("Get Reason For Request.")
@@ -116,7 +120,7 @@ public class ReturnCreation2Page extends StorefrontBasePage {
 
     @Step("User hover mouse over top Next button on Return Creation 2 page.")
     public void userHoverMouseOverBottomNextButtonOnReturnCreation2Page() {
-        moveToElement((WebElement) By.id(BOTTOM_NEXT_BUTTON_ID));
+        moveToElement($(BOTTOM_NEXT_BUTTON_XPATH));
     }
 
     @Step("Get Next Button Tool Tip Text 2 Page.")
@@ -129,5 +133,25 @@ public class ReturnCreation2Page extends StorefrontBasePage {
     public String getSaveForLaterPopUpTitle() {
         waitUntilPageIsFullyLoaded();
         return $(SAVE_FOR_LATER_POP_UP_TITLE_XPATH).getText();
+    }
+
+    @Step("Get Save For Later Pop-up Header.")
+    public String getSaveForLaterPopUpHeader() {
+        waitUntilPageIsFullyLoaded();
+        return $(SAVE_FOR_LATER_POP_UP_HEADER_XPATH).getText();
+    }
+
+    @Step("Set Name For New Saved Return List.")
+    public String setNameForNewSavedReturnList() {
+        waitUntilPageIsFullyLoaded();
+        String returnListName = utils.generateUniqueTimestamp();
+        $(SAVE_FOR_LATER_POP_UP_LIST_NAME_INPUT_XPATH).clear();
+        $(SAVE_FOR_LATER_POP_UP_LIST_NAME_INPUT_XPATH).sendKeys(returnListName);
+        return returnListName;
+    }
+
+    @Step("Click Save New Return List.")
+    public void clickSaveNewReturnList() {
+        click(SAVE_FOR_LATER_POP_UP_SAVE_BUTTON_XPATH);
     }
 }

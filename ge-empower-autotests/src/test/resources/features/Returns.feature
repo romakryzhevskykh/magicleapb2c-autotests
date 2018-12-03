@@ -49,7 +49,7 @@ Feature: Return creation tests
 #      | North_America |
 #      | EMEA          |
 #      | ASIA          |
-#
+
 #  Scenario Outline: Check that user is able to create returns manually via uploading file.
 #    And Account management page is opened.
 #    When Choose North_America region.
@@ -125,24 +125,39 @@ Feature: Return creation tests
     When Returns page is opened.
     And Click on Create Request button.
     Then Return Creation 1 page is opened.
-
     When User hover mouse over top Next button on Return Creation 1 page.
     Then Is <toolTipNextBtn1and2page> text displayed in the Next button tooltip on Return Creation 1 page.
-
     When Search All PO No. in the Search field on Return Creation 1 page.
     And Select First Invoice No. in the Search Result table on Return Creation 1 page.
     And Select First Product in the Product List table on Return Creation 1 page.
     And Click on the Next button Return Creation 1 page.
     Then Return Creation 2 page is opened.
-
     When User hover mouse over bottom Next button on Return Creation 2 page.
     Then Is <toolTipNextBtn1and2page> text displayed in the Next button tooltip on Return Creation 2 page.
-
+    And Select Shortage Reason for Request on Return Creation 2 page.
+    And Select Credit Requested Action on Return Creation 2 page.
+    And Set value 1 to the Qty. field on Return Creation 2 page.
     When User clicks on Save for later button on Return Creation 2 page.
-
     Then Save to Return List with title Save to Return List pop-up is appeared.
+    Then Save for later Return pop-up contains Please enter a new return list name header.
+    When User sets random name to the Return list name input.
+    And User clicks on Save button in Save for later Return pop-up.
+    Then Returns title is displayed on Returns page.
+    When User opens Saved Requests tab.
+    Then The return with appropriate name is displayed on the Saved Request tab.
+    When User clicks on Edit last saved return icon.
+    Then Return Creation 2 page is opened.
+    Then Correct catalog No is displayed on Return Creation 2 page.
+    And Click on Next button on Return Creation 2 page.
+    Then Return Creation 3 page is opened.
+
+    When User hover mouse over bottom Next button on Return Creation 3 page.
+    Then Is <toolTipNextBtn3page> text displayed in additional button tooltip on Return Creation 3 page.
+
+    When User hover mouse over Additional Info button on Return Creation 3 page.
+    Then Is <additionalButtonTooltip> text displayed in additional button tooltip.
+
 
     Examples:
-      | toolTipNextBtn1and2page           |
-      | Required data is missing or is incorrect |
-
+      | toolTipNextBtn1and2page                  | additionalButtonTooltip                               | toolTipNextBtn3page                                                                                            |
+      | Required data is missing or is incorrect | Additional information is required for this line item | Additional information missing, please ensure all mandatory data has been entered and saved before proceeding. |
