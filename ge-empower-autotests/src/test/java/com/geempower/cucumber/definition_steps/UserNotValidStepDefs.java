@@ -12,7 +12,6 @@ public class UserNotValidStepDefs extends AbstractStepDefs {
     @Autowired
     private UserNotValidPage userNotValidPage;
 
-
     @Then("^User sees User not valid page.$")
     public void isUserNotValidPageOpened() {
         assertTrue(userNotValidPage.isOpened());

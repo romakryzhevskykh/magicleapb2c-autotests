@@ -55,8 +55,14 @@ public class HeaderBlock extends UIComponent {
         $(PRODUCT_SEARCH_FIELD_XPATH).sendKeys(product);
     }
 
-    @Step
+    @Step("Click On Search Product Icon.")
     public void clickOnSearchProductIcon() {
         click(By.id(PRODUCT_SEARCH_ICON_ID));
+    }
+
+    @Step("Is appropriate section available to user.")
+    public boolean isSectionAvailableToUser(String sectionName) {
+        waitUntilPageIsFullyLoaded();
+        return isDisplayed(MENU_SECTION_XPATH, sectionName);
     }
 }

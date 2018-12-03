@@ -10,4 +10,6 @@ public class HeaderBlockElements {
     public final static String CHECKOUT_BUTTON_XPATH = ".//p[contains(@class,'cart-total-price')]";
     public final static String PRODUCT_SEARCH_FIELD_XPATH = ".//input[@name = 'product']";
     public final static String PRODUCT_SEARCH_ICON_ID = "searchProductBut";
+    //main menu
+    public final static String MENU_SECTION_XPATH = "//li/a[text()='%s']";
 }
