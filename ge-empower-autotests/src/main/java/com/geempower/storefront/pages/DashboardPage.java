@@ -179,7 +179,7 @@ public class DashboardPage extends StorefrontBasePage {
 
     @Step("Get Expired Tax Cert Pop Up Title.")
     public String getExpiredTaxCertPopUpTitle() {
-        return $(EXPIRED_TAX_CERT_POP_UP_TITLE_XPATH ).getText();
+        return $(EXPIRED_TAX_CERT_POP_UP_TITLE_XPATH).getText();
     }
 
     @Step("Is Expired Tax Cert Pop Up Displayed.")
@@ -201,5 +201,87 @@ public class DashboardPage extends StorefrontBasePage {
     @Step("User Clicks On Dismiss Button.")
     public void userClicksOnDismissButton() {
         click(DISMISS_BUTTON_XPATH);
+    }
+
+    @Step("Is Avr Widget Displayed.")
+    public boolean isAvrWidgetDisplayed() {
+        waitUntilPageIsFullyLoaded();
+        return isDisplayed(AVR_WIDGET_XPATH);
+    }
+
+    @Step("Get Avr Widget Title.")
+    public String getAvrWidgetTitle() {
+        waitUntilPageIsFullyLoaded();
+        return $(AVR_WIDGET_TITLE_XPATH).getText();
+    }
+
+    @Step("Get Avr Currency Label.")
+    public String getAvrCurrencyLabel() {
+        waitUntilPageIsFullyLoaded();
+        return $(By.id(AVR_CURRENCY_TITLE_ID)).getText();
+    }
+
+    @Step("Get Min Count Of Avrs.")
+    public int getMinCountOfAvrs() {
+        waitUntilPageIsFullyLoaded();
+        return $$(AVR_MIN_COUNT_ON_DASHBOARD_XPATH).size();
+    }
+
+    @Step("Get Avr Rebate Company Name.")
+    public String getAvrRebateCompanyName() {
+        waitUntilPageIsFullyLoaded();
+        return $(ACTIVE_AVR_REBATE_COMPANY_NAME_XPATH).getText();
+    }
+
+    @Step("Is Current Payout Displayed.")
+    public String isCurrentPayoutDisplayed() {
+        return $(CURRENT_PAYOUT_TITLE_XPATH).getText();
+    }
+
+    @Step("Is Current Volume Displayed.")
+    public String isCurrentVolumeDisplayed() {
+        return $(CURRENT_VOLUME_TITLE_XPATH).getText();
+    }
+
+    @Step("Is Ytd Payout Displayed.")
+    public String isYtdPayoutDisplayed() {
+        return $(YTD_PAYOUT_TITLE_XPATH).getText();
+    }
+
+    @Step("Get Ytd Payout.")
+    public String getYtdPayout() {
+        return $(YTD_PAYOUT_VALUE_XPATH).getText();
+    }
+
+    @Step("Get Current Volume.")
+    public String getCurrentVolume() {
+        return $(CURRENT_VOLUME_VALUE_XPATH).getText();
+    }
+
+    @Step("Select Appropriate Avr on the Dashboard.")
+    public void selectAppropriateAvr(int avrNumber) {
+        waitUntilPageIsFullyLoaded();
+        click(APPROPRIATE_AVR_ON_THE_DASHBOARD_XPATH, String.valueOf(avrNumber));
+    }
+
+    @Step("Get Avr Type Description Without Percentage.")
+    public String getAvrTypeDescriptionWithoutPercentage(int avrNumber) {
+        waitUntilPageIsFullyLoaded();
+        String fullAvrDescription = $(AVR_TYPE_DESCRIPTION_XPATH, String.valueOf(avrNumber)).getText();
+        if (fullAvrDescription.contains("%)")) {
+            return fullAvrDescription.split(" \\(")[0];
+        } else
+            return fullAvrDescription;
+    }
+
+    @Step("Get Avr Target Description Without Price.")
+    public String getAvrTargetDescriptionWithoutPrice(int avrNumber) {
+        waitUntilPageIsFullyLoaded();
+        return $(APPROPRIATE_AVR_TARGET_LABEL_XPATH, String.valueOf(avrNumber)).getText();
+    }
+
+    @Step("Click To The Active Avr Link.")
+    public void clickToTheActiveAvrLink() {
+        click(ACTIVE_AVR_LINK_TO_ANNUAL_REBATE_PAGE_XPATH);
     }
 }

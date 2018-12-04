@@ -61,3 +61,14 @@ Feature: Some actions with toggles, UI components on the Notification Center pag
     Examples:
       | email                   |
       | testcaadmin@yopmail.com |
+
+  Scenario: Check that user is able to switch off/on Marketing promotional content toggle.
+    And Current promo content toggle position is saved to the threadVarsHashMap.
+    When Admin switches the promo content toggle to another state.
+    And Dashboard page is opened.
+    And Notification Center page is opened.
+    Then Promo content toggle is switched to previously chosen state.
+    When Admin switches the promo content toggle to another state.
+    And Dashboard page is opened.
+    And Notification Center page is opened.
+    Then Promo content toggle is switched to previously chosen state.
