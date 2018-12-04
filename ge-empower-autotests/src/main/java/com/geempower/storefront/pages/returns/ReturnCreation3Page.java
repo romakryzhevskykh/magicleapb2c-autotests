@@ -36,13 +36,13 @@ public class ReturnCreation3Page extends StorefrontBasePage {
         return isDisplayed(ADDITIONAL_INFORMATION_ACTIVE_TITLE_XPATH);
     }
 
-    @Step("Click on Additional Info Button")
+    @Step("Click on Additional Info Button.")
     public void clickOnAdditionalInfoButton() {
         waitUntilPageIsFullyLoaded();
         click(ADDITIONAL_INFORMATION_BUTTON_XPATH);
     }
 
-    @Step("Set color of shrink field")
+    @Step("Set color of shrink field.")
     public String setColorOfShrinkField() {
         waitUntilPageIsFullyLoaded();
         String uniqueColor = Long.toString(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().getEpochSecond());
@@ -50,8 +50,7 @@ public class ReturnCreation3Page extends StorefrontBasePage {
         return uniqueColor;
     }
 
-
-    @Step("Set Additional Information Field")
+    @Step("Set Additional Information Field.")
     public String setAdditionalInformationField() {
         waitUntilPageIsFullyLoaded();
         String uniqueAddInfo = Long.toString(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().getEpochSecond());
@@ -59,49 +58,49 @@ public class ReturnCreation3Page extends StorefrontBasePage {
         return uniqueAddInfo;
     }
 
-    @Step("Click on Save button")
+    @Step("Click on Save button.")
     public void clickOnSaveButton() {
         waitUntilPageIsFullyLoaded();
         click(SAVE_BUTTON_XPATH);
     }
 
-    @Step("Click on Next button")
+    @Step("Click on Next button.")
     public void clickOnNextButton() {
         waitUntilPageIsFullyLoaded();
         click(BOTTOM_NEXT_BUTTON_XPATH);
     }
 
-    @Step("Get Reason For Request Value")
+    @Step("Get Reason For Request Value.")
     public String getReasonForRequest() {
         return $(REASON_FOR_REQUEST_VALUE_XPATH).getText();
     }
 
-    @Step("Get Requested Action")
+    @Step("Get Requested Action.")
     public String getRequestedAction() {
         return $(REQUESTED_ACTION_VALUE_XPATH).getText();
     }
 
-    @Step("Get Catalog No")
+    @Step("Get Catalog No.")
     public String getCatalogNo() {
         return $(CATALOG_NO_VALUE_XPATH).getText();
     }
 
-    @Step("Get Alert Text For Non Returnable Products")
+    @Step("Get Alert Text For Non Returnable Products.")
     public String getAlertTextForNonReturnableProducts() {
         return $(MESSAGE_FOR_NON_RETURNABLE_PRODUCTS_XPATH).getText();
     }
 
-    @Step("Check If Exclamation Mark Displayed")
+    @Step("Check If Exclamation Mark Displayed.")
     public boolean checkIfExclamationMarkDisplayed(String flag) {
         return isDisplayed(EXCLAMATION_MARK_FOR_NON_RETURNABLE_PRODUCT_XPATH, flag);
     }
 
-    @Step("Get Disable Attribute Of Next Button")
+    @Step("Get Disable Attribute Of Next Button.")
     public String getDisableAttributeOfNextButton() {
         return $(BOTTOM_NEXT_BUTTON_XPATH).getAttribute("disabled");
     }
 
-    @Step("Delete All Non Returnable Products")
+    @Step("Delete All Non Returnable Products.")
     public void deleteAllNonReturnableProducts() {
         $$(ALL_NON_RETURNABLE_PRODUCTS_REMOVE_ICON_XPATH).forEach(product -> {
             product.click();
@@ -109,19 +108,19 @@ public class ReturnCreation3Page extends StorefrontBasePage {
         });
     }
 
-    @Step("Store Actual Product To The Thread Vars")
+    @Step("Store Actual Product To The Thread Vars.")
     public String storeActualProductToTheThreadVars() {
         waitUntilPageIsFullyLoaded();
         return $(ALL_CATALOG_NUMBERS_TEXT_XPATH).getText();
     }
 
-    @Step("Store Actual Reason for request To The Thread Vars")
+    @Step("Store Actual Reason for request To The Thread Vars.")
     public String storeActualReasonForRequestToTheThreadVars() {
         waitUntilPageIsFullyLoaded();
         return $(ALL_REASONS_FOR_REQUEST_XPATH).getText();
     }
 
-    @Step("Store Actual Requested action To The Thread Vars")
+    @Step("Store Actual Requested action To The Thread Vars.")
     public String storeActualRequestedActionToTheThreadVars() {
         waitUntilPageIsFullyLoaded();
         return $(ALL_REQUESTED_ACTION_XPATH).getText();
@@ -142,7 +141,7 @@ public class ReturnCreation3Page extends StorefrontBasePage {
         moveToElement($(ADDITIONAL_INFORMATION_BUTTON_XPATH));
     }
 
-    @Step("Get Additional Button Tool Tip Text.")
+    @Step("Get Additional Button Tooltip Text.")
     public String getAdditionalButtonToolTipText() {
         waitUntilPageIsFullyLoaded();
         return $(ADDITIONAL_INFORMATION_BUTTON_TOOLTIP_XPATH).getText();
@@ -151,5 +150,10 @@ public class ReturnCreation3Page extends StorefrontBasePage {
     @Step("Hover Mouse Over Bottom Next Button On Return Creation 3 Page.")
     public void hoverMouseOverBottomNextButtonOnReturnCreation3Page() {
         moveToElement($(BOTTOM_NEXT_BUTTON_XPATH));
+    }
+
+    @Step("Get Next Button Tooltip Text.")
+    public String getNextButtonTooltipText() {
+        return $(NEXT_BUTTON_TOOLTIP_XPATH).getText();
     }
 }

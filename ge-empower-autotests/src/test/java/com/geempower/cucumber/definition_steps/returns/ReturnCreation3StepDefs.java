@@ -84,7 +84,6 @@ public class ReturnCreation3StepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.RETURN_CATALOG_NO, returnCreation3Page.storeActualProductToTheThreadVars());
         threadVarsHashMap.put(TestKeyword.RETURN_REASON_FOR_REQUEST, returnCreation3Page.storeActualReasonForRequestToTheThreadVars());
         threadVarsHashMap.put(TestKeyword.RETURN_REQUESTED_ACTION, returnCreation3Page.storeActualRequestedActionToTheThreadVars());
-
     }
 
     @And("^Upload (.*) file to the Optional Attach file field on Return Creation 3 page.$")
@@ -98,7 +97,7 @@ public class ReturnCreation3StepDefs extends AbstractStepDefs {
     }
 
     @When("^User hover mouse over Additional Info button on Return Creation 3 page.$")
-    public void userHoverMouseOverAdditionalInfoButtonOnReturnCreationPage() {
+    public void userHoverMouseOverAdditionalInfoButtonOnReturnCreation3Page() {
         returnCreation3Page.hoverMouseOverAdditionalButton();
     }
 
@@ -110,5 +109,10 @@ public class ReturnCreation3StepDefs extends AbstractStepDefs {
     @When("^User hover mouse over bottom Next button on Return Creation 3 page.$")
     public void userHoverMouseOverBottomNextButtonOnReturnCreation3Page() {
         returnCreation3Page.hoverMouseOverBottomNextButtonOnReturnCreation3Page();
+    }
+
+    @Then("^Is (.*) text displayed in additional button tooltip on Return Creation 3 page.$")
+    public void isToolTipTextDisplayedInAdditionalButtonTooltipOnReturnCreation3Page(String tooltipText){
+        assertEquals(tooltipText, returnCreation3Page.getNextButtonTooltipText());
     }
 }

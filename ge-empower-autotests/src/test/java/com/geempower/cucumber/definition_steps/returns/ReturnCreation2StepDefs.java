@@ -73,17 +73,17 @@ public class ReturnCreation2StepDefs extends AbstractStepDefs {
     }
 
     @And("^Select (.*) Request type on Return Creation 2 page.$")
-    public void selectCosmeticRequestTypeOnReturnCreationPage(String type) {
+    public void selectCosmeticRequestTypeOnReturnCreation2Page(String type) {
         returnCreation2Page.selectRequestTypeForRequest(type);
     }
 
     @And("^Select (.*) Request sub-type on Return Creation 2 page.$")
-    public void selectPaintRequestSubTypeOnReturnCreationPage(String subType) {
+    public void selectPaintRequestSubTypeOnReturnCreation2Page(String subType) {
         returnCreation2Page.selectRequestSubTypeForRequest(subType);
     }
 
     @When("^User clicks on Save for later button on Return Creation 2 page.$")
-    public void userClicksOnSaveForLaterButtonOnReturnCreationPage() {
+    public void userClicksOnSaveForLaterButtonOnReturnCreation2Page() {
         returnCreation2Page.clickOnSaveForLaterButton();
     }
 

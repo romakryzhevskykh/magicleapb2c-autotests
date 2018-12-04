@@ -44,53 +44,63 @@ public class ReturnCreation4Page extends StorefrontBasePage {
         click(ARROW_DOWN_ALL_BUTTON_XPATH);
     }
 
-    @Step("Get Requested Action value")
+    @Step("Get Requested Action value.")
     public String getRequestedAction() {
         waitUntilPageIsFullyLoaded();
         return $(REQUEST_ACTION_VALUE_XPATH).getText();
     }
 
-    @Step("Get Color of Shrink value")
+    @Step("Get Color of Shrink value.")
     public String getColorOfShrink() {
         return $(COLOR_OF_SHRINK_WRAP_VALUE_XPATH).getText();
     }
 
-    @Step("Get Additional Info value")
+    @Step("Get Additional Info value.")
     public String getAdditionalInfo() {
         return $(ADDITIONAL_INFO_VALUE_XPATH).getText();
     }
 
-    @Step("Click On Submit Request Button")
+    @Step("Click On Submit Request Button.")
     public void clickOnSubmitRequestButton() {
         click(BOTTOM_SUBMIT_REQUEST_BUTTON_XPATH);
     }
 
 
-    @Step("Submit Terms and Conditions pop-up")
+    @Step("Submit Terms and Conditions pop-up.")
     public void submitTermsPopUp(String popUpTitle) {
         waitForElementWithAppropriateTextToAppear(By.xpath(TERMS_AND_CONDITIONS_POP_UP_XPATH), popUpTitle);
         click(AGREED_CHECKBOX_POP_UP_XPATH);
         click(By.id(SUBMIT_TERMS_POPUP_BUTTON_ID));
     }
 
-    @Step("Get Catalog No")
+    @Step("Get Catalog No.")
     public String getCatalogNo() {
         return $(CATALOG_NO_VALUE_XPATH).getText();
     }
 
 
-    @Step("Check that Request Submissions Pop Up Is Displayed ")
+    @Step("Check that Request Submissions Pop Up Is Displayed.")
     public void requestPopUpIsDisplayed(String popUpTitle) {
         waitForElementWithAppropriateTextToAppear(By.id(REQUEST_SUBMISSION_POP_UP_ID ),popUpTitle);
     }
 
-    @Step("Get Request Confirm No")
+    @Step("Get Request Confirm No.")
     public String getRequestConfirmNo() {
         return $(By.id(REQUEST_CONFIRM_NUMBER_ID)).getText().trim();
     }
 
-    @Step("Close Request ")
+    @Step("Close Request.")
     public void closeRequestPopUp() {
         click(CLOSE_REQUEST_BUTTON_XPATH);
+    }
+
+    @Step("Hover Mouse Over Question Icon On Return Creation 4 Page.")
+    public void hoverMouseOverQuestionIconOnReturnCreation4Page() {
+        moveToElement($(QUESTION_ICON_XPATH));
+    }
+
+    @Step("Get Question Icon Tooltip Text.")
+    public String getQuestionIconTooltipText() {
+        return $(TOOLTIP_QUESTION_ICON_XPATH).getText();
     }
 }
