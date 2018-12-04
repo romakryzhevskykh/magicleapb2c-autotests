@@ -64,7 +64,7 @@ public class ReturnCreation2Page extends StorefrontBasePage {
     @Step("Click on bottom Next button.")
     public void clickOnNextButton() {
         waitUntilPageIsFullyLoaded();
-        click(BOTTOM_NEXT_BUTTON_XPATH);
+        click(By.id(BOTTOM_NEXT_BUTTON_ID));
     }
 
     @Step("Get Reason For Request.")
@@ -120,7 +120,7 @@ public class ReturnCreation2Page extends StorefrontBasePage {
 
     @Step("User hover mouse over top Next button on Return Creation 2 page.")
     public void userHoverMouseOverBottomNextButtonOnReturnCreation2Page() {
-        moveToElement($(BOTTOM_NEXT_BUTTON_XPATH));
+        moveToElement($(By.id(BOTTOM_NEXT_BUTTON_ID)));
     }
 
     @Step("Get Next Button Tool Tip Text 2 Page.")

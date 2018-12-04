@@ -93,8 +93,8 @@ public class ReturnCreation2StepDefs extends AbstractStepDefs {
     }
 
     @Then("^Is (.*) text displayed in the Next button tooltip on Return Creation 2 page.$")
-    public void isAppropriateTextDisplayedInTheNextButtonTooltipOnReturnCreation2Page(String toolTipText) {
-        assertEquals(toolTipText, returnCreation2Page.getNextButtonToolTipText2Page());
+    public void isAppropriateTextDisplayedInTheNextButtonTooltipOnReturnCreation2Page(String tooltipText) {
+        assertEquals(tooltipText, returnCreation2Page.getNextButtonToolTipText2Page());
     }
 
     @Then("^Save to Return List with title (.*) pop-up is appeared.$")

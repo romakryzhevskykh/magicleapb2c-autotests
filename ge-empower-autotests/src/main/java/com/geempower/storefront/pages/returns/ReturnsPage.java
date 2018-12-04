@@ -68,8 +68,8 @@ public class ReturnsPage extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
     }
 
-    private boolean isSentRequestTabFullyUpdated(int a) {
-        return Integer.parseInt($(ALL_RETURNS_QUANTITY_XPATH).getText()) == a;
+    private boolean isSentRequestTabFullyUpdated(int allReturnsQuantity) {
+        return Integer.parseInt($(ALL_RETURNS_QUANTITY_XPATH).getText()) == allReturnsQuantity;
     }
 
     @Step("Get All Returns Quantity.")
@@ -77,6 +77,7 @@ public class ReturnsPage extends StorefrontBasePage {
         return Integer.parseInt($(ALL_RETURNS_QUANTITY_XPATH).getText());
     }
 
+    @Step("Get Last Added Return.")
     public String getLastAddedReturn() {
         return $(LAST_ADDED_RETURN_XPATH).getText();
     }

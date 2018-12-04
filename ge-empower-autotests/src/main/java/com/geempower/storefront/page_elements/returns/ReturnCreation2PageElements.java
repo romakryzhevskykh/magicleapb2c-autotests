@@ -12,7 +12,7 @@ public class ReturnCreation2PageElements {
     public final static String FIRST_ROW_REQUESTED_ACTION_FIELD_XPATH = "(.//*[@class='select2 select2-container select2-container--default'])[1]";
     public final static String SELECTED_FIRST_ROW_REQUESTED_ACTION_FIELD_XPATH = "//table[@id='returnTrackingTableStep2']//*[@class='select2-selection select2-selection--single']//span[@class='select2-selection__rendered']";
     public final static String FIRST_QTY_FIELD_XPATH = "(.//*[@class='form-control qty-input-val done'])[1]";
-    public final static String BOTTOM_NEXT_BUTTON_XPATH = "//button[@id='returnRequest2NextButton']";
+    public final static String BOTTOM_NEXT_BUTTON_ID = "returnRequest2NextButton";
     public final static String NEXT_BUTTON_TOOLTIP_XPATH = "//div[@class = 'tooltip fade top in']//div[@class='tooltip-inner']";
     public final static String CATALOG_NO_VALUE_XPATH = ".//*[@id='returnTrackingTableStep2']/tbody/tr/td[2]";
     public final static String SAVE_FOR_LATER_BUTTON_XPATH = "//button[@data-target='#save-return-request-modal']";
