@@ -1,13 +1,15 @@
 package com.geempower.cucumber.definition_steps;
 
 import com.geempower.helpers.managers.ProductManager;
-import com.geempower.helpers.models.*;
+import com.geempower.helpers.models.AVRTarget;
+import com.geempower.helpers.models.AVRType;
+import com.geempower.helpers.models.Product;
+import com.geempower.helpers.models.Region;
 import com.geempower.storefront.page_blocks.HeaderBlock;
 import com.geempower.storefront.page_blocks.OrderStatusWidget;
 import com.geempower.storefront.page_blocks.PriceAndAvailabilityBlock;
 import com.geempower.storefront.pages.DashboardPage;
 import com.geempower.storefront.pages.order.OrdersPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -320,7 +322,7 @@ public class DashboardStepDefs extends AbstractStepDefs {
     }
 
     @Then("^Currency has correct value (.*) label.$")
-    public void currencyHasCorrectValueValuesInEURLabel(String currencyLabel) {
+    public void currencyHasCorrectValueLabel(String currencyLabel) {
         assertEquals(currencyLabel, dashboardPage.getAvrCurrencyLabel(), "AVR Currency are not equal.");
     }
 

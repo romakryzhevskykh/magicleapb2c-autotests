@@ -26,3 +26,4 @@ Feature: Verification of main AVR elements on the Dashboard and on the Volume Re
     When User clicks on active AVR.
     Then Volume rebate page is opened.
     Then Count of AVR is more or equal than count of AVR on the dashboard.
+
