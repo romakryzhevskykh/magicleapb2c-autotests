@@ -45,6 +45,7 @@
         <classes>
             <!--secondEmpAdmin, thirdInternalUser, externalUser1, externaluser3-->
             <class name="com.geempower.cucumber.ManageUsersSuite"/>
+            <class name="com.geempower.cucumber.AVRSuite"/>
         </classes>
     </test>
 </suite>

@@ -1,6 +1,8 @@
 package com.geempower.cucumber.definition_steps;
 
 import com.geempower.helpers.managers.ProductManager;
+import com.geempower.helpers.models.AVRTarget;
+import com.geempower.helpers.models.AVRType;
 import com.geempower.helpers.models.Product;
 import com.geempower.helpers.models.Region;
 import com.geempower.storefront.page_blocks.HeaderBlock;
@@ -16,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.testng.Assert.*;
 
@@ -306,5 +309,79 @@ public class DashboardStepDefs extends AbstractStepDefs {
     @Then("^Is expired tax pop up not displayed.$")
     public void isExpiredTaxPopUpNotDisplayed() {
         assertFalse(dashboardPage.isExpiredTaxCertPopUpDisplayed());
+    }
+
+    @Then("^AVR widget is displayed on the Dashboard page.$")
+    public void avrWidgetIsDisplayedOnTheDashboardPage() {
+        assertTrue(dashboardPage.isAvrWidgetDisplayed());
+    }
+
+    @Then("^(.*) title is displayed for AVR widget.$")
+    public void volumeRebateAVRTitleIsDisplayedForAVRWidget(String avrTitle) {
+        assertEquals(avrTitle, dashboardPage.getAvrWidgetTitle(), "AVR Titles are not equal.");
+    }
+
+    @Then("^Currency has correct value (.*) label.$")
+    public void currencyHasCorrectValueLabel(String currencyLabel) {
+        assertEquals(currencyLabel, dashboardPage.getAvrCurrencyLabel(), "AVR Currency are not equal.");
+    }
+
+    @And("^Minimal count of AVRs is stored to the threadVarsHashmap.$")
+    public void countOfAVRsIsStoredToTheThreadVarsHashmap() {
+        threadVarsHashMap.put(TestKeyword.MINIMAL_COUNT_OF_AVR_ON_DASHBOARD, dashboardPage.getMinCountOfAvrs());
+    }
+
+    @Then("^Rebate company name is displayed correctly.$")
+    public void rebateCompanyNameIsDisplayedCorrectly() {
+        String rebateCompanyName = dashboardPage.getAvrRebateCompanyName();
+        assertTrue(rebateCompanyName.startsWith("AVR: 003000"));
+        assertTrue(rebateCompanyName.contains("|"));
+        assertTrue(rebateCompanyName.endsWith("2018"));
+    }
+
+    @Then("^(.*) current payout is displayed on the AVR widget.$")
+    public void currentPayoutIsDisplayedOnTheAVRWidget(String currentPayoutTitle) {
+        assertEquals(currentPayoutTitle, dashboardPage.isCurrentPayoutDisplayed());
+    }
+
+    @Then("^(.*) current volume is displayed on the AVR widget.$")
+    public void currentVolumeIsDisplayedOnTheAVRWidget(String currentVolumeTitle) {
+        assertEquals(currentVolumeTitle, dashboardPage.isCurrentVolumeDisplayed());
+    }
+
+    @Then("^(.*) ytd volume is displayed on the AVR widget.$")
+    public void ytdVolumeIsDisplayedOnTheAVRWidget(String ytdVolumeTitle) {
+        assertEquals(ytdVolumeTitle, dashboardPage.isYtdPayoutDisplayed());
+    }
+
+    @Then("^YTD Payout value is equal to Current volume.$")
+    public void ytdPayoutValueIsEqualToCurrentVolume() {
+        assertEquals(dashboardPage.getYtdPayout(), dashboardPage.getCurrentVolume());
+    }
+
+    @Then("^AVR type description is correct for each avr on the dashboard.$")
+    public void avrTypeLabelIsCorrect() {
+        for (int i = 1; i <= dashboardPage.getMinCountOfAvrs(); i++) {
+            dashboardPage.selectAppropriateAvr(i);
+            assertTrue(AVRType.getAVRTypes().stream().map(avrType -> avrType.getAvrTypeDescription()).collect(Collectors.toList()).contains(dashboardPage.getAvrTypeDescriptionWithoutPercentage(i)));
+        }
+    }
+
+    @Then("^Next target label is correct for each avr on the dashboard.$")
+    public void nextTargetValueIsCorrectForEachAvrOnTheDashboard() {
+        for (int i = 1; i <= dashboardPage.getMinCountOfAvrs(); i++) {
+            dashboardPage.selectAppropriateAvr(i);
+            assertTrue(AVRTarget.getAVRTargets().stream().map(avrTarget -> avrTarget.getAvrTargetDescription()).collect(Collectors.toList()).contains(dashboardPage.getAvrTargetDescriptionWithoutPrice(i)));
+        }
+    }
+
+    @When("^User clicks on active AVR.$")
+    public void userClicksOnActiveOfTheAVR() {
+        dashboardPage.clickToTheActiveAvrLink();
+    }
+
+    @Then("^(.*) AVR section is displayed in the header menu.$")
+    public void avrSectionIsDisplayedInTheHeaderMenu(String sectionName) {
+        assertTrue(headerBlock.isSectionAvailableToUser(sectionName));
     }
 }
