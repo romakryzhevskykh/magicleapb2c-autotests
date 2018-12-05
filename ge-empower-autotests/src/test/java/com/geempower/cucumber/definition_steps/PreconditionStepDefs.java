@@ -71,6 +71,8 @@ public class PreconditionStepDefs extends AbstractStepDefs {
     private LessonLyService lessonLyService;
     @Autowired
     private BackofficeLoginPage backofficeLoginPage;
+    @Autowired
+    private VolumeRebatePage volumeRebatePage;
 
     @Given("^User is logged in to Storefront.$")
     public void userIsLoggedInToStorefront() {
@@ -222,6 +224,14 @@ public class PreconditionStepDefs extends AbstractStepDefs {
             dashboardPage.open();
         }
         dashboardPage.closeWeAreNowAbbPopUpIfPresent();
+    }
+
+    @And("^Volume rebtae page is opened.$")
+    public void volumeRebatePageIsOpened() {
+        volumeRebatePage.waitUntilPageIsFullyLoaded();
+        if (!volumeRebatePage.isOpened()) {
+            volumeRebatePage.open();
+        }
     }
 
     @And("^Notification Center page is opened.$")

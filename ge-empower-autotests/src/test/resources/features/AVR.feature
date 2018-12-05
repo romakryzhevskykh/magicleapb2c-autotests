@@ -33,3 +33,13 @@ Feature: Verification of main AVR elements on the Dashboard and on the Volume Re
     And Close cookies pop-up.
     And Minimal count of AVRs is stored to the threadVarsHashmap.
     Then Each available AVR has correct target, data diff and other labels.
+
+  Scenario Outline: Check that user is able to open Volume Rebate page and all necessary elements are displayed on it.
+    And Volume rebate page is opened.
+    Then Volume Rebate (AVR) title is displayed on the Volume rebate page.
+    Then Year switcher is present with current year.
+    Then <settlementMessage> settlement message is displayed on the Volume rebate page.
+
+    Examples:
+      | settlementMessage                                                                         |
+      | Some Volume Rebate details may be not displayed, check settlement partner account instead |

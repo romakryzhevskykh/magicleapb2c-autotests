@@ -3,12 +3,12 @@ Feature: Some actions on Saved Items page
   Background:
     Given Switch to Storefront as rmAdmin.
     And User is logged in to Storefront.
-
-  Scenario: Check that user able to open Saved Items page and correct header title is displayed
-    And Saved Items page is opened.
-    Then Items title is displayed on Saved Items page.
-    Then Active Cart title for appropriate section is displayed.
-    Then Saved Lists title for appropriate table is displayed.
+#
+#  Scenario: Check that user able to open Saved Items page and correct header title is displayed
+#    And Saved Items page is opened.
+#    Then Items title is displayed on Saved Items page.
+#    Then Active Cart title for appropriate section is displayed.
+#    Then Saved Lists title for appropriate table is displayed.
 
   Scenario Outline: Check that user is able to add new List.
     And Account management page is opened.
@@ -38,10 +38,10 @@ Feature: Some actions on Saved Items page
 
     Examples:
       | productNo | agreementNo |
-      | thql1120  | 45000514    |
+      | thql1115  | 45000514    |
 
-  Scenario: Check that Help button works correctly on the Saved Items page.
-    And Saved Items page is opened.
-    And Help button is displayed.
-    When User clicks on Help button.
-    Then Saved Lists & Shopping Carts tip is displayed on Lessonly widget.
+#  Scenario: Check that Help button works correctly on the Saved Items page.
+#    And Saved Items page is opened.
+#    And Help button is displayed.
+#    When User clicks on Help button.
+#    Then Saved Lists & Shopping Carts tip is displayed on Lessonly widget.
