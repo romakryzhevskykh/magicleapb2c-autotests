@@ -49,9 +49,9 @@ public class ReturnCreation3StepDefs extends AbstractStepDefs {
 
     @Then("^Correct Catalog No, Reason for request and Requested action are displayed on Return Creation 3 page.$")
     public void correctReasonForRequestAndRequestedActionAreDisplayedOnReturnCreationPage() {
-        String reasonForRequest = (String) threadVarsHashMap.get(TestKeyword.RETURN_REASON_FOR_REQUEST);
-        String requestedAction = (String) threadVarsHashMap.get(TestKeyword.RETURN_REQUESTED_ACTION);
-        String catalogNo = (String) threadVarsHashMap.get(TestKeyword.RETURN_CATALOG_NO);
+        String reasonForRequest = threadVarsHashMap.getString(TestKeyword.RETURN_REASON_FOR_REQUEST);
+        String requestedAction = threadVarsHashMap.getString(TestKeyword.RETURN_REQUESTED_ACTION);
+        String catalogNo = threadVarsHashMap.getString(TestKeyword.RETURN_CATALOG_NO);
         assertEquals(reasonForRequest, returnCreation3Page.getReasonForRequest());
         assertEquals(requestedAction, returnCreation3Page.getRequestedAction());
         assertEquals(catalogNo, returnCreation3Page.getCatalogNo());
@@ -83,7 +83,6 @@ public class ReturnCreation3StepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.RETURN_CATALOG_NO, returnCreation3Page.storeActualProductToTheThreadVars());
         threadVarsHashMap.put(TestKeyword.RETURN_REASON_FOR_REQUEST, returnCreation3Page.storeActualReasonForRequestToTheThreadVars());
         threadVarsHashMap.put(TestKeyword.RETURN_REQUESTED_ACTION, returnCreation3Page.storeActualRequestedActionToTheThreadVars());
-
     }
 
     @And("^Upload (.*) file to the Optional Attach file field on Return Creation 3 page.$")
@@ -94,5 +93,25 @@ public class ReturnCreation3StepDefs extends AbstractStepDefs {
     @Then("^Is green Additional Info button displayed.$")
     public void isGreenAdditionalInfoButtonDisplayed() {
         assertTrue(returnCreation3Page.isGreenAdditionalInfoButtonDisplayed());
+    }
+
+    @When("^User hover mouse over Additional Info button on Return Creation 3 page.$")
+    public void userHoverMouseOverAdditionalInfoButtonOnReturnCreation3Page() {
+        returnCreation3Page.hoverMouseOverAdditionalButton();
+    }
+
+    @Then("^Is (.*) text displayed in additional button tooltip.$")
+    public void isAdditionalButtonTooltipTextDisplayedInAdditionalButtonTooltip(String tooltipText) {
+        assertEquals(tooltipText, returnCreation3Page.getAdditionalButtonToolTipText());
+    }
+
+    @When("^User hover mouse over bottom Next button on Return Creation 3 page.$")
+    public void userHoverMouseOverBottomNextButtonOnReturnCreation3Page() {
+        returnCreation3Page.hoverMouseOverBottomNextButtonOnReturnCreation3Page();
+    }
+
+    @Then("^Is (.*) text displayed in additional button tooltip on Return Creation 3 page.$")
+    public void isToolTipTextDisplayedInAdditionalButtonTooltipOnReturnCreation3Page(String tooltipText){
+        assertEquals(tooltipText, returnCreation3Page.getNextButtonTooltipText());
     }
 }

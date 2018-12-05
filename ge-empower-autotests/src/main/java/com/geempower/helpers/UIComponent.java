@@ -54,12 +54,18 @@ public abstract class UIComponent {
         click(webElement);
     }
 
-    protected void moveToElement(WebElement webElement) {
+    protected void moveToElementAndWait(WebElement webElement) {
         WebDriverWait wait = new WebDriverWait(getDriver(), webDriverPool.getActiveDriverSession().getShortTimeOut());
         Actions actions = new Actions(getDriver());
         actions.moveToElement(webElement);
         actions.perform();
         wait.until(ExpectedConditions.elementToBeClickable(webElement));
+    }
+
+    protected void moveToElement(WebElement webElement) {
+        Actions actions = new Actions(getDriver());
+        actions.moveToElement(webElement);
+        actions.perform();
     }
 
     protected void click(By by) {

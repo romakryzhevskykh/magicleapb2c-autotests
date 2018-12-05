@@ -6,6 +6,7 @@ import com.geempower.helpers.Utils;
 import com.geempower.storefront.pages.returns.ReturnCreation2Page;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class ReturnCreation2StepDefs extends AbstractStepDefs {
 
     @Then("^Return Creation 2 page is opened.$")
     public void returnCreation2pageIsOpened() {
-        if(!returnCreation2Page.reasonForRequestTitleIsDisplayed()) {
+        if (!returnCreation2Page.reasonForRequestTitleIsDisplayed()) {
             utils.refreshCurrentPage();
         }
         assertTrue(returnCreation2Page.isOpened() && returnCreation2Page.reasonForRequestTitleIsDisplayed());
@@ -50,6 +51,7 @@ public class ReturnCreation2StepDefs extends AbstractStepDefs {
     @And("^Set value (.*) to the Qty. field on Return Creation 2 page.$")
     public void setQtyValue(String qty) {
         returnCreation2Page.setQtyValue(qty);
+        threadVarsHashMap.put(TestKeyword.RETURN_QUANTITY, qty);
     }
 
     @And("^Click on Next button on Return Creation 2 page.$")
@@ -71,12 +73,47 @@ public class ReturnCreation2StepDefs extends AbstractStepDefs {
     }
 
     @And("^Select (.*) Request type on Return Creation 2 page.$")
-    public void selectCosmeticRequestTypeOnReturnCreationPage(String type) {
+    public void selectCosmeticRequestTypeOnReturnCreation2Page(String type) {
         returnCreation2Page.selectRequestTypeForRequest(type);
     }
 
     @And("^Select (.*) Request sub-type on Return Creation 2 page.$")
-    public void selectPaintRequestSubTypeOnReturnCreationPage(String subType) {
+    public void selectPaintRequestSubTypeOnReturnCreation2Page(String subType) {
         returnCreation2Page.selectRequestSubTypeForRequest(subType);
+    }
+
+    @When("^User clicks on Save for later button on Return Creation 2 page.$")
+    public void userClicksOnSaveForLaterButtonOnReturnCreation2Page() {
+        returnCreation2Page.clickOnSaveForLaterButton();
+    }
+
+    @When("^User hover mouse over bottom Next button on Return Creation 2 page.$")
+    public void userHoverMouseOverBottomNextButtonOnReturnCreation2Page() {
+        returnCreation2Page.userHoverMouseOverBottomNextButtonOnReturnCreation2Page();
+    }
+
+    @Then("^Is (.*) text displayed in the Next button tooltip on Return Creation 2 page.$")
+    public void isAppropriateTextDisplayedInTheNextButtonTooltipOnReturnCreation2Page(String tooltipText) {
+        assertEquals(tooltipText, returnCreation2Page.getNextButtonToolTipText2Page());
+    }
+
+    @Then("^Save to Return List with title (.*) pop-up is appeared.$")
+    public void saveForLaterPopUpAppearsWithTitle(String saveForLaterPopUpTitle) {
+        assertEquals(saveForLaterPopUpTitle, returnCreation2Page.getSaveForLaterPopUpTitle());
+    }
+
+    @Then("^Save for later Return pop-up contains (.*) header.$")
+    public void saveForLaterPopUpContainsCorrectHeader(String popUpHeader) {
+        assertEquals(popUpHeader, returnCreation2Page.getSaveForLaterPopUpHeader());
+    }
+
+    @When("^User sets random name to the Return list name input.$")
+    public void userSetsRandomNameToTheReturnListNameInput() {
+        threadVarsHashMap.put(TestKeyword.RETURN_SAVE_FOR_LATER_LIST_NAME, returnCreation2Page.setNameForNewSavedReturnList());
+    }
+
+    @And("^User clicks on Save button in Save for later Return pop-up.$")
+    public void userClicksOnSaveButtonInSaveForLaterReturnPopUp() {
+        returnCreation2Page.clickSaveNewReturnList();
     }
 }

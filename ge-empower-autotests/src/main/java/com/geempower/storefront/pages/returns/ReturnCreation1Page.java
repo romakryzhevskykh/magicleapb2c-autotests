@@ -39,7 +39,7 @@ public class ReturnCreation1Page extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
     }
 
-    @Step("Select first Invoice No. in table")
+    @Step("Select first Invoice No. in table.")
     public long selectFirstInvoiceNo() {
         waitUntilPageIsFullyLoaded();
         click(FIRST_INVOICE_NO_IN_TABLE_XPATH);
@@ -47,14 +47,14 @@ public class ReturnCreation1Page extends StorefrontBasePage {
         return Long.parseLong($(FIRST_ACTIVE_INVOICE_NO_IN_TABLE_XPATH).getText());
     }
 
-    @Step("Select first product in table")
+    @Step("Select first product in table.")
     public String selectFirstProduct() {
         waitUntilPageIsFullyLoaded();
         click(FIRST_CHECKBOX_IN_TABLE_XPATH);
         return $(FIRST_ACTIVE_CATALOGUE_NO_IN_TABLE_XPATH).getText();
     }
 
-    @Step("Click on Top Next button")
+    @Step("Click on Top Next button.")
     public void clickOnNextButton() {
         waitUntilPageIsFullyLoaded();
         click(TOP_NEXT_BUTTON_XPATH);
@@ -67,19 +67,30 @@ public class ReturnCreation1Page extends StorefrontBasePage {
         return $(FIRST_ACTIVE_CATALOGUE_NO_IN_TABLE_XPATH).getText();
     }
 
-    @Step("Click Manual Entry Option")
+    @Step("Click Manual Entry Option.")
     public void clickManualEntryOption() {
         click(MANUAL_ENTRY_RETURN_OPTION_XPATH);
     }
 
-    @Step("Upload Return File")
+    @Step("Upload Return File.")
     public void uploadReturnFile(String fileName) {
         utils.uploadFileByName(fileName, UPLOAD_FILE_INPUT_XPATH);
     }
 
-    @Step("Get Warning Message")
+    @Step("Get Warning Message.")
     public String getWarningMessage() {
         waitUntilPageIsFullyLoaded();
         return $(NORTH_AMERICA_WARNING_MESSAGE_XPATH).getText();
+    }
+
+    @Step("User hover mouse over top Next button on Return Creation 1 page.")
+    public void userHoverMouseOverTopNextButtonOnReturnCreation1Page() {
+        moveToElement($(TOP_NEXT_BUTTON_XPATH));
+    }
+
+    @Step("Get Next Button Tool Tip Text on Return Creation 1 page.")
+    public String getNextButtonToolTipText1Page() {
+        waitUntilPageIsFullyLoaded();
+        return $(NEXT_BUTTON_TOOLTIP_XPATH).getText();
     }
 }
