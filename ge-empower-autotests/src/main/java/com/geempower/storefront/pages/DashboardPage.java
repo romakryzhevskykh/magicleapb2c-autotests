@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static com.geempower.storefront.page_elements.DashboardPageElements.*;
@@ -262,6 +263,7 @@ public class DashboardPage extends StorefrontBasePage {
     public void selectAppropriateAvr(int avrNumber) {
         waitUntilPageIsFullyLoaded();
         click(APPROPRIATE_AVR_ON_THE_DASHBOARD_XPATH, String.valueOf(avrNumber));
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Get Avr Type Description Without Percentage.")
@@ -283,5 +285,33 @@ public class DashboardPage extends StorefrontBasePage {
     @Step("Click To The Active Avr Link.")
     public void clickToTheActiveAvrLink() {
         click(ACTIVE_AVR_LINK_TO_ANNUAL_REBATE_PAGE_XPATH);
+    }
+
+    @Step("Get full avr data by attribute name from the html.")
+    public HashMap<String, String> getAvrData(String avrNumber) {
+        WebElement avr = $(APPROPRIATE_AVR_DATA_FROM_HTML_XPATH, avrNumber);
+        HashMap<String, String> avrData = new HashMap<>();
+        avrData.put("data-volume", avr.getAttribute("data-volume"));
+        avrData.put("data-diff", avr.getAttribute("data-diff"));
+        avrData.put("data-target", avr.getAttribute("data-target"));
+        avrData.put("data-met", avr.getAttribute("data-met"));
+        avrData.put("data-reached", avr.getAttribute("data-reached"));
+        return avrData;
+    }
+
+    @Step("Get target N reached label under the graph.")
+    public String getTargetNReachedLabel(int avrNumber) {
+        waitUntilPageIsFullyLoaded();
+        return $(APPROPRIATE_AVR_TARGET_N_REACHED_LABEL_XPATH, String.valueOf(avrNumber)).getText();
+    }
+
+    @Step("Get next target value right after the graph.")
+    public int getNextTargetValue(int avrNumber) {
+        return Math.round(Float.valueOf($(APPROPRIATE_AVR_NEXT_TARGET_LABEL_VALUE_XPATH, String.valueOf(avrNumber)).getText().replace("K", "").replace(",", "")));
+    }
+
+    @Step("Is volume K left label displayed under the graph.")
+    public boolean isVolumeKLeftLabelDisplayed(int avrNumber) {
+        return isDisplayed(APPROPRIATE_AVR_TARGET_N_REACHED_LABEL_XPATH, String.valueOf(avrNumber));
     }
 }
