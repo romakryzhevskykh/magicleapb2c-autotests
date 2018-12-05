@@ -361,7 +361,8 @@ public class DashboardStepDefs extends AbstractStepDefs {
 
     @Then("^AVR type description is correct for each avr on the dashboard.$")
     public void avrTypeLabelIsCorrect() {
-        for (int i = 1; i <= dashboardPage.getMinCountOfAvrs(); i++) {
+        int countOfAvrs = dashboardPage.getMinCountOfAvrs();
+        for (int i = 1; i <= countOfAvrs; i++) {
             dashboardPage.selectAppropriateAvr(i);
             assertTrue(AVRType.getAVRTypes().stream().map(avrType -> avrType.getAvrTypeDescription()).collect(Collectors.toList()).contains(dashboardPage.getAvrTypeDescriptionWithoutPercentage(i)));
         }
@@ -369,7 +370,8 @@ public class DashboardStepDefs extends AbstractStepDefs {
 
     @Then("^Next target label is correct for each avr on the dashboard.$")
     public void nextTargetValueIsCorrectForEachAvrOnTheDashboard() {
-        for (int i = 1; i <= dashboardPage.getMinCountOfAvrs(); i++) {
+        int countOfAvrs = dashboardPage.getMinCountOfAvrs();
+        for (int i = 1; i <= countOfAvrs; i++) {
             dashboardPage.selectAppropriateAvr(i);
             assertTrue(AVRTarget.getAVRTargets().stream().map(avrTarget -> avrTarget.getAvrTargetDescription()).collect(Collectors.toList()).contains(dashboardPage.getAvrTargetDescriptionWithoutPrice(i)));
         }
@@ -383,5 +385,51 @@ public class DashboardStepDefs extends AbstractStepDefs {
     @Then("^(.*) AVR section is displayed in the header menu.$")
     public void avrSectionIsDisplayedInTheHeaderMenu(String sectionName) {
         assertTrue(headerBlock.isSectionAvailableToUser(sectionName));
+    }
+
+    @Then("^Each available AVR has correct target, data diff and other labels.$")
+    public void eachAvailableAVRHasCorrectTargetAndDataDiff() {
+        int countOfAvrs = dashboardPage.getMinCountOfAvrs();
+        for (int i = 1; i <= countOfAvrs; i++) {
+            dashboardPage.selectAppropriateAvr(i);
+            HashMap<String, String> avrData = dashboardPage.getAvrData(String.valueOf(i));
+            if (avrData.get("data-target") != null) {
+                String[] dataTargets = avrData.get("data-target").split(",");
+                int targetsCount = dataTargets.length;
+                if (Integer.parseInt(avrData.get("data-volume")) >= Integer.parseInt(dataTargets[targetsCount - 1])) {
+                    verifyAvrDataIfTopTargetMet(targetsCount, avrData, i);
+                } else if (Integer.parseInt(avrData.get("data-volume")) < Integer.parseInt(dataTargets[targetsCount - 1])) {
+                    for (int j = 0; j < targetsCount - 1; j++) {
+                        if (Integer.parseInt(avrData.get("data-volume")) == Integer.parseInt(dataTargets[j])) {
+                            int diff = Integer.parseInt(dataTargets[j + 1]) - Integer.parseInt(avrData.get("data-volume"));
+                            verifyAvrDataIfDifferenceApplicable(diff, avrData, i);
+                            assertEquals("target " + String.valueOf(j + 1) + " reached", avrData.get("data-reached"));
+                        } else if (!(Integer.parseInt(avrData.get("data-volume")) > Integer.parseInt(dataTargets[j]))) {
+                            int diff = Integer.parseInt(dataTargets[j]) - Integer.parseInt(avrData.get("data-volume"));
+                            verifyAvrDataIfDifferenceApplicable(diff, avrData, i);
+                            assertEquals("target " + String.valueOf(j) + " reached", avrData.get("data-reached"));
+                        }
+                    }
+                }
+            }
+            if (avrData.get("data-diff") == null) {
+                assertEquals("No Limit", dashboardPage.getAvrTargetDescriptionWithoutPrice(i));
+                assertFalse(dashboardPage.isVolumeKLeftLabelDisplayed(i));
+            }
+        }
+    }
+
+    private void verifyAvrDataIfTopTargetMet(int targetsCount, HashMap<String, String> avrData, int counter) {
+        assertEquals("target " + String.valueOf(targetsCount) + " reached", avrData.get("data-reached"));
+        assertEquals("target " + String.valueOf(targetsCount) + " reached", dashboardPage.getTargetNReachedLabel(counter));
+        assertEquals("Top Target Met", dashboardPage.getAvrTargetDescriptionWithoutPrice(counter));
+        assertEquals("true", avrData.get("data-met"));
+    }
+
+    private void verifyAvrDataIfDifferenceApplicable(int diff, HashMap<String, String> avrData, int counter) {
+        assertTrue(diff == Integer.parseInt(avrData.get("data-diff").replace("K", "")));
+        assertEquals(String.valueOf(diff) + "K left", dashboardPage.getTargetNReachedLabel(counter));
+        assertTrue((Integer.parseInt(avrData.get("data-volume")) + diff) == dashboardPage.getNextTargetValue(counter));
+        assertEquals("null", avrData.get("data-met"));
     }
 }

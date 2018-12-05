@@ -33,20 +33,27 @@ public class DashboardPageElements {
     public final static String HERE_LINK_IN_ACCOUNT_INFO_DROP_DOWN_ID = "activate-tax-modal";
     public final static String MAIN_TEXT_IN_EXPIRED_TAX_CERT_POP_UP_XPATH = "//div[@id='expired-tax-certificate-modal']//div[@class='d-flex']/div[2]";
     public final static String DISMISS_BUTTON_XPATH = "//button[contains (text(), 'Dismiss')]";
+    //AVR widget
+    private final static String ACTIVE_AVR_XPATH = "//li[@class='flex-active-slide']";
+    private final static String ACTIVE_SLIDE_CURRENT_VALUES_XPATH = ACTIVE_AVR_XPATH + "/div[@class='row']/div[2]/";
+    private final static String AVR_BY_NUMBER_XPATH = "//li[@data-thumb-alt][%s]";
+    private final static String GRAPH_XPATH = "//div[contains(@class,'graph-label')]";
     public final static String AVR_WIDGET_XPATH = "//div[@class='panel avr-panel']";
     public final static String AVR_WIDGET_TITLE_XPATH = AVR_WIDGET_XPATH + "//h3";
     public final static String AVR_CURRENCY_TITLE_ID = "avr-currency-title";
     public final static String AVR_MIN_COUNT_ON_DASHBOARD_XPATH = "//div[@id='avr-dashboard-list-slider']//ol/li";
     public final static String APPROPRIATE_AVR_ON_THE_DASHBOARD_XPATH = AVR_MIN_COUNT_ON_DASHBOARD_XPATH + "[%s]/a";
-    public final static String ACTIVE_AVR_REBATE_COMPANY_NAME_XPATH = "//div[@id='avr-dashboard-list-slider']//li[@class='flex-active-slide']//a";
-    public final static String AVR_TYPE_DESCRIPTION_XPATH = "//ul[@id='avr-dashboard-list']//li[@data-thumb-alt][%s]/div/div[contains(@class, 'md-7')]/div[1]";
-    public final static String ACTIVE_AVR_LINK_TO_ANNUAL_REBATE_PAGE_XPATH = "//ul[@id='avr-dashboard-list']//li[@class='flex-active-slide']/div/div[contains(@class, 'md-7')]/a";
-    private final static String ACTIVE_SLIDE_CURRENT_VALUES_XPATH = "//li[@class='flex-active-slide']/div[@class='row']/div[2]/";
+    public final static String ACTIVE_AVR_REBATE_COMPANY_NAME_XPATH = ACTIVE_AVR_XPATH + "//a";
+    public final static String AVR_TYPE_DESCRIPTION_XPATH = AVR_BY_NUMBER_XPATH + "/div/div[contains(@class, 'md-7')]/div[1]";
+    public final static String ACTIVE_AVR_LINK_TO_ANNUAL_REBATE_PAGE_XPATH = ACTIVE_AVR_XPATH + "/div/div[contains(@class, 'md-7')]/a";
     public final static String CURRENT_PAYOUT_TITLE_XPATH = ACTIVE_SLIDE_CURRENT_VALUES_XPATH + "div[1]/div[1]";
     public final static String CURRENT_PAYOUT_VALUE_XPATH = ACTIVE_SLIDE_CURRENT_VALUES_XPATH + "div[1]/div[2]/span";
     public final static String CURRENT_VOLUME_TITLE_XPATH = ACTIVE_SLIDE_CURRENT_VALUES_XPATH + "div[2]/div[1]";
     public final static String CURRENT_VOLUME_VALUE_XPATH = ACTIVE_SLIDE_CURRENT_VALUES_XPATH + "div[2]/div[2]/span";
-    public final static String YTD_PAYOUT_TITLE_XPATH = "//li[@class='flex-active-slide']//div[contains(@class,'graph-label')]/div[@class='text-right']";
-    public final static String YTD_PAYOUT_VALUE_XPATH = "//li[@class='flex-active-slide']//div[contains(@class,'graph-label')]/div[2]";
-    public final static String APPROPRIATE_AVR_TARGET_LABEL_XPATH = "//ul[@id='avr-dashboard-list']/li[@data-thumb-alt][%s]//div[contains(@class,'graph-label')]/div[contains(@class,'left')][1]";
+    public final static String YTD_PAYOUT_TITLE_XPATH = ACTIVE_AVR_XPATH + GRAPH_XPATH + "/div[@class='text-right']";
+    public final static String YTD_PAYOUT_VALUE_XPATH = ACTIVE_AVR_XPATH + GRAPH_XPATH + "/div[2]";
+    public final static String APPROPRIATE_AVR_TARGET_LABEL_XPATH = AVR_BY_NUMBER_XPATH + GRAPH_XPATH + "/div[contains(@class,'left')][1]";
+    public final static String APPROPRIATE_AVR_DATA_FROM_HTML_XPATH = AVR_BY_NUMBER_XPATH + "//div[contains(@class,'graph-container col-xs-8')]";
+    public final static String APPROPRIATE_AVR_TARGET_N_REACHED_LABEL_XPATH = APPROPRIATE_AVR_DATA_FROM_HTML_XPATH + "//*[name()='tspan']";
+    public final static String APPROPRIATE_AVR_NEXT_TARGET_LABEL_VALUE_XPATH = AVR_BY_NUMBER_XPATH + "//div[contains(@class,'graph-label pl')]/div[2]";
 }

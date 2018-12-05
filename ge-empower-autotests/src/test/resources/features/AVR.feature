@@ -26,3 +26,10 @@ Feature: Verification of main AVR elements on the Dashboard and on the Volume Re
     When User clicks on active AVR.
     Then Volume rebate page is opened.
     Then Count of AVR is more or equal than count of AVR on the dashboard.
+
+  Scenario: Check all the targets, data difference for AVR widget on the Dashbord.
+    And Dashboard page is opened.
+    When Click on Skip button.
+    And Close cookies pop-up.
+    And Minimal count of AVRs is stored to the threadVarsHashmap.
+    Then Each available AVR has correct target, data diff and other labels.
