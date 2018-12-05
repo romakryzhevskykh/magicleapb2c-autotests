@@ -60,12 +60,16 @@ public class ReturnsPage extends StorefrontBasePage {
     public void getUpdatedSentRequestsTab(int allReturnsQuantity) {
         waitUntilPageIsFullyLoaded();
         int counter = 0;
-        do {
-            getDriver().navigate().refresh();
-            counter++;
+        try {
+            do {
+                getDriver().navigate().refresh();
+                counter++;
+            }
+            while (!isSentRequestTabFullyUpdated(allReturnsQuantity) && counter < 5);
+            waitUntilPageIsFullyLoaded();
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
         }
-        while (!isSentRequestTabFullyUpdated(allReturnsQuantity) && counter < 5);
-        waitUntilPageIsFullyLoaded();
     }
 
     private boolean isSentRequestTabFullyUpdated(int allReturnsQuantity) {
