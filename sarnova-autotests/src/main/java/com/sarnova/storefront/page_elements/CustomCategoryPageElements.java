@@ -18,8 +18,7 @@ public class CustomCategoryPageElements {
     public static final String SHOW_CHILD_CATEGORY_BY_ID_XPATH = CHILD_CATEGORY_BLOCK_BY_ID_XPATH + "/span[@class='subcat-item-title js-subcat-title-span']";
     public static final String REMOVE_CHILD_CATEGORY_BUTTON_BY_ID_XPATH = CHILD_CATEGORY_BLOCK_BY_ID_XPATH + "/span[@class='subcat-item-icon js-subcat-delete']";
 
-    public static final String PRODUCTS_BLOCK_XPATH = "//div[@id='productListWithCustomCategory']";
-    public static final String PRODUCTS_ROWS_XPATH = PRODUCTS_BLOCK_XPATH + "/ul/li[@class='product-listing-item nav']";
+    public static final String PRODUCTS_ROWS_XPATH = ".//*[contains(@class,'product-listing-item nav')]";
     public static final String REMOVE_PRODUCT_FROM_CATEGORY_BY_PRODUCT_ID_BUTTON_XPATH = PRODUCTS_ROWS_XPATH + "[@data-product-code='%s']//span[@class='glyphicon glyphicon-remove']";
 
     public static final String QUICK_ADD_BLOCK_XPATH = "//div[@id='quickAddContainer']";

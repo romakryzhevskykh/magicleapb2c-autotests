@@ -1,8 +1,6 @@
 package com.sarnova.helpers.user_engine;
 
-import com.sarnova.helpers.managers.DepartmentsManager;
 import com.sarnova.helpers.managers.UserGroupsManager;
-import com.sarnova.helpers.models.users.Department;
 import com.sarnova.helpers.models.users.UserGroup;
 import com.sarnova.helpers.request_engine.API;
 import com.sarnova.helpers.request_engine.GETRequest;
@@ -22,21 +20,25 @@ import us.codecraft.xsoup.Xsoup;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+
+import static com.sarnova.RegexUtils.matchPattern;
 
 public class UsersManager {
-    @Autowired UserGroupsManager userGroupsManager;
-    @Autowired DepartmentsManager departmentsManager;
+    private static final String DEPARTMENT_ID_REGEX_PATTERN = "id=\"department-radio-(.*)\"\\s*class.*\\s*checked";
 
-    GETRequest USER_GROUPS = new GETRequest("Add user groups page", "my-company/organization-management/manage-users/usergroups?user=%s");
-    GETRequest CREATE_PAGE = new GETRequest("Create new test user page", "my-company/organization-management/manage-users/create");
-    POSTRequest CREATE_REQUEST = new POSTRequest("Create new test user", "my-company/organization-management/manage-users/create");
-    GETRequest RESET_PASSWORD_PAGE = new GETRequest("Reset password to User page", "my-company/organization-management/manage-users/resetpassword?user=%s");
-    POSTRequest RESET_PASSWORD = new POSTRequest("Reset password to User", "my-company/organization-management/manage-users/resetpassword?user=%s");
-    POSTRequest REMOVE_GROUP_FROM_USER = new POSTRequest("Remove group from user", "my-company/organization-management/manage-users/usergroups/deselect/");
-    POSTRequest REMOVE_ROLE_FROM_USER = new POSTRequest("Remove role from user", "my-company/organization-management/manage-users/globalRoles/deselect/");
-    POSTRequest ADD_GROUP_TO_USER = new POSTRequest("Add group to user", "my-company/organization-management/manage-users/usergroups/select/");
-    GETRequest USER_DETAILS_PAGE = new GETRequest("User details page", "my-company/organization-management/manage-users/details/");
-    ArrayList<User> users = new ArrayList<>();
+    @Autowired private UserGroupsManager userGroupsManager;
+
+    private GETRequest USER_GROUPS = new GETRequest("Add user groups page", "my-company/organization-management/manage-users/usergroups?user=%s");
+    private GETRequest CREATE_PAGE = new GETRequest("Create new test user page", "my-company/organization-management/manage-users/create");
+    private POSTRequest CREATE_REQUEST = new POSTRequest("Create new test user", "my-company/organization-management/manage-users/create");
+    private GETRequest RESET_PASSWORD_PAGE = new GETRequest("Reset password to User page", "my-company/organization-management/manage-users/resetpassword?user=%s");
+    private POSTRequest RESET_PASSWORD = new POSTRequest("Reset password to User", "my-company/organization-management/manage-users/resetpassword?user=%s");
+    private POSTRequest REMOVE_GROUP_FROM_USER = new POSTRequest("Remove group from user", "my-company/organization-management/manage-users/usergroups/deselect/");
+    private POSTRequest REMOVE_ROLE_FROM_USER = new POSTRequest("Remove role from user", "my-company/organization-management/manage-users/globalRoles/deselect/");
+    private POSTRequest ADD_GROUP_TO_USER = new POSTRequest("Add group to user", "my-company/organization-management/manage-users/usergroups/select/");
+    private GETRequest USER_DETAILS_PAGE = new GETRequest("User details page", "my-company/organization-management/manage-users/details/");
+    private ArrayList<User> users = new ArrayList<>();
 
     public String getManageUserGroupsPageCsrfToken(UserSession userSession, User user) {
         GETRequest getManageGroupsSource = USER_GROUPS.getClone();
@@ -50,19 +52,28 @@ public class UsersManager {
         return Xsoup.select(htmlResponse, "//input[@name=CSRFToken]/@value").list().stream().findAny().orElse(null);
     }
 
-    public String getCreateUserPageCsrfToken(UserSession userSession) {
-        GETRequest getCartPageSource = CREATE_PAGE.getClone();
-        getCartPageSource.setIsShortLogResponse(true);
-        try {
-            getCartPageSource.sendGetRequest(userSession);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Document htmlResponse = getCartPageSource.getResponse().getHTMLResponseDocument();
+    private String getCreateUserPageCsrfToken(UserSession userSession) {
+        Document htmlResponse = getCreateNewUserPage(userSession);
         return Xsoup.select(htmlResponse, "//input[@name=CSRFToken]/@value").list().stream().findAny().orElse(null);
     }
 
-    public String getResetPasswordPageCsrfToken(UserSession userSession, User userToResetPassword) {
+    private Document getCreateNewUserPage(UserSession userSession){
+        GETRequest createUserPageRequest = CREATE_PAGE.getClone();
+        createUserPageRequest.setIsShortLogResponse(true);
+        try {
+            createUserPageRequest.sendGetRequest(userSession);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return createUserPageRequest.getResponse().getHTMLResponseDocument();
+    }
+
+    private String getSelectedUserDepartmentId(UserSession userSession){
+        String htmlResponse = getCreateNewUserPage(userSession).outerHtml();
+        return matchPattern(htmlResponse, DEPARTMENT_ID_REGEX_PATTERN, 1);
+    }
+    
+    private String getResetPasswordPageCsrfToken(UserSession userSession, User userToResetPassword) {
         GETRequest getResetPasswordPageSource = RESET_PASSWORD_PAGE.getClone();
         getResetPasswordPageSource.setIsShortLogResponse(true);
         getResetPasswordPageSource.setValue(userToResetPassword.getUsername());
@@ -75,20 +86,13 @@ public class UsersManager {
         return Xsoup.select(htmlResponse, "//input[@name=CSRFToken]/@value").list().stream().findAny().orElse(null);
     }
 
-    public void createInstance(String username, String password, Cockpit userCockpit, ArrayList<String> cockpitRoles) {
+    public void createInstance(String username, String password, Cockpit userCockpit, List<String> cockpitRoles) {
         User user = new User(username, password, userCockpit);
         this.users.add(user);
         user.getUserRoles().addAll(parseUserRoles(userCockpit, cockpitRoles));
     }
 
-    public void createInstance(String username, String password, Cockpit userCockpit, Department department, ArrayList<String> cockpitRoles) {
-        User user = new User(username, password, userCockpit);
-        user.setDepartment(department);
-        this.users.add(user);
-        user.getUserRoles().addAll(parseUserRoles(userCockpit, cockpitRoles));
-    }
-
-    public void createTestInstance(String username, String password, Cockpit userCockpit, Department department, ArrayList<? extends UserRole> userRoles) {
+    public void createTestInstance(String username, String password, Cockpit userCockpit, String department, List<? extends UserRole> userRoles) {
         User user = new User(username, password, userCockpit);
         user.setDepartment(department);
         this.users.add(user);
@@ -101,24 +105,21 @@ public class UsersManager {
     public void createTestUserByApi(UserSession userSession) {
         POSTRequest createUser = CREATE_REQUEST.getClone();
         String csrfToken = getCreateUserPageCsrfToken(userSession);
-//        UserTitle userTitle = UserTitle.getRandom();
+        String departmentId = getSelectedUserDepartmentId(userSession);
         String firstName = RandomStringUtils.randomAlphabetic(10);
         String lastName = RandomStringUtils.randomAlphabetic(10);
         String email = RandomStringUtils.randomAlphabetic(10) + "@" + RandomStringUtils.randomAlphabetic(5) + ".com";
         String username = RandomStringUtils.randomAlphabetic(10);
         StorefrontUserRole role = StorefrontUserRole.ORGANIZATION_TEST_USER;
-//        StorefrontUserRole adminRole = StorefrontUserRole.ADMIN;
-        Department organization = userSession.getUser().getDepartment();
-        ArrayList<StorefrontUserRole> userRoles = new ArrayList() {{
+        List<StorefrontUserRole> userRoles = new ArrayList() {{
             add(role);
-//            add(adminRole);
         }};
-//        createUser.addPostParameterAndValue(new API.PostParameterAndValue("titleCode", userTitle.name().toLowerCase()));
+
         createUser.addPostParameterAndValue(new API.PostParameterAndValue("uid", username));
         createUser.addPostParameterAndValue(new API.PostParameterAndValue("firstName", firstName));
         createUser.addPostParameterAndValue(new API.PostParameterAndValue("lastName", lastName));
         createUser.addPostParameterAndValue(new API.PostParameterAndValue("email", email));
-        createUser.addPostParameterAndValue(new API.PostParameterAndValue("parentB2BUnit", organization.getId()));
+        createUser.addPostParameterAndValue(new API.PostParameterAndValue("parentB2BUnit", departmentId));
         userRoles.forEach(userRole -> createUser.addPostParameterAndValue(new API.PostParameterAndValue("roles", userRole.getRoleCode())));//.stream().filter(userRole1 -> !userRole1.isTest())
         createUser.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", csrfToken));
         createUser.setHeader("Upgrade-Insecure-Requests", "1");
@@ -127,12 +128,12 @@ public class UsersManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        createTestInstance(username, "", userSession.getUser().getUserCockpit(), userSession.getUser().getDepartment(), userRoles);
+        createTestInstance(username, "", userSession.getUser().getUserCockpit(), departmentId, userRoles);
         User user = getUserByUsername(username);
         user.setEmail(email);
         user.setFirstName(firstName);
         user.setLastName(lastName);
-//        user.setUserTitle(userTitle);
+        user.setDepartment(departmentId);
     }
 
     @SuppressWarnings("unchecked")
@@ -193,7 +194,7 @@ public class UsersManager {
         user.setInitialized(true);
     }
 
-    public ArrayList<User> getUsers() {
+    public List<User> getUsers() {
         return users;
     }
 
@@ -214,8 +215,8 @@ public class UsersManager {
         return getUsers().stream().filter(user -> user.getUsername().equals(username)).findAny().orElse(null);
     }
 
-    private ArrayList<UserRole> parseUserRoles(Cockpit userCockpit, ArrayList<String> userRoleNames) {
-        ArrayList<UserRole> userRoles = new ArrayList<>();
+    private List<UserRole> parseUserRoles(Cockpit userCockpit, List<String> userRoleNames) {
+        List<UserRole> userRoles = new ArrayList<>();
         userRoleNames.forEach(userRoleName -> {
             UserRole userRole = null;
             if (userCockpit instanceof SarnovaStorefront) {

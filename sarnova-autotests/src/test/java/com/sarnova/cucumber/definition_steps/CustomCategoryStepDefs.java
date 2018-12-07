@@ -10,9 +10,9 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
-import java.util.stream.Collectors;
+import java.util.List;
 
+import static java.util.stream.Collectors.toList;
 import static org.testng.Assert.assertTrue;
 
 public class CustomCategoryStepDefs extends AbstractStepDefs {
@@ -38,7 +38,6 @@ public class CustomCategoryStepDefs extends AbstractStepDefs {
     @Then("^Check that new Custom Category name field is visible on Custom categories page.$")
     public void checkThatNewCustomCategoryNameFieldIsVisibleOnCustomCategoriesPage() {
         assertTrue(customCategoryPage.isNewCustomCategoryNameFieldVisible());
-
     }
 
     @And("^Check that Add new Custom Category button is visible on Custom categories page.$")
@@ -77,10 +76,10 @@ public class CustomCategoryStepDefs extends AbstractStepDefs {
     public void checkThatProductsAreDisplayedOnCustomCategoriesPage() {
         String ccId = threadVarsHashMap.getString(TestKeyword.TEST_CHILD_CUSTOM_CATEGORY_ID);
         ChildCustomCategory category = (ChildCustomCategory)customCategoriesManager.getCustomCategoryById(ccId);
-        ArrayList<String> categoryProductSKUs = category.getProducts().stream()
+        List<String> categoryProductSKUs = category.getProducts().stream()
                 .map(Product::getSku)
-                .collect(Collectors.toCollection(ArrayList::new));
-        ArrayList<String> productsSKUsOnThePage = customCategoryPage.getDisplayedProductSKUs();
+                .collect(toList());
+        List<String> productsSKUsOnThePage = customCategoryPage.getDisplayedProductSKUs();
         assertTrue(productsSKUsOnThePage.containsAll(categoryProductSKUs));
     }
 

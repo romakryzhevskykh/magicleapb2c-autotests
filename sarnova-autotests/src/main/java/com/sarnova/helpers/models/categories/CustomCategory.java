@@ -1,16 +1,14 @@
 package com.sarnova.helpers.models.categories;
 
-import com.sarnova.helpers.models.users.Department;
-
 public class CustomCategory extends Category {
-    private final Department organization;
+    private String department;
 
-    public CustomCategory(String id, String name, Department organization) {
+    public CustomCategory(String id, String name, String department) {
         super(id, name);
-        this.organization = organization;
+        this.department = department;
     }
 
-    public Department getOrganization() {
-        return organization;
+    public String getDepartment() {
+        return department;
     }
 }

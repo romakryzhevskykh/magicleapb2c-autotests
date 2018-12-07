@@ -19,15 +19,17 @@ import us.codecraft.xsoup.Xsoup;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class CustomCategoriesManager {
-    @Autowired UserSessions userSessions;
-    POSTRequest ADD_NEW_CUSTOM_CATEGORY = new POSTRequest("Create new Custom category", "custom-category/add");
-    GETRequest GET_CSRF_TOKEN = new GETRequest("Get CSRF token for Custom categories", "");
-    GETRequest GET_TREE_VIEW = new GETRequest("Get Custom categories tree info", "custom-category/treeView");
-    POSTRequest DELETE_CUSTOM_CATEGORY = new POSTRequest("Delete Custom category", "custom-category/delete");
-    POSTRequest ADD_PRODUCT_TO_CUSTOM_CATEGORY = new POSTRequest("Add product to Custom category", "custom-category/addProducts");
+    @Autowired private UserSessions userSessions;
+
+    private POSTRequest ADD_NEW_CUSTOM_CATEGORY = new POSTRequest("Create new Custom category", "custom-category/add");
+    private GETRequest GET_CSRF_TOKEN = new GETRequest("Get CSRF token for Custom categories", "");
+    private GETRequest GET_TREE_VIEW = new GETRequest("Get Custom categories tree info", "custom-category/treeView");
+    private POSTRequest DELETE_CUSTOM_CATEGORY = new POSTRequest("Delete Custom category", "custom-category/delete");
+    private POSTRequest ADD_PRODUCT_TO_CUSTOM_CATEGORY = new POSTRequest("Add product to Custom category", "custom-category/addProducts");
 
     private ArrayList<CustomCategory> customCategories = new ArrayList<>();
 
@@ -86,7 +88,7 @@ public class CustomCategoriesManager {
         customCategories.stream()
                 .filter(category -> category instanceof ParentCustomCategory)
                 .forEach(customCategory -> {
-                    UserSession userSession = userSessions.getAnyUserSessionForOrganization((customCategory).getOrganization());
+                    UserSession userSession = userSessions.getAnyUserSessionForOrganization(customCategory.getDepartment());
                     deleteCustomCategory(userSession, customCategory);
                 });
         customCategories.clear();
@@ -99,7 +101,6 @@ public class CustomCategoriesManager {
 
         deleteCC.addPostParameterAndValue(new API.PostParameterAndValue("categoryCode", category.getId()));
         deleteCC.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", csrfToken));
-
         try {
             deleteCC.sendPostRequest(userSession);
         } catch (IOException e) {
@@ -108,7 +109,7 @@ public class CustomCategoriesManager {
     }
 
     @SuppressWarnings("unchecked")
-    public void addProductsToCategoryByApi(UserSession userSession, ChildCustomCategory childCustomCategory, ArrayList<Product> products) {
+    public void addProductsToCategoryByApi(UserSession userSession, ChildCustomCategory childCustomCategory, List<Product> products) {
         products.forEach(product -> addProductToCategoryByApi(userSession, childCustomCategory, product));
     }
 

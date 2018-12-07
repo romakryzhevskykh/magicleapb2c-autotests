@@ -1,6 +1,5 @@
 package com.sarnova.helpers.managers;
 
-import com.sarnova.helpers.models.users.Department;
 import com.sarnova.helpers.models.users.UserGroup;
 import com.sarnova.helpers.request_engine.API;
 import com.sarnova.helpers.request_engine.GETRequest;
@@ -15,9 +14,14 @@ import us.codecraft.xsoup.Xsoup;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+
+import static com.sarnova.RegexUtils.matchPattern;
 
 @Component
 public class UserGroupsManager {
+    private static final String DEPARTMENT_ID_REGEX_PATTERN = "id=\"department-radio-(.*)\"\\s*class.*\\s*checked";
+
     private GETRequest PERMISSIONS_PAGE_FOR_GROUP = new GETRequest("User group permissions page", "my-company/organization-management/manage-usergroups/permissions/?usergroup=%s");
     private GETRequest CREATE_USER_GROUP_PAGE = new GETRequest("Create new user group page", "my-company/organization-management/manage-usergroups/create");
     private POSTRequest ADD_PERMISSION = new POSTRequest("Add permission to user", "my-company/organization-management/manage-usergroups/permissions/select/");
@@ -26,24 +30,23 @@ public class UserGroupsManager {
     private POSTRequest DELETE_USER_GROUP = new POSTRequest("Delete user group", "my-company/organization-management/manage-usergroups/remove/");
     private GETRequest PERMISSIONS_PAGE = new GETRequest("User group Permissions page", "my-company/organization-management/manage-usergroups/permissions/");
 
-    private ArrayList<UserGroup> userGroups = new ArrayList<>();
+    private List<UserGroup> userGroups = new ArrayList<>();
 
-    public ArrayList<UserGroup> getUserGroups() {
+    public List<UserGroup> getUserGroups() {
         return userGroups;
     }
 
     @SuppressWarnings("unchecked")
     @Step("Create User group.")
     public void createUserGroup(UserSession activeUserSession) {
-//        String groupUID = RandomStringUtils.randomAlphabetic(10);
         String csrfToken = getCreateGroupPageCsrfToken(activeUserSession);
+        String departmentId = getSelectedUserDepartmentId(activeUserSession);
         String groupName = RandomStringUtils.randomAlphabetic(10);
-        Department organization = activeUserSession.getUser().getDepartment();
         POSTRequest createUserGroup = CREATE_USER_GROUP.getClone();
         createUserGroup.addPostParameterAndValue(new API.PostParameterAndValue("originalUid", ""));
         createUserGroup.addPostParameterAndValue(new API.PostParameterAndValue("uid", "uid"));
         createUserGroup.addPostParameterAndValue(new API.PostParameterAndValue("name", groupName));
-        createUserGroup.addPostParameterAndValue(new API.PostParameterAndValue("parentUnit", organization.getId()));
+        createUserGroup.addPostParameterAndValue(new API.PostParameterAndValue("parentUnit", departmentId));
         createUserGroup.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", csrfToken));
         try {
             createUserGroup.sendPostRequest(activeUserSession);
@@ -86,7 +89,7 @@ public class UserGroupsManager {
     }
 
     @SuppressWarnings("unchecked")
-    public void addPermissionsToUserGroup(UserSession activeUserSession, UserGroup editingUserGroup, ArrayList<Permission> permissions) {
+    public void addPermissionsToUserGroup(UserSession activeUserSession, UserGroup editingUserGroup, List<Permission> permissions) {
         permissions.forEach(permission -> addPermissionToUserGroup(activeUserSession, editingUserGroup, permission));
         editingUserGroup.getPermissions().addAll(permissions);
     }
@@ -107,7 +110,7 @@ public class UserGroupsManager {
         //Add permission after api is involved
     }
 
-    public void removePermissionsToUserGroup(UserSession activeUserSession, UserGroup editingUserGroup, ArrayList<Permission> permissions) {
+    public void removePermissionsToUserGroup(UserSession activeUserSession, UserGroup editingUserGroup, List<Permission> permissions) {
         permissions.forEach(permission -> removePermissionToUserGroup(activeUserSession, editingUserGroup, permission));
         editingUserGroup.getPermissions().removeAll(permissions);
     }
@@ -151,15 +154,25 @@ public class UserGroupsManager {
         userGroup.setInitiated(true);
     }
 
-    public String getCreateGroupPageCsrfToken(UserSession userSession) {
-        GETRequest getCartPageSource = CREATE_USER_GROUP_PAGE.getClone();
-        getCartPageSource.setIsShortLogResponse(true);
+    private String getCreateGroupPageCsrfToken(UserSession userSession) {
+        Document htmlResponse = getUserGroupsPage(userSession);
+        return Xsoup.select(htmlResponse, "//input[@name=CSRFToken]/@value").list().stream().findAny().orElse(null);
+    }
+
+
+    private Document getUserGroupsPage(UserSession userSession){
+        GETRequest userGroupRequest = CREATE_USER_GROUP_PAGE.getClone();
+        userGroupRequest.setIsShortLogResponse(true);
         try {
-            getCartPageSource.sendGetRequest(userSession);
+            userGroupRequest.sendGetRequest(userSession);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Document htmlResponse = getCartPageSource.getResponse().getHTMLResponseDocument();
-        return Xsoup.select(htmlResponse, "//input[@name=CSRFToken]/@value").list().stream().findAny().orElse(null);
+        return userGroupRequest.getResponse().getHTMLResponseDocument();
+    }
+
+    private String getSelectedUserDepartmentId(UserSession userSession){
+        String htmlResponse = getUserGroupsPage(userSession).outerHtml();
+        return matchPattern(htmlResponse, DEPARTMENT_ID_REGEX_PATTERN, 1);
     }
 }

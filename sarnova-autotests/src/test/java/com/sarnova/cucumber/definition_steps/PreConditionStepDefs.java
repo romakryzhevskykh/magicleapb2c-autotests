@@ -34,12 +34,11 @@ import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 public class PreConditionStepDefs extends AbstractStepDefs {
-    @Autowired HeaderRowPageBlock headerRowPageBlock;
-    @Autowired LoginPage loginPage;
-    @Autowired PayFabricLoginPage payFabricLoginPage;
-    @Autowired HomePage homePage;
-    @Autowired SarnovaStorefront sarnovaStorefront;
-
+    @Autowired private HeaderRowPageBlock headerRowPageBlock;
+    @Autowired private LoginPage loginPage;
+    @Autowired private PayFabricLoginPage payFabricLoginPage;
+    @Autowired private HomePage homePage;
+    @Autowired private SarnovaStorefront sarnovaStorefront;
     @Autowired private SupplyListsManager supplyListsManager;
     @Autowired private UserGroupsManager userGroupsManager;
     @Autowired private ProductsManager productsManager;
@@ -94,7 +93,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     @SuppressWarnings("unchecked")
     @And("^Active Supply list that doesn't contain this products exists.$")
     public void existingSupplyListThatDoesNotContainThisProducts() {
-        HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = getSelectedUOMS();
+        Map<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = getSelectedUOMS();
         String existingSupplyListName = supplyListsManager.getTestSupplyLists()
                 .stream()
                 .filter(SupplyList::isActive)
@@ -138,7 +137,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     private BiFunction<Set<UnitOfMeasure>, Integer, SupplyList> createSupplyListThatDoesNotContainUOMsAndWithNumberOfProducts = (selectedUnitsOfMeasurement, numberOfProducts) -> {
         UserSession userSession = userSessions.getActiveUserSession();
         String newSupplyListName = RandomStringUtils.randomAlphanumeric(10);
-        ArrayList<IndividualProduct> individualProductsThatDoNotContainSelectedUOMs = productsManager.getTestIndividualProducts()
+        List<IndividualProduct> individualProductsThatDoNotContainSelectedUOMs = productsManager.getTestIndividualProducts()
                 .stream()
                 .filter(product -> product.getUnitsOfMeasurement()
                         .stream()
@@ -148,7 +147,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
         if (individualProductsThatDoNotContainSelectedUOMs.size() >= numberOfProducts)
             productsToCreate = individualProductsThatDoNotContainSelectedUOMs.subList(0, numberOfProducts);
         else
-            throw new NullPointerException("No test products without selected UOMs: " + selectedUnitsOfMeasurement + " or quantity of products < " + numberOfProducts + "\n"
+            throw new IllegalStateException("No test products without selected UOMs: " + selectedUnitsOfMeasurement + " or quantity of products < " + numberOfProducts + "\n"
                     + "List of filtered products: " + individualProductsThatDoNotContainSelectedUOMs);
         boolean restorePermission = false;
         UserGroup restoreUserGroup = null;
@@ -193,7 +192,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     @SuppressWarnings("unchecked")
     @And("^Add to cart (.*) product with quantity (\\d+) that hasn't been added before.$")
     public void setQTYToAnyProductUOMThatHasNotBeenSelectedOnThePDP(List<String> productTypes, int qtyOfProduct) {
-        HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = getSelectedUOMS();
+        Map<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = getSelectedUOMS();
         List<IndividualProduct> selectedProducts = selectedUnitsOfMeasurement.keySet()
                 .stream()
                 .map(unitOfMeasure -> productsManager.getProductByUOM(unitOfMeasure))
@@ -411,7 +410,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
                 userGroupsManager.addPermissionToUserGroup(userSessions.getActiveUserSession(), testUserGroup, testPermission);
                 testUserGroup.getPermissions().add(testPermission);
             } else {
-                ArrayList<Permission> permissionsToRemove = new ArrayList<>(testUserGroup.getPermissions());
+                List<Permission> permissionsToRemove = new ArrayList<>(testUserGroup.getPermissions());
                 permissionsToRemove.remove(testPermission);
                 userGroupsManager.removePermissionsToUserGroup(userSessions.getActiveUserSession(), testUserGroup, permissionsToRemove);
             }
@@ -442,7 +441,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     private ParentCustomCategory getOrCreateParentCustomCategory() {
         return (ParentCustomCategory) customCategoriesManager.getCustomCategories().stream()
                 .filter(ParentCustomCategory.class::isInstance)
-                .filter(parentCustomCategory -> parentCustomCategory.getOrganization()
+                .filter(parentCustomCategory -> parentCustomCategory.getDepartment()
                         .equals(userSessions.getActiveUserSession().getUser().getDepartment()))
                 .findAny().orElseGet(() -> {
                     String ccName = RandomStringUtils.randomAlphabetic(8);
@@ -456,9 +455,9 @@ public class PreConditionStepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.TEST_PARENT_CUSTOM_CATEGORY_ID, category.getParentCustomCategory().getId());
         threadVarsHashMap.put(TestKeyword.TEST_CHILD_CUSTOM_CATEGORY_ID, category.getId());
         if (category.getProducts().size() < productsInChildCC) {
-            ArrayList<Product> productsToAdd = productsManager.getUniqueProductsByProductsQuantityTestTypesAndExcludeProductList(productsInChildCC,
+            List<Product> productsToAdd = productsManager.getUniqueProductsByProductsQuantityTestTypesAndExcludeProductList(productsInChildCC,
                     new ArrayList<String>() {{
-                        add("INDIVIDUAL_PRODUCT");
+                        add("INDIVIDUAL");
                     }},
                     new ArrayList<>());
             customCategoriesManager.addProductsToCategoryByApi(userSessions.getActiveUserSession(), category, productsToAdd);
@@ -468,7 +467,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     private ChildCustomCategory getOrCreateChildCustomCategory() {
         return ((ParentCustomCategory) customCategoriesManager.getCustomCategories().stream()
                 .filter(ParentCustomCategory.class::isInstance)
-                .filter(parentCustomCategory -> parentCustomCategory.getOrganization()
+                .filter(parentCustomCategory -> parentCustomCategory.getDepartment()
                         .equals(userSessions.getActiveUserSession().getUser().getDepartment()))
                 .filter(parentCategory -> !((ParentCustomCategory) parentCategory).getChildCustomCategories().isEmpty())
                 .findAny()

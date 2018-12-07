@@ -6,10 +6,10 @@ import org.openqa.selenium.By;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import java.util.ArrayList;
-import java.util.stream.Collectors;
+import java.util.List;
 
 import static com.sarnova.storefront.page_elements.CustomCategoryPageElements.*;
+import static java.util.stream.Collectors.toList;
 
 @Component
 public class CustomCategoryPage extends StorefrontBasePage {
@@ -64,10 +64,10 @@ public class CustomCategoryPage extends StorefrontBasePage {
     }
 
     @Step("Get displayed product's SKUs on the page.")
-    public ArrayList<String> getDisplayedProductSKUs() {
+    public List<String> getDisplayedProductSKUs() {
         return $$(PRODUCTS_ROWS_XPATH).stream()
                 .map(webElement -> webElement.getAttribute("data-product-code"))
-                .collect(Collectors.toCollection(ArrayList::new));
+                .collect(toList());
     }
 
     @Step("Is remove parent Custom category {0} button visible?")

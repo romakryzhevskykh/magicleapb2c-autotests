@@ -3,13 +3,14 @@ package com.sarnova.helpers.models.categories;
 import com.sarnova.helpers.models.products.Product;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ChildCustomCategory extends CustomCategory {
     private final ParentCustomCategory parentCustomCategory;
-    private ArrayList<Product> products = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
 
     public ChildCustomCategory(String id, String name, ParentCustomCategory parentCustomCategory) {
-        super(id, name, parentCustomCategory.getOrganization());
+        super(id, name, parentCustomCategory.getDepartment());
         this.parentCustomCategory = parentCustomCategory;
         parentCustomCategory.getChildCustomCategories().add(this);
     }
@@ -18,7 +19,7 @@ public class ChildCustomCategory extends CustomCategory {
         return parentCustomCategory;
     }
 
-    public ArrayList<Product> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
