@@ -37,6 +37,11 @@ public class UserSwitchStepDefs {
         webDriverPool.setDriverActive(StorefrontUserRoles.CAADMIN);
     }
 
+    @Given("Switch to Storefront as first caAdmin.")
+    public void switchToStorefrontAsCaAdmin1() {
+        webDriverPool.setDriverActive(StorefrontUserRoles.CAADMIN1);
+    }
+
     @Given("Switch to Storefront as admin.")
     public void switchToStorefrontAsAdmin() {
         webDriverPool.setDriverActive(StorefrontUserRoles.EMPOWERADMIN);
@@ -51,6 +56,11 @@ public class UserSwitchStepDefs {
     @Given("Switch to Storefront as smAdmin.")
     public void switchToStorefrontAsSmAdmin() {
         webDriverPool.setDriverActive(StorefrontUserRoles.SMADMIN);
+    }
+
+    @Given("Switch to Storefront as first smAdmin.")
+    public void switchToStorefrontAsSmAdmin1() {
+        webDriverPool.setDriverActive(StorefrontUserRoles.SMADMIN1);
     }
 
     @Given("Switch to Storefront as rmAdmin.")
@@ -72,7 +82,7 @@ public class UserSwitchStepDefs {
     public void switchToBackofficeAsAdmin() {
         webDriverPool.setDriverActive(BackofficeUserRoles.ADMIN);
     }
-  
+
     @Given("Switch to Storefront as newInternalUser.")
     public void switchToStorefrontAsNewInternalUser() {
         webDriverPool.setDriverActive(StorefrontUserRoles.NEWINTERNALUSER);
@@ -113,7 +123,7 @@ public class UserSwitchStepDefs {
         webDriverPool.setDriverActive(StorefrontUserRoles.EMPADMIN);
     }
 
-    @Given("Switch to Storefront as firstEmpAdmin.")
+    @Given("Switch to Storefront as first EmpAdmin.")
     public void switchToStorefrontAsFirstEmpAdmin() {
         webDriverPool.setDriverActive(StorefrontUserRoles.FIRSTEMPADMIN);
     }
@@ -126,6 +136,16 @@ public class UserSwitchStepDefs {
     @Given("Switch to Storefront as helpDesc.")
     public void switchToStorefrontAsHelpDesc() {
         webDriverPool.setDriverActive(StorefrontUserRoles.HELPDESC);
+    }
+
+    @Given("Switch to Storefront as first helpDesc.")
+    public void switchToStorefrontAsHelpDesc1() {
+        webDriverPool.setDriverActive(StorefrontUserRoles.HELPDESC1);
+    }
+
+    @Given("Switch to Storefront as csAdmin.")
+    public void switchToStorefrontAsCsAdmin() {
+        webDriverPool.setDriverActive(StorefrontUserRoles.CSADMIN);
     }
 
     @And("^Dismiss sessions.$")

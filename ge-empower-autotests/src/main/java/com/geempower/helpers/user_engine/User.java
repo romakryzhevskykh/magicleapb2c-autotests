@@ -48,6 +48,9 @@ public class User {
                 case "smadmin":
                     userRole = StorefrontUserRoles.SMADMIN;
                     break;
+                case "smadmin1":
+                    userRole = StorefrontUserRoles.SMADMIN1;
+                    break;
                 case "rmadmin":
                     userRole = StorefrontUserRoles.RMADMIN;
                     break;
@@ -56,6 +59,9 @@ public class User {
                     break;
                 case "caadmin":
                     userRole = StorefrontUserRoles.CAADMIN;
+                    break;
+                case "caadmin1":
+                    userRole = StorefrontUserRoles.CAADMIN1;
                     break;
                 case "mfgrepuser":
                     userRole = StorefrontUserRoles.MFGREPUSER;
@@ -77,6 +83,12 @@ public class User {
                     break;
                 case "helpdesc":
                     userRole = StorefrontUserRoles.HELPDESC;
+                    break;
+                case "helpdesc1":
+                    userRole = StorefrontUserRoles.HELPDESC1;
+                    break;
+                case "csadmin":
+                    userRole = StorefrontUserRoles.CSADMIN;
                     break;
                 default:
                     userRole = null;

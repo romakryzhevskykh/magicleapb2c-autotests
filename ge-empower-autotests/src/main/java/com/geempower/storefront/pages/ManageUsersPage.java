@@ -278,6 +278,46 @@ public class ManageUsersPage extends StorefrontBasePage {
         return Integer.parseInt($(COUNT_OF_PAGES_PENDING_REQUESTS_TAB_XPATH).getText().replace("of ", ""));
     }
 
+    @Step("Get Count Of Pages On Pending Requests Tab.")
+    private int getCountOfPagesOnPendingRequestsTab() {
+        int actualCount = 0;
+        if (isPaginatorDisplayed()) {
+            actualCount = Integer.parseInt($(COUNT_OF_PAGES_PENDING_REQUESTS_TAB_XPATH).getText().replace("of ", ""));
+        } else if (!isPaginatorDisplayed() && !isEmptyPendingRequestTableDisplayed()) {
+            actualCount = 1;
+        } else if (isEmptyPendingRequestTableDisplayed()) {
+            actualCount = 0;
+        }
+        return actualCount;
+    }
+
+    @Step("Is Empty Pending Request Table Displayed.")
+    private boolean isEmptyPendingRequestTableDisplayed() {
+        return isDisplayed(EMPTY_PENDING_REQUESTS_TABLE_XPATH);
+    }
+
+    @Step("Is Admin Can See User On The Pending Requests Tab.")
+    public boolean isAdminCanSeeUserOnThePendingRequestsTab(String userId) {
+        waitUntilPageIsFullyLoaded();
+        boolean result = false;
+        int actualCountOfPages = getCountOfPagesOnPendingRequestsTab();
+        for (int i = 0; i < actualCountOfPages; i++) {
+            if ($$(PENDING_USERS_SSO_LIST_XPATH).stream().noneMatch(userSso -> userSso.getText().equals(userId))) {
+                if (actualCountOfPages > 1) {
+                    click(By.id(NEXT_PAGINATION_BUTTON_PENDING_TAB_ID));
+                }
+            } else if (($$(PENDING_USERS_SSO_LIST_XPATH).stream().anyMatch(userSso -> userSso.getText().equals(userId)))) {
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    @Step("Is Paginator Displayed.")
+    private boolean isPaginatorDisplayed() {
+        return isDisplayed(COUNT_OF_PAGES_PENDING_REQUESTS_TAB_XPATH);
+    }
+
     @Step("Get No Accounts Label For User.")
     public String getNoAccountsLabelForUser(String userId, int pagesCount) {
         for (int i = 0; i < pagesCount; i++) {
