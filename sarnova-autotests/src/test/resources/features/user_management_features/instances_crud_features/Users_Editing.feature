@@ -27,7 +27,7 @@ Feature: Check that owner role can edit user.
     And Set new password to New password field on Reset password page.
     And Set the same password to Confirm new password field on Reset password page.
     And Click on Update password button on Reset password page.
-    And Switch to Storefront cockpit test user.
+    And Switch to Storefront cockpit test user ORGANIZATION_TEST_USER.
     And Opened Login page.
     And Login to Storefront.
     Then Check that user is logged in.

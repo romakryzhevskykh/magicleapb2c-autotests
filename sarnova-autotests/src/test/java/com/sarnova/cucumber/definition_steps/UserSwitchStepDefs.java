@@ -41,8 +41,8 @@ public class UserSwitchStepDefs extends AbstractStepDefs {
     }
 
     @Given("Switch to Storefront cockpit test user (.*).")
-    public void switchToStorefrontCockpitAsTestUser(UserRole userRole) {
-        webDriverPool.setDriverActive(userRole);
+    public void switchToStorefrontCockpitAsTestUser(String userRole) {
+        webDriverPool.setDriverActive(StorefrontUserRole.valueOf(userRole));
     }
 
     @And("^Switch to PayFabric agent.$")

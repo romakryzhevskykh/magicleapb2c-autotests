@@ -102,7 +102,7 @@ public class UsersManager {
 
     @SuppressWarnings("unchecked")
     @Step("Create user with random parameters.")
-    public User createTestUserByApi(UserSession userSession, UserRole role) {
+    public User createTestUserByApi(UserSession userSession, String role) {
         POSTRequest createUser = CREATE_REQUEST.getClone();
         String csrfToken = getCreateUserPageCsrfToken(userSession);
         String departmentId = getSelectedUserDepartmentId(userSession);
@@ -111,7 +111,7 @@ public class UsersManager {
         String email = RandomStringUtils.randomAlphabetic(10) + "@" + RandomStringUtils.randomAlphabetic(5) + ".com";
         String username = RandomStringUtils.randomAlphabetic(10);
         List<StorefrontUserRole> userRoles = new ArrayList() {{
-            add(role);
+            add(StorefrontUserRole.valueOf(role));
         }};
 
         createUser.addPostParameterAndValue(new API.PostParameterAndValue("uid", username));
@@ -198,10 +198,10 @@ public class UsersManager {
         return users;
     }
 
-    public User getTestUser(UserRole userTestRole) {
+    public User getTestUser(String userTestRole) {
         return users.stream()
                 .filter(user -> user.getUserRoles().stream().anyMatch(UserRole::isTest))
-                .filter(user -> user.getUserRoles().stream().anyMatch(userRole -> userRole.equals(userTestRole)))
+                .filter(user -> user.getUserRoles().stream().anyMatch(userRole -> userRole.equals(StorefrontUserRole.valueOf(userTestRole))))
                 .findFirst().orElse(null);
     }
 

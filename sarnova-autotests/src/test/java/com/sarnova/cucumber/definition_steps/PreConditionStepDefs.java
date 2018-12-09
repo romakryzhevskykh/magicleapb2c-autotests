@@ -19,7 +19,6 @@ import com.sarnova.helpers.user_engine.*;
 import com.sarnova.pay_fabric.page_blocks.PayFabricHeaderBlock;
 import com.sarnova.pay_fabric.page_blocks.PayFabricLeftBarBlock;
 import com.sarnova.pay_fabric.pages.PayFabricLoginPage;
-import com.sarnova.storefront.models.SarnovaStorefront;
 import com.sarnova.storefront.page_blocks.HeaderRowPageBlock;
 import com.sarnova.storefront.pages.HomePage;
 import com.sarnova.storefront.pages.LoginPage;
@@ -334,7 +333,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     }
 
     @And("^Test user is present (.*).$")
-    public void testUserIsPresent(UserRole userRole) {
+    public void testUserIsPresent(String userRole) {
         User testUser = usersManager.getTestUser(userRole);
         if (testUser == null) {
             testUser = usersManager.createTestUserByApi(userSessions.getActiveUserSession(), userRole);
@@ -344,7 +343,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
 
     //    Test user with set password
     @And("^Valid test user is present (.*).$")
-    public void validTestUserIsPresent(UserRole userRole) {
+    public void validTestUserIsPresent(String userRole) {
         User testUser = usersManager.getTestUser(userRole);
         if (testUser == null) {
             testUser = usersManager.createTestUserByApi(userSessions.getActiveUserSession(), userRole);
@@ -384,11 +383,11 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     }
 
     @And("^Test user has no any roles (.*).$")
-    public void testUserHasNoRoles(UserRole role) {
+    public void testUserHasNoRoles(String userRole) {
         User testUser = usersManager.getUserByUsername(threadVarsHashMap.getString(TestKeyword.TEST_USER_USERNAME));
         if (!testUser.isInitialized())
             usersManager.initUserGroups(userSessions.getActiveUserSession(), testUser);
-        if (!testUser.getUserRoles().isEmpty() && !(testUser.getUserRoles().size() == 1 && testUser.getUserRoles().contains(role))) {
+        if (!testUser.getUserRoles().isEmpty() && !(testUser.getUserRoles().size() == 1 && testUser.getUserRoles().contains(StorefrontUserRole.valueOf(userRole)))) {
             usersManager.removeAllUserRolesForUser(userSessions.getActiveUserSession(), testUser);
         }
     }
