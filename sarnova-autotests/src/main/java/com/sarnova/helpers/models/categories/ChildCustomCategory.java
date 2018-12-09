@@ -6,17 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChildCustomCategory extends CustomCategory {
-    private final ParentCustomCategory parentCustomCategory;
+
+    private String parentCategoryId;
     private List<Product> products = new ArrayList<>();
 
-    public ChildCustomCategory(String id, String name, ParentCustomCategory parentCustomCategory) {
-        super(id, name, parentCustomCategory.getDepartment());
-        this.parentCustomCategory = parentCustomCategory;
-        parentCustomCategory.getChildCustomCategories().add(this);
+    public ChildCustomCategory(String id, String name, String parentCategoryId) {
+        super(id, name);
+        this.parentCategoryId = parentCategoryId;
     }
 
-    public ParentCustomCategory getParentCustomCategory() {
-        return parentCustomCategory;
+    public String getParentCustomCategory() {
+        return parentCategoryId;
     }
 
     public List<Product> getProducts() {

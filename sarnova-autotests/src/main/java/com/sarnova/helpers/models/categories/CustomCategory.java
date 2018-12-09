@@ -8,6 +8,10 @@ public class CustomCategory extends Category {
         this.department = department;
     }
 
+    public CustomCategory(String id, String name) {
+        super(id, name);
+    }
+
     public String getDepartment() {
         return department;
     }

@@ -74,6 +74,10 @@ public class UserSessions {
                 .findAny().orElse(null);
     }
 
+    public List<UserSession> getAllUserSession() {
+      return  allSessionsList;
+    }
+
     public UserSession getAnyUserSessionForOrganization(String department) {
         return allSessionsList.stream()
                 .filter(userSession -> department.equals(userSession.getUser().getDepartment()))

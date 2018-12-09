@@ -32,8 +32,8 @@ public class CustomCategoryPage extends StorefrontBasePage {
     }
 
     @Step("Is parent category {0} visible?")
-    public boolean isParentCCVisible(Category category) {
-        return isDisplayed(PARENT_CATEGORY_ITEM_BY_ID_XPATH, category.getId());
+    public boolean isParentCCVisible(String categoryId) {
+        return isDisplayed(PARENT_CATEGORY_ITEM_BY_ID_XPATH, categoryId);
     }
 
     @Step("Is child category {0} visible?")
@@ -42,9 +42,9 @@ public class CustomCategoryPage extends StorefrontBasePage {
     }
 
     @Step("Expand parent category {0} in the tree.")
-    public void expandParentCCItemInTheTree(Category category) {
-        click(EXPAND_PARENT_CATEGORY_ARROW_XPATH, category.getId());
-        waitUntilElementIsVisible(ADD_CHILD_BLOCK_BY_PARENT_ID_XPATH, category.getId());
+    public void expandParentCCItemInTheTree(String categoryId) {
+        click(EXPAND_PARENT_CATEGORY_ARROW_XPATH, categoryId);
+        waitUntilElementIsVisible(ADD_CHILD_BLOCK_BY_PARENT_ID_XPATH, categoryId);
     }
 
     @Step("Show child category {0}.")
@@ -71,18 +71,18 @@ public class CustomCategoryPage extends StorefrontBasePage {
     }
 
     @Step("Is remove parent Custom category {0} button visible?")
-    public boolean isRemoveParentCustomCategoryButtonVisible(Category category) {
-        return isDisplayed(REMOVE_PARENT_CATEGORY_BUTTON_BY_ID_XPATH, category.getId());
+    public boolean isRemoveParentCustomCategoryButtonVisible(String categoryId) {
+        return isDisplayed(REMOVE_PARENT_CATEGORY_BUTTON_BY_ID_XPATH, categoryId);
     }
 
     @Step("Is Add child to parent Custom category {0} button visible?")
-    public boolean isAddChildCustomCategoryButtonVisible(Category category) {
-        return isDisplayed(ADD_CHILD_TO_PARENT_CATEGORY_BUTTON_BY_ID_XPATH, category.getId());
+    public boolean isAddChildCustomCategoryButtonVisible(String categoryId) {
+        return isDisplayed(ADD_CHILD_TO_PARENT_CATEGORY_BUTTON_BY_ID_XPATH, categoryId);
     }
 
     @Step("Is Add child to parent Custom category {0} text field visible?")
-    public boolean isAddChildCustomCategoryTextFieldVisible(Category category) {
-        return isDisplayed(ADD_CHILD_TO_PARENT_CATEGORY_TEXT_FIELD_BY_ID_XPATH, category.getId());
+    public boolean isAddChildCustomCategoryTextFieldVisible(String categoryId) {
+        return isDisplayed(ADD_CHILD_TO_PARENT_CATEGORY_TEXT_FIELD_BY_ID_XPATH, categoryId);
     }
 
     @Step("Is remove child Custom category {0} button visible?")

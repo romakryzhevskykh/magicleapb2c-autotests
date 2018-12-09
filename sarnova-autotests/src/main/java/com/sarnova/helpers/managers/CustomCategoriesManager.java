@@ -39,8 +39,8 @@ public class CustomCategoriesManager {
         return parentCustomCategory;
     }
 
-    public ChildCustomCategory createChildInstance(String id, String name, ParentCustomCategory parentCategory) {
-        ChildCustomCategory childCustomCategory = new ChildCustomCategory(id, name, parentCategory);
+    public ChildCustomCategory createChildInstance(String id, String name, String parentCategoryId) {
+        ChildCustomCategory childCustomCategory = new ChildCustomCategory(id, name, parentCategoryId);
         customCategories.add(childCustomCategory);
         return childCustomCategory;
     }
@@ -66,13 +66,13 @@ public class CustomCategoriesManager {
 
     @SuppressWarnings("unchecked")
     @Step("Create child category {1} for parent {2}.")
-    public ChildCustomCategory createNewChildCustomCategoryByApi(UserSession userSession, String name, ParentCustomCategory parentCategory) {
+    public ChildCustomCategory createNewChildCustomCategoryByApi(UserSession userSession, String name, String parentCategoryId) {
         String csrfToken = getCSRFToken(userSession);
         POSTRequest createParentCC = ADD_NEW_CUSTOM_CATEGORY.getClone();
 
         createParentCC.addPostParameterAndValue(new API.PostParameterAndValue("categoryName", name));
         createParentCC.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", csrfToken));
-        createParentCC.addPostParameterAndValue(new API.PostParameterAndValue("parentCategoryCode", parentCategory.getId()));
+        createParentCC.addPostParameterAndValue(new API.PostParameterAndValue("parentCategoryCode", parentCategoryId));
 
         try {
             createParentCC.sendPostRequest(userSession);
@@ -81,16 +81,14 @@ public class CustomCategoriesManager {
         }
 
         String id = getChildCCIdByName(userSession, name);
-        return createChildInstance(id, name, parentCategory);
+        return createChildInstance(id, name, parentCategoryId);
     }
 
     public void deleteAllCustomCategories() {
         customCategories.stream()
                 .filter(category -> category instanceof ParentCustomCategory)
-                .forEach(customCategory -> {
-                    UserSession userSession = userSessions.getAnyUserSessionForOrganization(customCategory.getDepartment());
-                    deleteCustomCategory(userSession, customCategory);
-                });
+                .forEach(customCategory ->
+                    deleteCustomCategory(userSessions.getActiveUserSession(), customCategory));
         customCategories.clear();
     }
 

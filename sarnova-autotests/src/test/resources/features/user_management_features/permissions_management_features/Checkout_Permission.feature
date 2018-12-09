@@ -3,14 +3,14 @@ Feature: Check user restrictions with CHECKOUT PERMISSION and without it.
   Background:
     Given Switch to Storefront owner.
     And User is logged in to Storefront.
-    And Valid test user is present.
+    And Valid test user is present ORGANIZATION_TEST_USER.
     And Test user group is present.
     And Test user group has only CHECKOUT permission.
-    And Test user has no any roles.
+    And Test user has no any roles ORGANIZATION_TEST_USER.
     And Test user has only test user group assigned.
 
   Scenario: Check that user with only CHECKOUT PERMISSION has access to Checkout button on Cart page.
-    Given Switch to Storefront cockpit test user.
+    Given Switch to Storefront cockpit test user ORGANIZATION_TEST_USER.
     And User is logged in to Storefront.
     And Empty Cart.
     And Add to cart INDIVIDUAL, VALID product with quantity 1.
@@ -18,7 +18,7 @@ Feature: Check user restrictions with CHECKOUT PERMISSION and without it.
     Then Check that Checkout button is visible on Cart page.
 
   Scenario: Check that user with only CHECKOUT PERMISSION has access to Shipping address step on Checkout page.
-    Given Switch to Storefront cockpit test user.
+    Given Switch to Storefront cockpit test user ORGANIZATION_TEST_USER.
     And User is logged in to Storefront.
     And Empty Cart.
     And Add to cart INDIVIDUAL, VALID product with quantity 1.
@@ -27,7 +27,7 @@ Feature: Check user restrictions with CHECKOUT PERMISSION and without it.
     Then Check that Checkout Shipping address step is opened.
 
   Scenario: Check that user with only CHECKOUT PERMISSION has access to Delivery method step on Checkout page.
-    Given Switch to Storefront cockpit test user.
+    Given Switch to Storefront cockpit test user ORGANIZATION_TEST_USER.
     And User is logged in to Storefront.
     And Empty Cart.
     And Add to cart INDIVIDUAL, VALID product with quantity 1.
@@ -37,7 +37,7 @@ Feature: Check user restrictions with CHECKOUT PERMISSION and without it.
     And Check that Checkout Shipping method step is opened.
 
   Scenario: Check that user with only CHECKOUT PERMISSION has access to license-restricted pop-up on Checkout page.
-    Given Switch to Storefront cockpit test user.
+    Given Switch to Storefront cockpit test user ORGANIZATION_TEST_USER.
     And User is logged in to Storefront.
     And Empty Cart.
     And Add to cart INDIVIDUAL, LICENSE_RESTRICTED product with quantity 1.
@@ -47,7 +47,7 @@ Feature: Check user restrictions with CHECKOUT PERMISSION and without it.
     Then Check that Check license pop-up is displayed on Checkout Shipping method step.
 
   Scenario: Check that user with only CHECKOUT PERMISSION has access to Payment method step on Checkout page.
-    Given Switch to Storefront cockpit test user.
+    Given Switch to Storefront cockpit test user ORGANIZATION_TEST_USER.
     And User is logged in to Storefront.
     And Empty Cart.
     And Add to cart INDIVIDUAL, VALID product with quantity 1.
@@ -58,7 +58,7 @@ Feature: Check user restrictions with CHECKOUT PERMISSION and without it.
     And Check that Checkout Payment method step is opened.
 
   Scenario: Check that user with only CHECKOUT PERMISSION has access to Card type Payment method on Checkout page.
-    Given Switch to Storefront cockpit test user.
+    Given Switch to Storefront cockpit test user ORGANIZATION_TEST_USER.
     And User is logged in to Storefront.
     And Empty Cart.
     And Add to cart INDIVIDUAL, VALID product with quantity 1.
@@ -72,7 +72,7 @@ Feature: Check user restrictions with CHECKOUT PERMISSION and without it.
     And Check that Comment text field is visible on Checkout Payment method step.
 
   Scenario: Check that user with only CHECKOUT PERMISSION has access to Invoice type Payment method on Checkout page.
-    Given Switch to Storefront cockpit test user.
+    Given Switch to Storefront cockpit test user ORGANIZATION_TEST_USER.
     And User is logged in to Storefront.
     And Empty Cart.
     And Add to cart INDIVIDUAL, VALID product with quantity 1.
@@ -91,7 +91,7 @@ Feature: Check user restrictions with CHECKOUT PERMISSION and without it.
     And Check that CVV text field is visible on Checkout Payment method step.
 
   Scenario: Check that user with only CHECKOUT PERMISSION has access to Final Review step on Checkout page.
-    Given Switch to Storefront cockpit test user.
+    Given Switch to Storefront cockpit test user ORGANIZATION_TEST_USER.
     And User is logged in to Storefront.
     And Empty Cart.
     And Add to cart INDIVIDUAL, VALID product with quantity 1.
@@ -107,7 +107,7 @@ Feature: Check user restrictions with CHECKOUT PERMISSION and without it.
     And Check that accept Terms and Conditions checkbox is visible on Checkout Final Review step.
 
   Scenario: Check that user with only CHECKOUT PERMISSION has access to place order and Order confirmation page.
-    Given Switch to Storefront cockpit test user.
+    Given Switch to Storefront cockpit test user ORGANIZATION_TEST_USER.
     And User is logged in to Storefront.
     And Empty Cart.
     And Add to cart INDIVIDUAL, VALID product with quantity 1.

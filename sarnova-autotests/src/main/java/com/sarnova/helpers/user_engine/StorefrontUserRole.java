@@ -14,7 +14,8 @@ public enum StorefrontUserRole implements UserRole {
     TEMP("b2btemp"),
     GUEST_CONSUMER("b2bguest"),
     INDEPENDENT_TEST_USER,
-    ORGANIZATION_TEST_USER;
+    ORGANIZATION_TEST_USER,
+    CUSTOM_CATEGORY_TEST_USER;
 
     private final String roleCode;
     private final boolean isTest;

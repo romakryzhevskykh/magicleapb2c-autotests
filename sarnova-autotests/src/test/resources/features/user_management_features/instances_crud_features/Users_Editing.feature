@@ -5,7 +5,7 @@ Feature: Check that owner role can edit user.
     And User is logged in to Storefront.
 
   Scenario: Check user editing from Storefront.
-    When Test user is present.
+    When Test user is present ORGANIZATION_TEST_USER.
     And Open Test user edit page.
     And Fill First name field with a random text on Edit user page.
     And Fill Last name field with a random text on Edit user page.
@@ -21,7 +21,7 @@ Feature: Check that owner role can edit user.
     And Check that User status is Enable on User details page.
 
   Scenario: Check that admin user can reset password to other user.
-    When Test user is present.
+    When Test user is present ORGANIZATION_TEST_USER.
     And Open Test user details page.
     And Click on Reset password button on User details page.
     And Set new password to New password field on Reset password page.

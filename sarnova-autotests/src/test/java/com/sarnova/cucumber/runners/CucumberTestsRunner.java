@@ -5,9 +5,7 @@ import com.sarnova.helpers.managers.CustomCategoriesManager;
 import com.sarnova.helpers.managers.SupplyListsManager;
 import com.sarnova.helpers.managers.UserGroupsManager;
 import com.sarnova.helpers.models.supply_lists.SupplyList;
-import com.sarnova.helpers.user_engine.StorefrontUserRole;
 import com.sarnova.helpers.user_engine.UserSessions;
-import com.sarnova.helpers.user_engine.UsersManager;
 import com.sarnova.helpers.web_engine.WebDriverSessions;
 import com.sarnova.helpers.web_engine.WebDriverSetups;
 import com.sarnova.helpers.web_engine.WebDriverThreadTestSetups;
@@ -20,15 +18,13 @@ import org.testng.annotations.*;
 
 @ContextConfiguration(locations = {"classpath:spring-application-context.xml"})
 public class CucumberTestsRunner extends AbstractTestNGSpringContextTests {
-    @Autowired WebDriverSessions webDriverPool;
-    @Autowired SeleniumGridSettings seleniumGridSettings;
-    @Autowired WebDriverThreadTestSetups webDriverThreadTestSetups;
+    @Autowired private WebDriverSessions webDriverPool;
+    @Autowired private SeleniumGridSettings seleniumGridSettings;
+    @Autowired private WebDriverThreadTestSetups webDriverThreadTestSetups;
 
-    @Autowired SupplyListsManager supplyListsManager;
-    @Autowired UserGroupsManager userGroupsManager;
-    @Autowired UsersManager usersManager;
-    @Autowired UserSessions userSessions;
-    @Autowired CustomCategoriesManager customCategoriesManager;
+    @Autowired private SupplyListsManager supplyListsManager;
+    @Autowired private UserGroupsManager userGroupsManager;
+    @Autowired private UserSessions userSessions;
 
     private TestNGCucumberRunner testNGCucumberRunner;
 
@@ -67,14 +63,18 @@ public class CucumberTestsRunner extends AbstractTestNGSpringContextTests {
 
     @AfterSuite(alwaysRun = true)
     public void tearDownClass() throws Exception {
+        deactivateSupplyLists();
+        deleteUserGroupsForEachUser();
+    }
+
+    private void deactivateSupplyLists() {
         supplyListsManager.getTestSupplyLists()
                 .stream()
                 .filter(SupplyList::isActive)
                 .forEach(supplyList -> supplyListsManager.deactivate(supplyList));
-        customCategoriesManager.deleteAllCustomCategories();
-        userGroupsManager.deleteAllCreatedUserGroups(userSessions.getAnyUserSessionForUser(usersManager.getUsers()
-                .stream()
-                .filter(user -> user.getUserRoles().contains(StorefrontUserRole.ADMIN))
-                .findAny().get()));
+    }
+
+    private void deleteUserGroupsForEachUser() {
+        userSessions.getAllUserSession().forEach(userSession -> userGroupsManager.deleteAllCreatedUserGroups(userSession));
     }
 }

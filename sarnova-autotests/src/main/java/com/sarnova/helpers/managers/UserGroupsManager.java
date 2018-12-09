@@ -21,6 +21,7 @@ import static com.sarnova.RegexUtils.matchPattern;
 @Component
 public class UserGroupsManager {
     private static final String DEPARTMENT_ID_REGEX_PATTERN = "id=\"department-radio-(.*)\"\\s*class.*\\s*checked";
+    private static final String CSRFTOKEN_REGEX_PATTERN = "CSRFToken\\s*=\\s*\"(.+)\";";
 
     private GETRequest PERMISSIONS_PAGE_FOR_GROUP = new GETRequest("User group permissions page", "my-company/organization-management/manage-usergroups/permissions/?usergroup=%s");
     private GETRequest CREATE_USER_GROUP_PAGE = new GETRequest("Create new user group page", "my-company/organization-management/manage-usergroups/create");
@@ -38,7 +39,7 @@ public class UserGroupsManager {
 
     @SuppressWarnings("unchecked")
     @Step("Create User group.")
-    public void createUserGroup(UserSession activeUserSession) {
+    public UserGroup createUserGroup(UserSession activeUserSession) {
         String csrfToken = getCreateGroupPageCsrfToken(activeUserSession);
         String departmentId = getSelectedUserDepartmentId(activeUserSession);
         String groupName = RandomStringUtils.randomAlphabetic(10);
@@ -55,14 +56,18 @@ public class UserGroupsManager {
         }
         System.out.println(createUserGroup.getResponse().getResponseHeaders());
 
-        createInstance(createUserGroup.getResponse().getResponseHeaders().get("Location").get(0).split("=")[1], groupName);
+       UserGroup userGroup = createInstance(createUserGroup.getResponse().getResponseHeaders().get("Location").get(0).split("=")[1], groupName);
+       activeUserSession.getUser().getUserGroups().add(userGroup);
+       return userGroup;
     }
 
     @SuppressWarnings("unchecked")
     @Step("Delete {1}.")
     public void deleteUserGroup(UserSession activeUserSession, UserGroup userGroup) {
         POSTRequest deleteUserGroup = DELETE_USER_GROUP.getClone();
-        deleteUserGroup.setGetParameterAndValue("usergroup", userGroup.getUId());
+        String csrfToken = getCreateGroupPageCsrfToken(activeUserSession);
+        deleteUserGroup.addPostParameterAndValue(new API.PostParameterAndValue("usergroup", userGroup.getUId()));
+        deleteUserGroup.addPostParameterAndValue(new API.PostParameterAndValue("CSRFToken", csrfToken));
         try {
             deleteUserGroup.sendPostRequest(activeUserSession);
         } catch (IOException e) {
@@ -72,7 +77,7 @@ public class UserGroupsManager {
 
     @SuppressWarnings("unchecked")
     public void deleteAllCreatedUserGroups(UserSession activeUserSession) {
-        userGroups.forEach(userGroup -> deleteUserGroup(activeUserSession, userGroup));
+        activeUserSession.getUser().getUserGroups().forEach(userGroup -> deleteUserGroup(activeUserSession, userGroup));
         userGroups.clear();
     }
 
@@ -80,12 +85,16 @@ public class UserGroupsManager {
         return getUserGroups().stream().filter(userGroup -> userGroup.getUId().equalsIgnoreCase(uid)).findAny().orElse(null);
     }
 
-    public void createInstance(String uid) {
-        userGroups.add(new UserGroup(uid));
+    public UserGroup createInstance(String uid) {
+        UserGroup userGroup =  new UserGroup(uid);
+        userGroups.add(userGroup);
+        return userGroup;
     }
 
-    public void createInstance(String uid, String name) {
-        userGroups.add(new UserGroup(uid, name));
+    public UserGroup createInstance(String uid, String name) {
+        UserGroup userGroup =  new UserGroup(uid, name);
+        userGroups.add(userGroup);
+        return userGroup;
     }
 
     @SuppressWarnings("unchecked")
@@ -155,12 +164,11 @@ public class UserGroupsManager {
     }
 
     private String getCreateGroupPageCsrfToken(UserSession userSession) {
-        Document htmlResponse = getUserGroupsPage(userSession);
-        return Xsoup.select(htmlResponse, "//input[@name=CSRFToken]/@value").list().stream().findAny().orElse(null);
+        String htmlResponse = getUserGroupsPage(userSession);
+        return matchPattern(htmlResponse, CSRFTOKEN_REGEX_PATTERN, 1);
     }
 
-
-    private Document getUserGroupsPage(UserSession userSession){
+    private String getUserGroupsPage(UserSession userSession){
         GETRequest userGroupRequest = CREATE_USER_GROUP_PAGE.getClone();
         userGroupRequest.setIsShortLogResponse(true);
         try {
@@ -168,11 +176,11 @@ public class UserGroupsManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return userGroupRequest.getResponse().getHTMLResponseDocument();
+        return userGroupRequest.getResponse().getHTMLResponseDocument().outerHtml();
     }
 
     private String getSelectedUserDepartmentId(UserSession userSession){
-        String htmlResponse = getUserGroupsPage(userSession).outerHtml();
+        String htmlResponse = getUserGroupsPage(userSession);
         return matchPattern(htmlResponse, DEPARTMENT_ID_REGEX_PATTERN, 1);
     }
 }

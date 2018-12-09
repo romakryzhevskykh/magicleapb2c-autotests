@@ -38,7 +38,6 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     @Autowired private LoginPage loginPage;
     @Autowired private PayFabricLoginPage payFabricLoginPage;
     @Autowired private HomePage homePage;
-    @Autowired private SarnovaStorefront sarnovaStorefront;
     @Autowired private SupplyListsManager supplyListsManager;
     @Autowired private UserGroupsManager userGroupsManager;
     @Autowired private ProductsManager productsManager;
@@ -334,24 +333,21 @@ public class PreConditionStepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, activeSupplyList.getName());
     }
 
-    @And("^Test user is present.$")
-    public void testUserIsPresent() {
-        User testUser = usersManager.getTestUser(sarnovaStorefront);
-        System.out.println(usersManager.getTestUser(sarnovaStorefront));
+    @And("^Test user is present (.*).$")
+    public void testUserIsPresent(UserRole userRole) {
+        User testUser = usersManager.getTestUser(userRole);
         if (testUser == null) {
-            usersManager.createTestUserByApi(userSessions.getActiveUserSession());
-            testUser = usersManager.getTestUser(sarnovaStorefront);
+            testUser = usersManager.createTestUserByApi(userSessions.getActiveUserSession(), userRole);
         }
         threadVarsHashMap.put(TestKeyword.TEST_USER_USERNAME, testUser.getUsername());
     }
 
     //    Test user with set password
-    @And("^Valid test user is present.$")
-    public void validTestUserIsPresent() {
-        User testUser = usersManager.getTestUser(sarnovaStorefront);
+    @And("^Valid test user is present (.*).$")
+    public void validTestUserIsPresent(UserRole userRole) {
+        User testUser = usersManager.getTestUser(userRole);
         if (testUser == null) {
-            usersManager.createTestUserByApi(userSessions.getActiveUserSession());
-            testUser = usersManager.getTestUser(sarnovaStorefront);
+            testUser = usersManager.createTestUserByApi(userSessions.getActiveUserSession(), userRole);
             usersManager.resetPassword(userSessions.getActiveUserSession(), testUser);
         } else if (testUser.getPassword().isEmpty()) {
             usersManager.resetPassword(userSessions.getActiveUserSession(), testUser);
@@ -361,9 +357,12 @@ public class PreConditionStepDefs extends AbstractStepDefs {
 
     @And("^Test user group is present.$")
     public void testUserGroupIsPresent() {
-        if (userGroupsManager.getUserGroups().isEmpty())
-            userGroupsManager.createUserGroup(userSessions.getActiveUserSession());
+        if (userGroupsManager.getUserGroups().isEmpty() || getuserGroupsOfCurrentUser().isEmpty()) {
+            UserGroup userGroup =  userGroupsManager.createUserGroup(userSessions.getActiveUserSession());
+            threadVarsHashMap.put(TestKeyword.TEST_USER_GROUP_UID, userGroup.getUId());
+        } else {
         threadVarsHashMap.put(TestKeyword.TEST_USER_GROUP_UID, userGroupsManager.getUserGroups().stream().findAny().get().getUId());
+        }
     }
 
     @And("^Test user has only test user group assigned.$")
@@ -372,18 +371,24 @@ public class PreConditionStepDefs extends AbstractStepDefs {
         User testUser = usersManager.getUserByUsername(threadVarsHashMap.getString(TestKeyword.TEST_USER_USERNAME));
         if (!testUser.isInitialized())
             usersManager.initUserGroups(userSessions.getActiveUserSession(), testUser);
-        if (testUser.getUserGroups().isEmpty() || !testUser.getUserGroups().stream().allMatch(userGroup -> userGroup == testUserGroup)) {
+        if (testUser.getUserGroups().isEmpty()
+                || getuserGroupsOfCurrentUser().isEmpty()
+                ||!testUser.getUserGroups().stream().allMatch(userGroup -> userGroup == testUserGroup)) {
             usersManager.removeAllUserGroupsForUser(userSessions.getActiveUserSession(), testUser);
             usersManager.setUserGroupForUser(userSessions.getActiveUserSession(), testUser, testUserGroup);
         }
     }
 
-    @And("^Test user has no any roles.$")
-    public void testUserHasNoRoles() {
+    private Set<UserGroup> getuserGroupsOfCurrentUser() {
+        return userSessions.getActiveUserSession().getUser().getUserGroups();
+    }
+
+    @And("^Test user has no any roles (.*).$")
+    public void testUserHasNoRoles(UserRole role) {
         User testUser = usersManager.getUserByUsername(threadVarsHashMap.getString(TestKeyword.TEST_USER_USERNAME));
         if (!testUser.isInitialized())
             usersManager.initUserGroups(userSessions.getActiveUserSession(), testUser);
-        if (!testUser.getUserRoles().isEmpty() && !(testUser.getUserRoles().size() == 1 && testUser.getUserRoles().contains(StorefrontUserRole.ORGANIZATION_TEST_USER))) {
+        if (!testUser.getUserRoles().isEmpty() && !(testUser.getUserRoles().size() == 1 && testUser.getUserRoles().contains(role))) {
             usersManager.removeAllUserRolesForUser(userSessions.getActiveUserSession(), testUser);
         }
     }
@@ -425,58 +430,38 @@ public class PreConditionStepDefs extends AbstractStepDefs {
         supplyListsManager.shareSupplyListWithUser(userSessions.getActiveUserSession(), userToShareWith, supplyList);
     }
 
-    @And("^Test parent Custom category is present.$")
-    public void testParentCustomCategoryIsPresent() {
-        Category category = getOrCreateParentCustomCategory();
+    @And("^Customer create parent category via webservice.$")
+    public void customerCreateParentcategoryViaWebservice() {
+        Category category = createParentCustomCategory();
         threadVarsHashMap.put(TestKeyword.TEST_PARENT_CUSTOM_CATEGORY_ID, category.getId());
     }
 
-    @And("^Test child Custom category is present.$")
-    public void testChildCustomCategoryIsPresent() {
-        ChildCustomCategory category = getOrCreateChildCustomCategory();
-        threadVarsHashMap.put(TestKeyword.TEST_PARENT_CUSTOM_CATEGORY_ID, category.getParentCustomCategory().getId());
-        threadVarsHashMap.put(TestKeyword.TEST_CHILD_CUSTOM_CATEGORY_ID, category.getId());
+    private ParentCustomCategory createParentCustomCategory() {
+        String parentCategoryName = "parentCategory" + RandomStringUtils.randomNumeric(8);
+        return customCategoriesManager.createNewParentCustomCategoryByApi(userSessions.getActiveUserSession(), parentCategoryName);
     }
 
-    private ParentCustomCategory getOrCreateParentCustomCategory() {
-        return (ParentCustomCategory) customCategoriesManager.getCustomCategories().stream()
-                .filter(ParentCustomCategory.class::isInstance)
-                .filter(parentCustomCategory -> parentCustomCategory.getDepartment()
-                        .equals(userSessions.getActiveUserSession().getUser().getDepartment()))
-                .findAny().orElseGet(() -> {
-                    String ccName = RandomStringUtils.randomAlphabetic(8);
-                    return customCategoriesManager.createNewParentCustomCategoryByApi(userSessions.getActiveUserSession(), ccName);
-                });
+    @And("^Customer create child category via webservice.$")
+    public void customerCreateChildcategoryViaWebservice() {
+        ChildCustomCategory childCategory = createChildCustomCategory();
+        threadVarsHashMap.put(TestKeyword.TEST_CHILD_CUSTOM_CATEGORY, childCategory);
     }
 
-    @And("^At least (\\d+) product in child Custom category.$")
-    public void atLeastProductInChildCustomCategory(int productsInChildCC) {
-        ChildCustomCategory category = getOrCreateChildCustomCategory();
-        threadVarsHashMap.put(TestKeyword.TEST_PARENT_CUSTOM_CATEGORY_ID, category.getParentCustomCategory().getId());
-        threadVarsHashMap.put(TestKeyword.TEST_CHILD_CUSTOM_CATEGORY_ID, category.getId());
-        if (category.getProducts().size() < productsInChildCC) {
+    private ChildCustomCategory createChildCustomCategory() {
+        String parentCategoryId = threadVarsHashMap.getString(TestKeyword.TEST_PARENT_CUSTOM_CATEGORY_ID);
+        String childCategoryName = "childCategory" + RandomStringUtils.randomNumeric(8);
+        return customCategoriesManager.createNewChildCustomCategoryByApi(userSessions.getActiveUserSession(), childCategoryName, parentCategoryId);
+    }
+
+    @And("^Customer add (\\d+) products to child custom category via webservice.$")
+    public void customerAddProductsToChildCustomCategoryWiaWebservice(int productsInChildCC) {
+        ChildCustomCategory childCategoryId = (ChildCustomCategory) threadVarsHashMap.get(TestKeyword.TEST_CHILD_CUSTOM_CATEGORY);
             List<Product> productsToAdd = productsManager.getUniqueProductsByProductsQuantityTestTypesAndExcludeProductList(productsInChildCC,
                     new ArrayList<String>() {{
                         add("INDIVIDUAL");
                     }},
                     new ArrayList<>());
-            customCategoriesManager.addProductsToCategoryByApi(userSessions.getActiveUserSession(), category, productsToAdd);
-        }
-    }
-
-    private ChildCustomCategory getOrCreateChildCustomCategory() {
-        return ((ParentCustomCategory) customCategoriesManager.getCustomCategories().stream()
-                .filter(ParentCustomCategory.class::isInstance)
-                .filter(parentCustomCategory -> parentCustomCategory.getDepartment()
-                        .equals(userSessions.getActiveUserSession().getUser().getDepartment()))
-                .filter(parentCategory -> !((ParentCustomCategory) parentCategory).getChildCustomCategories().isEmpty())
-                .findAny()
-                .orElseGet(() -> {
-                    ParentCustomCategory parentCategory = getOrCreateParentCustomCategory();
-                    String ccName = RandomStringUtils.randomAlphabetic(8);
-                    customCategoriesManager.createNewChildCustomCategoryByApi(userSessions.getActiveUserSession(), ccName, parentCategory);
-                    return parentCategory;
-                })).getChildCustomCategories().stream().findAny().get();
+            customCategoriesManager.addProductsToCategoryByApi(userSessions.getActiveUserSession(), childCategoryId, productsToAdd);
     }
 
     @And("^Saved Cart with at least (\\d+) products has been created.$")

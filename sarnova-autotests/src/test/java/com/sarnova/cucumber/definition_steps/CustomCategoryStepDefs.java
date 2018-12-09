@@ -1,13 +1,14 @@
 package com.sarnova.cucumber.definition_steps;
 
 import com.sarnova.helpers.managers.CustomCategoriesManager;
-import com.sarnova.helpers.models.categories.Category;
 import com.sarnova.helpers.models.categories.ChildCustomCategory;
 import com.sarnova.helpers.models.products.Product;
 import com.sarnova.storefront.pages.CustomCategoryPage;
+import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.assertj.core.api.SoftAssertions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -17,8 +18,10 @@ import static org.testng.Assert.assertTrue;
 
 public class CustomCategoryStepDefs extends AbstractStepDefs {
 
-    @Autowired CustomCategoriesManager customCategoriesManager;
-    @Autowired CustomCategoryPage customCategoryPage;
+    @Autowired
+    CustomCategoriesManager customCategoriesManager;
+    @Autowired
+    CustomCategoryPage customCategoryPage;
 
     @When("^Open Custom category page.$")
     public void openCustomCategoryPage() {
@@ -30,86 +33,68 @@ public class CustomCategoryStepDefs extends AbstractStepDefs {
         assertTrue(customCategoryPage.isOpened());
     }
 
-    @Then("Check that Categories tree is visible on Custom categories page.")
-    public void checkThatCategoriesTreeIsVisible() {
-        assertTrue(customCategoryPage.isCustomCategoriesTreeVisible());
-    }
-
-    @Then("^Check that new Custom Category name field is visible on Custom categories page.$")
-    public void checkThatNewCustomCategoryNameFieldIsVisibleOnCustomCategoriesPage() {
-        assertTrue(customCategoryPage.isNewCustomCategoryNameFieldVisible());
-    }
-
-    @And("^Check that Add new Custom Category button is visible on Custom categories page.$")
-    public void checkThatAddNewCustomCategoryButtonIsVisibleOnCustomCategoriesPage() {
-        assertTrue(customCategoryPage.isAddNewCustomCategoryButtonVisible());
+    @And("^Check that Categories tree, New Category field and Add button are visible on Custom categories page.$")
+    public void checkThatCategoriesTreeNewCategoryFieldAndAddButtonAreVisibleOnCustomCategoriesPage() {
+        SoftAssertions softly = new SoftAssertions();
+        softly.assertThat(customCategoryPage.isCustomCategoriesTreeVisible()).as("Custom category tree isn't visible").isTrue();
+        softly.assertThat(customCategoryPage.isNewCustomCategoryNameFieldVisible()).as("New Custom category field isn't visible").isTrue();
+        softly.assertThat(customCategoryPage.isAddNewCustomCategoryButtonVisible()).as("Add New Custom category button isn't visible").isTrue();
+        softly.assertAll();
     }
 
     @Then("^Check that parent Custom category is visible on Custom categories page.$")
     public void checkThatParentCustomCategoryIsVisibleOnCustomCategoriesPage() {
         String ccId = threadVarsHashMap.getString(TestKeyword.TEST_PARENT_CUSTOM_CATEGORY_ID);
-        Category category = customCategoriesManager.getCustomCategoryById(ccId);
-        assertTrue(customCategoryPage.isParentCCVisible(category));
+        assertTrue(customCategoryPage.isParentCCVisible(ccId));
     }
 
     @And("^Expand parent Custom category on Custom categories page.$")
     public void expandParentCustomCategoryOnCustomCategoriesPage() {
         String ccId = threadVarsHashMap.getString(TestKeyword.TEST_PARENT_CUSTOM_CATEGORY_ID);
-        Category category = customCategoriesManager.getCustomCategoryById(ccId);
-        customCategoryPage.expandParentCCItemInTheTree(category);
+        customCategoryPage.expandParentCCItemInTheTree(ccId);
     }
 
     @Then("^Check that child Custom category is visible on Custom categories page.$")
     public void checkThatChildCustomCategoryIsVisibleOnCustomCategoriesPage() {
-        String ccId = threadVarsHashMap.getString(TestKeyword.TEST_CHILD_CUSTOM_CATEGORY_ID);
-        Category category = customCategoriesManager.getCustomCategoryById(ccId);
-        customCategoryPage.isChildCCVisible(category);
+        customCategoryPage.isChildCCVisible(getCreatedChildCategory());
     }
 
     @And("^Open child Custom category on Custom categories page.$")
     public void openChildCustomCategoryOnCustomCategoriesPage() {
-        Category childCustomCategory = customCategoriesManager.getCustomCategoryById(threadVarsHashMap.getString(TestKeyword.TEST_CHILD_CUSTOM_CATEGORY_ID));
-        customCategoryPage.clickOnOpenChildCC(childCustomCategory);
+        customCategoryPage.clickOnOpenChildCC(getCreatedChildCategory());
     }
 
     @Then("^Check that products are displayed on Custom categories page.$")
     public void checkThatProductsAreDisplayedOnCustomCategoriesPage() {
-        String ccId = threadVarsHashMap.getString(TestKeyword.TEST_CHILD_CUSTOM_CATEGORY_ID);
-        ChildCustomCategory category = (ChildCustomCategory)customCategoriesManager.getCustomCategoryById(ccId);
-        List<String> categoryProductSKUs = category.getProducts().stream()
+        List<String> categoryProductSKUs = getCreatedChildCategory().getProducts().stream()
                 .map(Product::getSku)
                 .collect(toList());
         List<String> productsSKUsOnThePage = customCategoryPage.getDisplayedProductSKUs();
         assertTrue(productsSKUsOnThePage.containsAll(categoryProductSKUs));
     }
 
+    private ChildCustomCategory getCreatedChildCategory() {
+        return (ChildCustomCategory) threadVarsHashMap.get(TestKeyword.TEST_CHILD_CUSTOM_CATEGORY);
+    }
+
     @Then("^Check that Remove parent Custom category button is visible on Custom categories page.$")
     public void checkThatRemoveParentCustomCategoryButtonIsVisibleOnCustomCategoriesPage() {
         String ccId = threadVarsHashMap.getString(TestKeyword.TEST_PARENT_CUSTOM_CATEGORY_ID);
-        Category category = customCategoriesManager.getCustomCategoryById(ccId);
-        assertTrue(customCategoryPage.isRemoveParentCustomCategoryButtonVisible(category));
+        assertTrue(customCategoryPage.isRemoveParentCustomCategoryButtonVisible(ccId));
     }
 
-    @Then("^Check that Add child category to parent button is visible on Custom categories page.$")
-    public void checkThatAddChildCategoryToParentButtonIsVisibleOnCustomCategoriesPage() {
+    @Then("^Check that New Subcategory field and Add Subcategory button are visible on Custom categories page.$")
+    public void checkThatNewSubcategoryFieldAndAddSubcategoryButtonAreVisibleOnCustomCategoriesPage() {
         String ccId = threadVarsHashMap.getString(TestKeyword.TEST_PARENT_CUSTOM_CATEGORY_ID);
-        Category category = customCategoriesManager.getCustomCategoryById(ccId);
-        System.out.println(category);
-        assertTrue(customCategoryPage.isAddChildCustomCategoryButtonVisible(category));
-    }
-
-    @Then("^Check that Add child category to parent text field is visible on Custom categories page.$")
-    public void checkThatAddChildCategoryToParentTextFieldIsVisibleOnCustomCategoriesPage() {
-        String ccId = threadVarsHashMap.getString(TestKeyword.TEST_PARENT_CUSTOM_CATEGORY_ID);
-        Category category = customCategoriesManager.getCustomCategoryById(ccId);
-        assertTrue(customCategoryPage.isAddChildCustomCategoryTextFieldVisible(category));
+        SoftAssertions softly = new SoftAssertions();
+        softly.assertThat(customCategoryPage.isAddChildCustomCategoryButtonVisible(ccId)).as("Add Subcategory button isn't visible").isTrue();
+        softly.assertThat(customCategoryPage.isAddChildCustomCategoryTextFieldVisible(ccId)).as("New Subcategory field isn't visible").isTrue();
+        softly.assertAll();
     }
 
     @Then("^Check that Remove child Custom category button is visible on Custom categories page.$")
     public void checkThatRemoveChildCustomCategoryButtonIsVisibleOnCustomCategoriesPage() {
-        String ccId = threadVarsHashMap.getString(TestKeyword.TEST_CHILD_CUSTOM_CATEGORY_ID);
-        Category category = customCategoriesManager.getCustomCategoryById(ccId);
-        assertTrue(customCategoryPage.isRemoveChildCustomCategoryButtonVisible(category));
+        assertTrue(customCategoryPage.isRemoveChildCustomCategoryButtonVisible(getCreatedChildCategory()));
     }
 
     @Then("^Check that Quick Add block is visible on Custom categories page.$")
@@ -119,9 +104,7 @@ public class CustomCategoryStepDefs extends AbstractStepDefs {
 
     @And("^Check that Remove product buttons are visible on Custom categories page.$")
     public void checkThatRemoveProductButtonsAreVisibleOnCustomCategoriesPage() {
-        String ccId = threadVarsHashMap.getString(TestKeyword.TEST_CHILD_CUSTOM_CATEGORY_ID);
-        ChildCustomCategory category = (ChildCustomCategory) customCategoriesManager.getCustomCategoryById(ccId);
-        assertTrue(customCategoryPage.areRemoveProductsFromCCButtonsVisible(category));
+        assertTrue(customCategoryPage.areRemoveProductsFromCCButtonsVisible(getCreatedChildCategory()));
     }
 
     @And("^Click on Quick Add checkbox on Custom categories page.$")
@@ -137,5 +120,11 @@ public class CustomCategoryStepDefs extends AbstractStepDefs {
     @Then("^Click on Manage Existing Products item on Custom Category page.$")
     public void clickOnManageExistingProductsItemOnCustomCategoryPage() {
         customCategoryPage.clickOnManageExistingProductsItem();
+    }
+
+    @After("@deletecustomcategory")
+    @And("^Delete custom categories.$")
+    public void deleteCustomCategories() {
+        customCategoriesManager.deleteAllCustomCategories();
     }
 }
