@@ -306,7 +306,7 @@ public class ManageUsersPage extends StorefrontBasePage {
                 if (actualCountOfPages > 1) {
                     click(By.id(NEXT_PAGINATION_BUTTON_PENDING_TAB_ID));
                 }
-            } else if (($$(PENDING_USERS_SSO_LIST_XPATH).stream().anyMatch(userSso -> userSso.getText().equals(userId)))) {
+            } else if ($$(PENDING_USERS_SSO_LIST_XPATH).stream().anyMatch(userSso -> userSso.getText().equals(userId))) {
                 result = true;
             }
         }
