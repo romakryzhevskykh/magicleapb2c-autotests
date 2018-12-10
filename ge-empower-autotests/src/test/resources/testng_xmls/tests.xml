@@ -19,7 +19,7 @@
         <parameter name="browserName" value="chrome"/>
         <parameter name="headless" value="true"/>
         <classes>
-            <!--rmAdmin, firstEmpAdmin, secondInternalUser, newUser, newMfgRepUser1-->
+            <!--first caAdmin, first smAdmin, rmAdmin, first EmpAdmin, first helpDesc, secondInternalUser, newUser, newMfgRepUser1, mfgRepAdmin-->
             <class name="com.geempower.cucumber.ShipmentSuite"/>
             <class name="com.geempower.cucumber.OrdersSuite"/>
             <class name="com.geempower.cucumber.SavedItemsSuite"/>

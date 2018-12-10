@@ -8,6 +8,7 @@ public class ManageUsersPageElements {
     public final static String ACTIVE_PENDING_REQUESTS_TAB_XPATH = "//ul[@class='my-pending-account-list']/li[1]";
     public final static String COUNT_OF_PAGES_PENDING_REQUESTS_TAB_XPATH = "//div[@id='pending-requests-table_paginate']//span[@class='paginate_of']";
     private final static String PENDING_USERS_TABLE_XPATH = "//table[@id='pending-requests-table']";
+    public final static String EMPTY_PENDING_REQUESTS_TABLE_XPATH = PENDING_USERS_TABLE_XPATH + "//td[@class='dataTables_empty']";
     public final static String PENDING_USERS_SSO_LIST_XPATH = PENDING_USERS_TABLE_XPATH + "//td[2]";
     public final static String NO_ACCOUNTS_LABEL_FOR_APPROPRIATE_USER_XPATH = PENDING_USERS_TABLE_XPATH + "//td[text()='%s']//..//td[6]";
     public final static String BLUE_INTERNAL_ICON_FOR_APPROPRIATE_USER_XPATH = PENDING_USERS_TABLE_XPATH + "//td[text()='%s']//..//i[@class='fa fa-user-circle text-blue']";

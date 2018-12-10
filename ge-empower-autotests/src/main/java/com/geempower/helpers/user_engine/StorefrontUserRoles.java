@@ -5,6 +5,7 @@ public enum StorefrontUserRoles implements UserRole {
     EXTERNALUSER2,
     EXTERNALUSER3,
     CAADMIN,
+    CAADMIN1,
     EMPOWERADMIN,
     INTERNALUSER,
     INTERNALUSER1,
@@ -12,15 +13,19 @@ public enum StorefrontUserRoles implements UserRole {
     NEWINTERNALUSER,
     REGIONALVIEW,
     SMADMIN,
+    SMADMIN1,
     RMADMIN,
     MFGREPUSER,
+    MFGREPADMIN,
     TESTROLEUSER,
     NEWUSER,
     MFGREPUSER1,
     EMPADMIN,
     FIRSTEMPADMIN,
     SECONDEMPADMIN,
-    HELPDESC;
+    HELPDESC,
+    HELPDESC1,
+    CSADMIN;
 
     @Override
     public String toString() {
