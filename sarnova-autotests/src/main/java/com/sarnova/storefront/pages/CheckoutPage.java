@@ -8,8 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import java.util.ArrayList;
-import java.util.stream.Collectors;
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Component
 public class CheckoutPage extends StorefrontBasePage {
@@ -44,12 +45,12 @@ public class CheckoutPage extends StorefrontBasePage {
         shippingMethodStepBlock.clickOnContinueButtonOnCheckoutShippingMethodStepInLicensePopUp();
     }
 
-    public ArrayList<IndividualProduct> getProductsInCheckLicensePopUp() {
+    public List<IndividualProduct> getProductsInCheckLicensePopUp() {
         return shippingMethodStepBlock.getSKUsInCheckLicensePopUp()
                 .stream()
                 .map(productsManager::getProductBySku)
                 .map(product -> (IndividualProduct) product)
-                .collect(Collectors.toCollection(ArrayList::new));
+                .collect(toList());
     }
 
     @Override
@@ -81,7 +82,7 @@ public class CheckoutPage extends StorefrontBasePage {
     @Step("Is Final review Step opened?")
     public boolean isFinalReviewStepOpened() {
         return (storefrontProject.getBaseUrl()
-                + String.format(PAGE_URL, finalReviewStepBlock.getPageUrlMethod()))
+                + String.format(PAGE_URL, finalReviewStepBlock.getPageUrl()))
                 .equals(getCurrentUrl());
     }
 
@@ -151,8 +152,6 @@ public class CheckoutPage extends StorefrontBasePage {
 
     public void clickOnPlaceOrder() {
         finalReviewStepBlock.placeOrder();
-        if (!isFinalReviewStepOpened()) {
-        }
     }
 
     public String getAnyShippingCountryFromDropDown() {
@@ -308,5 +307,9 @@ public class CheckoutPage extends StorefrontBasePage {
 
     public OrderSummaryBlock getOrderSummary(){
         return orderSummaryBlock;
+    }
+
+    public CheckoutFinalReviewStepBlock getFinalReview() {
+        return finalReviewStepBlock;
     }
 }

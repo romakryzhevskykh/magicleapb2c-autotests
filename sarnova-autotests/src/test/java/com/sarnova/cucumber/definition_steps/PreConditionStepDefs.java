@@ -22,6 +22,7 @@ import com.sarnova.pay_fabric.pages.PayFabricLoginPage;
 import com.sarnova.storefront.page_blocks.HeaderRowPageBlock;
 import com.sarnova.storefront.pages.HomePage;
 import com.sarnova.storefront.pages.LoginPage;
+import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
@@ -126,6 +127,7 @@ public class PreConditionStepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.SUPPLY_LIST_NAME, notEmptySupplyList.getName());
     }
 
+    @After("@clearcart")
     @Given("^Empty Cart.$")
     public void emptyCart() {
         cartManager.clearActiveCart(userSessions.getActiveUserSession());

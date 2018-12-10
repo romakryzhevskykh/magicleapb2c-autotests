@@ -17,7 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -56,15 +57,15 @@ public class CheckoutStepDefs extends AbstractStepDefs {
     @SuppressWarnings("unchecked")
     @Then("^Check that only license-restricted products are displaying in pop-up.$")
     public void checkThatOnlyLicenseRestrictedProductsAreDisplayingInPopUp() {
-        HashMap<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = getSelectedUOMS();
-        ArrayList<IndividualProduct> selectedLicenseRestrectedProducts = selectedUnitsOfMeasurement.keySet()
+        Map<UnitOfMeasure, Integer> selectedUnitsOfMeasurement = getSelectedUOMS();
+        List<IndividualProduct> selectedLicenseRestrectedProducts = selectedUnitsOfMeasurement.keySet()
                 .stream()
                 .map(productsManager::getProductByUOM)
                 .distinct()
                 .filter(IndividualProduct::isLicenseRestricted)
                 .collect(Collectors.toCollection(ArrayList::new));
 
-        ArrayList<IndividualProduct> productsInLicenseRestrictedPopUp = checkoutPage.getProductsInCheckLicensePopUp();
+        List<IndividualProduct> productsInLicenseRestrictedPopUp = checkoutPage.getProductsInCheckLicensePopUp();
         assertEquals(productsInLicenseRestrictedPopUp.size(), selectedLicenseRestrectedProducts.size());
         productsInLicenseRestrictedPopUp.forEach(productInLicenseRestrictedPopUp
                 -> assertTrue(selectedLicenseRestrectedProducts.contains(productInLicenseRestrictedPopUp)));
@@ -387,6 +388,15 @@ public class CheckoutStepDefs extends AbstractStepDefs {
 
     @And("^Check that stock warning message for product (.*), (.*) is displayed on Checkout page: (.*).$")
     public void checkThatStockWarningMessageForProductIsDisplayed(String skuId, String uom, boolean isDisplayed) {
-        assertThat(checkoutPage.getOrderSummary().isWarningMessageDisplayedForProduct(skuId, uom)).as("Issue with displaying stock warning message").isEqualTo(isDisplayed);
+        assertThat(checkoutPage.getOrderSummary().isWarningMessageDisplayedForProduct(skuId, uom))
+                .as("Issue with displaying stock warning message")
+                .isEqualTo(isDisplayed);
+    }
+
+    @Then("^Check that Schedule Replenishment button is displayed on the Final Review step: (.*).$")
+    public void checkThatScheduleReplenishmentButtonIsDisplayedOnTheFinalReviewStep(boolean isDisplayed) {
+        assertThat(checkoutPage.getFinalReview().isReplenishmentButtonPresent())
+                .as("Issue with displaying stock warning [Schedule Replenishment] button")
+                .isEqualTo(isDisplayed);
     }
 }

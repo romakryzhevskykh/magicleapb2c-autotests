@@ -11,7 +11,7 @@ import static com.sarnova.storefront.page_block_elements.CheckoutFinalReviewStep
 @Component
 public class CheckoutFinalReviewStepBlock extends UIComponent {
 
-    private String pageUrlMethod = "multi/summary/view";
+    private static final String PAGE_URL = "multi/summary/view";
 
     @Step("Is Terms and Conditions checkbox visible?")
     public boolean isAcceptTermsCheckboxVisible() {
@@ -23,8 +23,8 @@ public class CheckoutFinalReviewStepBlock extends UIComponent {
         return isDisplayed(By.id(PLACE_ORDER_BUTTON_ID));
     }
 
-    public String getPageUrlMethod() {
-        return pageUrlMethod;
+    public String getPageUrl() {
+        return PAGE_URL;
     }
 
     @Step("Confirm Terms and Conditions.")
@@ -46,5 +46,9 @@ public class CheckoutFinalReviewStepBlock extends UIComponent {
 
     public boolean isPlaceOrderButtonEnabled() {
         return $(By.id(PLACE_ORDER_BUTTON_ID)).isEnabled();
+    }
+
+    public boolean isReplenishmentButtonPresent(){
+       return isPresent(By.id("scheduleReplenishment"));
     }
 }
