@@ -24,7 +24,7 @@ Feature: Some actions on Profile page
     Then Login page is opened.
     And Get user status in lessonly service for user by email <email>.
     Then Is INACTIVE user status displayed in lessonly service.
-    Given Switch to Storefront as firstEmpAdmin.
+    Given Switch to Storefront as first EmpAdmin.
     And User is logged in to Storefront.
     And Manage Users page is opened.
     When Admin opens Users tab.
