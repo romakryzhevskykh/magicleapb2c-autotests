@@ -6,6 +6,7 @@ Feature: Verification of main AVR elements on the Dashboard and on the Volume Re
     And Account management page is opened.
     When Choose EMEA region.
     And Select account 9004834.
+    And Click on chosen account.
 
   Scenario: Check that AVR widget is displayed on the Dashboard with all necessary elements.
     And Dashboard page is opened.
@@ -38,8 +39,8 @@ Feature: Verification of main AVR elements on the Dashboard and on the Volume Re
     And Volume rebate page is opened.
     Then Volume Rebate (AVR) title is displayed on the Volume rebate page.
     Then Year switcher is present with current year.
-    Then <settlementMessage> settlement message is displayed on the Volume rebate page.
+    Then <settlementMessage> and <infoMessage> messages are displayed on the Volume rebate page.
 
     Examples:
-      | settlementMessage                                                                         |
-      | Some Volume Rebate details may be not displayed, check settlement partner account instead |
+      | infoMessage                                                                                                                                        | settlementMessage                                                                         |
+      | Disclaimer: The amount and calculations displayed on this page are for informational purposes only. Actual amounts owed are subject to validation. | Some Volume Rebate details may be not displayed, check settlement partner account instead |

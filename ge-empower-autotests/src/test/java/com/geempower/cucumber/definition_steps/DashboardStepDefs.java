@@ -427,7 +427,7 @@ public class DashboardStepDefs extends AbstractStepDefs {
     }
 
     private void verifyAvrDataIfDifferenceApplicable(int diff, HashMap<String, String> avrData, int counter) {
-        assertTrue(diff == Integer.parseInt(avrData.get("data-diff").replace("K", "")));
+        assertEquals(diff, (int)(Float.parseFloat(avrData.get("data-diff").replace("K", ""))));
         assertEquals(String.valueOf(diff) + "K left", dashboardPage.getTargetNReachedLabel(counter));
         assertTrue((Integer.parseInt(avrData.get("data-volume")) + diff) == dashboardPage.getNextTargetValue(counter));
         assertEquals("null", avrData.get("data-met"));
