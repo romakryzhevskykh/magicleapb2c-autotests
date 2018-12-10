@@ -16,6 +16,7 @@ public enum StorefrontUserRoles implements UserRole {
     SMADMIN1,
     RMADMIN,
     MFGREPUSER,
+    MFGREPADMIN,
     TESTROLEUSER,
     NEWUSER,
     MFGREPUSER1,
