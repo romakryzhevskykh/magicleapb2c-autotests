@@ -47,3 +47,13 @@ with following params and own credentials for prod and stage environment:
 - by default Spring will run stage profile with stage properties, to run other(f.e. production) profiles, use additional command:
     - -Dspring.profiles.active=production :
         - _mvn clean test site jetty:run -Dspring.profiles.active=environmentToUse
+        
+## Run single scenario via Intellij IDEA
+> Make sure that you removed all the old run configurations
+1. Open `Run \ Debug` configuration window (`Run -> Edit Configurations...`)
+2. Open `Defaults` configurations and open `Cucumber java` configuration
+3. Fill the `Main class:` field with `com.geempower.cucumber.runners.CucumberTestNGIdeaRunner`
+4. Add new environment variable `spring.profiles.active=qa` (or whatever you want)
+5. Save
+
+Now you can run single scenario via context menu (right-click -> run)
