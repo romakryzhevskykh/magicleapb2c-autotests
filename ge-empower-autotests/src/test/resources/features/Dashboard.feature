@@ -136,8 +136,8 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then Appropriate 2 error messages are displayed on the P&A page.
 
     Examples:
-      | products                                    |
-      | 1017251, 1019603, 1021099, 1021136, 1022416 |
+      | products                                            |
+      | THQL1120, THQL1115AFP, THQL1115AFP2,1021099,1022416 |
 
   Scenario Outline: While doing P&A Add Item, Agreement No from previous P&A result is being sent in the web service Request - DE81550
     And Account management page is opened.
