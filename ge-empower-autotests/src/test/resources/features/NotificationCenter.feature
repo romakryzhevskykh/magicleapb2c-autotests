@@ -35,6 +35,7 @@ Feature: Some actions with toggles, UI components on the Notification Center pag
     Then empowerU toggle is switched to previously chosen state.
     And Get Lessonly status for user by email <email>.
     Then Lessonly status corresponds to lessonly toggle position.
+    Given Set false value for lessonly.enabled property on HAC f1, HAC f2.
 
     Examples:
       | email                   |
@@ -57,6 +58,7 @@ Feature: Some actions with toggles, UI components on the Notification Center pag
     And Notification Center page is opened.
     Then StatusPage status for user <email> corresponds to the current System status toggle position.
     Then System Status toggle is switched to previously chosen state.
+    Given Set false value for lessonly.enabled property on HAC f1, HAC f2.
 
     Examples:
       | email                   |

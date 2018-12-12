@@ -234,10 +234,16 @@ public class PreconditionStepDefs extends AbstractStepDefs {
 
     @Given("^Set (.*) value for (.*) property on HAC (.*), HAC (.*).$")
     public void setTrueValueForLessonLyEnabledProperty(String propertyValue, String propertyName, String node1, String node2) {
-        if (!lessonLyService.getInstance().getLessonLyEnabled()) {
+        if (propertyValue.equals("true")) {
+            if (!lessonLyService.getInstance().getLessonLyEnabled()) {
+                enableLessonLyOnHacForNode(node1, propertyValue, propertyName);
+                enableLessonLyOnHacForNode(node2, propertyValue, propertyName);
+                lessonLyService.getInstance().setLessonLyEnabled(true);
+            }
+        } else {
             enableLessonLyOnHacForNode(node1, propertyValue, propertyName);
             enableLessonLyOnHacForNode(node2, propertyValue, propertyName);
-            lessonLyService.getInstance().setLessonLyEnabled(true);
+            lessonLyService.getInstance().setLessonLyEnabled(false);
         }
     }
 

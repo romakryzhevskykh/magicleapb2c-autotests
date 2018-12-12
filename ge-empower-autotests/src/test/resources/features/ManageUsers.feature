@@ -267,6 +267,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     When Clicks on the user name in the table.
     And Get user status in lessonly service for user by email <email>.
     Then Is ACTIVE user status displayed in lessonly service.
+    Given Set false value for lessonly.enabled property on HAC f1, HAC f2.
 
     Examples:
       | userId         | account | email                     |

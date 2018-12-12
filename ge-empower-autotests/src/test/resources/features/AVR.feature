@@ -6,6 +6,7 @@ Feature: Verification of main AVR elements on the Dashboard and on the Volume Re
     And Account management page is opened.
     When Choose EMEA region.
     And Select account 9004834.
+    And Click on chosen account.
 
   Scenario: Check that AVR widget is displayed on the Dashboard with all necessary elements.
     And Dashboard page is opened.
