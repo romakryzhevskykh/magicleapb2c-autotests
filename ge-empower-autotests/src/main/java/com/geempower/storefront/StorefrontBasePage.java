@@ -13,7 +13,10 @@ public abstract class StorefrontBasePage extends BasePageObject {
     }
 
     public void open() {
-        open(getPageUrl());
+        do {
+            open(getPageUrl());
+        }
+        while(!isDisplayed("//div[@id='passid']"));
     }
 
     public abstract String getPageUrl();
