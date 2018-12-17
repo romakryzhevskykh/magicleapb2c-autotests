@@ -52,6 +52,7 @@ public class ProductSearchStepDefs extends AbstractStepDefs {
 
     @Then("^Is Active Specification tab selected in Full Product Details pop-up.$")
     public void isActiveSpecificationTabSelected() {
+
         assertTrue(fullProductDetailsPopUpBlock.isActiveSpecificationTabSelected());
     }
 
