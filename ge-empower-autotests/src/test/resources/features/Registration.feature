@@ -224,176 +224,176 @@ Feature: Registration flow for external, internal, mfgrep users.
       | userName | userLastName | userId          | userEmail                 | companyName      | phoneNo         | relationship | account |
       | Autotest | NewUser      | autotestnewuser | autotestnewuser@gmail.com | ABB test company | 645284-31234-32 | distributor  | 9012306 |
 
-#    Scenario Outline: Check that user is able to register as external user, request account and admins (SM, RM, Emp, HD, CS) except of CA don't see him in Pending requests tab.
-#    Given Switch to Storefront as newUser.
-#    And User is logged in to Storefront.
-#    Then Registration page is opened.
-#    Then First name is equal to <userName>.
-#    Then Last name is equal to <userLastName>.
-#    Then User ID is equal to <userId>.
-#    Then User email is equal to <userEmail>.
-#    When User fills Company Name <companyName>.
-#    When User fills Phone No <phoneNo>.
-#    When User selects random Region from regions list.
-#    When User selects random Country from countries list.
-#    When User selects <relationship> Relationship to Industrial Solutions.
-#    When User selects random Role.
-#    And Create User instance on registration page with values <companyName>, <userEmail>, <phoneNo>.
-#    And Click on register button.
-#    Then Registration successful pop-up is appeared with appropriate header Registration Successful.
-#    Then User not active page is opened.
-#    When User sets <account> to the Account Number field.
-#    And Click on Submit for Approval button.
-#    Then Requested account fields contains <account> account.
-#    Given Switch to Storefront as first caAdmin.
-#    And User is logged in to Storefront.
-#    And Manage Users page is opened.
-#    And Refresh page.
-#    Then Pending requests tab is active.
-#    Then Is admin can see user <userId> on the Pending requests tab.
-#    Given Switch to Storefront as first smAdmin.
-#    And User is logged in to Storefront.
-#    And Manage Users page is opened.
-#    And Refresh page.
-#    Then Pending requests tab is active.
-#    Then Is admin can't see user <userId> on the Pending requests tab.
-#    Given Switch to Storefront as rmAdmin.
-#    And User is logged in to Storefront.
-#    And Manage Users page is opened.
-#    And Refresh page.
-#    Then Pending requests tab is active.
-#    Then Is admin can't see user <userId> on the Pending requests tab.
-#    Given Switch to Storefront as first helpDesc.
-#    And User is logged in to Storefront.
-#    And Manage Users page is opened.
-#    And Refresh page.
-#    Then Pending requests tab is active.
-#    Then Is admin can't see user <userId> on the Pending requests tab.
-#    Given Switch to Storefront as csAdmin.
-#    And User is logged in to Storefront.
-#    And Manage Users page is opened.
-#    And Refresh page.
-#    Then Pending requests tab is active.
-#    Then Is admin can't see user <userId> on the Pending requests tab.
-##    Given Switch to Storefront as mfgRepAdmin.
-##    And User is logged in to Storefront.
-##    And Manage Users page is opened.
-##    And Refresh page.
-##    Then Pending requests tab is active.
-##    Then Is admin can't see user <userId> on the Pending requests tab.
-#    Given Switch to Storefront as first EmpAdmin.
+    Scenario Outline: Check that user is able to register as external user, request account and admins (SM, RM, Emp, HD, CS) except of CA don't see him in Pending requests tab.
+    Given Switch to Storefront as newUser.
+    And User is logged in to Storefront.
+    Then Registration page is opened.
+    Then First name is equal to <userName>.
+    Then Last name is equal to <userLastName>.
+    Then User ID is equal to <userId>.
+    Then User email is equal to <userEmail>.
+    When User fills Company Name <companyName>.
+    When User fills Phone No <phoneNo>.
+    When User selects random Region from regions list.
+    When User selects random Country from countries list.
+    When User selects <relationship> Relationship to Industrial Solutions.
+    When User selects random Role.
+    And Create User instance on registration page with values <companyName>, <userEmail>, <phoneNo>.
+    And Click on register button.
+    Then Registration successful pop-up is appeared with appropriate header Registration Successful.
+    Then User not active page is opened.
+    When User sets <account> to the Account Number field.
+    And Click on Submit for Approval button.
+    Then Requested account fields contains <account> account.
+    Given Switch to Storefront as first caAdmin.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    And Refresh page.
+    Then Pending requests tab is active.
+    Then Is admin can see user <userId> on the Pending requests tab.
+    Given Switch to Storefront as first smAdmin.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    And Refresh page.
+    Then Pending requests tab is active.
+    Then Is admin can't see user <userId> on the Pending requests tab.
+    Given Switch to Storefront as rmAdmin.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    And Refresh page.
+    Then Pending requests tab is active.
+    Then Is admin can't see user <userId> on the Pending requests tab.
+    Given Switch to Storefront as first helpDesc.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    And Refresh page.
+    Then Pending requests tab is active.
+    Then Is admin can't see user <userId> on the Pending requests tab.
+    Given Switch to Storefront as csAdmin.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    And Refresh page.
+    Then Pending requests tab is active.
+    Then Is admin can't see user <userId> on the Pending requests tab.
+#    Given Switch to Storefront as mfgRepAdmin.
 #    And User is logged in to Storefront.
 #    And Manage Users page is opened.
 #    And Refresh page.
 #    Then Pending requests tab is active.
 #    Then Is admin can't see user <userId> on the Pending requests tab.
-#    And Refresh page.
-#    When Admin opens Users tab.
-#    And Sets <userId> email to the email field.
-#    And Clicks on the Search button.
-#    When Clicks on the user name in the table.
-#    When Admin opens Actions list.
-#    And Chooses Delete User option from the actions list.
-#    And Confirm delete action on manage users page.
-#    And Refresh page.
-#    When Admin opens Users tab.
-#    And Sets <userId> email to the email field.
-#    And Clicks on the Search button.
-#    Then There is no user in the users list table.
-#
-#    Examples:
-#      | userName | userLastName | userId          | userEmail                 | companyName      | phoneNo         | relationship | account |
-#      | Autotest | NewUser      | autotestnewuser | autotestnewuser@gmail.com | ABB test company | 645284-31234-32 | distributor  | 9012306 |
-#
-#  Scenario Outline: Check that user is able to register as external user, without requesting account and only admins Emp, CS, HD can see him in Pending Requests and Users tabs.
-#    And Dismiss sessions.
-#    Given Switch to Storefront as newUser.
-#    And User is logged in to Storefront.
-#    Then Registration page is opened.
-#    Then First name is equal to <userName>.
-#    Then Last name is equal to <userLastName>.
-#    Then User ID is equal to <userId>.
-#    Then User email is equal to <userEmail>.
-#    When User fills Company Name <companyName>.
-#    When User fills Phone No <phoneNo>.
-#    When User selects random Region from regions list.
-#    When User selects random Country from countries list.
-#    When User selects <relationship> Relationship to Industrial Solutions.
-#    When User selects random Role.
-#    And Create User instance on registration page with values <companyName>, <userEmail>, <phoneNo>.
-#    And Click on register button.
-#    Then Registration successful pop-up is appeared with appropriate header Registration Successful.
-#    Then User not active page is opened.
-#    Given Switch to Storefront as first caAdmin.
-#    And User is logged in to Storefront.
-#    And Manage Users page is opened.
-#    And Refresh page.
-#    Then Pending requests tab is active.
-#    Then Is admin can't see user <userId> on the Pending requests tab.
-#    When Admin opens Users tab.
-#    And Sets <userId> email to the email field.
-#    And Clicks on the Search button.
-#    Then There is no user in the users list table.
-#    Given Switch to Storefront as first smAdmin.
-#    And User is logged in to Storefront.
-#    And Manage Users page is opened.
-#    And Refresh page.
-#    Then Pending requests tab is active.
-#    Then Is admin can't see user <userId> on the Pending requests tab.
-#    When Admin opens Users tab.
-#    And Sets <userId> email to the email field.
-#    And Clicks on the Search button.
-#    Then There is no user in the users list table.
-#    Given Switch to Storefront as rmAdmin.
-#    And User is logged in to Storefront.
-#    And Manage Users page is opened.
-#    And Refresh page.
-#    Then Pending requests tab is active.
-#    Then Is admin can't see user <userId> on the Pending requests tab.
-#    When Admin opens Users tab.
-#    And Sets <userId> email to the email field.
-#    And Clicks on the Search button.
-#    Then There is no user in the users list table.
-#    Given Switch to Storefront as csAdmin.
-#    And User is logged in to Storefront.
-#    And Manage Users page is opened.
-#    And Refresh page.
-#    Then Pending requests tab is active.
-#    Then Is admin can see user <userId> on the Pending requests tab.
-#    When Admin opens Users tab.
-#    And Sets <userId> email to the email field.
-#    And Clicks on the Search button.
-#    Then Appropriate user with appropriate <userEmail> email is displayed in the users list.
-#    Given Switch to Storefront as first helpDesc.
-#    And User is logged in to Storefront.
-#    And Manage Users page is opened.
-#    And Refresh page.
-#    Then Pending requests tab is active.
-#    Then Is admin can see user <userId> on the Pending requests tab.
-#    When Admin opens Users tab.
-#    And Sets <userId> email to the email field.
-#    And Clicks on the Search button.
-#    Then Appropriate user with appropriate <userEmail> email is displayed in the users list.
-#    Given Switch to Storefront as first EmpAdmin.
-#    And User is logged in to Storefront.
-#    And Manage Users page is opened.
-#    And Refresh page.
-#    Then Pending requests tab is active.
-#    Then Is admin can see user <userId> on the Pending requests tab.
-#    When Admin opens Users tab.
-#    And Sets <userId> email to the email field.
-#    And Clicks on the Search button.
-#    Then Appropriate user with appropriate <userEmail> email is displayed in the users list.
-#    When Clicks on the user name in the table.
-#    When Admin opens Actions list.
-#    And Chooses Delete User option from the actions list.
-#    And Confirm delete action on manage users page.
-#    And Refresh page.
-#    When Admin opens Users tab.
-#    And Sets <userId> email to the email field.
-#    And Clicks on the Search button.
-#    Then There is no user in the users list table.
-#
-#    Examples:
-#      | userName | userLastName | userId          | userEmail                 | companyName      | phoneNo         | relationship |
-#      | Autotest | NewUser      | autotestnewuser | autotestnewuser@gmail.com | ABB test company | 645284-31234-32 | distributor  |
+    Given Switch to Storefront as first EmpAdmin.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    And Refresh page.
+    Then Pending requests tab is active.
+    Then Is admin can't see user <userId> on the Pending requests tab.
+    And Refresh page.
+    When Admin opens Users tab.
+    And Sets <userId> email to the email field.
+    And Clicks on the Search button.
+    When Clicks on the user name in the table.
+    When Admin opens Actions list.
+    And Chooses Delete User option from the actions list.
+    And Confirm delete action on manage users page.
+    And Refresh page.
+    When Admin opens Users tab.
+    And Sets <userId> email to the email field.
+    And Clicks on the Search button.
+    Then There is no user in the users list table.
+
+    Examples:
+      | userName | userLastName | userId          | userEmail                 | companyName      | phoneNo         | relationship | account |
+      | Autotest | NewUser      | autotestnewuser | autotestnewuser@gmail.com | ABB test company | 645284-31234-32 | distributor  | 9012306 |
+
+  Scenario Outline: Check that user is able to register as external user, without requesting account and only admins Emp, CS, HD can see him in Pending Requests and Users tabs.
+    And Dismiss sessions.
+    Given Switch to Storefront as newUser.
+    And User is logged in to Storefront.
+    Then Registration page is opened.
+    Then First name is equal to <userName>.
+    Then Last name is equal to <userLastName>.
+    Then User ID is equal to <userId>.
+    Then User email is equal to <userEmail>.
+    When User fills Company Name <companyName>.
+    When User fills Phone No <phoneNo>.
+    When User selects random Region from regions list.
+    When User selects random Country from countries list.
+    When User selects <relationship> Relationship to Industrial Solutions.
+    When User selects random Role.
+    And Create User instance on registration page with values <companyName>, <userEmail>, <phoneNo>.
+    And Click on register button.
+    Then Registration successful pop-up is appeared with appropriate header Registration Successful.
+    Then User not active page is opened.
+    Given Switch to Storefront as first caAdmin.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    And Refresh page.
+    Then Pending requests tab is active.
+    Then Is admin can't see user <userId> on the Pending requests tab.
+    When Admin opens Users tab.
+    And Sets <userId> email to the email field.
+    And Clicks on the Search button.
+    Then There is no user in the users list table.
+    Given Switch to Storefront as first smAdmin.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    And Refresh page.
+    Then Pending requests tab is active.
+    Then Is admin can't see user <userId> on the Pending requests tab.
+    When Admin opens Users tab.
+    And Sets <userId> email to the email field.
+    And Clicks on the Search button.
+    Then There is no user in the users list table.
+    Given Switch to Storefront as rmAdmin.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    And Refresh page.
+    Then Pending requests tab is active.
+    Then Is admin can't see user <userId> on the Pending requests tab.
+    When Admin opens Users tab.
+    And Sets <userId> email to the email field.
+    And Clicks on the Search button.
+    Then There is no user in the users list table.
+    Given Switch to Storefront as csAdmin.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    And Refresh page.
+    Then Pending requests tab is active.
+    Then Is admin can see user <userId> on the Pending requests tab.
+    When Admin opens Users tab.
+    And Sets <userId> email to the email field.
+    And Clicks on the Search button.
+    Then Appropriate user with appropriate <userEmail> email is displayed in the users list.
+    Given Switch to Storefront as first helpDesc.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    And Refresh page.
+    Then Pending requests tab is active.
+    Then Is admin can see user <userId> on the Pending requests tab.
+    When Admin opens Users tab.
+    And Sets <userId> email to the email field.
+    And Clicks on the Search button.
+    Then Appropriate user with appropriate <userEmail> email is displayed in the users list.
+    Given Switch to Storefront as first EmpAdmin.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    And Refresh page.
+    Then Pending requests tab is active.
+    Then Is admin can see user <userId> on the Pending requests tab.
+    When Admin opens Users tab.
+    And Sets <userId> email to the email field.
+    And Clicks on the Search button.
+    Then Appropriate user with appropriate <userEmail> email is displayed in the users list.
+    When Clicks on the user name in the table.
+    When Admin opens Actions list.
+    And Chooses Delete User option from the actions list.
+    And Confirm delete action on manage users page.
+    And Refresh page.
+    When Admin opens Users tab.
+    And Sets <userId> email to the email field.
+    And Clicks on the Search button.
+    Then There is no user in the users list table.
+
+    Examples:
+      | userName | userLastName | userId          | userEmail                 | companyName      | phoneNo         | relationship |
+      | Autotest | NewUser      | autotestnewuser | autotestnewuser@gmail.com | ABB test company | 645284-31234-32 | distributor  |
