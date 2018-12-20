@@ -564,6 +564,16 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         assertEquals(noAccLabel, manageUsersPage.getNoAccountsLabelForUser(userId, manageUsersPage.getPagesCountOfPendingRequests()));
     }
 
+    @Then("^Is admin can see user (.*) on the Pending requests tab.$")
+    public void isAdminCanSeeUserOnThePendingRequestsTab(String userId) {
+        assertTrue(manageUsersPage.isAdminCanSeeUserOnThePendingRequestsTab(userId));
+    }
+
+    @Then("^Is admin can't see user (.*) on the Pending requests tab.$")
+    public void isAdminCantSeeUserOnThePendingRequestsTab(String userId) {
+        assertFalse(manageUsersPage.isAdminCanSeeUserOnThePendingRequestsTab(userId));
+    }
+
     @When("^Admin clicks on envelope icon near the user (.*).$")
     public void adminClicksOnEnvelopeIconNearTheUser(String userId) {
         manageUsersPage.clickOnEnvelopeForAppropriateUser(userId);
@@ -600,7 +610,7 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     }
 
     @Then("^Is Blue internal user icon displayed for user (.*).$")
-    public void isBlueInternalUserIconDisplayedForUser(String userId){
+    public void isBlueInternalUserIconDisplayedForUser(String userId) {
         assertTrue(manageUsersPage.isBlueInternalUserIconDisplayedForUser(userId));
     }
 

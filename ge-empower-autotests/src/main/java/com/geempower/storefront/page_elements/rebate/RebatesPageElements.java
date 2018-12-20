@@ -11,5 +11,4 @@ public class RebatesPageElements {
     public final static String EDIT_LAST_SAVED_REQUEST_ICON_XPATH = LAST_SAVED_REBATES_XPATH + "//i[@class='fas fa-pencil-alt']";
     public final static String DELETE_LAST_SAVED_REQUEST_ICON_XPATH = LAST_SAVED_REBATES_XPATH + "//i[@class='fas fa-trash']";
     public final static String CONFIRM_DELETE_ACTION_SAVED_REBATE_BUTTON_XPATH = "//button[@id='submitDeleteRebateDraft']";
-
 }

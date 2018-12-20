@@ -13,5 +13,11 @@ public class ReturnCreation2PageElements {
     public final static String SELECTED_FIRST_ROW_REQUESTED_ACTION_FIELD_XPATH = "//table[@id='returnTrackingTableStep2']//*[@class='select2-selection select2-selection--single']//span[@class='select2-selection__rendered']";
     public final static String FIRST_QTY_FIELD_XPATH = "(.//*[@class='form-control qty-input-val done'])[1]";
     public final static String BOTTOM_NEXT_BUTTON_ID = "returnRequest2NextButton";
+    public final static String NEXT_BUTTON_TOOLTIP_XPATH = "//div[@class = 'tooltip fade top in']//div[@class='tooltip-inner']";
     public final static String CATALOG_NO_VALUE_XPATH = ".//*[@id='returnTrackingTableStep2']/tbody/tr/td[2]";
+    public final static String SAVE_FOR_LATER_BUTTON_XPATH = "//button[@data-target='#save-return-request-modal']";
+    public final static String SAVE_FOR_LATER_POP_UP_TITLE_XPATH = "//div[@id='save-return-request-modal']//h4";
+    public final static String SAVE_FOR_LATER_POP_UP_HEADER_XPATH = "//p[@class='save-list-heading']";
+    public final static String SAVE_FOR_LATER_POP_UP_LIST_NAME_INPUT_XPATH = "//input[@class='form-control new-list-input']";
+    public final static String SAVE_FOR_LATER_POP_UP_SAVE_BUTTON_XPATH = "//button[@class='btn primary-btn save-return-request-btn-js' and not(@disabled)]";
 }

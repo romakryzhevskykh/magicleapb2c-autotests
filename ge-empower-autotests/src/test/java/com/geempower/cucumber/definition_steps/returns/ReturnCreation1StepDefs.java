@@ -55,4 +55,14 @@ public class ReturnCreation1StepDefs extends AbstractStepDefs {
     public void warningWithCorrectMessageIsDisplayed(String warningMessage) {
         assertEquals(warningMessage, returnCreation1Page.getWarningMessage());
     }
+
+    @When("^User hover mouse over top Next button on Return Creation 1 page.$")
+    public void userHoverMouseOverTopNextButtonOnReturnCreation1Page(){
+        returnCreation1Page.userHoverMouseOverTopNextButtonOnReturnCreation1Page();
+    }
+
+    @Then("^Is (.*) text displayed in the Next button tooltip on Return Creation 1 page.$")
+    public void isAppropriateTextDisplayedInTheNextButtonTooltipOnReturnCreation1Page(String toolTipText) {
+        assertEquals(toolTipText, returnCreation1Page.getNextButtonToolTipText1Page());
+    }
 }

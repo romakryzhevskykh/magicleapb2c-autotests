@@ -235,8 +235,9 @@ public class OrdersPage extends StorefrontBasePage {
         String convertedDate = utils.convertStringDateToStringValues(date);
         String month = convertedDate.substring(4, 7).trim();
         String day = convertedDate.substring(8, 10).trim();
-        if(day.startsWith("0"))
+        if (day.startsWith("0")) {
             day = day.replace("0", "");
+        }
         String year = convertedDate.substring(24).trim();
         click(DATE_FROM_FIELD_FILTER_SLIDER_XPATH);
         String currentMonthAndYearInCalendar = $(CURRENT_MONTH_AND_YEAR_XPATH).getText();

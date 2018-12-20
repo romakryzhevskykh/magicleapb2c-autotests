@@ -136,8 +136,8 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then Appropriate 2 error messages are displayed on the P&A page.
 
     Examples:
-      | products                                    |
-      | 1017251, 1019603, 1021099, 1021136, 1022416 |
+      | products                                              |
+      | THQL1120, THQL1115AFP, THQL1115AFP2, 1021099, 1022416 |
 
   Scenario Outline: While doing P&A Add Item, Agreement No from previous P&A result is being sent in the web service Request - DE81550
     And Account management page is opened.
@@ -409,6 +409,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     And Dashboard page is opened.
     When Click on Skip button.
     When Close cookies pop-up.
+    And Refresh page.
     Then T&B Access widget is displayed.
     Then T&B Access widget title <tNbTitle> is correct.
     Then User clicks on T&B Access button and T&B Access web site is successfully opened in new tab with correct url <tNbUrl>.

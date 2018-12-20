@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -136,5 +137,10 @@ public class Utils extends UIComponent {
     @Step("Page scroll up.")
     public void pageScrollUp() {
         ((JavascriptExecutor) getDriver()).executeScript("scroll(0,0)");
+    }
+
+    public int getCurrentYear() {
+        LocalDateTime now = LocalDateTime.now();
+        return now.getYear();
     }
 }
