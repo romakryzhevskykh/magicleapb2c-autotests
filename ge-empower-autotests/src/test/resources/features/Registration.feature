@@ -245,12 +245,6 @@ Feature: Registration flow for external, internal, mfgrep users.
     When User sets <account> to the Account Number field.
     And Click on Submit for Approval button.
     Then Requested account fields contains <account> account.
-    Given Switch to Storefront as first caAdmin.
-    And User is logged in to Storefront.
-    And Manage Users page is opened.
-    And Refresh page.
-    Then Pending requests tab is active.
-    Then Is admin can see user <userId> on the Pending requests tab.
     Given Switch to Storefront as first smAdmin.
     And User is logged in to Storefront.
     And Manage Users page is opened.
@@ -281,6 +275,12 @@ Feature: Registration flow for external, internal, mfgrep users.
 #    And Refresh page.
 #    Then Pending requests tab is active.
 #    Then Is admin can't see user <userId> on the Pending requests tab.
+    Given Switch to Storefront as first caAdmin.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    And Refresh page.
+    Then Pending requests tab is active.
+    Then Is admin can see user <userId> on the Pending requests tab.
     Given Switch to Storefront as first EmpAdmin.
     And User is logged in to Storefront.
     And Manage Users page is opened.
