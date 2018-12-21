@@ -76,28 +76,28 @@ Feature: Some actions on Orders page
     Then Order Successful pop-up appears at the OE 3 page.
 
 #@TODO Need to remove comments after bug DE101173 will be fixed.
-  Scenario Outline: Check that Total Net Price value is correctly after changing status boxes
-    And Account management page is opened.
-    When Choose North_America region.
-    And Select account <account>.
-    And Click on chosen account.
-    And Dashboard page is opened.
-    When Click on Skip button.
-    When Close cookies pop-up.
-    When User searches order by <orderNo> orderNo via Order Search field.
-    Then Order by parameters page with appropriate <orderNo> is opened.
-    When User clicks on appropriate <orderNo>.
-    Then Orders Details page is opened.
-    When User expands/closes status boxes.
-    And Total net price stored to hashmap.
-    And User clicks on <status> status box.
-    Then Is <status> status box price equals to the total net price.
-    And User clicks on All status box.
-    Then Is Total Net Price value correct after changing status boxes.
-
-    Examples:
-      | account | orderNo   | status  |
-      | 1143G08 | 151320459 | shipped |
+#  Scenario Outline: Check that Total Net Price value is correctly after changing status boxes
+#    And Account management page is opened.
+#    When Choose North_America region.
+#    And Select account <account>.
+#    And Click on chosen account.
+#    And Dashboard page is opened.
+#    When Click on Skip button.
+#    When Close cookies pop-up.
+#    When User searches order by <orderNo> orderNo via Order Search field.
+#    Then Order by parameters page with appropriate <orderNo> is opened.
+#    When User clicks on appropriate <orderNo>.
+#    Then Orders Details page is opened.
+#    When User expands/closes status boxes.
+#    And Total net price stored to hashmap.
+#    And User clicks on <status> status box.
+#    Then Is <status> status box price equals to the total net price.
+#    And User clicks on All status box.
+#    Then Is Total Net Price value correct after changing status boxes.
+#
+#    Examples:
+#      | account | orderNo   | status  |
+#      | 1143G08 | 151320459 | shipped |
 
   Scenario Outline: Check that user is able to request open order report with pricing/ without pricing.
     And Orders page is opened.
