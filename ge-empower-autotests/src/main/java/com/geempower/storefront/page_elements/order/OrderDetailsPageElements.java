@@ -15,6 +15,7 @@ public class OrderDetailsPageElements {
     public final static String REORDER_BUTTON_TEXT_FIRST_PART_XPATH = "//a[contains(@class,'re-order-btn')]/../..//span[@class='hidden-xs']";
     public final static String REORDER_BUTTON_TEXT_SECOND_PART_XPATH = "//a[contains(@class,'re-order-btn')]/../..//span[@class='text-red hidden-xs']";
     public final static String STATUS_BOXES_XPATH = "//div[@class='order-item']";
+    public final static String SINGLE_STATUS_BOX_XPATH = "//span[@class='item-name' and contains(text(), '%s')]";
     public final static String ALL_STATUS_BOX_XPATH = "//div[@class='order-item orders-item-all']/a";
     public final static String SELECTED_ALL_STATUS_BOX_XPATH = "//div[@class='order-item orders-item-all']/a[@class='selected']";
     public final static String TABLE_WITH_PRODUCTS_XPATH = "//table[@id='order-description-table']//tr[contains(@class,'show-item')]";

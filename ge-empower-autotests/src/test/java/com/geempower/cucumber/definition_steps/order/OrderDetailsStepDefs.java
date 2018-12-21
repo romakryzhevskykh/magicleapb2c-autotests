@@ -8,6 +8,7 @@ import com.geempower.helpers.managers.ProductManager;
 import com.geempower.helpers.models.Order;
 import com.geempower.helpers.models.Product;
 import com.geempower.storefront.pages.order.OrderDetailsPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -337,5 +338,15 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     @When("^User goes to the previous Tracking Details.$")
     public void userGoesToThePreviousTrackingDetails() {
         orderDetailsPage.goToThePreviousTrackingInfo();
+    }
+
+    @And("^User clicks on (.*) status box.$")
+    public void userClicksOnAppropriateStatusBox(String status){
+        orderDetailsPage.clickOnAppropriateStatusBox(status);
+    }
+
+    @And("^Total net price stored to hashmap.$")
+    public void totalNetPriceStoredToHashmap(){
+        threadVarsHashMap.put(TestKeyword.ON_HOLD_ORDERS_IN_ACCOUNT, orderStatusWidget.getOnHoldOrdersCount());
     }
 }

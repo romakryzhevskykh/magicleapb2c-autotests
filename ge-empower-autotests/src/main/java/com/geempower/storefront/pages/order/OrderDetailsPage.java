@@ -343,4 +343,9 @@ public class OrderDetailsPage extends StorefrontBasePage {
     public void goToThePreviousTrackingInfo() {
         click(PREVIOUS_TRACKING_INFO_BUTTON_XPATH);
     }
+
+    @Step("Click On Appropriate Status Box.")
+    public void clickOnAppropriateStatusBox(String status) {
+        click(SINGLE_STATUS_BOX_XPATH, status);
+    }
 }
