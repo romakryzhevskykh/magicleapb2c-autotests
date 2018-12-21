@@ -45,7 +45,7 @@ public class VolumeRebatePage extends StorefrontBasePage {
 
     @Step("Get Year Switcher Value.")
     public int getYearSwitcherValue() {
-        return Integer.valueOf($(CURRENT_SWITCHER_VALUE_XPATH).getText());
+        return Integer.valueOf($(CURRENT_YEAR_SWITCHER_VALUE_XPATH).getText());
     }
 
     @Step("Get Currency Label.")

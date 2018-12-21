@@ -68,64 +68,56 @@ public class VolumeRebateStepDefs extends AbstractStepDefs {
 
     @Then("^AVR type description is correct for each avr.$")
     public void avrTypeDescriptionIsCorrectForEachAvr() {
-        int countOfAvrs = volumeRebatePage.getCountOfAvrs();
-        for (int i = 1; i <= countOfAvrs; i++) {
-            assertTrue(AVRType.getAVRTypes().stream().map(avrType -> avrType.getAvrTypeDescription()).collect(Collectors.toList()).contains(volumeRebatePage.getAvrTypeDescriptionWithoutPercentage(i)));
+        for (int i = 1; i <= volumeRebatePage.getCountOfAvrs(); i++) {
+            assertTrue(AVRType.getAVRTypes().stream().map(AVRType::getAvrTypeDescription).collect(Collectors.toList()).contains(volumeRebatePage.getAvrTypeDescriptionWithoutPercentage(i)));
         }
     }
 
     @Then("^Graph is displayed for each avr.$")
     public void graphIsDisplayedForEachAvr() {
-        int countOfAvrs = volumeRebatePage.getCountOfAvrs();
-        for (int i = 1; i <= countOfAvrs; i++) {
+        for (int i = 1; i <= volumeRebatePage.getCountOfAvrs(); i++) {
             assertTrue(volumeRebatePage.isGraphDisplayed(i));
         }
     }
 
     @Then("^Next target label is correct for each avr.$")
     public void nextTargetLabelIsCorrectForEachAvr() {
-        int countOfAvrs = volumeRebatePage.getCountOfAvrs();
-        for (int i = 1; i <= countOfAvrs; i++) {
-            assertTrue(AVRTarget.getAVRTargets().stream().map(avrTarget -> avrTarget.getAvrTargetDescription()).collect(Collectors.toList()).contains(volumeRebatePage.getNextTargetValue(i)));
+        for (int i = 1; i <= volumeRebatePage.getCountOfAvrs(); i++) {
+            assertTrue(AVRTarget.getAVRTargets().stream().map(AVRTarget::getAvrTargetDescription).collect(Collectors.toList()).contains(volumeRebatePage.getNextTargetValue(i)));
         }
     }
 
     @When("^User expands each AVR on the Volume Rebate page.$")
     public void userExpandsEachAVROnTheVolumeRebatePage() {
-        int countOfAvrs = volumeRebatePage.getCountOfAvrs();
-        for (int i = 1; i <= countOfAvrs; i++) {
+        for (int i = 1; i <= volumeRebatePage.getCountOfAvrs(); i++) {
             volumeRebatePage.expandAvr(i);
         }
     }
 
     @Then("^(.*) current volume is displayed for each AVR.$")
     public void currentVolumeIsDisplayedForEachAVR(String currentVolumeLabel) {
-        int countOfAvrs = volumeRebatePage.getCountOfAvrs();
-        for (int i = 1; i <= countOfAvrs; i++) {
+        for (int i = 1; i <= volumeRebatePage.getCountOfAvrs(); i++) {
             assertEquals(currentVolumeLabel, volumeRebatePage.getCurrentVolumeLabelForEachAvr(i));
         }
     }
 
     @Then("^(.*) current payout is displayed for each AVR.$")
     public void currentPayoutIsDisplayedForEachAVR(String currentPayoutLabel) {
-        int countOfAvrs = volumeRebatePage.getCountOfAvrs();
-        for (int i = 1; i <= countOfAvrs; i++) {
+        for (int i = 1; i <= volumeRebatePage.getCountOfAvrs(); i++) {
             assertEquals(currentPayoutLabel, volumeRebatePage.getCurrentPayoutLabelForEachAvr(i));
         }
     }
 
     @Then("^(.*) target reached label is displayed for each AVR.$")
     public void targetReachedLabelIsDisplayedForEachAVR(String targetReachedLabel) {
-        int countOfAvrs = volumeRebatePage.getCountOfAvrs();
-        for (int i = 1; i <= countOfAvrs; i++) {
+        for (int i = 1; i <= volumeRebatePage.getCountOfAvrs(); i++) {
             assertEquals(targetReachedLabel, volumeRebatePage.getTargetReachedLabelForEachAvr(i));
         }
     }
 
     @Then("^(.*) or (.*) is displayed for each AVR.$")
     public void payoutOrCurrentRebateIsDisplayedForEachAVR(String payout, String currentRebate) {
-        int countOfAvrs = volumeRebatePage.getCountOfAvrs();
-        for (int i = 1; i <= countOfAvrs; i++) {
+        for (int i = 1; i <= volumeRebatePage.getCountOfAvrs(); i++) {
             assertTrue(volumeRebatePage.getPayoutOrRebateLabelForEachAvr(i).equals(payout) ||
                     volumeRebatePage.getPayoutOrRebateLabelForEachAvr(i).contains(currentRebate));
         }
@@ -133,8 +125,7 @@ public class VolumeRebateStepDefs extends AbstractStepDefs {
 
     @Then("^(.*) is displayed for AVR if Target is applicable.$")
     public void diffToNextTargetIsDisplayedForAVRIfTargetIsApplicable(String diffTONextTargetLabel) {
-        int countOfAvrs = volumeRebatePage.getCountOfAvrs();
-        for (int i = 1; i <= countOfAvrs; i++) {
+        for (int i = 1; i <= volumeRebatePage.getCountOfAvrs(); i++) {
             if (volumeRebatePage.isTargetApplicable(i)) {
                 assertEquals(diffTONextTargetLabel, volumeRebatePage.getDiffToNextTargetLabel(i));
             }
@@ -143,8 +134,7 @@ public class VolumeRebateStepDefs extends AbstractStepDefs {
 
     @Then("^(.*) is displayed if Target applicable.$")
     public void nextTargetIsDisplayedIfTargetApplicable(String nextTargetLabel) {
-        int countOfAvrs = volumeRebatePage.getCountOfAvrs();
-        for (int i = 1; i <= countOfAvrs; i++) {
+        for (int i = 1; i <= volumeRebatePage.getCountOfAvrs(); i++) {
             if (volumeRebatePage.isTargetApplicable(i)) {
                 assertEquals(nextTargetLabel, volumeRebatePage.getNextTargetLabel(i));
             }
@@ -153,8 +143,7 @@ public class VolumeRebateStepDefs extends AbstractStepDefs {
 
     @Then("^Calculator with (.*) and (.*) is displayed if Target is applicable.$")
     public void calculatorWithCustomerProjectionAndProjectionPayoutIsDisplayed(String customerProjection, String projectionPayout) {
-        int countOfAvrs = volumeRebatePage.getCountOfAvrs();
-        for (int i = 1; i <= countOfAvrs; i++) {
+        for (int i = 1; i <= volumeRebatePage.getCountOfAvrs(); i++) {
             if (volumeRebatePage.isTargetApplicable(i)) {
                 assertTrue(volumeRebatePage.calculatorIsDisplayed(i));
                 assertEquals(customerProjection, volumeRebatePage.getCustomerProjectionLabel(i));
@@ -165,8 +154,7 @@ public class VolumeRebateStepDefs extends AbstractStepDefs {
 
     @Then("^Projection Payout is calculated correctly on the fly and user can save this value.$")
     public void projectionPayoutIsCalculatedOnTheFly() {
-        int countOfAvrs = volumeRebatePage.getCountOfAvrs();
-        for (int i = 1; i <= countOfAvrs; i++) {
+        for (int i = 1; i <= volumeRebatePage.getCountOfAvrs(); i++) {
             if (volumeRebatePage.isTargetApplicable(i)) {
                 String[] dataTargets = volumeRebatePage.getDataTargets(i);
                 String[] dataDiscounts = volumeRebatePage.getDataDiscounts(i);
@@ -190,9 +178,8 @@ public class VolumeRebateStepDefs extends AbstractStepDefs {
 
     @Then("^Current payout sum equals to sum of current payout for each avr except (.*) type.$")
     public void currentPayoutSumEqualsToSumOfCurrentPayoutForEachAvrExceptMarketingType(String marketingType) {
-        int countOfAvrs = volumeRebatePage.getCountOfAvrs();
         long currentPayoutSum = 0;
-        for (int i = 1; i <= countOfAvrs; i++) {
+        for (int i = 1; i <= volumeRebatePage.getCountOfAvrs(); i++) {
             volumeRebatePage.expandAvr(i);
             if (!volumeRebatePage.getAvrTypeDescriptionWithoutPercentage(i).contains(marketingType)) {
                 currentPayoutSum += volumeRebatePage.getCurrentPayoutForAvr(i);

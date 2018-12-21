@@ -4,7 +4,7 @@ public class VolumeRebatePageElements {
     public static String AVR_LIST_XPATH = "//div[contains(@class, 'avr-rebates')]/div";
     public static String VOLUME_REBATE_PAGE_TITLE_XPATH = "//h3";
     public static String LIST_OF_SETTLEMENT_PARTNER_AND_INFO_ERROR_MESSAGES_XPATH = "//div[contains(@class, 'disclaimer')]";
-    public static String CURRENT_SWITCHER_VALUE_XPATH = "//a[@data-toggle='pill']";
+    public static String CURRENT_YEAR_SWITCHER_VALUE_XPATH = "//a[@data-toggle='pill']";
     public static String CURRENCY_LABEL_XPATH = "//div[@class='panel-title text-center']//span[@class='pull-right']";
     public static String CURRENT_PAYOUT_LABEL_XPATH = "//div[@class='panel-title text-center']//span[1]";
     public static String SEE_DETAILS_BELOW_VALUE_XPATH = "//div[@class='panel-title text-center']//span[2]";
