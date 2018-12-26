@@ -32,7 +32,7 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
     public void setRandomQuantityOfProduct() {
         HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         selectedProducts.keySet().forEach(product -> {
-            int randomQuantity = utils.generateRandomNumber(400, 1000);
+            int randomQuantity = utils.generateRandomNumber(100, 299);
             priceAndAvailabilityPage.setQuantityForProduct(product, randomQuantity);
             selectedProducts.put(product, randomQuantity);
         });

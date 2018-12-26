@@ -95,4 +95,25 @@ public class ReturnsPage extends StorefrontBasePage {
     public boolean isSavedRequestsTableDisplayed() {
         return isDisplayed(SAVED_REQUEST_TABLE_XPATH);
     }
+
+    @Step("Get Window Title.")
+    public String getWindowTitle() {
+        waitUntilPageIsFullyLoaded();
+        return getDriver().getTitle();
+    }
+
+    @Step("Get Access Denied Page Title.")
+    public String getAccessDeniedPageTitle() {
+        return $(ACCESS_DENIED_TITLE_RETURNS_PAGE_XPATH).getText();
+    }
+
+    @Step("Get Access Denied Page Sub-Title.")
+    public String getAccessDeniedPageSubTitle() {
+        return $(ACCESS_DENIED_SUB_TITLE_RETURNS_PAGE_XPATH).getText();
+    }
+
+    @Step("Get Return Home Button Name.")
+    public String getReturnHomeButtonName() {
+        return $(ACCESS_DENIED_GO_HOME_BUTTON_XPATH).getText();
+    }
 }

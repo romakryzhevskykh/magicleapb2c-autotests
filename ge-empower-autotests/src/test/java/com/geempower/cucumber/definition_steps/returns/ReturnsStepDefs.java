@@ -70,4 +70,12 @@ public class ReturnsStepDefs extends AbstractStepDefs {
             assertFalse(returnsPage.isSavedRequestsTableDisplayed());
         }
     }
+
+    @Then("^User sees Access Denied page.$")
+    public void userSeesAccessDeniedPage() {
+        assertTrue(returnsPage.getWindowTitle().contains("Access Denied"));
+        assertEquals("Access Denied", returnsPage.getAccessDeniedPageTitle());
+        assertEquals("Unfortunately, you do not have permission to view this page.", returnsPage.getAccessDeniedPageSubTitle());
+        assertEquals("Return to the home page", returnsPage.getReturnHomeButtonName());
+    }
 }

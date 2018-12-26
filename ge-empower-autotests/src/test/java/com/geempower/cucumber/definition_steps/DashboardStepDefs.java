@@ -427,9 +427,19 @@ public class DashboardStepDefs extends AbstractStepDefs {
     }
 
     private void verifyAvrDataIfDifferenceApplicable(int diff, HashMap<String, String> avrData, int counter) {
-        assertEquals(diff, (int)(Float.parseFloat(avrData.get("data-diff").replace("K", ""))));
+        assertEquals(diff, (int) (Float.parseFloat(avrData.get("data-diff").replace("K", ""))));
         assertEquals(String.valueOf(diff) + "K left", dashboardPage.getTargetNReachedLabel(counter));
         assertTrue((Integer.parseInt(avrData.get("data-volume")) + diff) == dashboardPage.getNextTargetValue(counter));
         assertEquals("null", avrData.get("data-met"));
+    }
+
+    @Then("^Returns section is not displayed on the Header menu.$")
+    public void returnsSectionIsNotDisplayedOnTheHeaderMenu() {
+        assertFalse(headerBlock.isReturnsSectionAvailableToUser());
+    }
+
+    @Then("^Returns section is displayed on the Header menu.$")
+    public void returnsSectionIsDisplayedOnTheHeaderMenu() {
+        assertTrue(headerBlock.isReturnsSectionAvailableToUser());
     }
 }

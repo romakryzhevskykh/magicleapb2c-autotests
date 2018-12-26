@@ -11,4 +11,8 @@ public class ReturnsPageElements {
     public final static String ALL_RETURNS_QUANTITY_XPATH = "//div[@class='return-status all-returns clearfix']//span[@class='status-number text-bold']";
     public final static String LAST_ADDED_RETURN_XPATH = "//div[@id='accordion-returns-information']/div[1]//span[@class='numRequest text-separator']";
     public final static String ALL_RETURNS_CONFIRM_NO_XPATH = "//span[@id='listName']";
+    //ACCESS DENIED PAGE
+    public final static String ACCESS_DENIED_TITLE_RETURNS_PAGE_XPATH = "//h1";
+    public final static String ACCESS_DENIED_SUB_TITLE_RETURNS_PAGE_XPATH = "//div/span[contains(@class, 'text-center')]";
+    public final static String ACCESS_DENIED_GO_HOME_BUTTON_XPATH = "//div[contains(@class,'center')]/a[contains(@class,'btn')]";
 }
