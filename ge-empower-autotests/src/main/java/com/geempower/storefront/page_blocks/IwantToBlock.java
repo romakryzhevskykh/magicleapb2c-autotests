@@ -442,16 +442,17 @@ public class IwantToBlock extends UIComponent {
         }
     }
 
-//    public void turnRebatesToggleOn() {
-//        waitUntilPageIsFullyLoaded();
-//        click(REBATES_TOGGLE_CHANGE_POSITION_XPATH);
-//    }
-//
-//    @Step("Turn Rebates Toggle off.")
-//    public void turnRebatesToggleOff() {
-//        waitUntilPageIsFullyLoaded();
-//        if ($(REBATES_TOGGLE_CURRENT_POSITION_XPATH).getAttribute("value").equals("true")) {
-//            click(REBATES_TOGGLE_CHANGE_POSITION_XPATH);
-//        }
-//    }
+    @Step("Turn Rebates Toggle on.")
+    public void turnRebatesToggleOn() {
+        waitUntilPageIsFullyLoaded();
+        click(REBATES_TOGGLE_CHANGE_POSITION_XPATH);
+    }
+
+    @Step("Turn Rebates Toggle off.")
+    public void turnRebatesToggleOff() {
+        waitUntilPageIsFullyLoaded();
+        if ($(REBATES_TOGGLE_CURRENT_POSITION_XPATH).getAttribute("value").equals("true")) {
+            click(REBATES_TOGGLE_CHANGE_POSITION_XPATH);
+        }
+    }
 }

@@ -15,4 +15,6 @@ public class HeaderBlockElements {
     public final static String POST_SALES_SECTION_XPATH = "//div[text()[contains(.,'Post Sales')]]";
     public final static String EXPAND_POST_SALES_SECTION_XPATH = POST_SALES_SECTION_XPATH + "/b";
     public final static String RETURNS_SECTION_XPATH = "//ul[@class='dropdown-menu dropdown-list']/li/a[text()='Returns']";
+    public final static String REBATES_SECTION_XPATH = "//ul[@class='dropdown-menu dropdown-list']/li/a[text()='Rebates']";
+
 }

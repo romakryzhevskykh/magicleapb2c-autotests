@@ -442,4 +442,14 @@ public class DashboardStepDefs extends AbstractStepDefs {
     public void returnsSectionIsDisplayedOnTheHeaderMenu() {
         assertTrue(headerBlock.isReturnsSectionAvailableToUser());
     }
+
+    @Then("^Rebates section is not displayed on the Header menu.$")
+    public void rebatesSectionIsNotDisplayedOnTheHeaderMenu() {
+        assertFalse(headerBlock.isRebatesSectionAvailableToUser());
+    }
+
+    @Then("^Rebates section is displayed on the Header menu.$")
+    public void rebatesSectionIsDisplayedOnTheHeaderMenu() {
+        assertTrue(headerBlock.isRebatesSectionAvailableToUser());
+    }
 }

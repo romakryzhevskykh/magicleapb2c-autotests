@@ -139,44 +139,44 @@ Feature: Create Rebate manually/ via file uploading, Save for later, Edit saved 
     When User opens Saved credit request tab.
     Then The rebate with appropriate name is not displayed on the Saved credit request tab.
 
-#  Scenario Outline: Check that user is not able to see Rebates section and page response is 403 if appropriate toggle is turned of to the user.
-#    And Manage Users page is opened.
-#    When Admin opens Users tab.
-#    And Sets <sso> email to the email field.
-#    And Clicks on the Search button.
-#    When Clicks on the user name in the table.
-#    And Expand Change an empower Privilege/Role in I want to block.
-#    When Admin turn off Rebate Access toggle.
-#    And Clicks on Assign button.
-#    Given Switch to Storefront as internalUser.
-#    And User is logged in to Storefront.
-#    And Account management page is opened.
-#    When Choose North_America region.
-#    And Select account 2244411.
-#    And Click on chosen account.
-#    And Dashboard page is opened.
-#    When Click on Skip button.
-#    When Close cookies pop-up.
-#    Then Rebates section is not displayed on the Header menu.
-#    And Rebates page is opened.
-#    Then User sees Access Denied page.
-#    Given Switch to Storefront as empAdmin.
-#    And Manage Users page is opened.
-#    And Refresh page.
-#    When Admin opens Users tab.
-#    And Sets <sso> email to the email field.
-#    And Clicks on the Search button.
-#    When Clicks on the user name in the table.
-#    And Expand Change an empower Privilege/Role in I want to block.
-#    When Admin turn on Rebates Access toggle.
-#    And Clicks on Assign button.
-#    Given Switch to Storefront as internalUser.
-#    And User is logged in to Storefront.
-#    And Dashboard page is opened.
-#    When Click on Skip button.
-#    When Close cookies pop-up.
-#    Then Rebates section is displayed on the Header menu.
-#
-#    Examples:
-#      | sso           |
-#      | romanlessonly |
+  Scenario Outline: Check that user is not able to see Rebates section and page response is 403 if appropriate toggle is turned of to the user.
+    And Manage Users page is opened.
+    When Admin opens Users tab.
+    And Sets <sso> email to the email field.
+    And Clicks on the Search button.
+    When Clicks on the user name in the table.
+    And Expand Change an empower Privilege/Role in I want to block.
+    When Admin turn off Rebate Access toggle.
+    And Clicks on Assign button.
+    Given Switch to Storefront as internalUser.
+    And User is logged in to Storefront.
+    And Account management page is opened.
+    When Choose North_America region.
+    And Select account 2244411.
+    And Click on chosen account.
+    And Dashboard page is opened.
+    When Click on Skip button.
+    When Close cookies pop-up.
+    Then Rebates section is not displayed on the Header menu.
+    And Rebates page is opened.
+    Then User sees Access Denied page.
+    Given Switch to Storefront as empAdmin.
+    And Manage Users page is opened.
+    And Refresh page.
+    When Admin opens Users tab.
+    And Sets <sso> email to the email field.
+    And Clicks on the Search button.
+    When Clicks on the user name in the table.
+    And Expand Change an empower Privilege/Role in I want to block.
+    When Admin turn on Rebate Access toggle.
+    And Clicks on Assign button.
+    Given Switch to Storefront as internalUser.
+    And User is logged in to Storefront.
+    And Dashboard page is opened.
+    When Click on Skip button.
+    When Close cookies pop-up.
+    Then Rebates section is displayed on the Header menu.
+
+    Examples:
+      | sso           |
+      | romanlessonly |

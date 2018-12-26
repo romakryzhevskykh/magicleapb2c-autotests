@@ -19,7 +19,7 @@ public class PriceAndAvailabilityPageElements {
     public final static String FIRST_AGREEMENT_ON_THE_SPECIAL_PRICING_POP_UP_XPATH = "//table[@id='DataTables_Table_0']/tbody/tr[1]/td[1]";
     public final static String APPLY_TO_ALL_BUTTON_SPECIAL_PRICING_POP_UP_XPATH = "//button[@class='btn primary-btn spl-pricing-apply-all']";
     public final static String AGREEMENT_NO_VALUES_FOR_ALL_PRODUCTS_XPATH = "//td[@class='special-pricing-input-col']//input";
-    public final static String ADD_ITEM_BUTTON_XPATH = "//button[@class='btn btn-white']";
+    public final static String ADD_ITEM_BUTTON_XPATH = "//button[@data-target='#list-new-item-modal']";
     public final static String ADD_ITEM_POP_UP_FIRST_PRODUCT_FIELD_XPATH = "//ul[@id='addProductList']/li[1]//input[contains(@name, 'productNo')]";
     public final static String ADD_ITEM_POP_UP_ADD_PRODUCT_BUTTON_XPATH = "//button[@id='addProduct']";
     public final static String UPDATE_PRICE_AND_AVAILABILITY_BUTTON_ID = "upd_pr_and_av_btn";

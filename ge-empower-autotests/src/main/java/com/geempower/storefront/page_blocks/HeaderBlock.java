@@ -80,4 +80,13 @@ public class HeaderBlock extends UIComponent {
         }
         return isDisplayed(RETURNS_SECTION_XPATH);
     }
+
+    @Step("Is Rebates Section Available To User.")
+    public boolean isRebatesSectionAvailableToUser() {
+        if (isDisplayed(POST_SALES_SECTION_XPATH)) {
+            click(EXPAND_POST_SALES_SECTION_XPATH);
+            waitUntilPageIsFullyLoaded();
+        }
+        return isDisplayed(REBATES_SECTION_XPATH);
+    }
 }

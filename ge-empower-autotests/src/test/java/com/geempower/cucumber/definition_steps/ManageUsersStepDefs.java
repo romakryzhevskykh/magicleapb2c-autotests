@@ -7,7 +7,6 @@ import com.geempower.helpers.models.Region;
 import com.geempower.helpers.models.UserEntity;
 import com.geempower.storefront.page_blocks.IwantToBlock;
 import com.geempower.storefront.pages.ManageUsersPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -530,15 +529,15 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         iWantToBlock.turnReturnsToggleOff();
     }
 
-//    @When("^Admin turn off Rebate Access toggle.$")
-//    public void adminTurnOffRebateAccessToggle() {
-//        iWantToBlock.turnRebatesToggleOn();
-//    }
-//
-//    @When("^Admin turn on Rebate Access toggle.$")
-//    public void adminTurnOffRebateAccessToggle() {
-//        iWantToBlock.turnRebatesToggleOff();
-//    }
+    @When("^Admin turn off Rebate Access toggle.$")
+    public void adminTurnOffRebateAccessToggle() {
+        iWantToBlock.turnRebatesToggleOff();
+    }
+
+    @When("^Admin turn on Rebate Access toggle.$")
+    public void adminTurnOnRebateAccessToggle() {
+        iWantToBlock.turnRebatesToggleOn();
+    }
 
     @Then("^Is Appropriate data from user profile displayed in user details block for user (.*).$")
     public void isAppropriateFullNameDisplayedDetailBlockHeader(String email) {
