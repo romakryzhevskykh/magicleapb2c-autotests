@@ -338,4 +338,9 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     public void userGoesToThePreviousTrackingDetails() {
         orderDetailsPage.goToThePreviousTrackingInfo();
     }
+
+    @Then("^Service link is equal to (.*).$")
+    public void serviceLinkIsEqualToServiceLink(String serviceLink) {
+        assertEquals(serviceLink, orderDetailsPage.getInvoiceDetailsPopUpServiceLink());
+    }
 }

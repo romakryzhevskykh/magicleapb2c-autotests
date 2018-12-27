@@ -70,6 +70,12 @@ public class OrderDetailsPage extends StorefrontBasePage {
         return $(INVOICE_DETAILS_BODY_TEXT_XPATH).getText();
     }
 
+    @Step("Get Invoice Details Pop Up Service Link.")
+    public String getInvoiceDetailsPopUpServiceLink() {
+        waitUntilPageIsFullyLoaded();
+        return $(INVOICE_POP_UP_SERVICE_LINK_XPATH).getText();
+    }
+
     @Step("Close Invoice Details Pop-Up.")
     public void closeInvoiceDetailsPopUp() {
         click(INVOICE_DETAILS_POP_UP_CLOSE_BUTTON_XPATH);
@@ -249,6 +255,7 @@ public class OrderDetailsPage extends StorefrontBasePage {
 
     @Step("User Opens Random Product Detail Block.")
     public void userOpensRandomProductDetailBlock() {
+        waitUntilPageIsFullyLoaded();
         $$(EXPAND_DETAIL_PRODUCT_BLOCK_ARROW_XPATH).stream().findAny().ifPresent(this::click);
         waitUntilPageIsFullyLoaded();
     }
