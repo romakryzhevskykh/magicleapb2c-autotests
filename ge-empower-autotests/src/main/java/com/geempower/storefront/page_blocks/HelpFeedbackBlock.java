@@ -12,11 +12,13 @@ public class HelpFeedbackBlock extends UIComponent {
 
     @Step("Feedback button is displayed.")
     public boolean feedbackButtonIsDisplayed() {
+        waitUntilPageIsFullyLoaded();
         return isDisplayed(FEEDBACK_BUTTON_XPATH);
     }
 
     @Step("Help button is displayed.")
     public boolean helpButtonIsDisplayed() {
+        waitUntilPageIsFullyLoaded();
         return isDisplayed(HELP_BUTTON_XPATH);
     }
 
@@ -33,6 +35,7 @@ public class HelpFeedbackBlock extends UIComponent {
 
     @Step("Check If Emoji Displayed.")
     public boolean isEmojiDisplayedInTheFeedbackPopUp(String emoji) {
+        waitUntilPageIsFullyLoaded();
         return isDisplayed(EMOJI_LABEL_XPATH, emoji.toLowerCase());
     }
 
