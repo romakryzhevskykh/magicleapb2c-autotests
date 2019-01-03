@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.geempower.cucumber.definition_steps.TestKeyword.GE_ORDER_NO;
+import static com.geempower.cucumber.definition_steps.TestKeyword.ORDER_DETAILS_TOTAL_NET_PRICE_VALUE;
 import static org.testng.Assert.*;
 
 public class OrderDetailsStepDefs extends AbstractStepDefs {
@@ -146,15 +147,9 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
         orderDetailsPage.userClicksOnRandomStatusBox();
     }
 
-    @And("^User clicks on All status box.$")
-    public void userClicksOnAllStatusBox() {
-        orderDetailsPage.userClicksOnAllStatusBox();
-    }
-
     @Then("^Is Total Net Price value correct after changing status boxes.$")
     public void isTotalNetPriceValueCorrectAfterChangingStatusBoxes() {
-        double totalNetPrice = orderManager.getOrderById(Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO))).getTotalNetPrice();
-        assertEquals(totalNetPrice, Double.parseDouble(orderDetailsPage.getTotalNetPrice()));
+        assertEquals(threadVarsHashMap.getString(ORDER_DETAILS_TOTAL_NET_PRICE_VALUE), orderDetailsPage.getTotalNetPrice());
     }
 
     @Then("^Is Table with products displayed.$")
@@ -339,8 +334,24 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
         orderDetailsPage.goToThePreviousTrackingInfo();
     }
 
+    @And("^User clicks on (.*) status box.$")
+    public void userClicksOnAppropriateStatusBox(String status) {
+        orderDetailsPage.clickOnAppropriateStatusBox(status);
+    }
+
+    @And("^Total net price stored to hashmap.$")
+    public void totalNetPriceStoredToHashmap() {
+        threadVarsHashMap.put(TestKeyword.ORDER_DETAILS_TOTAL_NET_PRICE_VALUE, orderDetailsPage.getTotalNetPrice());
+    }
+
+    @Then("^Is (.*) status box price equals to the total net price.$")
+    public void isShippedStatusBoxPriceEqualsToTheTotalNetPrice(String status) {
+        assertEquals(orderDetailsPage.getTotalNetPrice(), orderDetailsPage.getPriceForAppropriateStatusBox(status));
+    }
+
     @Then("^Service link is equal to (.*).$")
     public void serviceLinkIsEqualToServiceLink(String serviceLink) {
         assertEquals(serviceLink, orderDetailsPage.getInvoiceDetailsPopUpServiceLink());
+
     }
 }
