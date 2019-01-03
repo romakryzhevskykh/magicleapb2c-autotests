@@ -519,6 +519,26 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         iWantToBlock.turnTnBToggleOff();
     }
 
+    @When("^Admin turn on Returns Access toggle.$")
+    public void adminTurnOnReturnsAccessToggle() {
+        iWantToBlock.turnReturnsToggleOn();
+    }
+
+    @When("^Admin turn off Returns Access toggle.$")
+    public void adminTurnOffReturnsAccessToggle() {
+        iWantToBlock.turnReturnsToggleOff();
+    }
+
+    @When("^Admin turn off Rebate Access toggle.$")
+    public void adminTurnOffRebateAccessToggle() {
+        iWantToBlock.turnRebatesToggleOff();
+    }
+
+    @When("^Admin turn on Rebate Access toggle.$")
+    public void adminTurnOnRebateAccessToggle() {
+        iWantToBlock.turnRebatesToggleOn();
+    }
+
     @Then("^Is Appropriate data from user profile displayed in user details block for user (.*).$")
     public void isAppropriateFullNameDisplayedDetailBlockHeader(String email) {
         UserEntity user = userManager.getUserByEmail(email);

@@ -16,7 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.geempower.cucumber.definition_steps.TestKeyword.*;
+import static com.geempower.cucumber.definition_steps.TestKeyword.GE_ORDER_NO;
+import static com.geempower.cucumber.definition_steps.TestKeyword.ORDER_DETAILS_TOTAL_NET_PRICE_VALUE;
 import static org.testng.Assert.*;
 
 public class OrderDetailsStepDefs extends AbstractStepDefs {
@@ -346,5 +347,11 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     @Then("^Is (.*) status box price equals to the total net price.$")
     public void isShippedStatusBoxPriceEqualsToTheTotalNetPrice(String status) {
         assertEquals(orderDetailsPage.getTotalNetPrice(), orderDetailsPage.getPriceForAppropriateStatusBox(status));
+    }
+
+    @Then("^Service link is equal to (.*).$")
+    public void serviceLinkIsEqualToServiceLink(String serviceLink) {
+        assertEquals(serviceLink, orderDetailsPage.getInvoiceDetailsPopUpServiceLink());
+
     }
 }

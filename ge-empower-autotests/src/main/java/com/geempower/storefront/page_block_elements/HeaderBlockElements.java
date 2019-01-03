@@ -12,4 +12,9 @@ public class HeaderBlockElements {
     public final static String PRODUCT_SEARCH_ICON_ID = "searchProductBut";
     //main menu
     public final static String MENU_SECTION_XPATH = "//li/a[text()='%s']";
+    public final static String POST_SALES_SECTION_XPATH = "//div[text()[contains(.,'Post Sales')]]";
+    public final static String EXPAND_POST_SALES_SECTION_XPATH = POST_SALES_SECTION_XPATH + "/b";
+    public final static String RETURNS_SECTION_XPATH = "//ul[@class='dropdown-menu dropdown-list']/li/a[text()='Returns']";
+    public final static String REBATES_SECTION_XPATH = "//ul[@class='dropdown-menu dropdown-list']/li/a[text()='Rebates']";
+
 }

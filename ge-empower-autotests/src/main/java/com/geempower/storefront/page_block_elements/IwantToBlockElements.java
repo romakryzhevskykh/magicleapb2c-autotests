@@ -68,4 +68,8 @@ public class IwantToBlockElements {
     public final static String T_AND_B_ACCESS_TOGGLE_SECTION_TEXT_XPATH = "//div[@class='row accessTandB-selction enabled-important']/div[1]//label";
     public final static String T_AND_B_TOGGLE_CHANGE_POSITION_XPATH = "//label[@for='accessTandBPrivilege']/span[2]";
     public final static String T_AND_B_TOGGLE_CURRENT_POSITION_XPATH = "//div[@class='row accessTandB-selction enabled-important']//input";
+    public final static String RETURNS_TOGGLE_CHANGE_POSITION_XPATH = "//label[@for='returnPrivilege']/span[2]";
+    public final static String RETURNS_TOGGLE_CURRENT_POSITION_XPATH = "//div[@class='row return-selection enabled-important']//input";
+    public final static String REBATES_TOGGLE_CHANGE_POSITION_XPATH = "//label[@for='rebateEnabled']/span[2]";
+    public final static String REBATES_TOGGLE_CURRENT_POSITION_XPATH = "//div[@class='row submitRebate-selction enabled-important']//input";
 }

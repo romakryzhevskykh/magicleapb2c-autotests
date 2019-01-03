@@ -261,3 +261,31 @@ Feature: Some actions on Orders page
     And Set random Date to the date from field.
     And Click on apply filter button.
     Then Appropriate orders with equal date or greater date are appeared on orders page.
+
+  Scenario Outline: Check that effective date in invoiceCountry table - Service Links are correct for LA region
+    And Account management page is opened.
+    When Choose Latin_America region.
+    And Select account 1000839.
+    And Click on chosen account.
+    And Dashboard page is opened.
+    When Click on Skip button.
+    When Close cookies pop-up.
+    When User searches order by <orderNo> orderNo via Order Search field.
+    Then Order by parameters page with appropriate <orderNo> is opened.
+    When User clicks on appropriate <orderNo>.
+    When User opens random product detail block.
+    When Clicks on Invoice hyperlink.
+    Then Service link is equal to <serviceLink1>.
+    And Dashboard page is opened.
+    When Click on Skip button.
+    When Close cookies pop-up.
+    When User searches order by <orderNo2> orderNo via Order Search field.
+    Then Order by parameters page with appropriate <orderNo2> is opened.
+    When User clicks on appropriate <orderNo2>.
+    When User opens random product detail block.
+    When Clicks on Invoice hyperlink.
+    Then Service link is equal to <serviceLink2>.
+
+    Examples:
+      | orderNo   | orderNo2  | serviceLink1        | serviceLink2              |
+      | 150990077 | 151292926 | http://www.dbnet.cl | https://www.gosocket.net/ |

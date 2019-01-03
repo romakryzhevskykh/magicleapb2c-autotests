@@ -65,4 +65,28 @@ public class HeaderBlock extends UIComponent {
         waitUntilPageIsFullyLoaded();
         return isDisplayed(MENU_SECTION_XPATH, sectionName);
     }
+
+    @Step("Is Post Sales Section Available To User.")
+    public boolean isPostSalesSectionAvailableToUser() {
+        waitUntilPageIsFullyLoaded();
+        return isDisplayed(POST_SALES_SECTION_XPATH);
+    }
+
+    @Step("Is Returns Section Available To User.")
+    public boolean isReturnsSectionAvailableToUser() {
+        if (isDisplayed(POST_SALES_SECTION_XPATH)) {
+            click(EXPAND_POST_SALES_SECTION_XPATH);
+            waitUntilPageIsFullyLoaded();
+        }
+        return isDisplayed(RETURNS_SECTION_XPATH);
+    }
+
+    @Step("Is Rebates Section Available To User.")
+    public boolean isRebatesSectionAvailableToUser() {
+        if (isDisplayed(POST_SALES_SECTION_XPATH)) {
+            click(EXPAND_POST_SALES_SECTION_XPATH);
+            waitUntilPageIsFullyLoaded();
+        }
+        return isDisplayed(REBATES_SECTION_XPATH);
+    }
 }

@@ -19,7 +19,6 @@ public class OrdersStepDefs extends AbstractStepDefs {
     private OrdersPage ordersPage;
     @Autowired
     private Utils utils;
-
     @Autowired
     private OrderManager orderManager;
 

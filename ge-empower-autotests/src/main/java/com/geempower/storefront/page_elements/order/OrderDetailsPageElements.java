@@ -53,4 +53,5 @@ public class OrderDetailsPageElements {
     public final static String DELIVERED_STATUS_NAME_XPATH = DELIVERED_PROGRESS_BAR_XPATH + "/span";
     public final static String NEXT_TRACKING_INFO_BUTTON_XPATH = "//a[@class='text-blue track-next ']";
     public final static String PREVIOUS_TRACKING_INFO_BUTTON_XPATH = "//a[@class='text-blue track-prev ']";
+    public final static String FIRST_INVOICE_HYPERLINK_XPATH = "//tbody/tr[1]//a[@class='check-invoice-href']";
 }
