@@ -468,4 +468,9 @@ public class IwantToBlock extends UIComponent {
     public void turnVolumeRebateToggleOn() {
         click(VOLUME_REBATE_TOGGLE_CHANGE_POSITION_XPATH);
     }
+
+    @Step("Is Volume Rebate Toggle Displayed.")
+    public boolean IsVolumeRebateToggleDisplayed() {
+        return isDisplayed(VOLUME_REBATE_TOGGLE_CHANGE_POSITION_XPATH);
+    }
 }

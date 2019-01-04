@@ -648,4 +648,9 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     public void isTextDisplayedInTooltipAfterHoverOnBlueInternalUserIconForUser(String text, String userId) {
         assertEquals(text, manageUsersPage.hoverMouseOverBlueIconForUser(userId));
     }
+
+    @Then("^Volume Rebate toggle is not displayed for external user.$")
+    public void volumeRebateToggleIsNotDisplayedForExternalUser() {
+        assertFalse(iWantToBlock.IsVolumeRebateToggleDisplayed());
+    }
 }

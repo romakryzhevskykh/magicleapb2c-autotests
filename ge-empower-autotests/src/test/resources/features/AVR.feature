@@ -72,6 +72,11 @@ Feature: Verification of main AVR elements on the Dashboard and on the Volume Re
     And User is logged in to Storefront.
     And Manage Users page is opened.
     When Admin opens Users tab.
+    And Sets externalUser1 email to the email field.
+    And Clicks on the Search button.
+    When Clicks on the user name in the table.
+    And Expand Change an empower Privilege/Role in I want to block.
+    Then Volume Rebate toggle is not displayed for external user.
     And Sets <sso> email to the email field.
     And Clicks on the Search button.
     When Clicks on the user name in the table.
