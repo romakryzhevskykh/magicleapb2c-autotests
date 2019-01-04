@@ -72,4 +72,6 @@ public class IwantToBlockElements {
     public final static String RETURNS_TOGGLE_CURRENT_POSITION_XPATH = "//div[@class='row return-selection enabled-important']//input";
     public final static String REBATES_TOGGLE_CHANGE_POSITION_XPATH = "//label[@for='rebateEnabled']/span[2]";
     public final static String REBATES_TOGGLE_CURRENT_POSITION_XPATH = "//div[@class='row submitRebate-selction enabled-important']//input";
+    public final static String VOLUME_REBATE_TOGGLE_CHANGE_POSITION_XPATH = "//label[@for='accessAVRPrivilege']/span[2]";
+    public final static String VOLUME_REBATE_TOGGLE_CURRENT_POSITION_XPATH = "//div[@class='row accessAvr-selction enabled-important']//input";
 }

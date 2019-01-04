@@ -529,6 +529,16 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         iWantToBlock.turnReturnsToggleOff();
     }
 
+    @When("^Admin turn off Volume Rebate toggle.$")
+    public void adminTurnOffVolumeRebateToggle() {
+        iWantToBlock.turnVolumeRebateToggleOff();
+    }
+
+    @When("^Admin turn on Volume Rebate toggle.$")
+    public void adminTurnOnVolumeRebateToggle() {
+        iWantToBlock.turnVolumeRebateToggleOn();
+    }
+
     @When("^Admin turn off Rebate Access toggle.$")
     public void adminTurnOffRebateAccessToggle() {
         iWantToBlock.turnRebatesToggleOff();

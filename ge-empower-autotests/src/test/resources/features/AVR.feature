@@ -61,6 +61,44 @@ Feature: Verification of main AVR elements on the Dashboard and on the Volume Re
     Then Calculator with Customer's Projection*: and Projection Payout: is displayed if Target is applicable.
     Then Projection Payout is calculated correctly on the fly and user can save this value.
 
+  Examples:
+  | infoMessage                                                                                                                                        | settlementMessage                                                                         |
+  | Disclaimer: The amount and calculations displayed on this page are for informational purposes only. Actual amounts owed are subject to validation. | Some Volume Rebate details may be not displayed, check settlement partner account instead |
+
+  Scenario Outline: Check that internal user can't see Volume Rebate menu item if appropriate toggle is turned of to the user.
+    And Select account 9003084.
+    And Click on chosen account.
+    Given Switch to Storefront as secondEmpAdmin.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    When Admin opens Users tab.
+    And Sets <sso> email to the email field.
+    And Clicks on the Search button.
+    When Clicks on the user name in the table.
+    And Expand Change an empower Privilege/Role in I want to block.
+    When Admin turn off Volume Rebate toggle.
+    And Clicks on Assign button.
+    Given Switch to Storefront as thirdInternalUser.
+    And Refresh page.
+    And Dashboard page is opened.
+    When Click on Skip button.
+    And Close cookies pop-up.
+    Then VOLUME REBATE AVR section is not displayed in the header menu.
+    Given Switch to Storefront as secondEmpAdmin.
+    And Manage Users page is opened.
+    And Refresh page.
+    When Admin opens Users tab.
+    And Sets <sso> email to the email field.
+    And Clicks on the Search button.
+    When Clicks on the user name in the table.
+    And Expand Change an empower Privilege/Role in I want to block.
+    When Admin turn on Volume Rebate toggle.
+    And Clicks on Assign button.
+    Given Switch to Storefront as thirdInternalUser.
+    And Dashboard page is opened.
+    And Refresh page.
+    Then VOLUME REBATE AVR section is displayed in the header menu.
+
     Examples:
-      | infoMessage                                                                                                                                        | settlementMessage                                                                         |
-      | Disclaimer: The amount and calculations displayed on this page are for informational purposes only. Actual amounts owed are subject to validation. | Some Volume Rebate details may be not displayed, check settlement partner account instead |
+      | sso       |
+      | 503030969 |

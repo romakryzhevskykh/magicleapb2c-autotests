@@ -387,6 +387,11 @@ public class DashboardStepDefs extends AbstractStepDefs {
         assertTrue(headerBlock.isSectionAvailableToUser(sectionName));
     }
 
+    @Then("^(.*) AVR section is not displayed in the header menu.$")
+    public void avrSectionIsNotDisplayedInTheHeaderMenu(String sectionName) {
+        assertFalse(headerBlock.isSectionAvailableToUser(sectionName));
+    }
+
     @Then("^Each available AVR has correct target, data diff and other labels.$")
     public void eachAvailableAVRHasCorrectTargetAndDataDiff() {
         int countOfAvrs = dashboardPage.getMinCountOfAvrs();
