@@ -1,7 +1,10 @@
 package com.geempower.storefront.pages.order;
 
 import com.geempower.storefront.StorefrontBasePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -35,7 +38,7 @@ public class OrderDetailsPage extends StorefrontBasePage {
     public String getTotalNetPrice() {
         waitUntilPageIsFullyLoaded();
         String netPrice = $(TOTAL_NET_PRICE_VALUE_XPATH).getText();
-        return netPrice.replace(",", "").replace(".", "").replace("USD", "").trim();
+        return netPrice.substring(0, netPrice.length() - 4).replace(",", "");
     }
 
     @Step("Click On Expand Order Details Icon.")
@@ -349,6 +352,6 @@ public class OrderDetailsPage extends StorefrontBasePage {
     @Step("Get Price For Appropriate Status Box.")
     public String getPriceForAppropriateStatusBox(String status) {
         waitUntilPageIsFullyLoaded();
-        return $(SINGLE_STATUS_BOX_PRICE_VALUE_XPATH, status.toLowerCase()).getText().replace(",", "").replace(".", "");
+        return $(SINGLE_STATUS_BOX_PRICE_VALUE_XPATH, status.toLowerCase()).getText().replace(",", "");
     }
 }
