@@ -49,7 +49,7 @@ Feature: Return creation tests
       | North_America |
       | EMEA          |
       | ASIA          |
-    
+
   Scenario Outline: Check that user is able to create returns manually via uploading file.
     And Account management page is opened.
     When Choose North_America region.
