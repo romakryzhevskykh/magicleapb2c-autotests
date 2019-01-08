@@ -4,7 +4,6 @@ import com.geempower.helpers.UIComponent;
 import com.geempower.helpers.Utils;
 import com.geempower.helpers.models.RegionType;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -334,6 +333,7 @@ public class IwantToBlock extends UIComponent {
     public void clickOnAssignRolesButton() {
         waitUntilPageIsFullyLoaded();
         click(By.id(ASSIGN_ROLES_OR_PRIVILEGES_BUTTON_ID));
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Prevent Appearing Account In The All Accounts Tab.")
@@ -454,5 +454,23 @@ public class IwantToBlock extends UIComponent {
         if ($(REBATES_TOGGLE_CURRENT_POSITION_XPATH).getAttribute("value").equals("true")) {
             click(REBATES_TOGGLE_CHANGE_POSITION_XPATH);
         }
+    }
+
+    @Step("Turn Volume Rebate Toggle off.")
+    public void turnVolumeRebateToggleOff() {
+        waitUntilPageIsFullyLoaded();
+        if ($(VOLUME_REBATE_TOGGLE_CURRENT_POSITION_XPATH).getAttribute("value").equals("true")) {
+            click(VOLUME_REBATE_TOGGLE_CHANGE_POSITION_XPATH);
+        }
+    }
+
+    @Step("Turn Volume Rebate Toggle on.")
+    public void turnVolumeRebateToggleOn() {
+        click(VOLUME_REBATE_TOGGLE_CHANGE_POSITION_XPATH);
+    }
+
+    @Step("Is Volume Rebate Toggle Displayed.")
+    public boolean IsVolumeRebateToggleDisplayed() {
+        return isDisplayed(VOLUME_REBATE_TOGGLE_CHANGE_POSITION_XPATH);
     }
 }

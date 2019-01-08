@@ -62,7 +62,6 @@ public class HeaderBlock extends UIComponent {
 
     @Step("Is appropriate section available to user.")
     public boolean isSectionAvailableToUser(String sectionName) {
-        waitUntilPageIsFullyLoaded();
         return isDisplayed(MENU_SECTION_XPATH, sectionName);
     }
 

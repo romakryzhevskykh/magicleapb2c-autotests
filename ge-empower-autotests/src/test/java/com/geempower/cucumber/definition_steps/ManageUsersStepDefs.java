@@ -529,6 +529,16 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
         iWantToBlock.turnReturnsToggleOff();
     }
 
+    @When("^Admin turn off Volume Rebate toggle.$")
+    public void adminTurnOffVolumeRebateToggle() {
+        iWantToBlock.turnVolumeRebateToggleOff();
+    }
+
+    @When("^Admin turn on Volume Rebate toggle.$")
+    public void adminTurnOnVolumeRebateToggle() {
+        iWantToBlock.turnVolumeRebateToggleOn();
+    }
+
     @When("^Admin turn off Rebate Access toggle.$")
     public void adminTurnOffRebateAccessToggle() {
         iWantToBlock.turnRebatesToggleOff();
@@ -637,5 +647,10 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     @Then("^Is (.*) text displayed in tooltip after hover on blue internal user icon for user (.*).$")
     public void isTextDisplayedInTooltipAfterHoverOnBlueInternalUserIconForUser(String text, String userId) {
         assertEquals(text, manageUsersPage.hoverMouseOverBlueIconForUser(userId));
+    }
+
+    @Then("^Volume Rebate toggle is not displayed for external user.$")
+    public void volumeRebateToggleIsNotDisplayedForExternalUser() {
+        assertFalse(iWantToBlock.IsVolumeRebateToggleDisplayed());
     }
 }
