@@ -122,6 +122,82 @@ Feature: Registration flow for external, internal, mfgrep users.
       | userId    | userEmail                    | abbEmail                         | newAbbEmail             | companyName      | phoneNo         | relationship                    | account | abbText                                                                                                        |
       | 503021114 | oleksandr.nikolaienko@ge.com | oleksandr.nikolaienko@in.abb.com | update.email@in.abb.com | ABB test company | 645284-31234-32 | Industrial Solutions Contractor | 9012306 | In order to better serve you, please perform this profile update by entering your new ABB email address below: |
 
+  Scenario Outline: Check that user is able to register as internal user and only global admins can see him on Pending requests tab.
+    And Dismiss sessions.
+    Given Switch to Storefront as newInternalUser.
+    And User is logged in to Storefront.
+    Then Registration page is opened.
+    Then User ID is equal to <userId>.
+    Then User email is equal to <userEmail>.
+    Then User relationship to Industrial Solution is equal to <relationship>.
+    When User fills Company Name <companyName>.
+    When User fills Phone No <phoneNo>.
+    When User selects random Region from regions list.
+    When User selects random Country from countries list.
+    When User selects random Role.
+    And User fills ABB email address <abbEmail>.
+    Then SO code Sales Office Code and SE code Sales Engineer Code titles and fields are displayed.
+    And Create Internal User instance on registration page with values <companyName>, <userEmail>, <phoneNo>, <abbEmail>.
+    And Click on register button.
+    Then Registration successful pop-up is appeared with appropriate header Registration Successful.
+    Then User not active page is opened.
+    When User sets <account> to the Account Number field.
+    And Click on Submit for Approval button.
+    Then Requested account fields contains <account> account.
+    Given Switch to Storefront as first caAdmin.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    And Refresh page.
+    Then Pending requests tab is active.
+    Then Is admin can't see user <userId> on the Pending requests tab.
+    Given Switch to Storefront as first smAdmin.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    And Refresh page.
+    Then Pending requests tab is active.
+    Then Is admin can't see user <userId> on the Pending requests tab.
+    Given Switch to Storefront as rmAdmin.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    And Refresh page.
+    Then Pending requests tab is active.
+    Then Is admin can't see user <userId> on the Pending requests tab.
+    Given Switch to Storefront as first helpDesc.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    And Refresh page.
+    Then Pending requests tab is active.
+    Then Is admin can see user <userId> on the Pending requests tab.
+    Given Switch to Storefront as csAdmin.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    And Refresh page.
+    Then Pending requests tab is active.
+    Then Is admin can see user <userId> on the Pending requests tab.
+    Given Switch to Storefront as first EmpAdmin.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    And Refresh page.
+    Then Pending requests tab is active.
+    Then Is admin can see user <userId> on the Pending requests tab.
+    And Refresh page.
+    When Admin opens Users tab.
+    And Sets <userId> email to the email field.
+    And Clicks on the Search button.
+    When Clicks on the user name in the table.
+    When Admin opens Actions list.
+    And Chooses Delete User option from the actions list.
+    And Confirm delete action on manage users page.
+    And Refresh page.
+    When Admin opens Users tab.
+    And Sets <userId> email to the email field.
+    And Clicks on the Search button.
+    Then There is no user in the users list table.
+
+    Examples:
+      | userId    | userEmail                    | abbEmail                         |  companyName      | phoneNo         | relationship                    | account | abbText                                                                                                        |
+      | 503021114 | oleksandr.nikolaienko@ge.com | oleksandr.nikolaienko@in.abb.com |  ABB test company | 645284-31234-32 | Industrial Solutions Contractor | 9012306 | In order to better serve you, please perform this profile update by entering your new ABB email address below: |
+
   Scenario Outline: Check that manufacturer representative user can change role, will become an external user and then admin will delete the user via manage users.
     And Dismiss sessions.
     Given Switch to Storefront as newMfgRepUser1.
