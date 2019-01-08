@@ -38,7 +38,7 @@ Feature: Verification of main AVR elements on the Dashboard and on the Volume Re
     Then Each available AVR has correct target, data diff and other labels.
 
   Scenario Outline: Check that user is able to open Volume Rebate page and all necessary elements are displayed on it.
-    And Select account 9003084.
+    And Select account 9004834.
     And Click on chosen account.
     And Volume rebate page is opened.
     Then Volume Rebate (AVR) title is displayed on the Volume rebate page.
