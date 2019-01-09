@@ -4,8 +4,10 @@ import com.geempower.cucumber.definition_steps.AbstractStepDefs;
 import com.geempower.cucumber.definition_steps.TestKeyword;
 import com.geempower.helpers.Utils;
 import com.geempower.helpers.managers.OrderManager;
+import com.geempower.helpers.managers.PackingSlipManager;
 import com.geempower.helpers.managers.ProductManager;
 import com.geempower.helpers.models.Order;
+import com.geempower.helpers.models.PackingSlip;
 import com.geempower.helpers.models.Product;
 import com.geempower.storefront.pages.order.OrderDetailsPage;
 import cucumber.api.java.en.And;
@@ -13,6 +15,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +32,8 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     private ProductManager productManager;
     @Autowired
     private Utils utils;
+    @Autowired
+    private PackingSlipManager packingSlipManager;
 
     private final double delta = 0.000001;
 
@@ -260,6 +265,11 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
         orderDetailsPage.userOpensRandomProductDetailBlock();
     }
 
+    @When("^User opens first product detail block.$")
+    public void userOpensFirstProductDetailBlock() {
+        orderDetailsPage.userOpensFirstProductDetailBlock();
+    }
+
     @When("^User closes opened product detail block.$")
     public void userClosesOpenedProductDetailBlock() {
         orderDetailsPage.userClosesOpenedProductDetailBlock();
@@ -353,5 +363,28 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     public void serviceLinkIsEqualToServiceLink(String serviceLink) {
         assertEquals(serviceLink, orderDetailsPage.getInvoiceDetailsPopUpServiceLink());
 
+    }
+
+    @And("^Packing slip entity created.$")
+    public void packingSlipEntityCreated() {
+        String orderId = orderDetailsPage.getPackingSlipOrderId();
+        String orderLine = orderDetailsPage.getPackingSlipOrderLine();
+        String packingSlipNumber = orderDetailsPage.getDataPackingSlipNumber();
+        String packingSlipBolNumber = orderDetailsPage.getDataPackingBolNumber();
+        packingSlipManager.createPackingSlipInstance(orderId, orderLine, packingSlipNumber, packingSlipBolNumber);
+    }
+
+    @Then("^Packing slip document prepared successfully with orderId (.*).$")
+    public void packingSlipDocumentPreparedSuccessfully(String orderNo) throws IOException {
+        PackingSlip packingSlip = packingSlipManager.getPackingSlipByOrderId(orderNo);
+        int responseCode = packingSlipManager.preparePackingSlipDocument(userSessions.getActiveUserSession(), packingSlip.getOrderId(), packingSlip.getOrderLine(), packingSlip.getDataPackingSlipNumber(), packingSlip.getDataPackingBolNumber());
+        assertEquals(responseCode, 200);
+    }
+
+    @Then("^Packing slip document downloaded successfully with orderId (.*).$")
+    public void packingSlipDocumentDownloadedSuccessfully(String orderNo) throws IOException {
+        PackingSlip packingSlip = packingSlipManager.getPackingSlipByOrderId(orderNo);
+        int responseCode = packingSlipManager.downloadPackingSlipDocument(userSessions.getActiveUserSession(), packingSlip.getOrderId(), packingSlip.getOrderLine(), packingSlip.getDataPackingSlipNumber(), packingSlip.getDataPackingBolNumber());
+        assertEquals(responseCode, 200);
     }
 }

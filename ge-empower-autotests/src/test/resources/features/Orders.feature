@@ -288,3 +288,22 @@ Feature: Some actions on Orders page
     Examples:
       | orderNo   | orderNo2  | serviceLink1        | serviceLink2              |
       | 150990077 | 151292926 | http://www.dbnet.cl | https://www.gosocket.net/ |
+
+  Scenario Outline: Check that user is able to download packing slip pdf and the HTTP response is 200 OK.
+    And Account management page is opened.
+    When Choose <region> region.
+    And Select account <accountNo>.
+    And Click on account with <salesDivision> sales division.
+    And Dashboard page is opened.
+    When Click on Skip button.
+    When Close cookies pop-up.
+    When User searches order by <orderId> orderNo via Order Search field.
+    When User clicks on appropriate <orderId>.
+    When User opens first product detail block.
+    And Packing slip entity created.
+    Then Packing slip document prepared successfully with orderId <orderId>.
+    Then Packing slip document downloaded successfully with orderId <orderId>.
+
+    Examples:
+      | region        | accountNo | salesDivision | orderId    |
+      | North_America | 1318501   | USS1          | 0151359861 |

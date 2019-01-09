@@ -253,6 +253,13 @@ public class OrderDetailsPage extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
     }
 
+    @Step("User Opens First Product Detail Block.")
+    public void userOpensFirstProductDetailBlock() {
+        waitUntilPageIsFullyLoaded();
+        click(EXPAND_FIRST_DETAIL_PRODUCT_BLOCK_ARROW_XPATH);
+        waitUntilPageIsFullyLoaded();
+    }
+
     @Step("User Closes Opened Product Detail Block.")
     public void userClosesOpenedProductDetailBlock() {
         $(CLOSE_DETAIL_PRODUCT_BLOCK_ARROW_XPATH).click();
@@ -353,5 +360,26 @@ public class OrderDetailsPage extends StorefrontBasePage {
     public String getPriceForAppropriateStatusBox(String status) {
         waitUntilPageIsFullyLoaded();
         return $(SINGLE_STATUS_BOX_PRICE_VALUE_XPATH, status.toLowerCase()).getText().replace(",", "");
+    }
+
+    @Step("Get Packing Slip Order Id.")
+    public String getPackingSlipOrderId() {
+        waitUntilPageIsFullyLoaded();
+        return $(FIRST_LINE_PACKING_SLIP_HYPER_LINK_XPATH).getAttribute("data-order-number");
+    }
+
+    @Step("Get Packing Slip Order Line.")
+    public String getPackingSlipOrderLine() {
+        return $(FIRST_LINE_PACKING_SLIP_HYPER_LINK_XPATH).getAttribute("data-order-line-number");
+    }
+
+    @Step("Get Data Packing Slip Number.")
+    public String getDataPackingSlipNumber() {
+        return $(FIRST_LINE_PACKING_SLIP_HYPER_LINK_XPATH).getAttribute("data-packing-slip-number");
+    }
+
+    @Step("Get Data Packing Bol Number.")
+    public String getDataPackingBolNumber() {
+        return $(FIRST_LINE_PACKING_SLIP_HYPER_LINK_XPATH).getAttribute("data-packing-bol-number");
     }
 }

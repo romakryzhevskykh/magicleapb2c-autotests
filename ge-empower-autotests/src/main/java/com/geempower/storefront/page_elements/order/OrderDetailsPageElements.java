@@ -33,6 +33,7 @@ public class OrderDetailsPageElements {
     public final static String TIME_STATUSES_VALUES_IN_DROP_DOWN_XPATH = "//li[contains(@class,'select2-results__option') and not(contains(@class,'highlight'))]";
     public final static String ORDER_DETAILS_TABLE_HEADERS_XPATH = "//th[contains(@class,'create-summary')]";
     public final static String EXPAND_DETAIL_PRODUCT_BLOCK_ARROW_XPATH = "//i[contains(@class,'fa fa-angle-down table-collpase display-inline-block collapsed')]";
+    public final static String EXPAND_FIRST_DETAIL_PRODUCT_BLOCK_ARROW_XPATH = "//tr[@data-currentindex='1']" + EXPAND_DETAIL_PRODUCT_BLOCK_ARROW_XPATH;
     public final static String CLOSE_DETAIL_PRODUCT_BLOCK_ARROW_XPATH = "//i[contains(@class,'fa fa-angle-down table-collpase display-inline-block open')]";
     public final static String LABEL_VALUES_IN_PRODUCT_DETAILS_BLOCK_XPATH = "//div[contains(@id,'description-1') and contains(@aria-expanded, 'true')]//label[contains(text(),'%s')]/following-sibling::p";
     public final static String LABELS_IN_PRODUCT_DETAILS_BLOCK_XPATH = "//div[contains(@id,'description-1') and contains(@aria-expanded, 'true')]//label";
@@ -54,4 +55,5 @@ public class OrderDetailsPageElements {
     public final static String NEXT_TRACKING_INFO_BUTTON_XPATH = "//a[@class='text-blue track-next ']";
     public final static String PREVIOUS_TRACKING_INFO_BUTTON_XPATH = "//a[@class='text-blue track-prev ']";
     public final static String FIRST_INVOICE_HYPERLINK_XPATH = "//tbody/tr[1]//a[@class='check-invoice-href']";
+    public final static String FIRST_LINE_PACKING_SLIP_HYPER_LINK_XPATH = "//tr[@data-currentindex='1']//a[@class='packing-slip-href']";
 }
