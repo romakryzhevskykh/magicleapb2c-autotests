@@ -96,7 +96,12 @@ public class VolumeRebatePage extends StorefrontBasePage {
 
     @Step("Get Next Target Value for appropriate Avr.")
     public String getNextTargetValue(int avrNumber) {
-        return $(APPROPRIATE_NEXT_TARGET_VALUE_XPATH, String.valueOf(avrNumber)).getText();
+        String nextTargetValue = $(APPROPRIATE_NEXT_TARGET_VALUE_XPATH, String.valueOf(avrNumber)).getText();
+        if (nextTargetValue.contains("Next Target")) {
+            return "Next Target";
+        } else {
+            return nextTargetValue;
+        }
     }
 
     @Step("Get Current Volume Label For Each Avr.")
@@ -161,6 +166,11 @@ public class VolumeRebatePage extends StorefrontBasePage {
         return dataDiscount.split(",");
     }
 
+    @Step("Get Guaranteed Percentage.")
+    public String getGuaranteedPercentage(int avrNumber) {
+        return $(CALCULATOR_CUSTOMER_PROJECTION_FIELD_XPATH, String.valueOf(avrNumber)).getAttribute("data-guaranteed-rate");
+    }
+
     @Step("Set Customer Projection Value.")
     public void setCustomerProjectionValue(int avrNumber, long customerProjectionValue) {
         $(CALCULATOR_CUSTOMER_PROJECTION_FIELD_XPATH, String.valueOf(avrNumber)).clear();
@@ -181,11 +191,11 @@ public class VolumeRebatePage extends StorefrontBasePage {
     @Step("Get Customer Projection Value.")
     public float getCustomerProjectionValue(int avrNumber) {
         waitUntilPageIsFullyLoaded();
-        return Float.parseFloat($(CALCULATOR_CUSTOMER_PROJECTION_FIELD_XPATH, String.valueOf(avrNumber)).getAttribute("value"));
+        return Float.parseFloat($(CALCULATOR_CUSTOMER_PROJECTION_FIELD_XPATH, String.valueOf(avrNumber)).getAttribute("value").replaceAll(",", ""));
     }
 
     @Step("Get Current Payout For Avr.")
     public long getCurrentPayoutForAvr(int avrNumber) {
-        return Long.parseLong($(APPROPRIATE_AVR_CURRENT_PAYOUT_VALUE_XPATH, String.valueOf(avrNumber)).getText().replace(",", ""));
+        return Long.parseLong($(APPROPRIATE_AVR_CURRENT_PAYOUT_VALUE_XPATH, String.valueOf(avrNumber)).getText().replaceAll(",", ""));
     }
 }

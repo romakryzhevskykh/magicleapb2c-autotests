@@ -1,5 +1,6 @@
 package com.geempower.cucumber.definition_steps;
 
+import com.geempower.helpers.Utils;
 import com.geempower.helpers.managers.ProductManager;
 import com.geempower.helpers.models.AVRTarget;
 import com.geempower.helpers.models.AVRType;
@@ -35,6 +36,8 @@ public class DashboardStepDefs extends AbstractStepDefs {
     private HeaderBlock headerBlock;
     @Autowired
     private ProductManager productManager;
+    @Autowired
+    private Utils utils;
 
     @And("^Order Status widget is displayed.$")
     public void orderStatusWidgetIsDisplayed() {
@@ -336,7 +339,7 @@ public class DashboardStepDefs extends AbstractStepDefs {
         String rebateCompanyName = dashboardPage.getAvrRebateCompanyName();
         assertTrue(rebateCompanyName.startsWith("AVR: 003000"));
         assertTrue(rebateCompanyName.contains("|"));
-        assertTrue(rebateCompanyName.endsWith("2018"));
+        assertTrue(rebateCompanyName.endsWith(String.valueOf(utils.getCurrentYear())) || rebateCompanyName.endsWith(String.valueOf(utils.getCurrentYear()-1)));
     }
 
     @Then("^(.*) current payout is displayed on the AVR widget.$")

@@ -45,7 +45,8 @@ public class VolumeRebateStepDefs extends AbstractStepDefs {
 
     @Then("^Year switcher is present with current year.$")
     public void yearSwitcherIsPresentWithCurrentYear() {
-        assertEquals(utils.getCurrentYear(), volumeRebatePage.getYearSwitcherValue());
+        assertTrue(utils.getCurrentYear() == (volumeRebatePage.getYearSwitcherValue()) ||
+                utils.getCurrentYear() - 1 == volumeRebatePage.getYearSwitcherValue());
     }
 
     @Then("^(.*) currency is displayed on the Volume Rebate page.$")
@@ -155,6 +156,7 @@ public class VolumeRebateStepDefs extends AbstractStepDefs {
     @Then("^Projection Payout is calculated correctly on the fly and user can save this value.$")
     public void projectionPayoutIsCalculatedOnTheFly() {
         for (int i = 1; i <= volumeRebatePage.getCountOfAvrs(); i++) {
+            volumeRebatePage.expandAvr(i);
             if (volumeRebatePage.isTargetApplicable(i)) {
                 String[] dataTargets = volumeRebatePage.getDataTargets(i);
                 String[] dataDiscounts = volumeRebatePage.getDataDiscounts(i);
@@ -164,8 +166,16 @@ public class VolumeRebateStepDefs extends AbstractStepDefs {
                     customerProjectionValue = Long.parseLong(dataTargets[j]) + 1;
                     float dataDiscount = Float.parseFloat(dataDiscounts[j]);
                     volumeRebatePage.setCustomerProjectionValue(i, customerProjectionValue);
-                    expectedProjectionPayout = (customerProjectionValue * dataDiscount) / 100;
-                    assertEquals(expectedProjectionPayout, volumeRebatePage.getCalculatedPayoutValue(i), 0.01);
+                    if (volumeRebatePage.getAvrTypeDescriptionWithoutPercentage(i).contains("Guarantee")) {
+                        float guaranteed = Float.parseFloat(volumeRebatePage.getGuaranteedPercentage(i));
+                        expectedProjectionPayout = (customerProjectionValue * (dataDiscount + guaranteed)) / 100;
+                        assertEquals(expectedProjectionPayout, volumeRebatePage.getCalculatedPayoutValue(i), 0.02);
+                    }
+                    else {
+                        expectedProjectionPayout = (customerProjectionValue * dataDiscount) / 100;
+                        assertEquals(expectedProjectionPayout, volumeRebatePage.getCalculatedPayoutValue(i), 0.01);
+
+                    }
                 }
                 volumeRebatePage.saveProjectionPayout(i);
                 utils.refreshCurrentPage();
