@@ -166,6 +166,7 @@ public class VolumeRebatePage extends StorefrontBasePage {
         return dataDiscount.split(",");
     }
 
+    @Step("Get Guaranteed Percentage.")
     public String getGuaranteedPercentage(int avrNumber) {
         return $(CALCULATOR_CUSTOMER_PROJECTION_FIELD_XPATH, String.valueOf(avrNumber)).getAttribute("data-guaranteed-rate");
     }

@@ -139,6 +139,7 @@ public class Utils extends UIComponent {
         ((JavascriptExecutor) getDriver()).executeScript("scroll(0,0)");
     }
 
+    @Step("Get current year.")
     public int getCurrentYear() {
         LocalDateTime now = LocalDateTime.now();
         return now.getYear();
