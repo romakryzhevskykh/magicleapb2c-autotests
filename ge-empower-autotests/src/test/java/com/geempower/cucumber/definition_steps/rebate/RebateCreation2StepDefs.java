@@ -39,7 +39,7 @@ public class RebateCreation2StepDefs extends AbstractStepDefs {
     }
 
     @When("^User clicks on the Next top button on the second rebate creation step.$")
-    public void userClicksOnTheNextTopButtonOnTheSecondRebateCreationStep() {
+    public void сlicksOnTheNextTopButtonOnTheSecondRebateCreationStep() {
         rebateCreation2Page.clickOnNextButtonOnSecondPage();
     }
 
@@ -65,7 +65,7 @@ public class RebateCreation2StepDefs extends AbstractStepDefs {
     }
 
     @When("^User clicks on Save for later button.$")
-    public void userClicksOnSaveForLaterButton() {
+    public void сlicksOnSaveForLaterButton() {
         rebateCreation2Page.clickOnSaveForLaterButton();
     }
 
@@ -75,12 +75,12 @@ public class RebateCreation2StepDefs extends AbstractStepDefs {
     }
 
     @When("^User sets random name to the list name input.$")
-    public void userSetsRandomNameToTheListNameInput() {
+    public void setsRandomNameToTheListNameInput() {
         threadVarsHashMap.put(TestKeyword.REBATE_SAVE_FOR_LATER_LIST_NAME, rebateCreation2Page.setNameForNewSavedRebateList());
     }
 
     @And("^User clicks on Save button in Save for later pop-up.$")
-    public void userClicksOnSaveButtonInSaveForLaterPopUp() {
+    public void сlicksOnSaveButtonInSaveForLaterPopUp() {
         rebateCreation2Page.clickSaveNewRebatesList();
     }
 

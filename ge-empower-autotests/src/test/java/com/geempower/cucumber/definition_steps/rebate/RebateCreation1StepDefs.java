@@ -26,7 +26,7 @@ public class RebateCreation1StepDefs extends AbstractStepDefs {
     }
 
     @When("^User chooses Manual Entry option.$")
-    public void userChoosesManualEntryOption() {
+    public void choosesManualEntryOption() {
         rebateCreation1Page.chooseManualEntryOption();
     }
 
@@ -47,7 +47,7 @@ public class RebateCreation1StepDefs extends AbstractStepDefs {
     }
 
     @When("^User sets appropriate Catalog No. for appropriate account to the Catalog No. field.$")
-    public void userSetsAppropriateCatalogNoForAppropriateAccountToTheCatalogNoField() {
+    public void setsAppropriateCatalogNoForAppropriateAccountToTheCatalogNoField() {
         String catalogNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
         rebateCreation1Page.setChosenProductCatalogNoToTheInput(catalogNo);
     }
@@ -75,7 +75,7 @@ public class RebateCreation1StepDefs extends AbstractStepDefs {
     }
 
     @When("^User clicks on the Next top button on the first rebate creation step.$")
-    public void userClicksOnTheNextTopButtonOnTheFirstRebateCreationStep() {
+    public void clicksOnTheNextTopButtonOnTheFirstRebateCreationStep() {
         rebateCreation1Page.clickOnTopNextButton();
     }
 
