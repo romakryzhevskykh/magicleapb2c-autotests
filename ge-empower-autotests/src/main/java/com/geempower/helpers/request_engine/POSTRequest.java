@@ -73,7 +73,6 @@ public class POSTRequest extends APIRequest {
         this.stringOfPostParameters.append(postString);
     }
 
-
     public void sendPostRequest(UserSession userSession) throws IOException {
         sendPostRequest(userSession, this.postParametersAndValues);
     }
