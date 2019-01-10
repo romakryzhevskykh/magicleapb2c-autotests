@@ -92,6 +92,8 @@ Feature: Create Rebate manually/ via file uploading, Save for later, Edit saved 
     Then Second step is opened.
     Then Validation message Date should not be more than current date is displayed under the End Customer Invoice Date field.
     Then Error message is displayed Invalid invoice dates: 01/01/2020 in the top of Rebate Second step page.
+    When User hover mouse over top Next button on Rebate Creation 2 page.
+    Then Is Required data is missing or is incorrect text displayed in the Next button tooltip on Rebate Creation 2 page.
 
   Scenario: Check validation message for Current date < 90 days via file uploading.
     When Users click on the Create Rebate button on the All Rebates page.

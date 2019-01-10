@@ -101,4 +101,15 @@ public class RebateCreation2Page extends StorefrontBasePage {
         $(SAVE_FOR_LATER_POP_UP_LIST_NAME_INPUT_XPATH).sendKeys(rebateListName);
         return rebateListName;
     }
+
+    @Step("User Hover Mouse Over Top Next Button On Rebate Creation 2 Page.")
+    public void userHoverMouseOverTopNextButtonOnRebateCreation2Page() {
+        moveToElement($(NEXT_TOP_BUTTON_XPATH));
+    }
+
+    @Step("Get Next Button Tool Tip Text on Rebate Creation 2 page.")
+    public String getNextButtonToolTipText2Page() {
+        waitUntilPageIsFullyLoaded();
+        return $(NEXT_BUTTON_TOOLTIP_XPATH).getText();
+    }
 }

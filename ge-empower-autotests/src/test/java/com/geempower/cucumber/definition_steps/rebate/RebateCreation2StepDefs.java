@@ -83,4 +83,14 @@ public class RebateCreation2StepDefs extends AbstractStepDefs {
     public void userClicksOnSaveButtonInSaveForLaterPopUp() {
         rebateCreation2Page.clickSaveNewRebatesList();
     }
+
+    @When("^User hover mouse over top Next button on Rebate Creation 2 page.$")
+    public void userHoverMouseOverTopNextButtonOnRebateCreation2Page(){
+        rebateCreation2Page.userHoverMouseOverTopNextButtonOnRebateCreation2Page();
+    }
+
+    @Then("^Is (.*) text displayed in the Next button tooltip on Rebate Creation 2 page.$")
+    public void isAppropriateTextDisplayedInTheNextButtonTooltipOnRebateCreation2Page(String tooltipText) {
+        assertEquals(tooltipText, rebateCreation2Page.getNextButtonToolTipText2Page());
+    }
 }
