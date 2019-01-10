@@ -71,4 +71,15 @@ public class RebatesStepDefs extends AbstractStepDefs {
     public void theRebateWithAppropriateNameIsNotDisplayedOnTheSavedCreditRequestTab() {
         assertNotEquals(threadVarsHashMap.get(TestKeyword.REBATE_SAVE_FOR_LATER_LIST_NAME), rebatesPage.getLastSavedRebateName());
     }
+
+    @Then("^All Rebates quantity box is the sum of In Process and Complete quantity boxes.$")
+    public void allRebatesQuantityBoxIsTheSumOfInProcessAndCompleteQuantityBoxes() {
+        assertEquals(rebatesPage.getNumberOfAllRebates(), rebatesPage.getNumberOfInProcessRebates()
+                + rebatesPage.getNumberOfCompletedRebates());
+    }
+
+    @Then("^External user can see less quantity of All Rebates than admin.$")
+    public void externalUserCanSeeLessQuantityOfAllRebatesThanAdmin() {
+        assertTrue(Integer.parseInt(threadVarsHashMap.getString(TestKeyword.ALL_REBATES_COUNT)) > rebatesPage.getNumberOfAllRebates());
+    }
 }

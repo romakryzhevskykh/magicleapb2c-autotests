@@ -19,18 +19,38 @@ Feature: Create Rebate manually/ via file uploading, Save for later, Edit saved 
   Scenario: Check that user able to open Rebates page and correct header title is displayed.
     Then Rebates title is displayed on Rebates page.
 
-  Scenario: Check that user is able to place rebate manually.
+  Scenario: Check that quantity of All Rebate box is displayed correctly.
+    Then All Rebates quantity box is the sum of In Process and Complete quantity boxes.
+
+  Scenario: Check that external user can see less quantity of Rebates than admin.
+    And Admin see all the rebates.
+    Given Switch to Storefront as externalUser2.
+    And User is logged in to Storefront.
+    And Rebates page is opened.
+    Then External user can see less quantity of All Rebates than admin.
+
+  Scenario Outline: Check that user is able to place rebate manually.
     When Users click on the Create Rebate button on the All Rebates page.
     Then First step of rebate creation process is opened.
     When User chooses Manual Entry option.
+    When User hover mouse over top Next button on Rebate Creation 1 page.
+    Then Is <tooltipNextButton1and2page> text displayed in the Next button tooltip on Rebate Creation 1 page.
     And Sets account for chosen region to the Account No. field.
+    When Click on Search Agreement No icon.
+    And Hover mouse over Apply button in Special Pricing Lookup pop-up.
+    Then Is <applyButtonTooltipText> text is displayed in Apply tooltip button.
     And Chooses random SPA No. from Special Pricing Lookup list for the appropriate Account.
     Given Select test product for chosen region.
     When User sets appropriate Catalog No. for appropriate account to the Catalog No. field.
+    When Click on Search End Customer Account No icon.
+    And Hover mouse over Apply button in End Customer Account No pop-up.
+    Then Is <applyButtonTooltipText> text is displayed in Apply tooltip button.
     And Chooses random End Customer Account No. from End Customer Account No. list.
     And Sets correct End Customer Invoice Date.
     And Sets random Distributor Invoice No.
     And Sets random Qty. Sold.
+    When User hover mouse over question icon on Rebate Creation 1 page.
+    Then Is <questionIconTooltipText> text displayed in question icon tooltip on Rebate Creation 1 page.
     When User clicks on the Next top button on the first rebate creation step.
     Then Second step is opened.
     Then All data has been replaced correctly from first to second step.
@@ -43,6 +63,10 @@ Feature: Create Rebate manually/ via file uploading, Save for later, Edit saved 
     And Rebate is created with all parameters.
     Then Rebates title is displayed on Rebates page.
     Then Created rebate is appeared on the All Rebates page.
+
+    Examples:
+      | tooltipNextButton1and2page               | questionIconTooltipText                                           | applyButtonTooltipText        |
+      | Required data is missing or is incorrect | Assign an ID# or name to this rebate request for your own records | Please make a selection first |
 
   Scenario: Check that user is able to place rebate via file uploading.
     When Users click on the Create Rebate button on the All Rebates page.
@@ -68,6 +92,8 @@ Feature: Create Rebate manually/ via file uploading, Save for later, Edit saved 
     Then Second step is opened.
     Then Validation message Date should not be more than current date is displayed under the End Customer Invoice Date field.
     Then Error message is displayed Invalid invoice dates: 01/01/2020 in the top of Rebate Second step page.
+    When User hover mouse over top Next button on Rebate Creation 2 page.
+    Then Is Required data is missing or is incorrect text displayed in the Next button tooltip on Rebate Creation 2 page.
 
   Scenario: Check validation message for Current date < 90 days via file uploading.
     When Users click on the Create Rebate button on the All Rebates page.
@@ -83,9 +109,11 @@ Feature: Create Rebate manually/ via file uploading, Save for later, Edit saved 
     Then First step of rebate creation process is opened.
     When User chooses Manual Entry option.
     And Sets account for chosen region to the Account No. field.
+    When Click on Search Agreement No icon.
     And Chooses random SPA No. from Special Pricing Lookup list for the appropriate Account.
     Given Select test product for chosen region.
     When User sets appropriate Catalog No. for appropriate account to the Catalog No. field.
+    When Click on Search End Customer Account No icon.
     And Chooses random End Customer Account No. from End Customer Account No. list.
     And Sets correct End Customer Invoice Date.
     And Sets random Distributor Invoice No.
@@ -118,9 +146,11 @@ Feature: Create Rebate manually/ via file uploading, Save for later, Edit saved 
     Then First step of rebate creation process is opened.
     When User chooses Manual Entry option.
     And Sets account for chosen region to the Account No. field.
+    When Click on Search Agreement No icon.
     And Chooses random SPA No. from Special Pricing Lookup list for the appropriate Account.
     Given Select test product for chosen region.
     When User sets appropriate Catalog No. for appropriate account to the Catalog No. field.
+    When Click on Search End Customer Account No icon.
     And Chooses random End Customer Account No. from End Customer Account No. list.
     And Sets correct End Customer Invoice Date.
     And Sets random Distributor Invoice No.

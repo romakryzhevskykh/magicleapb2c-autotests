@@ -362,7 +362,6 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     @Then("^Service link is equal to (.*).$")
     public void serviceLinkIsEqualToServiceLink(String serviceLink) {
         assertEquals(serviceLink, orderDetailsPage.getInvoiceDetailsPopUpServiceLink());
-
     }
 
     @And("^Packing slip entity created.$")

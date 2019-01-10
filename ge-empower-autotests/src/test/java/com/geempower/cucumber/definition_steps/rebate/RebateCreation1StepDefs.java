@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class RebateCreation1StepDefs extends AbstractStepDefs {
@@ -25,7 +26,7 @@ public class RebateCreation1StepDefs extends AbstractStepDefs {
     }
 
     @When("^User chooses Manual Entry option.$")
-    public void userChoosesManualEntryOption() {
+    public void choosesManualEntryOption() {
         rebateCreation1Page.chooseManualEntryOption();
     }
 
@@ -40,8 +41,13 @@ public class RebateCreation1StepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.REBATE_SPA_NO, rebateCreation1Page.chooseRandomSpaNoFromTheListOfAvailableSpa(listTitle));
     }
 
+    @When("^Click on Search Agreement No icon.$")
+    public void clickOnSearchAgreementNoIcon() {
+        rebateCreation1Page.clickOnSearchAgreementNoIcon();
+    }
+
     @When("^User sets appropriate Catalog No. for appropriate account to the Catalog No. field.$")
-    public void userSetsAppropriateCatalogNoForAppropriateAccountToTheCatalogNoField() {
+    public void setsAppropriateCatalogNoForAppropriateAccountToTheCatalogNoField() {
         String catalogNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
         rebateCreation1Page.setChosenProductCatalogNoToTheInput(catalogNo);
     }
@@ -69,12 +75,52 @@ public class RebateCreation1StepDefs extends AbstractStepDefs {
     }
 
     @When("^User clicks on the Next top button on the first rebate creation step.$")
-    public void userClicksOnTheNextTopButtonOnTheFirstRebateCreationStep() {
+    public void clicksOnTheNextTopButtonOnTheFirstRebateCreationStep() {
         rebateCreation1Page.clickOnTopNextButton();
     }
 
     @And("^Upload test rebate file with name (.*).$")
     public void uploadTestRebateFile(String fileName) {
         rebateCreation1Page.uploadRebateFile(fileName);
+    }
+
+    @When("^User hover mouse over top Next button on Rebate Creation 1 page.$")
+    public void houseOverTopNextButtonOnRebateCreation1Page(){
+        rebateCreation1Page.hoverMouseOverTopNextButtonOnRebateCreation1Page();
+    }
+
+    @Then("^Is (.*) text displayed in the Next button tooltip on Rebate Creation 1 page.$")
+    public void isAppropriateTextDisplayedInTheNextButtonTooltipOnRebateCreation1Page(String tooltipText) {
+        assertEquals(tooltipText, rebateCreation1Page.getNextButtonToolTipText1Page());
+    }
+
+    @When("^User hover mouse over question icon on Rebate Creation 1 page.$")
+    public void hoverMouseOverQuestionIconOnRebateCreationPage() {
+        rebateCreation1Page.hoverMouseOverQuestionIconOnRebateCreation1Page();
+    }
+
+    @Then("^Is (.*) text displayed in question icon tooltip on Rebate Creation 1 page.$")
+    public void isAppropriateTextDisplayedInQuestionIconTooltipOnRebateCreation1Page(String tooltipText) {
+        assertEquals(tooltipText, rebateCreation1Page.getQuestionIconTooltipText());
+    }
+
+    @And("^Hover mouse over Apply button in Special Pricing Lookup pop-up.$")
+    public void hoverMouseOverApplyButtonInSpecialPricingLookupPopUp()  {
+        rebateCreation1Page.hoverMouseOverApplyButtonInSpecialPricingLookupPopUp();
+    }
+
+    @And("^Hover mouse over Apply button in End Customer Account No pop-up.$")
+    public void hoverMouseOverApplyButtonInEndCustomerAccountPopUp()  {
+        rebateCreation1Page.hoverMouseOverApplyButtonInEndCustomerAccountPopUp();
+    }
+
+    @Then("^Is (.*) text is displayed in Apply tooltip button.$")
+    public void isTooltipTextIsDisplayedInApplyTooltipButton(String tooltipText){
+        assertEquals(tooltipText, rebateCreation1Page.getApplyButtonToolTip());
+    }
+
+    @When("^Click on Search End Customer Account No icon.$")
+    public void clickOnSearchEndCustomerAccountNoIcon() {
+        rebateCreation1Page.clickOnSearchEndCustomerAccountNoIcon();
     }
 }
