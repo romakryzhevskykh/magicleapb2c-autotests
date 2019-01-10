@@ -85,8 +85,8 @@ public class RebateCreation1StepDefs extends AbstractStepDefs {
     }
 
     @When("^User hover mouse over top Next button on Rebate Creation 1 page.$")
-    public void userHoverMouseOverTopNextButtonOnRebateCreation1Page(){
-        rebateCreation1Page.userHoverMouseOverTopNextButtonOnRebateCreation1Page();
+    public void houseOverTopNextButtonOnRebateCreation1Page(){
+        rebateCreation1Page.hoverMouseOverTopNextButtonOnRebateCreation1Page();
     }
 
     @Then("^Is (.*) text displayed in the Next button tooltip on Rebate Creation 1 page.$")
@@ -95,7 +95,7 @@ public class RebateCreation1StepDefs extends AbstractStepDefs {
     }
 
     @When("^User hover mouse over question icon on Rebate Creation 1 page.$")
-    public void userHoverMouseOverQuestionIconOnRebateCreationPage() {
+    public void hoverMouseOverQuestionIconOnRebateCreationPage() {
         rebateCreation1Page.hoverMouseOverQuestionIconOnRebateCreation1Page();
     }
 

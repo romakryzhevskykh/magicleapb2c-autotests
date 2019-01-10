@@ -113,15 +113,15 @@ public class RebateCreation1Page extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
     }
 
-    @Step("User Hover Mouse Over Top Next Button On Rebate Creation 1 Page.")
-    public void userHoverMouseOverTopNextButtonOnRebateCreation1Page() {
+    @Step("Hover Mouse Over Top Next Button On Rebate Creation 1 Page.")
+    public void hoverMouseOverTopNextButtonOnRebateCreation1Page() {
         moveToElement($(NEXT_TOP_BUTTON_FIRST_STEP_XPATH));
     }
 
     @Step("Get Next Button Tool Tip Text on Rebate Creation 1 page.")
     public String getNextButtonToolTipText1Page() {
         waitUntilPageIsFullyLoaded();
-        return $(NEXT_BUTTON_TOOLTIP_XPATH).getText();
+        return $(TOOLTIP_APPLY_AND_NEXT_BUTTONS_XPATH).getText();
     }
 
     @Step("Hover Mouse Over Question Icon On Rebate Creation 1 Page.")
@@ -149,7 +149,7 @@ public class RebateCreation1Page extends StorefrontBasePage {
 
     @Step("Get Apply Button Tool Tip.")
     public String getApplyButtonToolTip() {
-        return $(TOOLTIP_APPLY_BUTTON_XPATH).getText();
+        return $(TOOLTIP_APPLY_AND_NEXT_BUTTONS_XPATH).getText();
     }
 
     @Step("Click On Search End Customer Account No Icon.")

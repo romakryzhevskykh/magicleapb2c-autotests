@@ -102,8 +102,8 @@ public class RebateCreation2Page extends StorefrontBasePage {
         return rebateListName;
     }
 
-    @Step("User Hover Mouse Over Top Next Button On Rebate Creation 2 Page.")
-    public void userHoverMouseOverTopNextButtonOnRebateCreation2Page() {
+    @Step("Hover Mouse Over Top Next Button On Rebate Creation 2 Page.")
+    public void hoverMouseOverTopNextButtonOnRebateCreation2Page() {
         moveToElement($(NEXT_TOP_BUTTON_XPATH));
     }
 

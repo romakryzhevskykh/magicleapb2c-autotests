@@ -21,8 +21,7 @@ public class RebateCreation1PageElements {
     public final static String SPECIAL_PRICING_LOOKUP_POP_UP_TITLE_XPATH = "//div[@id='rebate-special-pricing-lookup-modal']//h4[@class='modal-title']";
     public final static String END_CUSTOMER_ACCOUNT_NO_POP_UP_TITLE_XPATH = "//div[@id='rebate-end-customer-modal']//h4[@class='modal-title']";
     public final static String UPLOAD_INPUT_PATH_XPATH = "//input[@id='rebate-upload-file']";
-    public final static String NEXT_BUTTON_TOOLTIP_XPATH = "//div[@class='tooltip-inner']";
     public final static String QUESTION_ICON_XPATH = "//a[@class='text-grey2 popover-link']/i";
     public final static String TOOLTIP_QUESTION_ICON_XPATH = "//div[@class = 'popover fade top in']//div[@class = 'popover-content']";
-    public final static String TOOLTIP_APPLY_BUTTON_XPATH = "//div[@class='tooltip-inner']";
+    public final static String TOOLTIP_APPLY_AND_NEXT_BUTTONS_XPATH = "//div[@class='tooltip-inner']";
 }

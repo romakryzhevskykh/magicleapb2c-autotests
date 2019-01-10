@@ -85,8 +85,8 @@ public class RebateCreation2StepDefs extends AbstractStepDefs {
     }
 
     @When("^User hover mouse over top Next button on Rebate Creation 2 page.$")
-    public void userHoverMouseOverTopNextButtonOnRebateCreation2Page(){
-        rebateCreation2Page.userHoverMouseOverTopNextButtonOnRebateCreation2Page();
+    public void hoverMouseOverTopNextButtonOnRebateCreation2Page(){
+        rebateCreation2Page.hoverMouseOverTopNextButtonOnRebateCreation2Page();
     }
 
     @Then("^Is (.*) text displayed in the Next button tooltip on Rebate Creation 2 page.$")
