@@ -94,7 +94,6 @@ public class RebateCreation1Page extends StorefrontBasePage {
         return randomDistributorInvoiceNo;
     }
 
-
     @Step("Set Random Qty Sold")
     public int setRandomQtySold() {
         int randomQtySold = utils.generateRandomNumber(2, 40);
