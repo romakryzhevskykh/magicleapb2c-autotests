@@ -297,13 +297,13 @@ Feature: Some actions on Orders page
     And Dashboard page is opened.
     When Click on Skip button.
     When Close cookies pop-up.
-    When User searches order by <orderId> orderNo via Order Search field.
-    When User clicks on appropriate <orderId>.
+    When User searches order by <orderNo> orderNo via Order Search field.
+    When User clicks on appropriate <orderNo>.
     When User opens first product detail block.
     And Packing slip entity created.
-    Then Packing slip document prepared successfully with orderId <orderId>.
+    Then Packing slip document prepared successfully with data <accountNo>, <salesDivision>, <orderId>.
     Then Packing slip document downloaded successfully with orderId <orderId>.
 
     Examples:
-      | region        | accountNo | salesDivision | orderId    |
-      | North_America | 1318501   | USS1          | 0151359861 |
+      | region        | accountNo | salesDivision | orderNo   | orderId    |
+      | North_America | 1318501   | USS1          | 151359861 | 0151359861 |
