@@ -5,6 +5,8 @@ public class RebatesPageElements {
     public final static String CREATE_REBATE_BUTTON_XPATH = "//button[@class='btn back-to-request-rebate btn-white']";
     public final static String REBATE_BY_ID_XPATH = "//div[@class='panel accordion-section']//a[text()='%s']";
     public final static String ALL_REBATES_COUNT_XPATH = "//span[@class='status-number text-bold']";
+    public final static String IN_PROCESS_REBATES_COUNT_XPATH = "//span[@class='status-number text-status-orange text-bold']";
+    public final static String COMPLETED_REBATES_COUNT_XPATH = "//span[@class='status-number text-status-gray text-bold']";
     public final static String SAVED_CREDIT_REQUEST_TAB_XPATH = "//a[@href='#saved-credit-request']";
     private final static String LAST_SAVED_REBATES_XPATH = "//div[@id='saved-credit-request']//div[@class='panel accordion-section'][last()]";
     public final static String LAST_SAVED_REBATE_NAME_XPATH = LAST_SAVED_REBATES_XPATH + "//span[@class]";

@@ -41,6 +41,15 @@ public class RebatesPage extends StorefrontBasePage {
         return Integer.parseInt($(ALL_REBATES_COUNT_XPATH).getText());
     }
 
+    @Step("Get Number Of In Process Rebates on the Rebates page.")
+    public int getNumberOfInProcessRebates() {
+        return Integer.parseInt($(IN_PROCESS_REBATES_COUNT_XPATH).getText());
+    }
+    @Step("Get Number Of In Completed Rebates on the Rebates page.")
+    public int getNumberOfCompletedRebates() {
+        return Integer.parseInt($(COMPLETED_REBATES_COUNT_XPATH).getText());
+    }
+
     @Step("Open Saved Credit Requests Tab.")
     public void openSavedCreditRequestsTab() {
         click(SAVED_CREDIT_REQUEST_TAB_XPATH);
