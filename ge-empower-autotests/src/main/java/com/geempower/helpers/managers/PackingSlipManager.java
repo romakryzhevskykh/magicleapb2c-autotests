@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 @Component
 public class PackingSlipManager {
-    private POSTRequest PREPARE_PACKING_SLIP_DOCUMENT = new POSTRequest("Prepare packing slop document for downloading.", "packingslip/pdf/prepare/%s");
+    private POSTRequest PREPARE_PACKING_SLIP_DOCUMENT = new POSTRequest("Prepare packing slip document for downloading.", "packingslip/pdf/prepare/%s");
     private GETRequest DOWNLOAD_PACKING_SLIP_DOCUMENT = new GETRequest("Download packing slip.", "packingslip/pdf/download/%s");
 
     private ArrayList<PackingSlip> packingSlipList = new ArrayList<>();

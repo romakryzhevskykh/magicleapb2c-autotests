@@ -377,14 +377,18 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
     @Then("^Packing slip document prepared successfully with orderId (.*).$")
     public void packingSlipDocumentPreparedSuccessfully(String orderNo) throws IOException {
         PackingSlip packingSlip = packingSlipManager.getPackingSlipByOrderId(orderNo);
-        int responseCode = packingSlipManager.preparePackingSlipDocument(userSessions.getActiveUserSession(), packingSlip.getOrderId(), packingSlip.getOrderLine(), packingSlip.getDataPackingSlipNumber(), packingSlip.getDataPackingBolNumber());
+        int responseCode = packingSlipManager.preparePackingSlipDocument(userSessions.getActiveUserSession(),
+                packingSlip.getOrderId(), packingSlip.getOrderLine(), packingSlip.getDataPackingSlipNumber(),
+                packingSlip.getDataPackingBolNumber());
         assertEquals(responseCode, 200);
     }
 
     @Then("^Packing slip document downloaded successfully with orderId (.*).$")
     public void packingSlipDocumentDownloadedSuccessfully(String orderNo) throws IOException {
         PackingSlip packingSlip = packingSlipManager.getPackingSlipByOrderId(orderNo);
-        int responseCode = packingSlipManager.downloadPackingSlipDocument(userSessions.getActiveUserSession(), packingSlip.getOrderId(), packingSlip.getOrderLine(), packingSlip.getDataPackingSlipNumber(), packingSlip.getDataPackingBolNumber());
+        int responseCode = packingSlipManager.downloadPackingSlipDocument(userSessions.getActiveUserSession(),
+                packingSlip.getOrderId(), packingSlip.getOrderLine(), packingSlip.getDataPackingSlipNumber(),
+                packingSlip.getDataPackingBolNumber());
         assertEquals(responseCode, 200);
     }
 }
