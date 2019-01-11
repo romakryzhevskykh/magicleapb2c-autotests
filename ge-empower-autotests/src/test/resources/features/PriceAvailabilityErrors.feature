@@ -90,7 +90,7 @@ Feature: Test scenarios for all possible P&A validation error messages.
     When User set catalogueNo to Copy & Paste field.
     And Click on P&A button.
     And Price&Availability page is opened.
-    When User cleans Qty field.
+    When User makes Quantity field empty.
     Then Is Incorrect Qty. error message below Qty. field displayed.
     When User sets <longValue> value to the Qty field.
     Then Is Incorrect Qty. error message below Qty. field displayed.

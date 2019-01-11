@@ -40,7 +40,7 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
 
     @Step("Get Qty value.")
     public String getQtyValue(Product product) {
-        return $(QUANTITY_INPUT_RELATES_TO_PRODUCT_XPATH, product.getCatalogNo().toUpperCase()).getAttribute("value");
+        return $(QUANTITY_FIELD_BY_CATALOG_NO_XPATH, product.getCatalogNo().toUpperCase()).getAttribute("value");
     }
 
     @Step("Get Description.")
@@ -70,8 +70,8 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
     @Step("Set quantity to quantity field.")
     public void setQuantityForProduct(Product product, int quantity) {
         waitUntilPageIsFullyLoaded();
-        $(QUANTITY_INPUT_RELATES_TO_PRODUCT_XPATH, product.getCatalogNo().toUpperCase()).clear();
-        $(QUANTITY_INPUT_RELATES_TO_PRODUCT_XPATH, product.getCatalogNo().toUpperCase()).sendKeys(Integer.toString(quantity));
+        $(QUANTITY_FIELD_BY_CATALOG_NO_XPATH, product.getCatalogNo().toUpperCase()).clear();
+        $(QUANTITY_FIELD_BY_CATALOG_NO_XPATH, product.getCatalogNo().toUpperCase()).sendKeys(Integer.toString(quantity));
     }
 
     @Step("Click on Update Price and Availability button.")
@@ -192,11 +192,11 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
         return $(ERROR_MESSAGE_BELOW_AGREEMENT_NO_FIELD_XPATH).getText();
     }
 
-    @Step("Clean Qty Field.")
-    public void cleanQtyField() {
+    @Step("Make Quantity Field Empty.")
+    public void makeQuantityFieldEmpty() {
         waitUntilPageIsFullyLoaded();
-        $(QTY_FIELD_XPATH).clear();
-        $(QTY_FIELD_XPATH).sendKeys(Keys.ENTER);
+        $(QUANTITY_FIELD_XPATH).clear();
+        $(QUANTITY_FIELD_XPATH).sendKeys(Keys.ENTER);
     }
 
     @Step("Get Error Message Below Qty Field.")
@@ -207,6 +207,6 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
 
     @Step("Set value to the Qty field.")
     public void setQtyValue(String value) {
-        $(QTY_FIELD_XPATH).sendKeys(value);
+        $(QUANTITY_FIELD_XPATH).sendKeys(value);
     }
 }
