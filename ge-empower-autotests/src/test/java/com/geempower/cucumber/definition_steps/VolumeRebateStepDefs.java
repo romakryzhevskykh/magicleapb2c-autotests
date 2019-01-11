@@ -4,7 +4,6 @@ import com.geempower.helpers.Utils;
 import com.geempower.helpers.models.AVRTarget;
 import com.geempower.helpers.models.AVRType;
 import com.geempower.storefront.pages.VolumeRebatePage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
