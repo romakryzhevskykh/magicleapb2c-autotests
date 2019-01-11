@@ -107,3 +107,14 @@ Feature: Verification of main AVR elements on the Dashboard and on the Volume Re
     Examples:
       | sso       |
       | 503030969 |
+
+  Scenario: Check that dashboard AVR widget is not displayed and appropriate No AVR title is displayed on the Volume rebate page if no AVR data available.
+    And Select account 9000131.
+    And Click on chosen account.
+    And Dashboard page is opened.
+    When Click on Skip button.
+    And Close cookies pop-up.
+    Then VOLUME REBATE AVR section is displayed in the header menu.
+    Then AVR widget is not displayed on the Dashboard page.
+    When User clicks on VOLUME REBATE section in header menu.
+    Then There are no Volume Rebates available for this account. No AVR message is displayed on the Volume rebates page.

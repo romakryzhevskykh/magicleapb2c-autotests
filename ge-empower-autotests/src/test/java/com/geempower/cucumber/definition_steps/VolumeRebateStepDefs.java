@@ -197,4 +197,9 @@ public class VolumeRebateStepDefs extends AbstractStepDefs {
         }
         assertEquals(currentPayoutSum, Long.parseLong(volumeRebatePage.getCurrentPayoutTitle().replace("Current Payout: ", "").replace(",", "")));
     }
+
+    @Then("^(.*) No AVR message is displayed on the Volume rebates page.$")
+    public void noAVRMessageIsDisplayed(String message) {
+        assertEquals(message, volumeRebatePage.getNoAvrMessage());
+    }
 }

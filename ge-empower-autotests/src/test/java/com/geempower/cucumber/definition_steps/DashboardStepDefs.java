@@ -460,4 +460,14 @@ public class DashboardStepDefs extends AbstractStepDefs {
     public void rebatesSectionIsDisplayedOnTheHeaderMenu() {
         assertTrue(headerBlock.isRebatesSectionAvailableToUser());
     }
+
+    @Then("^AVR widget is not displayed on the Dashboard page.$")
+    public void avrWidgetIsNotDisplayedOnTheDashboardPage() {
+        assertFalse(dashboardPage.isAvrWidgetDisplayed());
+    }
+
+    @When("^User clicks on (.*) section in header menu.$")
+    public void userClicksOnAppropriateSectionInHeaderMenu(String sectionName) {
+        headerBlock.clickOnAppropriateSection(sectionName);
+    }
 }
