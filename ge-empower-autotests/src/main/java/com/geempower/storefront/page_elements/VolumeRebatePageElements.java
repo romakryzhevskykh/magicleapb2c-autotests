@@ -30,5 +30,5 @@ public class VolumeRebatePageElements {
     public static String CALCULATOR_PROJECTION_PAYOUT_LABEL_XPATH = APPROPRIATE_AVR_CALCULATOR_XPATH + "//div[2]/div[1]/label";
     public static String CALCULATOR_PROJECTION_PAYOUT_FIELD_XPATH = APPROPRIATE_AVR_CALCULATOR_XPATH + "//div[2]/div[2]/input";
     public static String SAVE_PROJECTION_PAYOUT_ICON_XPATH = APPROPRIATE_AVR_CALCULATOR_XPATH + "//i[@class='fas fa-save']";
-    public static String NO_AVD_DATA_MESSAGE_XPATH = "//div[@class='alert alert-info alert-info-spa']";
+    public static String NO_AVR_DATA_MESSAGE_XPATH = "//div[@class='alert alert-info alert-info-spa']";
 }

@@ -202,6 +202,6 @@ public class VolumeRebatePage extends StorefrontBasePage {
     @Step("Get No AVR data message.")
     public String getNoAvrMessage() {
         waitUntilPageIsFullyLoaded();
-        return $(NO_AVD_DATA_MESSAGE_XPATH).getText();
+        return $(NO_AVR_DATA_MESSAGE_XPATH).getText();
     }
 }
