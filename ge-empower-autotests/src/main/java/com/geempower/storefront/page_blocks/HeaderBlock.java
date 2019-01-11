@@ -90,7 +90,7 @@ public class HeaderBlock extends UIComponent {
     }
 
     @Step("Click on Header Section by section name.")
-    public void clickOnVolumeRebateSection(String sectionName) {
+    public void clickOnAppropriateSection(String sectionName) {
         click(MENU_SECTION_XPATH, sectionName);
     }
 }

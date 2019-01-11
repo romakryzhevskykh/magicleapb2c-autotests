@@ -467,7 +467,7 @@ public class DashboardStepDefs extends AbstractStepDefs {
     }
 
     @When("^User clicks on (.*) section in header menu.$")
-    public void userClicksOnVolumeRebateSectionInHeaderMenu(String sectionName) {
-        headerBlock.clickOnVolumeRebateSection(sectionName);
+    public void userClicksOnAppropriateSectionInHeaderMenu(String sectionName) {
+        headerBlock.clickOnAppropriateSection(sectionName);
     }
 }
