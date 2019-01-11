@@ -79,7 +79,7 @@ Feature: Test scenarios for all possible P&A validation error messages.
       | region        | account | salesDivision | product | agreementNo | pricingError                                               |
       | North_America | 2244411 | USS1_10_10    | TH2221J | 45000514    | Pricing agreement is invalid. Standard price is displayed. |
 
-  Scenario Outline: Check that user is able to place order via Copy&Paste field using P&A block in NA, EMEA, ASIA regions
+  Scenario Outline: Check that validation of Qty. field on P&A page works correctly.
     And Account management page is opened.
     When Choose <region> region.
     And Search random account for chosen region.
@@ -90,16 +90,17 @@ Feature: Test scenarios for all possible P&A validation error messages.
     When User set catalogueNo to Copy & Paste field.
     And Click on P&A button.
     And Price&Availability page is opened.
-    Then Check that default quantity is equals to 1 on the Price&Availability page.
-    When User clean Qty field.
+    When User cleans Qty field.
     Then Is Incorrect Qty. error message below Qty. field displayed.
-    When User set 11 characters to the Qty field.
+    When User sets <longValue> value to the Qty field.
     Then Is Incorrect Qty. error message below Qty. field displayed.
-    When User set letters to the Qty field.
+    When User sets <charsValue> value to the Qty field.
     Then Is Incorrect Qty. error message below Qty. field displayed.
-    When User set negative number to the Qty field.
+    When User sets <negativeValue> value to the Qty field.
+    Then Is Incorrect Qty. error message below Qty. field displayed.
+    When User sets <specialCharsValue> value to the Qty field.
     Then Is Incorrect Qty. error message below Qty. field displayed.
 
     Examples:
-      | region        |
-      | North_America |
+      | region        | longValue   | charsValue | negativeValue | specialCharsValue |
+      | North_America | 12345678900 | abc        | -5            | !@#$%ˆ            |
