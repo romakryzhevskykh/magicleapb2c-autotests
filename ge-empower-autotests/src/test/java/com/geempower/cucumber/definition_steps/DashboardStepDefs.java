@@ -11,6 +11,7 @@ import com.geempower.storefront.page_blocks.OrderStatusWidget;
 import com.geempower.storefront.page_blocks.PriceAndAvailabilityBlock;
 import com.geempower.storefront.pages.DashboardPage;
 import com.geempower.storefront.pages.order.OrdersPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -459,5 +460,15 @@ public class DashboardStepDefs extends AbstractStepDefs {
     @Then("^Rebates section is displayed on the Header menu.$")
     public void rebatesSectionIsDisplayedOnTheHeaderMenu() {
         assertTrue(headerBlock.isRebatesSectionAvailableToUser());
+    }
+
+    @Then("^AVR widget is not displayed on the Dashboard page.$")
+    public void avrWidgetIsNotDisplayedOnTheDashboardPage() {
+        assertFalse(dashboardPage.isAvrWidgetDisplayed());
+    }
+
+    @When("^User clicks on (.*) section in header menu.$")
+    public void userClicksOnVolumeRebateSectionInHeaderMenu(String sectionName) {
+        headerBlock.clickOnVolumeRebateSection(sectionName);
     }
 }

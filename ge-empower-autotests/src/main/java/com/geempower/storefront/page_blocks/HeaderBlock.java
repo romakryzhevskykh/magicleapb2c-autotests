@@ -88,4 +88,9 @@ public class HeaderBlock extends UIComponent {
         }
         return isDisplayed(REBATES_SECTION_XPATH);
     }
+
+    @Step("Click on Header Section by section name.")
+    public void clickOnVolumeRebateSection(String sectionName) {
+        click(MENU_SECTION_XPATH, sectionName);
+    }
 }

@@ -38,7 +38,7 @@ Feature: Some actions on Saved Items page
 
     Examples:
       | productNo | agreementNo |
-      | thql1115  | 45000514    |
+      | thql1115p  | 45000514    |
 
   Scenario: Check that Help button works correctly on the Saved Items page.
     And Saved Items page is opened.

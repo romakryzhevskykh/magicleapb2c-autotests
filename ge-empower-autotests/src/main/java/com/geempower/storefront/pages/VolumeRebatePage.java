@@ -198,4 +198,10 @@ public class VolumeRebatePage extends StorefrontBasePage {
     public long getCurrentPayoutForAvr(int avrNumber) {
         return Long.parseLong($(APPROPRIATE_AVR_CURRENT_PAYOUT_VALUE_XPATH, String.valueOf(avrNumber)).getText().replaceAll(",", ""));
     }
+
+    @Step("Get No AVR data message.")
+    public String getNoAvrMessage() {
+        waitUntilPageIsFullyLoaded();
+        return $(NO_AVD_DATA_MESSAGE_XPATH).getText();
+    }
 }

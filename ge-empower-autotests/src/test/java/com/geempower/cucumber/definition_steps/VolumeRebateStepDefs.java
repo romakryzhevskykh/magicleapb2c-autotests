@@ -4,6 +4,7 @@ import com.geempower.helpers.Utils;
 import com.geempower.helpers.models.AVRTarget;
 import com.geempower.helpers.models.AVRType;
 import com.geempower.storefront.pages.VolumeRebatePage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -196,5 +197,10 @@ public class VolumeRebateStepDefs extends AbstractStepDefs {
             }
         }
         assertEquals(currentPayoutSum, Long.parseLong(volumeRebatePage.getCurrentPayoutTitle().replace("Current Payout: ", "").replace(",", "")));
+    }
+
+    @Then("^(.*) No AVR message is displayed on the Volume rebates page.$")
+    public void noAVRMessageIsDisplayed(String message) {
+        assertEquals(message, volumeRebatePage.getNoAvrMessage());
     }
 }
