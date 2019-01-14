@@ -3,6 +3,7 @@ package com.geempower.storefront.pages;
 import com.geempower.helpers.models.Product;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
@@ -25,62 +26,62 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
         return getCurrentUrl().equals(getPageUrl());
     }
 
-    @Step("Select all checkboxes")
+    @Step("Select all checkboxes.")
     public void clickOnAllCheckboxes() {
         waitUntilPageIsFullyLoaded();
         click(ALL_CHECKBOXES_XPATH);
     }
 
-    @Step("Click on Add to Card button")
+    @Step("Click on Add to Card button.")
     public void clickOnAddToCartButton() {
         $(ADD_TO_CARD_BUTTON_XPATH).click();
         waitUntilPageIsFullyLoaded();
     }
 
-    @Step("Get Qty value")
+    @Step("Get Qty value.")
     public String getQtyValue(Product product) {
-        return $(QUANTITY_INPUT_XPATH, product.getCatalogNo().toUpperCase()).getAttribute("value");
+        return $(QUANTITY_FIELD_BY_CATALOG_NO_XPATH, product.getCatalogNo().toUpperCase()).getAttribute("value");
     }
 
-    @Step("Get Description")
+    @Step("Get Description.")
     public String getDescription() {
         waitUntilPageIsFullyLoaded();
         return $(DESCRIPTION_FIELD_XPATH).getText();
     }
 
-    @Step("Get List Price")
+    @Step("Get List Price.")
     public String getListPrice() {
         waitUntilPageIsFullyLoaded();
         return $(LIST_PRICE_FIELD_XPATH).getText();
     }
 
-    @Step("Get Final Net Price")
+    @Step("Get Final Net Price.")
     public String getFinalNetPrice() {
         waitUntilPageIsFullyLoaded();
         return $(FINAL_NET_PRICE_FIELD_XPATH).getText();
     }
 
-    @Step("Get Availability")
+    @Step("Get Availability.")
     public String getAvailability(Product product) {
         waitUntilPageIsFullyLoaded();
         return $(AVAILABILITY_FIELD_XPATH, product.getCatalogNo().toUpperCase()).getText();
     }
 
-    @Step("Set quantity to quantity field")
+    @Step("Set quantity to quantity field.")
     public void setQuantityForProduct(Product product, int quantity) {
         waitUntilPageIsFullyLoaded();
-        $(QUANTITY_INPUT_XPATH, product.getCatalogNo().toUpperCase()).clear();
-        $(QUANTITY_INPUT_XPATH, product.getCatalogNo().toUpperCase()).sendKeys(Integer.toString(quantity));
+        $(QUANTITY_FIELD_BY_CATALOG_NO_XPATH, product.getCatalogNo().toUpperCase()).clear();
+        $(QUANTITY_FIELD_BY_CATALOG_NO_XPATH, product.getCatalogNo().toUpperCase()).sendKeys(Integer.toString(quantity));
     }
 
-    @Step("Click on Update Price and Availability button")
+    @Step("Click on Update Price and Availability button.")
     public void clickOnUpdatePAButton() {
         waitUntilPageIsFullyLoaded();
         click(UPDATE_PRICE_AND_AVAILABILITY_BUTTON_XPATH);
         waitUntilPageIsFullyLoaded();
     }
 
-    @Step("Getting final extend price for product")
+    @Step("Getting final extend price for product.")
     public String getNewExtendPrice(Product product) {
         waitUntilPageIsFullyLoaded();
         return $(EXTENDED_PRICE_XPATH, product.getCatalogNo().toUpperCase()).getText();
@@ -189,5 +190,23 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
     public String getErrorMessageBelowAgreementNoField() {
         waitUntilPageIsFullyLoaded();
         return $(ERROR_MESSAGE_BELOW_AGREEMENT_NO_FIELD_XPATH).getText();
+    }
+
+    @Step("Make Quantity Field Empty.")
+    public void makeQuantityFieldEmpty() {
+        waitUntilPageIsFullyLoaded();
+        $(QUANTITY_FIELD_XPATH).clear();
+        $(QUANTITY_FIELD_XPATH).sendKeys(Keys.ENTER);
+    }
+
+    @Step("Get Error Message Below Qty Field.")
+    public String getErrorMessageBelowQtyField() {
+        waitUntilPageIsFullyLoaded();
+        return $(ERROR_MESSAGE_BELOW_QUANTITY_INPUT_XPATH).getText();
+    }
+
+    @Step("Set value to the Qty field.")
+    public void setQtyValue(String value) {
+        $(QUANTITY_FIELD_XPATH).sendKeys(value);
     }
 }

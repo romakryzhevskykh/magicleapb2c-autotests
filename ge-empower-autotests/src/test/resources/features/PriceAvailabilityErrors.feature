@@ -78,3 +78,29 @@ Feature: Test scenarios for all possible P&A validation error messages.
     Examples:
       | region        | account | salesDivision | product | agreementNo | pricingError                                               |
       | North_America | 2244411 | USS1_10_10    | TH2221J | 45000514    | Pricing agreement is invalid. Standard price is displayed. |
+
+  Scenario Outline: Check that validation of Qty. field on P&A page works correctly.
+    And Account management page is opened.
+    When Choose <region> region.
+    And Search random account for chosen region.
+    And Click on chosen account.
+    And Dashboard page is opened.
+    When Click on Skip button.
+    Given Select test product for chosen region.
+    When User set catalogueNo to Copy & Paste field.
+    And Click on P&A button.
+    And Price&Availability page is opened.
+    When User makes Quantity field empty.
+    Then Is Incorrect Qty. error message below Qty. field displayed.
+    When User sets <longValue> value to the Qty field.
+    Then Is Incorrect Qty. error message below Qty. field displayed.
+    When User sets <charsValue> value to the Qty field.
+    Then Is Incorrect Qty. error message below Qty. field displayed.
+    When User sets <negativeValue> value to the Qty field.
+    Then Is Incorrect Qty. error message below Qty. field displayed.
+    When User sets <specialCharsValue> value to the Qty field.
+    Then Is Incorrect Qty. error message below Qty. field displayed.
+
+    Examples:
+      | region        | longValue   | charsValue | negativeValue | specialCharsValue |
+      | North_America | 12345678900 | abc        | -5            | !@#$%ˆ            |

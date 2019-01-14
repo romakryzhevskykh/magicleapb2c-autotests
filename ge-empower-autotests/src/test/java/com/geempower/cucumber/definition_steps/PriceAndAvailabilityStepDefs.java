@@ -240,4 +240,19 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
     public void isPricingErrorBelowPricingDetailsDisplayed(String error) {
         assertEquals(error, fullProductDetailsPopUpBlock.getPricingErrorMessageBelowPricingDetailsTitleField());
     }
+
+    @When("^User makes Quantity field empty.$")
+    public void makeQuantityFieldEmpty() {
+        priceAndAvailabilityPage.makeQuantityFieldEmpty();
+    }
+
+    @Then("^Is (.*) error message below Qty. field displayed.$")
+    public void isErrorMessageBelowQtyFieldDisplayed(String errorMessage) {
+        assertEquals(errorMessage, priceAndAvailabilityPage.getErrorMessageBelowQtyField());
+    }
+
+    @When("^User sets (.*) value to the Qty field.$")
+    public void setValueToTheQtyField(String value) {
+        priceAndAvailabilityPage.setQtyValue(value);
+    }
 }
