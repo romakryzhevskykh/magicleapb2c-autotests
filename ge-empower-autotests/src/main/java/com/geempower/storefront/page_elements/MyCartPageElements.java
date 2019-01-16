@@ -6,7 +6,7 @@ public class MyCartPageElements {
     public final static String SAVE_ITEMS_BUTTON_XPATH = ".//button[@data-target='#cart-save-list-modal']";
     public final static String CANCEL_BUTTON_XPATH = ".//button[@data-target='#discard-order-modal']";
     public final static String BUILD_ORDER_TOP_NEXT_BUTTON_XPATH = ".//*[@id='build-order']/div[1]/div[2]/div/ul/button";
-    public final static String BUILD_ORDER_BOTTOM_NEXT_BUTTON_XPATH = ".//*[@id='build-order']/div[2]/div[2]/div[6]/ul/li/button";
+    public final static String BUILD_ORDER_BOTTOM_NEXT_BUTTON_XPATH = "//*[@id='build-order']//div[7]/ul/li/button";
     public final static String BUILD_ORDER_STEP_ICON_XPATH = "//*[@class='active build-order']";
     public final static String SHIPPING_BILLING_INFO_STEP_ICON_XPATH = "//*[@class='shipping-billing-info']";
     public final static String ORDER_SUMMARY_STEP_ICON_XPATH = "//*[@class='order-summary']";

@@ -99,6 +99,7 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
 
     @Step("Set Appropriate agreement No To All Products.")
     public void userSelectAgreementNoForAllTheProduct(String agreementNo) {
+        waitUntilPageIsFullyLoaded();
         click(SEARCH_AGREEMENT_NO_ICON_XPATH);
         waitForElementWithAppropriateTextToAppear(By.xpath(SPECIAL_PRICING_POP_UP_TITLE_XPATH), "Special Pricing Lookup");
         searchAppropriateAgreementNoViaSearchFieldOnSpecialPricingLookupPopUp(agreementNo);

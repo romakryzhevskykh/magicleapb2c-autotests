@@ -52,11 +52,13 @@ public class MyCartPage extends StorefrontBasePage {
 
     @Step("Is Update P&A button displayed.")
     public boolean isUpdatePriceAndAvailabilityButtonPresent() {
+        waitUntilPageIsFullyLoaded();
         return $(UPDATE_PRICE_AND_AVAILABILITY_BUTTON_XPATH).isDisplayed();
     }
 
     @Step("Is Next bottom button displayed.")
     public boolean isNextBottomButtonPresent() {
+        waitUntilPageIsFullyLoaded();
         return $(BUILD_ORDER_BOTTOM_NEXT_BUTTON_XPATH).isDisplayed();
     }
 
