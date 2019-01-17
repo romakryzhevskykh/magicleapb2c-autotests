@@ -122,34 +122,34 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
       | 9000048 |
       | 30006   |
 
-  Scenario Outline: Check that admin is able to deactivate user and then deactivated user will see /userNotValid page
-    And Profile page is opened.
-    And Admin's name and last name are stored to threadVars.
-    And Manage Users page is opened.
-    When Admin opens Users tab.
-    And Sets <userId> email to the email field.
-    And Clicks on the Search button.
-    When Clicks on the user name in the table.
-    Then User details block for chosen user with <userId> userId is opened.
-    Then Chosen user has Active user status.
-    When Admin opens Actions list.
-    And Chooses Deactivate User option from the actions list.
-    Then Chosen user's status has been changed to Inactive and sub-status details are correct.
-    Given Switch to Storefront as externalUser1.
-    And User is logged in to Storefront.
-    And Refresh page.
-    Then User sees User not valid page.
-    Then Appropriate text is displayed on the page.
-    Given Switch to Storefront as secondEmpAdmin.
-    When Admin opens Actions list.
-    And Chooses Reactivate User option from the actions list.
-    Then Chosen user has Active user status.
-    Given Switch to Storefront as externalUser1.
-    Then User is able to use GE site.
-
-    Examples:
-      | userId         |
-      | externaluser01 |
+#  Scenario Outline: Check that admin is able to deactivate user and then deactivated user will see /userNotValid page
+#    And Profile page is opened.
+#    And Admin's name and last name are stored to threadVars.
+#    And Manage Users page is opened.
+#    When Admin opens Users tab.
+#    And Sets <userId> email to the email field.
+#    And Clicks on the Search button.
+#    When Clicks on the user name in the table.
+#    Then User details block for chosen user with <userId> userId is opened.
+#    Then Chosen user has Active user status.
+#    When Admin opens Actions list.
+#    And Chooses Deactivate User option from the actions list.
+#    Then Chosen user's status has been changed to Inactive and sub-status details are correct.
+#    Given Switch to Storefront as externalUser1.
+#    And User is logged in to Storefront.
+#    And Refresh page.
+#    Then User sees User not valid page.
+#    Then Appropriate text is displayed on the page.
+#    Given Switch to Storefront as secondEmpAdmin.
+#    When Admin opens Actions list.
+#    And Chooses Reactivate User option from the actions list.
+#    Then Chosen user has Active user status.
+#    Given Switch to Storefront as externalUser1.
+#    Then User is able to use GE site.
+#
+#    Examples:
+#      | userId         |
+#      | externaluser01 |
 
   Scenario Outline: Check that admin is able Wipe All Accounts to user and user will see /userNotActive page
     And Manage Users page is opened.
