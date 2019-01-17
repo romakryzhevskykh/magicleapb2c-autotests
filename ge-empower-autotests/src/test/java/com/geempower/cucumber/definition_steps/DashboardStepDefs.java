@@ -475,4 +475,9 @@ public class DashboardStepDefs extends AbstractStepDefs {
     public void userUploadsTestPAFileWithNameToThePABlock(String fileName) {
         priceAndAvailabilityBlock.uploadTestPAFile(fileName);
     }
+
+    @Then("^(.*) error message is displayed on the P&A block.$")
+    public void totalProductsInTheFileCannotExceedErrorMessageIsDisplayedOnThePABlock(String errorMessage) {
+        assertEquals(errorMessage, priceAndAvailabilityBlock.getUploadErrorMessage());
+    }
 }

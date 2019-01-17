@@ -518,3 +518,18 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Examples:
       | fileName         |
       | Products_54.xlsx |
+
+  Scenario Outline: Check that user is unable to upload successfully file with more than 300 products, check error message.
+    And Account management page is opened.
+    When Choose North_America region.
+    And Search random account for chosen region.
+    And Click on chosen account.
+    And Dashboard page is opened.
+    When Click on Skip button.
+    When Close cookies pop-up.
+    And User uploads test P&A file with name <fileName> to the P&A block.
+    Then Total Products in the file cannot exceed 300 error message is displayed on the P&A block.
+
+    Examples:
+      | fileName          |
+      | Products_350.xlsx |

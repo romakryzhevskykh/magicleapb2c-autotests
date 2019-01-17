@@ -149,6 +149,7 @@ public class Utils extends UIComponent {
         return now.getYear();
     }
 
+    @Step("Parse file to get count from template products file.")
     public int getCountOfProductsInProductsTemplateFile(String fileName) throws FileNotFoundException {
         FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "/src/test/resources/testdata/" + fileName);
         XSSFWorkbook workbook = null;

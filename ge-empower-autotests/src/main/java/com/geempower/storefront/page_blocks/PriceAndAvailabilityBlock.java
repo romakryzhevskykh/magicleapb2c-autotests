@@ -44,4 +44,10 @@ public class PriceAndAvailabilityBlock extends UIComponent {
         utils.uploadFileByName(fileName, UPLOAD_P_AND_A_FILE_PATH_XPATH);
         waitUntilPageIsFullyLoaded();
     }
+
+    @Step("Get upload error message from P&A block for more than 300 products.")
+    public String getUploadErrorMessage() {
+        waitUntilPageIsFullyLoaded();
+        return $(By.id(UPLOAD_ERROR_MESSAGE_ID)).getText();
+    }
 }
