@@ -470,4 +470,9 @@ public class DashboardStepDefs extends AbstractStepDefs {
     public void userClicksOnAppropriateSectionInHeaderMenu(String sectionName) {
         headerBlock.clickOnAppropriateSection(sectionName);
     }
+
+    @And("^User uploads test P&A file with name (.*) to the P&A block.$")
+    public void userUploadsTestPAFileWithNameToThePABlock(String fileName) {
+        priceAndAvailabilityBlock.uploadTestPAFile(fileName);
+    }
 }

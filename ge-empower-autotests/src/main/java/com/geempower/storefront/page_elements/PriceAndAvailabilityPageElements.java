@@ -36,5 +36,5 @@ public class PriceAndAvailabilityPageElements {
     public final static String CATALOG_ERROR_MESSAGE_XPATH = LEFT_TOP_ERROR_SECTION_XPATH + "//span[@class='warning-text']";
     public final static String ERROR_RED_ICON_XPATH = LEFT_TOP_ERROR_SECTION_XPATH + "//i[@class='fa fa-exclamation fa-stack-1x fa-inverse']";
     public final static String ERROR_MESSAGE_BELOW_AGREEMENT_NO_FIELD_XPATH = "//*[@class = 'error-text-spa error-spa  visible']";
-
+    public final static String LIST_OF_PRODUCTS_XPATH = "//table[@id='priceTable']/tbody/tr";
 }

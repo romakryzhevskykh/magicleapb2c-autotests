@@ -94,6 +94,7 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
 
     @Step("Get count of error message on the P&A page.")
     public int getCountOfProductErrorMessages() {
+        waitUntilPageIsFullyLoaded();
         return $$(PRODUCT_ERROR_MESSAGES_XPATH).size();
     }
 
@@ -209,5 +210,11 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
     @Step("Set value to the Qty field.")
     public void setQtyValue(String value) {
         $(QUANTITY_FIELD_XPATH).sendKeys(value);
+    }
+
+    @Step("Get count of products on the P&A page.")
+    public int getCountOfProducts() {
+        waitUntilPageIsFullyLoaded();
+        return $$(LIST_OF_PRODUCTS_XPATH).size();
     }
 }

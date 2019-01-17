@@ -1,16 +1,20 @@
 package com.geempower.helpers;
 
 import com.geempower.helpers.web_engine.WebDriverSessions;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.JavascriptExecutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -143,5 +147,17 @@ public class Utils extends UIComponent {
     public int getCurrentYear() {
         LocalDateTime now = LocalDateTime.now();
         return now.getYear();
+    }
+
+    public int getCountOfProductsInProductsTemplateFile(String fileName) throws FileNotFoundException {
+        FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "/src/test/resources/testdata/" + fileName);
+        XSSFWorkbook workbook = null;
+        try {
+            workbook = new XSSFWorkbook(fis);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        XSSFSheet sheet = workbook.getSheet("Sheet1");
+        return sheet.getLastRowNum()-1;
     }
 }

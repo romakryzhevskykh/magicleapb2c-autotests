@@ -494,3 +494,27 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     Then Is Shipping notes label contains correct value from OE steps in opened Order No. Details block.
     When User expands/closes random catalog No block in opened Order No. Details block.
     Then Is Shipping notes label contains correct value from OE steps in Product Details block in opened Order No. Details block.
+
+  Scenario Outline: Check that user is able to upload file with more than 50 products and all the products will be added to Cart successfully.
+    And Account management page is opened.
+    When Choose North_America region.
+    And Select account 3394040.
+    And Click on account with USS1 sales division.
+    And Dashboard page is opened.
+    When Click on Skip button.
+    When Close cookies pop-up.
+    And User uploads test P&A file with name <fileName> to the P&A block.
+    And Click on P&A button.
+    Then Price&Availability page is opened.
+    Then Count of uploaded products is equal to count of products in the test file <fileName>.
+    And All products are selected on P&A page.
+    When User clicks on Add to Cart button.
+    Then Check that count of added items is displayed on My Cart icon in Header block.
+    When User clicks on My Cart icon in Header block.
+    When User clicks on Checkout button in Header block.
+    Then My Cart page is opened.
+    Then Count of products in My Cart is equal to count of products in the test file.
+
+    Examples:
+      | fileName         |
+      | Products_54.xlsx |
