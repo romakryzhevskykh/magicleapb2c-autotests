@@ -155,4 +155,10 @@ public class MyCartPage extends StorefrontBasePage {
         }
         return countryOriginMyCartPage;
     }
+
+    @Step("Get count of products on the My Cart page.")
+    public int getCountOfProducts() {
+        waitUntilPageIsFullyLoaded();
+        return $$(LIST_OF_PRODUCTS_XPATH).size();
+    }
 }

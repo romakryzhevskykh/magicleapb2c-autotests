@@ -1,7 +1,7 @@
 package com.geempower.storefront.page_blocks;
 
 import com.geempower.helpers.UIComponent;
-import com.geempower.helpers.managers.ProductManager;
+import com.geempower.helpers.Utils;
 import org.openqa.selenium.By;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,8 +13,9 @@ import static com.geempower.storefront.page_block_elements.PriceAndAvailabilityB
 
 @Component
 public class PriceAndAvailabilityBlock extends UIComponent {
+
     @Autowired
-    private ProductManager productManager;
+    private Utils utils;
 
     @Step("Click on Check P&A button")
     public void clickOnCheckPAButton() {
@@ -35,5 +36,18 @@ public class PriceAndAvailabilityBlock extends UIComponent {
     @Step("Add the list of Items to the Copy&Paste block.")
     public void addItemsToTheCopyPasteBlock(List<String> products) {
         products.forEach(product -> $(By.id(COPY_AND_PASTE_FIELD_ID)).sendKeys(product + "\n"));
+    }
+
+    @Step("Upload test file to the P&A block on the Dashboard page.")
+    public void uploadTestPAFile(String fileName) {
+        waitUntilPageIsFullyLoaded();
+        utils.uploadFileByName(fileName, UPLOAD_P_AND_A_FILE_PATH_XPATH);
+        waitUntilPageIsFullyLoaded();
+    }
+
+    @Step("Get upload error message from P&A block for more than 300 products.")
+    public String getUploadErrorMessage() {
+        waitUntilPageIsFullyLoaded();
+        return $(By.id(UPLOAD_ERROR_MESSAGE_ID)).getText();
     }
 }

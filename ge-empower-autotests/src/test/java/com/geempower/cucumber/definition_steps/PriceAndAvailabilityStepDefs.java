@@ -10,6 +10,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -254,5 +255,15 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
     @When("^User sets (.*) value to the Qty field.$")
     public void setValueToTheQtyField(String value) {
         priceAndAvailabilityPage.setQtyValue(value);
+    }
+
+    @Then("^Count of uploaded products is equal to count of products in the test file (.*).$")
+    public void countOfUploadedProductsIsEqualToCountOfProductsInTheTestFile(String fileName) throws FileNotFoundException {
+        int countOfProductsInFile = utils.getCountOfProductsInProductsTemplateFile(fileName);
+        threadVarsHashMap.put(TestKeyword.UPLOADED_PRODUCTS_COUNT, countOfProductsInFile);
+        int invalidProductsCount = priceAndAvailabilityPage.getCountOfProductErrorMessages();
+        threadVarsHashMap.put(TestKeyword.COUNT_OF_INVALID_UPLOADED_PRODUCTS, invalidProductsCount);
+        int actualCountOfProducts = invalidProductsCount + priceAndAvailabilityPage.getCountOfProducts();
+        assertEquals(countOfProductsInFile, actualCountOfProducts);
     }
 }

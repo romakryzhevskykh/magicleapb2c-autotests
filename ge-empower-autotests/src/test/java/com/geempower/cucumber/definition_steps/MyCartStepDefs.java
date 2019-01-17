@@ -123,4 +123,10 @@ public class MyCartStepDefs extends AbstractStepDefs {
         Order randomOrder = orderManager.getOrderById(Long.parseLong(threadVarsHashMap.getString(GE_ORDER_NO)));
         assertTrue(randomOrder.getQuantity() == myCartPage.getQtyValue(randomOrder.getCatalogNo()));
     }
+
+    @Then("^Count of products in My Cart is equal to count of products in the test file.$")
+    public void countOfProductsInMyCartIsEqualToCountOfProductsInTheTestFile() {
+        int invalidUploadedProductsCount = (int) threadVarsHashMap.get(TestKeyword.COUNT_OF_INVALID_UPLOADED_PRODUCTS);
+        assertEquals((int) threadVarsHashMap.get(TestKeyword.UPLOADED_PRODUCTS_COUNT) - invalidUploadedProductsCount, myCartPage.getCountOfProducts());
+    }
 }
