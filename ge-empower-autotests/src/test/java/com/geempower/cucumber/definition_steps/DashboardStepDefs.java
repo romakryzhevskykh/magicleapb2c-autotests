@@ -477,7 +477,7 @@ public class DashboardStepDefs extends AbstractStepDefs {
     }
 
     @Then("^(.*) error message is displayed on the P&A block.$")
-    public void totalProductsInTheFileCannotExceedErrorMessageIsDisplayedOnThePABlock(String errorMessage) {
+    public void errorMessageIsDisplayedOnThePABlock(String errorMessage) {
         assertEquals(errorMessage, priceAndAvailabilityBlock.getUploadErrorMessage());
     }
 }
