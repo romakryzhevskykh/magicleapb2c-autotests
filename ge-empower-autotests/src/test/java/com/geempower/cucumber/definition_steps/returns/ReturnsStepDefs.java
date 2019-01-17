@@ -5,6 +5,7 @@ import com.geempower.cucumber.definition_steps.TestKeyword;
 import com.geempower.helpers.managers.ReturnManager;
 import com.geempower.helpers.models.Return;
 import com.geempower.storefront.pages.returns.ReturnsPage;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -77,5 +78,35 @@ public class ReturnsStepDefs extends AbstractStepDefs {
         assertEquals("Access Denied", returnsPage.getAccessDeniedPageTitle());
         assertEquals("Unfortunately, you do not have permission to view this page.", returnsPage.getAccessDeniedPageSubTitle());
         assertEquals("Return to the home page", returnsPage.getReturnHomeButtonName());
+    }
+
+    @And("^User clicks on filter returns icon.$")
+    public void clickOnFilterReturnsIcon() {
+        returnsPage.clickOnFilterReturnsIcon();
+    }
+
+    @And("^Select (.*) status in the case status drop-down field.$")
+    public void selectAppropriateStatusInTheCaseStatusDropDownField(String status) {
+        returnsPage.selectAppropriateStatusInTheCaseStatusDropDownField(status);
+    }
+
+    @And("^Click on apply filter button on Returns page.$")
+    public void clickOnApplyFilterButtonOnReturnsPage() {
+        returnsPage.clickOnApplyFilterButtonOnReturnsPage();
+    }
+
+    @Then("^Opened return contains (.*) status.$")
+    public void openedReturnContainsAppropriateStatus(String status) {
+        assertEquals(status, returnsPage.getStatusOfOpenedReturn());
+    }
+
+    @When("^User clicks on Case No. in opened Return block.$")
+    public void clickOnCaseNoInOpenedReturn() {
+        returnsPage.clickOnCaseNoInOpenedReturn();
+    }
+
+    @And("^Case No. value put to the hashmap.$")
+    public void caseNoValuePutToTheHashmap() {
+        threadVarsHashMap.put(TestKeyword.RETURN_CASE_NO, returnsPage.getCaseNoInOpenedReturn());
     }
 }

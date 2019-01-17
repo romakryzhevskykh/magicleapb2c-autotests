@@ -10,7 +10,6 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.HashMap;
 import java.util.List;
 
 import static com.geempower.cucumber.definition_steps.TestKeyword.DETAILS_PO_PAGE_CATALOG_NO;
