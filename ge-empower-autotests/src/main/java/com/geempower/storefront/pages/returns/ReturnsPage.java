@@ -151,4 +151,10 @@ public class ReturnsPage extends StorefrontBasePage {
     public String getCaseNoInOpenedReturn() {
         return $(CASE_NO_LINK_IN_OPENED_RETURN_BLOCK_XPATH).getText();
     }
+
+    @Step("Is Filter Slider Displayed.")
+    public boolean isFilterSliderDisplayed() {
+        waitUntilPageIsFullyLoaded();
+        return isDisplayed(FILTER_SLIDER_XPATH);
+    }
 }

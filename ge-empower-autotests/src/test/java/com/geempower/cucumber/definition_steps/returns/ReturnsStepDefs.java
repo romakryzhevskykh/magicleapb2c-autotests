@@ -109,4 +109,9 @@ public class ReturnsStepDefs extends AbstractStepDefs {
     public void caseNoValuePutToTheHashmap() {
         threadVarsHashMap.put(TestKeyword.RETURN_CASE_NO, returnsPage.getCaseNoInOpenedReturn());
     }
+
+    @Then("^Is Filter slider displayed.$")
+    public void isFilterSliderDisplayed(){
+        assertTrue(returnsPage.isFilterSliderDisplayed());
+    }
 }

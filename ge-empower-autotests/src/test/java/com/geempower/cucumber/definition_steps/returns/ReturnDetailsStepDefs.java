@@ -36,10 +36,22 @@ public class ReturnDetailsStepDefs extends AbstractStepDefs {
     public void fillCommentsField() {
         String uniqueComment = utils.generateUniqueTimestamp();
         returnDetailsPage.fillCommentsField(uniqueComment);
+        threadVarsHashMap.put(TestKeyword.RETURN_COMMENT, uniqueComment);
     }
 
     @And("^Click on Submit button in Comments pop-up.$")
     public void clickOnSubmitButtonInCommentsPopUp() {
         returnDetailsPage.clickOnSubmitButtonInCommentsPopUp();
+    }
+
+    @Then("^Is last added comment displayed in All comments table.$")
+    public void isLastAddedCommentDisplayedInAllCommentsTable() {
+        assertTrue(returnDetailsPage.getAllCommentTitles().allMatch(comment -> comment.getText()
+                .equals(threadVarsHashMap.getString(TestKeyword.RETURN_COMMENT))));
+    }
+
+    @Then("^Is Add Comments button disabled.$")
+    public void isAddCommentsButtonDisabled() {
+        assertTrue(returnDetailsPage.isAddCommentsButtonDisabled());
     }
 }

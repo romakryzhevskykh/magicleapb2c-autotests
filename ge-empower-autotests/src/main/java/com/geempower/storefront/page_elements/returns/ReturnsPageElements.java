@@ -18,6 +18,7 @@ public class ReturnsPageElements {
     private final static String OPENED_RETURN_XPATH = "//div[contains(@id,'returns') and contains(@class,'in')]";
     public final static String RETURN_STATUS_XPATH = OPENED_RETURN_XPATH + "//div[@class='info-table-wrapper visible-lg-block']//span[contains(@class,'indicator')]/..";
     public final static String CASE_NO_LINK_IN_OPENED_RETURN_BLOCK_XPATH = OPENED_RETURN_XPATH + "//div[@class='info-table-wrapper visible-lg-block']//a[contains(@href,'/geempower/')]";
+    public final static String FILTER_SLIDER_XPATH = "//div[@class='filter-setting-overlay filter-canvas open']";
     //ACCESS DENIED PAGE
     public final static String ACCESS_DENIED_TITLE_RETURNS_PAGE_XPATH = "//h1";
     public final static String ACCESS_DENIED_SUB_TITLE_RETURNS_PAGE_XPATH = "//div/span[contains(@class, 'text-center')]";
