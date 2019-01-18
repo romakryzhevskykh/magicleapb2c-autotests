@@ -114,6 +114,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     And Sets <account> account to the account field.
     And Clicks on the Search button.
     Then Users list is not empty.
+    And User cleans account field.
 
     Examples:
       | account |
@@ -477,7 +478,6 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Examples:
       | email                         | soCode |
       | roman.kryzhevskykh@in.abb.com | USG4   |
-
 
   Scenario Outline: Check that admin is able to reject SO codes to the internal user
     And Refresh page.
