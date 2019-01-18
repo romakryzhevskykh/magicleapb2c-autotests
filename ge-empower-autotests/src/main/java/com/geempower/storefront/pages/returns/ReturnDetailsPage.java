@@ -24,7 +24,7 @@ public class ReturnDetailsPage extends StorefrontBasePage {
         return getCurrentUrl().contains(pageUri) && getCurrentUrl().endsWith(caseNo);
     }
 
-    @Step("Click On Comments Tab")
+    @Step("Click On Comments Tab.")
     public void clickOnCommentsTab() {
         click(COMMENTS_TAB_XPATH);
     }
