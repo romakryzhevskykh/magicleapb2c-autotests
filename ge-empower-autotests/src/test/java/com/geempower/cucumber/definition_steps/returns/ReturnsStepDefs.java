@@ -78,4 +78,39 @@ public class ReturnsStepDefs extends AbstractStepDefs {
         assertEquals("Unfortunately, you do not have permission to view this page.", returnsPage.getAccessDeniedPageSubTitle());
         assertEquals("Return to the home page", returnsPage.getReturnHomeButtonName());
     }
+
+    @And("^User clicks on filter returns icon.$")
+    public void clickOnFilterReturnsIcon() {
+        returnsPage.clickOnFilterReturnsIcon();
+    }
+
+    @And("^Select (.*) status in the case status drop-down field.$")
+    public void selectAppropriateStatusInTheCaseStatusDropDownField(String status) {
+        returnsPage.selectAppropriateStatusInTheCaseStatusDropDownField(status);
+    }
+
+    @And("^Click on apply filter button on Returns page.$")
+    public void clickOnApplyFilterButtonOnReturnsPage() {
+        returnsPage.clickOnApplyFilterButtonOnReturnsPage();
+    }
+
+    @Then("^Opened return contains (.*) status.$")
+    public void openedReturnContainsAppropriateStatus(String status) {
+        assertEquals(status, returnsPage.getStatusOfOpenedReturn());
+    }
+
+    @When("^User clicks on Case No. in opened Return block.$")
+    public void clickOnCaseNoInOpenedReturn() {
+        returnsPage.clickOnCaseNoInOpenedReturn();
+    }
+
+    @And("^Case No. value put to the hashmap.$")
+    public void caseNoValuePutToTheHashmap() {
+        threadVarsHashMap.put(TestKeyword.RETURN_CASE_NO, returnsPage.getCaseNoInOpenedReturn());
+    }
+
+    @Then("^Is Filter slider displayed.$")
+    public void isFilterSliderDisplayed(){
+        assertTrue(returnsPage.isFilterSliderDisplayed());
+    }
 }

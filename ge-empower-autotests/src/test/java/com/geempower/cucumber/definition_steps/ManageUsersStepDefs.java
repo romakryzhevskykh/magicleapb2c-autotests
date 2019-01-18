@@ -653,4 +653,9 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     public void volumeRebateToggleIsNotDisplayedForExternalUser() {
         assertFalse(iWantToBlock.IsVolumeRebateToggleDisplayed());
     }
+
+    @And("^User cleans account field.$")
+    public void cleanAccountField() {
+        manageUsersPage.cleanAccountField();
+    }
 }

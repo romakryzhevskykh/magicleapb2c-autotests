@@ -389,4 +389,9 @@ public class ManageUsersPage extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
         return $(BLUE_INTERNAL_ICON_TOOLTIP_FOR_APPROPRIATE_USER_XPATH, userId).getText();
     }
+
+    @Step("Clean Account Field.")
+    public void cleanAccountField() {
+        $(ACCOUNT_DETAIL_SEARCH_INPUT_XPATH).clear();
+    }
 }

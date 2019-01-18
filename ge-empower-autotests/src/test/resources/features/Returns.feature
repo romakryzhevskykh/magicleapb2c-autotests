@@ -220,3 +220,48 @@ Feature: Return creation tests
     Examples:
       | sso           |
       | romanlessonly |
+
+  Scenario Outline: Check that user can add the comment to the opened return.
+    And Account management page is opened.
+    When Choose North_America region.
+    And Select account 2244411.
+    And Click on chosen account.
+    When Returns page is opened.
+    And User clicks on filter returns icon.
+    Then Is Filter slider displayed.
+    And Select <status> status in the case status drop-down field.
+    And Click on apply filter button on Returns page.
+    Then Opened return contains <status> status.
+    And Case No. value put to the hashmap.
+    When User clicks on Case No. in opened Return block.
+    Then Return Details page is opened.
+    And Click on Comments tab on Return Details page.
+    When User clicks on Add Comment button.
+    And User fills Comments field.
+    And Click on Submit button in Comments pop-up.
+    Then Is last added comment displayed in All comments table.
+
+    Examples:
+      | status |
+      | Open   |
+
+  Scenario Outline: Check that user can't add the comment to the closed return.
+    And Account management page is opened.
+    When Choose North_America region.
+    And Select account 2244411.
+    And Click on chosen account.
+    When Returns page is opened.
+    And User clicks on filter returns icon.
+    Then Is Filter slider displayed.
+    And Select <status> status in the case status drop-down field.
+    And Click on apply filter button on Returns page.
+    Then Opened return contains <status> status.
+    And Case No. value put to the hashmap.
+    When User clicks on Case No. in opened Return block.
+    Then Return Details page is opened.
+    And Click on Comments tab on Return Details page.
+    Then Is Add Comments button disabled.
+
+    Examples:
+      | status |
+      | Closed |

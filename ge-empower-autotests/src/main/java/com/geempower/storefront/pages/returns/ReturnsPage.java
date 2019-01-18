@@ -116,4 +116,45 @@ public class ReturnsPage extends StorefrontBasePage {
     public String getReturnHomeButtonName() {
         return $(ACCESS_DENIED_GO_HOME_BUTTON_XPATH).getText();
     }
+
+    @Step("Click On Filter Returns Icon.")
+    public void clickOnFilterReturnsIcon() {
+        click(RETURN_FILTER_ICON_XPATH);
+    }
+
+    @Step("Select Appropriate Status In The Case Status Drop Down Field.")
+    public void selectAppropriateStatusInTheCaseStatusDropDownField(String status) {
+        waitUntilPageIsFullyLoaded();
+        click(CASE_STATUS_DROP_DOWN_ARROW_XPATH);
+        waitUntilPageIsFullyLoaded();
+        click(APPROPRIATE_DROP_DOWN_ITEM_XPATH, status);
+    }
+
+    @Step("Click On Apply Filter Button On Returns Page.")
+    public void clickOnApplyFilterButtonOnReturnsPage() {
+        waitUntilPageIsFullyLoaded();
+        click(APPLY_BUTTON_IN_FILTERS_XPATH);
+    }
+
+    @Step("Get Status Of Opened Return.")
+    public String getStatusOfOpenedReturn() {
+        waitUntilPageIsFullyLoaded();
+        return $(RETURN_STATUS_XPATH).getText();
+    }
+
+    @Step("Click On Case No In Opened Return block.")
+    public void clickOnCaseNoInOpenedReturn() {
+        click(CASE_NO_LINK_IN_OPENED_RETURN_BLOCK_XPATH);
+    }
+
+    @Step("Get Case No In Opened Return block.")
+    public String getCaseNoInOpenedReturn() {
+        return $(CASE_NO_LINK_IN_OPENED_RETURN_BLOCK_XPATH).getText();
+    }
+
+    @Step("Is Filter Slider Displayed.")
+    public boolean isFilterSliderDisplayed() {
+        waitUntilPageIsFullyLoaded();
+        return isDisplayed(FILTER_SLIDER_XPATH);
+    }
 }

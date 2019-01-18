@@ -39,7 +39,7 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
 
     @Then("^Orders Details page is opened.$")
     public void orderDetailsPageIsOpened() {
-        assertTrue(orderDetailsPage.isOpened(threadVarsHashMap.get(TestKeyword.GE_ORDER_NO).toString()));
+        assertTrue(orderDetailsPage.isOpened(threadVarsHashMap.getString(TestKeyword.GE_ORDER_NO)));
     }
 
     @Then("^GE Order No. is correct.$")
@@ -49,7 +49,7 @@ public class OrderDetailsStepDefs extends AbstractStepDefs {
 
     @Then("^Total Net Price is equal to Extend Price.$")
     public void totalNetPriceIsEqualToExtendPrice() {
-        Order order = orderManager.getOrderById(Long.parseLong((String) threadVarsHashMap.get(TestKeyword.GE_ORDER_NO)));
+        Order order = orderManager.getOrderById(Long.parseLong(threadVarsHashMap.getString(TestKeyword.GE_ORDER_NO)));
         assertEquals(order.getFinalOrderPrice(), Double.parseDouble(orderDetailsPage.getTotalNetPrice()), delta);
     }
 
