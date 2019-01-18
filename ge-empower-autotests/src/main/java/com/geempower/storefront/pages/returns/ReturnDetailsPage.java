@@ -12,7 +12,7 @@ import static com.geempower.storefront.page_elements.returns.ReturnDetailsPageEl
 
 @Component
 public class ReturnDetailsPage extends StorefrontBasePage {
-    private final String pageUri = "return/";
+    private final String pageUri = "return";
 
     @Override
     public String getPageUrl() {
@@ -21,7 +21,7 @@ public class ReturnDetailsPage extends StorefrontBasePage {
 
     @Step("Return Details page is opened.")
     public boolean isOpened(String caseNo){
-        return getCurrentUrl().contains(pageUri) && getCurrentUrl().endsWith(caseNo);
+        return getCurrentUrl().equals(getPageUrl().concat("/").concat(caseNo));
     }
 
     @Step("Click On Comments Tab.")
@@ -43,7 +43,7 @@ public class ReturnDetailsPage extends StorefrontBasePage {
 
     @Step("Click On Submit Button In Comments Pop-Up.")
     public void clickOnSubmitButtonInCommentsPopUp() {
-        click($(By.id(SUBMIT_COMMENTS_BUTTON_ID)));
+        click(By.id(SUBMIT_COMMENTS_BUTTON_ID));
     }
 
     @Step("Get All Comment Titles.")

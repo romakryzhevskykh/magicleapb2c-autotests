@@ -46,7 +46,7 @@ public class ReturnDetailsStepDefs extends AbstractStepDefs {
 
     @Then("^Is last added comment displayed in All comments table.$")
     public void isLastAddedCommentDisplayedInAllCommentsTable() {
-        assertTrue(returnDetailsPage.getAllCommentTitles().allMatch(comment -> comment.getText()
+        assertTrue(returnDetailsPage.getAllCommentTitles().anyMatch(comment -> comment.getText()
                 .equals(threadVarsHashMap.getString(TestKeyword.RETURN_COMMENT))));
     }
 
