@@ -25,12 +25,11 @@ public class AccountManagementPageElements {
     public final static String FAVORITES_ACCOUNTS_TAB_XPATH = "//a[@href='#favorites']";
     public final static String STAR_ICON_FOR_APPROPRIATE_ACCOUNT_ON_APPROVED_ACCOUNT_TAB_XPATH = ".//*[@id='activeRequestsTable']/tbody/tr[1]/td[text()='%s']/..//td[@class=' table-visible-lg-block']//i[@class='fa-star far']";
     public final static String STAR_ICON_FOR_APPROPRIATE_ACCOUNT_ON_FAVORITES_TAB_XPATH = "//table[@id='favoritesTable']/tbody/tr/td[text()='%s']/..//td[@class=' table-visible-lg-block']//i[@class='fa-star  fas']";
-    public final static String APPROVED_ACCOUNT_ROW_XPATH = "//*[@class='my-pending-accounts-wrapper']//tr[@role='row' and @class='odd' or @class='even']";
-    public final static String ACCOUNT_NAME_VALUE_IN_TABLE_XPATH = ".//*[@id='activeRequestsTable']/tbody/tr[1]/td[3]";
     public final static String FULL_INFO_OF_FIRST_ACCOUNT_APPROVED_ACC_TAB_XPATH = ".//*[@id='activeRequestsTable']/tbody/tr[1]/td[2]/a";
     public final static String PENDING_FOR_APPROVAL_TABLE_NO_DATA_TITLE_XPATH = "//*[@id='pendingApprovalTable']//td";
     public final static String APPROVED_ACCOUNTS_TAB_XPATH = "//a[@href='#recently-viewed']";
-    public final static String APPROVED_ACCOUNTS_NAME_IN_APPROVED_ACCOUNTS_TABLE_XPATH = "//table[@id='activeRequestsTable']/tbody/tr/td[2]";
+    public final static String APPROVED_ACCOUNTS_NO_IN_APPROVED_ACCOUNTS_TABLE_XPATH = "//table[@id='activeRequestsTable']/tbody/tr/td[2]";
+    public final static String APPROVED_ACCOUNTS_NAME_IN_APPROVED_ACCOUNT_TABLE_XPATH = "//table[@id='activeRequestsTable']//td[contains(@class,'account-name-col')]";
     public final static String REMOVE_ACCOUNT_ACTION_FOR_APPROPRIATE_ACCOUNT_THREE_DOT_ICON_XPATH = "//td[@class=' table-visible-lg-block']/a[contains(text(), '%s')]/../..//td[@class=' table-visible-lg-block']/ul//i[@class='fa fa-ellipsis-v']";
     public final static String THREE_DOT_ICON_REMOVE_ACCOUNT_XPATH = "//td[@class=' table-visible-lg-block']/a[contains(text(),'%s')]/../..//td[@class=' table-visible-lg-block']/ul//i[@class='fas fa-trash']";
     public final static String CONFIRMATION_FOR_REMOVE_ACTIVE_ACCOUNT_BUTTON_XPATH = "//button[@id='removeActiveBtn']";

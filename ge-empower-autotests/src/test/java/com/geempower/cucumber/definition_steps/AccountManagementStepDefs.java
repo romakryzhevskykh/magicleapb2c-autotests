@@ -42,7 +42,7 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
             throw new NullPointerException("No Accounts in the selected region");
         });
         threadVarsHashMap.put(TestKeyword.CHOSEN_ACCOUNT, accountName);
-        accountManagementPage.searchAnAccountOnAccountManagementPage(accountName);
+        accountManagementPage.searchAccountByAccountName(accountName);
     }
 
     @And("^Click on chosen account.$")
@@ -102,11 +102,6 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
         accountManagementPage.removeRequestedAccounts(Integer.parseInt(threadVarsHashMap.getString(TestKeyword.COUNT_OF_PENDING_REQUESTS)));
     }
 
-    @And("^Search an account (.*) on Account Management Page.$")
-    public void searchAnAccountOnAccountManagementPage(String accountNo) {
-        accountManagementPage.searchAnAccountOnAccountManagementPage(accountNo);
-    }
-
     @Then("^Is account (.*) displayed in the table on Account Management Page.$")
     public void isAccountDisplayedInTheTableOnAccountManagementPage(String accountNo) {
         assertTrue(accountManagementPage.getAllApprovedAccounts()
@@ -115,7 +110,7 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
 
     @And("^Select account (.*).$")
     public void selectAccount(String accountNo) {
-        accountManagementPage.searchAnAccountOnAccountManagementPage(accountNo);
+        accountManagementPage.searchAccountByAccountName(accountNo);
     }
 
     @And("^Search account from Add Account pop-up.$")
@@ -129,6 +124,12 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
         String accountNo = threadVarsHashMap.getString(TestKeyword.MANAGE_USERS_ACCOUNT_NO);
         assertTrue(accountManagementPage.getAllApprovedAccounts()
                 .anyMatch(account -> account.getText().equals(accountNo)));
+    }
+
+    @Then("^Is account name (.*) displayed in the table.")
+    public void isAppropriateAccountNameIsDisplayedInTheTable(String accountName) {
+        assertTrue(accountManagementPage.getListOfApprovedAccountNames()
+                .anyMatch(account -> account.getText().equals(accountName)));
     }
 
     @And("^All requested accounts are stored to the thread vars hashmap.$")
@@ -151,7 +152,7 @@ public class AccountManagementStepDefs extends AbstractStepDefs {
     @Then("^All the requested accounts are displayed in the tab.$")
     public void allTheRequestedAccountsAreDisplayedInTheTab() {
         ArrayList<String> approvedAccounts = (ArrayList<String>) threadVarsHashMap.get(TestKeyword.LIST_OF_REQUESTED_ACCOUNTS);
-        assertTrue(accountManagementPage.getAllApprovedAccountsInApprovedAccountsTab().containsAll(approvedAccounts));
+        assertTrue(accountManagementPage.getAllApprovedAccountsNoInApprovedAccountsTab().containsAll(approvedAccounts));
     }
 
     @SuppressWarnings("unchecked")
