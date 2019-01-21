@@ -58,7 +58,7 @@ public class AccountManagementPage extends StorefrontBasePage {
     @Step("Open regions list.")
     private void openRegionsList() {
         waitUntilPageIsFullyLoaded();
-        $(REGION_COMBOBOX_XPATH).click();
+        click(By.id(REGION_COMBOBOX_ID));
     }
 
     @Step("Click on Search account button.")
@@ -99,8 +99,8 @@ public class AccountManagementPage extends StorefrontBasePage {
 
     @Step("Search account by account name.")
     public void searchAccountByAccountName(String accountName) {
-        $(SEARCH_FIELD_XPATH).clear();
-        $(SEARCH_FIELD_XPATH).sendKeys(accountName);
+        $(By.id(SEARCH_FIELD_ID)).clear();
+        $(By.id(SEARCH_FIELD_ID)).sendKeys(accountName);
         clickOnSearchButton();
     }
 
@@ -215,7 +215,7 @@ public class AccountManagementPage extends StorefrontBasePage {
 
     @Step("Get List of approved account names.")
     public Stream<WebElement> getListOfApprovedAccountNames() {
-        return $$(APPROVED_ACCOUNTS_NAME_IN_APPROVED_ACCOUNT_TABLE_XPATH).stream();
+        return $$(APPROVED_ACCOUNTS_NAME_IN_APPROVED_ACCOUNTS_TABLE_XPATH).stream();
     }
 
     @Step("Get all approved accounts.")
@@ -230,7 +230,7 @@ public class AccountManagementPage extends StorefrontBasePage {
         click(REMOVE_ACCOUNT_ACTION_FOR_APPROPRIATE_ACCOUNT_THREE_DOT_ICON_XPATH, account);
         click(THREE_DOT_ICON_REMOVE_ACCOUNT_XPATH, account);
         waitUntilPageIsFullyLoaded();
-        click(CONFIRMATION_FOR_REMOVE_ACTIVE_ACCOUNT_BUTTON_XPATH);
+        click(CONFIRMATION_FOR_REMOVE_ACTIVE_ACCOUNT_BUTTON_ID);
         getDriver().navigate().refresh();
     }
 
@@ -285,7 +285,7 @@ public class AccountManagementPage extends StorefrontBasePage {
 
     @Step("Click On Send Pre Auth Code.")
     public void clickOnSendPreAuthCode() {
-        click(PRE_AUTH_SEND_REQUEST_BUTTON_XPATH);
+        click(By.id(PRE_AUTH_SEND_REQUEST_BUTTON_ID));
     }
 
     @Step("Get Count Of Favorite Accounts.")

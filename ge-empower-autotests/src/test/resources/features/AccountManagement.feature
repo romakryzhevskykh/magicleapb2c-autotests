@@ -92,7 +92,7 @@ Feature: Some actions on Account Management page as admin
       | tooltipText                                                                                                                       | accountPopUpMessage                                                                                                               |
       | This account is on Delivery Block: pricing and ordering are allowed, but shipments will be held. Please contact customer service. | This account is on Delivery Block, pricing and ordering are allowed, but shipments will be held. Please contact customer service. |
 
-  Scenario Outline: Check that user can search account by name and name with character &
+  Scenario Outline: Check that user can search account by name and name with character &.
     And Account management page is opened.
     When Choose North_America region.
     And Select account <accountName>.
