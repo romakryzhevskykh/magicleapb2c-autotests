@@ -39,7 +39,7 @@ public class RebateCreation2StepDefs extends AbstractStepDefs {
     }
 
     @When("^User clicks on the Next top button on the second rebate creation step.$")
-    public void сlicksOnTheNextTopButtonOnTheSecondRebateCreationStep() {
+    public void clicksOnTheNextTopButtonOnTheSecondRebateCreationStep() {
         rebateCreation2Page.clickOnNextButtonOnSecondPage();
     }
 
@@ -65,7 +65,7 @@ public class RebateCreation2StepDefs extends AbstractStepDefs {
     }
 
     @When("^User clicks on Save for later button.$")
-    public void сlicksOnSaveForLaterButton() {
+    public void clicksOnSaveForLaterButton() {
         rebateCreation2Page.clickOnSaveForLaterButton();
     }
 
@@ -80,7 +80,7 @@ public class RebateCreation2StepDefs extends AbstractStepDefs {
     }
 
     @And("^User clicks on Save button in Save for later pop-up.$")
-    public void сlicksOnSaveButtonInSaveForLaterPopUp() {
+    public void clicksOnSaveButtonInSaveForLaterPopUp() {
         rebateCreation2Page.clickSaveNewRebatesList();
     }
 
