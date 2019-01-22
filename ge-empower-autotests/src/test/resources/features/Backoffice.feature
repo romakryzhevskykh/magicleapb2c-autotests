@@ -9,8 +9,6 @@ Feature: Login to Backoffice as user with admin access rights and open main page
     Given Switch to Backoffice as admin.
     Given Admin is logged in to Backoffice.
     And Refresh page.
-    Given Switch to Backoffice as admin.
-    Given Admin is logged in to Backoffice.
     And Commerce logo is displayed on the main backoffice page.
     When Admin opens Users tab in Backoffice.
     And Admin opens Customers section in Backoffice.

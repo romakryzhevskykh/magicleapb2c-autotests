@@ -1,5 +1,7 @@
 package com.geempower.helpers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public abstract class BasePageObject extends UIComponent {
 
     public String getCurrentUrl() {
@@ -10,7 +12,11 @@ public abstract class BasePageObject extends UIComponent {
         return getPageUrl().equals(getCurrentUrl());
     }
 
+    @Autowired
+    private Utils utils;
+
     public void open() {
+        System.out.println("Open backoffice at:" + utils.getLocalDateTimeStamp());
         open(getPageUrl());
     }
 

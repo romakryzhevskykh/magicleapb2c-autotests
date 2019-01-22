@@ -23,6 +23,12 @@ public class BackofficeLoginPage extends BackofficeBasePage {
 
     @Override
     public boolean isOpened() {
+        waitUntilPageIsFullyLoaded();
+        if (getCurrentUrl().contains(getPageUrl())) {
+            System.out.println("Backoffice login page is opened at: " + utils.getLocalDateTimeStamp());
+        } else {
+            System.out.println("Backoffice login page is not opened at: " + utils.getLocalDateTimeStamp());
+        }
         return getCurrentUrl().contains(getPageUrl());
     }
 
@@ -34,6 +40,7 @@ public class BackofficeLoginPage extends BackofficeBasePage {
     @Step("Login to Backoffice.")
     public void loginToBackoffice(UserSession userSession) {
         waitUntilPageIsFullyLoaded();
+        System.out.println("Login to backoffice started at: " + utils.getLocalDateTimeStamp());
         fillUsername(userSession.getUsername());
         fillPassword(userSession.getPassword());
         clickOnLoginButton();

@@ -23,6 +23,7 @@ public class BackofficeMainPage extends BackofficeBasePage {
 
     @Step("Is Commerce Logo Displayed.")
     public boolean isCommerceLogoDisplayed() {
+        System.out.println("User has been redirected to tne main backoffice page: " + utils.getLocalDateTimeStamp());
         waitUntilPageIsFullyLoaded();
         loadBackofficeIfNeeded();
         return isDisplayed(COMMERCE_LOGO_XPATH);

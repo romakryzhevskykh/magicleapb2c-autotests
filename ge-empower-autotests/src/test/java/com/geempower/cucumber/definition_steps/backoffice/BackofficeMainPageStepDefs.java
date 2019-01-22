@@ -1,21 +1,24 @@
 package com.geempower.cucumber.definition_steps.backoffice;
 
 import com.geempower.cucumber.definition_steps.AbstractStepDefs;
+import com.geempower.helpers.Utils;
 import com.geempower.hybris.backoffice.pages.BackofficeMainPage;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import static org.testng.Assert.assertTrue;
 
 public class BackofficeMainPageStepDefs extends AbstractStepDefs {
     @Autowired
     private BackofficeMainPage backofficeMainPage;
+    @Autowired
+    private Utils utils;
 
     @And("^Commerce logo is displayed on the main backoffice page.$")
     public void checkThatCommerceLogoIsDisplayedOnTheMainBackofficePage() {
-        backofficeMainPage.isCommerceLogoDisplayed();
+        if (backofficeMainPage.isCommerceLogoDisplayed()) {
+            System.out.println("Main page was fully loaded at: " + utils.getLocalDateTimeStamp());
+        } else
+            System.out.println("Commerce Logo is not Displayed, main page is not fully loaded after all the timeouts at: " + utils.getLocalDateTimeStamp());
     }
 
     @When("^Admin opens Users tab in Backoffice.$")

@@ -31,6 +31,7 @@ public class SsoLoginPage extends StorefrontBasePage {
 
     public void loginToStorefront(User user) {
 //        Only for HAC login
+        System.out.println("Login to SSO.");
         fillUsername(user.getUsername());
         fillPassword(user.getPassword());
         clickOnLoginButton();
