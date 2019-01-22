@@ -31,14 +31,14 @@ Feature: Some actions on Special Pricing page
       | 30324       | NL 2018                  | NLS1_30_10    |
       | 9006692     | GE Power Controls cennik | PLS3_10_10    |
 
-  Scenario Outline: Check that New Local List price TAB is NOT displayed in EMEA account which is not from Sales District list
-    And Account management page is opened.
-    When Choose EMEA region.
-    And Select account <emeaAccount>.
-    And Click on account with <salesDivision> sales division.
-    And Special Pricing page is opened.
-    Then Regional List Price tab is not displayed.
-
-    Examples:
-      | emeaAccount | salesDivision |
-      | 9007384     | BES1_20_10    |
+#  Scenario Outline: Check that New Local List price TAB is NOT displayed in EMEA account which is not from Sales District list
+#    And Account management page is opened.
+#    When Choose EMEA region.
+#    And Select account <emeaAccount>.
+#    And Click on account with <salesDivision> sales division.
+#    And Special Pricing page is opened.
+#    Then Regional List Price tab is not displayed.
+#
+#    Examples:
+#      | emeaAccount | salesDivision |
+#      | 9007384     | BES1_20_10    |
