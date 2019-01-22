@@ -1,10 +1,5 @@
 Feature: Login to Backoffice as user with admin access rights and open main pages.
 
-  Background:
-    Given Switch to Backoffice as admin.
-    Given Admin is logged in to Backoffice.
-    And Refresh page.
-
   Scenario: Check that admin is able to login to Backoffice and Users - Customers section is opened.
     Given Switch to Backoffice as admin.
     Given Admin is logged in to Backoffice.
