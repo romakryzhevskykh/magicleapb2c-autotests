@@ -35,6 +35,7 @@ public class AccountManagementPage extends StorefrontBasePage {
         return getCurrentUrl().equals(getPageUrl());
     }
 
+    @Step("Select Appropriate Region From Region List.")
     public void selectAppropriateRegionFromRegionList(Region chosenRegion) {
         waitUntilPageIsFullyLoaded();
         openRegionsList();
@@ -57,18 +58,7 @@ public class AccountManagementPage extends StorefrontBasePage {
     @Step("Open regions list.")
     private void openRegionsList() {
         waitUntilPageIsFullyLoaded();
-        $(REGION_COMBOBOX_XPATH).click();
-    }
-
-    @Step("Search an account by account name on account management page.")
-    public void searchAnAccountOnAccountManagementPage(String accountName) {
-        setAccountNumberToSearchField(accountName);
-        clickOnSearchButton();
-    }
-
-    @Step("Set account number to search field.")
-    private void setAccountNumberToSearchField(String accountName) {
-        $(SEARCH_FIELD_XPATH).sendKeys(accountName);
+        click(By.id(REGION_COMBOBOX_ID));
     }
 
     @Step("Click on Search account button.")
@@ -109,7 +99,8 @@ public class AccountManagementPage extends StorefrontBasePage {
 
     @Step("Search account by account name.")
     public void searchAccountByAccountName(String accountName) {
-        setAccountNumberToSearchField(accountName);
+        $(By.id(SEARCH_FIELD_ID)).clear();
+        $(By.id(SEARCH_FIELD_ID)).sendKeys(accountName);
         clickOnSearchButton();
     }
 
@@ -159,11 +150,6 @@ public class AccountManagementPage extends StorefrontBasePage {
         }
     }
 
-    @Step("Get First Account Name In The Table.")
-    public String getFirstAccountNameInTheTable() {
-        return $(ACCOUNT_NAME_VALUE_IN_TABLE_XPATH).getText();
-    }
-
     @Step("Get Full Account Number with divisions In The Approved Accounts Table.")
     public String getFirstAccountFullInfo() {
         waitUntilPageIsFullyLoaded();
@@ -188,9 +174,9 @@ public class AccountManagementPage extends StorefrontBasePage {
         click(FAVORITES_ACCOUNTS_TAB_XPATH);
     }
 
-    @Step("Get All Approved Accounts In Approved Accounts Tab.")
-    public List<String> getAllApprovedAccountsInApprovedAccountsTab() {
-        return $$(APPROVED_ACCOUNTS_NAME_IN_APPROVED_ACCOUNTS_TABLE_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
+    @Step("Get All Approved Accounts No In Approved Accounts Tab.")
+    public List<String> getAllApprovedAccountsNoInApprovedAccountsTab() {
+        return $$(APPROVED_ACCOUNTS_NO_IN_APPROVED_ACCOUNTS_TABLE_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
     @Step("Remove All Active Requested Accounts.")
@@ -227,6 +213,11 @@ public class AccountManagementPage extends StorefrontBasePage {
         return $$(By.xpath(APPROVED_ACCOUNTS_LIST_XPATH));
     }
 
+    @Step("Get List of approved account names.")
+    public Stream<WebElement> getListOfApprovedAccountNames() {
+        return $$(APPROVED_ACCOUNTS_NAME_IN_APPROVED_ACCOUNTS_TABLE_XPATH).stream();
+    }
+
     @Step("Get all approved accounts.")
     public Stream<WebElement> getAllApprovedAccounts() {
         waitUntilPageIsFullyLoaded();
@@ -239,7 +230,7 @@ public class AccountManagementPage extends StorefrontBasePage {
         click(REMOVE_ACCOUNT_ACTION_FOR_APPROPRIATE_ACCOUNT_THREE_DOT_ICON_XPATH, account);
         click(THREE_DOT_ICON_REMOVE_ACCOUNT_XPATH, account);
         waitUntilPageIsFullyLoaded();
-        click(CONFIRMATION_FOR_REMOVE_ACTIVE_ACCOUNT_BUTTON_XPATH);
+        click(CONFIRMATION_FOR_REMOVE_ACTIVE_ACCOUNT_BUTTON_ID);
         getDriver().navigate().refresh();
     }
 
@@ -294,7 +285,7 @@ public class AccountManagementPage extends StorefrontBasePage {
 
     @Step("Click On Send Pre Auth Code.")
     public void clickOnSendPreAuthCode() {
-        click(PRE_AUTH_SEND_REQUEST_BUTTON_XPATH);
+        click(By.id(PRE_AUTH_SEND_REQUEST_BUTTON_ID));
     }
 
     @Step("Get Count Of Favorite Accounts.")

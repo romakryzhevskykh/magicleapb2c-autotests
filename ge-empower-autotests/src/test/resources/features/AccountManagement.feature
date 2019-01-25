@@ -91,3 +91,15 @@ Feature: Some actions on Account Management page as admin
     Examples:
       | tooltipText                                                                                                                       | accountPopUpMessage                                                                                                               |
       | This account is on Delivery Block: pricing and ordering are allowed, but shipments will be held. Please contact customer service. | This account is on Delivery Block, pricing and ordering are allowed, but shipments will be held. Please contact customer service. |
+
+  Scenario Outline: Check that user can search account by name and name with character &.
+    And Account management page is opened.
+    When Choose North_America region.
+    And Select account <accountName>.
+    Then Is account name <accountName> displayed in the table.
+    And Select account <accountName2>.
+    Then Is account name <accountName2> displayed in the table.
+
+    Examples:
+      | accountName                     | accountName2                     |
+      | YOKOGAWA CORPORATION OF AMERICA | WOMACK ELECTRIC & SUPPLY CO, INC |
