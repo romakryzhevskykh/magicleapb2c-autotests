@@ -414,7 +414,7 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     And Refresh page.
     And Account management page is opened.
     When Choose EMEA region.
-    And Search an account <account> on Account Management Page.
+    And Select account <account>.
     Then Is account <account> displayed in the table on Account Management Page.
     Given Switch to Storefront as secondEmpAdmin.
     And Focus on browser.
