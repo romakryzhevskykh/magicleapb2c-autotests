@@ -118,9 +118,10 @@ Feature: Registration flow for external, internal, mfgrep users.
     And Sets <userId> email to the email field.
     And Clicks on the Search button.
     Then There is no user in the users list table.
+
     Examples:
-      | userId    | userEmail                    | abbEmail                         | newAbbEmail             | companyName      | phoneNo         | relationship                    | account | abbText                                                                                                        |
-      | 503021114 | oleksandr.nikolaienko@ge.com | oleksandr.nikolaienko@in.abb.com | update.email@in.abb.com | ABB test company | 645284-31234-32 | Industrial Solutions Contractor | 9012306 | In order to better serve you, please perform this profile update by entering your new ABB email address below: |
+      | userId    | userEmail                   | abbEmail                        | newAbbEmail             | companyName      | phoneNo        | relationship                    | account | abbText                                                                                                        |
+      | 503030803 | diana.sanzharevskaya@ge.com | diana.sanzharevskaya@in.abb.com | update.email@in.abb.com | ABB test company | 213-443320-932 | Industrial Solutions Contractor | 9012306 | In order to better serve you, please perform this profile update by entering your new ABB email address below: |
 
   Scenario Outline: Check that user is able to register as internal user and only global admins can see him on Pending requests tab.
     And Dismiss sessions.
@@ -195,8 +196,8 @@ Feature: Registration flow for external, internal, mfgrep users.
     Then There is no user in the users list table.
 
     Examples:
-      | userId    | userEmail                    | abbEmail                         |  companyName      | phoneNo         | relationship                    | account | abbText                                                                                                        |
-      | 503021114 | oleksandr.nikolaienko@ge.com | oleksandr.nikolaienko@in.abb.com |  ABB test company | 645284-31234-32 | Industrial Solutions Contractor | 9012306 | In order to better serve you, please perform this profile update by entering your new ABB email address below: |
+      | userId    | userEmail                   | abbEmail                        | companyName      | phoneNo        | relationship                    | account | abbText                                                                                                        |
+      | 503030803 | diana.sanzharevskaya@ge.com | diana.sanzharevskaya@in.abb.com | ABB test company | 213-443320-932 | Industrial Solutions Contractor | 9012306 | In order to better serve you, please perform this profile update by entering your new ABB email address below: |
 
   Scenario Outline: Check that manufacturer representative user can change role, will become an external user and then admin will delete the user via manage users.
     And Dismiss sessions.
