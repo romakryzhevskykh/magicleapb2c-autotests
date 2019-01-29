@@ -476,8 +476,8 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Then No data available in table title is displayed in Sales Office Code table.
 
     Examples:
-      | email                  | soCode |
-      | randrii.zhukov@abb.com | USG4   |
+      | email                 | soCode |
+      | andrii.zhukov@abb.com | USG4   |
 
   Scenario Outline: Check that admin is able to reject SO codes to the internal user
     And Refresh page.

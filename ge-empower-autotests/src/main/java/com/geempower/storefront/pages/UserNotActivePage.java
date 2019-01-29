@@ -97,6 +97,7 @@ public class UserNotActivePage extends StorefrontBasePage {
     @Step("Get Request Account Title PopUp.")
     public String getRequestAccountTitlePopUp() {
         waitUntilPageIsFullyLoaded();
+        moveToElement($(REQUEST_ACCOUNT_TITLE_IN_POP_UP_XPATH));
         return $(REQUEST_ACCOUNT_TITLE_IN_POP_UP_XPATH).getText();
     }
 
@@ -140,6 +141,7 @@ public class UserNotActivePage extends StorefrontBasePage {
     @Step("Get Pre Auth Title PopUp.")
     public String getPreAuthTitlePopUp() {
         waitUntilPageIsFullyLoaded();
+        moveToElement($(PRE_AUTHORIZATION_CODE_TITLE_IN_POP_UP_XPATH));
         return $(PRE_AUTHORIZATION_CODE_TITLE_IN_POP_UP_XPATH).getText();
     }
 

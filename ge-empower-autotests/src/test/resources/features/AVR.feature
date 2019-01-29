@@ -106,7 +106,7 @@ Feature: Verification of main AVR elements on the Dashboard and on the Volume Re
 
     Examples:
       | sso       |
-      | 503030969 |
+      | 503089727 |
 
   Scenario: Check that dashboard AVR widget is not displayed and appropriate No AVR title is displayed on the Volume rebate page if no AVR data available.
     And Select account 9000131.

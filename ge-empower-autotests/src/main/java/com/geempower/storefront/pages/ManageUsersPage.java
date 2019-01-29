@@ -12,7 +12,8 @@ import ru.yandex.qatools.allure.annotations.Step;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.geempower.storefront.page_block_elements.IwantToBlockElements.*;
+import static com.geempower.storefront.page_block_elements.IwantToBlockElements.APPROVE_PENDING_ACCOUNTS_SECTION_TITLE_XPATH;
+import static com.geempower.storefront.page_block_elements.IwantToBlockElements.TOTAL_ACCOUNT_REQUESTS_XPATH;
 import static com.geempower.storefront.page_elements.manageUsers.ManageUsersPageElements.*;
 
 @Component
@@ -68,8 +69,8 @@ public class ManageUsersPage extends StorefrontBasePage {
     @Step("Click on Add Account Button In User Detail Block.")
     public void clickOnAddAccountButtonInUserDetailBlock() {
         waitUntilPageIsFullyLoaded();
-        utils.pageScrollDown();
-        click(ADD_ACCOUNT_BUTTON_XPATH);
+        moveToElement($(ADD_ACCOUNT_BUTTON_XPATH));
+        $(ADD_ACCOUNT_BUTTON_XPATH).click();
     }
 
     @Step("Get Add Account Pop Up Title.")
