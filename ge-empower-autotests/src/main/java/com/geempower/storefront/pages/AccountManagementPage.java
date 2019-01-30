@@ -230,8 +230,8 @@ public class AccountManagementPage extends StorefrontBasePage {
         click(REMOVE_ACCOUNT_ACTION_FOR_APPROPRIATE_ACCOUNT_THREE_DOT_ICON_XPATH, account);
         click(THREE_DOT_ICON_REMOVE_ACCOUNT_XPATH, account);
         waitUntilPageIsFullyLoaded();
-        click(CONFIRMATION_FOR_REMOVE_ACTIVE_ACCOUNT_BUTTON_ID);
-        getDriver().navigate().refresh();
+        click(By.id(CONFIRMATION_FOR_REMOVE_ACTIVE_ACCOUNT_BUTTON_ID));
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Mark appropriate account as favourite.")

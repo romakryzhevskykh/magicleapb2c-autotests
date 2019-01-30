@@ -295,6 +295,7 @@ public class IwantToBlock extends UIComponent {
 
     @Step("Accept The Action On Reject Account PopUp.")
     public void acceptTheActionOnRejectAccountPopUp() {
+        moveToElement($(ACCEPT_THE_ACTION_IN_REJECT_ACCOUNT_POP_UP_XPATH));
         click(ACCEPT_THE_ACTION_IN_REJECT_ACCOUNT_POP_UP_XPATH);
         waitUntilPageIsFullyLoaded();
     }

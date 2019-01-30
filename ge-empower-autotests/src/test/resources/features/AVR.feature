@@ -61,9 +61,9 @@ Feature: Verification of main AVR elements on the Dashboard and on the Volume Re
     Then Calculator with Customer's Projection*: and Projection Payout: is displayed if Target is applicable.
     Then Projection Payout is calculated correctly on the fly and user can save this value.
 
-  Examples:
-  | infoMessage                                                                                                                                        | settlementMessage                                                                         |
-  | Disclaimer: The amount and calculations displayed on this page are for informational purposes only. Actual amounts owed are subject to validation. | Some Volume Rebate details may be not displayed, check settlement partner account instead |
+    Examples:
+      | infoMessage                                                                                                                                        | settlementMessage                                                                         |
+      | Disclaimer: The amount and calculations displayed on this page are for informational purposes only. Actual amounts owed are subject to validation. | Some Volume Rebate details may be not displayed, check settlement partner account instead |
 
   Scenario Outline: Check that internal user can't see Volume Rebate menu item if appropriate toggle is turned of to the user.
     And Select account 9003084.
