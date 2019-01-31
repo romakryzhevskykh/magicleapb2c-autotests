@@ -550,6 +550,8 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
       | testRoleUser | CS (Customer Ser.)         | HD (Help Desk)             |
       | testRoleUser | HD (Help Desk)             | User                       |
 
+  # DE https://rally1.rallydev.com/#/detail/defect/283827673008?fdp=true
+  @Skip
   Scenario Outline: Check that admin can open user details page and check appropriate data
     Given Switch to Storefront as thirdInternalUser.
     And User is logged in to Storefront.

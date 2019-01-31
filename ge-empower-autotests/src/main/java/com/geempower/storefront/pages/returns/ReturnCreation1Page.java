@@ -57,6 +57,9 @@ public class ReturnCreation1Page extends StorefrontBasePage {
     @Step("Click on Top Next button.")
     public void clickOnNextButton() {
         waitUntilPageIsFullyLoaded();
+        if($(TOP_NEXT_BUTTON_XPATH).isDisplayed() && !$(TOP_NEXT_BUTTON_XPATH).isEnabled()) {
+            utils.refreshCurrentPage();
+        }
         click(TOP_NEXT_BUTTON_XPATH);
         waitUntilPageIsFullyLoaded();
     }
