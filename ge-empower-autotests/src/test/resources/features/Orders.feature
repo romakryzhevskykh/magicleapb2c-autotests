@@ -119,6 +119,8 @@ Feature: Some actions on Orders page
       | Download your open orders report -> | With Pricing    | rmautotest@gmail.com |
       | Download your open orders report -> | Without Pricing | rmautotest@gmail.com |
 
+  # DE https://rally1.rallydev.com/#/detail/defect/283827673008?fdp=true
+  @Skip
   Scenario Outline: Check that user can open Detail Orders page and verify main elements
     And Account management page is opened.
     When Choose <region> region.
