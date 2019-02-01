@@ -1,7 +1,13 @@
 package com.geempower.storefront.pages;
 
+import com.geempower.helpers.Utils;
 import com.geempower.helpers.models.Product;
 import com.geempower.storefront.StorefrontBasePage;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -9,6 +15,8 @@ import static com.geempower.storefront.page_elements.MyCartPageElements.*;
 
 @Component
 public class MyCartPage extends StorefrontBasePage {
+    @Autowired
+    private Utils utils;
 
     private final String pageUri = "checkout";
 
@@ -37,7 +45,7 @@ public class MyCartPage extends StorefrontBasePage {
     @Step("Is build order Information input present.")
     public boolean isBuildOrderInformationInputPresent() {
         return $(BUILD_ORDER_FORM_WRAPPER_XPATH).isDisplayed() &&
-                $(BUILD_ORDER_INFORMATION_INPUT_XPATH).isDisplayed();
+                $(By.id(BUILD_ORDER_INFORMATION_INPUT_ID)).isDisplayed();
     }
 
     @Step("Is add item button present.")
@@ -160,5 +168,89 @@ public class MyCartPage extends StorefrontBasePage {
     public int getCountOfProducts() {
         waitUntilPageIsFullyLoaded();
         return $$(LIST_OF_PRODUCTS_XPATH).size();
+    }
+
+    @Step("Get Actual Items Count Label.")
+    public String getActualItemsCountLabel() {
+        waitUntilPageIsFullyLoaded();
+        return $(N_ITEMS_LABEL_XPATH).getText();
+    }
+
+    @Step("Get Build Order Header.")
+    public String getBuildOrderHeader() {
+        return $(BUILD_ORDER_HEADER_XPATH).getText();
+    }
+
+    @Step("Get Build Order Placeholder.")
+    public String getBuildOrderPlaceholder() {
+        return $(By.id(BUILD_ORDER_INFORMATION_INPUT_ID)).getAttribute("placeholder");
+    }
+
+    @Step("Set Random Build Order Note.")
+    public String setRandomBuildOrderNote() {
+        String randomOrderNote = utils.generateUniqueTimestamp();
+        enterText(randomOrderNote, By.id(BUILD_ORDER_INFORMATION_INPUT_ID));
+        return randomOrderNote;
+    }
+
+    @Step("Click On Add Item Button.")
+    public void clickOnAddItemButton() {
+        waitUntilPageIsFullyLoaded();
+        click(ADD_ITEM_BUTTON_XPATH);
+    }
+
+    @Step("Add Product To The New Item Pop-Up.")
+    public void addProductToTheNewItemPopUp(String catalogNo) {
+        waitUntilPageIsFullyLoaded();
+        enterText(catalogNo, NEW_ITEM_POP_UP_PRODUCT_FIRST_FIELD_XPATH);
+    }
+
+    @Step("Confirm Add Item Action.")
+    public void confirmAddItemAction() {
+        waitUntilPageIsFullyLoaded();
+        click(CONFIRM_ADD_ITEM_ACTION_BUTTON_XPATH);
+    }
+
+    @Step("Click On Save Cart Button.")
+    public void clickOnSaveCartButton() {
+        waitUntilPageIsFullyLoaded();
+        click(SAVE_ITEMS_BUTTON_XPATH);
+    }
+
+    @Step("Get Save To Cart Pop-Up Title.")
+    public String getSaveToCartPopUpTitle() {
+        waitUntilPageIsFullyLoaded();
+        WebDriverWait wait = new WebDriverWait(getDriver(), 3);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(SAVE_TO_CART_POP_UP_TITLE_XPATH)));
+        WebElement title = $(SAVE_TO_CART_POP_UP_TITLE_XPATH);
+        return title.getText();
+    }
+
+    @Step("Set Random Cart Name To The Cart Name Input.")
+    public String setRandomCartNameToTheCartNameInput() {
+        String randomCartName = utils.generateUniqueTimestamp();
+        waitUntilPageIsFullyLoaded();
+        enterText(randomCartName, SAVE_TO_CART_POP_UP_CART_NAME_INPUT_XPATH);
+        return randomCartName;
+    }
+
+    @Step("Сlick On Save New Cart Button.")
+    public void clickOnSaveNewCartButton() {
+        WebDriverWait wait = new WebDriverWait(getDriver(), 3);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(SAVE_TO_CART_POP_UP_CREATE_NEW_LIST_BUTTON_XPATH)));
+        WebElement button = $(SAVE_TO_CART_POP_UP_CREATE_NEW_LIST_BUTTON_XPATH);
+        button.click();
+        waitUntilPageIsFullyLoaded();
+    }
+
+    @Step("Get Build Order Note Value.")
+    public String getBuildOrderNoteValue() {
+        waitUntilPageIsFullyLoaded();
+        return $(By.id(BUILD_ORDER_INFORMATION_INPUT_ID)).getText();
+    }
+
+    @Step("Get First Product Catalog No.")
+    public String getFirstProductCatalogNo() {
+        return $(FIRST_PRODUCT_CATALOG_NO_XPATH).getText();
     }
 }

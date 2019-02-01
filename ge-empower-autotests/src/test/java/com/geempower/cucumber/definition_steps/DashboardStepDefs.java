@@ -98,14 +98,12 @@ public class DashboardStepDefs extends AbstractStepDefs {
 
     @When("^User set catalogueNo to Copy & Paste field.$")
     public void userSetCatalogueNoToCopyPasteField() {
-        threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
         priceAndAvailabilityBlock.setCatalogueNoToTheCopyAndPasteField(catalogueNo);
     }
 
     @When("^User set chosen catalogueNo to the Product Number field.$")
     public void userSetCatalogueNoToProductField() {
-        threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
         String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
         priceAndAvailabilityBlock.setCatalogueNoToProductField(catalogueNo);
     }

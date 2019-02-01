@@ -24,4 +24,17 @@ public class SavedItemsPageElements {
     public final static String THREE_DOT_ICON_XPATH = FIRST_LIST_FROM_THE_SAVED_LISTS_TABLE_XPATH + "/td[5]//i[@class='fa fa-ellipsis-v']";
     public final static String THREE_DOT_ICON_DELETE_OPTION_XPATH = FIRST_LIST_FROM_THE_SAVED_LISTS_TABLE_XPATH + "//td[5]//a[contains(@data-target, 'delete-list-modal')]";
     public final static String DELETE_BUTTON_IN_CONFIRMATION_DELETE_POP_UP_XPATH = "//div[@class='modal fade delete-list-modal in']//button[@class='btn primary-btn delete-list-btn']";
+    //SAVED CART
+    private final static String SAVED_CART_TABLE_XPATH = "//table[@id='savedCartTable']";
+    public final static String SAVED_CART_LIST_OF_NAMES_XPATH =  SAVED_CART_TABLE_XPATH + "//tbody/tr/td[1]/a";
+    public final static String SAVED_CART_TABLE_COLUMNS_NAMES_XPATH = SAVED_CART_TABLE_XPATH + "//th[contains(@class,'table-visible-lg-block sorting')]";
+    private final static String APPROPRIATE_SAVED_CART_BY_NAME_XPATH = SAVED_CART_TABLE_XPATH + "//tbody/tr/td[1]/a[text()='%s']/../../";
+    public final static String APPROPRIATE_SAVED_CART_NAME_VALUE_XPATH = APPROPRIATE_SAVED_CART_BY_NAME_XPATH + "/td[1]/a";
+    public final static String APPROPRIATE_SAVED_CART_CREATED_ON_VALUE_XPATH = APPROPRIATE_SAVED_CART_BY_NAME_XPATH + "td[2]";
+    public final static String APPROPRIATE_SAVED_CART_CREATED_BY_VALUE_XPATH = APPROPRIATE_SAVED_CART_BY_NAME_XPATH + "td[3]";
+    public final static String APPROPRIATE_SAVED_CART_LAST_EDITED_ON_VALUE_XPATH = APPROPRIATE_SAVED_CART_BY_NAME_XPATH + "td[4]";
+    public final static String APPROPRIATE_SAVED_CART_NO_OF_ITEMS_VALUE_XPATH = APPROPRIATE_SAVED_CART_BY_NAME_XPATH + "td[5]";
+    public final static String THREE_DOT_ICON_SAVED_CART_XPATH = "//tbody//a[text()='%s']/../../td[6]//a[@data-toggle='dropdown']/i";
+    public final static String THREE_DOT_ICON_SAVED_CART_DELETE_OPTION_XPATH = "//tbody//a[text()='%s']/../../td[6]//ul[@class='dropdown-menu dropdown-list more-action-dropdown']/li/a";
+    public final static String DELETE_BUTTON_IN_CONFIRMATION_DELETE_CART_POP_UP_XPATH = "//button[@class='btn primary-btn delete-cart-btn']";
 }

@@ -149,6 +149,7 @@ public class RebateCreation1Page extends StorefrontBasePage {
 
     @Step("Get Apply Button Tool Tip.")
     public String getApplyButtonToolTip() {
+        waitUntilPageIsFullyLoaded();
         return $(TOOLTIP_APPLY_AND_NEXT_BUTTONS_XPATH).getText();
     }
 

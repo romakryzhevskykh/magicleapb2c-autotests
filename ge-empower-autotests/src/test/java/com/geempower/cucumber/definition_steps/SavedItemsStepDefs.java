@@ -1,20 +1,24 @@
 package com.geempower.cucumber.definition_steps;
 
+import com.geempower.helpers.Utils;
 import com.geempower.storefront.pages.SavedItemsPage;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 import static org.testng.Assert.*;
 
 public class SavedItemsStepDefs extends AbstractStepDefs {
     @Autowired
     private SavedItemsPage savedItemsPage;
-
+    @Autowired
+    private Utils utils;
 
     @Then("^Check that Saved Items page is opened.$")
-    public void isSavedItemsPageOpened(){
+    public void isSavedItemsPageOpened() {
         assertTrue(savedItemsPage.isOpened());
     }
 
@@ -106,5 +110,37 @@ public class SavedItemsStepDefs extends AbstractStepDefs {
     public void listWithAppropriateNameDisappearedInSavedListsTable() {
         String addedListName = threadVarsHashMap.getString(TestKeyword.NEW_SAVED_LIST_NAME);
         assertNotEquals(addedListName, savedItemsPage.getFirstListNameFromTheSavedListsTable());
+    }
+
+    @Then("^Active Cart table contains (.*) columns.$")
+    public void activeCartTableContainsNecessaryColumns(List<String> expectedColumnsNames) {
+        List<String> actualColumnsNames = savedItemsPage.collectSavedCartTableColumnsName();
+        assertTrue(actualColumnsNames.containsAll(expectedColumnsNames), "Expected: " + expectedColumnsNames + " but actual: " + actualColumnsNames);
+    }
+
+    @Then("^Active Cart table contains appropriate cart with correct data.$")
+    public void activeCartTableContainsCorrectData() {
+        String savedCartName = threadVarsHashMap.getString(TestKeyword.RANDOM_SAVED_CART_NAME);
+        assertTrue(savedItemsPage.getListOfSavedCartNames().contains(savedCartName));
+        assertEquals(utils.getCurrentDate(), savedItemsPage.getLatestCreatedOnValue(savedCartName));
+        assertTrue(savedItemsPage.getLatestCreatedByValue(savedCartName).contains("autotest"));
+        assertEquals(utils.getCurrentDate(), savedItemsPage.getLatestLastEditedOnValue(savedCartName));
+        assertEquals("1", savedItemsPage.getLatestNoOfItemsValue(savedCartName));
+    }
+
+    @When("^User opens appropriate saved cart.$")
+    public void userOpensAppropriateSavedCart() {
+        savedItemsPage.openAppropriateSavedCart(threadVarsHashMap.getString(TestKeyword.RANDOM_SAVED_CART_NAME));
+    }
+
+    @When("^User deletes appropriate saved cart.$")
+    public void userDeletesAppropriateSavedCart() {
+        savedItemsPage.deleteSavedCart(threadVarsHashMap.getString(TestKeyword.RANDOM_SAVED_CART_NAME));
+    }
+
+    @Then("^Cart with appropriate name disappeared in Saved Cart table.$")
+    public void savedCartIsNotDisplayedOnTheList() {
+        String addedSavedCart = threadVarsHashMap.getString(TestKeyword.RANDOM_SAVED_CART_NAME);
+        assertTrue(!savedItemsPage.getListOfSavedCartNames().contains(addedSavedCart));
     }
 }
