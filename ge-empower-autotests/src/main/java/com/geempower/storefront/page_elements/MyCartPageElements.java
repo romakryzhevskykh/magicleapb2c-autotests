@@ -11,7 +11,6 @@ public class MyCartPageElements {
     public final static String SHIPPING_BILLING_INFO_STEP_ICON_XPATH = "//*[@class='shipping-billing-info']";
     public final static String ORDER_SUMMARY_STEP_ICON_XPATH = "//*[@class='order-summary']";
     public final static String BUILD_ORDER_INFORMATION_INPUT_ID = "orderNote";
-    public final static String BUILD_ORDER_INFORMATION_INPUT_XPATH = "//textarea[@name='orderNote']";
     public final static String BUILD_ORDER_FORM_WRAPPER_XPATH = "//*[@class='add-new-order-form-wrapper']";
     public final static String BUILD_ORDER_HEADER_XPATH = "//div[@class='add-new-order-form-wrapper']/div/h4";
     public final static String DELETE_ITEM_BUTTON_XPATH = ".//button[@data-target='#delete-item-modal']";

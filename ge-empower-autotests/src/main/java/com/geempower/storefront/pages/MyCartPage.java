@@ -246,7 +246,7 @@ public class MyCartPage extends StorefrontBasePage {
     @Step("Get Build Order Note Value.")
     public String getBuildOrderNoteValue() {
         waitUntilPageIsFullyLoaded();
-        return $(BUILD_ORDER_INFORMATION_INPUT_XPATH).getText();
+        return $(By.id(BUILD_ORDER_INFORMATION_INPUT_ID)).getText();
     }
 
     @Step("Get First Product Catalog No.")
