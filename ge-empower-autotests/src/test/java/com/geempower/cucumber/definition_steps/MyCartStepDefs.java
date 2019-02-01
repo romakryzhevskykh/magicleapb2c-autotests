@@ -129,4 +129,64 @@ public class MyCartStepDefs extends AbstractStepDefs {
         int invalidUploadedProductsCount = (int) threadVarsHashMap.get(TestKeyword.COUNT_OF_INVALID_UPLOADED_PRODUCTS);
         assertEquals((int) threadVarsHashMap.get(TestKeyword.UPLOADED_PRODUCTS_COUNT) - invalidUploadedProductsCount, myCartPage.getCountOfProducts());
     }
+
+    @Then("^(.*) label is displayed on the My cart page.$")
+    public void labelIsDisplayedOnTheMyCartPage(String label) {
+        assertTrue(myCartPage.getActualItemsCountLabel().contains(label));
+    }
+
+    @Then("^(.*) header is displayed on the My Cart page.$")
+    public void buildOrderHeaderIsDisplayedOnTheMyCartPage(String buildOrderHeader) {
+        assertEquals(buildOrderHeader, myCartPage.getBuildOrderHeader());
+    }
+
+    @Then("^Order note with (.*) placeholder is displayed.$")
+    public void orderNoteWithPlaceholderIsDisplayed(String placeholder) {
+        assertEquals(placeholder, myCartPage.getBuildOrderPlaceholder());
+    }
+
+    @When("^User sets random order note to the Build Order field.$")
+    public void userSetsRandomOrderNoteToTheBuildOrderField() {
+        threadVarsHashMap.put(TestKeyword.BUILD_ORDER_NOTE, myCartPage.setRandomBuildOrderNote());
+    }
+
+    @And("^Add the found test product by region to the My Cart.$")
+    public void addTheFoundTestProductByRegionToTheMyCart() {
+        myCartPage.clickOnAddItemButton();
+        String catalogueNo = getSelectedProducts().keySet().stream().findAny().get().getCatalogNo();
+        threadVarsHashMap.put(TestKeyword.MY_CART_CATALOG_NO, catalogueNo);
+        myCartPage.addProductToTheNewItemPopUp(catalogueNo);
+        myCartPage.confirmAddItemAction();
+    }
+
+    @When("^User clicks on the Save items button.$")
+    public void userClicksOnTheSaveItemsButton() {
+        myCartPage.clickOnSaveCartButton();
+    }
+
+    @Then("^(.*) pop-up appears on the My Cart page.$")
+    public void saveToCartPopUpAppearsOnTheMyCartPage(String popUpTitle) {
+        assertEquals(popUpTitle, myCartPage.getSaveToCartPopUpTitle());
+    }
+
+    @When("^User sets random name to the Cart Name input.$")
+    public void userSetsRandomNameToTheCartNameInput() {
+        threadVarsHashMap.put(TestKeyword.RANDOM_SAVED_CART_NAME, myCartPage.setRandomCartNameToTheCartNameInput());
+    }
+
+    @And("^Click on Save button in the Save to cart pop-up.$")
+    public void clickOnSaveButtonInTheSaveToCartPopUp() {
+        myCartPage.clickOnSaveNewCartButton();
+    }
+
+    @Then("^Saved Cart contains previously added Order note.$")
+    public void savedCartContainsPreviouslyAddedOrderNote() {
+        assertEquals(threadVarsHashMap.getString(TestKeyword.BUILD_ORDER_NOTE), myCartPage.getBuildOrderNoteValue());
+    }
+
+    @Then("^Saved Cart contains previously added product.$")
+    public void savedCartContainsPreviouslyAddedProduct() {
+        HashMap<Product, Integer> selectedProducts = (HashMap<Product, Integer>) threadVarsHashMap.get(TestKeyword.SELECTED_PRODUCTS);
+        assertTrue(selectedProducts.keySet().iterator().next().getCatalogNo().equals(myCartPage.getFirstProductCatalogNo()));
+    }
 }

@@ -3,11 +3,16 @@ package com.geempower.storefront.pages;
 import com.geempower.helpers.Utils;
 import com.geempower.storefront.StorefrontBasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static com.geempower.storefront.page_elements.SavedItemsPageElements.*;
+import static com.geempower.storefront.page_elements.SavedItemsPageElements.APPROPRIATE_SAVED_CART_CREATED_BY_VALUE_XPATH;
 
 @Component
 public class SavedItemsPage extends StorefrontBasePage {
@@ -26,27 +31,27 @@ public class SavedItemsPage extends StorefrontBasePage {
         return getCurrentUrl().equals(getPageUrl());
     }
 
-    @Step("Get All Items title")
+    @Step("Get All Items title.")
     public String getAllItemsTitle() {
         return $(ALL_ITEMS_TITLE_XPATH).getText();
     }
 
-    @Step("Get Active Cart Table Title")
+    @Step("Get Active Cart Table Title.")
     public String getActiveCartTableTitle() {
         return $(ACTIVE_CART_TABLE_TITLE_XPATH).getText();
     }
 
-    @Step("Get Saved Lists Table Title")
+    @Step("Get Saved Lists Table Title.")
     public String getSavedListsTableTitle() {
         return $(SAVED_ITEMS_TABLE_TITLE_XPATH).getText();
     }
 
-    @Step("Click On Add New List Button On All Items Page")
+    @Step("Click On Add New List Button On All Items Page.")
     public void clickOnAddNewListButtonOnAllItemsPage() {
         click(ADD_NEW_LIST_BUTTON_XPATH);
     }
 
-    @Step("Set New List Name To The New List Pop Up")
+    @Step("Set New List Name To The New List Pop Up.")
     public String setNewListNameToTheNewListPopUp() {
         waitHTMLTemplateLoad();
         String listName = utils.getLocalDateTimeStamp();
@@ -55,13 +60,13 @@ public class SavedItemsPage extends StorefrontBasePage {
         return listName;
     }
 
-    @Step("Click On Add New List Button On New List Pop Up")
+    @Step("Click On Add New List Button On New List Pop Up.")
     public void clickOnAddNewListButtonOnNewListPopUp() {
         waitUntilPageIsFullyLoaded();
         click(ADD_NEW_LIST_BUTTON_IN_NEW_LIST_POP_UP_XPATH);
     }
 
-    @Step("Sort Saved List Table By Created On")
+    @Step("Sort Saved List Table By Created On.")
     public void sortSavedListTableByCreatedOn(String sortRule) {
         waitUntilPageIsFullyLoaded();
         switch (sortRule) {
@@ -76,7 +81,7 @@ public class SavedItemsPage extends StorefrontBasePage {
         }
     }
 
-    @Step("Get First List Name From The Saved Lists Table")
+    @Step("Get First List Name From The Saved Lists Table.")
     public String getFirstListNameFromTheSavedListsTable() {
         if (!$(NO_DATA_TITLE_IN_SAVED_ITEMS_TABLE_XPATH).getText().equals("No data available in table")) {
             return $(FIRST_LIST_NAME_FROM_THE_SAVED_LISTS_TABLE_XPATH).getText();
@@ -84,27 +89,27 @@ public class SavedItemsPage extends StorefrontBasePage {
             return $(NO_DATA_TITLE_IN_SAVED_ITEMS_TABLE_XPATH).getText();
     }
 
-    @Step("Get Created On Value Of Saved List")
+    @Step("Get Created On Value Of Saved List.")
     public String getCreatedOnValueOfSavedList() {
         return $(FIRST_LIST_CREATED_ON_FROM_THE_SAVED_LISTS_TABLE_XPATH).getText();
     }
 
-    @Step("Get Last Edited On Value Of Saved List")
+    @Step("Get Last Edited On Value Of Saved List.")
     public String getLastEditedOnValueOfSavedList() {
         return $(FIRST_LIST_LAST_EDITED_ON_FROM_THE_SAVED_LISTS_TABLE_XPATH).getText();
     }
 
-    @Step("Get No Of Items Value Of Saved List")
+    @Step("Get No Of Items Value Of Saved List.")
     public String getNoOfItemsValueOfSavedList() {
         return $(FIRST_LIST_NO_OF_ITEMS_FROM_THE_SAVED_LISTS_TABLE_XPATH).getText();
     }
 
-    @Step("Open The Created Saved List")
+    @Step("Open The Created Saved List.")
     public void openTheCreatedSavedList() {
         click(FIRST_LIST_NAME_FROM_THE_SAVED_LISTS_TABLE_XPATH);
     }
 
-    @Step("Add New Item To The Saved List")
+    @Step("Add New Item To The Saved List.")
     public void addNewItemToTheSavedList(String productNo) {
         waitUntilPageIsFullyLoaded();
         click(ADD_ITEM_BUTTON_XPATH);
@@ -115,23 +120,23 @@ public class SavedItemsPage extends StorefrontBasePage {
         click(By.id(ADD_PRODUCT_BUTTON_IN_NEW_ITEM_POP_UP_ID));
     }
 
-    @Step("Is Added Product Displayed On Saved List Page")
+    @Step("Is Added Product Displayed On Saved List Page.")
     public String isAddedProductDisplayedOnSavedListPage() {
         return $(ADDED_NEW_ITEM_CATALOG_NO_TO_THE_SAVED_LIST_XPATH).getText();
     }
 
-    @Step("Get Extnd Price Of Chosen Product")
+    @Step("Get Extnd Price Of Chosen Product.")
     public double getExtndPriceOfChosenProduct() {
         return Double.parseDouble($(EXTENDED_PRICE_OF_ADDED_PRODUCT_XPATH).getText());
     }
 
-    @Step("Go Back To All Saved Items")
+    @Step("Go Back To All Saved Items.")
     public void goBackToAllSavedItems() {
         waitUntilPageIsFullyLoaded();
         click(GO_BACK_TO_ALL_SAVED_ITEMS_ICON_XPATH);
     }
 
-    @Step("Delete Saved List")
+    @Step("Delete Saved List.")
     public void deleteSavedList() {
         waitUntilPageIsFullyLoaded();
         click(THREE_DOT_ICON_XPATH);
@@ -140,5 +145,53 @@ public class SavedItemsPage extends StorefrontBasePage {
         waitUntilPageIsFullyLoaded();
         click(DELETE_BUTTON_IN_CONFIRMATION_DELETE_POP_UP_XPATH);
         waitUntilPageIsFullyLoaded();
+    }
+
+    @Step("Collect Saved Cart Table Columns Name.")
+    public List<String> collectSavedCartTableColumnsName() {
+        return $$(SAVED_CART_TABLE_COLUMNS_NAMES_XPATH).stream().filter(column -> !column.getText().equals(""))
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
+    }
+
+    @Step("Get Latest Created On Value.")
+    public String getLatestCreatedOnValue(String cartName) {
+        return $(APPROPRIATE_SAVED_CART_CREATED_ON_VALUE_XPATH, cartName).getText();
+    }
+
+    @Step("Get Latest Created By Value.")
+    public String getLatestCreatedByValue(String cartName) {
+        return $(APPROPRIATE_SAVED_CART_CREATED_BY_VALUE_XPATH, cartName).getText();
+    }
+
+    @Step("Get Latest Last Edited On Value.")
+    public String getLatestLastEditedOnValue(String cartName) {
+        return $(APPROPRIATE_SAVED_CART_LAST_EDITED_ON_VALUE_XPATH, cartName).getText();
+    }
+
+    @Step("Get Latest No Of Items Value.")
+    public String getLatestNoOfItemsValue(String cartName) {
+        return $(APPROPRIATE_SAVED_CART_NO_OF_ITEMS_VALUE_XPATH, cartName).getText();
+    }
+
+    @Step("Open Appropriate Saved Cart.")
+    public void openAppropriateSavedCart(String cartName) {
+        waitUntilPageIsFullyLoaded();
+        click(APPROPRIATE_SAVED_CART_NAME_VALUE_XPATH, cartName);
+    }
+
+    @Step("Delete Saved Cart.")
+    public void deleteSavedCart(String cartName) {
+        waitUntilPageIsFullyLoaded();
+        click(THREE_DOT_ICON_SAVED_CART_XPATH, cartName);
+        waitUntilPageIsFullyLoaded();
+        click(THREE_DOT_ICON_SAVED_CART_DELETE_OPTION_XPATH, cartName);
+        waitUntilPageIsFullyLoaded();
+        click(DELETE_BUTTON_IN_CONFIRMATION_DELETE_CART_POP_UP_XPATH);
+    }
+
+    @Step("Get List Of Saved Cart Names.")
+    public List<String> getListOfSavedCartNames() {
+        return $$(SAVED_CART_LIST_OF_NAMES_XPATH).stream().map(WebElement::getText).collect(Collectors.toList());
     }
 }
