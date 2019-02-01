@@ -29,7 +29,7 @@ Feature: Create Rebate manually/ via file uploading, Save for later, Edit saved 
     And Rebates page is opened.
     Then External user can see less quantity of All Rebates than admin.
 
-  Sce"nario Outline: Check that user is able to place rebate manually.
+  Scenario Outline: Check that user is able to place rebate manually.
     When Users click on the Create Rebate button on the All Rebates page.
     Then First step of rebate creation process is opened.
     When User chooses Manual Entry option.
