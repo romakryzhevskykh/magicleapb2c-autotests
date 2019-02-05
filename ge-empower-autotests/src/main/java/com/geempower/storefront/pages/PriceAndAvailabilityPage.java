@@ -23,6 +23,7 @@ public class PriceAndAvailabilityPage extends StorefrontBasePage {
 
     @Override
     public boolean isOpened() {
+        waitUntilPageIsFullyLoaded();
         return getCurrentUrl().equals(getPageUrl());
     }
 

@@ -505,7 +505,7 @@ Feature: Dashboard elements and widgets checking, Order creation via the P&A blo
     When Close cookies pop-up.
     And User uploads test P&A file with name <fileName> to the P&A block.
     And Click on P&A button.
-    Then Price&Availability page is opened.
+    Then Check that P&A page is opened.
     Then Count of uploaded products is equal to count of products in the test file <fileName>.
     And All products are selected on P&A page.
     When User clicks on Add to Cart button.

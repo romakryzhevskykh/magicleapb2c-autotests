@@ -39,6 +39,11 @@ public class PriceAndAvailabilityStepDefs extends AbstractStepDefs {
         });
     }
 
+    @Then("^Check that P&A page is opened.$")
+    public void checkThatPAndAPageIsOpened() {
+        assertTrue(priceAndAvailabilityPage.isOpened());
+    }
+
     @And("^All products are selected on P&A page.$")
     public void allProductsAreSelectedOnPAPage() {
         priceAndAvailabilityPage.clickOnAllCheckboxes();

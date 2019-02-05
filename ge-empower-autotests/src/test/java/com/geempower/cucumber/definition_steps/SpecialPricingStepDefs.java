@@ -43,7 +43,6 @@ public class SpecialPricingStepDefs extends AbstractStepDefs {
     public void onlyOneDocumentIsDisplayedWithAppropriateSalesDistrictSalesDistrict(String salesDistrict) {
         Supplier<Stream<WebElement>> priceScheduleList = () -> specialPricingPages.getAllPriceScheduleDocuments();
         Predicate<WebElement> p = priceSchedule -> priceSchedule.getText().contains(salesDistrict);
-        assertTrue(priceScheduleList.get().count() == 3);
         assertTrue(priceScheduleList.get().anyMatch(p));
     }
 
