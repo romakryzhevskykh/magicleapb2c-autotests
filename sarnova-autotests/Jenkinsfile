@@ -1,0 +1,30 @@
+pipeline {
+
+    parameters {
+        choice(choices: 'dev\nqa\nstage\nprod', description: 'Profile name', name: 'Environment')
+        choice(choices: ' \n-Dcucumber.options="--tags @SmokeTest --plugin ru.yandex.qatools.allure.cucumberjvm.AllureReporter"', description: 'By default all - empty value (all tests)', name: 'Scope')
+         }
+
+   agent any
+   tools {
+       maven 'apache-maven-3.5.4'
+   }
+   stages {
+
+        stage('Mvn compile') {
+           steps {
+           dir('sarnova-autotests')  {
+
+        sh 'mvn clean test site -Dspring.profiles.active=${Environment} ${Scope}'
+                 }
+           }
+       }
+
+       stage('reports') {
+           steps {
+               allure results: [[path: 'sarnova-autotests/target/allure-results']]
+           }
+       }
+
+   }
+}
