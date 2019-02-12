@@ -2,7 +2,7 @@ pipeline {
 
     parameters {
         choice(choices: 'dev\nqa\nstage\nprod', description: 'Profile name', name: 'Environment')
-        choice(choices: ' \n-Dcucumber.options="--tags @SmokeTest --plugin ru.yandex.qatools.allure.cucumberjvm.AllureReporter"', description: 'By default all - empty value (all tests)', name: 'Scope')
+        choice(choices: ' \n-Dcucumber.options="--tags @SmokeTest --plugin ru.yandex.qatools.allure.cucumberjvm.AllureReporter"', description: 'By default empty. Use param for prod', name: 'Scope')
          }
 
    agent any
@@ -11,20 +11,18 @@ pipeline {
    }
    stages {
 
-        stage('Mvn compile') {
+       stage('mvn compile') {
            steps {
            dir('sarnova-autotests')  {
-
-        sh 'mvn clean test site -Dspring.profiles.active=${Environment} ${Scope}'
+                 sh "mvn clean test site -Dspring.profiles.active=${params.Environment} ${params.Scope}"
                  }
            }
        }
 
-       stage('reports') {
+       stage('generate report') {
            steps {
                allure results: [[path: 'sarnova-autotests/target/allure-results']]
            }
        }
-
    }
 }
