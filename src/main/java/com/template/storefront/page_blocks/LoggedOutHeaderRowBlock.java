@@ -1,6 +1,6 @@
 package com.template.storefront.page_blocks;
 
-import com.template.helpers.UIComponent;
+import com.template.helpers.page.UIComponent;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 

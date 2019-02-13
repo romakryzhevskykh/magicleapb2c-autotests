@@ -1,4 +1,7 @@
-package com.template.helpers.models.users;
+package com.template.helpers.user_engine;
+
+
+import com.template.helpers.models.users.User;
 
 import java.util.Collections;
 import java.util.HashMap;

@@ -12,18 +12,18 @@
       
            ```properties
            #for example
-           com.tdsc.backoffice.login.url=http://projectname-stage.zaelab.com/backoffice
-           com.tdsc.backoffice.username=
-           com.tdsc.backoffice.password=
+           com.template.backoffice.login.url=http://projectname-stage.zaelab.com/backoffice
+           com.template.backoffice.username=
+           com.template.backoffice.password=
            ```
            
       - storefront stage/dev credentials:
       
            ```properties
            # for example
-           com.tdsc.storefront.base.url=http://com.template.template-stage.com
-           com.tdsc.storefront.username=
-           com.tdsc.storefront.password=
+           com.template.storefront.base.url=http://com.template.template-stage.com
+           com.template.storefront.username=
+           com.template.storefront.password=
            ``` 
             
 3. create properties file for Selenium grid server
@@ -49,7 +49,7 @@
     .target/
     src/test/resources/META-INF
     target
-    etc.
+    # etc.
     ```
 
 ## Dependencies
@@ -72,19 +72,19 @@
     3) `mvn jetty:run`  - run a local web server
     4) `-Djetty.port=xxxx` - to run jetty on another(default 8080) port
 - then you can open report in your browser by link [http://localhost:8080/](http://localhost:8080/)
-- by default Spring will run stage profile with stage properties, to run other(f.e. production) profiles, use additional command - **`-Dspring.profiles.active=production`** :
+- by default Spring will run stage profile with stage properties, to run other(f.e. production) profiles, use additional command - **-Dspring.profiles.active=production** :
 	```bash
 	mvn clean test site jetty:run -Dspring.profiles.active=environmentToUse
     ```
 - To launch by tags:
-    -Dcucumber.options="--tags @TagName"
+    **-Dcucumber.options="--tags @TagName"**
 
 ## Run single scenario via Intellij IDEA
 > Make sure that you removed all the old run configurations
-1. Open `Run \ Debug` configuration window (`Run -> Edit Configurations...`)
-2. Open `Defaults` configurations and open `Cucumber java` configuration
-3. Fill the `Main class:` field with `com.tdsc.cucumber.runners.CucumberTestNGIdeaRunner`
+1. Open **Run \ Debug** configuration window (**Run -> Edit Configurations...**)
+2. Open **Defaults** configurations and open **Cucumber java** configuration
+3. Fill the **Main class:** field with `com.template.cucumber.runners.CucumberTestNGIdeaRunner`
 4. Add new environment variable `spring.profiles.active=dev` (or whatever you want)
 5. Save
 
-Now you can run single scenario via context menu (right-click -> run)
+Now you can run single scenario via context menu (**right-click -> run**)

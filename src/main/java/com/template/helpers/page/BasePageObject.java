@@ -1,4 +1,4 @@
-package com.template.helpers;
+package com.template.helpers.page;
 
 import org.openqa.selenium.UnhandledAlertException;
 import ru.yandex.qatools.allure.annotations.Step;

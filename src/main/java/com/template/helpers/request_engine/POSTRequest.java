@@ -1,36 +1,56 @@
 package com.template.helpers.request_engine;
 
-import com.template.helpers.models.users.UserSession;
+import com.template.helpers.user_engine.UserSession;
+import lombok.Getter;
+import lombok.Setter;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.net.ssl.HttpsURLConnection;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
+import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 
 public class POSTRequest extends APIRequest {
-    private ArrayList<PostParameterAndValue> postParametersAndValues;
+
+    private PrintWriter postParametersWriter;
+    private DataOutputStream outputStream;
+    @Getter private ArrayList<PostParameterAndValue> postParametersAndValues;
+    private boolean isFile = false;
+    @Setter private boolean isFollowRedirection = false;
+
+    public POSTRequest(String name, String addressMethod) {
+        super(name, addressMethod);
+    }
 
     public void addPostParameterAndValue(PostParameterAndValue parameterAndValue) {
         if (postParametersAndValues == null) {
             this.postParametersAndValues = new ArrayList<>();
             this.postParametersAndValues.add(parameterAndValue);
-        } else
+        } else {
             this.postParametersAndValues.add(parameterAndValue);
+        }
+        if (parameterAndValue.value instanceof File) {
+            System.out.println("The POST request contains file(s)");
+            this.isFile = true;
+        }
     }
 
-    public ArrayList<PostParameterAndValue> getPostParametersAndValues() {
-        return postParametersAndValues;
-    }
-
-    public POSTRequest(String name, String address_method) {
-        super(name, address_method);
+    @SuppressWarnings("unchecked")
+    public void addPostParameterAndValue(String parameter, String value) {
+        PostParameterAndValue parameterAndValue = new PostParameterAndValue(parameter, value);
+        if (postParametersAndValues == null) {
+            this.postParametersAndValues = new ArrayList<>();
+            this.postParametersAndValues.add(parameterAndValue);
+        } else {
+            this.postParametersAndValues.add(parameterAndValue);
+        }
     }
 
     @Override
@@ -43,15 +63,16 @@ public class POSTRequest extends APIRequest {
             this.postParametersAndValues = postParametersAndValues;
             for (PostParameterAndValue parameterAndValue : postParametersAndValues) {
                 try {
-                    this.stringOfPostParameters.append(parameterAndValue.parameter).append("=")
-                            .append(URLEncoder.encode(parameterAndValue.getValue(), "UTF-8"));
+                    this.postParametersWriter.append(parameterAndValue.parameter).append("=")
+                            .append(URLEncoder.encode(parameterAndValue.getValue(), CHARSET.toString()));
+                    this.postParametersWriter.flush();
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
                 if (!postParametersAndValues
                         .get(postParametersAndValues.size() - 1)
                         .equals(parameterAndValue)) {
-                    this.stringOfPostParameters.append(DELIMITER.AMPERSAND);
+                    this.postParametersWriter.append(DELIMITER.AMPERSAND.delimiter).flush();
                 }
             }
         }
@@ -63,32 +84,88 @@ public class POSTRequest extends APIRequest {
             JSONObject jsonObject = new JSONObject();
             for (PostParameterAndValue parameterAndValue : payloadParametersAndValues) {
                 jsonObject.put(parameterAndValue.parameter, parameterAndValue.value instanceof List ?
-                        new JSONArray((List)parameterAndValue.value) : parameterAndValue.getValue());
+                        new JSONArray((List) parameterAndValue.value) : parameterAndValue.getValue());
             }
-            this.stringOfPostParameters.append(jsonObject.toString());
+            this.postParametersWriter.append(jsonObject.toString()).flush();
+        }
+    }
+
+
+    private void setFormDataPostParametersAndValuesForMultipart(ArrayList<PostParameterAndValue> postParametersAndValues) throws IOException {
+        if (postParametersAndValues != null) {
+            this.postParametersAndValues = postParametersAndValues;
+            for (PostParameterAndValue parameterAndValue : postParametersAndValues) {
+                if (parameterAndValue.value instanceof File) {
+                    File file = (File) parameterAndValue.value;
+                    String fileName = file.getName();
+                    this.postParametersWriter.append("--").append(boundary).append(DELIMITER.LINE_FEED.delimiter);
+                    this.postParametersWriter.append("Content-Disposition: form-data; name=\"").append(parameterAndValue.parameter);
+                    this.postParametersWriter.append("\"; filename=\"").append(fileName).append("\"");
+                    this.postParametersWriter.append(DELIMITER.LINE_FEED.delimiter);
+                    this.postParametersWriter.append("Content-Type: ").append(URLConnection.guessContentTypeFromName(fileName));
+                    this.postParametersWriter.append(DELIMITER.LINE_FEED.delimiter);
+                    this.postParametersWriter.append(DELIMITER.LINE_FEED.delimiter);
+                    this.postParametersWriter.flush();
+                    Files.copy(file.toPath(), this.outputStream);
+                    this.outputStream.flush();
+                    this.postParametersWriter.append(DELIMITER.LINE_FEED.delimiter).flush();
+                    this.postParametersWriter.append("--").append(boundary).append("--").append(DELIMITER.LINE_FEED.delimiter).flush();
+                } else {
+                    this.postParametersWriter.append("--").append(boundary).append(DELIMITER.LINE_FEED.delimiter);
+
+                    this.postParametersWriter.append("Content-Disposition: form-data; name=\"");
+                    this.postParametersWriter.append(parameterAndValue.parameter).append("\"")
+                            .append(DELIMITER.LINE_FEED.delimiter);
+                    this.postParametersWriter.append(DELIMITER.LINE_FEED.delimiter);
+                    this.postParametersWriter.append(parameterAndValue.value.toString()).append(DELIMITER.LINE_FEED.delimiter).flush();
+                }
+            }
         }
     }
 
     public void setPostString(String postString) {
-        this.stringOfPostParameters.append(postString);
+        this.postParametersWriter.append(postString);
     }
-
 
     public void sendPostRequest(UserSession userSession) throws IOException {
         sendPostRequest(userSession, this.postParametersAndValues);
     }
 
-    public void sendPostRequest(UserSession userSession, ArrayList<PostParameterAndValue> postParametersAndValues) throws IOException {
-        //create url without post parameters
+    public void sendPostRequest() throws IOException {
+        sendPostRequest(this.postParametersAndValues, Collections.emptyList());
+    }
+
+    public void sendPostRequest(List<String> cookies) throws IOException {
+        sendPostRequest(this.postParametersAndValues, cookies);
+    }
+
+    private void sendPostRequest(ArrayList<PostParameterAndValue> postParametersAndValues, List<String> cookies) throws IOException {
+        sendPostRequest(postParametersAndValues, null, cookies);
+    }
+
+    private void sendPostRequest(UserSession userSession, ArrayList<PostParameterAndValue> postParametersAndValues) throws IOException {
+        sendPostRequest(postParametersAndValues, userSession, userSession.getCookies());
+    }
+
+    private void sendPostRequest(ArrayList<PostParameterAndValue> postParametersAndValues, UserSession userSession, List<String> cookies) throws IOException {
+        System.out.println("Create url without post parameters");
         generateRequestURL(userSession);
-        //Create connection
+        System.out.println("Create connection");
         System.out.println("*******");
         System.out.println("API: " + this.name);
         System.out.println("Sending 'POST' request to URL : " + requestURL.toString());
 
         connection = (HttpsURLConnection) requestURL.openConnection();
         connection.setRequestMethod("POST");
-        connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+        if (isFile) {
+            System.out.println("Set header: Content-Type = multipart/form-data; boundary=" + boundary);
+            connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
+        } else {
+            System.out.println("Set header: Content-Type = application/x-www-form-urlencoded");
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+        }
+        connection.setRequestProperty("Connection", "keep-alive");
         connection.setRequestProperty("X-Requested-With", "XMLHttpRequest");
 
         if (headers.size() > 0) {
@@ -98,27 +175,36 @@ public class POSTRequest extends APIRequest {
             }
         }
 
-        if (userSession.getCookies() != null) {
-            connection.setRequestProperty("Cookie", String.join("; ", userSession.getCookies()));
-            System.out.println("Set cookies: " + connection.getRequestProperty("Cookie"));
+        if (!cookies.isEmpty()) {
+            connection.setRequestProperty("Cookie", String.join("; ", cookies));
+            System.out.println("Set cookie: " + String.join("\n ", cookies));
         }
 
         connection.setUseCaches(false);
         connection.setDoInput(true);
         connection.setDoOutput(true);
+        connection.setInstanceFollowRedirects(false);
 
-        //create post data
+        System.out.println("Send request");
+        this.outputStream = new DataOutputStream(connection.getOutputStream());
+        this.postParametersWriter = new PrintWriter(new OutputStreamWriter(outputStream, CHARSET), true);
+
+        System.out.println("Sending post data");
         if (connection.getRequestProperty("Content-Type").contains("json")) {
             setPayloadPostParametersAndValues(postParametersAndValues);
+        } else if (this.isFile) {
+            setFormDataPostParametersAndValuesForMultipart(postParametersAndValues);
         } else {
             setFormDataPostParametersAndValues(postParametersAndValues);
         }
-        //Send request
-        System.out.println("POST parameters: " + stringOfPostParameters);
-        DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-        wr.writeBytes(stringOfPostParameters.toString());
-        wr.flush();
-        wr.close();
+
+        this.postParametersWriter.close();
+        this.outputStream.flush();
+        this.outputStream.close();
+
+        if (this.isFollowRedirection) {
+            connection = checkAndFollowRedirection(connection, userSession);
+        }
 
         this.response = new APIResponse(connection);
         this.response.setContentType();

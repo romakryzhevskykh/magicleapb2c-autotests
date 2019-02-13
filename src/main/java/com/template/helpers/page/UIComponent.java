@@ -1,4 +1,4 @@
-package com.template.helpers;
+package com.template.helpers.page;
 
 import com.template.helpers.web_engine.WebDriverSessions;
 import org.openqa.selenium.*;

@@ -1,8 +1,8 @@
 package com.template.helpers.web_engine;
 
-import com.template.helpers.managers.users.UserSessions;
 import com.template.helpers.managers.users.UsersManager;
 import com.template.helpers.models.users.UserRole;
+import com.template.helpers.user_engine.UserSessions;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -28,7 +28,7 @@ public class WebDriverSessions {
 
     public synchronized void setDriver(URL hubUrl, String browserName, boolean headless, UserRole userRole) {
         Capabilities capabilities;
-        if (browserName.equals("chrome")) {
+        if (browserName.equalsIgnoreCase("chrome")) {
             capabilities = new ChromeOptions();
             ((ChromeOptions) capabilities).setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
             ((ChromeOptions) capabilities).setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
@@ -77,6 +77,7 @@ public class WebDriverSessions {
             tlDriversMap.get().get(userRole).setActive(true);
             userSessions.setActiveUserSession(userRole);
         }
+        userSessions.getActiveUserSession().setCookies(tlDriversMap.get().get(userRole).getWebDriver().manage().getCookies());
     }
 
     public synchronized WebDriver getActiveDriver() {
@@ -88,7 +89,9 @@ public class WebDriverSessions {
     }
 
     public void dismissAll() {
-        tlDriversMap.get().values().forEach(WebDriverSession::dismiss);
-        tlDriversMap.get().clear();
+        if (tlDriversMap.get() != null) {
+            tlDriversMap.get().values().forEach(WebDriverSession::dismiss);
+            tlDriversMap.get().clear();
+        }
     }
 }

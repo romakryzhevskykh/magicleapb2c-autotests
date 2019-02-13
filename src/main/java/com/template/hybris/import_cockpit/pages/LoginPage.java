@@ -1,12 +1,14 @@
 package com.template.hybris.import_cockpit.pages;
 
-import com.template.helpers.models.users.UserSession;
+import com.template.helpers.user_engine.UserSession;
 import com.template.hybris.import_cockpit.ImportCockpitBasePage;
 import org.openqa.selenium.By;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import static com.template.hybris.import_cockpit.page_elements.LoginPageElements.*;
+import static com.template.hybris.import_cockpit.page_elements.LoginPageElements.LOGIN_BUTTON_ID;
+import static com.template.hybris.import_cockpit.page_elements.LoginPageElements.PASSWORD_FIELD_ID;
+import static com.template.hybris.import_cockpit.page_elements.LoginPageElements.USER_ID_FIELD_ID;
 
 @Component
 public class LoginPage extends ImportCockpitBasePage {

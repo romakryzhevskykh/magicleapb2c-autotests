@@ -1,13 +1,11 @@
 package com.template.helpers.request_engine;
 
-import com.template.helpers.models.users.UserSession;
+import com.template.helpers.user_engine.UserSession;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.net.ssl.HttpsURLConnection;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +14,8 @@ import java.util.Map;
 
 public class PUTRequest extends APIRequest {
     private ArrayList<PostParameterAndValue> postParametersAndValues;
+    private PrintWriter postParametersWriter;
+    private DataOutputStream outputStream;
 
     public void addPostParameterAndValue(PostParameterAndValue parameterAndValue) {
         if (postParametersAndValues == null) {
@@ -29,8 +29,8 @@ public class PUTRequest extends APIRequest {
         return postParametersAndValues;
     }
 
-    public PUTRequest(String name, String address_method) {
-        super(name, address_method);
+    public PUTRequest(String name, String addressMethod) {
+        super(name, addressMethod);
     }
 
     @Override
@@ -43,15 +43,16 @@ public class PUTRequest extends APIRequest {
             this.postParametersAndValues = postParametersAndValues;
             for (PostParameterAndValue parameterAndValue : postParametersAndValues) {
                 try {
-                    this.stringOfPostParameters.append(parameterAndValue.parameter).append("=")
-                            .append(URLEncoder.encode(parameterAndValue.getValue(), "UTF-8"));
+                    this.postParametersWriter.append(parameterAndValue.parameter).append("=")
+                            .append(URLEncoder.encode(parameterAndValue.getValue(), CHARSET.toString()));
+                    this.postParametersWriter.flush();
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
                 if (!postParametersAndValues
                         .get(postParametersAndValues.size() - 1)
                         .equals(parameterAndValue)) {
-                    this.stringOfPostParameters.append(DELIMITER.AMPERSAND);
+                    this.postParametersWriter.append(DELIMITER.AMPERSAND.delimiter).flush();
                 }
             }
         }
@@ -63,14 +64,14 @@ public class PUTRequest extends APIRequest {
             JSONObject jsonObject = new JSONObject();
             for (PostParameterAndValue parameterAndValue : payloadParametersAndValues) {
                 jsonObject.put(parameterAndValue.parameter, parameterAndValue.value instanceof List ?
-                        new JSONArray((List)parameterAndValue.value) : parameterAndValue.getValue());
+                        new JSONArray((List) parameterAndValue.value) : parameterAndValue.getValue());
             }
-            this.stringOfPostParameters.append(jsonObject.toString());
+            this.postParametersWriter.append(jsonObject.toString()).flush();
         }
     }
 
     public void setPostString(String postString) {
-        this.stringOfPostParameters.append(postString);
+        this.postParametersWriter.append(postString);
     }
 
 
@@ -108,17 +109,17 @@ public class PUTRequest extends APIRequest {
         connection.setDoOutput(true);
 
         //create post data
+        this.outputStream = new DataOutputStream(connection.getOutputStream());
+        this.postParametersWriter = new PrintWriter(new OutputStreamWriter(outputStream, CHARSET), true);
         if (connection.getRequestProperty("Content-Type").contains("json")) {
             setPayloadPostParametersAndValues(postParametersAndValues);
         } else {
             setFormDataPostParametersAndValues(postParametersAndValues);
         }
-        //Send request
-        System.out.println("POST parameters: " + stringOfPostParameters);
-        DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-        wr.writeBytes(stringOfPostParameters.toString());
-        wr.flush();
-        wr.close();
+
+        outputStream.flush();
+        outputStream.close();
+        postParametersWriter.close();
 
         this.response = new APIResponse(connection);
         this.response.setContentType();

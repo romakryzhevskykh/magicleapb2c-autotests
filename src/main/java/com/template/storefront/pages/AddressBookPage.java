@@ -1,6 +1,6 @@
 package com.template.storefront.pages;
 
-import com.template.helpers.models.users.UserSession;
+import com.template.helpers.user_engine.UserSession;
 import com.template.storefront.managers.AddressBookEntriesManager;
 import com.template.storefront.models.AddressBookEntry;
 import com.template.storefront.page_blocks.AddressBookAddUpdateEntryBlock;
@@ -12,7 +12,9 @@ import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.ArrayList;
 
-import static com.template.storefront.page_elements.AddressBookPageElements.*;
+import static com.template.storefront.page_elements.AddressBookPageElements.ADDRESSES_INFO_ITEMS_TEXT_XPATH;
+import static com.template.storefront.page_elements.AddressBookPageElements.ADD_ADDRESS_BUTTON_XPATH;
+import static com.template.storefront.page_elements.AddressBookPageElements.SECTION_HEADER_XPATH;
 
 @Component
 public class AddressBookPage extends StorefrontBasePage {

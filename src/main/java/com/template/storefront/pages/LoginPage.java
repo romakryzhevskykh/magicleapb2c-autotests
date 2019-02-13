@@ -1,10 +1,12 @@
 package com.template.storefront.pages;
 
-import com.template.helpers.models.users.UserSession;
+import com.template.helpers.user_engine.UserSession;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import static com.template.storefront.page_elements.LoginPageElements.*;
+import static com.template.storefront.page_elements.LoginPageElements.LOG_IN_BUTTON_XPATH;
+import static com.template.storefront.page_elements.LoginPageElements.PASSWORD_FIELD_XPATH;
+import static com.template.storefront.page_elements.LoginPageElements.USERNAME_FIELD_XPATH;
 
 @Component
 public class LoginPage extends StorefrontBasePage {

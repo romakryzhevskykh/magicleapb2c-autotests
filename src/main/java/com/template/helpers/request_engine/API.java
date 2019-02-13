@@ -36,7 +36,8 @@ public interface API {
         QUESTION_MARK("?"),
         AMPERSAND("&"),
         FORWARD_SLASH("/"),
-        EQUALS_SIGN("=");
+        EQUALS_SIGN("="),
+        LINE_FEED("\r\n");
         String delimiter;
 
         DELIMITER(String delimiter) {

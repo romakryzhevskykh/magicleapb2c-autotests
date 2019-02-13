@@ -1,6 +1,6 @@
 package com.template.storefront.pages;
 
-import com.template.helpers.BasePageObject;
+import com.template.helpers.page.BasePageObject;
 import com.template.storefront.models.TemplateStorefront;
 import com.template.storefront.page_blocks.HeaderRowPageBlock;
 import org.springframework.beans.factory.annotation.Autowired;

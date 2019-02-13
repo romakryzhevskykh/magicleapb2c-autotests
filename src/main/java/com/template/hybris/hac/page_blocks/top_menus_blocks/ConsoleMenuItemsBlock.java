@@ -1,6 +1,6 @@
 package com.template.hybris.hac.page_blocks.top_menus_blocks;
 
-import com.template.helpers.UIComponent;
+import com.template.helpers.page.UIComponent;
 import org.springframework.stereotype.Component;
 
 @Component
