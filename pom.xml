@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>test</groupId>
-    <artifactId>com.template.template-automatedtests</artifactId>
+    <groupId>com.zaelab</groupId>
+    <artifactId>template-automatedtests</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>QA-Automation Tests Template</name>
 
@@ -116,6 +116,13 @@
             <groupId>us.codecraft</groupId>
             <artifactId>xsoup</artifactId>
             <version>0.3.1</version>
+        </dependency>
+        <!--Lombok for clear code getters and setters-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.4</version>
+            <scope>provided</scope>
         </dependency>
         <!--In test mode JSON builder-->
         <!--<dependency>-->
