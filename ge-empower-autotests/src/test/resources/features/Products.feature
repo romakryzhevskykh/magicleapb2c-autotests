@@ -49,7 +49,7 @@ Feature: Some actions on Products page
       | region        |
       | North_America |
       | ASIA          |
-      | EMEA          |
+#      | EMEA          |
 
   Scenario Outline: Check that user is able to open PDP and check Product Detail and P&A tabs.
     And Account management page is opened.
