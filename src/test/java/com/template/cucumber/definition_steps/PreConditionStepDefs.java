@@ -44,4 +44,11 @@ public class PreConditionStepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.SHIPPING_ADDRESS, shippingAddress);
     }
 
+    @Given("^User does not have Saved Shipping Addresses.$")
+    public void customerDoesNotHaveSavedShippingAddresses() {
+        List<User.UserShippingAddress> shippingAddresses = addressesManager.getUserSavedShippingAddresses(userSessions.getActiveUserSession());
+        if (!shippingAddresses.isEmpty()) {
+            addressesManager.removeUserShippingAddresses(userSessions.getActiveUserSession(), shippingAddresses);
+        }
+    }
 }

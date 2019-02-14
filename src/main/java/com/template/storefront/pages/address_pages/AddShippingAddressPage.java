@@ -48,6 +48,12 @@ public class AddShippingAddressPage extends StorefrontBasePage {
     public void fillAddressLine1(String street) {
         $(By.id(ADDRESS1_FIELD_ID)).enterText(street);
     }
+
+    @Step("Enter text: {0} to Address line 2 field.")
+    public void fillAddressLine2(String street) {
+        $(By.id(ADDRESS2_FIELD_ID)).enterText(street);
+    }
+
     @Step("Enter text: {0} to City field.")
     public void fillCity(String city) {
         $(By.id(CITY_ID)).enterText(city);
@@ -65,7 +71,7 @@ public class AddShippingAddressPage extends StorefrontBasePage {
 
     @Step("Get flash/info message.")
     public String getFlashInfoMessage() {
-        if (withTimeOutOf(5,TimeUnit.SECONDS).isPresent(INFO_FLASH_MESSAGE_XPATH)) {
+        if (withTimeOutOf(5, TimeUnit.SECONDS).isPresent(INFO_FLASH_MESSAGE_XPATH)) {
             return $(INFO_FLASH_MESSAGE_XPATH).getText();
         } else {
             return $(FLASH_MESSAGE_XPATH).getTextNode();
@@ -85,5 +91,10 @@ public class AddShippingAddressPage extends StorefrontBasePage {
     @Step("Fill state {0}")
     public void fillState(String state) {
         $(By.id(STATE_DROPDOWN_ID)).selectByVisibleText(state);
+    }
+
+    @Step("Enter text: {0} to Telephone field.")
+    public void fillTelephone(String telephone) {
+        $(By.id(TELEPHONE_FIELD_ID)).enterText(telephone);
     }
 }

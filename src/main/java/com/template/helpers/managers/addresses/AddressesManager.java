@@ -101,11 +101,22 @@ public class AddressesManager {
 
     @Step("Generate {0} Shipping address that doesn't exist.")
     public ShippingAddress generateRandomShippingAddressThatDoesNotExist(List<User.UserShippingAddress> userShippingAddresses, AddressTestType addressTestType) {
-        return createShippingAddressInstance(getTestAddresses().stream()
+        Address address = getTestAddresses().stream()
                 .filter(testValidAddress -> userShippingAddresses.stream().noneMatch(shippingAddress -> shippingAddress.getShippingAddress().equals(testValidAddress)))
                 .findAny().orElseGet(() -> {
                     throw new NullPointerException("Not enough available test Addresses");
-                }));
+                });
+
+        if (addressTestType == AddressTestType.WITH_ALL_FIELDS) {
+            String addressLine2 = RandomStringUtils.randomNumeric(3);
+            String telephone = RandomStringUtils.randomNumeric(10);
+            address.setAddressLine2(addressLine2);
+            address.setPhoneNumber(telephone);
+            return createShippingAddressInstance(address);
+        } else if (addressTestType == AddressTestType.VALID) {
+            return createShippingAddressInstance(address);
+        }
+        return null; //TODO make INVALID return
     }
 
     @Step("Generate {0} Billing address.")
@@ -124,15 +135,15 @@ public class AddressesManager {
 
     public ShippingAddress createShippingAddressInstance(Address address) {
         ShippingAddress shippingAddress = new ShippingAddress(address.getUserTitle(), address.getFirstName(), address.getLastName(), address.getStreet(), address.getCity(), address.getCountry(), address.getZipCode());
-        if (address.getState()!=null){
-            shippingAddress.setState(address.getState());
-        }
+        shippingAddress.setState(address.getState());
+        shippingAddress.setAddressLine2(address.getAddressLine2());
+        shippingAddress.setPhoneNumber(address.getPhoneNumber());
         return shippingAddress;
     }
 
     public BillingAddress createBillingAddressInstance(Address address) {
         BillingAddress billingAddress = new BillingAddress(address.getUserTitle(), address.getFirstName(), address.getLastName(), address.getStreet(), address.getCity(), address.getCountry(), address.getZipCode());
-        if (address.getState()!=null){
+        if (address.getState() != null) {
             billingAddress.setState(address.getState());
         }
         return billingAddress;

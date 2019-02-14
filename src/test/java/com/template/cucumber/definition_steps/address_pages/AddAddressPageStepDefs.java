@@ -58,6 +58,12 @@ public class AddAddressPageStepDefs extends AbstractStepDefs {
         addShippingAddressPage.fillAddressLine1(shippingAddress.getStreet());
     }
 
+    @When("^Fill Address line 2 field on Add Shipping Address page.$")
+    public void fillAddressLine2FieldOnAddShippingAddressPage() {
+        ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.SHIPPING_ADDRESS);
+        addShippingAddressPage.fillAddressLine2(shippingAddress.getAddressLine2());
+    }
+
     @And("^Fill City field on Add Shipping Address page.$")
     public void fillCityFieldOnAddShippingAddressPage() {
         ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.SHIPPING_ADDRESS);
@@ -104,5 +110,11 @@ public class AddAddressPageStepDefs extends AbstractStepDefs {
     public void fillStateFieldOnAddShippingAddressPage() {
         ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.SHIPPING_ADDRESS);
         addShippingAddressPage.fillState(shippingAddress.getState());
+    }
+
+    @When("^Fill Telephone field on Add Shipping Address page.$")
+    public void fillTelephoneFieldOnAddShippingAddressPage() {
+        ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.SHIPPING_ADDRESS);
+        addShippingAddressPage.fillTelephone(shippingAddress.getPhoneNumber());
     }
 }
