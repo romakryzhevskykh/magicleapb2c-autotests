@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ru.yandex.qatools.allure.annotations.Step;
 
 public abstract class StorefrontBasePage extends BasePageObject {
-    @Autowired TemplateStorefront storefrontProject;
+
+    @Autowired protected TemplateStorefront storefrontProject;
 
     @Autowired private HeaderRowPageBlock headerRowPageBlock;
 

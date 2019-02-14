@@ -1,24 +1,25 @@
 package com.template.storefront.page_blocks;
 
 import com.template.helpers.page.UIComponent;
-import org.openqa.selenium.By;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import static com.template.storefront.page_block_elements.AddToCartPopUpBlockElements.*;
+import static com.template.storefront.page_block_elements.AddToCartPopUpBlockElements.CART_POP_UP_BANNER_IMAGE_XPATH;
+import static com.template.storefront.page_block_elements.AddToCartPopUpBlockElements.CART_POP_UP_IMAGES_XPATH;
+import static com.template.storefront.page_block_elements.AddToCartPopUpBlockElements.CONTENT_MESSAGE_TEXT_XPATH;
 
 @Component
 public class AddToCartPopUpBlock extends UIComponent {
 
     @Step("Click on Checkout in Add to cart pop-up.")
     public void clickOnCheckoutButtonInAddToCartPopUp() {
-        click(CHECKOUT_BUTTON_XPATH);
+//        click(CHECKOUT_BUTTON_XPATH);
         waitUntilPageIsFullyLoaded();
     }
 
     @Step("Click on Continue shopping in Add to cart pop-up.")
     public void clickOnContinueShoppingButtonInAddToCartPopUp() {
-        click(CONTINUE_SHOPPING_BUTTON_XPATH);
+//        click(CONTINUE_SHOPPING_BUTTON_XPATH);
         waitUntilPageIsFullyLoaded();
     }
 
@@ -55,6 +56,6 @@ public class AddToCartPopUpBlock extends UIComponent {
     }
 
     public void waitUntilVisible() {
-        waitUntilElementIsVisible(By.id(POP_UP_ID));
+//        waitUntilElementIsVisible(By.id(POP_UP_ID));
     }
 }

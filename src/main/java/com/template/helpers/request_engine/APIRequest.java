@@ -36,9 +36,9 @@ public abstract class APIRequest implements API {
 
     protected boolean isShortLogResponse = false;
 
-    public APIRequest(String name, String address_method) {
+    public APIRequest(String name, String addressMethod) {
         this.name = name;
-        this.systemAddress = address_method;
+        this.systemAddress = addressMethod;
         this.parametersAndValues = new ArrayList<>();
     }
 

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import static com.template.storefront.page_elements.ProductDetailsPageElements.ADD_TO_CART_BUTTONS_XPATH;
-import static com.template.storefront.page_elements.ProductDetailsPageElements.QTY_FIELD_BY_SKU_AND_UOM_TYPE_XPATH;
 
 @Component
 public class ProductDetailsPage extends StorefrontBasePage {
@@ -20,7 +19,7 @@ public class ProductDetailsPage extends StorefrontBasePage {
 
     @Step("Set QTY: {1} for product: {0}.")
     public void setQTYForProductToValue(BaseProduct product, int qty) {
-        enterText(String.valueOf(qty), QTY_FIELD_BY_SKU_AND_UOM_TYPE_XPATH);
+//        enterText(String.valueOf(qty), QTY_FIELD_BY_SKU_AND_UOM_TYPE_XPATH);
     }
 
     @Step("Open PDP for product {0} by link.")
@@ -43,7 +42,7 @@ public class ProductDetailsPage extends StorefrontBasePage {
     }
 
     public void clickOnAddToCartButton() {
-        click(ADD_TO_CART_BUTTONS_XPATH);
+//        click(ADD_TO_CART_BUTTONS_XPATH);
         waitUntilPageIsFullyLoaded();
         addToCartPopUpBlock.waitUntilVisible();
 //        addToCartPopUpBlock.waitUntilProductImagesAreVisible();

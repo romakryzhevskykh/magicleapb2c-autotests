@@ -54,13 +54,12 @@ public class User {
         userCreditCards.add(userCreditCard);
     }
 
-    public synchronized User.UserShippingAddress addShippingAddress(String id, String practiceName, ShippingAddress shippingAddress) {
+    public synchronized User.UserShippingAddress addShippingAddress(String id, ShippingAddress shippingAddress) {
         if (!shippingAddress.getAddressLine2().isEmpty()) {
             shippingAddress.setStreet(shippingAddress.getStreet() + " " + shippingAddress.getAddressLine2());
             shippingAddress.setAddressLine2("");
         }
         UserShippingAddress userShippingAddress = new UserShippingAddress(id, shippingAddress);
-        userShippingAddress.setPracticeName(practiceName);
         userShippingAddresses.add(userShippingAddress);
         return userShippingAddress;
     }
@@ -111,7 +110,6 @@ public class User {
 
     public class UserShippingAddress {
         @Getter private ShippingAddress shippingAddress;
-        @Getter private String practiceName;
         @Getter private boolean isDefault;
         @Getter private final String id;
 
@@ -128,13 +126,9 @@ public class User {
             this.isDefault = isDefault;
         }
 
-        public void setPracticeName(String practiceName) {
-            this.practiceName = practiceName == null ? "" : practiceName;
-        }
-
         @Override
         public String toString() {
-            return "id: " + id + ", " + shippingAddress + ", " + practiceName + ", " + isDefault;
+            return "id: " + id + ", " + shippingAddress + ", " + isDefault;
         }
     }
 

@@ -13,6 +13,6 @@ public class LeftBarMenuBlock extends UIComponent {
     }
 
     private boolean isOpened() {
-        return isDisplayed(MENU_LABEL_ID);
+        return $(MENU_LABEL_ID).isDisplayed();
     }
 }

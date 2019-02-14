@@ -17,21 +17,22 @@ public class Address implements Cloneable, Serializable {
     @Getter @Setter private String phoneNumber = "";
     @Getter @Setter private String city;
     @Getter @Setter private String state;
+    @Getter @Setter private String country;
     @Getter @Setter private String zipCode;
 
-    public Address(UserTitle userTitle, String firstName, String lastName, String address1, String city, String state, String zipCode) {
+    public Address(UserTitle userTitle, String firstName, String lastName, String address1, String city,String country, String zipCode) {
         this.userTitle = userTitle;
         this.firstName = firstName;
         this.lastName = lastName;
         this.street = address1;
         this.city = city;
-        this.state = state;
+        this.country = country;
         this.zipCode = zipCode;
     }
 
     @Override
     public String toString() {
-        return firstName + ", " + lastName + ", " + street + ", " + city + ", " + state + ", " + zipCode;
+        return firstName + ", " + lastName + ", " + street + ", " + city + ", " + country + ", " + zipCode;
     }
 
     @Override
@@ -44,7 +45,8 @@ public class Address implements Cloneable, Serializable {
                 .append((this.street + " " + this.addressLine2).trim(), (compareObj.street + " " + compareObj.addressLine2).trim())
                 .append(this.phoneNumber, compareObj.phoneNumber)
                 .append(this.city, compareObj.city)
-                .append(this.state, compareObj.state)
+                .append(this.state,compareObj.state)
+                .append(this.country, compareObj.country)
                 .append(this.zipCode, compareObj.zipCode)
                 .isEquals();
     }
@@ -54,7 +56,7 @@ public class Address implements Cloneable, Serializable {
                 .append((this.street + " " + this.addressLine2).trim())
                 .append(phoneNumber)
                 .append(city)
-                .append(state)
+                .append(country)
                 .append(zipCode)
                 .toHashCode();
     }

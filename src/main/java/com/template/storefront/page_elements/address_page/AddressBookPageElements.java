@@ -1,6 +1,19 @@
-package com.template.storefront.page_elements;
+package com.template.storefront.page_elements.address_page;
 
 public class AddressBookPageElements {
+
+    public static String ADDRESS_BLOCK = "//div[@class = 'account-cards card-select']/div[@class = 'row']";
+    public static String ADDRESS_ITEMS_XPATH = ADDRESS_BLOCK + "/div[contains(@class,'card')]";
+
+
+
+
+
+
+
+
+
+
 
     public static String SECTION_HEADER_XPATH = "//div[contains(@class, 'account-section-header ')]";
     public static String ADDRESSES_INFO_ITEMS_TEXT_XPATH = "//div[@class = 'account-cards card-select']/div[@class = 'row']/div/ul";

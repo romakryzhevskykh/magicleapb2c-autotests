@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import static com.template.storefront.page_elements.AddressBookPageElements.*;
+import static com.template.storefront.page_elements.address_page.AddressBookPageElements.*;
 
 @Component
 public class AddressBookAddUpdateEntryBlock extends UIComponent {
@@ -67,11 +67,12 @@ public class AddressBookAddUpdateEntryBlock extends UIComponent {
 
     @Step("Is alert displayed.")
     public boolean isAlert() {
-        return isDisplayed(ALERT_ERROR_MESSAGE_XPATH);
+        return $(ALERT_ERROR_MESSAGE_XPATH).isDisplayed();
     }
 
     @Step("Click on Save button.")
     public void clickOnSaveButton() {
         $(SAVE_ADDRESS_BUTTON_XPATH).click();
     }
+
 }

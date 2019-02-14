@@ -16,6 +16,6 @@ public class LoggedOutHeaderRowBlock extends UIComponent {
 
     @Step("Check that user is logged out.")
     public boolean isUserLoggedOut() {
-        return isDisplayed(SIGN_IN_BUTTON_XPATH);
+        return $(SIGN_IN_BUTTON_XPATH).isDisplayed();
     }
 }

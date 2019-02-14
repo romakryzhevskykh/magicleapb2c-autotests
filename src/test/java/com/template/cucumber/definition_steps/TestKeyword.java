@@ -1,6 +1,11 @@
 package com.template.cucumber.definition_steps;
 
 public enum TestKeyword {
+    SELECTED_PRODUCTS,
+    SHIPPING_ADDRESS,USER_SHIPPING_ADDRESS,
+
+
+
     NEW_ADDRESS,
     NEW_ADDRESS_COUNTRY,
     NEW_ADDRESS_TITLE,

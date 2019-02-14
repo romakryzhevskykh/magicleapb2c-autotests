@@ -4,14 +4,12 @@ import com.template.helpers.models.users.BackofficeUserRole;
 import com.template.helpers.models.users.ImportCockpitUserRole;
 import com.template.helpers.models.users.StorefrontUserRole;
 import com.template.helpers.web_engine.WebDriverSessions;
-import com.template.storefront.pages.StartPage;
 import cucumber.api.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserSwitchStepDefs {
 
     @Autowired protected WebDriverSessions webDriverPool;
-    @Autowired StartPage storefrontStartPage;
 
     @Given("Switch to Backoffice Admin user.")
     public void switchToBackofficeAdmin() {

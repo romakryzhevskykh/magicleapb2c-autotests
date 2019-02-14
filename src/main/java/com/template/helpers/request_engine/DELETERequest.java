@@ -10,8 +10,8 @@ import java.util.Objects;
 
 public class DELETERequest extends APIRequest {
 
-    public DELETERequest(String name, String address_method) {
-        super(name, address_method);
+    public DELETERequest(String name, String addressMethod) {
+        super(name, addressMethod);
     }
 
     @Override
