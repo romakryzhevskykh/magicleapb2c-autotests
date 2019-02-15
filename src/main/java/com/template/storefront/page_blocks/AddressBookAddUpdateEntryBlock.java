@@ -42,27 +42,27 @@ public class AddressBookAddUpdateEntryBlock extends UIComponent {
 
     @Step("Fill First name field with text.")
     public void fillFirstNameWithText(String firstName) {
-        $(By.id(FIRST_NAME_FIELD_ID)).sendKeys(firstName);
+        $(By.id(FIRST_NAME_FIELD_ID)).enterText(firstName);
     }
 
     @Step("Fill Last name field with text.")
     public void fillLastNameWithText(String lastName) {
-        $(By.id(LAST_NAME_FIELD_ID)).sendKeys(lastName);
+        $(By.id(LAST_NAME_FIELD_ID)).enterText(lastName);
     }
 
     @Step("Fill Address 1 field with text.")
     public void fillAddress1WithText(String address1) {
-        $(By.id(ADDRESS_LINE_1_FIELD_ID)).sendKeys(address1);
+        $(By.id(ADDRESS_LINE_1_FIELD_ID)).enterText(address1);
     }
 
     @Step("Fill TOWN field with text.")
     public void fillTownWithText(String townName) {
-        $(By.id(TOWN_FIELD_ID)).sendKeys(townName);
+        $(By.id(TOWN_FIELD_ID)).enterText(townName);
     }
 
     @Step("Fill Post code field with text.")
     public void fillPostCodeWithText(String postCode) {
-        $(By.id(POST_CODE_FIELD_ID)).sendKeys(postCode);
+        $(By.id(POST_CODE_FIELD_ID)).enterText(postCode);
     }
 
     @Step("Is alert displayed.")

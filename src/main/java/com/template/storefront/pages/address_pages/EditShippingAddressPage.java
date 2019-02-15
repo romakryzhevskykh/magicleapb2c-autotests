@@ -1,5 +1,6 @@
 package com.template.storefront.pages.address_pages;
 
+import com.template.helpers.models.users.User;
 import com.template.helpers.models.users.UserTitle;
 import com.template.storefront.page_blocks.AddressBookAddUpdateEntryBlock;
 import com.template.storefront.pages.StorefrontBasePage;
@@ -11,27 +12,24 @@ import ru.yandex.qatools.allure.annotations.Step;
 import java.util.concurrent.TimeUnit;
 
 import static com.template.storefront.page_elements.address_page.AddEditAddressPageElements.*;
-
 @Component
-public class AddShippingAddressPage extends StorefrontBasePage {
+public class EditShippingAddressPage extends StorefrontBasePage {
 
     @Autowired private AddressBookAddUpdateEntryBlock addressBookAddUpdateEntryBlock;
 
-    private final String pageUrlMethod = "powertools/en/USD/my-account/add-address";
+    private final String pageUrlMethod = "powertools/en/USD/my-account/edit-address/%s";
 
     @Override
     public String getPageUrl() {
-        return storefrontProject.getBaseUrl() + pageUrlMethod;
+        return storefrontProject.getBaseUrl().concat(pageUrlMethod);
     }
 
-    @Step("Is Title displayed?")
-    public boolean isTitleDisplayed() {
-        return $(PAGE_HEADER_TITLE_XPATH).isDisplayed();
+    public String getPageUrl(User.UserShippingAddress userShippingAddress) {
+        return storefrontProject.getBaseUrl().concat(String.format(pageUrlMethod, userShippingAddress.getId()));
     }
 
-    @Step("Get page title text.")
-    public String getTitleText() {
-        return $(PAGE_HEADER_TITLE_XPATH).getText();
+    public void open(User.UserShippingAddress userShippingAddress) {
+        open(getPageUrl(userShippingAddress));
     }
 
     @Step("Select country {0}")
@@ -64,20 +62,6 @@ public class AddShippingAddressPage extends StorefrontBasePage {
         $(By.id(POSTCODE_FIELD_ID)).enterText(zipCode);
     }
 
-    @Step("Click on Save button.")
-    public void clickOnSaveButton() {
-        addressBookAddUpdateEntryBlock.clickOnSaveButton();
-    }
-
-    @Step("Get flash/info message.")
-    public String getFlashInfoMessage() {
-        if (withTimeOutOf(5, TimeUnit.SECONDS).isPresent(INFO_FLASH_MESSAGE_XPATH)) {
-            return $(INFO_FLASH_MESSAGE_XPATH).getText();
-        } else {
-            return $(FLASH_MESSAGE_XPATH).getTextNode();
-        }
-    }
-
     @Step("Fill first name {0}.")
     public void fillFirstName(String firstName) {
         addressBookAddUpdateEntryBlock.fillFirstNameWithText(firstName);
@@ -97,4 +81,23 @@ public class AddShippingAddressPage extends StorefrontBasePage {
     public void fillTelephone(String telephone) {
         $(By.id(TELEPHONE_FIELD_ID)).enterText(telephone);
     }
+    @Step("Click on Save button.")
+    public void clickOnSaveButton() {
+        addressBookAddUpdateEntryBlock.clickOnSaveButton();
+    }
+
+    @Step("Get flash/info message.")
+    public String getFlashInfoMessage() {
+        if (withTimeOutOf(5, TimeUnit.SECONDS).isPresent(INFO_FLASH_MESSAGE_XPATH)) {
+            return $(INFO_FLASH_MESSAGE_XPATH).getText();
+        } else {
+            return $(FLASH_MESSAGE_XPATH).getTextNode();
+        }
+    }
+
+    @Step("Click on Cancel button.")
+    public void clickOnCancelButton() {
+        $(CANCEL_BUTTON_XPATH).click();
+    }
+
 }
