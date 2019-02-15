@@ -12,6 +12,7 @@ import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class EditAddressPageStepDefs extends AbstractStepDefs {
 
@@ -142,5 +143,11 @@ public class EditAddressPageStepDefs extends AbstractStepDefs {
     @And("^Click on Cancel button on Edit Shipping Address page.$")
     public void clickOnCancelButtonOnEditShippingAddressPage() {
         editShippingAddressPage.clickOnCancelButton();
+    }
+
+    @Then("^Check that Edit Shipping address page is opened.$")
+    public void checkThatAddressBookPageIsOpened() {
+        User.UserShippingAddress userShippingAddress = (User.UserShippingAddress) threadVarsHashMap.get(TestKeyword.USER_SHIPPING_ADDRESS);
+        assertTrue(editShippingAddressPage.isOpened(userShippingAddress), "Edit Address page must be opened for: " + userShippingAddress);
     }
 }

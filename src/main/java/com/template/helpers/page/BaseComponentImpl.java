@@ -83,6 +83,7 @@ public abstract class BaseComponentImpl implements BaseComponent {
             alertHandling();
             return $(xPath, args);
         } catch (NoSuchElementException ex) {
+            ex.printStackTrace();
             return null;
         } finally {
             restoreDefaults();

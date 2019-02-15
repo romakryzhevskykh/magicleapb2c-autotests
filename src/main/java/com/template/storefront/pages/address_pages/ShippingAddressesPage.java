@@ -2,10 +2,8 @@ package com.template.storefront.pages.address_pages;
 
 import com.template.helpers.managers.addresses.AddressesManager;
 import com.template.helpers.models.addresses.ShippingAddress;
+import com.template.helpers.models.users.User;
 import com.template.helpers.models.users.UserTitle;
-import com.template.helpers.user_engine.UserSession;
-import com.template.storefront.models.AddressBookEntry;
-import com.template.storefront.page_blocks.AddressBookAddUpdateEntryBlock;
 import com.template.storefront.pages.StorefrontBasePage;
 import com.template.utils.SiteUtil;
 import org.openqa.selenium.By;
@@ -14,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import static com.template.helpers.managers.constants.ShippingAddressXSoupElements.DEFAULT_ADD;
@@ -23,14 +21,14 @@ import static com.template.storefront.page_elements.address_page.AddressBookPage
 
 @Component
 public class ShippingAddressesPage extends StorefrontBasePage {
+
     @Autowired private AddressesManager addressesManager;
-    @Autowired AddressBookAddUpdateEntryBlock addressBookAddUpdateEntryBlock;
 
     private final String pageUrlMethod = "powertools/en/USD/my-account/address-book";
 
     @Step("Get all shipping addresses on Shipping address book page.")
     public List<ShippingAddress> getShippingAddresses() {
-        return $$(ADDRESS_ITEMS_XPATH).stream()
+        return withTimeOutOf(10,TimeUnit.SECONDS).$$(ADDRESS_ITEMS_XPATH).stream()
                 .map(webElement -> {
                     List<WebElement> elements = webElement.findElements(By.xpath(".//li"));
 
@@ -81,69 +79,53 @@ public class ShippingAddressesPage extends StorefrontBasePage {
     }
 
 
-    @Step("Get text of header section on address book page.")
-    public String getSectionHeader() {
-        return $(SECTION_HEADER_XPATH).getText().trim();
+    @Step("Is Title displayed?")
+    public boolean isTitleDisplayed() {
+        return $(TITLE_XPATH).isDisplayed();
     }
 
-    @Step("Get all shipping addresses on address book page.")
-    public ArrayList<AddressBookEntry> getAddressesList(UserSession userSession) {
-        ArrayList<AddressBookEntry> userAddresses = new ArrayList<>();
-        for (WebElement address : $$(By.xpath(ADDRESSES_INFO_ITEMS_TEXT_XPATH))) {
-//            AddressBookEntry userAddress = addressBookEntriesManager.parseAddressFromHTML(address, userSession.getUser());
-//            userAddresses.add(userAddress);
-        }
-        return userAddresses;
+    @Step("Get page title text.")
+    public String getTitleText() {
+        return $(TITLE_XPATH).getTextNode();
     }
 
-
-    public void selectCountryFromDropDown(String countryName) {
-        addressBookAddUpdateEntryBlock.selectCountryFromDropDown(countryName);
+    @Step("Is empty list message displayed?")
+    public boolean isEmptyListMessageDisplayed() {
+        return $(EMPTY_LIST_MESSAGE_XPATH).isDisplayed();
     }
 
-    public void clickOnCountryDropDown() {
-        addressBookAddUpdateEntryBlock.clickOnCountryDropDown();
+    @Step("Get empty list message.")
+    public String getEmptyListMessage() {
+        return $(EMPTY_LIST_MESSAGE_XPATH).getText().trim();
     }
 
-    public String getRandomCountryFromDropDown() {
-        return addressBookAddUpdateEntryBlock.getRandomCountryFromDropDown();
+    @Step("Click on Delete button for Shipping address: {0}.")
+    public void clickOnDeleteButtonForShippingAddress(User.UserShippingAddress userShippingAddress) {
+        $(DELETE_ADDRESS_BUTTON_BY_ID_XPATH, userShippingAddress.getId()).click();
+        waitUntilPageIsFullyLoaded();
     }
 
-    public String getRandomTitleFromDropDown() {
-        return addressBookAddUpdateEntryBlock.getRandomTitleFromDropDown();
+    @Step("Click on Set as default for {0}.")
+    public void clickOnSetAsDefaultButton(User.UserShippingAddress userShippingAddress) {
+        $(SET_AS_DEFAULT_BUTTON_BY_ID_XPATH, userShippingAddress.getId()).click();
+        waitUntilPageIsFullyLoaded();
     }
 
-    public void selectTitleFromDropDown(String titleName) {
-        addressBookAddUpdateEntryBlock.selectTitleFromDropDown(titleName);
+    @Step("Is Shipping address {0} default.")
+    public boolean isShippingAddressDefault(User.UserShippingAddress userShippingAddress) {
+        return !withTimeOutOf(5,TimeUnit.SECONDS).isPresent(SET_AS_DEFAULT_BUTTON_BY_ID_XPATH, userShippingAddress.getId());
     }
 
-    public void clickOnTitleDropDown() {
-        addressBookAddUpdateEntryBlock.clickOnTitleDropDown();
+    @Step("Click on Edit button for {0}.")
+    public void clickOnEditButton(User.UserShippingAddress userShippingAddress) {
+        $(EDIT_ADDRESS_BUTTON_BY_ID_XPATH, userShippingAddress.getId()).click();
+        waitUntilPageIsFullyLoaded();
     }
 
-    public void fillAddress1With(String address1) {
-        addressBookAddUpdateEntryBlock.fillAddress1WithText(address1);
-    }
-
-    public void fillTownWith(String towm) {
-        addressBookAddUpdateEntryBlock.fillTownWithText(towm);
-    }
-
-    public void fillPostCode(String postCode) {
-        addressBookAddUpdateEntryBlock.fillPostCodeWithText(postCode);
-    }
-
-    public void clickOnSaveButton() {
-        addressBookAddUpdateEntryBlock.clickOnSaveButton();
-    }
-
-    public boolean isAlertOnCreateNewAddress() {
-        return addressBookAddUpdateEntryBlock.isAlert();
-    }
-
-    @Step("Click on Add Address button.")
-    public void clickOnAddAddressButton() {
+    @Step("Click on Add Shipping address button.")
+    public void clickOnAddShippingAddressButton() {
         $(ADD_ADDRESS_BUTTON_XPATH).click();
+        waitUntilPageIsFullyLoaded();
     }
 
     @Override

@@ -1,21 +1,17 @@
 package com.template.storefront.pages.address_pages;
 
 import com.template.helpers.models.users.UserTitle;
-import com.template.storefront.page_blocks.AddressBookAddUpdateEntryBlock;
 import com.template.storefront.pages.StorefrontBasePage;
 import org.openqa.selenium.By;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.template.storefront.page_elements.address_page.AddEditAddressPageElements.*;
+import static com.template.storefront.page_elements.address_page.AddAddressPageElements.*;
 
 @Component
 public class AddShippingAddressPage extends StorefrontBasePage {
-
-    @Autowired private AddressBookAddUpdateEntryBlock addressBookAddUpdateEntryBlock;
 
     private final String pageUrlMethod = "powertools/en/USD/my-account/add-address";
 
@@ -66,7 +62,7 @@ public class AddShippingAddressPage extends StorefrontBasePage {
 
     @Step("Click on Save button.")
     public void clickOnSaveButton() {
-        addressBookAddUpdateEntryBlock.clickOnSaveButton();
+        $(SAVE_ADDRESS_BUTTON_XPATH).click();
     }
 
     @Step("Get flash/info message.")
@@ -80,12 +76,12 @@ public class AddShippingAddressPage extends StorefrontBasePage {
 
     @Step("Fill first name {0}.")
     public void fillFirstName(String firstName) {
-        addressBookAddUpdateEntryBlock.fillFirstNameWithText(firstName);
+        $(By.id(FIRST_NAME_FIELD_ID)).enterText(firstName);
     }
 
     @Step("Fill last name {0}")
     public void fillLastName(String lastName) {
-        addressBookAddUpdateEntryBlock.fillLastNameWithText(lastName);
+        $(By.id(LAST_NAME_FIELD_ID)).enterText(lastName);
     }
 
     @Step("Fill state {0}")

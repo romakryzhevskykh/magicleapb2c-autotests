@@ -71,4 +71,16 @@ public class PreConditionStepDefs extends AbstractStepDefs {
         threadVarsHashMap.put(TestKeyword.USER_SHIPPING_ADDRESS, userShippingAddress);
         threadVarsHashMap.put(TestKeyword.SHIPPING_ADDRESS, userShippingAddress.getShippingAddress());
     }
+
+    @And("^Choose any not default user Saved Shipping address.$")
+    public void chooseAnyNotDefaultUserSavedShippingAddress() {
+        User.UserShippingAddress userShippingAddress = userSessions.getActiveUserSession().getUser().getUserShippingAddresses().stream()
+                .filter(userShippingAddress1 -> !userShippingAddress1.isDefault())
+                .findAny()
+                .orElseGet(() -> {
+                    throw new NullPointerException("User does not have not default Shipping addresses.");
+                });
+        threadVarsHashMap.put(TestKeyword.USER_SHIPPING_ADDRESS, userShippingAddress);
+        threadVarsHashMap.put(TestKeyword.SHIPPING_ADDRESS, userShippingAddress.getShippingAddress());
+    }
 }

@@ -1,6 +1,6 @@
 package com.template.storefront.page_elements.address_page;
 
-public class AddEditAddressPageElements {
+public class AddAddressPageElements {
     public static String PAGE_HEADER_TITLE_XPATH = "//div[@class='account-section']//span[@class='label']";
     public static String ADDRESS1_FIELD_ID = "address.line1";
     public static String ADDRESS2_FIELD_ID = "address.line2";
@@ -13,4 +13,7 @@ public class AddEditAddressPageElements {
     public static String INFO_FLASH_MESSAGE_XPATH = FLASH_MESSAGE_XPATH + "/p";
     public static String TELEPHONE_FIELD_ID = "address.phone";
     public static String CANCEL_BUTTON_XPATH = "//div[@id='addressform_button_panel']//a";
+    public static String SAVE_ADDRESS_BUTTON_XPATH = "//button[@type = 'submit'][contains(., 'Save')]";
+    public static String FIRST_NAME_FIELD_ID = "address.firstName";
+    public static String LAST_NAME_FIELD_ID = "address.surname";
 }

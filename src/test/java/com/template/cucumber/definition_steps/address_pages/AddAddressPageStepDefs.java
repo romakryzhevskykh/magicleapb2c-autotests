@@ -117,4 +117,9 @@ public class AddAddressPageStepDefs extends AbstractStepDefs {
         ShippingAddress shippingAddress = (ShippingAddress) threadVarsHashMap.get(TestKeyword.SHIPPING_ADDRESS);
         addShippingAddressPage.fillTelephone(shippingAddress.getPhoneNumber());
     }
+
+    @Then("^Check that Add Shipping address page is opened.$")
+    public void checkThatAddressBookPageIsOpened() {
+        assertTrue(addShippingAddressPage.isOpened(), "Shipping Address page must be opened.");
+    }
 }
