@@ -283,10 +283,13 @@ public class AddressesManager {
         String finalLocation = addAddress.getResponse().getFinalLocation();
         String id = finalLocation.split("/")[finalLocation.split("/").length - 1];
         ShippingAddress shippingAddress1;
-        if (!(shippingAddress instanceof ShippingAddress))
+        if (!(shippingAddress instanceof ShippingAddress)) {
             shippingAddress1 = createShippingAddressInstance(shippingAddress);
-        else shippingAddress1 = (ShippingAddress) shippingAddress;
-
+            shippingAddress1.setState(shippingAddress.getState());
+        }
+        else {
+            shippingAddress1 = (ShippingAddress) shippingAddress;
+        }
         if (userSession.getUser().getUserShippingAddresses().isEmpty() || isDefault) {
             userSession.getUser().addShippingAddress(id, shippingAddress1);
             userSession.getUser().setShippingAddressIsDefault(shippingAddress1);

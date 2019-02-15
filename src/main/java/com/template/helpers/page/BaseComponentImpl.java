@@ -83,7 +83,6 @@ public abstract class BaseComponentImpl implements BaseComponent {
             alertHandling();
             return $(xPath, args);
         } catch (NoSuchElementException ex) {
-            ex.printStackTrace();
             return null;
         } finally {
             restoreDefaults();
@@ -182,6 +181,9 @@ public abstract class BaseComponentImpl implements BaseComponent {
 
     @Override
     public boolean isDisplayed(WebElement element) {
+        if (element == null){
+            return false;
+        }
         setCustomImplWait();
         try {
             return element.isDisplayed();
