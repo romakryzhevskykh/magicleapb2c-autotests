@@ -135,7 +135,10 @@ public class APIResponse implements API {
                 } catch (JSONException e) {/*ignore*/}
             }
         else if (RESPONSE_CONTENT_TYPES.HTML.contains(contentType)) {
-            if (RESPONSE_STRING.toLowerCase().startsWith("<!DOCTYPE html>".toLowerCase()) || RESPONSE_STRING.startsWith("<html")) {
+            if (RESPONSE_STRING == null){
+                this.responseBody = null;
+            }
+            else if (RESPONSE_STRING.toLowerCase().startsWith("<!DOCTYPE html>".toLowerCase()) || RESPONSE_STRING.startsWith("<html")) {
                 this.responseBody = Jsoup.parse(RESPONSE_STRING);
             } else {
                 this.responseBody = RESPONSE_STRING;

@@ -51,4 +51,24 @@ public class PreConditionStepDefs extends AbstractStepDefs {
             addressesManager.removeUserShippingAddresses(userSessions.getActiveUserSession(), shippingAddresses);
         }
     }
+
+    @Given("^User has at least (\\d+) Saved Shipping Addresses.$")
+    public void userHasAtLeastSavedShippingAddress(int numOfAddressesToExist) {
+        List<User.UserShippingAddress> userShippingAddresses = addressesManager.getUserSavedShippingAddresses(userSessions.getActiveUserSession());
+        if (userShippingAddresses.size() < numOfAddressesToExist) {
+            int numberOfAddressesToCreate = numOfAddressesToExist - userShippingAddresses.size();
+            addressesManager.createNumberOfUniqueAddresses(userSessions.getActiveUserSession(), numberOfAddressesToCreate);
+        }
+    }
+
+    @And("^Choose any user Saved Shipping address.$")
+    public void chooseAnyUserSavedShippingAddress() {
+        User.UserShippingAddress userShippingAddress = userSessions.getActiveUserSession().getUser().getUserShippingAddresses().stream()
+                .findAny()
+                .orElseGet(() -> {
+                    throw new NullPointerException("User does not have Shipping addresses.");
+                });
+        threadVarsHashMap.put(TestKeyword.USER_SHIPPING_ADDRESS, userShippingAddress);
+        threadVarsHashMap.put(TestKeyword.SHIPPING_ADDRESS, userShippingAddress.getShippingAddress());
+    }
 }

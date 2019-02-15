@@ -9,6 +9,7 @@ import com.template.helpers.request_engine.APIResponse;
 import com.template.helpers.request_engine.GETRequest;
 import com.template.helpers.request_engine.POSTRequest;
 import com.template.helpers.user_engine.UserSession;
+import com.template.utils.SiteUtil;
 import org.apache.commons.lang.RandomStringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -20,7 +21,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.StringJoiner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -29,13 +29,14 @@ import static com.template.helpers.managers.constants.ShippingAddressXSoupElemen
 @Component
 public class AddressesManager {
 
-    private final GETRequest ADDRESS_PAGE_SOURCE = new GETRequest("Address book page source", "/powertools/en/USD/" + "my-account/address-book");
+    private static final String URL_ADD = "powertools/en/USD/";
 
+    private final GETRequest ADDRESS_PAGE_SOURCE = new GETRequest("Address book page source", URL_ADD + "my-account/address-book");
+    private final POSTRequest ADD_ADDRESS = new POSTRequest("Add address", URL_ADD + "my-account/add-address");
+    private final GETRequest GET_ADD_ADDRESS = new GETRequest("Get page add address", URL_ADD + "my-account/add-address");
+    private final GETRequest REMOVE_ADDRESS = new GETRequest("Remove address", URL_ADD + "my-account/remove-address/%s");
 
-    private final POSTRequest ADD_ADDRESS = new POSTRequest("Add address", "my-account/add-address");
-    private final GETRequest REMOVE_ADDRESS = new GETRequest("Remove address", "my-account/remove-address/%s");
-
-    private final GETRequest MARK_AS_DEFAULT = new GETRequest("Make Shipping address default", "my-account/set-default-address/%s");
+    private final GETRequest MARK_AS_DEFAULT = new GETRequest("Make Shipping address default", URL_ADD + "my-account/set-default-address/%s");
 
     private ArrayList<Address> testValidAddresses = new ArrayList<>();
     private boolean isTestAddressesInit = false;
@@ -51,7 +52,9 @@ public class AddressesManager {
                 String state = streetName.getCity().getState().getFullName();
                 String country = streetName.getCity().getState().getCountry().getName();
                 String zipCode = streetName.getZipCode();
-                return createAddressInstance(userTitle, firstName.getFirstNameText(), lastName.getLastNameText(), street, city, state, country, zipCode);
+                Address address = createAddressInstance(userTitle, firstName.getFirstNameText(), lastName.getLastNameText(), street, city, country, zipCode);
+                address.setState(state);
+                return address;
             }).collect(Collectors.toList()));
             this.isTestAddressesInit = true;
         }
@@ -80,17 +83,15 @@ public class AddressesManager {
             String state = RandomStringUtils.randomAlphabetic(10);
             String country = RandomStringUtils.randomAlphabetic(10);
             String zipCode = RandomStringUtils.randomNumeric(5) + "-" + RandomStringUtils.randomNumeric(4);
-            return createAddressInstance(userTitle, firstName.getFirstNameText(), lastName.getLastNameText(), streetName, city, state, country, zipCode);
+            Address address = createAddressInstance(userTitle, firstName.getFirstNameText(), lastName.getLastNameText(), streetName, city, country, zipCode);
+            address.setState(state);
+            return address;
         }
         throw new NullPointerException("Status is not added to generator: " + validInvalid);
     }
 
-    private Address createAddressInstance(UserTitle userTitle, String firstName, String lastName, String streetName, String city, String state, String country, String zipCode) {
-        Address address = new Address(userTitle, firstName, lastName, streetName, city, country, zipCode);
-        if (state != null) {
-            address.setState(state);
-        }
-        return address;
+    private Address createAddressInstance(UserTitle userTitle, String firstName, String lastName, String streetName, String city, String country, String zipCode) {
+        return new Address(userTitle, firstName, lastName, streetName, city, country, zipCode);
     }
 
     @Step("Generate {0} Shipping address.")
@@ -106,15 +107,18 @@ public class AddressesManager {
                 .findAny().orElseGet(() -> {
                     throw new NullPointerException("Not enough available test Addresses");
                 });
-
         if (addressTestType == AddressTestType.WITH_ALL_FIELDS) {
             String addressLine2 = RandomStringUtils.randomNumeric(3);
             String telephone = RandomStringUtils.randomNumeric(10);
-            address.setAddressLine2(addressLine2);
-            address.setPhoneNumber(telephone);
-            return createShippingAddressInstance(address);
+            ShippingAddress shippingAddress = createShippingAddressInstance(address);
+            shippingAddress.setState(address.getState());
+            shippingAddress.setAddressLine2(addressLine2);
+            shippingAddress.setPhoneNumber(telephone);
+            return shippingAddress;
         } else if (addressTestType == AddressTestType.VALID) {
-            return createShippingAddressInstance(address);
+            ShippingAddress shippingAddress = createShippingAddressInstance(address);
+            shippingAddress.setState(address.getState());
+            return shippingAddress;
         }
         return null; //TODO make INVALID return
     }
@@ -134,19 +138,11 @@ public class AddressesManager {
     }
 
     public ShippingAddress createShippingAddressInstance(Address address) {
-        ShippingAddress shippingAddress = new ShippingAddress(address.getUserTitle(), address.getFirstName(), address.getLastName(), address.getStreet(), address.getCity(), address.getCountry(), address.getZipCode());
-        shippingAddress.setState(address.getState());
-        shippingAddress.setAddressLine2(address.getAddressLine2());
-        shippingAddress.setPhoneNumber(address.getPhoneNumber());
-        return shippingAddress;
+        return new ShippingAddress(address.getUserTitle(), address.getFirstName(), address.getLastName(), address.getStreet(), address.getCity(), address.getCountry(), address.getZipCode());
     }
 
     public BillingAddress createBillingAddressInstance(Address address) {
-        BillingAddress billingAddress = new BillingAddress(address.getUserTitle(), address.getFirstName(), address.getLastName(), address.getStreet(), address.getCity(), address.getCountry(), address.getZipCode());
-        if (address.getState() != null) {
-            billingAddress.setState(address.getState());
-        }
-        return billingAddress;
+        return new BillingAddress(address.getUserTitle(), address.getFirstName(), address.getLastName(), address.getStreet(), address.getCity(), address.getCountry(), address.getZipCode());
     }
 
     public List<User.UserShippingAddress> getUserSavedShippingAddresses(UserSession activeUserSession) {
@@ -185,22 +181,15 @@ public class AddressesManager {
         String addressLine1 = addressParts.get(1).trim();
         String addressLine2 = hasAddress2 ? addressParts.get(2).trim() : null;
         String cityState = (hasAddress2 ? addressParts.get(3) : addressParts.get(2)).trim();
-        boolean isState = cityState.split("[\\s\\u00A0]").length > 1;
-        String city = isState ? cityState.split("[\\s\\u00A0]")[0].trim() : cityState.trim();
-        String state = isState ? cityState.split("[\\s\\u00A0]")[1].trim() : null;
-        String[] countryPostal = (hasAddress2 ? addressParts.get(4) : addressParts.get(3)).split("[\\s\\u00A0]");
+        String[] cityAndState = SiteUtil.separateWordsByWhiteSpace(cityState);
+        boolean isState = cityAndState.length > 1;
+        String city = isState ? cityAndState[0] : cityState.trim();
+        String state = isState ?cityAndState[1].trim() : null;
+        String countryPostal = (hasAddress2 ? addressParts.get(4) : addressParts.get(3));
+        String[] countryAndPostal = SiteUtil.separateWordsByWhiteSpace(countryPostal);
         String country, postalCode;
-        if (countryPostal.length > 2) {
-            StringJoiner joiner = new StringJoiner(" ");
-            for (int i = 0; i < countryPostal.length - 1; i++) {
-                joiner.add(countryPostal[i]);
-            }
-            country = joiner.toString();
-            postalCode = countryPostal[countryPostal.length - 1];
-        } else {
-            country = countryPostal[0];
-            postalCode = countryPostal[1];
-        }
+        country = countryAndPostal[0];
+        postalCode = countryAndPostal[1];
         String phone = hasPhone ? addressParts.get(addressPartsSize - 1) : null;
         ShippingAddress shippingAddress = createShippingAddressInstance(title, firstName, lastName, addressLine1, city, country, postalCode);
         if (addressLine2 != null) {
@@ -262,32 +251,36 @@ public class AddressesManager {
     }
 
     @Step("Create new user: {0} Shipping Address.")
-    public void createNewUserShippingAddress(UserSession userSession, Address shippingAddress, String practiceName, boolean isDefault) {
+    public void createNewUserShippingAddress(UserSession userSession, Address shippingAddress, boolean isDefault) {
         POSTRequest addAddress = ADD_ADDRESS.getClone();
         addAddress.addPostParameterAndValue("addressId", "");
         addAddress.addPostParameterAndValue("bill_state", "");
-        addAddress.addPostParameterAndValue("practiceName", practiceName);
+        addAddress.addPostParameterAndValue("countryIso", Country.getCountryByName(shippingAddress.getCountry()).getAbbreviation());
         addAddress.addPostParameterAndValue("titleCode", shippingAddress.getUserTitle().getTitleText().toLowerCase().replaceAll("\\.", ""));
         addAddress.addPostParameterAndValue("firstName", shippingAddress.getFirstName());
         addAddress.addPostParameterAndValue("lastName", shippingAddress.getLastName());
         addAddress.addPostParameterAndValue("line1", shippingAddress.getStreet());
         addAddress.addPostParameterAndValue("line2", shippingAddress.getAddressLine2());
         addAddress.addPostParameterAndValue("townCity", shippingAddress.getCity());
-        addAddress.addPostParameterAndValue("regionIso", State.getStateByFullName(shippingAddress.getCountry()).getWithCountryAbbreviation());
+        addAddress.addPostParameterAndValue("regionIso", State.getStateByFullName(shippingAddress.getState()).getWithCountryAbbreviation());
         addAddress.addPostParameterAndValue("postcode", shippingAddress.getZipCode());
         addAddress.addPostParameterAndValue("phone", shippingAddress.getPhoneNumber());
         if (isDefault) {
             addAddress.addPostParameterAndValue("defaultAddress", String.valueOf(isDefault));
         }
         addAddress.addPostParameterAndValue("_defaultAddress", "on");
+        addAddress.addPostParameterAndValue("_defaultAddress", "on");
+        String csrfToken = getCsrfToken(userSession);
+        addAddress.addPostParameterAndValue("CSRFToken", csrfToken);
 
+        addAddress.setFollowRedirection(true);
         try {
             addAddress.sendPostRequest(userSession);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        String finalLocation = addAddress.getResponse().getResponseLocation();
+        String finalLocation = addAddress.getResponse().getFinalLocation();
         String id = finalLocation.split("/")[finalLocation.split("/").length - 1];
         ShippingAddress shippingAddress1;
         if (!(shippingAddress instanceof ShippingAddress))
@@ -303,7 +296,7 @@ public class AddressesManager {
     }
 
     public void createNewUserAddresses(UserSession userSession, List<Address> shippingAddresses) {
-        shippingAddresses.forEach(shippingAddress -> createNewUserShippingAddress(userSession, shippingAddress, "", false));
+        shippingAddresses.forEach(shippingAddress -> createNewUserShippingAddress(userSession, shippingAddress, false));
     }
 
     public void createNumberOfUniqueAddresses(UserSession activeUserSession, int numberOfAddressesToCreate) {
@@ -331,5 +324,19 @@ public class AddressesManager {
         }
 
         userShippingAddress.setDefault(true);
+    }
+
+    private String getCsrfToken(UserSession userSession) {
+        GETRequest getAddAddressPage = GET_ADD_ADDRESS.getClone();
+        getAddAddressPage.setIsShortLogResponse(true);
+
+        try {
+            getAddAddressPage.sendGetRequest(userSession);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Document pageSource = getAddAddressPage.getResponse().getHTMLResponseDocument();
+        return pageSource.html().split("ACC.config.CSRFToken = \"")[1].split("\"")[0];
     }
 }

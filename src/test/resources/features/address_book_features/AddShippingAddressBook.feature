@@ -48,3 +48,23 @@ Feature: Feature: Add Shipping Address book functionality
     Then Check that flash/info message is Your address was created. on Add Shipping Address book page.
     And Open Shipping Addresses page.
     And Check that Shipping address is present on Shipping Addresses page.
+
+  Scenario: Check that user can not add existing Shipping Address
+    Given User has at least 1 Saved Shipping Addresses.
+    And Choose any user Saved Shipping address.
+    And Open Add Shipping Address page.
+    When Select country from drop-down on Add Shipping Address page.
+    And Select Title from drop-down on Add Shipping Address page.
+    And Fill First name on Add Shipping Address page.
+    And Fill Last name on Add Shipping Address page.
+    And Fill Address line 1 field on Add Shipping Address page.
+    And Fill Address line 2 field on Add Shipping Address page.
+    And Fill City field on Add Shipping Address page.
+    And Fill State field on Add Shipping Address page.
+    And Fill Zip code field on Add Shipping Address page.
+    And Fill Telephone field on Add Shipping Address page.
+    And Click on Save button on Add Shipping Address page.
+    Then Check that Shipping Addresses page is opened.
+    And Check that flash/info message is Your address already exists in shipping address book on Shipping Address book page.
+    And Check that Shipping address is present on Shipping Addresses page.
+    And Check that new Shipping Address has not been added on Shipping Address page.

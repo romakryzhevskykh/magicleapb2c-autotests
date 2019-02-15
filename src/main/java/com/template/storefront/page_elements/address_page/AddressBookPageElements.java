@@ -4,7 +4,7 @@ public class AddressBookPageElements {
 
     public static String ADDRESS_BLOCK = "//div[@class = 'account-cards card-select']/div[@class = 'row']";
     public static String ADDRESS_ITEMS_XPATH = ADDRESS_BLOCK + "/div[contains(@class,'card')]";
-
+    public static String FLASH_INFO_MESSAGE_XPATH = "//div[@class = 'global-alerts']//div[contains(@class,'alert-info')]/p[@class='alert-text']";
 
 
 

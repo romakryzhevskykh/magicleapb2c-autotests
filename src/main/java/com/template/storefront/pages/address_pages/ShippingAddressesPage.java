@@ -7,6 +7,7 @@ import com.template.helpers.user_engine.UserSession;
 import com.template.storefront.models.AddressBookEntry;
 import com.template.storefront.page_blocks.AddressBookAddUpdateEntryBlock;
 import com.template.storefront.pages.StorefrontBasePage;
+import com.template.utils.SiteUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +15,11 @@ import org.springframework.stereotype.Component;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.StringJoiner;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import static com.template.storefront.page_elements.address_page.AddressBookPageElements.ADDRESSES_INFO_ITEMS_TEXT_XPATH;
-import static com.template.storefront.page_elements.address_page.AddressBookPageElements.ADDRESS_ITEMS_XPATH;
-import static com.template.storefront.page_elements.address_page.AddressBookPageElements.ADD_ADDRESS_BUTTON_XPATH;
-import static com.template.storefront.page_elements.address_page.AddressBookPageElements.SECTION_HEADER_XPATH;
+import static com.template.helpers.managers.constants.ShippingAddressXSoupElements.DEFAULT_ADD;
+import static com.template.storefront.page_elements.address_page.AddressBookPageElements.*;
 
 @Component
 public class ShippingAddressesPage extends StorefrontBasePage {
@@ -36,17 +32,16 @@ public class ShippingAddressesPage extends StorefrontBasePage {
     public List<ShippingAddress> getShippingAddresses() {
         return $$(ADDRESS_ITEMS_XPATH).stream()
                 .map(webElement -> {
-                    List<String> addressParts = webElement.findElements(By.xpath(".//li")).stream().map(WebElement::getText).collect(Collectors.toList());
+                    List<WebElement> elements = webElement.findElements(By.xpath(".//li"));
 
+                    List<String> addressParts = elements.stream()
+                            .map(webElement1 -> webElement1.getAttribute("innerHTML")).collect(Collectors.toList());
+                    String unformattedNameParts = elements.get(0).findElement(By.xpath("./strong")).getAttribute("innerHTML");
+                    String[] nameParts = SiteUtil.separateWordsByWhiteSpace(unformattedNameParts);
 
-                    List<String> nameParts = Stream.of(addressParts.get(0)
-                            .split(" "))
-                            .map(String::trim)
-                            .collect(Collectors.toList());
-                    UserTitle userTitle = UserTitle.getUserTitleByTitleText(nameParts.get(0).trim());
-                    String firstName = nameParts.get(1);
-                    String lastName = nameParts.get(2);
-
+                    UserTitle title = UserTitle.getUserTitleByTitleText(nameParts[0].trim());
+                    String firstName = nameParts[1].trim();
+                    String lastName = nameParts[2].replace(DEFAULT_ADD, "").trim();
                     //
                     int addressPartsSize = addressParts.size();
                     boolean hasPhone = addressParts.get(addressPartsSize - 1).replaceAll("[^0-9]", "").length() > 0;
@@ -54,26 +49,18 @@ public class ShippingAddressesPage extends StorefrontBasePage {
                     //address part
                     String addressLine1 = addressParts.get(1).trim();
                     String addressLine2 = hasAddress2 ? addressParts.get(2).trim() : null;
-                    String[] cityState = (hasAddress2 ? addressParts.get(3) : addressParts.get(2)).trim().split("[\\s\\u00A0]");
-                    boolean isState = cityState.length > 1;
-                    String state = isState ? cityState[cityState.length - 1].trim() : null;
-                    String city = isState ? String.join(" ",Arrays.stream(cityState).filter(word -> !word.equalsIgnoreCase(state)).collect(Collectors.toList()))
-                            : cityState[0];
-                    String[] countryPostal = (hasAddress2 ? addressParts.get(4) : addressParts.get(3)).split("[\\s\\u00A0]");
+                    String cityState = (hasAddress2 ? addressParts.get(3) : addressParts.get(2)).trim();
+                    String[] cityAndState = SiteUtil.separateWordsByWhiteSpace(cityState);
+                    boolean isState = cityAndState.length > 1;
+                    String city = isState ? cityAndState[0] : cityState.trim();
+                    String state = isState ?cityAndState[1].trim() : null;
+                    String countryPostal = (hasAddress2 ? addressParts.get(4) : addressParts.get(3));
+                    String[] countryAndPostal = SiteUtil.separateWordsByWhiteSpace(countryPostal);
                     String country, postalCode;
-                    if (countryPostal.length > 2) {
-                        StringJoiner joiner = new StringJoiner(" ");
-                        for (int i = 0; i < countryPostal.length - 1; i++) {
-                            joiner.add(countryPostal[i]);
-                        }
-                        country = joiner.toString();
-                        postalCode = countryPostal[countryPostal.length - 1];
-                    } else {
-                        country = countryPostal[0];
-                        postalCode = countryPostal[1];
-                    }
+                    country = countryAndPostal[0].trim();
+                    postalCode = countryAndPostal[1].trim();
                     String phone = hasPhone ? addressParts.get(addressPartsSize - 1) : null;
-                    ShippingAddress shippingAddress =addressesManager.createShippingAddressInstance(userTitle, firstName, lastName, addressLine1, city, country, postalCode);
+                    ShippingAddress shippingAddress = addressesManager.createShippingAddressInstance(title, firstName, lastName, addressLine1, city, country, postalCode);
                     if (addressLine2 != null) {
                         shippingAddress.setAddressLine2(addressLine2);
                     }
@@ -88,15 +75,10 @@ public class ShippingAddressesPage extends StorefrontBasePage {
                 }).collect(Collectors.toList());
     }
 
-
-
-
-
-
-
-
-
-
+    @Step("Get info flash message.")
+    public String getFlashInfoMessage() {
+        return $(FLASH_INFO_MESSAGE_XPATH).getText().trim();
+    }
 
 
     @Step("Get text of header section on address book page.")

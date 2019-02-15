@@ -2,14 +2,12 @@ package com.template.cucumber.definition_steps.address_pages;
 
 import com.template.cucumber.definition_steps.AbstractStepDefs;
 import com.template.cucumber.definition_steps.TestKeyword;
-import com.template.helpers.managers.addresses.AddressesManager;
 import com.template.helpers.models.addresses.ShippingAddress;
 import com.template.helpers.models.users.User;
 import com.template.helpers.user_engine.UserSessions;
 import com.template.storefront.models.AddressBookEntry;
-import com.template.storefront.page_blocks.HeaderRowPageBlock;
 import com.template.storefront.pages.address_pages.ShippingAddressesPage;
-import com.template.storefront.pages.LoginPageStorefront;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -23,12 +21,9 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class AddressBookPageStepDefs extends AbstractStepDefs {
-    @Autowired UserSessions userSessions;
-    @Autowired AddressesManager addressBookEntriesManager;
 
+    @Autowired private UserSessions userSessions;
     @Autowired private ShippingAddressesPage shippingAddressesPage;
-    @Autowired LoginPageStorefront loginPageStorefront;
-    @Autowired HeaderRowPageBlock headerRowPageBlock;
 
     @Given("^Shipping Addresses page is opened.$")
     public void addressBookPageIsOpened() {
@@ -47,6 +42,21 @@ public class AddressBookPageStepDefs extends AbstractStepDefs {
         User.UserShippingAddress userShippingAddress = (User.UserShippingAddress) threadVarsHashMap.get(TestKeyword.USER_SHIPPING_ADDRESS);
         List<ShippingAddress> shippingAddresses = shippingAddressesPage.getShippingAddresses();
         assertTrue(shippingAddresses.contains(userShippingAddress.getShippingAddress()), "Shipping address must be present: " + userShippingAddress);
+    }
+
+    @Then("^Check that Shipping Addresses page is opened.$")
+    public void checkThatAddressBookPageIsOpened() {
+        assertTrue(shippingAddressesPage.isOpened());
+    }
+
+    @And("^Check that flash/info message is (.*) on Shipping Address book page.$")
+    public void checkThatFlashInfoMessageIsYourAddressAlreadyExistsInShippingAddressBookOnShippingAddressBookPage(String message) {
+        assertEquals(shippingAddressesPage.getFlashInfoMessage(), message);
+    }
+
+    @And("^Check that new Shipping Address has not been added on Shipping Address page.$")
+    public void checkThatNewShippingAddressHasNotBeenAddedOnShippingAddressPage() {
+        assertEquals(shippingAddressesPage.getShippingAddresses().size(), userSessions.getActiveUserSession().getUser().getUserShippingAddresses().size());
     }
 
 
