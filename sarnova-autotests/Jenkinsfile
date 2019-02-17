@@ -2,27 +2,48 @@ pipeline {
 
     parameters {
         choice(choices: 'dev\nqa\nstage\nprod', description: 'Profile name', name: 'Environment')
-        choice(choices: ' \n-Dcucumber.options="--tags @SmokeTest --plugin ru.yandex.qatools.allure.cucumberjvm.AllureReporter"', description: 'By default empty. Use param for prod', name: 'Scope')
+        choice(choices: ' \n-Dcucumber.options="--tags @SmokeTest --plugin ru.yandex.qatools.allure.cucumberjvm.AllureReporter"', description: 'By default empty', name: 'Scope')
          }
 
    agent any
+
+   environment {
+        SLACK_CHANEL="devsrnvgit"
+        ROOT_DIR="sarnova-autotests"
+    }
+
    tools {
        maven 'apache-maven-3.5.4'
    }
    stages {
-
-       stage('mvn compile') {
+       stage('run tests') {
            steps {
-           dir('sarnova-autotests')  {
-                 sh "mvn clean test site -Dspring.profiles.active=${params.Environment} ${params.Scope}"
-                 }
+               slackSend (color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'\n Environment:${params.Environment}", channel:"${env.SLACK_CHANEL}")
+               dir("${env.ROOT_DIR}")  {
+                   sh "mvn clean test site -Dspring.profiles.active=${params.Environment} ${params.Scope}"
+                    }
            }
        }
 
        stage('generate report') {
            steps {
-               allure results: [[path: 'sarnova-autotests/target/allure-results']]
+               allure results: [[path: "${env.ROOT_DIR}/target/allure-results"]]
            }
        }
    }
+
+  post {
+
+       failure {
+           slackSend (color: '#FF0000', message: "Failure: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'\n Environment:${params.Environment}\n Allure report: ${env.BUILD_URL}${env.BUILD_NUMBER}/allure", channel:"${env.SLACK_CHANEL}")
+            }
+
+       success {
+           slackSend (color: '#00FF00', message: "Success: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'\n Environment:${params.Environment}\n Allure report: ${env.BUILD_URL}${env.BUILD_NUMBER}/allure", channel:"${env.SLACK_CHANEL}")
+            }
+
+       unstable {
+           slackSend (color: '#FFA500', message: "Failure: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'\n Environment:${params.Environment}\n Allure report: ${env.BUILD_URL}${env.BUILD_NUMBER}/allure", channel:"${env.SLACK_CHANEL}")
+            }
+     }
 }
