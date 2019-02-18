@@ -1,4 +1,4 @@
-package com.template.storefront.page_elements.address_page;
+package com.template.storefront.page_elements.address_page_elements;
 
 public class AddressBookPageElements {
 

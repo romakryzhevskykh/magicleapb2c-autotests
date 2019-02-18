@@ -11,15 +11,16 @@ import com.template.helpers.models.credit_cards.CardType;
 import com.template.helpers.models.credit_cards.CreditCard;
 import com.template.helpers.models.products.VariantProduct;
 import com.template.helpers.models.users.User;
-import com.template.helpers.models.users.UserTitle;
 import com.template.helpers.request_engine.APIResponse;
 import com.template.helpers.request_engine.GETRequest;
 import com.template.helpers.request_engine.POSTRequest;
 import com.template.helpers.user_engine.UserSession;
+import com.template.utils.SiteUtil;
 import javafx.util.Pair;
 import lombok.Getter;
 import org.apache.commons.lang.RandomStringUtils;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.yandex.qatools.allure.annotations.Step;
 import us.codecraft.xsoup.Xsoup;
@@ -27,12 +28,14 @@ import us.codecraft.xsoup.Xsoup;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
+import static com.template.helpers.managers.constants.CreditCardsXSoupElements.*;
 import static com.template.utils.RandomUtil.getRandomIntInRange;
 
 
 public class CreditCardsManager {
+
+    private static final String URL_ADD = "powertools/en/USD/";
 
     @Autowired private AddressesManager addressesManager;
     @Autowired private CartManager cartManager;
@@ -40,9 +43,9 @@ public class CreditCardsManager {
     @Autowired private CheckoutManager checkoutManager;
     @Getter private ArrayList<CreditCard> testCreditCards = new ArrayList<>();
 
-    private final GETRequest PAYMENT_INFO_PAGE_SOURCE = new GETRequest("Payment info page source", "my-account/payment-details");
-    private final POSTRequest REMOVE_PAYMENT_METHOD = new POSTRequest("Remove payment method from user list", "my-account/remove-payment-method");
-    private final POSTRequest SET_CARD_AS_DEFAULT = new POSTRequest("Set card as default", "my-account/set-default-payment-details");
+    private final GETRequest PAYMENT_INFO_PAGE_SOURCE = new GETRequest("Payment info page source", URL_ADD + "my-account/payment-details");
+    private final POSTRequest REMOVE_PAYMENT_METHOD = new POSTRequest("Remove payment method from user list", URL_ADD + "my-account/remove-payment-method");
+    private final POSTRequest SET_CARD_AS_DEFAULT = new POSTRequest("Set card as default", URL_ADD + "my-account/set-default-payment-details");
 
     public CreditCard createInstance(CardType cardType, String cardNumber, String cardExpiryMonth, String cardExpiryYear, String cvv, BillingAddress billingAddress) {
         return new CreditCard(cardType, cardNumber, cardExpiryMonth, cardExpiryYear, cvv, billingAddress);
@@ -79,60 +82,59 @@ public class CreditCardsManager {
     }
 
     private Map<String, Pair<CreditCard, Boolean>> getCreditCardsFromPage(UserSession userSession) {
-        String customSplitter = "TemporaryRemoveSign";
-        String cardElementsXSoupPath = "//div[@class*=account-paymentdetails]/div[@class*=account-cards]/div[@class=row]/div[@class*=card]";
-        String nameInCardXSoupPath = "ul/li[1]/div/text()";
-        String billingInfoXSoupPath = "ul/li[1]/text()";
-        String cardTypeXSoupPath = "ul/li[2]/text()";
-        String cardMaskXSoupPath = "ul/li[3]/text()";
-        String cardExpiryDataXSoupPath = "ul/li[4]/div/text()";
-        String cardIsDefaultXSoupPath = "ul/li[5]";
-        String cardRemoveButtonCardIdXSoupPath = "div[@class*=account-cards-actions]/a[@class*=removePaymentDetailsButton]/@data-payment-id";
+
 
         Document pageSource = getPageSource(userSession).getHTMLResponseDocument();
-        return Xsoup.select(pageSource, cardElementsXSoupPath).getElements().stream()
+        return Xsoup.select(pageSource, CARD_ELEMENTS_X_SOUP_PATH).getElements().stream()
                 .collect(Collectors.toMap(
-                        element -> Xsoup.select(element, cardRemoveButtonCardIdXSoupPath).get(),
-                        element -> {
-                            //billing data parser
-                            List<String> billingNameParts = Stream.of(Xsoup.select(element, nameInCardXSoupPath).get()
-                                    .replaceAll(" ", customSplitter)
-                                    .split("[\\s\\u00A0]"))
-                                    .map(str -> str.replaceAll(customSplitter, " "))
-                                    .map(String::trim)
-                                    .collect(Collectors.toList());
-                            UserTitle title = UserTitle.getUserTitleByTitleText(billingNameParts.get(0));
-                            String firstName = billingNameParts.get(1);
-                            String lastName = billingNameParts.get(2);
-                            String addressBlock = Xsoup.select(element, billingInfoXSoupPath).get();
-                            List<String> addressParts = Stream.of(addressBlock.split("  "))
-                                    .filter(str -> !str.trim().isEmpty())
-                                    .map(str -> str.replaceAll("[\\s\\u00A0]", " ").trim())
-                                    .collect(Collectors.toList());
-                            String addressLine1 = addressParts.get(0);
-                            String city = addressParts.get(1).split(",")[0].trim();
-                            String state = addressParts.get(1).split(",")[1].trim();
-                            String postalCode = addressParts.get(2);
-                            BillingAddress billingAddress = addressesManager.createBillingAddressInstance(title, firstName, lastName, addressLine1, city, state, postalCode);
+                        element -> Xsoup.select(element, CARD_REMOVE_BUTTON_CARD_ID_X_SOUP_PATH).get(),
+                        this::getCreditCard));
+    }
 
-                            //credit card data parser
-                            CardType cardType = CardType.cardTypeByTextMarker(Xsoup.select(element, cardTypeXSoupPath).get().trim());
-                            String cardMask = Xsoup.select(element, cardMaskXSoupPath).get().trim();
-                            String cardExpiryMonth = Xsoup.select(element, cardExpiryDataXSoupPath).get().trim().split("/")[0].replaceAll("[\\s\\u00A0]", "");
-                            String cardExpiryYear = Xsoup.select(element, cardExpiryDataXSoupPath).get().trim().split("/")[1].replaceAll("[\\s\\u00A0]", "");
-                            CreditCard sameCreditCardByMask = getTestCreditCards().stream()
-                                    .filter(creditCard -> creditCard.getCardNumber().endsWith(cardMask.substring(cardMask.length() - 4)))
-                                    .findAny().orElse(null);
-                            String cvv = sameCreditCardByMask != null ? sameCreditCardByMask.getCvv() : null;
 
-                            String isDefaultCardText = Xsoup.select(element, cardIsDefaultXSoupPath).get();
-                            Boolean isDefaultFlag = false;
-                            if (isDefaultCardText != null && isDefaultCardText.contains("(Default)")) {
-                                isDefaultFlag = true;
-                            }
+    private Pair<CreditCard, Boolean> getCreditCard(Element cardElement) {
+        //TODO no billing name in OOB
+        //billing data parser
+//                            List<String> billingNameParts = Stream.of(Xsoup.select(element, NAME_IN_CARD_X_SOUP_PATH).get()
+//                                    .replaceAll(" ", CUSTOM_SPLITTER)
+//                                    .split("[\\s\\u00A0]"))
+//                                    .map(str -> str.replaceAll(CUSTOM_SPLITTER, " "))
+//                                    .map(String::trim)
+//                                    .collect(Collectors.toList());
+//                            UserTitle title = UserTitle.getUserTitleByTitleText(billingNameParts.get(0));
+//                            String firstName = billingNameParts.get(1);
+//                            String lastName = billingNameParts.get(2);
+        String addressLine1 = Xsoup.select(cardElement, CARD_ADDRESS_1_X_SOUP_PATH).get();
+        String[] cityState = SiteUtil.separateWordsByWhiteSpace(Xsoup.select(cardElement, CARD_CITY_STATE_X_SOUP_PATH).get());
+        String city = cityState[0].trim();
+        String state = cityState.length > 1 ? cityState[1].trim() : null;
+        String[] countryZip = SiteUtil.separateWordsByWhiteSpace(Xsoup.select(cardElement, CARD_COUNTRY_ZIP_X_SOUP_PATH).get());
+        String country = countryZip[0].trim();
+        String postalCode = countryZip[1].trim();
+        //TODO no name on Payment details in OOB hybris
+//                            BillingAddress billingAddress = addressesManager.createBillingAddressInstance(title, firstName, lastName, addressLine1, city, state, postalCode);
+        BillingAddress billingAddress = addressesManager.createBillingAddressInstance(null, null, null, addressLine1, city, country, postalCode);
+        if (state != null) {
+            billingAddress.setState(state);
+        }
+        //credit card data parser
+        CardType cardType = CardType.cardTypeByTextMarker(Xsoup.select(cardElement, CARD_TYPE_X_SOUP_PATH).get().trim());
+        String cardMask = Xsoup.select(cardElement, CARD_MASK_X_SOUP_PATH).get().trim();
+        String cardExpiryMonth = Xsoup.select(cardElement, CARD_EXPIRY_DATA_X_SOUP_PATH).get().trim().split("/")[0].replaceAll("[\\s\\u00A0]", "");
+        String cardExpiryYear = Xsoup.select(cardElement, CARD_EXPIRY_DATA_X_SOUP_PATH).get().trim().split("/")[1].replaceAll("[\\s\\u00A0]", "");
+        CreditCard sameCreditCardByMask = getTestCreditCards().stream()
+                .filter(creditCard -> creditCard.getCardNumber().endsWith(cardMask.substring(cardMask.length() - 4)))
+                .findAny().orElse(null);
+        String cvv = sameCreditCardByMask != null ? sameCreditCardByMask.getCvv() : null;
 
-                            return new Pair<>(createInstance(cardType, cardMask, cardExpiryMonth, cardExpiryYear, cvv, billingAddress), isDefaultFlag);
-                        }));
+        String isDefaultCardText = Xsoup.select(cardElement, CARD_IS_DEFAULT_X_SOUP_PATH).get();
+        Boolean isDefaultFlag = false;
+        if (isDefaultCardText != null && isDefaultCardText.contains("(Default)")) {
+            isDefaultFlag = true;
+        }
+
+        return new Pair<>(createInstance(cardType, cardMask, cardExpiryMonth, cardExpiryYear, cvv, billingAddress), isDefaultFlag);
+
     }
 
     @Step("Get user {0} saved cards from Payment info page.")
@@ -152,7 +154,7 @@ public class CreditCardsManager {
 
     @Step("Get user credit cards without init if possible.")
     public List<User.UserCreditCard> getUserSavedCreditCards(UserSession userSession) {
-        if(!userSession.getUser().isCreditCardInit()) {
+        if (!userSession.getUser().isCreditCardInit()) {
             getAndUpdateUserSavedCreditCards(userSession);
         }
         return userSession.getUser().getUserCreditCards();
@@ -173,19 +175,22 @@ public class CreditCardsManager {
     }
 
     public void removeUserCreditCards(UserSession activeUserSession, List<User.UserCreditCard> userCreditCards) {
-        userCreditCards.forEach(userCreditCard -> removeUserCreditCard(activeUserSession, userCreditCard));
+        String token = getCsrfToken(activeUserSession);
+        userCreditCards.forEach(userCreditCard -> removeUserCreditCard(activeUserSession, userCreditCard, token));
         activeUserSession.getUser().getUserCreditCards().removeAll(userCreditCards);
     }
 
     public void removeUserCreditCards(UserSession activeUserSession, User.UserCreditCard userCreditCard) {
-        removeUserCreditCard(activeUserSession, userCreditCard);
+        String token = getCsrfToken(activeUserSession);
+        removeUserCreditCard(activeUserSession, userCreditCard, token);
         activeUserSession.getUser().getUserCreditCards().remove(userCreditCard);
     }
 
     @Step("Remove CC: {1} for user {0}.")
-    private void removeUserCreditCard(UserSession activeUserSession, User.UserCreditCard userCreditCard) {
+    private void removeUserCreditCard(UserSession activeUserSession, User.UserCreditCard userCreditCard, String CsrToken) {
         POSTRequest removePaymentMethod = REMOVE_PAYMENT_METHOD.getClone();
         removePaymentMethod.addPostParameterAndValue("paymentInfoId", userCreditCard.getId());
+        removePaymentMethod.addPostParameterAndValue("CSRFToken", CsrToken);
 
         try {
             removePaymentMethod.sendPostRequest(activeUserSession);
@@ -199,7 +204,9 @@ public class CreditCardsManager {
         Map<VariantProduct, Integer> variantProducts = cartManager.getProductsInCart(userSession);
         if (variantProducts.isEmpty()) {
             Map<VariantProduct, Integer> productsToAdd = new HashMap<VariantProduct, Integer>() {{
-                put(productsManager.getProductByProductTestTypes(new ArrayList<String>() {{ add("VALID"); }}), 1);
+                put(productsManager.getProductByProductTestTypes(new ArrayList<String>() {{
+                    add("VALID");
+                }}), 1);
             }};
             cartManager.addProducts(userSession, productsToAdd);
         }
@@ -263,5 +270,10 @@ public class CreditCardsManager {
             throw new NullPointerException("Not enough available test Credit Cards");
         List<CreditCard> ccToAdd = availableCC.subList(0, numberOfCCToCreate);
         createNewUserCCs(activeUserSession, ccToAdd);
+    }
+
+    private String getCsrfToken(UserSession userSession) {
+        Document pageSource = getPageSource(userSession).getHTMLResponseDocument();
+        return pageSource.html().split("ACC.config.CSRFToken = \"")[1].split("\"")[0];
     }
 }

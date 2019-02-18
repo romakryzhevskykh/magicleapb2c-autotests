@@ -8,7 +8,7 @@ import ru.yandex.qatools.allure.annotations.Step;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.template.storefront.page_elements.address_page.AddAddressPageElements.*;
+import static com.template.storefront.page_elements.address_page_elements.AddAddressPageElements.*;
 
 @Component
 public class AddShippingAddressPage extends StorefrontBasePage {

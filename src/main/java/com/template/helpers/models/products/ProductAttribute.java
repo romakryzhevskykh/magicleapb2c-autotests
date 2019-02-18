@@ -18,7 +18,7 @@ public class ProductAttribute {
     }
 
     public boolean getBooleanValue() {
-        return (Boolean) this.value;
+        return Boolean.valueOf(this.value.toString());
     }
 
     public String getName() {

@@ -1,8 +1,14 @@
 package com.template.cucumber.definition_steps;
 
 import com.template.helpers.managers.addresses.AddressesManager;
+import com.template.helpers.managers.cards.CreditCardsManager;
+import com.template.helpers.managers.orders.CartManager;
+import com.template.helpers.managers.products.ProductsManager;
 import com.template.helpers.models.addresses.AddressTestType;
 import com.template.helpers.models.addresses.ShippingAddress;
+import com.template.helpers.models.credit_cards.CardTestType;
+import com.template.helpers.models.credit_cards.CreditCard;
+import com.template.helpers.models.products.VariantProduct;
 import com.template.helpers.models.users.User;
 import com.template.storefront.page_blocks.HeaderRowPageBlock;
 import com.template.storefront.pages.HomePage;
@@ -12,6 +18,8 @@ import cucumber.api.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class PreConditionStepDefs extends AbstractStepDefs {
 
@@ -19,8 +27,10 @@ public class PreConditionStepDefs extends AbstractStepDefs {
     @Autowired private LoginPageStorefront loginPageStorefront;
     @Autowired private HomePage homePage;
 
-
+    @Autowired private CartManager cartManager;
     @Autowired private AddressesManager addressesManager;
+    @Autowired private CreditCardsManager creditCardsManager;
+    @Autowired private ProductsManager productsManager;
 
     @Given("^User is logged in to Storefront.$")
     public void userIsLoggedInToStorefront() {
@@ -82,5 +92,54 @@ public class PreConditionStepDefs extends AbstractStepDefs {
                 });
         threadVarsHashMap.put(TestKeyword.USER_SHIPPING_ADDRESS, userShippingAddress);
         threadVarsHashMap.put(TestKeyword.SHIPPING_ADDRESS, userShippingAddress.getShippingAddress());
+    }
+
+    @SuppressWarnings("unchecked")
+    @And("^Cart is empty.$")
+    public void cartIsEmpty() {
+        Map<VariantProduct, Integer> productList = cartManager.getProductsInCart(userSessions.getActiveUserSession());
+        if (!productList.isEmpty()) {
+            cartManager.removeProducts(userSessions.getActiveUserSession(), productList);
+            getSelectedProducts().clear();
+        }
+    }
+
+    @Given("^User does not have saved Credit Carts/Payment Infos.$")
+    public void customerDoesNotHavePaymentInfo() {
+        List<User.UserCreditCard> userCreditCards = creditCardsManager.getAndUpdateUserSavedCreditCards(userSessions.getActiveUserSession());
+        if (!userCreditCards.isEmpty()) {
+            creditCardsManager.removeUserCreditCards(userSessions.getActiveUserSession(), userCreditCards);
+        }
+    }
+
+    @Given("^User does not have default Shipping Address.$")
+    public void customerDoesNotHaveDefaultShippingAddress() {
+        List<User.UserShippingAddress> shippingAddresses = addressesManager.getUserSavedShippingAddresses(userSessions.getActiveUserSession());
+        shippingAddresses.stream()
+                .filter(User.UserShippingAddress::isDefault)
+                .findAny()
+                .ifPresent(i -> addressesManager.removeUserShippingAddresses(userSessions.getActiveUserSession(), shippingAddresses));
+    }
+
+    @And("^(\\d+) (.*) products are added to cart.$")
+    public void validProductsAreAddedToCart(int numberOfProducts, List<String> productTestTypes) {
+        List<VariantProduct> products = productsManager.getUniqueVariantProductsByProductsQuantityAndProductTestTypes(numberOfProducts, productTestTypes);
+        Map<VariantProduct, Integer> productsToAdd = products.stream().collect(Collectors.toMap(product -> product, product -> 1));
+        cartManager.addProducts(userSessions.getActiveUserSession(), productsToAdd);
+        addSelectedProducts(productsToAdd);
+    }
+
+    @And("^(.*) Shipping address is generated.$")
+    public void validShippingAddressIsGenerated(String validInvalid) {
+        AddressTestType addressTestType = AddressTestType.valueOf(validInvalid);
+        ShippingAddress shippingAddress = addressesManager.generateRandomShippingAddress(addressTestType);
+        threadVarsHashMap.put(TestKeyword.SHIPPING_ADDRESS, shippingAddress);
+    }
+
+    @And("^(.*) Credit card is generated.$")
+    public void validCreditCardIsGenerated(String validInvalid) {
+        CardTestType cardTestType = CardTestType.valueOf(validInvalid);
+        CreditCard creditCard = creditCardsManager.generateRandomCard(cardTestType);
+        threadVarsHashMap.put(TestKeyword.CREDIT_CARD, creditCard);
     }
 }

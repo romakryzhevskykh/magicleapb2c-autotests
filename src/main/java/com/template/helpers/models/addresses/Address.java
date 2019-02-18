@@ -20,7 +20,7 @@ public class Address implements Cloneable, Serializable {
     @Getter @Setter private String country;
     @Getter @Setter private String zipCode;
 
-    public Address(UserTitle userTitle, String firstName, String lastName, String address1, String city,String country, String zipCode) {
+    public Address(UserTitle userTitle, String firstName, String lastName, String address1, String city, String country, String zipCode) {
         this.userTitle = userTitle;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -45,11 +45,12 @@ public class Address implements Cloneable, Serializable {
                 .append((this.street + " " + this.addressLine2).trim(), (compareObj.street + " " + compareObj.addressLine2).trim())
                 .append(this.phoneNumber, compareObj.phoneNumber)
                 .append(this.city, compareObj.city)
-                .append(this.state,compareObj.state)
+                .append(this.state, compareObj.state)
                 .append(this.country, compareObj.country)
                 .append(this.zipCode, compareObj.zipCode)
                 .isEquals();
     }
+
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37)

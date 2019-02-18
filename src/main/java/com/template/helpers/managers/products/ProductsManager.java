@@ -108,9 +108,9 @@ public class ProductsManager {
                 .stream().filter(attribute -> attribute.getName().equalsIgnoreCase("license"))
                 .findAny();
         boolean isLicenseRestricted = licenseRestricted.isPresent() && licenseRestricted.get().getBooleanValue();
-        if (isLicenseRestricted){
+        if (isLicenseRestricted) {
             product.addProductTestType(ProductTestType.LICENSE_RESTRICTED);
-        }else {
+        } else {
             product.addProductTestType(ProductTestType.VALID);
         }
     }

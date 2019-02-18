@@ -97,7 +97,9 @@ public class AddressesManager {
     @Step("Generate {0} Shipping address.")
     public ShippingAddress generateRandomShippingAddress(AddressTestType validInvalid) {
         Address address = generateRandomAddress(validInvalid);
-        return createShippingAddressInstance(address);
+        ShippingAddress shippingAddress = createShippingAddressInstance(address);
+        shippingAddress.setState(address.getState());
+        return shippingAddress;
     }
 
     @Step("Generate {0} Shipping address that doesn't exist.")
@@ -126,15 +128,17 @@ public class AddressesManager {
     @Step("Generate {0} Billing address.")
     public BillingAddress generateRandomBillingAddress(AddressTestType validInvalid) {
         Address address = generateRandomAddress(validInvalid);
-        return createBillingAddressInstance(address);
+        BillingAddress billingAddress = createBillingAddressInstance(address);
+        billingAddress.setState(address.getState());
+        return billingAddress;
     }
 
     public ShippingAddress createShippingAddressInstance(UserTitle userTitle, String firstName, String lastName, String address1, String city, String country, String zipCode) {
         return new ShippingAddress(userTitle, firstName, lastName, address1, city, country, zipCode);
     }
 
-    public BillingAddress createBillingAddressInstance(UserTitle userTitle, String firstName, String lastName, String address1, String city, String state, String zipCode) {
-        return new BillingAddress(userTitle, firstName, lastName, address1, city, state, zipCode);
+    public BillingAddress createBillingAddressInstance(UserTitle userTitle, String firstName, String lastName, String address1, String city, String country, String zipCode) {
+        return new BillingAddress(userTitle, firstName, lastName, address1, city, country, zipCode);
     }
 
     public ShippingAddress createShippingAddressInstance(Address address) {

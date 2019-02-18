@@ -1,6 +1,6 @@
-package com.template.storefront.page_elements.address_page;
+package com.template.storefront.page_elements.address_page_elements;
 
-public class EditAddressPageElements {
+public class AddAddressPageElements {
     public static String PAGE_HEADER_TITLE_XPATH = "//div[@class='account-section']//span[@class='label']";
     public static String ADDRESS1_FIELD_ID = "address.line1";
     public static String ADDRESS2_FIELD_ID = "address.line2";

@@ -1,4 +1,4 @@
-package com.template.cucumber.definition_steps.address_pages;
+package com.template.cucumber.definition_steps.address_steps;
 
 import com.template.cucumber.definition_steps.AbstractStepDefs;
 import com.template.cucumber.definition_steps.TestKeyword;

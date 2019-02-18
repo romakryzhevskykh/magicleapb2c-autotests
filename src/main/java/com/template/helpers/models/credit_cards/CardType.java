@@ -32,11 +32,15 @@ public enum CardType {
         return Stream.of(values()).filter(cardType -> cardType.getTypeTextName().equals(typeTextName)).findAny()
                 .orElseGet(() -> {
                     throw new NullPointerException("Card with text type: " + typeTextName + " is not present in Types list.");
-        });
+                });
     }
 
     public static CardType getAny() {
         Random rand = new Random();
         return values()[(rand.nextInt(values().length))];
+    }
+
+    public String getName() {
+        return this.typeTextName;
     }
 }

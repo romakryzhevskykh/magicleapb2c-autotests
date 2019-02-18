@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import static com.template.helpers.managers.constants.ShippingAddressXSoupElements.DEFAULT_ADD;
-import static com.template.storefront.page_elements.address_page.AddressBookPageElements.*;
+import static com.template.storefront.page_elements.address_page_elements.AddressBookPageElements.*;
 
 @Component
 public class ShippingAddressesPage extends StorefrontBasePage {
