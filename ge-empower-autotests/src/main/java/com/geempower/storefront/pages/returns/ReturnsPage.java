@@ -88,6 +88,7 @@ public class ReturnsPage extends StorefrontBasePage {
 
     @Step("Get All Returns Confirmation No.")
     public Stream<WebElement> getAllReturnsConfirmationNo() {
+        waitUntilPageIsFullyLoaded();
         return $$(ALL_RETURNS_CONFIRM_NO_XPATH).stream();
     }
 
