@@ -1,0 +1,32 @@
+properties:
+  
+  #Browser
+  chrome-browser: &chrome_browser
+     browser.type: chrome
+
+  #Test Environments
+  dev-env: &dev_env
+     storefront.test.environment.url: https://dev.emp:9002/
+
+  dev-hac-env: &dev_hac_env
+     hac.test.environment.url: https://dev.emp:9002/hac/
+
+  qa-env: &qa_env
+     storefront.test.environment.url: https://qa.emp:9002/
+
+  qa-hac-env: &qa_hac_env
+     hac.test.environment.url: https://qa.emp:9002/hac/
+
+  #Global variables
+  default-config: &default_config
+    <<: *dev_env
+    <<: *dev_hac_env
+    <<: *chrome_browser
+
+  dev-emp: &dev_emp
+    <<: *default_config
+
+  qa-emp: &qa_emp
+    <<: *qa_env
+    <<: *qa_hac_env
+    <<: *chrome_browser

@@ -1,0 +1,13 @@
+$defaultPassword=12341234
+
+INSERT_UPDATE B2BUnit;&B2BUnitID;description;uid[unique=true];organizationId;name;locName[lang=en];groups(uid);Addresses(&addId);billingAddress(&addId);shippingAddress(&addId)
+;${id}; Automation Organization Sample;${id};${id}; Automation Sample;Automation Sample;;${addressBillingId};${addressBillingId}
+;${id}DepartmentSample1;Automation Department Sample 1;${id}_SHIP001;${id}_SHIP001;Department Sample 1;Department Sample 1;${id};${addressShippingId};;${addressShippingId}
+
+
+INSERT_UPDATE Address;code;streetname[unique=true];postalcode[unique=true];town;country(isocode);region(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;phone1;title(code);&addId;owner(&B2BUnitID)[unique=true];
+;TEST-BILL-TO;999 South Wacker Drive;60606;Chicago;US;US-IL;TRUE;TRUE;FALSE;FALSE;Akiro;Nakamura;akiro.nakamura@sample.com;18777748228;mr;${addressBillingId};${id};
+;TEST-SHIP001;3000 Lombard Street;94123;San Francisco;US;US-CA;FALSE;FALSE;TRUE;TRUE;Anil;Gupta;anil.gupta@sample.com;18777748228;mr;${addressShippingId};${id}DepartmentSample1;
+
+INSERT_UPDATE B2BCustomer;description;uid[unique=true];originalUid;email;name;title(code);groups(uid);sessionCurrency(isocode)[default='USD'];password[default=$defaultPassword];
+;Automation B2B User;${userName};${userName};automation@test.com; Automation Test User;ms;${id},b2badmingroup;
