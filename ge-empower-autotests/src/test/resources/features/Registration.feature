@@ -62,6 +62,14 @@ Feature: Registration flow for external, internal, mfgrep users.
       | autotest | mfgrep       | newmfguser1 | mfgrepuser@zaelab.com | ABB test company | 645284-31234-32 | manufacturer | zenithrepresentative | Hey autotest, you are registered as a Zenith Manufacturers Representative. Please allow us 24 hours to process your registration request. | Not a Zenith Rep? Select the correct Relationship and Role: | Note: You must be an existing customer or authorized representative of Industrial Solutions to use empower. If you are en existing customer or authorized representative: | Locate a distributor  near you to purchase our products | Contact us  if you are interested in becoming an Industrial Solutions customer or authorized representative. |
 
   Scenario Outline: Check that user is able to register as internal user and then delete himself from the user's profile.
+    Given Switch to Storefront as first EmpAdmin.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    And Refresh page.
+    When Admin opens Users tab.
+    And Sets <userId> email to the email field.
+    And Clicks on the Search button.
+    And Delete User with email <abbEmail> if necessary.
     Given Switch to Storefront as newInternalUser.
     And User is logged in to Storefront.
     Then Registration page is opened.
@@ -124,6 +132,14 @@ Feature: Registration flow for external, internal, mfgrep users.
       | 503030803 | diana.sanzharevskaya@ge.com | diana.sanzharevskaya@in.abb.com | update.email@in.abb.com | ABB test company | 213-443320-932 | Industrial Solutions Contractor | 9012306 | In order to better serve you, please perform this profile update by entering your new ABB email address below: |
 
   Scenario Outline: Check that user is able to register as internal user and only global admins can see him on Pending requests tab.
+    Given Switch to Storefront as first EmpAdmin.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    And Refresh page.
+    When Admin opens Users tab.
+    And Sets <userId> email to the email field.
+    And Clicks on the Search button.
+    And Delete User with email <abbEmail> if necessary.
     And Dismiss sessions.
     Given Switch to Storefront as newInternalUser.
     And User is logged in to Storefront.
@@ -243,7 +259,16 @@ Feature: Registration flow for external, internal, mfgrep users.
       | userName | userLastName | userId      | userEmail             | companyName      | phoneNo         | relationship | userRole             |
       | autotest | mfgrep       | newmfguser1 | mfgrepuser@zaelab.com | ABB test company | 645284-31234-32 | manufacturer | zenithrepresentative |
 
+  @Skip
   Scenario Outline: Check that user is able to register as external user and then delete himself from the user's profile.
+    Given Switch to Storefront as first EmpAdmin.
+    And User is logged in to Storefront.
+    And Manage Users page is opened.
+    And Refresh page.
+    When Admin opens Users tab.
+    And Sets <userId> email to the email field.
+    And Clicks on the Search button.
+    And Delete User with email <userEmail> if necessary.
     Given Switch to Storefront as newUser.
     And User is logged in to Storefront.
     Then Registration page is opened.
@@ -301,6 +326,7 @@ Feature: Registration flow for external, internal, mfgrep users.
       | userName | userLastName | userId          | userEmail                 | companyName      | phoneNo         | relationship | account |
       | Autotest | NewUser      | autotestnewuser | autotestnewuser@gmail.com | ABB test company | 645284-31234-32 | distributor  | 9012306 |
 
+    @Skip
     Scenario Outline: Check that user is able to register as external user, request account and admins (SM, RM, Emp, HD, CS) except of CA don't see him in Pending requests tab.
     Given Switch to Storefront as newUser.
     And User is logged in to Storefront.
@@ -382,6 +408,7 @@ Feature: Registration flow for external, internal, mfgrep users.
       | userName | userLastName | userId          | userEmail                 | companyName      | phoneNo         | relationship | account |
       | Autotest | NewUser      | autotestnewuser | autotestnewuser@gmail.com | ABB test company | 645284-31234-32 | distributor  | 9012306 |
 
+  @Skip
   Scenario Outline: Check that user is able to register as external user, without requesting account and only admins Emp, CS, HD can see him in Pending Requests and Users tabs.
     And Dismiss sessions.
     Given Switch to Storefront as newUser.

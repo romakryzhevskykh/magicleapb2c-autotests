@@ -573,3 +573,54 @@ Feature: Manage users on Pending Requests/ Users/ Revalidation tabs
     Examples:
       | email                 |
       | andrii.zhukov@abb.com |
+
+#  Scenario Outline: Check that admin is able to accept SE codes to the internal user
+#    And Refresh page.
+#    When Admin opens Users tab.
+#    And Sets <email> email to the email field.
+#    And Clicks on the Search button.
+#    Then Appropriate user with appropriate <email> email is displayed in the users list.
+#    When Clicks on the user name in the table.
+#    And Expand Modify an Account tab in I Want To Block.
+#    When Click on Sales Engineer Codes tab In Modify an Account Tab.
+#    And Prevent appearing of SE code in SE Codes tab.
+#    Then No data available in table title is displayed in Sales Engineer Code table.
+#    And Refresh page.
+#    And Focus on browser.
+#    Given Switch to Storefront as thirdInternalUser.
+#    And User is logged in to Storefront.
+#    And Refresh page.
+#    And Account management page is opened.
+#    When Request account popup is opened.
+#    When Set <seCode> SE code to the First Sales Office Code field in the Request Account pop-up.
+#    And Click on Modify button in the Request Account pop-up.
+#    Given Switch to Storefront as secondEmpAdmin.
+#    And Manage Users page is opened.
+#    And Focus on browser.
+#    And Refresh page.
+#    When Admin opens Users tab.
+#    And Sets <email> email to the email field.
+#    And Clicks on the Search button.
+#    Then Appropriate user with appropriate <email> email is displayed in the users list.
+#    When Clicks on the user name in the table.
+#    When User expand the Approve Pending Accounts section.
+#    When Click on Pending Sales Engineer Codes tab In Approve Pending Accounts Tab.
+#    Then <seCode> SE code is displayed in the Pending SE codes table.
+#    When Admin clicks on All Sales Engineer Codes checkbox in Pending SE Codes tab.
+#    And Click on Accept SE codes button.
+#    Then Accept Account pop-up is displayed on I Want To Block in Pending SE Codes tab.
+#    And Click on Accept button in the Accept Account pop-up on I Want To Block in Pending SE Codes tab.
+#    Then No data available in table title is displayed in Pending Sales Engineer Code table.
+#    And Expand Modify an Account tab in I Want To Block.
+#    When Click on Sales Office Engineer tab In Modify an Account Tab.
+#    Then Is <seCode> Sales Engineer Code displayed in the Approved SE Codes table.
+#    And Select All Sales Engineer Codes checkbox in SE Codes tab.
+#    And Click on SE Codes Remove button in SE Codes tab.
+#    And Focus on browser.
+#    Then Remove Account pop-up is displayed on I Want To Block in SO codes tab.
+#    And Click on Remove button in the Remove Account pop-up on I Want To Block in SO codes tab.
+#    Then No data available in table title is displayed in Sales Engineer Code table.
+#
+#    Examples:
+#      | email                 | seCode    |
+#      | andrii.zhukov@abb.com | 220028351 |

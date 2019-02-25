@@ -658,4 +658,9 @@ public class ManageUsersStepDefs extends AbstractStepDefs {
     public void cleanAccountField() {
         manageUsersPage.cleanAccountField();
     }
+
+    @And("^(.*) with email (.*) if necessary.$")
+    public void deleteUserUserIdIfNecessary(String actionName, String userEmail) {
+        manageUsersPage.deleteUserIfNecessary(userEmail, actionName);
+    }
 }

@@ -375,6 +375,7 @@ public class ManageUsersPage extends StorefrontBasePage {
     public void confirmDeleteUserAction() {
         waitUntilPageIsFullyLoaded();
         click(By.id(CONFIRM_DELETE_ACTION_BUTTON_ID));
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Click On Add Rep Code Button In User Detail Block.")
@@ -394,5 +395,20 @@ public class ManageUsersPage extends StorefrontBasePage {
     @Step("Clean Account Field.")
     public void cleanAccountField() {
         $(ACCOUNT_DETAIL_SEARCH_INPUT_XPATH).clear();
+    }
+
+    @Step("Delete user if necessary.")
+    public void deleteUserIfNecessary(String userEmail, String actionName) {
+        waitUntilPageIsFullyLoaded();
+        if (!isDisplayed(NO_DATA_AVAILABLE_IN_THE_USERS_LIST_XPATH)) {
+            if ($(USER_EMAIL_FIELD_XPATH).getText().equals(userEmail)) {
+                waitUntilPageIsFullyLoaded();
+                click(FIRST_NAME_LINK_XPATH);
+                waitUntilPageIsFullyLoaded();
+                openActionsList();
+                click(APPROPRIATE_USER_OPTION_XPATH, actionName);
+                confirmDeleteUserAction();
+            }
+        }
     }
 }
