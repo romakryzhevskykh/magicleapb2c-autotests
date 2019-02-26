@@ -52,7 +52,7 @@ Feature: Some actions on Orders page
 
   Scenario: Check that user can place order via Re-Order functionality
     And Account management page is opened.
-    When Choose EMEA region.
+    When Choose North_America region.
     And Search random account for chosen region.
     And Click on chosen account.
     And Orders page is opened.

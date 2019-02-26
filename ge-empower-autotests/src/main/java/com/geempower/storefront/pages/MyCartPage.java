@@ -234,7 +234,7 @@ public class MyCartPage extends StorefrontBasePage {
         return randomCartName;
     }
 
-    @Step("Сlick On Save New Cart Button.")
+    @Step("Click On Save New Cart Button.")
     public void clickOnSaveNewCartButton() {
         WebDriverWait wait = new WebDriverWait(getDriver(), 3);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(SAVE_TO_CART_POP_UP_CREATE_NEW_LIST_BUTTON_XPATH)));

@@ -259,7 +259,6 @@ Feature: Registration flow for external, internal, mfgrep users.
       | userName | userLastName | userId      | userEmail             | companyName      | phoneNo         | relationship | userRole             |
       | autotest | mfgrep       | newmfguser1 | mfgrepuser@zaelab.com | ABB test company | 645284-31234-32 | manufacturer | zenithrepresentative |
 
-  @Skip
   Scenario Outline: Check that user is able to register as external user and then delete himself from the user's profile.
     Given Switch to Storefront as first EmpAdmin.
     And User is logged in to Storefront.

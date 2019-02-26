@@ -348,6 +348,7 @@ public class ManageUsersPage extends StorefrontBasePage {
     @Step("Get Confirmation Pop-Up Title.")
     public String getConfirmationPopUpTitle() {
         waitUntilPageIsFullyLoaded();
+        moveToElement($(CONFIRMATION_POP_UP_TITLE_XPATH));
         return $(CONFIRMATION_POP_UP_TITLE_XPATH).getText();
     }
 
@@ -400,7 +401,7 @@ public class ManageUsersPage extends StorefrontBasePage {
     @Step("Delete user if necessary.")
     public void deleteUserIfNecessary(String userEmail, String actionName) {
         waitUntilPageIsFullyLoaded();
-        if (!isDisplayed(NO_DATA_AVAILABLE_IN_THE_USERS_LIST_XPATH)) {
+        if ($$(NO_DATA_AVAILABLE_IN_THE_USERS_LIST_XPATH).size()>2) {
             if ($(USER_EMAIL_FIELD_XPATH).getText().equals(userEmail)) {
                 waitUntilPageIsFullyLoaded();
                 click(FIRST_NAME_LINK_XPATH);
