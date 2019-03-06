@@ -43,6 +43,7 @@ public class ReturnDetailsPage extends StorefrontBasePage {
 
     @Step("Click On Submit Button In Comments Pop-Up.")
     public void clickOnSubmitButtonInCommentsPopUp() {
+        waitUntilPageIsFullyLoaded();
         click(By.id(SUBMIT_COMMENTS_BUTTON_ID));
     }
 

@@ -61,10 +61,10 @@ Feature: Some actions on Account Management page as admin
   Scenario Outline: Check that account with stopbook any value except Z9 contains correct icon with tooltip and message in account drop-down.
     And Account management page is opened.
     When Choose ASIA region.
-    And Select account 1000202.
+    And Select account 1000270.
     When User hover mouse over red triangle icon.
     Then Is tooltip text <tooltipText> displayed in stopship/stopbook tooltip.
-    And Click on account with CNS1 sales division.
+    And Click on account with CNS2 sales division.
     And Dashboard page is opened.
     When Click on Skip button.
     Then Is red triangle icon displayed near account no.
