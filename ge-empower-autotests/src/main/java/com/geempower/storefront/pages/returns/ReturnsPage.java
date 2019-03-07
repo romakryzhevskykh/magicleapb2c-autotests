@@ -53,7 +53,9 @@ public class ReturnsPage extends StorefrontBasePage {
 
     @Step("Delete Appropriate Saved Return.")
     public void deleteAppropriateReturn(String savedReturn) {
+        waitUntilPageIsFullyLoaded();
         click(DELETE_ICON_FOR_APPROPRIATE_RETURN_XPATH, savedReturn);
+        waitUntilPageIsFullyLoaded();
     }
 
     @Step("Get Updated Sent Requests Tab.")
