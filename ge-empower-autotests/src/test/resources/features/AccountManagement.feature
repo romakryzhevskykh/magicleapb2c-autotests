@@ -39,7 +39,7 @@ Feature: Some actions on Account Management page as admin
   Scenario Outline: Check that account with stopbook value Z9 contains correct icon with tooltip and message in account drop-down.
     And Account management page is opened.
     When Choose North_America region.
-    And Select account 2057V01.
+    And Select account 4272801.
     When User hover mouse over red certificate icon.
     Then Is tooltip text <tooltipText> displayed in stopship/stopbook tooltip.
     And Click on account with USS1 sales division.
@@ -78,10 +78,10 @@ Feature: Some actions on Account Management page as admin
   Scenario Outline: Check that account with not empty stopship value contains correct icon with tooltip and message in account drop-down.
     And Account management page is opened.
     When Choose EMEA region.
-    And Select account 9000131.
+    And Select account 9015126.
     When User hover mouse over red triangle icon.
     Then Is tooltip text <tooltipText> displayed in stopship/stopbook tooltip.
-    And Click on account with TRS1 sales division.
+    And Click on account with GBS1 sales division.
     And Dashboard page is opened.
     When Click on Skip button.
     Then Is red triangle icon displayed near account no.
@@ -101,5 +101,5 @@ Feature: Some actions on Account Management page as admin
     Then Is account name <accountName2> displayed in the table.
 
     Examples:
-      | accountName                     | accountName2                     |
-      | YOKOGAWA CORPORATION OF AMERICA | WOMACK ELECTRIC & SUPPLY CO, INC |
+      | accountName                     | accountName2                       |
+      | YOKOGAWA CORPORATION OF AMERICA | Industrial Connections & Solutions |
