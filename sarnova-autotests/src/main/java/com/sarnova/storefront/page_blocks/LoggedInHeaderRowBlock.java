@@ -41,6 +41,7 @@ public class LoggedInHeaderRowBlock extends UIComponent {
 
     @Step("Click on My account drop-down button.")
     public void clickOnMyAccountDropDownButton() {
+        scroll(MY_ACCOUNT_DROP_DOWN_XPATH);
         click(MY_ACCOUNT_DROP_DOWN_XPATH);
     }
 

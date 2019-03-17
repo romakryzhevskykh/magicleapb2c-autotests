@@ -498,10 +498,8 @@ public class PreConditionStepDefs extends AbstractStepDefs {
 
     @And("^Quick order list is empty.$")
     public void quickOrderListIsEmpty() {
-        Map<UnitOfMeasure, Integer> uomsInQO = quickOrderManager.getUOMs(userSessions.getActiveUserSession());
-        if (!uomsInQO.isEmpty()) {
-            quickOrderManager.removeAllProductsFromList(userSessions.getActiveUserSession());
-        }
+         quickOrderManager.removeAllProductsFromList(userSessions.getActiveUserSession());
+
     }
 
     @When("^Generate any random User information.$")

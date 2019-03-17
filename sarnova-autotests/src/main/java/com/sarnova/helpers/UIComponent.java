@@ -318,4 +318,12 @@ public abstract class UIComponent {
             e.printStackTrace();
         }
     }
+
+    public void scroll(String xpath, String... args) {
+        WebElement webElement = $(xpath, args);
+        int elementPosition = webElement.getLocation().getY();
+        int elementHeight = webElement.getSize().getHeight();
+        String js = String.format("window.scroll(0, %s)", elementPosition - elementHeight);
+        ((JavascriptExecutor) getDriver()).executeScript(js);
+    }
 }
