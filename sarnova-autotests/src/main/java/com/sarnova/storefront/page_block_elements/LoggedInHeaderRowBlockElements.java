@@ -3,8 +3,7 @@ package com.sarnova.storefront.page_block_elements;
 public class LoggedInHeaderRowBlockElements {
 
     private static final String MY_ACCOUNT_CONTAINER_XPATH = "//div[@class='my-account-container']";
-    private static final String RIGHT_TOP_ACCOUNT_MENU = MY_ACCOUNT_CONTAINER_XPATH + "//div[@class='nav__right']";
-    public static final String MY_ACCOUNT_DROP_DOWN_XPATH = RIGHT_TOP_ACCOUNT_MENU + "//a[. = 'My Account']";
+    public static final String MY_ACCOUNT_DROP_DOWN_XPATH = "//a[contains(@class,'js-myAccount-toggle collapsed')]";
     public static final String MY_ACCOUNT_DROP_DOWN_CONTENT_XPATH = MY_ACCOUNT_CONTAINER_XPATH + "//ul[@class='nav__links']";
     public static final String MY_ACCOUNT_MENU_LINK_ITEMS_XPATH = MY_ACCOUNT_DROP_DOWN_CONTENT_XPATH + "/li[@class='auto col-md-4']";
     public static final String MY_ACCOUNT_MENU_LINK_ITEM_NAMES_XPATH = MY_ACCOUNT_MENU_LINK_ITEMS_XPATH + "/a";
