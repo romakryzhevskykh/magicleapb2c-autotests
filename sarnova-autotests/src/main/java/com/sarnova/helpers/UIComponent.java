@@ -326,4 +326,9 @@ public abstract class UIComponent {
         String js = String.format("window.scroll(0, %s)", elementPosition - elementHeight);
         ((JavascriptExecutor) getDriver()).executeScript(js);
     }
+
+    public void scrollUp() {
+        final JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+        jse.executeScript("window.scrollBy(0,-document.body.scrollHeight)", "");
+    }
 }

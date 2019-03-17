@@ -29,8 +29,7 @@ public class SupplyListDetailsPageElements {
     public static final String INACTIVE_PRODUCT_ROW_BY_SKU_XPATH = INACTIVE_PRODUCTS_BLOCK_XPATH + SUPPLY_PRODUCT_ROW_BY_SKU_XPATH;
     public static final String INACTIVE_PRODUCT_ACTIVATE_BUTTON_BY_SKU_XPATH = INACTIVE_PRODUCT_ROW_BY_SKU_XPATH + "//button[span[contains(@class,'plus')]]";
 
-    public static final String UOM_ROW_BY_SKU_AND_UOM_TYPE_XPATH = SUPPLY_PRODUCT_ROW_BY_SKU_XPATH + "//div[@class='product-price-unit-row'][div[@class='unit-data']/span[@class='unit-code' and text()='%s']]";
-    public static final String SUPPLY_PRODUCT_ROW_QTY_FIELD_BY_SKU_AND_UOM_TYPE_XPATH = UOM_ROW_BY_SKU_AND_UOM_TYPE_XPATH + "//input[contains(@class, 'js-qty-selector-input')]";
+    public static final String SUPPLY_PRODUCT_ROW_QTY_FIELD_BY_SKU_AND_UOM_TYPE_XPATH = ".//div[contains(@class,'qty-selector')][input[@value='%s'] and input[@value='%s']]/input[contains(@class,'js-qty-selector-input')]";
 
     public static final String QUICK_ADD_CHECKBOX_ID = "toggleQuickAdd";
     public static final String QUICK_ADD_SUPPLY_LIST_BLOCK_XPATH = "//div[@id='quickAddToSupplyListTable']";
