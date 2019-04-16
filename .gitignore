@@ -1,9 +1,0 @@
-# Created by .ignore support plugin (hsz.mobi)
-#.gitignore
-.DS_Store
-.idea/
-target
-#src/test/resources/META-INF
-com.template.template-automatedtests.iml
-sarnova-autotests
-ge-empower-autotests
